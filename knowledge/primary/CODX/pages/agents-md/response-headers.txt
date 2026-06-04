@@ -1,0 +1,18 @@
+HTTP/1.1 200 Connection established
+
+HTTP/2 200 
+accept-ranges: bytes
+access-control-allow-origin: *
+age: 5949
+cache-control: public, max-age=0, must-revalidate
+content-disposition: inline; filename="agents-md"
+content-type: text/html; charset=utf-8
+date: Wed, 03 Jun 2026 12:51:37 GMT
+etag: "aad17a351dd3a9461316fad04ce5200b"
+last-modified: Wed, 03 Jun 2026 11:12:28 GMT
+server: Vercel
+strict-transport-security: max-age=63072000
+x-vercel-cache: HIT
+x-vercel-id: yul1::krpqf-1780491097329-a9d4e4056c18
+content-length: 305635
+

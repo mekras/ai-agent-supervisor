@@ -1,0 +1,41 @@
+{
+  "skill_name": "ai-work-result-evaluation",
+  "cases": [
+    {
+      "id": "ai-work-result-evaluation-positive-rule-output",
+      "prompt": "Мы получили новый вариант правила для навыка, нужно принять решение по его пригодности и рискам.",
+      "should_trigger": true,
+      "rationale": "Результат может стать источником истины и требует проверки."
+    },
+    {
+      "id": "ai-work-result-evaluation-positive-publishable-doc",
+      "prompt": "Планирую принять и опубликовать обновлённый документ, проверь порог пригодности и базовую линию.",
+      "should_trigger": true,
+      "rationale": "Публикация документа должна проходить контрольный проход."
+    },
+    {
+      "id": "ai-work-result-evaluation-positive-badcase",
+      "prompt": "После проверки обнаружен провал, нужно решить, добавлять ли его в постоянные случаи.",
+      "should_trigger": true,
+      "rationale": "Сбой в результате должен быть классифицирован и зафиксирован."
+    },
+    {
+      "id": "ai-work-result-evaluation-negative-daily-note",
+      "prompt": "Собери идеи в черновой заметке после разговора и сохраните их в виде списка.",
+      "should_trigger": false,
+      "rationale": "Черновая заметка не требует полной процедуры пригодности."
+    },
+    {
+      "id": "ai-work-result-evaluation-negative-small-refactor",
+      "prompt": "Сделай небольшую реорганизацию файлов и убери дублирование кода.",
+      "should_trigger": false,
+      "rationale": "Техническая правка без немедленной публикации как истины."
+    },
+    {
+      "id": "ai-work-result-evaluation-negative-status-query",
+      "prompt": "Какой у нас текущий статус изменений в этой задаче?",
+      "should_trigger": false,
+      "rationale": "Запрос про статус не является приёмкой конкретного результата."
+    }
+  ]
+}

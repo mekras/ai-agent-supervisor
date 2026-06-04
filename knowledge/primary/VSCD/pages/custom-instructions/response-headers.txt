@@ -1,0 +1,20 @@
+HTTP/1.1 200 Connection established
+
+HTTP/2 200 
+date: Wed, 03 Jun 2026 12:51:42 GMT
+content-type: text/html; charset=utf-8
+content-length: 108024
+vary: Accept-Encoding
+cache-control: s-maxage=300
+etag: W/"1a5f8-vmyf+p5yqBpjJHGTAk2crYYviCo"
+strict-transport-security: max-age=31536000; includeSubDomains
+request-context: appId=cid-v1:
+content-security-policy: frame-ancestors 'self'
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-azure-ref: 20260603T125142Z-1697dd94475fmmv4hC1YTOs5ug0000000y00000000003hgn
+x-cache: TCP_MISS
+x-fd-int-roxy-purgeid: 2
+accept-ranges: bytes
+

@@ -1,0 +1,2 @@
+id	url	artifact_path	headers_path	artifact_sha256	headers_sha256	retrieved_at	http_status	last_modified	notes
+writing-good-agents	https://www.philschmid.de/writing-good-agents	knowledge/primary/PHSC/pages/writing-good-agents/index.html	knowledge/primary/PHSC/pages/writing-good-agents/response-headers.txt	3a577f97b8056b1a1670395e6fc66a6d495b5bb4d02c18265ccc90f1120aa003	34d7369c891941a41a5afbf16d2b78f6468c10ecd46ccb1bdb7e954f986dc838	2026-06-03T12:51:36Z	200		Full HTML snapshot saved locally; page is public and kept with redacted headers.

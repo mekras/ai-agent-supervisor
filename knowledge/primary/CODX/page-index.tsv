@@ -1,0 +1,2 @@
+id	url	artifact_path	headers_path	artifact_sha256	headers_sha256	retrieved_at	http_status	last_modified	notes
+agents-md	https://developers.openai.com/codex/guides/agents-md	knowledge/primary/CODX/pages/agents-md/index.html	knowledge/primary/CODX/pages/agents-md/response-headers.txt	9061446239ea152cc0de836caf14d36f3bdb4ed3b2d36dd98cb84125847c41b1	72b8ba067e40a53434035e70745857f913765a67fe80f40c6e238d3d8f19826f	2026-06-03T12:51:36Z	200	Wed, 03 Jun 2026 11:12:28 GMT	Full HTML snapshot saved locally; page is public and kept with redacted headers.
