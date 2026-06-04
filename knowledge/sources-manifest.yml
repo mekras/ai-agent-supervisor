@@ -1,0 +1,46 @@
+contract_version: 1
+
+registry:
+  path: knowledge/primary/web/knowledge-sources/index.yml
+  format: yaml
+  purpose: >
+    Реестр источников, которые используются как входные данные для правил,
+    навыков и проверок в этом проекте.
+
+primary_data:
+  root: knowledge/primary
+  source_index_pattern: knowledge/primary/<platform>/<source>/index.yml
+  snapshots:
+    path: knowledge/primary
+    policy: >
+      В Git сохраняются метаданные и контролируемые артефакты источников,
+      включая нормализованные представления и отчёты.
+
+reports:
+  source_inventory: knowledge/reports/source-inventory
+  source_impact: knowledge/reports/source-impact
+
+derived_documents:
+  - knowledge
+  - skills
+  - README.md
+  - CHANGELOG.md
+  - AGENTS.md
+
+sensitive_data_policy:
+  public_or_redacted: knowledge/primary
+  local_private: knowledge/private.local
+  local_raw: knowledge/raw.local
+  rules:
+    - "Не хранить в Git приватные токены, cookies, ключи доступа и рабочие заметки."
+    - "В первичных данных хранить только проверяемые ссылки и метаданные."
+    - "Не переносить в knowledge материалы без источника, даты проверки и явной привязки."
+
+sync:
+  default_adapter: manual-web
+  unsupported_adapters_policy: manual-required
+
+impact_audit:
+  default_scope:
+    - knowledge
+  source_report_required: true

@@ -1,0 +1,2 @@
+id	url	artifact_path	headers_path	artifact_sha256	headers_sha256	retrieved_at	http_status	last_modified	notes
+custom-instructions	https://code.visualstudio.com/docs/agent-customization/custom-instructions	knowledge/primary/VSCD/pages/custom-instructions/index.html	knowledge/primary/VSCD/pages/custom-instructions/response-headers.txt	4bd2f21d718d0ca195b527df211ae3599e467de94f160c13b76853f6df974101	580d841b316dd08caaf54ef79254900295bdbefd81af7b06dbaab034c52cf531	2026-06-03T12:51:36Z	200		Full HTML snapshot saved locally; page is public and kept with redacted headers.
