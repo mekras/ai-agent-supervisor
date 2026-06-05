@@ -1,0 +1,149 @@
+{
+  "skill_name": "subagent-model-routing",
+  "cases": [
+    {
+      "id": "subagent-model-routing-positive-cost-policy",
+      "prompt": "Нужно настроить, какие задачи поручать подагентам на дешёвых моделях, а какие оставлять сильной модели, чтобы снизить стоимость без потери качества.",
+      "should_trigger": true,
+      "rationale": "Запрос прямо касается политики маршрутизации подагентов по цене и качеству."
+    },
+    {
+      "id": "subagent-model-routing-positive-escalation",
+      "prompt": "Опиши правила эскалации: когда слабый подагент должен вернуть задачу старшему агенту вместо продолжения.",
+      "should_trigger": true,
+      "rationale": "Нужно спроектировать правила эскалации для подагентов."
+    },
+    {
+      "id": "subagent-model-routing-positive-quality-gates",
+      "prompt": "Проверь нашу схему: дешёвая модель извлекает факты, средняя пишет черновик, сильная принимает результат. Какие проверки качества нужны?",
+      "should_trigger": true,
+      "rationale": "Запрос про качество в многоуровневой схеме моделей."
+    },
+    {
+      "id": "subagent-model-routing-positive-budget",
+      "prompt": "Составь бюджетные ограничения для запуска нескольких подагентов: максимум повторов, токенов и условий остановки.",
+      "should_trigger": true,
+      "rationale": "Запрос касается бюджетного контроля и условий остановки подагентов."
+    },
+    {
+      "id": "subagent-model-routing-positive-review",
+      "prompt": "Посмотри на этот регламент работы агентов и скажи, где делегирование дешёвым моделям может ухудшить результат.",
+      "should_trigger": true,
+      "rationale": "Нужно проверить риски схемы делегирования между моделями."
+    },
+    {
+      "id": "subagent-model-routing-positive-codex-economy-setup",
+      "prompt": "Используй $subagent-model-routing. Настрой экономное использование подагентов для Codex-проекта.",
+      "should_trigger": true,
+      "rationale": "Запрос должен привести к черновику политики, попытке автообнаружения моделей, допустимым немодельным ограничениям и простой просьбе списка моделей только если автообнаружение не удалось."
+    },
+    {
+      "id": "subagent-model-routing-positive-auto-detect-models-before-codex-setup",
+      "prompt": "Используй $subagent-model-routing. Настрой экономное использование подагентов для этого проекта.",
+      "should_trigger": true,
+      "rationale": "Если пользователь не назвал модели, навык должен сначала попытаться получить список моделей сам, затем предложить понятную схему; при неудаче он должен спросить только простой список доступных моделей без классификации по назначениям."
+    },
+    {
+      "id": "subagent-model-routing-positive-simple-model-list",
+      "prompt": "Доступные модели: gpt-5.4-mini, gpt-5.5 и gpt-5.3-codex-spark. Настрой подагентов сам, не заставляй меня выбирать роли.",
+      "should_trigger": true,
+      "rationale": "Пользователь даёт простой список моделей и ожидает, что навык сам предложит схему их использования понятными названиями."
+    },
+    {
+      "id": "subagent-model-routing-positive-policy-only",
+      "prompt": "Используй $subagent-model-routing. Подготовь только черновик политики экономного использования подагентов, файлы не меняй.",
+      "should_trigger": true,
+      "rationale": "Явный запрет файловых правок оставляет задачу в режиме policy."
+    },
+    {
+      "id": "subagent-model-routing-positive-codex-implementation",
+      "prompt": "Внедри настройку подагентов для Codex: зафиксируй ограничения fan-out и создай custom agents для дешёвого поиска и проверки политики.",
+      "should_trigger": true,
+      "rationale": "Подтверждённое внедрение Codex subagents требует технической конфигурации .codex/config.toml и .codex/agents/*.toml."
+    },
+    {
+      "id": "subagent-model-routing-positive-codex-bootstrap-from-empty",
+      "prompt": "Используй $subagent-model-routing. Настрой Codex subagents с нуля: папки .codex в проекте сейчас нет.",
+      "should_trigger": true,
+      "rationale": "Отсутствие .codex не является блокером: навык должен создать .codex/config.toml, .codex/agents/ и файлы custom agents либо явно ждать только список моделей."
+    },
+    {
+      "id": "subagent-model-routing-positive-agents-md-insufficient",
+      "prompt": "Я описал в AGENTS.md, когда использовать дешёвых подагентов. Проверь, считается ли это полной настройкой Codex subagents.",
+      "should_trigger": true,
+      "rationale": "Навык должен обнаружить, что один AGENTS.md не создаёт custom agents и не закрепляет модели."
+    },
+    {
+      "id": "subagent-model-routing-positive-codex-real-spawn-check",
+      "prompt": "Разберись, почему подагенты Codex не запускаются, и проверь реальный запуск, но без --ephemeral.",
+      "should_trigger": true,
+      "rationale": "Навык должен диагностировать реальный запуск подагентов, не использовать codex exec --ephemeral как достаточную проверку и искать thread_spawn_edges, subagent_notification, дочерний поток или JSONL-событие subagent."
+    },
+    {
+      "id": "subagent-model-routing-positive-agent-command-only-main",
+      "prompt": "/agent показывает только Main [default]. Это нормально или custom agents не подключились?",
+      "should_trigger": true,
+      "rationale": "Вопрос касается диагностики Codex subagents: навык должен объяснить, что /agent показывает активные потоки, а не список шаблонов .codex/agents/*.toml."
+    },
+    {
+      "id": "subagent-model-routing-positive-cost-not-timeout",
+      "prompt": "Не уменьшай тайм-аут: скорость не важна, нужно снизить стоимость запуска подагентов.",
+      "should_trigger": true,
+      "rationale": "Запрос прямо уточняет бюджетную политику подагентов: стоимость надо снижать делегированием, моделями, контекстом и повторами, а не сокращением тайм-аута."
+    },
+    {
+      "id": "subagent-model-routing-positive-short-prompt-insufficient",
+      "prompt": "Проверка `Have cheap_explorer gather evidence` не запустила подагента. Нужно понять, почему такая проверка ненадёжна.",
+      "should_trigger": true,
+      "rationale": "Навык должен объяснить, что короткий запрос не доказывает сбой настройки, и предложить проверочный контракт с техническими признаками запуска."
+    },
+    {
+      "id": "subagent-model-routing-positive-child-model-not-switched",
+      "prompt": "Подагент Codex запускается, но session JSONL показывает agent_path = null и модель родителя. Нужно добиться экономии на gpt-5.4-mini или Spark.",
+      "should_trigger": true,
+      "rationale": "Навык должен отличить факт запуска дочернего потока от фактического переключения модели и предложить маршрут через отдельный процесс с явным выбором модели."
+    },
+    {
+      "id": "subagent-model-routing-positive-usage-line",
+      "prompt": "Хочу после каждой задачи видеть одной строкой, какие модели использовались и сколько примерно потрачено общего и отдельного лимита.",
+      "should_trigger": true,
+      "rationale": "Запрос касается контроля расхода моделей в схеме подагентов и должен привести к простому отчёту по моделям, классам лимитов, токенам и времени."
+    },
+    {
+      "id": "subagent-model-routing-positive-apm-portable-tools",
+      "prompt": "Навык subagent-model-routing будет подключён через APM в других проектах. Проверь, что инструменты запуска подагентов и отчёта расхода переносимы.",
+      "should_trigger": true,
+      "rationale": "Навык должен учитывать переносимость собственных scripts/ и не полагаться только на локальные tools конкретного проекта."
+    },
+    {
+      "id": "subagent-model-routing-negative-simple-subagent-run",
+      "prompt": "Запусти подагента, чтобы он нашёл все TODO в репозитории.",
+      "should_trigger": false,
+      "rationale": "Это разовый запуск подагента без проектирования политики маршрутизации."
+    },
+    {
+      "id": "subagent-model-routing-negative-ordinary-code-task",
+      "prompt": "Исправь ошибку в обработке пустого списка и добавь тест.",
+      "should_trigger": false,
+      "rationale": "Обычная задача разработки без выбора моделей или подагентов."
+    },
+    {
+      "id": "subagent-model-routing-negative-model-choice-single",
+      "prompt": "Какую модель выбрать для написания письма заказчику?",
+      "should_trigger": false,
+      "rationale": "Выбор одной модели для одиночной задачи не требует политики подагентов."
+    },
+    {
+      "id": "subagent-model-routing-negative-general-cost",
+      "prompt": "Как уменьшить расходы на API в нашем сервисе?",
+      "should_trigger": false,
+      "rationale": "Общая оптимизация расходов не обязательно связана с маршрутизацией подагентов."
+    },
+    {
+      "id": "subagent-model-routing-negative-agents-md-general-rule",
+      "prompt": "Добавь в AGENTS.md правило запускать тесты после изменения Python-файлов.",
+      "should_trigger": false,
+      "rationale": "Это обычное проектное правило, не связанное с маршрутизацией подагентов или настройкой моделей."
+    }
+  ]
+}
