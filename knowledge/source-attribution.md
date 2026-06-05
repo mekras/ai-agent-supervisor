@@ -16,6 +16,21 @@
 - Использование в корпусе: сохранены HTML-снимки страниц, подготовлены
   нормализованные представления и извлечённые утверждения.
 
+## AENG
+
+- Источник: `Anthropic Engineering`
+- URL: `https://www.anthropic.com/engineering`
+- Использованные страницы:
+  - `https://www.anthropic.com/engineering/building-effective-agents`
+  - `https://www.anthropic.com/engineering/multi-agent-research-system`
+  - `https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents`
+- Лицензионный статус: публичное разрешение на полный повторный текст в
+  сохранении не зафиксировано.
+- Использование в корпусе: снимки страниц хранятся локально с исключением
+  `pages/` из Git; в Git сохраняются метаданные и хэши.
+- Условия: полный текст и крупные дословные фрагменты не публикуются без
+  отдельной проверки условий использования.
+
 ## PPRX
 
 - Источник: `Perplexity Research`
