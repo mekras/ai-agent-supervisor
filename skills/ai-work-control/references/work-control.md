@@ -82,13 +82,18 @@
 
 Если задача создаёт или существенно меняет навык агента, маршрут должен включать
 `skills/skill-development/SKILL.md`. Для проверки таких изменений используются
-`skills/skill-development/assets/skill-evaluation-case-template.md` и
-`skills/skill-development/assets/skill-evaluation-report-template.md`.
+`skills/ai-work-result-evaluation/references/work-result-evaluation.md` и
+`skills/ai-work-result-evaluation/assets/work-result-evaluation-case-template.md`
+для итоговой проверки изменений, а также
+`skills/skill-development/references/validation.md` для проверки срабатывания и
+соседних триггеров.
 
 Если задача создаёт или существенно меняет проектный документ, маршрут должен
-включать `skills/technical-writing/SKILL.md`. Если назначение, основной
-читатель, тип документа, место хранения или формат не определены, до написания
-используется `skills/technical-writing/assets/document-design-template.md`.
+включать сбор данных в `skills/ai-data-collection/SKILL.md`, затем
+`skills/ai-work-control/SKILL.md`. Если назначение, основной читатель, тип
+документа или место хранения не определены, сначала зафиксируй это в
+`skills/ai-data-collection/SKILL.md`, затем переходи к проектированию и
+приёмке через `skills/ai-work-result-evaluation/SKILL.md`.
 
 Для таких задач маршрут обязательно включает сбор данных и роль аналитика до
 проектирования решения, документирования или изменения репозитория. Аналитик
