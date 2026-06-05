@@ -1,0 +1,77 @@
+{
+  "skill_name": "skill-development",
+  "cases": [
+    {
+      "id": "skill-development-positive-create-skill",
+      "prompt": "Создай новый навык для проверки русскоязычных юридических текстов.",
+      "should_trigger": true,
+      "rationale": "Нужно создать новый навык агента."
+    },
+    {
+      "id": "skill-development-positive-update-description",
+      "prompt": "Улучши SKILL.md: description слишком широкий и навык срабатывает не по делу.",
+      "should_trigger": true,
+      "rationale": "Нужно изменить маршрутизирующее описание и границы навыка."
+    },
+    {
+      "id": "skill-development-positive-review-skill",
+      "prompt": "Проверь этот навык и найди риски в description, references и agents/openai.yaml.",
+      "should_trigger": true,
+      "rationale": "Нужна диагностика качества существующего навыка."
+    },
+    {
+      "id": "skill-development-positive-project-specific",
+      "prompt": "В проекте есть локальные навыки. Как подключить к ним общие правила из центрального репозитория?",
+      "should_trigger": true,
+      "rationale": "Нужно спроектировать сопровождение проектных навыков через общие правила."
+    },
+    {
+      "id": "skill-development-positive-trigger-evals",
+      "prompt": "Добавь evals/triggers.json для навыка и проверь положительные и отрицательные случаи.",
+      "should_trigger": true,
+      "rationale": "Нужно добавить проверки срабатывания навыка."
+    },
+    {
+      "id": "skill-development-positive-openai-yaml",
+      "prompt": "После правки SKILL.md обнови agents/openai.yaml, чтобы описание не устарело.",
+      "should_trigger": true,
+      "rationale": "Нужно синхронизировать интерфейсные метаданные навыка."
+    },
+    {
+      "id": "skill-development-negative-ordinary-code-change",
+      "prompt": "Исправь ошибку в обработке пустого ответа API и добавь тест.",
+      "should_trigger": false,
+      "rationale": "Это обычная задача разработки, навык агента не меняется."
+    },
+    {
+      "id": "skill-development-negative-agents-md-review",
+      "prompt": "Проверь AGENTS.md в этом репозитории на конфликтность и машинную пригодность.",
+      "should_trigger": false,
+      "rationale": "Это проверка проектных инструкций, а не навыка агента."
+    },
+    {
+      "id": "skill-development-negative-readme",
+      "prompt": "Напиши README для библиотеки командной строки.",
+      "should_trigger": false,
+      "rationale": "Это пользовательская документация, а не документация навыка агента."
+    },
+    {
+      "id": "skill-development-negative-general-prompt",
+      "prompt": "Помоги написать хороший системный промпт для ассистента поддержки.",
+      "should_trigger": false,
+      "rationale": "Запрос про промпт, но не про навык агента или его структуру."
+    },
+    {
+      "id": "skill-development-negative-russian-editing",
+      "prompt": "Отредактируй русский текст объявления и убери канцелярит.",
+      "should_trigger": false,
+      "rationale": "Это редактура текста, а не создание или проверка навыка."
+    },
+    {
+      "id": "skill-development-negative-run-tests",
+      "prompt": "Запусти тесты проекта и кратко перескажи результат.",
+      "should_trigger": false,
+      "rationale": "Нужно выполнить проверку проекта без изменения навыка."
+    }
+  ]
+}

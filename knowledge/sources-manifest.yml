@@ -15,6 +15,15 @@ primary_data:
     policy: >
       В Git сохраняются метаданные и контролируемые артефакты источников,
       включая нормализованные представления и отчёты.
+  source_ids:
+    - ASKL
+    - CODX
+    - GHAB
+    - GIST
+    - PHSC
+    - PPRX
+    - VSCD
+    - XEM7
 
 reports:
   source_inventory: knowledge/reports/source-inventory
