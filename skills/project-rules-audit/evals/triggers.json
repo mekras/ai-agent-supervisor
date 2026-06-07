@@ -1,0 +1,107 @@
+{
+  "skill_name": "project-rules-audit",
+  "cases": [
+    {
+      "id": "project-rules-audit-positive-agents-md",
+      "prompt": "Проверь AGENTS.md: найди дубли, противоречия, неоднозначности и правила, которые зря раздувают контекст.",
+      "should_trigger": true,
+      "rationale": "Нужен аудит правил проекта для агента."
+    },
+    {
+      "id": "project-rules-audit-positive-all-agent-rules",
+      "prompt": "Собери все инструкции для ИИ в репозитории и предложи, как их упорядочить.",
+      "should_trigger": true,
+      "rationale": "Нужно найти и системно проверить несколько источников правил агента."
+    },
+    {
+      "id": "project-rules-audit-positive-conflicts",
+      "prompt": "У нас есть AGENTS.md, CLAUDE.md и .cursor/rules. Проверь, не конфликтуют ли они между собой.",
+      "should_trigger": true,
+      "rationale": "Нужна проверка согласованности правил в разных файлах."
+    },
+    {
+      "id": "project-rules-audit-positive-optimize",
+      "prompt": "Оптимизируй правила проекта для Codex: они слишком длинные, часто повторяются и, кажется, мешают работе.",
+      "should_trigger": true,
+      "rationale": "Нужна консолидация и сокращение правил проекта для агента."
+    },
+    {
+      "id": "project-rules-audit-positive-self-check",
+      "prompt": "Сделай глубокую самопроверку проектных инструкций агента перед релизом.",
+      "should_trigger": true,
+      "rationale": "Формулировка описывает самопроверку правил проекта."
+    },
+    {
+      "id": "project-rules-audit-positive-fix-rules",
+      "prompt": "Найди проблемы в правилах для ассистента и сразу поправь их минимально.",
+      "should_trigger": true,
+      "rationale": "Нужно диагностировать и исправить правила для агента."
+    },
+    {
+      "id": "project-rules-audit-positive-stepwise-review",
+      "prompt": "Проверь правила агента, но давай разбирать проблемы по одной: сначала опиши одну проблему и варианты решения, потом жди моего решения, а после моего ответа сразу переходи к следующей проблеме.",
+      "should_trigger": true,
+      "rationale": "Нужен аудит правил проекта с пошаговым согласованием найденных проблем."
+    },
+    {
+      "id": "project-rules-audit-positive-default-stepwise-review",
+      "prompt": "Проверь правила агента.",
+      "should_trigger": true,
+      "rationale": "Короткий запрос на аудит правил проекта должен запускать навык; сам навык по умолчанию разбирает проблемы по одной."
+    },
+    {
+      "id": "project-rules-audit-positive-local-global-skill-duplicates",
+      "prompt": "В проекте есть локальные навыки, глобальные навыки и символическая ссылка на общий набор. Найди локальные дубли правил и убери лишнее.",
+      "should_trigger": true,
+      "rationale": "Нужен аудит и чистка дублей между несколькими источниками правил агента."
+    },
+    {
+      "id": "project-rules-audit-positive-source-of-truth-rules",
+      "prompt": "Проверь источники истины для агентов в проекте и найди, где правила расходятся между собой.",
+      "should_trigger": true,
+      "rationale": "Запрос требует аудита нескольких источников правил, влияющих на работу агента."
+    },
+    {
+      "id": "project-rules-audit-negative-create-skill",
+      "prompt": "Создай новый навык для проверки русскоязычных юридических текстов.",
+      "should_trigger": false,
+      "rationale": "Это создание навыка, а не аудит правил проекта."
+    },
+    {
+      "id": "project-rules-audit-negative-code-review",
+      "prompt": "Проверь pull request и найди возможные регрессии в обработке платежей.",
+      "should_trigger": false,
+      "rationale": "Это обзор кода, не проверка правил агента."
+    },
+    {
+      "id": "project-rules-audit-negative-readme-edit",
+      "prompt": "Сократи README библиотеки и сделай описание понятнее пользователю.",
+      "should_trigger": false,
+      "rationale": "Обычная редактура пользовательской документации не является аудитом правил агента."
+    },
+    {
+      "id": "project-rules-audit-negative-run-tests",
+      "prompt": "Запусти тесты проекта и кратко перескажи результат.",
+      "should_trigger": false,
+      "rationale": "Нужно выполнить проверку проекта, а не проверять правила для агента."
+    },
+    {
+      "id": "project-rules-audit-negative-general-prompt",
+      "prompt": "Помоги написать системный промпт для ассистента поддержки.",
+      "should_trigger": false,
+      "rationale": "Запрос про создание промпта, но не про аудит набора правил в проекте."
+    },
+    {
+      "id": "project-rules-audit-negative-skill-review",
+      "prompt": "Проверь SKILL.md и agents/openai.yaml на качество описания навыка.",
+      "should_trigger": false,
+      "rationale": "Это проверка навыка агента, а не аудит правил проекта."
+    },
+    {
+      "id": "project-rules-audit-negative-project-skills-review",
+      "prompt": "Проверь навыки в этом проекте: нет ли в них проблем и нельзя ли их улучшить.",
+      "should_trigger": false,
+      "rationale": "Это аудит навыков агента, а не аудит проектных правил для агента."
+    }
+  ]
+}

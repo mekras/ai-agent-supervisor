@@ -1,0 +1,4 @@
+interface:
+  display_name: "project-rules-audit"
+  short_description: "Аудит правил проекта для агента"
+  default_prompt: "Используй project-rules-audit для глубокой проверки AGENTS.md и других правил проекта. По умолчанию разбирай найденные проблемы по одной."
