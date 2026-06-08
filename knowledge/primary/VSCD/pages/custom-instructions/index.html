@@ -184,7 +184,7 @@
 			</div>
 		</div>		<div data-announcement-version="2026-06-01-vscode-live-build" class="updates-banner js-hidden  ">
 			<div class="container">
-				<p class="message"><a href="https://aka.ms/VSCode/Livestage" target="_self" rel="noopener">💻 Join VS Code Live at MS Build on June 3.</a></p>
+				<p class="message"><a href="https://aka.ms/VSCode/Livestage?source=vsc-website-banner" target="_blank" rel="noopener">📼 Rewatch VS Code Live at MS Build 2026</a></p>
 			</div>
 			<div tabindex="0" role="button" title="Dismiss this update" class="dismiss-btn" id="banner-dismiss-btn"><span class="sr-only">Dismiss this update</span><span aria-hidden="true" class="glyph-icon"></span></div>
 		</div>
@@ -212,10 +212,10 @@
               <div class="docs-nav-back">
                 <a class="area" href="/docs" aria-label="Back to all documentation"><span class="codicon codicon-arrow-left" aria-hidden="true"></span><span>All Docs</span></a>
               </div>
-              <h4>Agent Native</h4>
+              <h4>Agents</h4>
               <ul class="nav" id="main-nav">
               <li >
-                <a href="/docs/agent-native/overview" >Overview</a>
+                <a href="/docs/agents/overview" >Overview</a>
               </li>
               
             <li class="panel collapsed">
@@ -223,11 +223,7 @@
               <ul id="agents-articles" class="collapse ">
             
                     <li >
-                      <a href="/docs/agents/overview" >Overview</a>
-                    </li>
-                      
-                    <li >
-                      <a href="/docs/agents/agents-tutorial" >Get Started</a>
+                      <a href="/docs/agents/agents-tutorial" >Tutorial</a>
                     </li>
                       
                     <li >
@@ -238,14 +234,14 @@
                       <a href="/docs/agents/chat-view" >Chat View</a>
                     </li>
                       
+                    <li >
+                      <a href="/docs/agents/remote-agent-sessions" >Remote Agent Sessions</a>
+                    </li>
+                      
             <li class="panel collapsed">
               <a class="area" role="button" href="#agents-sessions-articles"  data-toggle="collapse">Sessions</a>
               <ul id="agents-sessions-articles" class="collapse ">
             
-                    <li >
-                      <a href="/docs/agents/sessions/chat-sessions" >Manage Sessions</a>
-                    </li>
-                      
                     <li >
                       <a href="/docs/agents/sessions/session-insights" >Session Insights</a>
                     </li>
@@ -281,15 +277,15 @@
             </li>
                     
                     <li >
+                      <a href="/docs/agents/approvals" >Approvals & Permissions</a>
+                    </li>
+                      
+                    <li >
                       <a href="/docs/agents/planning" >Planning</a>
                     </li>
                       
                     <li >
                       <a href="/docs/agents/memory" >Memory</a>
-                    </li>
-                      
-                    <li >
-                      <a href="/docs/agents/agent-tools" >Tools</a>
                     </li>
                       
                     <li >
@@ -355,11 +351,19 @@
               <ul id="chat-articles" class="collapse ">
             
                     <li >
-                      <a href="/docs/chat/copilot-chat" >Overview</a>
+                      <a href="/docs/chat/chat-overview" >Overview</a>
+                    </li>
+                      
+                    <li >
+                      <a href="/docs/chat/chat-sessions" >Chat Sessions</a>
                     </li>
                       
                     <li >
                       <a href="/docs/chat/copilot-chat-context" >Add Context</a>
+                    </li>
+                      
+                    <li >
+                      <a href="/docs/chat/chat-tools" >Tools</a>
                     </li>
                       
                     <li >
@@ -491,7 +495,7 @@
               <ul id="agents-reference-articles" class="collapse ">
             
                     <li >
-                      <a href="/docs/agents/reference/copilot-vscode-features" >Cheat Sheet</a>
+                      <a href="/docs/agents/reference/ai-features-cheat-sheet" >Cheat Sheet</a>
                     </li>
                       
                     <li >
@@ -513,24 +517,22 @@
             </nav>
             
             <nav id="small-nav" aria-label="Topics" class="docs-nav hidden-md hidden-lg">
-              <label class="faux-h4" for="small-nav-dropdown-agent-native">Topics</label>
-              <select id="small-nav-dropdown-agent-native" aria-label="topics">
-                <option value="/docs/agent-native/overview" >Overview</option>
+              <label class="faux-h4" for="small-nav-dropdown-agents">Topics</label>
+              <select id="small-nav-dropdown-agents" aria-label="topics">
+                <option value="/docs/agents/overview" >Overview</option>
             
               <optgroup label="Agents">
             
-                    <option value="/docs/agents/overview" >Overview</option>
-                    
-                    <option value="/docs/agents/agents-tutorial" >Get Started</option>
+                    <option value="/docs/agents/agents-tutorial" >Tutorial</option>
                     
                     <option value="/docs/agents/agents-window" >Agents Window</option>
                     
                     <option value="/docs/agents/chat-view" >Chat View</option>
                     
+                    <option value="/docs/agents/remote-agent-sessions" >Remote Agent Sessions</option>
+                    
                     <optgroup label="Agents - Sessions">
             
-                      <option value="/docs/agents/sessions/chat-sessions" >Manage Sessions</option>
-                      
                       <option value="/docs/agents/sessions/session-insights" >Session Insights</option>
                       
                       <option value="/docs/agents/sessions/session-sync" >Sync Sessions</option>
@@ -549,11 +551,11 @@
                       
                     </optgroup>
             
+                    <option value="/docs/agents/approvals" >Approvals & Permissions</option>
+                    
                     <option value="/docs/agents/planning" >Planning</option>
                     
                     <option value="/docs/agents/memory" >Memory</option>
-                    
-                    <option value="/docs/agents/agent-tools" >Tools</option>
                     
                     <option value="/docs/agents/subagents" >Subagents</option>
                     
@@ -587,9 +589,13 @@
               
               <optgroup label="Using Chat">
             
-                    <option value="/docs/chat/copilot-chat" >Overview</option>
+                    <option value="/docs/chat/chat-overview" >Overview</option>
+                    
+                    <option value="/docs/chat/chat-sessions" >Chat Sessions</option>
                     
                     <option value="/docs/chat/copilot-chat-context" >Add Context</option>
+                    
+                    <option value="/docs/chat/chat-tools" >Tools</option>
                     
                     <option value="/docs/chat/inline-chat" >Inline Chat</option>
                     
@@ -657,7 +663,7 @@
               
               <optgroup label="Reference">
             
-                    <option value="/docs/agents/reference/copilot-vscode-features" >Cheat Sheet</option>
+                    <option value="/docs/agents/reference/ai-features-cheat-sheet" >Cheat Sheet</option>
                     
                     <option value="/docs/agents/reference/copilot-settings" >Settings Reference</option>
                     
@@ -793,7 +799,7 @@
           </path>
         </svg>
         Tip
-      </span><p>Use the <a href="/docs/agent-customization/overview#_agent-customizations-editor">Agent Customizations editor</a> (Preview) to discover, create, and manage all your agent customizations in one place. Run <strong>Chat: Open Customizations</strong> from the Command Palette.</p>
+      </span><p>Use the <a href="/docs/agent-customization/overview#_manage-customizations-in-the-editor">Agent Customizations editor</a> (Preview) to discover, create, and manage all your agent customizations in one place. Run <strong>Chat: Open Customizations</strong> from the Command Palette.</p>
 </div><div class="markdown-alert note" dir="auto">
       <span>
         <svg class="markdown-alert-icon" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
@@ -1001,7 +1007,7 @@
       <span role="menuitem" class="setting-action-item" data-version="stable" tabindex="0">Open in VS Code</span>
       <span role="menuitem" class="setting-action-item" data-version="insiders" tabindex="-1">Open in VS Code Insiders</span>
     </span>
-  </span></span> to discover instructions from the parent repository root. Learn more about <a href="/docs/agent-customization/overview#_parent-repository-discovery">parent repository discovery</a>.</p>
+  </span></span> to discover instructions from the parent repository root. Learn more about <a href="/docs/agent-customization/overview#_use-customizations-in-a-monorepo">parent repository discovery</a>.</p>
 </div><h3 id="_instructions-file-format" data-needslink="_instructions-file-format">Instructions file format</h3>
 <p>Instructions files are Markdown files with the <code>.instructions.md</code> extension. The optional YAML frontmatter header controls when the instructions are applied:</p>
 <table class="table table-striped">

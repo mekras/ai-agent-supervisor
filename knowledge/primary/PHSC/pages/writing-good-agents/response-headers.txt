@@ -1,13 +1,12 @@
-HTTP/1.1 200 Connection established
 
 HTTP/2 200 
 accept-ranges: bytes
 access-control-allow-origin: *
-age: 600213
+age: 1034056
 cache-control: public, max-age=0, must-revalidate
 content-disposition: inline
 content-type: text/html; charset=utf-8
-date: Wed, 03 Jun 2026 12:51:43 GMT
+date: Mon, 08 Jun 2026 13:22:26 GMT
 etag: "0c0989a1c812d3bc2ff82048b440af5a"
 server: Vercel
 strict-transport-security: max-age=63072000
@@ -16,6 +15,6 @@ x-matched-path: /writing-good-agents
 x-nextjs-prerender: 1
 x-nextjs-stale-time: 300
 x-vercel-cache: HIT
-x-vercel-id: yul1::5q9kx-1780491103751-6a1f4e46625a
+x-vercel-id: cle1::h7gqr-1780924946865-0eaf8d746920
 content-length: 82136
 

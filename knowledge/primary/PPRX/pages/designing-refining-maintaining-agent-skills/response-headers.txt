@@ -1,15 +1,14 @@
-HTTP/1.1 200 Connection established
 
 HTTP/2 200 
 alt-svc: h3=":443"; ma=2592000
 cache-control: public, max-age=0, must-revalidate
 content-type: text/html
-date: Mon, 01 Jun 2026 08:37:33 GMT
-etag: "01db4bbde7904d1f35d9606fb58729a9"
-last-modified: Wed, 27 May 2026 15:41:58 GMT
+date: Mon, 08 Jun 2026 13:22:28 GMT
+etag: "5e1bdb569f0f0e8d4d3e67d21a20163c"
+last-modified: Mon, 01 Jun 2026 17:44:20 GMT
 link: <https://framerusercontent.com>; rel="preconnect", <https://framerusercontent.com>; rel="preconnect"; crossorigin=""
-server: Framer/e66ed00
-server-timing: region;desc="us-west-2", cache;desc="cached", ssg-status;desc="optimized", version;desc="e66ed00", route;dur=1;desc="id=QYqlxbTGV&locale=default&var.ZK2kXOxhZ=designing-refining-and-maintaining-agent-skills-at-perplexity", country;desc="US"
+server: Framer/8c09469
+server-timing: region;desc="us-east-1", cache;desc="cached", ssg-status;desc="optimized", version;desc="8c09469", route;dur=1;desc="id=QYqlxbTGV&locale=default&var.ZK2kXOxhZ=designing-refining-and-maintaining-agent-skills-at-perplexity", country;desc="US"
 strict-transport-security: max-age=31536000
 vary: Accept-Encoding, Accept
 x-content-type-options: nosniff
