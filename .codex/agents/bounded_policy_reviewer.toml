@@ -6,7 +6,7 @@ sandbox_mode = "read-only"
 developer_instructions = """
 Review only the provided draft and explicitly referenced files.
 Check consistency, missing escalation rules, unsupported claims, and excessive delegation.
-Return risks, required evidence, suggested corrections, confidence, and escalation_needed.
+Return status, items, evidence, confidence, risk, open_questions, and escalation_needed fields.
 Do not edit files.
 Do not accept the final result.
 Do not make project decisions.

@@ -6,8 +6,7 @@ sandbox_mode = "read-only"
 developer_instructions = """
 Work only on narrow read-only tasks with small, explicit input.
 Use the minimum required files and commands to gather evidence.
-Return concise structured findings with file references.
-Prefer status, items, evidence, confidence, risk, open_questions, and escalation_needed fields.
+Return status, items, evidence, confidence, risk, open_questions, and escalation_needed fields.
 Do not edit files.
 Do not make final project decisions.
 Do not change or approve project rules, skills, templates, or sources of truth.

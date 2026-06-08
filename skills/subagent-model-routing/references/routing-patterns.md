@@ -143,13 +143,12 @@ agents. В режиме внедрения проверь или создай п
 # Включай только если текущий Codex CLI показывает, что реальный fan-out
 # находится за этим флагом.
 enable_fanout = true
-multi_agent = true
 
 [agents]
 max_threads = 2
 max_depth = 1
 # Не сокращай ради скорости, если цель — стоимость.
-job_max_runtime_seconds = 900
+job_max_runtime_seconds = 1800
 ```
 
 `max_threads` ограничивает число одновременных потоков. `max_depth = 1`
