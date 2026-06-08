@@ -249,7 +249,7 @@ decision.
 
 Task: review the current subagent scheme using only `.codex/config.toml`,
 `.codex/agents/*.toml`, `AGENTS.md`, and
-`skills/subagent-model-routing/SKILL.md`.
+`subagent-model-routing`.
 
 Return valid JSON only with keys:
 `findings`, `used_subagents`, `escalations`, `rejected_results`.

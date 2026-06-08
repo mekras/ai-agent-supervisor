@@ -1,8 +1,7 @@
+*.py[cod]
 /.idea
-knowledge/raw.local/
-knowledge/private.local/
-knowledge/reports/source-inventory/
-
-
-# APM dependencies
-apm_modules/
+/knowledge/private.local/
+/knowledge/raw.local/
+/knowledge/reports/source-inventory/
+__pycache__
+apm_modules

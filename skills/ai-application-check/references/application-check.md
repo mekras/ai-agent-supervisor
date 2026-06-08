@@ -10,10 +10,9 @@
 
 Для рабочего применения этой проверки вместе с ней используются:
 
-- `skills/ai-work-control/references/work-control.md` — порядок прохождения проверки;
-- `skills/ai-application-check/assets/application-check-template.md` — шаблон
-  фиксации результата проверки;
-- `skills/ai-data-collection/references/data-collection-procedure.md` — порядок
+- `ai-work-control` — порядок прохождения контроля запуска;
+- `assets/application-check-template.md` — шаблон фиксации результата проверки;
+- `ai-data-collection` — порядок
   предварительного сбора данных, если задача касается развития продукта.
 
 ## Когда применять проверку
