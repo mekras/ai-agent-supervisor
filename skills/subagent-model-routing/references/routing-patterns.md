@@ -21,6 +21,7 @@
 | Найти кандидаты: файлы, заметки или источники | `cheap` | Проверить риск неполноты и выбрать, что читать |
 | Извлечь утверждения из одного источника | `cheap` | Проверить выборку и отклонить неподтверждённые утверждения |
 | Суммировать много независимых фрагментов | `cheap` | Объединить, найти противоречия, сохранить ссылки |
+| Выполнить малую обратимую правку в указанных файлах | `cheap` write-capable | Проверить diff, запустить проверку и принять результат |
 | Сравнить два ограниченных документа | `medium` | Решить влияние и нужные изменения |
 | Подготовить черновик требований из проверенных фактов | `medium` | Проверить полноту и критерии приёмки |
 | Изменить документацию как источник истины | `strong` | Отвечать за итоговую формулировку и согласованность |
@@ -35,6 +36,7 @@
 Цель:
 Граница входных данных:
 Разрешённые действия/инструменты:
+Разрешённая область записи:
 Запрещённые действия:
 Схема результата:
 Обязательные свидетельства:
@@ -73,6 +75,8 @@
 - Подагенту нужно менять файлы вне своей области.
 - Задача требует суждения о правилах, архитектуре, безопасности, праве,
   финансах или источнике истины.
+- Write-capable подагенту нужно выбирать новые файлы для записи или менять
+  источники истины.
 - Результат выглядит правдоподобно, но его нельзя дёшево проверить.
 
 ## Бюджетные ограничения
@@ -172,6 +176,34 @@ change project sources of truth.
 """
 ```
 
+Пример дешёвого исполнителя для малых обратимых правок:
+
+```toml
+# .codex/agents/cheap_patch_worker.toml
+name = "cheap_patch_worker"
+description = "Cheap bounded patch worker for small reversible edits requested by the parent agent."
+model = "<cheap-code-model>"
+model_reasoning_effort = "low"
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Edit files only when the parent task gives an explicit file list or a narrow
+write scope.
+Make only small reversible changes with a cheap verification path.
+Return changed files, summary, verification performed or recommended, risk, and
+escalation_needed.
+Do not edit AGENTS.md, skills, rules, templates, requirements, architecture
+decisions, or other sources of truth.
+Do not broaden the task, choose unrelated files, accept the final result, or make
+project decisions.
+Escalate on ambiguity, missing write scope, failing verification, broad context,
+or requests to change project sources of truth.
+"""
+```
+
+Не превращай `cheap_explorer` в write-capable роль. Старые проекты обновляй
+добавлением отдельного patch-worker и сужением общего запрета записи до правила
+по умолчанию.
+
 Пример среднего проверяющего для ограниченных сравнений:
 
 ```toml
@@ -194,6 +226,25 @@ Escalate if the review requires a project decision or broad context.
 Для Codex `AGENTS.md` добавляй только как эксплуатационный слой: когда вызывать
 этих агентов, какие задачи им запрещены и как родительский агент проверяет
 результат. Один `AGENTS.md` не является полной настройкой custom agents.
+
+## Обновление старой настройки
+
+Для проекта, настроенного старой версией навыка, используй простой порядок:
+
+1. Найди `.codex/config.toml`, `.codex/agents/*.toml`, `AGENTS.md` и
+   `tools/codex-*`.
+2. Оставь read-only роли (`cheap_explorer`, reviewer-роли) без права записи.
+3. Добавь отдельную роль `cheap_patch_worker` или аналог с `workspace-write`.
+4. Замени общий запрет «подагенты не редактируют файлы» на правило по умолчанию
+   с исключением для write-capable роли по явному поручению родителя.
+5. Обнови запускатель: по умолчанию `read-only`, для patch-worker только явный
+   `CODEX_SUBAGENT_SANDBOX=workspace-write`.
+6. Проверь, что источники истины остаются запрещены для дешёвых write-capable
+   подагентов, а родитель принимает результат по diff и проверке.
+
+Человеку достаточно попросить: «Обнови старую настройку
+`subagent-model-routing` до версии с отдельным дешёвым patch-worker». Остальное
+агент должен вывести из файлов проекта.
 
 ## Маршрут через отдельный процесс для выбора модели
 

@@ -116,6 +116,12 @@
       "rationale": "Навык должен учитывать переносимость собственных scripts/ и не полагаться только на локальные tools конкретного проекта."
     },
     {
+      "id": "subagent-model-routing-positive-cheap-write-worker",
+      "prompt": "Обнови старую настройку подагентов: дешёвая Spark-модель должна уметь делать малые правки файлов только по прямому поручению родителя.",
+      "should_trigger": true,
+      "rationale": "Запрос касается политики записи для дешёвых подагентов и миграции старой схемы."
+    },
+    {
       "id": "subagent-model-routing-negative-simple-subagent-run",
       "prompt": "Запусти подагента, чтобы он нашёл все TODO в репозитории.",
       "should_trigger": false,
