@@ -31,6 +31,31 @@
 - Условия: полный текст и крупные дословные фрагменты не публикуются без
   отдельной проверки условий использования.
 
+## APMP
+
+- Источник: `Agent Package Manager Producer Docs`
+- URL: `https://microsoft.github.io/apm/producer/`
+- Использованные страницы:
+  - `https://microsoft.github.io/apm/producer/`
+  - `https://microsoft.github.io/apm/producer/author-primitives/`
+  - `https://microsoft.github.io/apm/producer/author-primitives/hooks-and-commands/`
+  - `https://microsoft.github.io/apm/producer/author-primitives/instructions-and-agents/`
+  - `https://microsoft.github.io/apm/producer/author-primitives/mcp-as-primitive/`
+  - `https://microsoft.github.io/apm/producer/author-primitives/prompts/`
+  - `https://microsoft.github.io/apm/producer/author-primitives/skills/`
+  - `https://microsoft.github.io/apm/producer/compile/`
+  - `https://microsoft.github.io/apm/producer/pack-a-bundle/`
+  - `https://microsoft.github.io/apm/producer/package-relative-links/`
+  - `https://microsoft.github.io/apm/producer/preview-and-validate/`
+  - `https://microsoft.github.io/apm/producer/publish-to-a-marketplace/`
+- Лицензионный статус: публичное разрешение на полный повторный текст в
+  сохранении не зафиксировано.
+- Использование в корпусе: снимки страниц хранятся локально с исключением
+  `knowledge/primary/APMP/pages/**` из Git; в Git сохраняются метаданные,
+  хэши и паспорт нормализованного слоя.
+- Условия: полный текст и крупные дословные фрагменты не публикуются без
+  отдельной проверки условий использования.
+
 ## LCMS
 
 - Источник: `LangChain Blog`

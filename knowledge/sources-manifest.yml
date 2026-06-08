@@ -1,15 +1,16 @@
 contract_version: 1
 
 registry:
-  path: knowledge/primary/web/knowledge-sources/index.yml
-  format: yaml
+  path: knowledge/inventory
+  format: markdown
   purpose: >
-    Реестр источников, которые используются как входные данные для правил,
-    навыков и проверок в этом проекте.
+    Карточки источников в `knowledge/inventory/*.md`, которые используются как
+    входные данные для правил, навыков и проверок в этом проекте.
 
 primary_data:
   root: knowledge/primary
-  source_index_pattern: knowledge/primary/<platform>/<source>/index.yml
+  source_index_pattern: knowledge/primary/<source>/page-index.tsv
+  source_passport_pattern: knowledge/primary/<source>/source.md
   snapshots:
     path: knowledge/primary
     policy: >
@@ -17,6 +18,7 @@ primary_data:
       включая нормализованные представления и отчёты.
   source_ids:
     - AENG
+    - APMP
     - ASKL
     - CODX
     - GHAB
@@ -26,6 +28,13 @@ primary_data:
     - PPRX
     - VSCD
     - XEM7
+
+normalized_data:
+  root: knowledge/normalized
+  source_passport_pattern: knowledge/normalized/<source>/source.md
+
+statements:
+  path_pattern: knowledge/statements/<source>.md
 
 reports:
   source_inventory: knowledge/reports/source-inventory
