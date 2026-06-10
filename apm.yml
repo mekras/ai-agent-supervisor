@@ -11,5 +11,7 @@ dependencies:
   apm: []
   mcp: []
 scripts:
-  start: "python3 tools/validate-trigger-evals.py --require-all"
+  start: "python3 tools/validate-trigger-evals.py --require-all && python3 tools/validate-skill-result-evals.py"
   validate-triggers: "python3 tools/validate-trigger-evals.py --require-all"
+  validate-result-evals: "python3 tools/validate-skill-result-evals.py"
+  validate-evals: "python3 tools/validate-trigger-evals.py --require-all && python3 tools/validate-skill-result-evals.py"
