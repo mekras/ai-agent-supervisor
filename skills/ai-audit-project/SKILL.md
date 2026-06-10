@@ -66,7 +66,7 @@ description: >
 широкого аудита правил, применяй `agents-md-review`. Если нужно создать,
 изменить, сократить или разделить `AGENTS.md`, применяй
 `agents-md-maintenance`. Если задача меняет сам навык, применяй
-`skill-development`.
+`ai-skill-development`.
 
 ## Обязательный порядок
 
