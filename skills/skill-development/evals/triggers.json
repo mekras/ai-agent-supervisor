@@ -32,6 +32,12 @@
       "rationale": "Нужно добавить проверки срабатывания навыка."
     },
     {
+      "id": "skill-development-positive-skill-tests",
+      "prompt": "Предложи набор тестов для нового навыка: срабатывание, качество результата и регрессии.",
+      "should_trigger": true,
+      "rationale": "Нужно спроектировать проверки качества и поведения навыка агента."
+    },
+    {
       "id": "skill-development-positive-openai-yaml",
       "prompt": "После правки SKILL.md обнови agents/openai.yaml, чтобы описание не устарело.",
       "should_trigger": true,
