@@ -41,7 +41,7 @@
       "id": "ai-rule-failure-analysis-negative-new-skill-design",
       "prompt": "Спроектируй новый навык для анализа требований и добавь проверки срабатывания.",
       "should_trigger": false,
-      "rationale": "Проектирование навыка без наблюдаемого провала относится к skill-development."
+      "rationale": "Проектирование навыка без наблюдаемого провала относится к ai-skill-development."
     },
     {
       "id": "ai-rule-failure-analysis-negative-general-quality",

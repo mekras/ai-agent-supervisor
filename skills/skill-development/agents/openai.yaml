@@ -1,4 +1,0 @@
-interface:
-  display_name: "skill-development"
-  short_description: "Создание и сопровождение навыков агента"
-  default_prompt: "Используй skill-development для создания, проверки или улучшения навыка агента."
