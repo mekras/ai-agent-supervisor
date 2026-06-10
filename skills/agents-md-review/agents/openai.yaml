@@ -1,4 +1,0 @@
-interface:
-  display_name: "agents-md-review"
-  short_description: "Проверка качества AGENTS.md"
-  default_prompt: "Используй agents-md-review для проверки AGENTS.md и цепочки соседних инструкций."

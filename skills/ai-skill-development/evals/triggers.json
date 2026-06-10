@@ -50,7 +50,7 @@
       "rationale": "Это обычная задача разработки, навык агента не меняется."
     },
     {
-      "id": "ai-skill-development-negative-agents-md-review",
+      "id": "ai-skill-development-negative-ai-audit-agents-md",
       "prompt": "Проверь AGENTS.md в этом репозитории на конфликтность и машинную пригодность.",
       "should_trigger": false,
       "rationale": "Это проверка проектных инструкций, а не навыка агента."
