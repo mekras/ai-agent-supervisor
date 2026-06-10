@@ -90,7 +90,7 @@ apm compile --dry-run --target claude,codex
 - `ai-work-control` — контрольный регламент перед существенным применением ИИ.
 - `ai-work-result-evaluation` — проверка результата перед публикацией и приёмкой.
 - `ai-audit-project` — аудит правил проекта для агента.
-- [subagent-model-routing](skills/subagent-model-routing/README.md) —
+- [ai-subagent-setup](skills/ai-subagent-setup/README.md) —
   настройка экономной маршрутизации подагентов и моделей с проверками качества.
 
 ### Разработка навыков
