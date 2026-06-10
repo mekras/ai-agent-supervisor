@@ -1,4 +1,4 @@
-# Источник: `AENG`
+# Источник: `LSME`
 
 ## Статус
 
@@ -7,45 +7,38 @@
 
 ## Происхождение
 
-- Сайт: `https://www.anthropic.com/engineering`
-- Дата получения: `2026-06-05`
+- Платформа: `https://docs.langchain.com`
+- Раздел: `LangSmith`
+- Дата пакетного получения: `2026-06-10T07:41:37Z`
 - Способ получения: HTTP GET с локальным сохранением raw HTML и заголовков
-  ответа
+  ответа.
 - Страницы источника:
-  - `https://www.anthropic.com/engineering/building-effective-agents`
-  - `https://www.anthropic.com/engineering/multi-agent-research-system`
-  - `https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents`
-  - `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
+  - `https://docs.langchain.com/langsmith/evaluation`
+  - `https://docs.langchain.com/langsmith/evaluation-approaches`
+  - `https://docs.langchain.com/langsmith/trajectory-evals`
+- Получено 3 страницы с HTTP-статусом `200`.
 
 ## Что сохранено
 
 В состав источника включены следующие артефакты:
 
-- passport: `knowledge/primary/AENG/source.md`
-- индекс: `knowledge/primary/AENG/page-index.tsv`
-- страница:
-  `knowledge/primary/AENG/pages/building-effective-agents/index.html`
+- passport: `knowledge/primary/LSME/source.md`
+- индекс: `knowledge/primary/LSME/page-index.tsv`
+- страницы:
+  - `knowledge/primary/LSME/pages/evaluation/index.html`
+  - `knowledge/primary/LSME/pages/evaluation-approaches/index.html`
+  - `knowledge/primary/LSME/pages/trajectory-evals/index.html`
 - заголовки ответа:
-  `knowledge/primary/AENG/pages/building-effective-agents/response-headers.txt`
-- страница:
-  `knowledge/primary/AENG/pages/multi-agent-research-system/index.html`
-- заголовки ответа:
-  `knowledge/primary/AENG/pages/multi-agent-research-system/response-headers.txt`
-- страница:
-  `knowledge/primary/AENG/pages/effective-context-engineering-for-ai-agents/index.html`
-- заголовки ответа:
-  `knowledge/primary/AENG/pages/effective-context-engineering-for-ai-agents/response-headers.txt`
-- страница:
-  `knowledge/primary/AENG/pages/demystifying-evals-for-ai-agents/index.html`
-- заголовки ответа:
-  `knowledge/primary/AENG/pages/demystifying-evals-for-ai-agents/response-headers.txt`
+  - `knowledge/primary/LSME/pages/evaluation/response-headers.txt`
+  - `knowledge/primary/LSME/pages/evaluation-approaches/response-headers.txt`
+  - `knowledge/primary/LSME/pages/trajectory-evals/response-headers.txt`
 
 Снимки хранятся локально с исключением `pages/` из Git через
-`knowledge/primary/AENG/.gitignore`.
+`knowledge/primary/LSME/.gitignore`.
 
 ## Ограничения
 
-- Источник ограничен четырьмя указанными страницами раздела engineering.
+- Источник ограничен тремя указанными страницами документации LangSmith.
 - Снимки отражают состояние страниц на момент получения.
 - Полный текст страниц не должен использоваться как единственная опора без
   проверки условий использования.
@@ -66,13 +59,9 @@
 ## Очистка перед сохранением
 
 В заголовках ответа удалены значения `set-cookie` и служебная строка прокси
-`HTTP/1.1 200 Connection established`.
+`HTTP/1.1 200 Connection established`, если они присутствовали.
 
 ## Назначение в проекте
 
-Материалы источника могут использоваться как первичные для изучения:
-
-- практик построения эффективных AI-агентов;
-- архитектуры и координации multi-agent систем;
-- подходов к context engineering для агентных сценариев.
-- практик evaluation для AI-агентов.
+Материал может использоваться как первичный для изучения подходов к оценке
+LangSmith, включая общую оценку, подходы к evaluation и trajectory evals.

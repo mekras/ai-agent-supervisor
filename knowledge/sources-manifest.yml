@@ -19,13 +19,18 @@ primary_data:
   source_ids:
     - AENG
     - APMP
+    - ASES
     - ASKL
+    - AZPF
     - CODX
     - GHAB
     - GIST
+    - INSP
     - LCMS
+    - LSME
     - PHSC
     - PPRX
+    - PRFO
     - VSCD
     - XEM7
 
