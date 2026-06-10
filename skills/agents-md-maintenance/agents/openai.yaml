@@ -1,4 +1,0 @@
-interface:
-  display_name: "agents-md-maintenance"
-  short_description: "Создание и сопровождение AGENTS.md"
-  default_prompt: "Используй agents-md-maintenance для создания, изменения или стабилизации AGENTS.md и соседних машинных инструкций."

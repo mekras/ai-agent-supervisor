@@ -34,7 +34,7 @@
 - `skills/skill-development/SKILL.md`
 - `skills/skill-development/references/validation.md`
 - `skills/subagent-model-routing/SKILL.md`
-- `skills/agents-md-maintenance/SKILL.md`
+- `skills/ai-agents-md-maintenance/SKILL.md`
 - `skills/agents-md-review/SKILL.md`
 
 `knowledge/statements/ASKL.md` не входил в этот догоняющий пакет: он уже
@@ -158,7 +158,7 @@
 Документы:
 
 - `skills/subagent-model-routing/SKILL.md`
-- `skills/agents-md-maintenance/SKILL.md`
+- `skills/ai-agents-md-maintenance/SKILL.md`
 - `skills/agents-md-review/SKILL.md`
 
 Источники:
@@ -171,7 +171,7 @@
 
 Факт: `subagent-model-routing` уже требует bounded read-only разведку,
 подробный контракт подагента, ограничения записи, эскалацию при нехватке
-контекста и независимую проверку; `agents-md-maintenance` и
+контекста и независимую проверку; `ai-agents-md-maintenance` и
 `agents-md-review` уже опираются на `GHAB` и проверяют специализацию,
 конкретные команды и минимальность инструкций.
 
