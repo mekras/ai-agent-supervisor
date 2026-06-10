@@ -22,8 +22,10 @@ target_dir="$project_root/tools"
 
 mkdir -p "$target_dir"
 
-for name in codex-model-subagent codex-spark-subagent codex-usage-report; do
+for name in codex-model-subagent codex-usage-report; do
   install -m 0755 "$script_dir/$name" "$target_dir/$name"
 done
+
+rm -f "$target_dir/codex-spark-subagent"
 
 printf 'installed=%s\n' "$target_dir"
