@@ -273,7 +273,7 @@ Escalate if the review requires a project decision or broad context.
    подагентов, а родитель принимает результат по diff и проверке.
 
 Человеку достаточно попросить: «Обнови старую настройку
-`subagent-model-routing` до версии с отдельным дешёвым patch-worker». Остальное
+`ai-subagent-setup` до версии с отдельным дешёвым patch-worker». Остальное
 агент должен вывести из файлов проекта.
 
 ## Маршрут через отдельный процесс для выбора модели
@@ -292,7 +292,7 @@ Escalate if the review requires a project decision or broad context.
 При внедрении в проект выполни установку из директории навыка:
 
 ```bash
-skills/subagent-model-routing/scripts/install-codex-tools .
+skills/ai-subagent-setup/scripts/install-codex-tools .
 ```
 
 После установки вызов выглядит так:
@@ -330,7 +330,7 @@ decision.
 
 Task: review the current subagent scheme using only `.codex/config.toml`,
 `.codex/agents/*.toml`, `AGENTS.md`, and
-`subagent-model-routing`.
+`ai-subagent-setup`.
 
 Return valid JSON only with keys:
 `findings`, `used_subagents`, `escalations`, `rejected_results`.
