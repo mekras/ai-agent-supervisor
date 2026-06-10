@@ -33,7 +33,7 @@ apm install --global github.com/mekras/ai-agent-supervisor#master
 Обновить уже установленную коллекцию:
 
 ```bash
-apm deps update --global
+apm update --global
 ```
 
 Проверить, есть ли новые версии зависимостей:
