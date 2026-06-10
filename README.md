@@ -78,7 +78,7 @@ apm compile --dry-run --target claude,codex
 
 ### Работа с AGENTS.md
 
-- `agents-md-maintenance` — создание и сопровождение `AGENTS.md`.
+- `ai-agents-md-maintenance` — создание и сопровождение `AGENTS.md`.
 - `ai-audit-agents-md` — проверка качества `AGENTS.md`.
 
 ### Выполнение задач с помощью ИИ
