@@ -237,8 +237,8 @@ or requests to change project sources of truth.
 Пример среднего проверяющего для ограниченных сравнений:
 
 ```toml
-# .codex/agents/policy_reviewer.toml
-name = "policy_reviewer"
+# .codex/agents/bounded_policy_reviewer.toml
+name = "bounded_policy_reviewer"
 description = "Reviewer for bounded policy drafts and routing consistency."
 model = "<medium-model>"
 model_reasoning_effort = "medium"
@@ -255,14 +255,17 @@ Escalate if the review requires a project decision or broad context.
 
 Для Codex `AGENTS.md` добавляй только как эксплуатационный слой: когда вызывать
 этих агентов, какие задачи им запрещены и как родительский агент проверяет
-результат. Один `AGENTS.md` не является полной настройкой custom agents.
+результат. Один `AGENTS.md` без пользовательской конфигурации `~/.codex` или
+обоснованного проектного слоя `.codex/` не является полной настройкой custom
+agents.
 
 ## Обновление старой настройки
 
 Для проекта, настроенного старой версией навыка, используй простой порядок:
 
-1. Найди `.codex/config.toml`, `.codex/agents/*.toml`, `AGENTS.md` и
-   `tools/codex-*`.
+1. Найди пользовательский слой `~/.codex/config.toml`, доступные глобальные
+   определения агентов, при наличии проектные `.codex/config.toml`,
+   `.codex/agents/*.toml`, `AGENTS.md` и `tools/codex-*`.
 2. Оставь read-only роли (`cheap_explorer`, reviewer-роли) без права записи.
 3. Добавь отдельную роль `cheap_patch_worker` или аналог с `workspace-write`.
 4. Замени общий запрет «подагенты не редактируют файлы» на правило по умолчанию
@@ -279,13 +282,13 @@ Escalate if the review requires a project decision or broad context.
 ## Маршрут через отдельный процесс для выбора модели
 
 Если проверка показывает, что встроенный fan-out создаёт дочерний поток, но не
-применяет модель из `.codex/agents/*.toml`, используй отдельный процесс Codex
-для задач, где модель должна быть выбрана гарантированно.
+применяет модель из пользовательского или проектного слоя Codex, используй
+отдельный процесс Codex для задач, где модель должна быть выбрана
+гарантированно.
 
 Переносимые запускатели лежат в директории `scripts/` навыка:
 
 - `codex-model-subagent` — запуск выбранной модели;
-- `codex-spark-subagent` — короткая обёртка для `gpt-5.3-codex-spark`;
 - `codex-usage-report` — краткий, однострочный, подробный и JSON-отчёт;
 - `install-codex-tools` — копирование скриптов в `<project-root>/tools`.
 
@@ -298,17 +301,18 @@ skills/ai-subagent-setup/scripts/install-codex-tools .
 После установки вызов выглядит так:
 
 ```bash
-tools/codex-model-subagent gpt-5.4-mini bounded-check \
+tools/codex-model-subagent экономичная-mini-модель bounded-check \
   'Return a short JSON result for the bounded task.'
 ```
 
 Если среда APM даёт стабильный путь к файлам навыка, можно вызывать
 `scripts/codex-model-subagent` напрямую без копирования в проект.
 
-Однострочный отчёт должен быть понятен без чтения JSONL:
+После задачи, где фактически запускались подагенты, однострочный отчёт должен
+быть понятен без чтения JSONL:
 
 ```text
-Модели: gpt-5.4-mini 14.5 тыс. | лимиты: общий 14.5 тыс. | время: 6.9 с
+Модели: экономичная-mini-модель 14.5 тыс. | лимиты: общий 14.5 тыс. | время: 6.9 с
 ```
 
 Для подробного анализа сохраняй JSONL и финальный ответ. Отдельно проверяй,
@@ -329,8 +333,8 @@ is justified by the current policy. Parent agent must make the final acceptance
 decision.
 
 Task: review the current subagent scheme using only `.codex/config.toml`,
-`.codex/agents/*.toml`, `AGENTS.md`, and
-`ai-subagent-setup`.
+`~/.codex/config.toml`, user or global agent definitions, optional
+project `.codex/agents/*.toml`, `AGENTS.md`, and `ai-subagent-setup`.
 
 Return valid JSON only with keys:
 `findings`, `used_subagents`, `escalations`, `rejected_results`.
