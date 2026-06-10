@@ -8,7 +8,8 @@
 
 - Состояние учёта: учтён
 - Состояние получения: получен и сохранён в корпусе
-- Состояние пригодности: пригоден для дальнейшей работы с оговорками
+- Состояние нормализации: нормализован кратким фактографическим слоем
+- Состояние пригодности: пригоден для извлечения утверждений с оговорками
 
 ## Что это за источник
 
@@ -38,6 +39,11 @@
   - `knowledge/primary/LSME/pages/evaluation/response-headers.txt`
   - `knowledge/primary/LSME/pages/evaluation-approaches/response-headers.txt`
   - `knowledge/primary/LSME/pages/trajectory-evals/response-headers.txt`
+- Нормализованный слой:
+  - `knowledge/normalized/LSME/source.md`
+  - `knowledge/normalized/LSME/pages/evaluation/index.md`
+  - `knowledge/normalized/LSME/pages/evaluation-approaches/index.md`
+  - `knowledge/normalized/LSME/pages/trajectory-evals/index.md`
 
 ## Происхождение
 
@@ -65,10 +71,10 @@
 
 - В индекс включены 3 страницы с HTTP-статусом `200`.
 - Хэши сохранённых файлов зафиксированы в `knowledge/primary/LSME/page-index.tsv`.
+- Для всех трёх страниц подготовлен краткий нормализованный слой.
 
 ## Что можно делать дальше
 
-- нормализовать сохранённый текст;
 - извлечь утверждения об evaluation-подходах и проверке траекторий;
 - проверить влияние утверждений на правила оценки работы агентов.
 
