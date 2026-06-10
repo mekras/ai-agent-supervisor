@@ -15,11 +15,12 @@
 Внешний публичный веб-источник: раздел `engineering` сайта Anthropic с
 материалами об агентных системах.
 
-Сейчас в корпус включены три единицы этого источника:
+Сейчас в корпус включены четыре единицы этого источника:
 
 - `building-effective-agents`
 - `multi-agent-research-system`
 - `effective-context-engineering-for-ai-agents`
+- `demystifying-evals-for-ai-agents`
 
 ## Почему источник относится к проекту
 
@@ -45,6 +46,10 @@
   `knowledge/primary/AENG/pages/effective-context-engineering-for-ai-agents/index.html`
 - Заголовки ответа:
   `knowledge/primary/AENG/pages/effective-context-engineering-for-ai-agents/response-headers.txt`
+- HTML:
+  `knowledge/primary/AENG/pages/demystifying-evals-for-ai-agents/index.html`
+- Заголовки ответа:
+  `knowledge/primary/AENG/pages/demystifying-evals-for-ai-agents/response-headers.txt`
 
 ## Происхождение
 
@@ -55,7 +60,10 @@
   `https://www.anthropic.com/engineering/multi-agent-research-system`
 - URL:
   `https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents`
+- URL:
+  `https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents`
 - Дата получения: `2026-06-05`
+- Дополнительная дата получения: `2026-06-10T07:50:20Z`
 
 ## Тип источника
 
@@ -73,7 +81,7 @@
 
 ## Что уже известно по источнику
 
-- Все три снимка сохранены с HTTP статусом `200`.
+- Все четыре снимка сохранены с HTTP статусом `200`.
 - В заголовках ответа удалены `set-cookie` и служебная прокси-строка перед
   фиксацией локальных артефактов.
 - Хэши сохранённых файлов зафиксированы в `knowledge/primary/AENG/page-index.tsv`.
@@ -82,6 +90,7 @@
 
 - нормализовать сохранённый текст;
 - извлечь утверждения о практиках агентной архитектуры и context engineering;
+- извлечь утверждения о практиках evaluation для AI-агентов;
 - проверить влияние утверждений на правила, навыки и проверки проекта.
 
 ## Что требует осторожности

@@ -14,6 +14,10 @@
 - `knowledge/normalized/AENG/pages/multi-agent-research-system/index.md`
 - `knowledge/normalized/AENG/pages/effective-context-engineering-for-ai-agents/index.md`
 
+## Ожидает нормализации
+
+- `knowledge/normalized/AENG/pages/demystifying-evals-for-ai-agents/index.md`
+
 ## Ограничения
 
 - Источник не имеет подтверждённой открытой лицензии на публикацию полного
@@ -21,3 +25,5 @@
   фактографический пересказ.
 - Численные результаты и продуктовые примеры относятся к описанным сценариям
   Anthropic и требуют отдельной оценки при переносе в проектные решения.
+- Страница `demystifying-evals-for-ai-agents` добавлена в первичный слой
+  `2026-06-10` и ещё не нормализована.
