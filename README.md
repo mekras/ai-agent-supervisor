@@ -27,10 +27,10 @@
 [APM](https://github.com/microsoft/apm). После установки навыки коллекции
 становятся доступны агенту как обычные локальные навыки.
 
-Установить коллекцию:
+Чтобы установить коллекцию выполните в корне вашего проекта:
 
 ```bash
-apm install --global github.com/mekras/ai-agent-supervisor#master
+apm install github.com/mekras/ai-agent-supervisor#^0.2.0
 ```
 
 Обновить уже установленную коллекцию:
