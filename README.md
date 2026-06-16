@@ -56,6 +56,7 @@ apm update --global
 ## Перечень навыков
 
 - `ai-agents-md-maintenance` — создание и сопровождение `AGENTS.md`.
+- `ai-apm-setup` — настройка проекта как коллекции навыков APM.
 - `ai-application-check` — проверка применимости ИИ к задаче.
 - `ai-audit-agents-md` — проверка качества `AGENTS.md`.
 - [ai-audit-project](skills/ai-audit-project/README.md) — аудит правил проекта
