@@ -16,13 +16,13 @@ CLAIM_RE = re.compile(r"^### ([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Validate evals/result-scenarios.json files in skill directories.",
+        description="Проверить файлы evals/result-scenarios.json в каталогах навыков.",
     )
     parser.add_argument(
         "paths",
         nargs="*",
         type=Path,
-        help="Skill directories or repository roots to scan. Defaults to cwd.",
+        help="Каталоги навыков или корни репозитория для обхода. По умолчанию текущий каталог.",
     )
     return parser.parse_args()
 
@@ -186,6 +186,54 @@ def validate_expected_output(
                     errors.append(f"{finding_label}: unknown claim_id {claim_id!r}")
 
 
+def validate_oracle(value: Any, label: str, errors: list[str]) -> None:
+    if not isinstance(value, dict):
+        errors.append(f"{label}.oracle: must be an object")
+        return
+    require_string_list(
+        value.get("success_criteria"),
+        f"{label}.oracle.success_criteria",
+        errors,
+    )
+    require_string_list(
+        value.get("failure_indicators"),
+        f"{label}.oracle.failure_indicators",
+        errors,
+    )
+
+
+def validate_negative_control(value: Any, label: str, errors: list[str]) -> None:
+    if not isinstance(value, dict):
+        errors.append(f"{label}.negative_control: must be an object")
+        return
+    require_string(
+        value.get("description"),
+        f"{label}.negative_control.description",
+        errors,
+    )
+    expected_failure = value.get("expected_failure")
+    not_applicable_reason = value.get("not_applicable_reason")
+    if isinstance(expected_failure, str) and expected_failure.strip():
+        return
+    if isinstance(not_applicable_reason, str) and not_applicable_reason.strip():
+        return
+    errors.append(
+        f"{label}.negative_control: expected_failure or "
+        "not_applicable_reason must be a non-empty string",
+    )
+
+
+def validate_application_contract(case: dict[str, Any], label: str, errors: list[str]) -> None:
+    require_string(case.get("evaluation_surface"), f"{label}.evaluation_surface", errors)
+    require_string_list(
+        case.get("application_evidence"),
+        f"{label}.application_evidence",
+        errors,
+    )
+    validate_oracle(case.get("oracle"), label, errors)
+    validate_negative_control(case.get("negative_control"), label, errors)
+
+
 def validate_case(
     case: Any,
     index: int,
@@ -233,6 +281,7 @@ def validate_case(
                     )
 
     validate_expected_output(case.get("expected_output"), label, known_claims, errors)
+    validate_application_contract(case, label, errors)
     require_string_list(case.get("assertions"), f"{label}.assertions", errors)
     require_string_list(case.get("must_not"), f"{label}.must_not", errors)
 
@@ -293,7 +342,7 @@ def main() -> int:
     repo_root = Path.cwd().resolve()
     skill_dirs = find_skill_dirs(roots)
     if not skill_dirs:
-        print("No skill directories found.", file=sys.stderr)
+        print("Каталоги навыков не найдены.", file=sys.stderr)
         return 1
 
     errors: list[str] = []
@@ -308,7 +357,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print(f"Validated {checked} result scenario eval file(s).")
+    print(f"Проверено файлов result-scenario eval: {checked}.")
     return 0
 
 

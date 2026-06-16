@@ -93,3 +93,36 @@ apm pack
 apm compile --validate
 apm compile --dry-run --target claude,codex
 ```
+
+### Тесты
+
+Основная команда проверки:
+
+```bash
+apm run tests
+```
+
+Она проверяет структуру тестов и запускает модельные тесты навыков: модель
+выбирает срабатывание навыка по `evals/triggers.json`, применяет навык к
+сценариям из `evals/result-scenarios.json`, а затем модель-судья сверяет ответы
+с ожиданиями сценария.
+
+Задать модель для выполнения тестов можно через переменную окружения
+`APM_EVAL_MODEL`:
+
+```bash
+APM_EVAL_MODEL=gpt-5.3-codex-spark apm run tests
+```
+
+Модель-судью можно задать отдельно:
+
+```bash
+APM_EVAL_JUDGE_MODEL=gpt-5.5 apm run tests
+```
+
+Для ограниченной локальной проверки можно временно сократить число
+результируюзих сценариев:
+
+```bash
+APM_EVAL_LIMIT=1 apm run tests
+```

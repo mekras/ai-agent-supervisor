@@ -20,20 +20,19 @@ REQUIRED_CASE_FIELDS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Validate evals/triggers.json files in skill directories.",
+        description="Проверить файлы evals/triggers.json в каталогах навыков.",
     )
     parser.add_argument(
         "paths",
         nargs="*",
         type=Path,
-        help="Skill directories or repository roots to scan. Defaults to cwd.",
+        help="Каталоги навыков или корни репозитория для обхода. По умолчанию текущий каталог.",
     )
     parser.add_argument(
         "--require-all",
         action="store_true",
         help=(
-            "Require every discovered skill directory to have "
-            "evals/triggers.json."
+            "Требовать файл evals/triggers.json у каждого найденного каталога навыка."
         ),
     )
     return parser.parse_args()
@@ -200,7 +199,7 @@ def main() -> int:
     roots = args.paths or [Path.cwd()]
     skill_dirs = find_skill_dirs(roots)
     if not skill_dirs:
-        print("No skill directories found.", file=sys.stderr)
+        print("Каталоги навыков не найдены.", file=sys.stderr)
         return 1
 
     errors: list[str] = []
@@ -216,7 +215,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print(f"Validated {checked} trigger eval file(s).")
+    print(f"Проверено файлов trigger-eval: {checked}.")
     return 0
 
 
