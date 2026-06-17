@@ -1,6 +1,8 @@
 *.py[cod]
 /.idea
 /apm_modules
+/.claude-plugin/
+/build/
 /knowledge/private.local/
 /knowledge/raw.local/
 /knowledge/reports/source-inventory/
