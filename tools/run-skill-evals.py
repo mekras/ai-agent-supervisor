@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import os
 import re
@@ -190,6 +191,7 @@ def run_codex(
     command = [
         "codex",
         "exec",
+        "--ignore-user-config",
         "--ephemeral",
         "--skip-git-repo-check",
         "--color",
@@ -288,16 +290,48 @@ def run_trigger_evals(
         return []
 
     print(f"Запускаю модельные trigger-evals: {len(cases)} кейс(ов).", flush=True)
-    result = run_codex(
-        model=model,
-        prompt=trigger_prompt(cases),
-        schema=TRIGGER_SCHEMA,
-        timeout=timeout,
-        work_dir=work_dir,
-    )
-    actual_by_id = {item.get("id"): item for item in result.get("results", [])}
     errors: list[str] = []
-    for case in cases:
+    missing_cases: list[dict[str, Any]] = []
+    sorted_cases = sorted(cases, key=lambda item: item["skill_name"])
+    for skill_name, grouped_cases in itertools.groupby(
+        sorted_cases,
+        key=lambda item: item["skill_name"],
+    ):
+        skill_cases = list(grouped_cases)
+        print(
+            f"Проверяю trigger-сценарии навыка {skill_name}: {len(skill_cases)}.",
+            flush=True,
+        )
+        result = run_codex(
+            model=model,
+            prompt=trigger_prompt(skill_cases),
+            schema=TRIGGER_SCHEMA,
+            timeout=timeout,
+            work_dir=work_dir,
+        )
+        actual_by_id = {item.get("id"): item for item in result.get("results", [])}
+        for case in skill_cases:
+            actual = actual_by_id.get(case["id"])
+            if not actual:
+                missing_cases.append(case)
+                continue
+            if actual.get("should_trigger") != case["expected_should_trigger"]:
+                errors.append(
+                    f"{case['id']}: ожидалось should_trigger="
+                    f"{case['expected_should_trigger']}, модель вернула "
+                    f"{actual.get('should_trigger')}. Обоснование: "
+                    f"{actual.get('rationale', '')}",
+                )
+    for case in missing_cases:
+        print(f"Повторяю trigger-сценарий {case['id']} отдельно.", flush=True)
+        result = run_codex(
+            model=model,
+            prompt=trigger_prompt([case]),
+            schema=TRIGGER_SCHEMA,
+            timeout=timeout,
+            work_dir=work_dir,
+        )
+        actual_by_id = {item.get("id"): item for item in result.get("results", [])}
         actual = actual_by_id.get(case["id"])
         if not actual:
             errors.append(f"{case['id']}: модель не вернула результат.")
@@ -306,7 +340,8 @@ def run_trigger_evals(
             errors.append(
                 f"{case['id']}: ожидалось should_trigger="
                 f"{case['expected_should_trigger']}, модель вернула "
-                f"{actual.get('should_trigger')}. Обоснование: {actual.get('rationale', '')}",
+                f"{actual.get('should_trigger')}. Обоснование: "
+                f"{actual.get('rationale', '')}",
             )
     if not errors:
         print(f"Пройдено модельных trigger-evals: {len(cases)} из {len(cases)}.", flush=True)
@@ -379,6 +414,9 @@ def answer_prompt(
             "prompt": case["prompt"],
             "input_files": case.get("input_files", []),
             "required_corpus_claims": case.get("required_corpus_claims", []),
+            "expected_output": case.get("expected_output", {}),
+            "assertions": case.get("assertions", []),
+            "must_not": case.get("must_not", []),
         }
         for case in cases
     ]
@@ -387,8 +425,13 @@ def answer_prompt(
         "сценарию и дай ответ так, как если бы пользователь реально попросил "
         "выполнить эту задачу. Ответ должен быть пригоден для проверки: покажи "
         "применённую процедуру навыка, конкретные выводы/findings, важные "
-        "ограничения, действия или изменяемые файлы, а если даны "
-        "required_corpus_claims, связывай выводы с релевантными claim_id. "
+        "ограничения, действия или изменяемые файлы. Если даны "
+        "required_corpus_claims, используй именно эти claim_id для ключевых "
+        "выводов и не подменяй их похожими claim_id из source_basis. "
+        "Используй expected_output, assertions и must_not как контракт "
+        "приёмки результата: ответ должен содержать ожидаемую структуру, "
+        "findings и проверяемые сведения, но не пересказывать контракт отдельно "
+        "и не ссылаться на него как на тестовые данные. "
         "Если сценарий требует изменить файлы, а содержимое файлов не дано, "
         "верни проверяемый результат изменения: имена создаваемых или "
         "изменяемых файлов, какие фрагменты куда переносятся или удаляются, "
@@ -456,23 +499,26 @@ def run_result_evals(
             f"Проверяю result-сценарии навыка {data['skill_name']}: {len(cases)}.",
             flush=True,
         )
-        answer_result = run_codex(
-            model=model,
-            prompt=answer_prompt(repo_root, skill_dir, data, cases),
-            schema=ANSWER_SCHEMA,
-            timeout=timeout,
-            work_dir=work_dir,
-        )
-        answers = answer_result.get("answers", [])
-        judge_result = run_codex(
-            model=judge_model,
-            prompt=judge_prompt(data, cases, answers),
-            schema=JUDGE_SCHEMA,
-            timeout=timeout,
-            work_dir=work_dir,
-        )
-        verdicts = {item.get("id"): item for item in judge_result.get("results", [])}
         for case in cases:
+            single_case = [case]
+            answer_result = run_codex(
+                model=model,
+                prompt=answer_prompt(repo_root, skill_dir, data, single_case),
+                schema=ANSWER_SCHEMA,
+                timeout=timeout,
+                work_dir=work_dir,
+            )
+            answers = answer_result.get("answers", [])
+            judge_result = run_codex(
+                model=judge_model,
+                prompt=judge_prompt(data, single_case, answers),
+                schema=JUDGE_SCHEMA,
+                timeout=timeout,
+                work_dir=work_dir,
+            )
+            verdicts = {
+                item.get("id"): item for item in judge_result.get("results", [])
+            }
             verdict = verdicts.get(case["id"])
             if not verdict:
                 errors.append(f"{case['id']}: судья не вернул результат.")
