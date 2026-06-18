@@ -119,12 +119,32 @@ def parse_args() -> argparse.Namespace:
         help="Ограничить число result-сценариев. 0 означает все сценарии.",
     )
     parser.add_argument(
+        "--case-id",
+        action="append",
+        default=[],
+        help=(
+            "Запустить только проверку с указанным id. Можно повторять. "
+            "Также читается из APM_EVAL_CASE_ID или APM_EVAL_CASE_IDS "
+            "через запятую."
+        ),
+    )
+    parser.add_argument(
         "--timeout",
         type=int,
         default=int(os.environ.get("APM_EVAL_TIMEOUT", "900")),
         help="Тайм-аут одного вызова Codex в секундах.",
     )
-    return parser.parse_args()
+    args = parser.parse_args()
+    env_case_ids = []
+    for name in ("APM_EVAL_CASE_ID", "APM_EVAL_CASE_IDS"):
+        raw_value = os.environ.get(name, "")
+        env_case_ids.extend(
+            part.strip()
+            for part in raw_value.split(",")
+            if part.strip()
+        )
+    args.case_id = [*env_case_ids, *args.case_id]
+    return args
 
 
 def find_skill_dirs(paths: list[Path]) -> list[Path]:
@@ -257,6 +277,15 @@ def collect_trigger_cases(skill_dirs: list[Path]) -> list[dict[str, Any]]:
     return cases
 
 
+def filter_trigger_cases(
+    cases: list[dict[str, Any]],
+    case_ids: set[str],
+) -> list[dict[str, Any]]:
+    if not case_ids:
+        return cases
+    return [case for case in cases if case["id"] in case_ids]
+
+
 def trigger_prompt(cases: list[dict[str, Any]]) -> str:
     payload = [
         {
@@ -367,6 +396,20 @@ def collect_result_groups(
             remaining -= len(cases)
         groups.append((skill_dir, data, cases))
     return groups
+
+
+def filter_result_groups(
+    groups: list[tuple[Path, dict[str, Any], list[dict[str, Any]]]],
+    case_ids: set[str],
+) -> list[tuple[Path, dict[str, Any], list[dict[str, Any]]]]:
+    if not case_ids:
+        return groups
+    filtered: list[tuple[Path, dict[str, Any], list[dict[str, Any]]]] = []
+    for skill_dir, data, cases in groups:
+        selected = [case for case in cases if case["id"] in case_ids]
+        if selected:
+            filtered.append((skill_dir, data, selected))
+    return filtered
 
 
 def extract_claim_block(statement_text: str, claim_id: str) -> str:
@@ -546,10 +589,28 @@ def main() -> int:
     judge_model = args.judge_model
     roots = args.paths or [Path.cwd()]
     repo_root = Path.cwd().resolve()
+    case_ids = set(args.case_id)
     skill_dirs = find_skill_dirs(roots)
     if not skill_dirs:
         print("Каталоги навыков не найдены.", file=sys.stderr)
         return 1
+
+    all_trigger_cases = collect_trigger_cases(skill_dirs)
+    all_result_groups = collect_result_groups(skill_dirs, 0)
+    if case_ids:
+        known_case_ids = {case["id"] for case in all_trigger_cases}
+        known_case_ids.update(
+            case["id"]
+            for _, _, cases in all_result_groups
+            for case in cases
+        )
+        missing = sorted(case_ids - known_case_ids)
+        if missing:
+            print(
+                "Проверки с указанными id не найдены: " + ", ".join(missing),
+                file=sys.stderr,
+            )
+            return 1
 
     print(f"Модель применения навыков: {args.model}.", flush=True)
     print(f"Модель оценки результатов: {judge_model}.", flush=True)
@@ -557,14 +618,19 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="apm-skill-evals-") as tmp:
         work_dir = Path(tmp)
         trigger_errors = run_trigger_evals(
-            cases=collect_trigger_cases(skill_dirs),
+            cases=filter_trigger_cases(all_trigger_cases, case_ids),
             model=args.model,
             timeout=args.timeout,
             work_dir=work_dir,
         )
         result_errors = run_result_evals(
             repo_root=repo_root,
-            groups=collect_result_groups(skill_dirs, args.limit),
+            groups=filter_result_groups(
+                all_result_groups
+                if case_ids
+                else collect_result_groups(skill_dirs, args.limit),
+                case_ids,
+            ),
             model=args.model,
             judge_model=judge_model,
             timeout=args.timeout,

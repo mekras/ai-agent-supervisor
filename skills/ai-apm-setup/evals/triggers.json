@@ -26,6 +26,12 @@
       "rationale": "Нужно диагностировать и исправить команду tests в настройках APM для коллекции."
     },
     {
+      "id": "ai-apm-setup-positive-selective-apm-tests",
+      "prompt": "Тесты коллекции APM идут слишком долго. Обнови scripts.tests так, чтобы можно было запускать один навык или один сценарий без потери полного запуска по умолчанию.",
+      "should_trigger": true,
+      "rationale": "Нужно изменить настройку scripts.tests и тестовый цикл APM для коллекции навыков."
+    },
+    {
       "id": "ai-apm-setup-positive-skills-only-compile-question",
       "prompt": "У нас пакет только со skills. Нужно ли добавлять apm compile в обязательный тестовый цикл?",
       "should_trigger": true,

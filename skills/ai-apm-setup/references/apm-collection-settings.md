@@ -31,12 +31,27 @@ scripts:
 репозитория с валидаторами навыков используй:
 
 ```bash
-python3 tools/validate-trigger-evals.py skills --require-all && python3 tools/validate-skill-result-evals.py skills && python3 tools/run-skill-evals.py skills
+sh -c 'set -e; target="${APM_EVAL_PATH:-skills}"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/run-skill-evals.py "$target"'
 ```
 
 Если таких инструментов нет, найди существующую команду тестов проекта. Если
 тестов нет, сначала создай минимальную проверку коллекции или остановись и
 сообщи, что `apm run tests` нельзя честно настроить без команды тестов.
+
+## Выборочный запуск
+
+Команда `scripts.tests` для коллекции навыков должна оставлять полный запуск
+значением по умолчанию, но поддерживать узкий цикл разработки:
+
+- `apm run tests` — полный набор коллекции;
+- `APM_EVAL_PATH=skills/<name> apm run tests` — проверки одного навыка;
+- `APM_EVAL_PATH=skills/<name> APM_EVAL_CASE_ID=<id> apm run tests` — один
+  модельный сценарий.
+
+Выборочный запуск не заменяет полный запуск перед публикацией, изменением общей
+инфраструктуры тестов или правкой нескольких навыков. Он нужен, чтобы быстро
+проверять локальную правку и не тратить модельные вызовы на незатронутые
+каталоги навыков.
 
 ## Проверка после правки
 
