@@ -68,6 +68,12 @@
       "rationale": "Нужно синхронизировать интерфейсные метаданные навыка."
     },
     {
+      "id": "ai-skill-development-positive-description-budget",
+      "prompt": "Сократи description у нескольких навыков до маршрутизирующего минимума и обнови тесты, чтобы коллекция проверяла бюджет описаний.",
+      "should_trigger": true,
+      "rationale": "Нужно изменить навыки, их description и постоянные тесты сопровождения."
+    },
+    {
       "id": "ai-skill-development-negative-ordinary-code-change",
       "prompt": "Исправь ошибку в обработке пустого ответа API и добавь тест.",
       "should_trigger": false,

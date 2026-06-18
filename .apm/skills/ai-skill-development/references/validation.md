@@ -41,6 +41,7 @@ python3 tools/validate-trigger-evals.py --require-all
 Для одного навыка передавай путь к его каталогу:
 
 ```bash
+python3 tools/validate-skill-descriptions.py .apm/skills/<name>
 python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
 ```
 
@@ -100,6 +101,7 @@ python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
 Используй узкий цикл, когда изменение затрагивает один навык:
 
 ```bash
+python3 tools/validate-skill-descriptions.py .apm/skills/<name>
 python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
 python3 tools/validate-skill-result-evals.py .apm/skills/<name>
 python3 tools/run-skill-evals.py .apm/skills/<name>
@@ -162,7 +164,8 @@ APM_EVAL_PATH=.apm/skills/<name> APM_EVAL_CASE_ID=<id> apm run tests
 
 Минимум для нового навыка: тесты срабатывания и один тест результата. Минимум
 для изменения `description`: обновлённые положительные, отрицательные и
-пограничные случаи. Минимум для изменения процедуры или ограничений: один тест
+пограничные случаи, плюс проверка бюджета `description`, если она есть в
+коллекции. Минимум для изменения процедуры или ограничений: один тест
 результата и один негативный тест ограничения.
 
 ## Аудит покрытия перед завершением
