@@ -7,6 +7,16 @@
 
 ## [Невыпущено]
 
+## [0.4.1] - 2026-06-18
+
+### Изменено
+
+- Обновлён навык `ai-agents-md-maintenance`: добавлен общий каркас `AGENTS.md`
+  и блоки по умолчанию про внесение изменений и Git с сохранением
+  пользовательских решений.
+- Добавлен сценарий результата, который проверяет, что эти блоки не перетирают
+  уже заданную политику проекта.
+
 ## [0.4.0] - 2026-06-18
 
 ### Изменено
@@ -61,7 +71,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.1...HEAD
+[0.4.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.3.1...0.4.0
 [0.3.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.2.0...0.3.0

@@ -154,15 +154,28 @@
       "input_files": [
         {
           "path": "apm.yml",
-          "purpose": "существующий манифест APM"
+          "purpose": "существующий манифест APM",
+          "content": "name: example-collection\nversion: 0.2.3\ndescription: Пример коллекции навыков\nauthor: example-team\nlicense: MIT\ntarget:\n- codex\ntype: skill\ndependencies:\n  apm:\n  - mekras/project-knowlege-corpus#^0.4.0\n  mcp: []\n"
         },
         {
           "path": ".apm/skills/example-skill/SKILL.md",
-          "purpose": "пример публикуемого навыка"
+          "purpose": "пример публикуемого навыка",
+          "content": "---\nname: example-skill\ndescription: Пример навыка для коллекции.\n---\n\n# example-skill\n\nКороткий пример публикуемого навыка.\n"
         },
         {
           "path": "tools/run-skill-evals.py",
-          "purpose": "существующая команда тестов коллекции"
+          "purpose": "существующая команда тестов коллекции",
+          "content": "#!/usr/bin/env python3\n\"\"\"Run skill evals for the collection.\"\"\"\n"
+        },
+        {
+          "path": "tools/validate-trigger-evals.py",
+          "purpose": "существующий валидатор проверок срабатывания",
+          "content": "#!/usr/bin/env python3\n\"\"\"Validate trigger eval files.\"\"\"\n"
+        },
+        {
+          "path": "tools/validate-skill-result-evals.py",
+          "purpose": "существующий валидатор сценариев результата",
+          "content": "#!/usr/bin/env python3\n\"\"\"Validate result scenario files.\"\"\"\n"
         }
       ],
       "required_corpus_claims": [
@@ -355,19 +368,23 @@
       "input_files": [
         {
           "path": "apm.yml",
-          "purpose": "существующий манифест APM"
+          "purpose": "существующий манифест APM",
+          "content": "name: example-collection\nversion: 0.2.3\ndescription: Пример коллекции навыков\ntarget:\n- codex\ntype: skill\nincludes: auto\nscripts:\n  tests: sh -c 'set -e; target=\"${APM_EVAL_PATH:-.apm/skills}\"; python3 tools/validate-trigger-evals.py \"$target\" --require-all; python3 tools/validate-skill-result-evals.py \"$target\"; python3 tools/run-skill-evals.py \"$target\"'\n"
         },
         {
           "path": "tools/validate-trigger-evals.py",
-          "purpose": "валидатор проверок срабатывания"
+          "purpose": "валидатор проверок срабатывания",
+          "content": "#!/usr/bin/env python3\n\"\"\"Validate trigger eval files.\"\"\"\n"
         },
         {
           "path": "tools/validate-skill-result-evals.py",
-          "purpose": "валидатор сценариев результата"
+          "purpose": "валидатор сценариев результата",
+          "content": "#!/usr/bin/env python3\n\"\"\"Validate result scenario files.\"\"\"\n"
         },
         {
           "path": "tools/run-skill-evals.py",
-          "purpose": "средство запуска модельных проверок"
+          "purpose": "средство запуска модельных проверок",
+          "content": "parser.add_argument(\"--case-id\", action=\"append\", default=[])\nenv_case_ids = os.environ.get(\"APM_EVAL_CASE_ID\", \"\")\n# The runner filters trigger and result scenarios by the selected id before model calls.\n"
         }
       ],
       "required_corpus_claims": [
