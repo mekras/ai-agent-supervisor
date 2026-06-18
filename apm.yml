@@ -1,15 +1,18 @@
 name: ai-agent-supervisor
 version: 0.4.0
-description: "Коллекция навыков для контроля применения ИИ в продуктовых задачах"
-author: "mekras"
-license: "MIT"
+description: Коллекция навыков для контроля применения ИИ в продуктовых задачах
+author: mekras
+license: MIT
 target:
-  - claude
-  - codex
-type: "skill"
+- claude
+- codex
+type: skill
 includes: auto
 dependencies:
-  apm: []
+  apm:
+  - mekras/project-knowlege-corpus#^0.3.0
   mcp: []
 scripts:
-  tests: "sh -c 'set -e; target=\"${APM_EVAL_PATH:-.apm/skills}\"; python3 tools/validate-trigger-evals.py \"$target\" --require-all; python3 tools/validate-skill-result-evals.py \"$target\"; python3 tools/run-skill-evals.py \"$target\"'"
+  tests: sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-trigger-evals.py
+    "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target";
+    python3 tools/run-skill-evals.py "$target"'
