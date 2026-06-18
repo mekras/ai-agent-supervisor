@@ -7,6 +7,16 @@
 
 ## [Невыпущено]
 
+## [0.4.2] - 2026-06-18
+
+### Изменено
+
+- В `apm run tests` добавлена проверка бюджета `description` у навыков.
+- Сокращены `description` публикуемых навыков до коротких маршрутизаторов.
+- Обновлена зависимость `mekras/ai-dev-team` до `^0.3.1` и перегенерирован
+  `apm.lock.yaml`.
+- В `.gitignore` добавлен каталог `/.codex`.
+
 ## [0.4.1] - 2026-06-18
 
 ### Изменено
@@ -71,7 +81,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.1...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.2...HEAD
+[0.4.2]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.1...0.4.2
 [0.4.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.3.1...0.4.0
 [0.3.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.3.0...0.3.1
