@@ -41,7 +41,7 @@ python3 tools/validate-trigger-evals.py --require-all
 Для одного навыка передавай путь к его каталогу:
 
 ```bash
-python3 tools/validate-trigger-evals.py skills/<name> --require-all
+python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
 ```
 
 ## Проверки качества результата
@@ -100,22 +100,22 @@ python3 tools/validate-trigger-evals.py skills/<name> --require-all
 Используй узкий цикл, когда изменение затрагивает один навык:
 
 ```bash
-python3 tools/validate-trigger-evals.py skills/<name> --require-all
-python3 tools/validate-skill-result-evals.py skills/<name>
-python3 tools/run-skill-evals.py skills/<name>
+python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
+python3 tools/validate-skill-result-evals.py .apm/skills/<name>
+python3 tools/run-skill-evals.py .apm/skills/<name>
 ```
 
 Если нужно повторить один модельный сценарий, запускай его по идентификатору:
 
 ```bash
-python3 tools/run-skill-evals.py skills/<name> --case-id <id>
+python3 tools/run-skill-evals.py .apm/skills/<name> --case-id <id>
 ```
 
 Через APM тот же выборочный запуск задаётся переменными среды:
 
 ```bash
-APM_EVAL_PATH=skills/<name> apm run tests
-APM_EVAL_PATH=skills/<name> APM_EVAL_CASE_ID=<id> apm run tests
+APM_EVAL_PATH=.apm/skills/<name> apm run tests
+APM_EVAL_PATH=.apm/skills/<name> APM_EVAL_CASE_ID=<id> apm run tests
 ```
 
 Расширяй запуск до всей коллекции, если:
