@@ -37,11 +37,15 @@
   "cases": [
     {
       "id": "ai-apm-setup-result-create-manifest-with-tests",
-      "prompt": "В репозитории есть каталог .apm/skills/ и валидаторы tools/validate-trigger-evals.py, tools/validate-skill-result-evals.py, tools/run-skill-evals.py, но нет apm.yml. Настрой проект как коллекцию APM и добавь apm run tests.",
+      "prompt": "В репозитории есть каталог .apm/skills/ и валидаторы tools/validate-skill-descriptions.py, tools/validate-trigger-evals.py, tools/validate-skill-result-evals.py, tools/run-skill-evals.py, но нет apm.yml. Настрой проект как коллекцию APM и добавь apm run tests.",
       "input_files": [
         {
           "path": ".apm/skills/example-skill/SKILL.md",
           "purpose": "пример публикуемого навыка"
+        },
+        {
+          "path": "tools/validate-skill-descriptions.py",
+          "purpose": "валидатор бюджета description"
         },
         {
           "path": "tools/validate-trigger-evals.py",
@@ -69,7 +73,7 @@
           "назван созданный apm.yml",
           "показано, что type выбран для коллекции .apm/skills",
           "показано, что includes разворачивает локальное дерево .apm",
-          "названа команда scripts.tests для apm run tests",
+          "названа команда scripts.tests для apm run tests, включая бюджет description",
           "перечислены выполненные проверки или причины, почему часть проверок не запускалась"
         ],
         "findings": [
@@ -81,7 +85,7 @@
             ],
             "observed_problem": "репозиторий с .apm/skills не имеет манифеста APM и поэтому не оформлен как пакет коллекции.",
             "expected_conclusion": "нужно создать минимальный apm.yml для публикации коллекции навыков",
-            "acceptable_fix_direction": "создать манифест с именем, версией, type skill, targets, includes auto, dependencies и scripts.tests"
+            "acceptable_fix_direction": "создать манифест с именем, версией, type skill, targets, includes auto, dependencies и scripts.tests с валидатором budget description"
           },
           {
             "severity": "high",
@@ -102,7 +106,7 @@
               "ASKL-010"
             ],
             "observed_problem": "команда apm run tests не настроена и не может служить повторяемой проверкой коллекции.",
-            "expected_conclusion": "scripts.tests должен запускать реальные тесты коллекции, а не заглушку или несуществующие файлы",
+            "expected_conclusion": "scripts.tests должен запускать реальные тесты коллекции, включая проверку бюджета description, а не заглушку или несуществующие файлы",
             "acceptable_fix_direction": "записать команду, которая вызывает найденные валидаторы и средство запуска проверок"
           }
         ]
@@ -116,7 +120,7 @@
           "создан или обновлён apm.yml",
           "исходники навыков размещены или ожидаются в .apm/skills",
           "includes задан как auto или явно включает .apm/skills",
-          "scripts.tests содержит команду для существующих тестов коллекции",
+          "scripts.tests содержит команду для существующих тестов коллекции и проверку бюджета description",
           "результат объясняет, какие проверки подтвердили настройку"
         ],
         "failure_indicators": [
@@ -138,7 +142,7 @@
       "assertions": [
         "Результат создаёт или обновляет манифест APM в корне проекта.",
         "Результат использует .apm/skills как исходное дерево коллекции навыков.",
-        "Команда scripts.tests запускает тесты коллекции, а не пустую заглушку.",
+        "Команда scripts.tests запускает тесты коллекции и проверку бюджета description, а не пустую заглушку.",
         "Отчёт отделяет выполненные проверки от проверок, которые остались недоступны."
       ],
       "must_not": [
@@ -161,6 +165,11 @@
           "path": ".apm/skills/example-skill/SKILL.md",
           "purpose": "пример публикуемого навыка",
           "content": "---\nname: example-skill\ndescription: Пример навыка для коллекции.\n---\n\n# example-skill\n\nКороткий пример публикуемого навыка.\n"
+        },
+        {
+          "path": "tools/validate-skill-descriptions.py",
+          "purpose": "существующий валидатор бюджета description",
+          "content": "#!/usr/bin/env python3\n\"\"\"Validate skill description budgets.\"\"\"\n"
         },
         {
           "path": "tools/run-skill-evals.py",
@@ -190,7 +199,7 @@
         "report_structure": [
           "названы сохранённые поля существующего apm.yml",
           "показано добавление includes или проверка явного includes",
-          "показано добавление или обновление scripts.tests",
+          "показано добавление или обновление scripts.tests с проверкой бюджета description",
           "объяснено, почему apm compile не стал обязательным для пакета только из .apm/skills",
           "перечислены проверки манифеста и тестовой команды"
         ],
@@ -201,7 +210,7 @@
               "APMP-003",
               "ASKL-010"
             ],
-            "observed_problem": "существующий манифест APM не содержит scripts.tests, поэтому стандартная команда проверки коллекции отсутствует.",
+            "observed_problem": "существующий манифест APM не содержит scripts.tests с проверкой бюджета description, поэтому стандартная команда проверки коллекции неполна.",
             "expected_conclusion": "нужно добавить scripts.tests, сохранив существующие метаданные",
             "acceptable_fix_direction": "обновить только недостающую секцию scripts или поле tests"
           },
@@ -235,7 +244,7 @@
         "success_criteria": [
           "существующие метаданные apm.yml сохранены",
           "includes добавлен как auto или существующий явный includes проверен",
-          "scripts.tests добавлен или обновлён",
+          "scripts.tests добавлен или обновлён вместе с проверкой бюджета description",
           "результат не требует apm compile для коллекции только из .apm/skills без причины"
         ],
         "failure_indicators": [
@@ -369,7 +378,12 @@
         {
           "path": "apm.yml",
           "purpose": "существующий манифест APM",
-          "content": "name: example-collection\nversion: 0.2.3\ndescription: Пример коллекции навыков\ntarget:\n- codex\ntype: skill\nincludes: auto\nscripts:\n  tests: sh -c 'set -e; target=\"${APM_EVAL_PATH:-.apm/skills}\"; python3 tools/validate-trigger-evals.py \"$target\" --require-all; python3 tools/validate-skill-result-evals.py \"$target\"; python3 tools/run-skill-evals.py \"$target\"'\n"
+          "content": "name: example-collection\nversion: 0.2.3\ndescription: Пример коллекции навыков\ntarget:\n- codex\ntype: skill\nincludes: auto\nscripts:\n  tests: sh -c 'set -e; target=\"${APM_EVAL_PATH:-.apm/skills}\"; python3 tools/validate-skill-descriptions.py \"$target\"; python3 tools/validate-trigger-evals.py \"$target\" --require-all; python3 tools/validate-skill-result-evals.py \"$target\"; python3 tools/run-skill-evals.py \"$target\"'\n"
+        },
+        {
+          "path": "tools/validate-skill-descriptions.py",
+          "purpose": "валидатор бюджета description",
+          "content": "#!/usr/bin/env python3\n\"\"\"Validate skill description budgets.\"\"\"\n"
         },
         {
           "path": "tools/validate-trigger-evals.py",

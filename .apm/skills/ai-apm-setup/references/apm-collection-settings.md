@@ -68,7 +68,7 @@ project/
 репозитория с валидаторами навыков используй:
 
 ```bash
-sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/run-skill-evals.py "$target"'
+sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/run-skill-evals.py "$target"'
 ```
 
 Если таких инструментов нет, найди существующую команду тестов проекта. Если
@@ -100,6 +100,7 @@ sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-tr
   коллекции `.apm/skills/**` он задан как `auto` или явно включает нужные пути;
 - `type` соответствует публикуемой коллекции;
 - `scripts.tests` есть и ссылается на существующие файлы или команды;
+- проверка бюджета `description` подключена, если коллекция публикует навыки;
 - `apm run tests` запускается либо объяснено, почему запуск сейчас невозможен;
 - для выпуска выполнены `apm view`, `apm audit` и `apm pack`, если они доступны
   и входят в задачу.

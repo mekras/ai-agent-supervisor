@@ -1,13 +1,8 @@
 ---
 name: ai-apm-setup
 description: >
-  Используй, когда нужно настроить или проверить проект как коллекцию APM:
-  создать либо обновить apm.yml, оформить исходное дерево .apm/skills/**,
-  добавить includes и scripts.tests для apm run tests, провести структурную
-  приёмку манифеста, исходников и публикуемого состава, проверить упаковку,
-  аудит или выпуск коллекции навыков, а также решить, нужен ли apm compile или
-  другой шаг APM в тестовом цикле коллекции. Не используй для обычной установки
-  чужого пакета APM.
+  Используй, когда нужно настроить или проверить коллекцию APM: `apm.yml`,
+  `.apm/*`, упаковку и выпуск.
 ---
 
 # ai-apm-setup
@@ -52,11 +47,13 @@ description: >
    или параметр скрипта. Не записывай команду, которая ссылается на отсутствующие
    файлы; сначала найди существующий запуск тестов либо создай недостающий
    проверочный скрипт в рамках задачи.
+   Если коллекция публикует навыки, добавь в тот же цикл проверку бюджета
+   `description`, чтобы длинные маршрутизаторы не накапливались незаметно.
 7. Если подходит стандартная структура этого репозитория после переноса исходников
    в `.apm/skills`, используй команду:
 
    ```bash
-   sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/run-skill-evals.py "$target"'
+   sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/run-skill-evals.py "$target"'
    ```
 
    Для проверки одного навыка используй:
