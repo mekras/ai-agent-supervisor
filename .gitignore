@@ -1,6 +1,7 @@
 *.py[cod]
 /.agents
 /.claude
+/.codex
 /.idea
 /knowledge/private.local/
 /knowledge/raw.local/
