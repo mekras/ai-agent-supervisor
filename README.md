@@ -131,3 +131,18 @@ APM_EVAL_JUDGE_MODEL=gpt-5.5 apm run tests
 ```bash
 APM_EVAL_LIMIT=1 apm run tests
 ```
+
+Для быстрой проверки одного навыка:
+
+```bash
+APM_EVAL_PATH=skills/ai-skill-development apm run tests
+```
+
+Для повторного запуска одного модельного сценария:
+
+```bash
+APM_EVAL_PATH=skills/ai-skill-development APM_EVAL_CASE_ID=ai-skill-development-result-stale-existing-tests apm run tests
+```
+
+Перед публикацией пакета запускайте полный `apm run tests` без этих
+ограничений.
