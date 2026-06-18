@@ -51,7 +51,7 @@ apm update --global
 ### Проверка правил проекта
 
 Для всесторонней проверки агентских правил проекта используйте навык
-[ai-audit-project](skills/ai-audit-project/README.md).
+[ai-audit-project](.apm/skills/ai-audit-project/README.md).
 
 ## Перечень навыков
 
@@ -59,7 +59,7 @@ apm update --global
 - `ai-apm-setup` — настройка проекта как коллекции навыков APM.
 - `ai-application-check` — проверка применимости ИИ к задаче.
 - `ai-audit-agents-md` — проверка качества `AGENTS.md`.
-- [ai-audit-project](skills/ai-audit-project/README.md) — аудит правил проекта
+- [ai-audit-project](.apm/skills/ai-audit-project/README.md) — аудит правил проекта
   для агента.
 - `ai-data-collection` — порядок сбора данных перед проектированием изменений.
 - `ai-rule-failure-analysis` — разбор нарушения правил агентом как дефекта
@@ -68,7 +68,7 @@ apm update --global
 - `ai-work-control` — контрольный регламент перед существенным применением ИИ.
 - `ai-work-result-evaluation` — проверка результата перед публикацией и
   приёмкой.
-- [ai-subagent-setup](skills/ai-subagent-setup/README.md) — настройка экономной
+- [ai-subagent-setup](.apm/skills/ai-subagent-setup/README.md) — настройка экономной
   маршрутизации подагентов и моделей с проверками качества.
 
 ## Разработка
@@ -135,13 +135,13 @@ APM_EVAL_LIMIT=1 apm run tests
 Для быстрой проверки одного навыка:
 
 ```bash
-APM_EVAL_PATH=skills/ai-skill-development apm run tests
+APM_EVAL_PATH=.apm/skills/ai-skill-development apm run tests
 ```
 
 Для повторного запуска одного модельного сценария:
 
 ```bash
-APM_EVAL_PATH=skills/ai-skill-development APM_EVAL_CASE_ID=ai-skill-development-result-stale-existing-tests apm run tests
+APM_EVAL_PATH=.apm/skills/ai-skill-development APM_EVAL_CASE_ID=ai-skill-development-result-stale-existing-tests apm run tests
 ```
 
 Перед публикацией пакета запускайте полный `apm run tests` без этих

@@ -33,7 +33,7 @@
     },
     {
       "id": "ai-apm-setup-positive-fix-project-broad-request",
-      "prompt": "Исправь этот проект, используя skills/ai-apm-setup.",
+      "prompt": "Исправь этот проект, используя .apm/skills/ai-apm-setup.",
       "should_trigger": true,
       "rationale": "Широкий запрос всё равно требует полного применения навыка настройки коллекции APM, а не локальной правки первого найденного симптома."
     },
