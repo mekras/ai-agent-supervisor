@@ -8,13 +8,16 @@ import re
 from pathlib import Path
 
 
+# Deterministic gate: structure validators only, no model or network calls.
 DEFAULT_TESTS = (
     "sh -c 'set -e; target=\"${APM_EVAL_PATH:-.apm/skills}\"; "
     "python3 tools/validate-skill-descriptions.py \"$target\"; "
     "python3 tools/validate-trigger-evals.py \"$target\" --require-all; "
-    "python3 tools/validate-skill-result-evals.py \"$target\"; "
-    "python3 tools/run-skill-evals.py \"$target\"'"
+    "python3 tools/validate-skill-result-evals.py \"$target\"'"
 )
+
+# Optional model run kept out of the gate.
+DEFAULT_EVALS = 'python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"'
 
 
 def parse_args() -> argparse.Namespace:
@@ -59,10 +62,15 @@ def detect_test_command(root: Path) -> str | None:
         root / "tools" / "validate-skill-descriptions.py",
         root / "tools" / "validate-trigger-evals.py",
         root / "tools" / "validate-skill-result-evals.py",
-        root / "tools" / "run-skill-evals.py",
     ]
     if all(path.is_file() for path in required):
         return DEFAULT_TESTS
+    return None
+
+
+def detect_evals_command(root: Path) -> str | None:
+    if (root / "tools" / "run-skill-evals.py").is_file():
+        return DEFAULT_EVALS
     return None
 
 
@@ -144,29 +152,37 @@ def ensure_includes(text: str) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def ensure_script_tests(text: str, command: str) -> str:
+def ensure_script(text: str, key: str, command: str) -> str:
     lines = text.splitlines()
     scripts = block_bounds(lines, "scripts")
-    scripts_block = ["scripts:", f"  tests: {yaml_double_quote(command)}"]
+    scripts_block = ["scripts:", f"  {key}: {yaml_double_quote(command)}"]
     if scripts is None:
         return "\n".join(ensure_block(lines, "scripts", scripts_block)).rstrip() + "\n"
 
     start, end = scripts
     block = lines[start:end]
     for index, line in enumerate(block):
-        if re.match(r"^  tests:\s*", line):
-            block[index] = f"  tests: {yaml_double_quote(command)}"
+        if re.match(rf"^  {re.escape(key)}:\s*", line):
+            block[index] = f"  {key}: {yaml_double_quote(command)}"
             break
     else:
-        block.append(f"  tests: {yaml_double_quote(command)}")
+        block.append(f"  {key}: {yaml_double_quote(command)}")
     lines = lines[:start] + block + lines[end:]
     return "\n".join(lines).rstrip() + "\n"
 
 
-def create_manifest(root: Path, args: argparse.Namespace, command: str) -> str:
+def create_manifest(
+    root: Path,
+    args: argparse.Namespace,
+    command: str,
+    evals_command: str | None,
+) -> str:
     name = args.name or root.name
     targets = args.target or ["codex"]
     target_lines = "\n".join(f"  - {target}" for target in targets)
+    scripts = f"scripts:\n  tests: {yaml_double_quote(command)}\n"
+    if evals_command:
+        scripts += f"  evals: {yaml_double_quote(evals_command)}\n"
     return (
         f"name: {name}\n"
         "version: 0.1.0\n"
@@ -178,8 +194,7 @@ def create_manifest(root: Path, args: argparse.Namespace, command: str) -> str:
         "dependencies:\n"
         "  apm: []\n"
         "  mcp: []\n"
-        "scripts:\n"
-        f"  tests: {yaml_double_quote(command)}\n"
+        f"{scripts}"
     )
 
 
@@ -192,21 +207,26 @@ def main() -> int:
         raise SystemExit(
             "No test command detected. Pass --test-command or create collection tests first.",
         )
+    evals_command = detect_evals_command(root)
     ensure_source_tree(root, Path(args.skills_source))
 
     if manifest.exists():
-        text = ensure_script_tests(manifest.read_text(encoding="utf-8"), command)
+        text = ensure_script(manifest.read_text(encoding="utf-8"), "tests", command)
+        if evals_command:
+            text = ensure_script(text, "evals", evals_command)
         text = ensure_type(text)
         text = ensure_targets(text, args.target or ["codex"])
         text = ensure_includes(text)
         text = ensure_dependencies(text)
     else:
-        text = create_manifest(root, args, command)
+        text = create_manifest(root, args, command, evals_command)
 
     manifest.write_text(text, encoding="utf-8")
     print(f"manifest={manifest}")
     print(f"skills_source={(root / args.skills_source).resolve()}")
     print(f"tests={command}")
+    if evals_command:
+        print(f"evals={evals_command}")
     if (root / "skills").exists() and not any((root / ".apm" / "skills").iterdir()):
         print("warning=root skills/ exists, but .apm/skills is empty")
     return 0
