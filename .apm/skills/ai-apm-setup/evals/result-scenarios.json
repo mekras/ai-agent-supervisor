@@ -32,6 +32,10 @@
     {
       "claim_id": "PPRX-001",
       "statement_path": "knowledge/statements/PPRX.md"
+    },
+    {
+      "claim_id": "PPRX-002",
+      "statement_path": "knowledge/statements/PPRX.md"
     }
   ],
   "cases": [
@@ -562,6 +566,81 @@
         "не объявлять проект исправленным только по одному удалённому .pyc",
         "не использовать apm audit --no-drift как единственное доказательство готовности",
         "не ссылаться только на доправочный apm pack без повторной проверки после изменения"
+      ]
+    },
+    {
+      "id": "ai-apm-setup-result-stop-on-consumer-apm-dependency",
+      "prompt": "В проекте есть apm.yml и devDependencies.apm на mekras/ai-dev-team, но он не публикует .apm/skills, .apm/agents или .apm/instructions. Проверь, нужно ли настраивать его как коллекцию APM.",
+      "input_files": [
+        {
+          "path": "apm.yml",
+          "purpose": "потребительский манифест APM",
+          "content": "name: knowlege\nversion: 0.1.0\ndevDependencies:\n  apm:\n    - mekras/ai-dev-team#^0.2.0\n"
+        },
+        {
+          "path": "AGENTS.md",
+          "purpose": "локальные инструкции клиентского проекта",
+          "content": "# AGENTS.md\n\nЛокальные инструкции проекта.\n"
+        }
+      ],
+      "required_corpus_claims": [
+        "ASKL-006",
+        "ASKL-009",
+        "ASKL-010",
+        "PPRX-002"
+      ],
+      "expected_output": {
+        "report_structure": [
+          "явно названо, что проект не имеет признаков публикуемой коллекции APM",
+          "перечислены найденные consumer-признаки: apm.yml и devDependencies.apm",
+          "зафиксировано стоп-условие без изменения producer-структуры",
+          "назван маршрут возврата в ait-setup, ai-agents-md-maintenance или клиентские инструкции"
+        ],
+        "findings": [
+          {
+            "severity": "high",
+            "corpus_claims": [
+              "ASKL-006",
+              "PPRX-002"
+            ],
+            "observed_problem": "проект-потребитель с devDependencies.apm ошибочно принимается за APM-коллекцию только из-за apm.yml и APM-зависимости.",
+            "expected_conclusion": "нужно остановить применение ai-apm-setup до создания producer-структуры и вернуть задачу в клиентскую настройку проекта",
+            "acceptable_fix_direction": "явно назвать отсутствие .apm/skills, .apm/agents и publishable .apm/instructions, не менять apm.yml как producer-манифест и перенаправить задачу в ait-setup, ai-agents-md-maintenance или клиентские инструкции"
+          }
+        ]
+      },
+      "negative_control": {
+        "description": "Сравнить с ответом, где агент добавил includes, type skill или .apm/skills только из-за consumer-зависимости APM.",
+        "expected_failure": "Такой ответ превращает клиентский проект в producer-пакет без признаков публикации и нарушает стоп-условие навыка."
+      },
+      "oracle": {
+        "success_criteria": [
+          "ответ прямо говорит, что одного apm.yml и devDependencies.apm недостаточно для коллекции APM",
+          "ответ перечисляет отсутствующие признаки публикации",
+          "diff не добавляет producer-поля или каталоги .apm/skills, .apm/agents, .apm/instructions",
+          "ответ перенаправляет задачу в ait-setup, ai-agents-md-maintenance или клиентские инструкции"
+        ],
+        "failure_indicators": [
+          "ответ создаёт или требует .apm/skills без отдельного запроса",
+          "ответ добавляет includes или type skill только потому, что проект использует APM-зависимость",
+          "ответ продолжает настройку apm run tests для коллекции без признаков публикации"
+        ]
+      },
+      "application_evidence": [
+        "отчёт называет consumer-зависимость APM и отсутствие publish-признаков",
+        "diff не меняет apm.yml в producer-манифест и не добавляет .apm/skills",
+        "результат содержит явное перенаправление в соседний навык или клиентские инструкции"
+      ],
+      "evaluation_surface": "остановка по правилу и граница между producer- и consumer-сценарием APM",
+      "assertions": [
+        "Результат не считает consumer-зависимость APM признаком публикуемой коллекции.",
+        "Результат явно останавливает ai-apm-setup на проекте без publish-признаков.",
+        "Результат отправляет задачу в клиентский маршрут вместо настройки producer-пакета."
+      ],
+      "must_not": [
+        "не создавать producer-структуру только из-за devDependencies.apm",
+        "не переписывать apm.yml под коллекцию без publish-признаков",
+        "не подменять клиентскую настройку проекта настройкой APM-коллекции"
       ]
     }
   ]
