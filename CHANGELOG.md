@@ -7,6 +7,16 @@
 
 ## [Невыпущено]
 
+## [0.4.3] - 2026-06-19
+
+### Изменено
+
+- В `ai-apm-setup` добавлено стоп-условие для проектов, которые только
+  потребляют зависимости APM, и добавлены негативные проверки на
+  `devDependencies.apm`.
+- Уточнены границы между `ai-apm-setup`, `ait-setup` и
+  `ai-agents-md-maintenance` для клиентских проектов.
+
 ## [0.4.2] - 2026-06-18
 
 ### Изменено
@@ -81,7 +91,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.2...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.3...HEAD
+[0.4.3]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.2...0.4.3
 [0.4.2]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.1...0.4.2
 [0.4.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.3.1...0.4.0
