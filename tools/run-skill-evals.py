@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""Run skill evals against a real Codex model."""
+"""Запуск модельных evals навыков через переносимый адаптер модели.
+
+Это измерение, а не гейт: модельный прогон опционален и запускается отдельной
+целью `apm run evals`. Детерминированный гейт `apm run tests` модель не требует.
+
+Модель вызывается через адаптер по переносимому контракту:
+вызов `<адаптер> <модель>`, промпт на stdin, текст ответа на stdout. Раннер сам
+вкладывает требование вернуть JSON в текст промпта и разбирает JSON из ответа.
+Привязки к конкретному CLI или модели в этом файле нет: всё задаётся локальным
+конфигом evals.local.yml, который в Git не попадает.
+"""
 
 from __future__ import annotations
 
@@ -8,15 +18,16 @@ import itertools
 import json
 import os
 import re
+import shlex
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 
-DEFAULT_MODEL = "gpt-5.3-codex-spark"
-DEFAULT_JUDGE_MODEL = "gpt-5.5"
+CONFIG_NAME = "evals.local.yml"
+SAMPLE_NAME = "evals.local.yml.sample"
 CLAIM_RE = re.compile(r"^### ([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
 
 
@@ -92,9 +103,13 @@ JUDGE_SCHEMA = {
 }
 
 
+# Тип вызова модели: (prompt, schema) -> разобранный JSON-объект.
+ModelCall = Callable[[str, dict[str, Any]], dict[str, Any]]
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Запустить evals навыков на реальной модели Codex.",
+        description="Запустить модельные evals навыков через адаптер модели.",
     )
     parser.add_argument(
         "paths",
@@ -103,14 +118,10 @@ def parse_args() -> argparse.Namespace:
         help="Каталоги навыков или корни репозитория для обхода. По умолчанию текущий каталог.",
     )
     parser.add_argument(
-        "--model",
-        default=os.environ.get("APM_EVAL_MODEL", DEFAULT_MODEL),
-        help="Модель для применения навыков. По умолчанию APM_EVAL_MODEL или gpt-5.3-codex-spark.",
-    )
-    parser.add_argument(
-        "--judge-model",
-        default=os.environ.get("APM_EVAL_JUDGE_MODEL", DEFAULT_JUDGE_MODEL),
-        help="Модель-судья. По умолчанию APM_EVAL_JUDGE_MODEL или gpt-5.5.",
+        "--config",
+        type=Path,
+        default=Path(os.environ.get("APM_EVAL_CONFIG", CONFIG_NAME)),
+        help="Путь к локальному конфигу evals. По умолчанию APM_EVAL_CONFIG или evals.local.yml.",
     )
     parser.add_argument(
         "--limit",
@@ -128,12 +139,6 @@ def parse_args() -> argparse.Namespace:
             "через запятую."
         ),
     )
-    parser.add_argument(
-        "--timeout",
-        type=int,
-        default=int(os.environ.get("APM_EVAL_TIMEOUT", "900")),
-        help="Тайм-аут одного вызова Codex в секундах.",
-    )
     args = parser.parse_args()
     env_case_ids = []
     for name in ("APM_EVAL_CASE_ID", "APM_EVAL_CASE_IDS"):
@@ -145,6 +150,205 @@ def parse_args() -> argparse.Namespace:
         )
     args.case_id = [*env_case_ids, *args.case_id]
     return args
+
+
+def bootstrap_config(repo_root: Path, config_path: Path) -> None:
+    """Создать локальный конфиг из образца и скрыть его от Git."""
+    sample = repo_root / SAMPLE_NAME
+    if not sample.exists():
+        print(
+            f"Нет ни {config_path.name}, ни образца {SAMPLE_NAME}. "
+            "Модельные evals настроить нельзя.",
+            file=sys.stderr,
+        )
+        return
+    config_path.write_text(sample.read_text(encoding="utf-8"), encoding="utf-8")
+    exclude = repo_root / ".git" / "info" / "exclude"
+    rel = config_path.name
+    if exclude.parent.is_dir():
+        lines = exclude.read_text(encoding="utf-8").splitlines() if exclude.exists() else []
+        if rel not in {line.strip() for line in lines}:
+            with exclude.open("a", encoding="utf-8") as handle:
+                handle.write(f"{rel}\n")
+    print(
+        f"Создан локальный конфиг {rel} из образца и добавлен в "
+        ".git/info/exclude.\n"
+        f"Заполните в нём adapters и models, затем повторите `apm run evals`.\n"
+        "Модельные evals пока пропущены.",
+        flush=True,
+    )
+
+
+def load_config(repo_root: Path, config_path: Path) -> dict[str, Any] | None:
+    """Прочитать конфиг evals. Вернуть None, если запуск нужно пропустить."""
+    if not config_path.is_absolute():
+        config_path = repo_root / config_path
+    if not config_path.exists():
+        bootstrap_config(repo_root, config_path)
+        return None
+    try:
+        import yaml
+    except ImportError:
+        print(
+            "Для модельных evals нужен PyYAML (pip install pyyaml). "
+            "Модельные evals пропущены.",
+            file=sys.stderr,
+        )
+        return None
+    data = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        print(f"Конфиг {config_path} должен быть YAML-объектом.", file=sys.stderr)
+        return None
+
+    raw_adapters = data.get("adapters")
+    if not isinstance(raw_adapters, dict) or not raw_adapters:
+        print(
+            f"В конфиге {config_path.name} не задан раздел adapters "
+            "(имя адаптера -> команда). Модельные evals пропущены.",
+            file=sys.stderr,
+        )
+        return None
+    adapters = {name: shlex.split(str(command)) for name, command in raw_adapters.items()}
+
+    env_model = os.environ.get("APM_EVAL_MODEL")
+    model_specs = [env_model] if env_model else list(data.get("models") or [])
+    judge_spec = os.environ.get("APM_EVAL_JUDGE_MODEL") or data.get("judge")
+    timeout = int(os.environ.get("APM_EVAL_TIMEOUT") or data.get("timeout") or 900)
+
+    if not model_specs:
+        print(
+            f"В конфиге {config_path.name} не заданы models. "
+            "Модельные evals пропущены.",
+            file=sys.stderr,
+        )
+        return None
+
+    spec_errors: list[str] = []
+    runs = [
+        resolve_run(spec, adapters, f"models[{index}]", spec_errors)
+        for index, spec in enumerate(model_specs)
+    ]
+    runs = [run for run in runs if run]
+    if judge_spec:
+        judge = resolve_run(judge_spec, adapters, "judge", spec_errors)
+    else:
+        judge = runs[0] if runs else None
+
+    if spec_errors or not runs or judge is None:
+        for error in spec_errors:
+            print(error, file=sys.stderr)
+        print(
+            f"Модельные evals пропущены из-за ошибок в {config_path.name}.",
+            file=sys.stderr,
+        )
+        return None
+    return {"runs": runs, "judge": judge, "timeout": timeout}
+
+
+def resolve_run(
+    spec: Any,
+    adapters: dict[str, list[str]],
+    label: str,
+    errors: list[str],
+) -> dict[str, Any] | None:
+    """Разобрать запись `адаптер:модель` и связать её с командой адаптера."""
+    if not isinstance(spec, str) or ":" not in spec:
+        errors.append(f"{label}: ожидается формат адаптер:модель, получено {spec!r}")
+        return None
+    name, model = spec.split(":", 1)
+    name, model = name.strip(), model.strip()
+    if name not in adapters:
+        errors.append(
+            f"{label}: неизвестный адаптер {name!r}; задайте его в разделе adapters",
+        )
+        return None
+    if not model:
+        errors.append(f"{label}: не указана модель в {spec!r}")
+        return None
+    return {"adapter": adapters[name], "model": model, "label": spec}
+
+
+def extract_json(text: str) -> dict[str, Any]:
+    """Достать JSON-объект из текстового ответа модели (best-effort)."""
+    text = text.strip()
+    candidates: list[str] = []
+    fence = re.search(r"```(?:json)?\s*(\{.*\})\s*```", text, re.DOTALL)
+    if fence:
+        candidates.append(fence.group(1))
+    candidates.append(text)
+    first = first_json_object(text)
+    if first:
+        candidates.append(first)
+    for candidate in candidates:
+        try:
+            return json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+    raise RuntimeError(f"Модель не вернула разбираемый JSON:\n{text}")
+
+
+def first_json_object(text: str) -> str:
+    """Вернуть первый сбалансированный JSON-объект в тексте."""
+    start = text.find("{")
+    if start < 0:
+        return ""
+    depth = 0
+    in_string = False
+    escaped = False
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start : index + 1]
+    return ""
+
+
+def make_model_call(adapter: list[str], model: str, timeout: int) -> ModelCall:
+    """Собрать вызов модели через адаптер по контракту prompt -> текст."""
+
+    def call(prompt: str, schema: dict[str, Any]) -> dict[str, Any]:
+        full_prompt = (
+            f"{prompt}\n\n"
+            "Верни только один JSON-объект без пояснений и без оформления в "
+            "кодовый блок, строго соответствующий схеме:\n"
+            f"{json.dumps(schema, ensure_ascii=False)}\n"
+        )
+        try:
+            completed = subprocess.run(
+                [*adapter, model],
+                input=full_prompt,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=timeout,
+                check=False,
+            )
+        except FileNotFoundError as exc:
+            raise RuntimeError(
+                f"Адаптер модели не найден: {' '.join(adapter)}. "
+                "Проверьте adapter в конфиге evals.",
+            ) from exc
+        if completed.returncode != 0:
+            raise RuntimeError(
+                f"Адаптер вернул код {completed.returncode}.\n"
+                f"STDOUT:\n{completed.stdout}\nSTDERR:\n{completed.stderr}",
+            )
+        return extract_json(completed.stdout)
+
+    return call
 
 
 def find_skill_dirs(paths: list[Path]) -> list[Path]:
@@ -192,65 +396,6 @@ def read_frontmatter(skill_path: Path) -> dict[str, str]:
     if current_key:
         frontmatter[current_key] = " ".join(current_lines).strip()
     return frontmatter
-
-
-def run_codex(
-    *,
-    model: str,
-    prompt: str,
-    schema: dict[str, Any],
-    timeout: int,
-    work_dir: Path,
-) -> dict[str, Any]:
-    schema_path = work_dir / "schema.json"
-    output_path = work_dir / "last-message.json"
-    schema_path.write_text(json.dumps(schema, ensure_ascii=False), encoding="utf-8")
-    if output_path.exists():
-        output_path.unlink()
-
-    command = [
-        "codex",
-        "exec",
-        "--ignore-user-config",
-        "--ephemeral",
-        "--skip-git-repo-check",
-        "--color",
-        "never",
-        "--sandbox",
-        "read-only",
-        "--model",
-        model,
-        "--output-schema",
-        str(schema_path),
-        "--output-last-message",
-        str(output_path),
-        "-",
-    ]
-    completed = subprocess.run(
-        command,
-        input=prompt,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        cwd=work_dir,
-        timeout=timeout,
-        check=False,
-    )
-    if completed.returncode != 0:
-        raise RuntimeError(
-            "Codex завершился с ошибкой "
-            f"{completed.returncode}.\nSTDOUT:\n{completed.stdout}\nSTDERR:\n{completed.stderr}",
-        )
-
-    raw_output = output_path.read_text(encoding="utf-8").strip()
-    if not raw_output:
-        raw_output = completed.stdout.strip()
-    try:
-        return json.loads(raw_output)
-    except json.JSONDecodeError as exc:
-        raise RuntimeError(
-            f"Codex вернул не JSON: {exc}\nОтвет:\n{raw_output}",
-        ) from exc
 
 
 def collect_trigger_cases(skill_dirs: list[Path]) -> list[dict[str, Any]]:
@@ -302,7 +447,6 @@ def trigger_prompt(cases: list[dict[str, Any]]) -> str:
         "пользовательского запроса. Опирайся на description навыка как на "
         "контракт маршрутизации. Не угадывай по названию навыка, если "
         "description не покрывает ситуацию.\n"
-        "Верни только JSON по заданной схеме.\n\n"
         f"Кейсы:\n{json.dumps(payload, ensure_ascii=False, indent=2)}\n"
     )
 
@@ -310,9 +454,7 @@ def trigger_prompt(cases: list[dict[str, Any]]) -> str:
 def run_trigger_evals(
     *,
     cases: list[dict[str, Any]],
-    model: str,
-    timeout: int,
-    work_dir: Path,
+    call: ModelCall,
 ) -> list[str]:
     if not cases:
         print("Модельные trigger-evals не найдены.", flush=True)
@@ -331,13 +473,7 @@ def run_trigger_evals(
             f"Проверяю trigger-сценарии навыка {skill_name}: {len(skill_cases)}.",
             flush=True,
         )
-        result = run_codex(
-            model=model,
-            prompt=trigger_prompt(skill_cases),
-            schema=TRIGGER_SCHEMA,
-            timeout=timeout,
-            work_dir=work_dir,
-        )
+        result = call(trigger_prompt(skill_cases), TRIGGER_SCHEMA)
         actual_by_id = {item.get("id"): item for item in result.get("results", [])}
         for case in skill_cases:
             actual = actual_by_id.get(case["id"])
@@ -353,13 +489,7 @@ def run_trigger_evals(
                 )
     for case in missing_cases:
         print(f"Повторяю trigger-сценарий {case['id']} отдельно.", flush=True)
-        result = run_codex(
-            model=model,
-            prompt=trigger_prompt([case]),
-            schema=TRIGGER_SCHEMA,
-            timeout=timeout,
-            work_dir=work_dir,
-        )
+        result = call(trigger_prompt([case]), TRIGGER_SCHEMA)
         actual_by_id = {item.get("id"): item for item in result.get("results", [])}
         actual = actual_by_id.get(case["id"])
         if not actual:
@@ -489,7 +619,6 @@ def answer_prompt(
         "observed_problem, expected_conclusion и acceptable_fix_direction. "
         "Не упоминай, что это тест, "
         "и не оценивай сам себя.\n"
-        "Верни только JSON по заданной схеме.\n\n"
         f"Навык:\n{skill_text}\n\n"
         f"Сценарии:\n{json.dumps(target_cases, ensure_ascii=False, indent=2)}\n"
         "Фактические основания source_basis:\n"
@@ -520,7 +649,6 @@ def judge_prompt(
         "Если assertion говорит, что результат меняет или создаёт файлы, считай "
         "его выполненным только когда ответ содержит конкретные имена файлов и "
         "проверяемые сведения о переносимых, удаляемых или добавляемых правилах.\n"
-        "Верни только JSON по заданной схеме.\n\n"
         f"Данные для проверки:\n{json.dumps(payload, ensure_ascii=False, indent=2)}\n"
     )
 
@@ -529,10 +657,8 @@ def run_result_evals(
     *,
     repo_root: Path,
     groups: list[tuple[Path, dict[str, Any], list[dict[str, Any]]]],
-    model: str,
-    judge_model: str,
-    timeout: int,
-    work_dir: Path,
+    call: ModelCall,
+    judge_call: ModelCall,
 ) -> list[str]:
     total = sum(len(cases) for _, _, cases in groups)
     if not total:
@@ -549,20 +675,14 @@ def run_result_evals(
         )
         for case in cases:
             single_case = [case]
-            answer_result = run_codex(
-                model=model,
-                prompt=answer_prompt(repo_root, skill_dir, data, single_case),
-                schema=ANSWER_SCHEMA,
-                timeout=timeout,
-                work_dir=work_dir,
+            answer_result = call(
+                answer_prompt(repo_root, skill_dir, data, single_case),
+                ANSWER_SCHEMA,
             )
             answers = answer_result.get("answers", [])
-            judge_result = run_codex(
-                model=judge_model,
-                prompt=judge_prompt(data, single_case, answers),
-                schema=JUDGE_SCHEMA,
-                timeout=timeout,
-                work_dir=work_dir,
+            judge_result = judge_call(
+                judge_prompt(data, single_case, answers),
+                JUDGE_SCHEMA,
             )
             verdicts = {
                 item.get("id"): item for item in judge_result.get("results", [])
@@ -589,12 +709,41 @@ def run_result_evals(
     return errors
 
 
+def run_for_target(
+    *,
+    repo_root: Path,
+    run: dict[str, Any],
+    judge: dict[str, Any],
+    timeout: int,
+    trigger_cases: list[dict[str, Any]],
+    result_groups: list[tuple[Path, dict[str, Any], list[dict[str, Any]]]],
+) -> list[str]:
+    print(f"\n=== Применение навыков: {run['label']} ===", flush=True)
+    print(f"Оценка результатов: {judge['label']}.", flush=True)
+    call = make_model_call(run["adapter"], run["model"], timeout)
+    judge_call = make_model_call(judge["adapter"], judge["model"], timeout)
+    trigger_errors = run_trigger_evals(cases=trigger_cases, call=call)
+    result_errors = run_result_evals(
+        repo_root=repo_root,
+        groups=result_groups,
+        call=call,
+        judge_call=judge_call,
+    )
+    return [f"[{run['label']}] {error}" for error in trigger_errors + result_errors]
+
+
 def main() -> int:
     args = parse_args()
-    judge_model = args.judge_model
     roots = args.paths or [Path.cwd()]
     repo_root = Path.cwd().resolve()
     case_ids = set(args.case_id)
+
+    config = load_config(repo_root, args.config)
+    if config is None:
+        # Bootstrap или нехватка настроек уже сообщены. Это не дефект гейта:
+        # модельные evals опциональны, поэтому выходим без ошибки.
+        return 0
+
     skill_dirs = find_skill_dirs(roots)
     if not skill_dirs:
         print("Каталоги навыков не найдены.", file=sys.stderr)
@@ -617,39 +766,32 @@ def main() -> int:
             )
             return 1
 
-    print(f"Модель применения навыков: {args.model}.", flush=True)
-    print(f"Модель оценки результатов: {judge_model}.", flush=True)
+    trigger_cases = filter_trigger_cases(all_trigger_cases, case_ids)
+    result_groups = filter_result_groups(
+        all_result_groups if case_ids else collect_result_groups(skill_dirs, args.limit),
+        case_ids,
+    )
 
-    with tempfile.TemporaryDirectory(prefix="apm-skill-evals-") as tmp:
-        work_dir = Path(tmp)
-        trigger_errors = run_trigger_evals(
-            cases=filter_trigger_cases(all_trigger_cases, case_ids),
-            model=args.model,
-            timeout=args.timeout,
-            work_dir=work_dir,
-        )
-        result_errors = run_result_evals(
-            repo_root=repo_root,
-            groups=filter_result_groups(
-                all_result_groups
-                if case_ids
-                else collect_result_groups(skill_dirs, args.limit),
-                case_ids,
-            ),
-            model=args.model,
-            judge_model=judge_model,
-            timeout=args.timeout,
-            work_dir=work_dir,
+    errors: list[str] = []
+    for run in config["runs"]:
+        errors.extend(
+            run_for_target(
+                repo_root=repo_root,
+                run=run,
+                judge=config["judge"],
+                timeout=config["timeout"],
+                trigger_cases=trigger_cases,
+                result_groups=result_groups,
+            )
         )
 
-    errors = trigger_errors + result_errors
     if errors:
         for error in errors:
             print(error, file=sys.stderr)
         print(f"Модельные evals не пройдены: {len(errors)} ошибка(ок).", file=sys.stderr)
         return 1
 
-    print("Модельные evals пройдены.", flush=True)
+    print("\nМодельные evals пройдены.", flush=True)
     return 0
 
 
