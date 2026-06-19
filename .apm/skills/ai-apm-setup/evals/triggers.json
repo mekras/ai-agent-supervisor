@@ -62,6 +62,12 @@
       "rationale": "Это потребительская установка чужого пакета APM, а не настройка проекта как коллекции."
     },
     {
+      "id": "ai-apm-setup-negative-consumer-devdependency",
+      "prompt": "В проекте есть apm.yml и devDependencies.apm на mekras/ai-dev-team. Настрой подключение агента, но сам проект не публикует .apm/skills и не должен становиться коллекцией APM.",
+      "should_trigger": false,
+      "rationale": "Наличие consumer-зависимости APM без признаков публикации нужно маршрутизировать в ait-setup, ai-agents-md-maintenance или клиентские инструкции, а не в настройку producer-пакета."
+    },
+    {
       "id": "ai-apm-setup-negative-ordinary-tests",
       "prompt": "Запусти тесты проекта и кратко перескажи результат.",
       "should_trigger": false,
