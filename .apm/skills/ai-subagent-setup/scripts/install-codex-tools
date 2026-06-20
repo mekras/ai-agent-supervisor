@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Установщик по общим правилам установщиков оснастки (навык ai-apm-setup,
+# references/tooling-installers.md): install-* [project-root], копирование в
+# tools/, строка installed= в конце.
+
 usage() {
   cat <<'EOF'
 Usage:
