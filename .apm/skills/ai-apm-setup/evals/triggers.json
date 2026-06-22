@@ -56,6 +56,18 @@
       "rationale": "Вопрос касается выбора проверок APM для коллекции только из skills."
     },
     {
+      "id": "ai-apm-setup-positive-consumer-audit-drift",
+      "prompt": "В проекте-потребителе apm audit показывает drift по развёрнутым навыкам. Разберись, что значат предупреждения и как привести установку в порядок.",
+      "should_trigger": true,
+      "rationale": "Это диагностика зависимостей и установки проекта-потребителя APM, которую ведёт ветка «Проект-потребитель» навыка."
+    },
+    {
+      "id": "ai-apm-setup-positive-consumer-lockfile-vs-manifest",
+      "prompt": "В apm.yml одна прямая зависимость, а в apm.lock.yaml ещё несколько пакетов. Думаю перенести их все в dependencies.apm. Проверь, нужно ли это.",
+      "should_trigger": true,
+      "rationale": "Вопрос о соотношении прямых зависимостей apm.yml и разрешённого графа apm.lock.yaml относится к диагностике проекта-потребителя APM."
+    },
+    {
       "id": "ai-apm-setup-negative-install-package",
       "prompt": "Установи пакет github.com/example/team-skills через apm install и проверь, что навыки доступны.",
       "should_trigger": false,
@@ -63,9 +75,9 @@
     },
     {
       "id": "ai-apm-setup-negative-consumer-devdependency",
-      "prompt": "В проекте есть apm.yml и devDependencies.apm на mekras/ai-dev-team. Настрой подключение агента, но сам проект не публикует .apm/skills и не должен становиться коллекцией APM.",
+      "prompt": "В проекте есть apm.yml и devDependencies.apm на mekras/ai-dev-team. Настрой подключение агента и правила проекта, но сам проект не публикует .apm/skills.",
       "should_trigger": false,
-      "rationale": "Наличие consumer-зависимости APM без признаков публикации нужно маршрутизировать в ait-setup, ai-agents-md-maintenance или клиентские инструкции, а не в настройку producer-пакета."
+      "rationale": "Это настройка клиентского контура проекта (подключение агента, правила), которую навык возвращает в ait-setup, ai-agents-md-maintenance или клиентские инструкции, а не диагностика зависимостей APM."
     },
     {
       "id": "ai-apm-setup-negative-ordinary-tests",

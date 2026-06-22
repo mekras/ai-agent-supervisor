@@ -141,7 +141,7 @@ adapters:
   # claude: tools/adapters/claude
 models:
   - codex:gpt-5.3-codex-spark
-  # - claude:opus-4.8
+  # - claude:opus
 judge: codex:gpt-5.5
 timeout: 900
 ```
