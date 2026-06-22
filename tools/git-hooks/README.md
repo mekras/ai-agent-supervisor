@@ -13,6 +13,17 @@
 
 Логика проверки: `tools/lint-commit-msg.py`.
 
+## pre-commit
+
+Проверяет индексированные артефакты перед созданием коммита:
+
+- `git diff --cached --check` ловит конфликтные маркеры, лишние пробелы в
+  конце строк и другие текстовые дефекты в индексированной версии;
+- `python3 tools/validate-hidden-unicode.py --staged` ловит скрытые
+  Unicode-символы именно в индексированном содержимом файлов.
+
+Логика проверки: команды Git и `tools/validate-hidden-unicode.py`.
+
 ## Активация
 
 `core.hooksPath` — локальная настройка Git, она не хранится в репозитории.
@@ -28,6 +39,7 @@ git config core.hooksPath tools/git-hooks
 
 ```sh
 printf 'Выпущена версия 0.5.0\n' | python3 tools/lint-commit-msg.py -
+python3 tools/validate-hidden-unicode.py --staged
 ```
 
 Код возврата `0` — нарушений нет, `1` — есть нарушения.

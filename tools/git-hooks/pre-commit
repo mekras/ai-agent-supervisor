@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+# Хук pre-commit: быстрый контроль индексированных артефактов перед коммитом.
+# Активация в проекте: git config core.hooksPath tools/git-hooks
+#
+# Хук остаётся тонкой обёрткой. Логика проверки живёт в проектных командах Git
+# и скрипте tools/validate-hidden-unicode.py.
+
+set -e
+
+hook_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+repo_root=$(cd -- "$hook_dir/../.." && pwd)
+unicode_validator="$repo_root/tools/validate-hidden-unicode.py"
+
+if [ ! -f "$unicode_validator" ]; then
+    echo "pre-commit: не найден валидатор $unicode_validator" >&2
+    exit 1
+fi
+
+git -C "$repo_root" diff --cached --check
+python3 "$unicode_validator" --staged

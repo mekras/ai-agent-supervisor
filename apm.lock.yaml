@@ -1,11 +1,12 @@
 lockfile_version: '2'
-generated_at: '2026-06-22T10:28:27.753672+00:00'
-apm_version: 0.20.0
+generated_at: '2026-06-22T17:45:52.841865+00:00'
+apm_version: 0.21.0
 dependencies:
 - repo_url: mekras/ai-agent-supervisor
   host: github.com
   resolved_commit: 8e42d92d8afc0d6f0d75278f91e66c0c91d2c0c1
-  resolved_ref: ^0.4.0
+  resolved_ref: 0.4.5
+  version: 0.4.5
   package_type: apm_package
   deployed_files:
   - .agents/skills/ai-agents-md-maintenance
@@ -340,6 +341,10 @@ dependencies:
     .claude/skills/ai-work-result-evaluation/evals/triggers.json: sha256:53886909d51af15cf1a76ba85a62564e21d6508076552042437437fcd055e654
     .claude/skills/ai-work-result-evaluation/references/work-result-evaluation.md: sha256:66cc42cd7d8108de064cdc958c046ba70e5f4be32925e887606c1da019e5e4a0
   content_hash: sha256:d9882cbc4c6f1e1eb99430ac2af4a7d98dc63e3cead2450c667d856b83279c5b
+  constraint: ^0.4.0
+  resolved_tag: 0.4.5
+  resolved_at: '2026-06-22T10:58:30+00:00'
+  declared_license: MIT
 - repo_url: mekras/ai-dev-team
   host: github.com
   resolved_commit: 17e13f6c81e4a9f4157b5e92211fd30fbb15c714
@@ -621,11 +626,13 @@ dependencies:
   content_hash: sha256:3001192910c4e65f2d409dae4013c97d2f2f80e02b8eca798af1d03d3be4cbae
   constraint: ^0.3.1
   resolved_tag: 0.3.1
-  resolved_at: '2026-06-18T19:36:18+00:00'
+  resolved_at: '2026-06-22T10:58:29+00:00'
+  declared_license: MIT
 - repo_url: mekras/ai-russian-language
   host: github.com
   resolved_commit: 6ba5283d6ee4c1d6340c67c693a63fed973a9563
-  resolved_ref: ^1.2.0
+  resolved_ref: 1.2.5
+  version: 1.2.5
   package_type: apm_package
   deployed_files:
   - .agents/skills/ru-dev
@@ -682,6 +689,10 @@ dependencies:
     .claude/skills/ru-lang/references/base-language.md: sha256:13958e902000811d92a4df3732486f36eaa22bc62385ff813172d79555962dcc
     .claude/skills/ru-lang/references/technical-russian.md: sha256:d1d773fec2d5a3791847854f69503334f9602cccb5bdf94c1c397ad8ceb7c290
   content_hash: sha256:c85e33ef6efd7ab99a7c92e419f19f59512607a6c106bf2ea8681e318670dd20
+  constraint: ^1.2.0
+  resolved_tag: 1.2.5
+  resolved_at: '2026-06-22T10:58:30+00:00'
+  declared_license: MIT
 - repo_url: mekras/project-knowlege-corpus
   host: github.com
   resolved_commit: c19dc500ad69d195494cd3034b8beb3b39d4c990
@@ -999,7 +1010,8 @@ dependencies:
   content_hash: sha256:77923a15ea6386ff406c7cbce4a58136dac5810f04bbf591d2a33d0097c23edc
   constraint: ^0.4.0
   resolved_tag: 0.4.0
-  resolved_at: '2026-06-18T19:36:20+00:00'
+  resolved_at: '2026-06-22T10:58:30+00:00'
+  declared_license: MIT
 - repo_url: talkstream/ru-text
   host: github.com
   resolved_commit: ffacdb942ca15d4cb33f27a6a7512e70e3c1dcf4
@@ -1069,7 +1081,8 @@ dependencies:
   content_hash: sha256:bc546b39af2f18917c3ddad49191700687fbb0fd6c4f6c4a968be8168d361f53
   constraint: ^1.8.0
   resolved_tag: v1.8.0
-  resolved_at: '2026-06-18T19:36:21+00:00'
+  resolved_at: '2026-06-22T10:58:31+00:00'
+  declared_license: MIT
 local_deployed_files:
 - .agents/skills/ai-agents-md-maintenance
 - .agents/skills/ai-agents-md-maintenance/SKILL.md
