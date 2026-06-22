@@ -136,7 +136,7 @@ project/
 интеграции. Для репозитория с валидаторами навыков:
 
 ```bash
-sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"'
+sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"'
 ```
 
 `scripts.evals` — опциональный модельный прогон. Это измерение качества, а не
@@ -145,6 +145,11 @@ sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-sk
 ```bash
 python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"
 ```
+
+Проверка `tools/validate-hidden-unicode.py` сканирует исходники пакета на
+невидимые управляющие символы до остальных проверок. Это тот класс проблемы,
+который `apm install` показывает как `Hidden characters in source files`, но
+без точного пути в сводке установки.
 
 Если проект доставляет оснастку модельных прогонов и сам её запускает из
 `tools/`, добавь в контроль качества детерминированную проверку совпадения
@@ -213,6 +218,8 @@ python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"
 - `type` соответствует публикуемой коллекции;
 - `scripts.tests` есть, состоит только из детерминированных проверок и
   ссылается на существующие файлы или команды;
+- `scripts.tests` включает проверку скрытых Unicode-символов в исходниках
+  пакета, чтобы предупреждения `apm install` не оставались ручной диагностикой;
 - модельный прогон вынесен в отдельную цель `scripts.evals` и не входит в
   контроль качества;
 - проверка бюджета `description` подключена, если коллекция публикует навыки;
