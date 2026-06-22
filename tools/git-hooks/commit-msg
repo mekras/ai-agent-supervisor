@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+# Хук commit-msg: проверяет первую строку сообщения коммита по правилам ru-dev.
+# Активация в проекте: git config core.hooksPath tools/git-hooks
+#
+# Хук намеренно не зависит от агента: он срабатывает одинаково для Claude Code,
+# Codex и ручного коммита. Логика проверки вынесена в lint-commit-msg.py.
+
+set -e
+
+# Каталог этого хука внутри репозитория.
+hook_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+repo_root=$(cd -- "$hook_dir/../.." && pwd)
+linter="$repo_root/tools/lint-commit-msg.py"
+
+if [ ! -f "$linter" ]; then
+    echo "commit-msg: не найден линтер $linter" >&2
+    exit 1
+fi
+
+python3 "$linter" "$1"

@@ -119,7 +119,7 @@
 - Опора в артефактах:
   - `knowledge/normalized/APMP/pages/consumer/manage-dependencies/index.md`
   - `knowledge/primary/APMP/pages/consumer/manage-dependencies/index.html`
-- Куда может перейти: навык `ai-apm-setup`, правила работы с проектом-потребителем.
+- Куда может перейти: навык `ai-setup-apm`, правила работы с проектом-потребителем.
 
 ### APMP-007
 
@@ -136,7 +136,7 @@
 - Опора в артефактах:
   - `knowledge/normalized/APMP/pages/consumer/manage-dependencies/index.md`
   - `knowledge/primary/APMP/pages/consumer/manage-dependencies/index.html`
-- Куда может перейти: навык `ai-apm-setup`, правила работы с зависимостями.
+- Куда может перейти: навык `ai-setup-apm`, правила работы с зависимостями.
 
 ### APMP-008
 
@@ -155,7 +155,7 @@
 - Опора в артефактах:
   - `knowledge/normalized/APMP/pages/consumer/drift-and-secure-by-default/index.md`
   - `knowledge/primary/APMP/pages/consumer/drift-and-secure-by-default/index.html`
-- Куда может перейти: навык `ai-apm-setup`, правила диагностики установки.
+- Куда может перейти: навык `ai-setup-apm`, правила диагностики установки.
 
 ### APMP-009
 
@@ -178,5 +178,5 @@
 - Опора в артефактах:
   - `knowledge/normalized/APMP/pages/consumer/drift-and-secure-by-default/index.md`
   - `knowledge/primary/APMP/pages/consumer/drift-and-secure-by-default/index.html`
-- Куда может перейти: навык `ai-apm-setup`, проверочные сценарии и справка по
+- Куда может перейти: навык `ai-setup-apm`, проверочные сценарии и справка по
   `apm audit`.

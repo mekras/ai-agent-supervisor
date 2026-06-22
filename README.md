@@ -56,7 +56,7 @@ apm update
 ## Перечень навыков
 
 - `ai-agents-md-maintenance` — создание и сопровождение `AGENTS.md`.
-- `ai-apm-setup` — настройка проекта как коллекции навыков APM.
+- `ai-setup-apm` — настройка проекта как коллекции навыков APM.
 - `ai-application-check` — проверка применимости ИИ к задаче.
 - `ai-audit-agents-md` — проверка качества `AGENTS.md`.
 - [ai-audit-project](.apm/skills/ai-audit-project/README.md) — аудит правил проекта
@@ -68,7 +68,7 @@ apm update
 - `ai-work-control` — контрольный регламент перед существенным применением ИИ.
 - `ai-work-result-evaluation` — проверка результата перед публикацией и
   приёмкой.
-- [ai-subagent-setup](.apm/skills/ai-subagent-setup/README.md) — настройка экономной
+- [ai-setup-subagents](.apm/skills/ai-setup-subagents/README.md) — настройка экономной
   маршрутизации подагентов и моделей с проверками качества.
 
 ## Разработка
