@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [0.5.0] - 2026-06-22
+
 ### Добавлено
 
 - Корневой навык `ai-setup-project` — настройка проекта под работу агентов по
@@ -153,7 +155,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.4...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.0...HEAD
+[0.5.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.5...0.5.0
 [0.4.4]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.3...0.4.4
 [0.4.3]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.2...0.4.3
 [0.4.2]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.1...0.4.2
