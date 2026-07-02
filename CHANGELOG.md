@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [0.5.2] - 2026-07-02
+
 ### Изменено
 
 - Навыки настройки проекта и сопровождения машинных инструкций теперь
@@ -172,7 +174,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.1...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.2...HEAD
+[0.5.2]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.5...0.5.0
 [0.4.4]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.3...0.4.4
