@@ -598,7 +598,7 @@
         {
           "path": "apm.yml",
           "purpose": "потребительский манифест APM",
-          "content": "name: knowlege\nversion: 0.1.0\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.2.0\n"
+          "content": "name: knowlege\nversion: 0.1.0\ntargets:\n  - claude\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.2.0\n"
         },
         {
           "path": "AGENTS.md",
@@ -616,6 +616,7 @@
         "report_structure": [
           "проект классифицирован как потребитель: есть зависимости APM, но нет признаков публикуемого пакета",
           "перечислены найденные consumer-признаки: apm.yml и devDependencies.apm",
+          "отдельно отмечено, что цель claude относится к клиентскому контуру и требует проверки CLAUDE.md в соседнем навыке",
           "зафиксировано, что producer-структуру создавать не нужно",
           "настройка клиентского контура возвращена в ai-setup-project, ai-agents-md-maintenance или клиентские инструкции"
         ],
@@ -629,6 +630,15 @@
             "observed_problem": "проект-потребитель с devDependencies.apm ошибочно принимается за публикуемый пакет только из-за apm.yml и APM-зависимости.",
             "expected_conclusion": "нужно классифицировать проект как потребителя, не создавать producer-структуру и вернуть настройку клиентского контура в клиентский маршрут",
             "acceptable_fix_direction": "явно назвать отсутствие .apm/skills, .apm/agents и publishable .apm/instructions, не менять apm.yml как producer-манифест и перенаправить настройку клиентского контура в ai-setup-project, ai-agents-md-maintenance или клиентские инструкции"
+          },
+          {
+            "severity": "medium",
+            "corpus_claims": [
+              "ASKL-010"
+            ],
+            "observed_problem": "цель `claude` в `targets` теряется при маршрутизации, хотя она указывает на отдельную клиентскую обвязку.",
+            "expected_conclusion": "ветка ai-setup-apm должна явно назвать признак `claude`, но не настраивать `CLAUDE.md` самостоятельно",
+            "acceptable_fix_direction": "зафиксировать в отчёте, что `targets: [claude]` относится к клиентскому маршруту и требует проверки `CLAUDE.md` в ai-setup-project или ai-agents-md-maintenance"
           }
         ]
       },
@@ -641,6 +651,7 @@
           "ответ прямо говорит, что одного apm.yml и devDependencies.apm недостаточно для публикуемого пакета",
           "ответ перечисляет отсутствующие признаки публикации",
           "diff не добавляет producer-поля или каталоги .apm/skills, .apm/agents, .apm/instructions",
+          "ответ отдельно отмечает `targets: [claude]` как сигнал клиентского контура",
           "ответ возвращает настройку клиентского контура в ai-setup-project, ai-agents-md-maintenance или клиентские инструкции"
         ],
         "failure_indicators": [
@@ -652,17 +663,20 @@
       "application_evidence": [
         "отчёт называет consumer-зависимость APM и отсутствие publish-признаков",
         "diff не меняет apm.yml в producer-манифест и не добавляет .apm/skills",
+        "результат отдельно называет `targets: [claude]` признаком клиентской обвязки",
         "результат содержит явное перенаправление настройки клиентского контура в соседний навык или клиентские инструкции"
       ],
       "evaluation_surface": "классификация типа проекта и граница между публикуемым пакетом и проектом-потребителем",
       "assertions": [
         "Результат не считает consumer-зависимость APM признаком публикуемого пакета.",
         "Результат классифицирует проект как потребителя и не строит producer-структуру.",
+        "Результат отдельно называет `targets: [claude]` признаком клиентской обвязки.",
         "Результат возвращает настройку клиентского контура в клиентский маршрут."
       ],
       "must_not": [
         "не создавать producer-структуру только из-за devDependencies.apm",
         "не переписывать apm.yml под публикуемый пакет без publish-признаков",
+        "не пытаться настраивать CLAUDE.md внутри ai-setup-apm вместо клиентского маршрута",
         "не подменять настройку клиентского контура настройкой публикуемого пакета APM"
       ]
     },
