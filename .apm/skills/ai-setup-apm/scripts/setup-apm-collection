@@ -198,10 +198,15 @@ def create_manifest(
     )
 
 
+def uses_claude_target(targets: list[str]) -> bool:
+    return any(target.strip().lower() == "claude" for target in targets)
+
+
 def main() -> int:
     args = parse_args()
     root = args.project_root.resolve()
     manifest = root / "apm.yml"
+    targets = args.target or ["codex"]
     command = args.test_command or detect_test_command(root)
     if not command:
         raise SystemExit(
@@ -215,7 +220,7 @@ def main() -> int:
         if evals_command:
             text = ensure_script(text, "evals", evals_command)
         text = ensure_type(text)
-        text = ensure_targets(text, args.target or ["codex"])
+        text = ensure_targets(text, targets)
         text = ensure_includes(text)
         text = ensure_dependencies(text)
     else:
@@ -227,6 +232,10 @@ def main() -> int:
     print(f"tests={command}")
     if evals_command:
         print(f"evals={evals_command}")
+    if uses_claude_target(targets):
+        print(
+            "note=targets include claude; client setup should check CLAUDE.md and prefer @AGENTS.md or a symlink to AGENTS.md",
+        )
     if (root / "skills").exists() and not any((root / ".apm" / "skills").iterdir()):
         print("warning=root skills/ exists, but .apm/skills is empty")
     return 0
