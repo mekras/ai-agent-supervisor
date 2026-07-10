@@ -1,0 +1,17 @@
+# Локальная политика подагентов. Не добавляйте рабочий файл в Git.
+# Идентификатор модели берите только из нативного каталога активной оснастки.
+
+[adapters]
+# codex = ["tools/adapters/codex-subagents"]
+# claude = ["tools/adapters/claude-subagents"]
+
+# models = ["codex:название-модели", "claude:название-модели"]
+
+[roles.cheap_explorer]
+# model = "точный-идентификатор"
+# effort = "low"
+# sandbox = "read-only"
+# adapter = "tools/adapters/codex-role"
+# contract = { result = "status, items, evidence, confidence, risk, open_questions, escalation_needed", writes = false }
+
+# Не добавляйте в этот образец фактические модели или роли конкретного проекта.

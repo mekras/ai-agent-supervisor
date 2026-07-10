@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+"""Запустить роль из локальной политики с явной моделью и минимальным вводом."""
+from __future__ import annotations
+
+import argparse, json, subprocess, sys, time, tomllib
+from pathlib import Path
+
+def main():
+    p = argparse.ArgumentParser(); p.add_argument("role"); p.add_argument("--config", type=Path, default=Path("subagents.local.toml")); p.add_argument("--input", action="append", default=[]); p.add_argument("--out", type=Path, default=Path(".codex/subagents")); args=p.parse_args()
+    data=tomllib.loads(args.config.read_text()); role=(data.get("roles") or {}).get(args.role)
+    if not isinstance(role, dict): p.error(f"роль {args.role} не найдена")
+    model, effort, sandbox, adapter = (role.get(k) for k in ("model", "effort", "sandbox", "adapter"))
+    if not all(isinstance(v, str) and v for v in (model, effort, sandbox, adapter)): p.error("у роли обязательны model, effort, sandbox, adapter")
+    task=sys.stdin.read(); files=[]
+    for name in args.input:
+        path=Path(name).resolve()
+        if not path.is_file(): p.error(f"входной файл не найден: {name}")
+        files.append(str(path))
+    prompt=json.dumps({"role":args.role,"contract":role.get("contract",{}),"inputs":files,"task":task},ensure_ascii=False)
+    args.out.mkdir(parents=True,exist_ok=True); started=time.time(); final=args.out/f"{int(started)}-{args.role}.final.txt"; log=args.out/f"{int(started)}-{args.role}.json"; journal=args.out/f"{int(started)}-{args.role}.jsonl"
+    command=[adapter, model, effort, sandbox]; env={**__import__("os").environ, "CODEX_ROLE_LOG": str(journal)}; completed=subprocess.run(command,input=prompt,text=True,capture_output=True,env=env)
+    final.write_text(completed.stdout,encoding="utf-8")
+    record={"role":args.role,"assigned_model":model,"effort":effort,"sandbox":sandbox,"inputs":files,"final":str(final),"journal":str(journal),"seconds":round(time.time()-started,3),"returncode":completed.returncode, "contract":role.get("contract", {})}
+    # Adapters must write the factual model as first JSON line when available.
+    try:
+        header=json.loads(completed.stdout.splitlines()[0]); record["actual_model"]=header.get("model"); record["usage"]=header.get("usage")
+    except (IndexError,json.JSONDecodeError,AttributeError): record["actual_model"]=None
+    log.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding="utf-8")
+    if completed.returncode or record["actual_model"] != model: raise SystemExit("роль не запущена на назначенной модели")
+    print(json.dumps(record,ensure_ascii=False))
+if __name__ == "__main__": main()
