@@ -1,0 +1,22 @@
+statements:
+  - id: CODX-059
+    source_id: CODX
+    item_id: CODX--mcp
+    status: ready_for_review
+    kind: fact
+    text: "Конфигурация MCP хранится в `config.toml` и общая для CLI и IDE; проектные MCP-серверы допускаются в `.codex/config.toml` только для доверенных проектов."
+    excerpt: |-
+      Codex stores MCP configuration in
+      config.toml
+      alongside other Codex configuration settings. By default this is
+      ~/.codex/config.toml
+      , but you can also scope MCP servers to a project with
+      .codex/config.toml
+      (trusted projects only).
+      The CLI and the IDE extension share this configuration.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Connect Codex to an MCP server"
+      limitations: "Относится к MCP в Codex."
+    open_questions: []

@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-019
+    source_id: CODX
+    item_id: CODX--skills
+    status: ready_for_review
+    kind: fact
+    text: "Codex применяет постепенное раскрытие: сначала видит имя и описание навыка, а полный `SKILL.md` читает при выборе навыка."
+    excerpt: "Codex loads the full SKILL.md instructions only when it decides to use a skill."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Agent Skills"
+      limitations: "Относится к навыкам Codex."
+    open_questions: []

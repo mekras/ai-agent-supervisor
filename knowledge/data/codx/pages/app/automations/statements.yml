@@ -1,0 +1,21 @@
+statements:
+  - id: CODX-023
+    source_id: CODX
+    item_id: CODX--app/automations
+    status: ready_for_review
+    kind: fact
+    text: "Автоматизация в Git-репозитории может выполняться в локальном проекте или в новом worktree; worktree изолирует её изменения от незавершённой локальной работы."
+    excerpt: |-
+      In Git repositories, you can choose whether an automation runs in your local
+      project or on a new
+      worktree
+      . Both options run in the
+      background. Worktrees keep automation changes separate from unfinished local
+      work, while running in your local project can modify files you are still
+      working on.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Automations"
+      limitations: "Относится к автоматизациям Codex в Git-репозиториях."
+    open_questions: []

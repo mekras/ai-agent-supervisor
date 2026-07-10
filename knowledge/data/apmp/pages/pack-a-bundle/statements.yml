@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-005
+    source_id: APMP
+    item_id: APMP--pack-a-bundle
+    status: ready_for_review
+    kind: fact
+    text: "По умолчанию `apm pack` создаёт каталог пакета в `./build/` и включает в него файл блокировки с хэшами файлов."
+    excerpt: "writes a plugin-format directory under"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "What apm pack produces"
+      limitations: "Фрагмент относится к поведению APM по умолчанию."
+    open_questions: []

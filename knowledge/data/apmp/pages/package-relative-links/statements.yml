@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-008
+    source_id: APMP
+    item_id: APMP--package-relative-links
+    status: ready_for_review
+    kind: fact
+    text: "APM переписывает обычные относительные Markdown-ссылки примитивов при установке, чтобы они сохраняли работоспособность в каталоге среды потребителя."
+    excerpt: "APM rewrites that link at install time so it still resolves after the primitive is copied into the consumer’s harness directory"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Package-relative links"
+      limitations: "Относится к примитивам APM."
+    open_questions: []

@@ -1,0 +1,19 @@
+source_id: PRFO
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "local normalized snapshot inspection"
+  extraction_status: "completed"
+structure:
+  units:
+    - id: PRFO--intro
+      title: "intro"
+      order: 1
+coverage:
+  units:
+    - unit_id: PRFO--intro
+      status: extracted
+      statements: [pages/intro/statements.yml]

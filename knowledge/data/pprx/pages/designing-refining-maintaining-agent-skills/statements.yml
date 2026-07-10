@@ -1,0 +1,14 @@
+statements:
+  - id: PPRX-001
+    source_id: PPRX
+    item_id: PPRX--designing-refining-maintaining-agent-skills
+    status: ready_for_review
+    kind: fact
+    text: "Описание навыка — это триггер маршрутизации, а не внутренняя документация: оно должно сообщать, когда навык загружать."
+    excerpt: "The description is the routing trigger. This is a common failure point: the description is not internal documentation for what the Skill does. It amounts to instructions for the model for when to load the Skill."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "A Skill is a Format / A Skill is Progressive"
+      limitations: "Практики Perplexity; числовые оценки относятся к их реализации."
+    open_questions: []

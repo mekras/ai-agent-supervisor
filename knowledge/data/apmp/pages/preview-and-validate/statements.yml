@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-006
+    source_id: APMP
+    item_id: APMP--preview-and-validate
+    status: ready_for_review
+    kind: fact
+    text: "Перед публикацией APM рекомендует последовательность предварительной проверки: `compile --dry-run`, затем `apm view` и `apm audit`."
+    excerpt: "The recommended sequence is"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "The recommended verify sequence"
+      limitations: "Рекомендация документации APM для издателя пакета."
+    open_questions: []

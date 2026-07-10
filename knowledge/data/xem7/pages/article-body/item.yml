@@ -1,0 +1,10 @@
+id: XEM7--article-body
+source_id: XEM7
+title: article body
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - normalized.local.md

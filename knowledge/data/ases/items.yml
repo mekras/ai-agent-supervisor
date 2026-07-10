@@ -1,0 +1,9 @@
+items:
+  - id: ASES--standard
+    source_id: ASES
+    title: "standard"
+    url: "https://ukgovernmentbeis.github.io/as-evaluation-standard/"
+    locator: "https://ukgovernmentbeis.github.io/as-evaluation-standard/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

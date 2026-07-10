@@ -1,0 +1,9 @@
+items:
+  - id: PRFO--intro
+    source_id: PRFO
+    title: "intro"
+    url: "https://www.promptfoo.dev/docs/intro/"
+    locator: "https://www.promptfoo.dev/docs/intro/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

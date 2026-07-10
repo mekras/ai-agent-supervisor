@@ -1,0 +1,113 @@
+items:
+  - id: APMP--overview
+    source_id: APMP
+    title: "overview"
+    url: "https://microsoft.github.io/apm/producer/"
+    locator: "https://microsoft.github.io/apm/producer/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--author-primitives
+    source_id: APMP
+    title: "author primitives"
+    url: "https://microsoft.github.io/apm/producer/author-primitives/"
+    locator: "https://microsoft.github.io/apm/producer/author-primitives/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--author-primitives-hooks-and-commands
+    source_id: APMP
+    title: "author primitives hooks and commands"
+    url: "https://microsoft.github.io/apm/producer/author-primitives/hooks-and-commands/"
+    locator: "https://microsoft.github.io/apm/producer/author-primitives/hooks-and-commands/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--author-primitives-instructions-and-agents
+    source_id: APMP
+    title: "author primitives instructions and agents"
+    url: "https://microsoft.github.io/apm/producer/author-primitives/instructions-and-agents/"
+    locator: "https://microsoft.github.io/apm/producer/author-primitives/instructions-and-agents/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--author-primitives-mcp-as-primitive
+    source_id: APMP
+    title: "author primitives mcp as primitive"
+    url: "https://microsoft.github.io/apm/producer/author-primitives/mcp-as-primitive/"
+    locator: "https://microsoft.github.io/apm/producer/author-primitives/mcp-as-primitive/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--author-primitives-prompts
+    source_id: APMP
+    title: "author primitives prompts"
+    url: "https://microsoft.github.io/apm/producer/author-primitives/prompts/"
+    locator: "https://microsoft.github.io/apm/producer/author-primitives/prompts/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--author-primitives-skills
+    source_id: APMP
+    title: "author primitives skills"
+    url: "https://microsoft.github.io/apm/producer/author-primitives/skills/"
+    locator: "https://microsoft.github.io/apm/producer/author-primitives/skills/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--compile
+    source_id: APMP
+    title: "compile"
+    url: "https://microsoft.github.io/apm/producer/compile/"
+    locator: "https://microsoft.github.io/apm/producer/compile/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--pack-a-bundle
+    source_id: APMP
+    title: "pack a bundle"
+    url: "https://microsoft.github.io/apm/producer/pack-a-bundle/"
+    locator: "https://microsoft.github.io/apm/producer/pack-a-bundle/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--package-relative-links
+    source_id: APMP
+    title: "package relative links"
+    url: "https://microsoft.github.io/apm/producer/package-relative-links/"
+    locator: "https://microsoft.github.io/apm/producer/package-relative-links/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--preview-and-validate
+    source_id: APMP
+    title: "preview and validate"
+    url: "https://microsoft.github.io/apm/producer/preview-and-validate/"
+    locator: "https://microsoft.github.io/apm/producer/preview-and-validate/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--publish-to-a-marketplace
+    source_id: APMP
+    title: "publish to a marketplace"
+    url: "https://microsoft.github.io/apm/producer/publish-to-a-marketplace/"
+    locator: "https://microsoft.github.io/apm/producer/publish-to-a-marketplace/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--consumer-manage-dependencies
+    source_id: APMP
+    title: "consumer manage dependencies"
+    url: "https://microsoft.github.io/apm/consumer/manage-dependencies/"
+    locator: "https://microsoft.github.io/apm/consumer/manage-dependencies/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: APMP--consumer-drift-and-secure-by-default
+    source_id: APMP
+    title: "consumer drift and secure by default"
+    url: "https://microsoft.github.io/apm/consumer/drift-and-secure-by-default/"
+    locator: "https://microsoft.github.io/apm/consumer/drift-and-secure-by-default/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

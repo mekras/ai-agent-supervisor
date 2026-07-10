@@ -1,0 +1,22 @@
+statements:
+  - id: CODX-037
+    source_id: CODX
+    item_id: CODX--cloud/internet-access
+    status: ready_for_review
+    kind: fact
+    text: "Доступ агента к интернету в облачных задачах по умолчанию заблокирован; при включении следует ограничивать домены и HTTP-методы, поскольку возрастает риск инъекций, утечки и вредоносных зависимостей."
+    excerpt: |-
+      By default, Codex blocks internet access during the agent phase. Setup scripts still run with internet access so you can install dependencies. You can enable agent internet access per environment when you need it.
+      Risks of agent internet access
+      Enabling agent internet access increases security risk, including:
+      Prompt injection from untrusted web content
+      Exfiltration of code or secrets
+      Downloading malware or vulnerable dependencies
+      Pulling in content with license restrictions
+      To reduce risk, allow only the domains and HTTP methods you need, and review the agent output and work log.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Agent internet access"
+      limitations: "Относится к облачным задачам Codex."
+    open_questions: []

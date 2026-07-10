@@ -1,0 +1,19 @@
+source_id: GHAB
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "local normalized snapshot inspection"
+  extraction_status: "source_checked"
+structure:
+  units:
+    - id: GHAB--how-to-write-a-great-agents-md-lessons-from-over-2500-repositories
+      title: "how to write a great agents md lessons from over 2500 repositories"
+      order: 1
+coverage:
+  units:
+    - unit_id: GHAB--how-to-write-a-great-agents-md-lessons-from-over-2500-repositories
+      status: no_significant_content
+      reason: "Локальный нормализованный снимок содержит только навигационный шаблон без текста статьи; утверждения не извлекались."

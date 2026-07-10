@@ -1,0 +1,19 @@
+source_id: GIST
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "local normalized snapshot inspection"
+  extraction_status: "source_checked"
+structure:
+  units:
+    - id: GIST--7c8f65572930a21efa62623557d83f6e
+      title: "7c8f65572930a21efa62623557d83f6e"
+      order: 1
+coverage:
+  units:
+    - unit_id: GIST--7c8f65572930a21efa62623557d83f6e
+      status: no_significant_content
+      reason: "Снимок содержит общие примеры FastAPI, Terraform и AWS без значимой связи с публикуемой коллекцией навыков."

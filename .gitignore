@@ -6,5 +6,8 @@
 /knowledge/private.local/
 /knowledge/raw.local/
 /knowledge/reports/source-inventory/
+/knowledge/data/**/*.local.*
+/knowledge/data/**/*.local
+/knowledge/data/**/*.tmp.*
 __pycache__
 apm_modules/

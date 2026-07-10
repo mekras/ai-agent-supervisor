@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-013
+    source_id: CODX
+    item_id: CODX--config-basic
+    status: ready_for_review
+    kind: fact
+    text: "Codex загружает проектный слой `.codex/` только для доверенного проекта."
+    excerpt: "For security, Codex loads project .codex/ layers only when you trust the project."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Config basics"
+      limitations: "Относится к локальной настройке Codex."
+    open_questions: []

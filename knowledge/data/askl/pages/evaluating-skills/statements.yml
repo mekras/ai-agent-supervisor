@@ -1,0 +1,14 @@
+statements:
+  - id: ASKL-004
+    source_id: ASKL
+    item_id: ASKL--evaluating-skills
+    status: ready_for_review
+    kind: fact
+    text: "Проверочный случай навыка включает реалистичный запрос, ожидаемый результат и при необходимости входные файлы."
+    excerpt: "A test case has three parts:"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Designing test cases"
+      limitations: "Рекомендация источника."
+    open_questions: []

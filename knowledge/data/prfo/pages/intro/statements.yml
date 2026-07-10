@@ -1,0 +1,28 @@
+statements:
+  - id: PRFO-001
+    source_id: PRFO
+    item_id: PRFO--intro
+    status: ready_for_review
+    kind: fact
+    text: "Систематическая разработка LLM требует определять ключевые сценарии и отказы, запускать оценки, анализировать результаты и расширять тестовые случаи по обратной связи."
+    excerpt: |-
+      Workflow and philosophy
+      Test-driven prompt engineering is much more effective than trial-and-error.
+      Serious LLM development requires a systematic approach to prompt engineering
+      . Promptfoo streamlines the process of evaluating and improving language model performance.
+      Define test cases
+      : Identify core use cases and failure modes. Prepare a set of prompts and test cases that represent these scenarios.
+      Configure evaluation
+      : Set up your evaluation by specifying prompts, test cases, and API providers.
+      Run evaluation
+      : Use the command-line tool or library to execute the evaluation and record model outputs for each prompt.
+      Analyze results
+      : Set up automatic requirements, or review results in a structured format/web UI. Use these results to select the best model and prompt for your use case.
+      Feedback loop
+      : As you gather more examples and user feedback, continue to expand your test cases.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Workflow and philosophy"
+      limitations: "Практика Promptfoo; применимость зависит от системы."
+    open_questions: []

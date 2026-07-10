@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-009
+    source_id: CODX
+    item_id: CODX--cloud
+    status: ready_for_review
+    kind: fact
+    text: "Codex cloud может выполнять фоновые задачи в собственном облачном окружении, в том числе параллельно."
+    excerpt: "Codex can work on tasks in the background (including in parallel) using its own cloud environment."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Codex web"
+      limitations: "Относится к Codex cloud."
+    open_questions: []

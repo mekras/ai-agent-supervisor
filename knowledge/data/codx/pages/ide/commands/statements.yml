@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-050
+    source_id: CODX
+    item_id: CODX--ide/commands
+    status: ready_for_review
+    kind: fact
+    text: "Команды расширения Codex для VS Code доступны через Command Palette и могут быть переназначены на сочетания клавиш."
+    excerpt: "Use these commands to control Codex from the VS Code Command Palette. You can also bind them to keyboard shortcuts."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Codex IDE extension commands"
+      limitations: "Относится к расширению Codex для VS Code."
+    open_questions: []

@@ -7,6 +7,7 @@ validate-hidden-unicode.py|tools/validate-hidden-unicode.py|644
 validate-skill-descriptions.py|tools/validate-skill-descriptions.py|644
 validate-trigger-evals.py|tools/validate-trigger-evals.py|644
 validate-skill-result-evals.py|tools/validate-skill-result-evals.py|644
+validate-portable-corpus-references.py|tools/validate-portable-corpus-references.py|644
 adapters/codex|tools/adapters/codex|755
 adapters/claude|tools/adapters/claude|755
 evals.local.yml.sample|evals.local.yml.sample|644

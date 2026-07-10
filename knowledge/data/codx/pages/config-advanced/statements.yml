@@ -1,0 +1,19 @@
+statements:
+  - id: CODX-014
+    source_id: CODX
+    item_id: CODX--config-advanced
+    status: ready_for_review
+    kind: fact
+    text: "Профиль Codex накладывает именованный слой настроек поверх пользовательского `config.toml`."
+    excerpt: |-
+      Codex loads
+      ~/.codex/config.toml
+      , then overlays
+      ~/.codex/profile-name.config.toml
+      .
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Profiles"
+      limitations: "Относится к локальной настройке Codex."
+    open_questions: []

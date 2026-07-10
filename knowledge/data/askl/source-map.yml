@@ -1,0 +1,34 @@
+source_id: ASKL
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "not_started"
+  extraction_status: "not_started"
+structure:
+  units:
+    - id: ASKL--best-practices
+      title: "best practices"
+      order: 1
+    - id: ASKL--optimizing-descriptions
+      title: "optimizing descriptions"
+      order: 2
+    - id: ASKL--evaluating-skills
+      title: "evaluating skills"
+      order: 3
+coverage:
+  units:
+    - unit_id: ASKL--best-practices
+      status: extracted
+      statements:
+        - pages/best-practices/statements.yml
+    - unit_id: ASKL--optimizing-descriptions
+      status: extracted
+      statements:
+        - pages/optimizing-descriptions/statements.yml
+    - unit_id: ASKL--evaluating-skills
+      status: extracted
+      statements:
+        - pages/evaluating-skills/statements.yml

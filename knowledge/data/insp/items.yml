@@ -1,0 +1,9 @@
+items:
+  - id: INSP--docs
+    source_id: INSP
+    title: "docs"
+    url: "https://inspect.aisi.org.uk/"
+    locator: "https://inspect.aisi.org.uk/"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

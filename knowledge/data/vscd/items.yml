@@ -1,0 +1,9 @@
+items:
+  - id: VSCD--custom-instructions
+    source_id: VSCD
+    title: "custom instructions"
+    url: "https://code.visualstudio.com/docs/agent-customization/custom-instructions"
+    locator: "https://code.visualstudio.com/docs/agent-customization/custom-instructions"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

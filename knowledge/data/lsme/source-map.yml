@@ -1,0 +1,31 @@
+source_id: LSME
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "local normalized snapshot inspection"
+  extraction_status: "in_progress"
+structure:
+  units:
+    - id: LSME--evaluation
+      title: "evaluation"
+      order: 1
+    - id: LSME--evaluation-approaches
+      title: "evaluation approaches"
+      order: 2
+    - id: LSME--trajectory-evals
+      title: "trajectory evals"
+      order: 3
+coverage:
+  units:
+    - unit_id: LSME--evaluation
+      status: extracted
+      statements: [pages/evaluation/statements.yml]
+    - unit_id: LSME--evaluation-approaches
+      status: extracted
+      statements: [pages/evaluation-approaches/statements.yml]
+    - unit_id: LSME--trajectory-evals
+      status: extracted
+      statements: [pages/trajectory-evals/statements.yml]

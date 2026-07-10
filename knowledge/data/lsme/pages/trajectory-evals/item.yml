@@ -1,0 +1,10 @@
+id: LSME--trajectory-evals
+source_id: LSME
+title: trajectory evals
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: statements_extracted
+files:
+  local:
+  - normalized.local.md

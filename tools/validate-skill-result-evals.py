@@ -11,7 +11,11 @@ from pathlib import Path
 from typing import Any
 
 
-CLAIM_RE = re.compile(r"^### ([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
+MARKDOWN_CLAIM_RE = re.compile(r"^### ([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
+YAML_CLAIM_RE = re.compile(r"^\s*-\s+id:\s*([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
+PORTABLE_STATEMENT_PATH_RE = re.compile(
+    r"^knowledge/data/[a-z0-9][a-z0-9-]*/pages/.+/statements\.yml$"
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -81,7 +85,9 @@ def collect_claims(repo_root: Path, statement_paths: set[str]) -> set[str]:
         path = repo_root / statement_path
         if not path.is_file():
             continue
-        claims.update(CLAIM_RE.findall(path.read_text(encoding="utf-8")))
+        content = path.read_text(encoding="utf-8")
+        claims.update(MARKDOWN_CLAIM_RE.findall(content))
+        claims.update(YAML_CLAIM_RE.findall(content))
     return claims
 
 
@@ -113,6 +119,10 @@ def validate_source_basis(
             basis_claims.add(claim_id)
         if isinstance(statement_path, str):
             statement_paths.add(statement_path)
+            if not PORTABLE_STATEMENT_PATH_RE.fullmatch(statement_path):
+                errors.append(
+                    f"{item_label}.statement_path: must reference a portable statements.yml file"
+                )
             if not (repo_root / statement_path).is_file():
                 errors.append(f"{item_label}: statement_path does not exist")
 

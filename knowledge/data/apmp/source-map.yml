@@ -1,0 +1,97 @@
+source_id: APMP
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "not_started"
+  extraction_status: "not_started"
+structure:
+  units:
+    - id: APMP--overview
+      title: "overview"
+      order: 1
+    - id: APMP--author-primitives
+      title: "author primitives"
+      order: 2
+    - id: APMP--author-primitives-hooks-and-commands
+      title: "author primitives hooks and commands"
+      order: 3
+    - id: APMP--author-primitives-instructions-and-agents
+      title: "author primitives instructions and agents"
+      order: 4
+    - id: APMP--author-primitives-mcp-as-primitive
+      title: "author primitives mcp as primitive"
+      order: 5
+    - id: APMP--author-primitives-prompts
+      title: "author primitives prompts"
+      order: 6
+    - id: APMP--author-primitives-skills
+      title: "author primitives skills"
+      order: 7
+    - id: APMP--compile
+      title: "compile"
+      order: 8
+    - id: APMP--pack-a-bundle
+      title: "pack a bundle"
+      order: 9
+    - id: APMP--package-relative-links
+      title: "package relative links"
+      order: 10
+    - id: APMP--preview-and-validate
+      title: "preview and validate"
+      order: 11
+    - id: APMP--publish-to-a-marketplace
+      title: "publish to a marketplace"
+      order: 12
+    - id: APMP--consumer-manage-dependencies
+      title: "consumer manage dependencies"
+      order: 13
+    - id: APMP--consumer-drift-and-secure-by-default
+      title: "consumer drift and secure by default"
+      order: 14
+coverage:
+  units:
+    - unit_id: APMP--overview
+      status: extracted
+      statements: [pages/overview/statements.yml]
+    - unit_id: APMP--author-primitives
+      status: extracted
+      statements: [pages/author-primitives/statements.yml]
+    - unit_id: APMP--author-primitives-hooks-and-commands
+      status: extracted
+      statements: [pages/author-primitives-hooks-and-commands/statements.yml]
+    - unit_id: APMP--author-primitives-instructions-and-agents
+      status: extracted
+      statements: [pages/author-primitives-instructions-and-agents/statements.yml]
+    - unit_id: APMP--author-primitives-mcp-as-primitive
+      status: extracted
+      statements: [pages/author-primitives-mcp-as-primitive/statements.yml]
+    - unit_id: APMP--author-primitives-prompts
+      status: extracted
+      statements: [pages/author-primitives-prompts/statements.yml]
+    - unit_id: APMP--author-primitives-skills
+      status: extracted
+      statements: [pages/author-primitives-skills/statements.yml]
+    - unit_id: APMP--compile
+      status: extracted
+      statements: [pages/compile/statements.yml]
+    - unit_id: APMP--pack-a-bundle
+      status: extracted
+      statements: [pages/pack-a-bundle/statements.yml]
+    - unit_id: APMP--package-relative-links
+      status: extracted
+      statements: [pages/package-relative-links/statements.yml]
+    - unit_id: APMP--preview-and-validate
+      status: extracted
+      statements: [pages/preview-and-validate/statements.yml]
+    - unit_id: APMP--publish-to-a-marketplace
+      status: extracted
+      statements: [pages/publish-to-a-marketplace/statements.yml]
+    - unit_id: APMP--consumer-manage-dependencies
+      status: extracted
+      statements: [pages/consumer-manage-dependencies/statements.yml]
+    - unit_id: APMP--consumer-drift-and-secure-by-default
+      status: extracted
+      statements: [pages/consumer-drift-and-secure-by-default/statements.yml]

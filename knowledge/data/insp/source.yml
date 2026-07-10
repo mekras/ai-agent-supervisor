@@ -1,0 +1,33 @@
+id: INSP
+slug: insp
+title: "Inspect Documentation"
+status: approved
+priority: normal
+carrier_type: website
+source_kind: reference
+long_source: true
+adapter: manual
+storage_strategy: local_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: "Точечная проверка нормализованных фрагментов с атрибуцией источника."
+requires_access_check: true
+url: "https://inspect.aisi.org.uk/"
+locator: "https://inspect.aisi.org.uk/"
+public_reference: "https://inspect.aisi.org.uk/"
+license_or_terms: "См. knowledge/source-attribution.md."
+access:
+  default: "Публичный веб-источник; условия публикации фрагментов проверяются перед использованием."
+reliability: official
+stability: mutable
+refresh_policy: manual
+retrieved_at: "2026-06-10"
+last_checked_at: "2026-06-10"
+scope:
+  includes: ["Страницы из прежнего page-index.tsv."]
+  excludes: ["Непроверенные материалы вне индексированных единиц."]
+known_limitations:
+  - "Переизвлечение утверждений ещё не выполнено."
+  - "Локальные снимки остаются в прежней структуре до финального переключения."
+processing_notes: ["Карточка создана в первой фазе миграции корпуса."]

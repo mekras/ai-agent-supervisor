@@ -2,20 +2,16 @@
   "skill_name": "ai-setup-subagents",
   "source_basis": [
     {
-      "claim_id": "ASKL-006",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-003",
+      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
     },
     {
-      "claim_id": "ASKL-009",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-004",
+      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
     },
     {
-      "claim_id": "ASKL-010",
-      "statement_path": "knowledge/statements/ASKL.md"
-    },
-    {
-      "claim_id": "PPRX-002",
-      "statement_path": "knowledge/statements/PPRX.md"
+      "claim_id": "PPRX-001",
+      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
     }
   ],
   "cases": [
@@ -33,10 +29,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -49,8 +45,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "настройка считается завершённой после правки AGENTS.md без реального конфигурационного слоя и проверки запуска.",
             "expected_conclusion": "для Codex один AGENTS.md не является полной настройкой подагентов",
@@ -59,8 +55,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "пользователя просят самому распределить модели по внутренним ролям.",
             "expected_conclusion": "навык должен сам предложить понятную схему использования моделей после получения списка",
@@ -114,10 +110,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -130,8 +126,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "проект используется через Claude, но политика подагентов не имеет Claude-совместимой точки входа.",
             "expected_conclusion": "нужен отдельный вход для Claude без появления второго расходящегося описания политики",
@@ -185,10 +181,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -201,8 +197,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "черновой запрос без права записи обрабатывается как внедрение и меняет файлы конфигурации.",
             "expected_conclusion": "явный запрет правок должен удерживать навык в режиме policy",
@@ -211,8 +207,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "неизвестные модели заменяются выдуманными значениями.",
             "expected_conclusion": "без списка моделей можно проектировать немодельные ограничения, но нельзя фиксировать конкретные модели",
@@ -274,10 +270,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -291,8 +287,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "переносимый навык начинает хранить конкретную политику целевого проекта.",
             "expected_conclusion": "навык должен хранить метод настройки и проверки, а проектная политика должна жить в целевом проекте или пользовательском слое",
@@ -301,7 +297,7 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "PPRX-002"
+              "PPRX-001"
             ],
             "observed_problem": "AGENTS.md содержит подробную процедуру маршрутизации и вытесняет рабочий контекст.",
             "expected_conclusion": "AGENTS.md можно оставить триггером, а подробную процедуру вынести в отдельный проектный файл",
@@ -310,8 +306,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "предпочтительный запуск cheap_explorer смешан с блокирующим обязательным запуском.",
             "expected_conclusion": "условия обязательности нужно явно разделить",

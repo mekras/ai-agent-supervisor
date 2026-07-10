@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-020
+    source_id: CODX
+    item_id: CODX--plugins
+    status: ready_for_review
+    kind: fact
+    text: "Плагин Codex объединяет навыки, интеграции приложений и MCP-серверы в повторно используемые рабочие процессы."
+    excerpt: "Plugins bundle skills, app integrations, and MCP servers into reusable\nworkflows for Codex."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Overview"
+      limitations: "Относится к плагинам Codex."
+    open_questions: []

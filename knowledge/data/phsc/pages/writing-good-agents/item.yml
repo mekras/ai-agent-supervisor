@@ -1,0 +1,10 @@
+id: PHSC--writing-good-agents
+source_id: PHSC
+title: writing good agents
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - normalized.local.md

@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-011
+    source_id: APMP
+    item_id: APMP--author-primitives-mcp-as-primitive
+    status: ready_for_review
+    kind: fact
+    text: "При установке пакета APM зависимости MCP задаются через блок `dependencies.mcp` манифеста."
+    excerpt: "dependencies.mcp:"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "MCP servers as a primitive"
+      limitations: "Фрагмент описывает декларацию MCP в APM."
+    open_questions: []

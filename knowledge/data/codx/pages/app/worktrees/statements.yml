@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-030
+    source_id: CODX
+    item_id: CODX--app/worktrees
+    status: ready_for_review
+    kind: fact
+    text: "Worktree позволяет Codex выполнять независимые задачи в одном проекте параллельно, не создавая взаимных помех; автоматизации Git-репозиториев используют отдельные фоновые worktree."
+    excerpt: |-
+      In the Codex app, worktrees let Codex run multiple independent tasks in the same project without interfering with each other. For Git repositories,
+      automations
+      run on dedicated background worktrees so they don’t conflict with your ongoing work.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Worktrees"
+      limitations: "Относится к приложению Codex и Git-репозиториям."
+    open_questions: []

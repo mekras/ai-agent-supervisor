@@ -1,0 +1,14 @@
+statements:
+  - id: AENG-002
+    source_id: AENG
+    item_id: AENG--effective-context-engineering-for-ai-agents
+    status: ready_for_review
+    kind: fact
+    text: "Контекст агента ограничен и требует отбора наиболее полезных токенов для достижения результата."
+    excerpt: "Context is a critical but finite resource for AI agents."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Effective context engineering for AI agents"
+      limitations: "Наблюдение авторов статьи."
+    open_questions: []

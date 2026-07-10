@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-001
+    source_id: APMP
+    item_id: APMP--overview
+    status: ready_for_review
+    kind: fact
+    text: "Пакет APM использует `apm.yml` как манифест, а устанавливаемые примитивы размещает в `.apm/`."
+    excerpt: "apm.yml                    # manifest -- who you are, what you depend on"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Package structure"
+      limitations: "Фрагмент описывает структуру пакета APM."
+    open_questions: []

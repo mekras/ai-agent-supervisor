@@ -1,0 +1,25 @@
+statements:
+  - id: CODX-061
+    source_id: CODX
+    item_id: CODX--noninteractive
+    status: ready_for_review
+    kind: fact
+    text: "`codex exec` по умолчанию работает в песочнице только для чтения; в автоматизации следует задавать минимально необходимые разрешения, а полный доступ допустим лишь в контролируемой среде."
+    excerpt: |-
+      Permissions and safety
+      By default,
+      codex exec
+      runs in a read-only sandbox. In automation, set the least permissions needed for the workflow:
+      Allow edits:
+      codex exec --sandbox workspace-write "<task>"
+      Allow broader access:
+      codex exec --sandbox danger-full-access "<task>"
+      Use
+      danger-full-access
+      only in a controlled environment (for example, an isolated CI runner or container).
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Permissions and safety"
+      limitations: "Относится к неинтерактивному запуску Codex."
+    open_questions: []

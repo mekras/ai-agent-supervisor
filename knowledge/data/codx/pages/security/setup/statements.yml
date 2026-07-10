@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-006
+    source_id: CODX
+    item_id: CODX--security/setup
+    status: ready_for_review
+    kind: fact
+    text: "Первичная проверка Codex Security может занимать несколько часов, особенно для больших репозиториев или длинной истории."
+    excerpt: "The initial backfill can take a few hours, especially for larger repositories or longer windows."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Initial scans can take a while"
+      limitations: "Относится к Codex Security."
+    open_questions: []

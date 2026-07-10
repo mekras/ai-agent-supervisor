@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-008
+    source_id: CODX
+    item_id: CODX--security/faq
+    status: ready_for_review
+    kind: fact
+    text: "Codex Security не применяет предложенные исправления автоматически: их проверяет пользователь перед созданием запроса на включение."
+    excerpt: "Codex Security does not auto-apply changes to the repository."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Does Codex Security auto-apply patches?"
+      limitations: "Относится к Codex Security."
+    open_questions: []

@@ -2,20 +2,16 @@
   "skill_name": "ai-data-collection",
   "source_basis": [
     {
-      "claim_id": "ASKL-006",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-003",
+      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
     },
     {
-      "claim_id": "ASKL-009",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-004",
+      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
     },
     {
-      "claim_id": "ASKL-010",
-      "statement_path": "knowledge/statements/ASKL.md"
-    },
-    {
-      "claim_id": "PPRX-002",
-      "statement_path": "knowledge/statements/PPRX.md"
+      "claim_id": "PPRX-001",
+      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
     }
   ],
   "cases": [
@@ -28,15 +24,15 @@
           "purpose": "кандидат на изменение источника истины"
         },
         {
-          "path": "knowledge/statements/ASKL.md",
+          "path": "knowledge/data/askl/pages/evaluating-skills/statements.yml",
           "purpose": "корпусное основание для сопровождения навыков"
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -49,8 +45,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "изменение навыка предлагается без проверяемого основания и без связи с реальной задачей или повторяемым сбоем.",
             "expected_conclusion": "переход к проектированию преждевременен, пока не отделены факты от допущений и не названы пробелы",
@@ -59,8 +55,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "непонятно, нужен ли переносимый навык или достаточно локального правила проекта.",
             "expected_conclusion": "граница между локальной инструкцией и переносимым навыком должна быть проверена до изменения источника истины",

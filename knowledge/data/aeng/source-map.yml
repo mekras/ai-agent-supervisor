@@ -1,0 +1,37 @@
+source_id: AENG
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "not_started"
+  extraction_status: "not_started"
+structure:
+  units:
+    - id: AENG--building-effective-agents
+      title: "building effective agents"
+      order: 1
+    - id: AENG--multi-agent-research-system
+      title: "multi agent research system"
+      order: 2
+    - id: AENG--effective-context-engineering-for-ai-agents
+      title: "effective context engineering for ai agents"
+      order: 3
+    - id: AENG--demystifying-evals-for-ai-agents
+      title: "demystifying evals for ai agents"
+      order: 4
+coverage:
+  units:
+    - unit_id: AENG--building-effective-agents
+      status: extracted
+      statements: [pages/building-effective-agents/statements.yml]
+    - unit_id: AENG--multi-agent-research-system
+      status: extracted
+      statements: [pages/multi-agent-research-system/statements.yml]
+    - unit_id: AENG--effective-context-engineering-for-ai-agents
+      status: extracted
+      statements: [pages/effective-context-engineering-for-ai-agents/statements.yml]
+    - unit_id: AENG--demystifying-evals-for-ai-agents
+      status: extracted
+      statements: [pages/demystifying-evals-for-ai-agents/statements.yml]

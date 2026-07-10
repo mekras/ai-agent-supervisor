@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-003
+    source_id: APMP
+    item_id: APMP--author-primitives-instructions-and-agents
+    status: ready_for_review
+    kind: fact
+    text: "Инструкция APM привязана к области файлов, а агент APM представляет именуемого специалиста, которого пользователь вызывает явно."
+    excerpt: "checklist that fires when the agent touches files matching a glob."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Instructions and agents"
+      limitations: "Фрагмент описывает примитивы APM."
+    open_questions: []

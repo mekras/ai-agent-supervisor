@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-004
+    source_id: CODX
+    item_id: CODX--security
+    status: ready_for_review
+    kind: fact
+    text: "Codex Security cloud проверяет подключённые репозитории GitHub на вероятные проблемы безопасности."
+    excerpt: "It scans connected GitHub repositories for likely security issues."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Codex Security cloud"
+      limitations: "В документации функция обозначена как research preview."
+    open_questions: []

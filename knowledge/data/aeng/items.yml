@@ -1,0 +1,33 @@
+items:
+  - id: AENG--building-effective-agents
+    source_id: AENG
+    title: "building effective agents"
+    url: "https://www.anthropic.com/engineering/building-effective-agents"
+    locator: "https://www.anthropic.com/engineering/building-effective-agents"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: AENG--multi-agent-research-system
+    source_id: AENG
+    title: "multi agent research system"
+    url: "https://www.anthropic.com/engineering/multi-agent-research-system"
+    locator: "https://www.anthropic.com/engineering/multi-agent-research-system"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: AENG--effective-context-engineering-for-ai-agents
+    source_id: AENG
+    title: "effective context engineering for ai agents"
+    url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+    locator: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: AENG--demystifying-evals-for-ai-agents
+    source_id: AENG
+    title: "demystifying evals for ai agents"
+    url: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+    locator: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

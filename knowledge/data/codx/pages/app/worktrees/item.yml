@@ -1,0 +1,10 @@
+id: CODX--app/worktrees
+source_id: CODX
+title: app / worktrees
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: statements_extracted
+files:
+  local:
+  - normalized.local.md

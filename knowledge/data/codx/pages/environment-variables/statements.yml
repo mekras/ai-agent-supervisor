@@ -1,0 +1,18 @@
+statements:
+  - id: CODX-046
+    source_id: CODX
+    item_id: CODX--environment-variables
+    status: ready_for_review
+    kind: fact
+    text: "Для постоянных настроек Codex используется `config.toml`, а переменные окружения предназначены для ограниченных оболочкой переопределений, секретов автоматизации, установки и диагностики."
+    excerpt: |-
+      Codex uses
+      config.toml
+      for durable settings. Use environment variables for
+      shell-scoped overrides, automation secrets, installer behavior, or diagnostics.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Environment variables"
+      limitations: "Относится к поддерживаемым переменным окружения Codex."
+    open_questions: []

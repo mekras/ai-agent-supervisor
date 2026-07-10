@@ -1,0 +1,20 @@
+statements:
+  - id: CODX-040
+    source_id: CODX
+    item_id: CODX--concepts/subagents
+    status: ready_for_review
+    kind: fact
+    text: "Codex не запускает подагентов автоматически: их следует использовать только по явному запросу на подагентов или параллельную работу, учитывая дополнительный расход токенов."
+    excerpt: |-
+      Codex doesn’t spawn subagents automatically, and it should only use subagents when you
+      explicitly ask for subagents or parallel agent work.
+      In practice, manual triggering means using direct instructions such as
+      “spawn two agents,” “delegate this work in parallel,” or “use one agent per
+      point.” Subagent workflows consume more tokens than comparable single-agent runs
+      because each subagent does its own model and tool work.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Triggering subagent workflows"
+      limitations: "Относится к рабочим процессам подагентов Codex."
+    open_questions: []

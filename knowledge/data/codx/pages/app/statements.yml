@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-026
+    source_id: CODX
+    item_id: CODX--app
+    status: ready_for_review
+    kind: fact
+    text: "Приложение Codex доступно для macOS и Windows; исключения для конкретных платформ должны быть отмечены в соответствующей документации."
+    excerpt: |-
+      The Codex app is available on macOS and Windows.
+      Most Codex app features are available on both platforms. The relevant docs
+      describe platform-specific exceptions.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Getting started"
+      limitations: "Относится к приложению Codex на дату источника."
+    open_questions: []

@@ -1,0 +1,19 @@
+statements:
+  - id: CODX-035
+    source_id: CODX
+    item_id: CODX--cli/slash-commands
+    status: ready_for_review
+    kind: fact
+    text: "Во время выполняющейся задачи slash-команду можно поставить в очередь клавишей Tab; Codex обработает её на следующем ходу после окончания текущего."
+    excerpt: |-
+      When a task is already running, you can type a slash command and press
+      Tab
+      to
+      queue it for the next turn. Codex parses queued slash commands when they run, so
+      command menus and errors appear after the current turn finishes.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Built-in slash commands"
+      limitations: "Относится к интерактивным сессиям CLI Codex."
+    open_questions: []

@@ -1,0 +1,9 @@
+items:
+  - id: GIST--7c8f65572930a21efa62623557d83f6e
+    source_id: GIST
+    title: "7c8f65572930a21efa62623557d83f6e"
+    url: "https://gist.github.com/0xfauzi/7c8f65572930a21efa62623557d83f6e"
+    locator: "https://gist.github.com/0xfauzi/7c8f65572930a21efa62623557d83f6e"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-013
+    source_id: APMP
+    item_id: APMP--consumer-drift-and-secure-by-default
+    status: ready_for_review
+    kind: fact
+    text: "При установке APM сопоставляет манифест и файл блокировки, проверяет хэши полученного содержимого и поддерживает воспроизводимость установки."
+    excerpt: "Three checks run automatically, in this order, before any file lands in"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "What runs on every apm install"
+      limitations: "Фрагмент относится к установке APM."
+    open_questions: []

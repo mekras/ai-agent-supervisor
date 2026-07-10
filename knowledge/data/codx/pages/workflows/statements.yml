@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-067
+    source_id: CODX
+    item_id: CODX--workflows
+    status: ready_for_review
+    kind: fact
+    text: "Для надёжной работы Codex нужно задавать явный контекст и чёткое определение готовности."
+    excerpt: "Codex works best when you treat it like a teammate with explicit context and a clear definition of “done.”"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Workflows"
+      limitations: "Практическая рекомендация по сценариям Codex."
+    open_questions: []

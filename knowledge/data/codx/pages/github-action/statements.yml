@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-047
+    source_id: CODX
+    item_id: CODX--github-action
+    status: ready_for_review
+    kind: fact
+    text: "GitHub Action Codex позволяет запускать Codex в заданиях CI/CD, применять патчи и публиковать рецензии из workflow GitHub Actions."
+    excerpt: |-
+      Use the Codex GitHub Action (
+      openai/codex-action@v1
+      ) to run Codex in CI/CD jobs, apply patches, or post reviews from a GitHub Actions workflow.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Codex GitHub Action"
+      limitations: "Относится к GitHub Actions и Codex Action."
+    open_questions: []

@@ -1,0 +1,20 @@
+statements:
+  - id: CODX-031
+    source_id: CODX
+    item_id: CODX--app-server
+    status: ready_for_review
+    kind: fact
+    text: "WebSocket-транспорт app-server экспериментальный и не поддерживается; перед его удалённым раскрытием необходимо настроить аутентификацию, так как не-loopback listener по умолчанию может принимать неаутентифицированные подключения."
+    excerpt: |-
+      WebSocket transport is experimental and unsupported. Local listeners such as
+      ws://127.0.0.1:PORT
+      are appropriate for localhost and SSH port-forwarding
+      workflows. Non-loopback WebSocket listeners currently allow unauthenticated
+      connections by default during rollout, so configure WebSocket auth before
+      exposing one remotely.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Protocol"
+      limitations: "Относится к app-server Codex и его WebSocket-транспорту."
+    open_questions: []

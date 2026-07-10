@@ -1,0 +1,49 @@
+sources:
+  - id: AENG
+    title: "Anthropic Engineering"
+    path: data/aeng
+  - id: APMP
+    title: "Agent Package Manager Producer Docs"
+    path: data/apmp
+  - id: ASES
+    title: "AI Safety Evaluation Standard"
+    path: data/ases
+  - id: ASKL
+    title: "Agent Skills"
+    path: data/askl
+  - id: AZPF
+    title: "Microsoft Learn: evaluation flow for Prompt flow"
+    path: data/azpf
+  - id: CODX
+    title: "OpenAI Codex Documentation"
+    path: data/codx
+  - id: GHAB
+    title: "GitHub Blog: agents.md practices"
+    path: data/ghab
+  - id: GIST
+    title: "GitHub Gist: AGENTS.md recommendations"
+    path: data/gist
+  - id: INSP
+    title: "Inspect Documentation"
+    path: data/insp
+  - id: LCMS
+    title: "LangChain Blog: multi-agent systems"
+    path: data/lcms
+  - id: LSME
+    title: "LangSmith Documentation"
+    path: data/lsme
+  - id: PHSC
+    title: "philschmid.de: Writing good agents"
+    path: data/phsc
+  - id: PPRX
+    title: "Perplexity Research: Agent Skills"
+    path: data/pprx
+  - id: PRFO
+    title: "Promptfoo Documentation"
+    path: data/prfo
+  - id: VSCD
+    title: "Visual Studio Code Docs: custom instructions"
+    path: data/vscd
+  - id: XEM7
+    title: "EXM7777 post and related X Article"
+    path: data/xem7

@@ -1,0 +1,9 @@
+items:
+  - id: LCMS--how-and-when-to-build-multi-agent-systems
+    source_id: LCMS
+    title: "how and when to build multi agent systems"
+    url: "https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems"
+    locator: "https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

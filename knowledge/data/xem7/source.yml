@@ -1,0 +1,33 @@
+id: XEM7
+slug: xem7
+title: "EXM7777 post and related X Article"
+status: approved
+priority: normal
+carrier_type: website
+source_kind: article
+long_source: true
+adapter: manual
+storage_strategy: local_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: "Точечная проверка нормализованных фрагментов с атрибуцией источника."
+requires_access_check: true
+url: "https://x.com/EXM7777/status/2060736517564477901"
+locator: "https://x.com/EXM7777/status/2060736517564477901"
+public_reference: "https://x.com/EXM7777/status/2060736517564477901"
+license_or_terms: "См. knowledge/source-attribution.md."
+access:
+  default: "Публичный веб-источник; условия публикации фрагментов проверяются перед использованием."
+reliability: personal
+stability: mutable
+refresh_policy: manual
+retrieved_at: "2026-06-01"
+last_checked_at: "2026-06-01"
+scope:
+  includes: ["Страницы из прежнего page-index.tsv."]
+  excludes: ["Непроверенные материалы вне индексированных единиц."]
+known_limitations:
+  - "Переизвлечение утверждений ещё не выполнено."
+  - "Локальные снимки остаются в прежней структуре до финального переключения."
+processing_notes: ["Карточка создана в первой фазе миграции корпуса."]

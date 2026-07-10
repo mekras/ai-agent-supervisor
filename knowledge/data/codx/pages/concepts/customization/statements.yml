@@ -1,0 +1,21 @@
+statements:
+  - id: CODX-038
+    source_id: CODX
+    item_id: CODX--concepts/customization
+    status: ready_for_review
+    kind: fact
+    text: "`AGENTS.md` должен оставаться компактным и содержать постоянные правила репозитория; неверные предположения агента следует исправлять в нём, чтобы это сохранялось для следующих сессий."
+    excerpt: |-
+      AGENTS.md
+      gives Codex durable project guidance that travels with your repository and applies before the agent starts work. Keep it small.
+      When the agent makes incorrect assumptions about your codebase, correct them in
+      AGENTS.md
+      and ask the agent to update
+      AGENTS.md
+      so the fix persists. Treat it as a feedback loop.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "AGENTS Guidance"
+      limitations: "Относится к проектным инструкциям Codex."
+    open_questions: []

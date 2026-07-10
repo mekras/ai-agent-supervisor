@@ -1,0 +1,10 @@
+id: APMP--package-relative-links
+source_id: APMP
+title: package relative links
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: statements_extracted
+files:
+  local:
+  - normalized.local.md

@@ -1,0 +1,14 @@
+statements:
+  - id: AZPF-001
+    source_id: AZPF
+    item_id: AZPF--evaluation-flow
+    status: ready_for_review
+    kind: fact
+    text: "Потоки оценки вычисляют метрики для проверки того, насколько результаты запуска отвечают заданным критериям и целям."
+    excerpt: "Evaluation flows are a special type of prompt flow that calculates metrics to assess how well the outputs of a run meet specific criteria and goals."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Evaluation flows and metrics"
+      limitations: "Источник объявляет прекращение поддержки Prompt flow для новой разработки."
+    open_questions: []

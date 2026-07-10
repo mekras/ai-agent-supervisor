@@ -1,0 +1,10 @@
+id: INSP--docs
+source_id: INSP
+title: docs
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - normalized.local.md

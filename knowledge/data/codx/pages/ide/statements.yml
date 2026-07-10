@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-052
+    source_id: CODX
+    item_id: CODX--ide
+    status: ready_for_review
+    kind: fact
+    text: "Интеграции Codex для совместимых с VS Code редакторов и JetBrains IDE доступны на macOS, Windows и Linux; в Windows возможны нативная песочница или WSL2."
+    excerpt: |-
+      Codex IDE integrations for VS Code-compatible editors and JetBrains IDEs are
+      available on macOS, Windows, and Linux. On Windows, run Codex natively with
+      the Windows sandbox, or use WSL2 when you need a Linux-native environment.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Extension setup"
+      limitations: "Относится к интеграциям IDE Codex."
+    open_questions: []

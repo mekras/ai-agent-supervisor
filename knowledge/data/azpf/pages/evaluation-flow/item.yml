@@ -1,0 +1,10 @@
+id: AZPF--evaluation-flow
+source_id: AZPF
+title: evaluation flow
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: statements_extracted
+files:
+  local:
+  - normalized.local.md

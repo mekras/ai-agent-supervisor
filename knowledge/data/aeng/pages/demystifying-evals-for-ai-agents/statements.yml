@@ -1,0 +1,14 @@
+statements:
+  - id: AENG-004
+    source_id: AENG
+    item_id: AENG--demystifying-evals-for-ai-agents
+    status: ready_for_review
+    kind: fact
+    text: "Проверки делают проблемы и изменения поведения агентов видимыми до воздействия на пользователей."
+    excerpt: "Evals make problems and behavioral changes visible before they affect users"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Introduction"
+      limitations: "Наблюдение авторов статьи."
+    open_questions: []

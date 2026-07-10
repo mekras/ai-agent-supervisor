@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-056
+    source_id: CODX
+    item_id: CODX--integrations/linear
+    status: ready_for_review
+    kind: fact
+    text: "В Linear поручение Codex через назначение задачи или упоминание создаёт облачную задачу, а в ответе публикуются ход работы и результаты."
+    excerpt: |-
+      Use Codex in Linear to delegate work from issues. Assign an issue to Codex or mention
+      @Codex
+      in a comment, and Codex creates a cloud task and replies with progress and results.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Use Codex in Linear"
+      limitations: "Относится к интеграции Codex и Linear."
+    open_questions: []

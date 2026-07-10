@@ -1,0 +1,18 @@
+statements:
+  - id: CODX-066
+    source_id: CODX
+    item_id: CODX--speed
+    status: ready_for_review
+    kind: fact
+    text: "Режим Fast повышает скорость поддерживаемых моделей, но расходует кредиты быстрее стандартного режима."
+    excerpt: |-
+      Codex offers the ability to increase the speed of the model for increased
+      credit consumption.
+      Fast mode increases supported model speed by 1.5x and consumes credits at a
+      higher rate than Standard mode.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Fast mode"
+      limitations: "Сведения о режимах и стоимости могут меняться."
+    open_questions: []

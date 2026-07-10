@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-001
+    source_id: CODX
+    item_id: CODX--agents-md
+    status: ready_for_review
+    kind: fact
+    text: "Codex читает файлы `AGENTS.md` до начала работы и объединяет глобальные и проектные инструкции."
+    excerpt: "Codex reads AGENTS.md files before doing any work."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Custom instructions with AGENTS.md"
+      limitations: "Фрагмент относится к Codex."
+    open_questions: []

@@ -13,13 +13,13 @@
 
 Этот порядок опирается на извлечённые утверждения из корпуса данных:
 
-- `knowledge/statements/ASES.md`;
-- `knowledge/statements/AZPF.md`;
-- `knowledge/statements/INSP.md`;
-- `knowledge/statements/LSME.md`;
-- `knowledge/statements/PRFO.md`;
-- `knowledge/statements/XEM7.md`;
-- `knowledge/statements/ASKL.md`.
+- `knowledge/data/ases/pages/standard/statements.yml`;
+- `knowledge/data/azpf/pages/evaluation-flow/statements.yml`;
+- `knowledge/data/askl/pages/evaluating-skills/statements.yml`;
+- `knowledge/data/lsme/pages/evaluation/statements.yml`;
+- `knowledge/data/prfo/pages/intro/statements.yml`;
+- `knowledge/data/askl/pages/evaluating-skills/statements.yml`;
+- `knowledge/data/askl/pages/evaluating-skills/statements.yml`.
 
 Положения источников не являются правилами проекта сами по себе. Они
 используются как основание для переносимого порядка проверки после анализа

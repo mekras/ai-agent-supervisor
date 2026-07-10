@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-063
+    source_id: CODX
+    item_id: CODX--quickstart
+    status: ready_for_review
+    kind: fact
+    text: "Поскольку Codex способен изменять кодовую базу, перед и после каждой задачи рекомендуется создавать контрольные точки Git для удобного отката."
+    excerpt: "Codex can modify your codebase, so consider creating Git checkpoints before and after each task so you can easily revert changes if needed."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Quickstart"
+      limitations: "Практическая рекомендация по началу работы с Codex."
+    open_questions: []
