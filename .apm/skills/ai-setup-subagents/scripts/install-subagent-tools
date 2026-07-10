@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage:
+  install-subagent-tools [project-root]
+
+Copies the portable model-check tool and its local configuration sample into
+<project-root>/tools. Add adapters for the active harnesses separately.
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+project_root="${1:-$(git rev-parse --show-toplevel)}"
+target_dir="$project_root/tools"
+
+mkdir -p "$target_dir"
+for name in check-subagent-models discover-subagent-models analyze-subagent-sessions run-subagent-role; do
+  install -m 0755 "$script_dir/$name" "$target_dir/$name"
+done
+install -m 0644 "$script_dir/../assets/subagents.local.toml.sample" \
+  "$target_dir/subagents.local.toml.sample"
+
+printf 'installed=%s\n' "$target_dir"

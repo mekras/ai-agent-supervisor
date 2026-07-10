@@ -1,4 +1,27 @@
 statements:
+  - id: CODX-032
+    source_id: CODX
+    item_id: CODX--app-server
+    status: ready_for_review
+    kind: fact
+    text: "Codex App Server предоставляет постраничный метод model/list: для текущей учётной записи он возвращает доступные модели, а записи содержат точный идентификатор, признак скрытости, поддерживаемые и рекомендуемые усилия и возможности. Для полного каталога клиент передаёт includeHidden: true."
+    excerpt: |-
+      model/list
+      - list available models (set
+      includeHidden: true
+      to include entries with
+      hidden: true
+      ) with effort options, optional
+      upgrade
+      , and
+      inputModalities
+      .
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Models"
+      limitations: "Каталог зависит от активной оснастки и текущей учётной записи; конкретный список моделей намеренно не сохраняется в корпусе."
+    open_questions: []
   - id: CODX-031
     source_id: CODX
     item_id: CODX--app-server
