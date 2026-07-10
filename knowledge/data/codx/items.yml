@@ -1,0 +1,545 @@
+items:
+  - id: CODX--agent-approvals-security
+    source_id: CODX
+    title: "agent approvals security"
+    url: "https://developers.openai.com/codex/agent-approvals-security"
+    locator: "https://developers.openai.com/codex/agent-approvals-security"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--agents-md
+    source_id: CODX
+    title: "agents md"
+    url: "https://developers.openai.com/codex/guides/agents-md"
+    locator: "https://developers.openai.com/codex/guides/agents-md"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app
+    source_id: CODX
+    title: "app"
+    url: "https://developers.openai.com/codex/app"
+    locator: "https://developers.openai.com/codex/app"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app-server
+    source_id: CODX
+    title: "app server"
+    url: "https://developers.openai.com/codex/app-server"
+    locator: "https://developers.openai.com/codex/app-server"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app/automations
+    source_id: CODX
+    title: "app / automations"
+    url: "https://developers.openai.com/codex/app/automations"
+    locator: "https://developers.openai.com/codex/app/automations"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app/commands
+    source_id: CODX
+    title: "app / commands"
+    url: "https://developers.openai.com/codex/app/commands"
+    locator: "https://developers.openai.com/codex/app/commands"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app/features
+    source_id: CODX
+    title: "app / features"
+    url: "https://developers.openai.com/codex/app/features"
+    locator: "https://developers.openai.com/codex/app/features"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app/local-environments
+    source_id: CODX
+    title: "app / local environments"
+    url: "https://developers.openai.com/codex/app/local-environments"
+    locator: "https://developers.openai.com/codex/app/local-environments"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app/settings
+    source_id: CODX
+    title: "app / settings"
+    url: "https://developers.openai.com/codex/app/settings"
+    locator: "https://developers.openai.com/codex/app/settings"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app/troubleshooting
+    source_id: CODX
+    title: "app / troubleshooting"
+    url: "https://developers.openai.com/codex/app/troubleshooting"
+    locator: "https://developers.openai.com/codex/app/troubleshooting"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--app/worktrees
+    source_id: CODX
+    title: "app / worktrees"
+    url: "https://developers.openai.com/codex/app/worktrees"
+    locator: "https://developers.openai.com/codex/app/worktrees"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--changelog
+    source_id: CODX
+    title: "changelog"
+    url: "https://developers.openai.com/codex/changelog"
+    locator: "https://developers.openai.com/codex/changelog"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--cli
+    source_id: CODX
+    title: "cli"
+    url: "https://developers.openai.com/codex/cli"
+    locator: "https://developers.openai.com/codex/cli"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--cli/features
+    source_id: CODX
+    title: "cli / features"
+    url: "https://developers.openai.com/codex/cli/features"
+    locator: "https://developers.openai.com/codex/cli/features"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--cli/reference
+    source_id: CODX
+    title: "cli / reference"
+    url: "https://developers.openai.com/codex/cli/reference"
+    locator: "https://developers.openai.com/codex/cli/reference"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--cli/slash-commands
+    source_id: CODX
+    title: "cli / slash commands"
+    url: "https://developers.openai.com/codex/cli/slash-commands"
+    locator: "https://developers.openai.com/codex/cli/slash-commands"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--cloud
+    source_id: CODX
+    title: "cloud"
+    url: "https://developers.openai.com/codex/cloud"
+    locator: "https://developers.openai.com/codex/cloud"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--cloud/environments
+    source_id: CODX
+    title: "cloud / environments"
+    url: "https://developers.openai.com/codex/cloud/environments"
+    locator: "https://developers.openai.com/codex/cloud/environments"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--cloud/internet-access
+    source_id: CODX
+    title: "cloud / internet access"
+    url: "https://developers.openai.com/codex/cloud/internet-access"
+    locator: "https://developers.openai.com/codex/cloud/internet-access"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--concepts/customization
+    source_id: CODX
+    title: "concepts / customization"
+    url: "https://developers.openai.com/codex/concepts/customization"
+    locator: "https://developers.openai.com/codex/concepts/customization"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--concepts/sandboxing
+    source_id: CODX
+    title: "concepts / sandboxing"
+    url: "https://developers.openai.com/codex/concepts/sandboxing"
+    locator: "https://developers.openai.com/codex/concepts/sandboxing"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--concepts/subagents
+    source_id: CODX
+    title: "concepts / subagents"
+    url: "https://developers.openai.com/codex/concepts/subagents"
+    locator: "https://developers.openai.com/codex/concepts/subagents"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--config-advanced
+    source_id: CODX
+    title: "config advanced"
+    url: "https://developers.openai.com/codex/config-advanced"
+    locator: "https://developers.openai.com/codex/config-advanced"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--config-basic
+    source_id: CODX
+    title: "config basic"
+    url: "https://developers.openai.com/codex/config-basic"
+    locator: "https://developers.openai.com/codex/config-basic"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--config-reference
+    source_id: CODX
+    title: "config reference"
+    url: "https://developers.openai.com/codex/config-reference"
+    locator: "https://developers.openai.com/codex/config-reference"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--config-sample
+    source_id: CODX
+    title: "config sample"
+    url: "https://developers.openai.com/codex/config-sample"
+    locator: "https://developers.openai.com/codex/config-sample"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--enterprise/access-tokens
+    source_id: CODX
+    title: "enterprise / access tokens"
+    url: "https://developers.openai.com/codex/enterprise/access-tokens"
+    locator: "https://developers.openai.com/codex/enterprise/access-tokens"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--enterprise/admin-setup
+    source_id: CODX
+    title: "enterprise / admin setup"
+    url: "https://developers.openai.com/codex/enterprise/admin-setup"
+    locator: "https://developers.openai.com/codex/enterprise/admin-setup"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--enterprise/governance
+    source_id: CODX
+    title: "enterprise / governance"
+    url: "https://developers.openai.com/codex/enterprise/governance"
+    locator: "https://developers.openai.com/codex/enterprise/governance"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--enterprise/managed-configuration
+    source_id: CODX
+    title: "enterprise / managed configuration"
+    url: "https://developers.openai.com/codex/enterprise/managed-configuration"
+    locator: "https://developers.openai.com/codex/enterprise/managed-configuration"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--environment-variables
+    source_id: CODX
+    title: "environment variables"
+    url: "https://developers.openai.com/codex/environment-variables"
+    locator: "https://developers.openai.com/codex/environment-variables"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--github-action
+    source_id: CODX
+    title: "github action"
+    url: "https://developers.openai.com/codex/github-action"
+    locator: "https://developers.openai.com/codex/github-action"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--guides/agents-md
+    source_id: CODX
+    title: "guides / agents md"
+    url: "https://developers.openai.com/codex/guides/agents-md"
+    locator: "https://developers.openai.com/codex/guides/agents-md"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--hooks
+    source_id: CODX
+    title: "hooks"
+    url: "https://developers.openai.com/codex/hooks"
+    locator: "https://developers.openai.com/codex/hooks"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--ide
+    source_id: CODX
+    title: "ide"
+    url: "https://developers.openai.com/codex/ide"
+    locator: "https://developers.openai.com/codex/ide"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--ide/commands
+    source_id: CODX
+    title: "ide / commands"
+    url: "https://developers.openai.com/codex/ide/commands"
+    locator: "https://developers.openai.com/codex/ide/commands"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--ide/features
+    source_id: CODX
+    title: "ide / features"
+    url: "https://developers.openai.com/codex/ide/features"
+    locator: "https://developers.openai.com/codex/ide/features"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--ide/settings
+    source_id: CODX
+    title: "ide / settings"
+    url: "https://developers.openai.com/codex/ide/settings"
+    locator: "https://developers.openai.com/codex/ide/settings"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--ide/slash-commands
+    source_id: CODX
+    title: "ide / slash commands"
+    url: "https://developers.openai.com/codex/ide/slash-commands"
+    locator: "https://developers.openai.com/codex/ide/slash-commands"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--integrations/github
+    source_id: CODX
+    title: "integrations / github"
+    url: "https://developers.openai.com/codex/integrations/github"
+    locator: "https://developers.openai.com/codex/integrations/github"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--integrations/linear
+    source_id: CODX
+    title: "integrations / linear"
+    url: "https://developers.openai.com/codex/integrations/linear"
+    locator: "https://developers.openai.com/codex/integrations/linear"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--integrations/slack
+    source_id: CODX
+    title: "integrations / slack"
+    url: "https://developers.openai.com/codex/integrations/slack"
+    locator: "https://developers.openai.com/codex/integrations/slack"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--learn/best-practices
+    source_id: CODX
+    title: "learn / best practices"
+    url: "https://developers.openai.com/codex/learn/best-practices"
+    locator: "https://developers.openai.com/codex/learn/best-practices"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--mcp
+    source_id: CODX
+    title: "mcp"
+    url: "https://developers.openai.com/codex/mcp"
+    locator: "https://developers.openai.com/codex/mcp"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--memories
+    source_id: CODX
+    title: "memories"
+    url: "https://developers.openai.com/codex/memories"
+    locator: "https://developers.openai.com/codex/memories"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--memories/chronicle
+    source_id: CODX
+    title: "memories / chronicle"
+    url: "https://developers.openai.com/codex/memories/chronicle"
+    locator: "https://developers.openai.com/codex/memories/chronicle"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--migrate
+    source_id: CODX
+    title: "migrate"
+    url: "https://developers.openai.com/codex/migrate"
+    locator: "https://developers.openai.com/codex/migrate"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--models
+    source_id: CODX
+    title: "models"
+    url: "https://developers.openai.com/codex/models"
+    locator: "https://developers.openai.com/codex/models"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--noninteractive
+    source_id: CODX
+    title: "noninteractive"
+    url: "https://developers.openai.com/codex/noninteractive"
+    locator: "https://developers.openai.com/codex/noninteractive"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--permissions
+    source_id: CODX
+    title: "permissions"
+    url: "https://developers.openai.com/codex/permissions"
+    locator: "https://developers.openai.com/codex/permissions"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--plugins
+    source_id: CODX
+    title: "plugins"
+    url: "https://developers.openai.com/codex/plugins"
+    locator: "https://developers.openai.com/codex/plugins"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--plugins/build
+    source_id: CODX
+    title: "plugins / build"
+    url: "https://developers.openai.com/codex/plugins/build"
+    locator: "https://developers.openai.com/codex/plugins/build"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--prompting
+    source_id: CODX
+    title: "prompting"
+    url: "https://developers.openai.com/codex/prompting"
+    locator: "https://developers.openai.com/codex/prompting"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--quickstart
+    source_id: CODX
+    title: "quickstart"
+    url: "https://developers.openai.com/codex/quickstart"
+    locator: "https://developers.openai.com/codex/quickstart"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--remote-connections
+    source_id: CODX
+    title: "remote connections"
+    url: "https://developers.openai.com/codex/remote-connections"
+    locator: "https://developers.openai.com/codex/remote-connections"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--rules
+    source_id: CODX
+    title: "rules"
+    url: "https://developers.openai.com/codex/rules"
+    locator: "https://developers.openai.com/codex/rules"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--sdk
+    source_id: CODX
+    title: "sdk"
+    url: "https://developers.openai.com/codex/sdk"
+    locator: "https://developers.openai.com/codex/sdk"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--security
+    source_id: CODX
+    title: "security"
+    url: "https://developers.openai.com/codex/security"
+    locator: "https://developers.openai.com/codex/security"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--security/faq
+    source_id: CODX
+    title: "security / faq"
+    url: "https://developers.openai.com/codex/security/faq"
+    locator: "https://developers.openai.com/codex/security/faq"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--security/plugin
+    source_id: CODX
+    title: "security / plugin"
+    url: "https://developers.openai.com/codex/security/plugin"
+    locator: "https://developers.openai.com/codex/security/plugin"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--security/setup
+    source_id: CODX
+    title: "security / setup"
+    url: "https://developers.openai.com/codex/security/setup"
+    locator: "https://developers.openai.com/codex/security/setup"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--security/threat-model
+    source_id: CODX
+    title: "security / threat model"
+    url: "https://developers.openai.com/codex/security/threat-model"
+    locator: "https://developers.openai.com/codex/security/threat-model"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--sites
+    source_id: CODX
+    title: "sites"
+    url: "https://developers.openai.com/codex/sites"
+    locator: "https://developers.openai.com/codex/sites"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--skills
+    source_id: CODX
+    title: "skills"
+    url: "https://developers.openai.com/codex/skills"
+    locator: "https://developers.openai.com/codex/skills"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--speed
+    source_id: CODX
+    title: "speed"
+    url: "https://developers.openai.com/codex/speed"
+    locator: "https://developers.openai.com/codex/speed"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--subagents
+    source_id: CODX
+    title: "subagents"
+    url: "https://developers.openai.com/codex/subagents"
+    locator: "https://developers.openai.com/codex/subagents"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--web
+    source_id: CODX
+    title: "web"
+    url: "https://developers.openai.com/codex/web"
+    locator: "https://developers.openai.com/codex/web"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: CODX--workflows
+    source_id: CODX
+    title: "workflows"
+    url: "https://developers.openai.com/codex/workflows"
+    locator: "https://developers.openai.com/codex/workflows"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

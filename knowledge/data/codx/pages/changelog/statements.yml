@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-032
+    source_id: CODX
+    item_id: CODX--changelog
+    status: ready_for_review
+    kind: fact
+    text: "В выпуске Codex CLI 0.137.0 для плагинов добавлены машиночитаемый вывод `codex plugin list --json` и кэшированные предложения удалённых каталогов."
+    excerpt: |-
+      Plugin workflows gained machine-readable
+      codex plugin list --json
+      output and cached remote catalog suggestions
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "2026-06-04 — Codex CLI 0.137.0"
+      limitations: "Состояние на указанную в журнале дату; может быть заменено последующими выпусками."
+    open_questions: []

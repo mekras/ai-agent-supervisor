@@ -1,0 +1,10 @@
+id: ASKL--optimizing-descriptions
+source_id: ASKL
+title: optimizing descriptions
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: statements_extracted
+files:
+  local:
+  - normalized.local.md

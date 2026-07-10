@@ -1,0 +1,19 @@
+statements:
+  - id: CODX-048
+    source_id: CODX
+    item_id: CODX--guides/agents-md
+    status: ready_for_review
+    kind: fact
+    text: "Codex строит цепочку `AGENTS.md` от корня к рабочему каталогу: более близкие файлы имеют приоритет, а общий размер инструкций ограничен параметром `project_doc_max_bytes`."
+    excerpt: |-
+      Merge order:
+      Codex concatenates files from the root down, joining them with blank lines. Files closer to your current directory override earlier guidance because they appear later in the combined prompt.
+      Codex skips empty files and stops adding files once the combined size reaches the limit defined by
+      project_doc_max_bytes
+      (32 KiB by default).
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "How Codex discovers guidance"
+      limitations: "Относится к обнаружению проектных инструкций Codex."
+    open_questions: []

@@ -1,0 +1,19 @@
+statements:
+  - id: CODX-029
+    source_id: CODX
+    item_id: CODX--app/troubleshooting
+    status: ready_for_review
+    kind: fact
+    text: "Worktree содержит только файлы, сохранённые в Git, поэтому для запуска проекта в нём могут потребоваться сценарии настройки локального окружения."
+    excerpt: |-
+      Worktrees are created in a different directory and only inherit the files that
+      are checked into Git. Depending on how you manage dependencies and tooling
+      for your project you might have to run some setup scripts on your worktree using a
+      local environment
+      .
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Code doesn’t run on a worktree"
+      limitations: "Относится к worktree в приложении Codex."
+    open_questions: []

@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-022
+    source_id: CODX
+    item_id: CODX--prompting
+    status: ready_for_review
+    kind: fact
+    text: "Codex даёт более качественный результат, когда может проверить выполненную работу; в запросе следует указывать воспроизведение, проверку функции и команды контроля качества."
+    excerpt: "Codex produces higher-quality outputs when it can verify its work. Include steps to reproduce an issue, validate a feature, and run linting and pre-commit checks."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Prompts"
+      limitations: "Практический совет по составлению запросов для Codex."
+    open_questions: []

@@ -1,0 +1,23 @@
+statements:
+  - id: VSCD-001
+    source_id: VSCD
+    item_id: VSCD--custom-instructions
+    status: ready_for_review
+    kind: fact
+    text: "Генерация рабочих инструкций VS Code обнаруживает существующие соглашения, включая `AGENTS.md`, анализирует структуру и практики проекта, а затем создаёт инструкции для всех запросов чата в рабочей области."
+    excerpt: |-
+      VS Code can analyze your workspace and generate always-on custom instructions that match your coding practices and project structure. These instructions then apply automatically to all chat requests in the workspace.
+      When you generate instructions, VS Code performs the following steps:
+      It discovers existing AI conventions in your workspace, such as
+      copilot-instructions.md
+      or
+      AGENTS.md
+      files.
+      It analyzes your project structure and coding patterns.
+      It generates comprehensive workspace instructions tailored to your project.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Generate custom instructions for your workspace"
+      limitations: "Относится к пользовательским инструкциям VS Code."
+    open_questions: []

@@ -1,0 +1,10 @@
+id: AENG--demystifying-evals-for-ai-agents
+source_id: AENG
+title: demystifying evals for ai agents
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: statements_extracted
+files:
+  local:
+  - normalized.local.md

@@ -1,0 +1,14 @@
+statements:
+  - id: ASES-001
+    source_id: ASES
+    item_id: ASES--standard
+    status: ready_for_review
+    kind: fact
+    text: "Оценка должна иметь полностью автоматизированное выставление результатов без ручных шагов."
+    excerpt: "Scoring for your evaluation should be fully automated, requiring no manual grading steps."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Scoring"
+      limitations: "Требование стандарта AISI к его набору оценок."
+    open_questions: []

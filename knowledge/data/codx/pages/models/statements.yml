@@ -1,0 +1,21 @@
+statements:
+  - id: CODX-068
+    source_id: CODX
+    item_id: CODX--models
+    status: ready_for_review
+    kind: fact
+    text: "В Codex можно использовать модель и поставщика, поддерживающие Chat Completions или Responses API, но поддержка Chat Completions API объявлена устаревающей."
+    excerpt: |-
+      You can also point Codex at any model and provider that supports either the
+      Chat Completions
+      or
+      Responses APIs
+      to fit your specific use case.
+      Support for the Chat Completions API is deprecated and will be removed in
+      future releases of Codex.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Other models"
+      limitations: "Состояние интеграций может меняться."
+    open_questions: []

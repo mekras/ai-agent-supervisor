@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-017
+    source_id: CODX
+    item_id: CODX--agent-approvals-security
+    status: ready_for_review
+    kind: fact
+    text: "Локально Codex по умолчанию использует ограниченную песочницу, отключённую сеть и политику согласования действий."
+    excerpt: "By default, the agent runs with network access turned off."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Agent approvals & security"
+      limitations: "Относится к настройкам безопасности Codex."
+    open_questions: []

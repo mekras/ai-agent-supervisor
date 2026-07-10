@@ -1,0 +1,27 @@
+statements:
+  - id: ASKL-001
+    source_id: ASKL
+    item_id: ASKL--best-practices
+    status: ready_for_review
+    kind: fact
+    text: "Навык следует выводить из реальной задачи с проектным контекстом, исправлениями и ограничениями."
+    excerpt: "Complete a real task in conversation with an agent, providing context, corrections, and preferences along the way. Then extract the reusable pattern into a skill."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Extract from a hands-on task"
+      limitations: "Рекомендация источника; применимость к проекту требует отдельного анализа."
+    open_questions: []
+  - id: ASKL-002
+    source_id: ASKL
+    item_id: ASKL--best-practices
+    status: ready_for_review
+    kind: fact
+    text: "Содержание навыка должно включать сведения, которых модели не хватает без проектного контекста."
+    excerpt: "Focus on what the agent wouldn’t know without your skill: project-specific conventions, domain-specific procedures, non-obvious edge cases, and the particular tools or APIs to use."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Add what the agent lacks, omit what it knows"
+      limitations: "Рекомендация источника; применимость к проекту требует отдельного анализа."
+    open_questions: []

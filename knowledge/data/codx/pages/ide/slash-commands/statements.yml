@@ -1,0 +1,30 @@
+statements:
+  - id: CODX-054
+    source_id: CODX
+    item_id: CODX--ide/slash-commands
+    status: ready_for_review
+    kind: fact
+    text: "Slash-команды расширения IDE управляют Codex из поля чата, в том числе показывают статус, переключают локальный и облачный режимы и запускают цель."
+    excerpt: |-
+      Slash commands let you control Codex without leaving the chat input. Use them to check status, switch between local and cloud mode, or send feedback.
+      Available slash commands
+      Slash command
+      Description
+      /auto-context
+      Turn Auto Context on or off to include recent files and IDE context automatically.
+      /cloud
+      Switch to cloud mode to run the task remotely (requires cloud access).
+      /cloud-environment
+      Choose the cloud environment to use (available only in cloud mode).
+      /feedback
+      Open the feedback dialog to submit feedback and optionally include logs.
+      /goal
+      Set a persistent goal for Codex to work toward.
+      /local
+      Switch to local mode to run the task in your workspace.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Codex IDE extension slash commands"
+      limitations: "Относится к расширению Codex для IDE."
+    open_questions: []

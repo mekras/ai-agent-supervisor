@@ -1,64 +1,30 @@
-contract_version: 1
+contract_version: 2
 
 registry:
-  path: knowledge/inventory
-  format: markdown
-  purpose: >
-    Карточки источников в `knowledge/inventory/*.md`, которые используются как
-    входные данные для правил, навыков и проверок в этом проекте.
+  path: knowledge/catalog.yml
+  format: yaml
+  purpose: "Каталог источников переносимого корпуса."
 
-primary_data:
-  root: knowledge/primary
-  source_index_pattern: knowledge/primary/<source>/page-index.tsv
-  source_passport_pattern: knowledge/primary/<source>/source.md
-  snapshots:
-    path: knowledge/primary
-    policy: >
-      В Git сохраняются метаданные и контролируемые артефакты источников,
-      включая нормализованные представления и отчёты.
-  source_ids:
-    - AENG
-    - APMP
-    - ASES
-    - ASKL
-    - AZPF
-    - CODX
-    - GHAB
-    - GIST
-    - INSP
-    - LCMS
-    - LSME
-    - PHSC
-    - PPRX
-    - PRFO
-    - VSCD
-    - XEM7
+tracked_data:
+  root: knowledge/data
+  source_pattern: knowledge/data/<source>/source.yml
+  item_pattern: knowledge/data/<source>/pages/<item>/item.yml
+  statement_pattern: knowledge/data/<source>/pages/<item>/statements.yml
+  source_map_pattern: knowledge/data/<source>/source-map.yml
 
-normalized_data:
-  root: knowledge/normalized
-  source_passport_pattern: knowledge/normalized/<source>/source.md
+local_data:
+  pattern: knowledge/data/<source>/pages/<item>/*.local.*
+  policy: "Локальные исходные и нормализованные снимки не отслеживаются Git."
 
-statements:
-  path_pattern: knowledge/statements/<source>.md
+source_ids: [AENG, APMP, ASES, ASKL, AZPF, CODX, GHAB, GIST, INSP, LCMS, LSME, PHSC, PPRX, PRFO, VSCD, XEM7]
 
-reports:
-  source_inventory: knowledge/reports/source-inventory
-  source_impact: knowledge/reports/source-impact
-
-derived_documents:
-  - knowledge
-  - skills
-  - README.md
-  - CHANGELOG.md
-  - AGENTS.md
+derived_documents: [knowledge, skills, README.md, CHANGELOG.md, AGENTS.md]
 
 sensitive_data_policy:
-  public_or_redacted: knowledge/primary
   local_private: knowledge/private.local
   local_raw: knowledge/raw.local
   rules:
     - "Не хранить в Git приватные токены, cookies, ключи доступа и рабочие заметки."
-    - "В первичных данных хранить только проверяемые ссылки и метаданные."
     - "Не переносить в knowledge материалы без источника, даты проверки и явной привязки."
 
 sync:
@@ -66,6 +32,5 @@ sync:
   unsupported_adapters_policy: manual-required
 
 impact_audit:
-  default_scope:
-    - knowledge
+  default_scope: [knowledge]
   source_report_required: true

@@ -1,0 +1,18 @@
+statements:
+  - id: CODX-062
+    source_id: CODX
+    item_id: CODX--permissions
+    status: ready_for_review
+    kind: fact
+    text: "Профили разрешений Codex реализуют границы минимальных привилегий для локальных команд через правила файловой системы и сети."
+    excerpt: |-
+      Permission profiles let you apply least-privilege boundaries to local commands
+      Codex runs on your behalf. A profile is a named policy that combines filesystem
+      rules, which define what commands can read or write, with network rules, which
+      define which destinations commands can reach.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Permissions"
+      limitations: "Профили разрешений помечены источником как beta."
+    open_questions: []

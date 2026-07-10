@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-065
+    source_id: CODX
+    item_id: CODX--sites
+    status: ready_for_review
+    kind: fact
+    text: "Каждый URL развёртывания Sites является production-развёртыванием; перед публикацией сборку следует сохранить без развёртывания для проверки."
+    excerpt: |-
+      Every Sites deployment URL is a production deployment. If you want to review a
+      build before it becomes live, ask Codex to save a version without deploying
+      it.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Sites"
+      limitations: "Относится к плагину Sites Codex."
+    open_questions: []

@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-002
+    source_id: APMP
+    item_id: APMP--consumer-manage-dependencies
+    status: ready_for_review
+    kind: fact
+    text: "`apm.lock.yaml` создаётся командой `apm install` и не предназначен для ручного редактирования."
+    excerpt: "the lockfile is a generated artifact — never hand-edit it."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Manage dependencies"
+      limitations: "Фрагмент относится к APM-проектам."
+    open_questions: []

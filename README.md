@@ -30,7 +30,7 @@
 Чтобы установить коллекцию выполните в корне вашего проекта:
 
 ```bash
-apm install --dev github.com/mekras/ai-agent-supervisor#^0.5.2
+apm install --dev mekras/ai-agent-supervisor#^0.5.2
 ```
 
 Обновить уже установленную коллекцию:

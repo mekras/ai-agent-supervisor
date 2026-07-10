@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-014
+    source_id: APMP
+    item_id: APMP--author-primitives-prompts
+    status: ready_for_review
+    kind: fact
+    text: "Подсказка APM — однозадачный параметризованный рабочий процесс, который потребитель вызывает по требованию."
+    excerpt: "A prompt is a single-purpose, parameterized AI workflow."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Author a prompt"
+      limitations: "Фрагмент описывает примитив APM."
+    open_questions: []

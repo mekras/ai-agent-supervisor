@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-016
+    source_id: CODX
+    item_id: CODX--cli
+    status: ready_for_review
+    kind: fact
+    text: "Команда `codex exec` предназначена для автоматизации повторяемых рабочих процессов."
+    excerpt: "Automate repeatable workflows by scripting Codex with the exec command."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Scripting Codex"
+      limitations: "Относится к Codex CLI."
+    open_questions: []

@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-018
+    source_id: CODX
+    item_id: CODX--memories
+    status: ready_for_review
+    kind: fact
+    text: "Файлы памяти Codex являются сгенерированным состоянием; перед передачей их следует проверить."
+    excerpt: "Treat these files as generated state."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Memory storage"
+      limitations: "Относится к локальной памяти Codex."
+    open_questions: []

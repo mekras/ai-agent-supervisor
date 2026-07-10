@@ -1,0 +1,25 @@
+items:
+  - id: LSME--evaluation
+    source_id: LSME
+    title: "evaluation"
+    url: "https://docs.langchain.com/langsmith/evaluation"
+    locator: "https://docs.langchain.com/langsmith/evaluation"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: LSME--evaluation-approaches
+    source_id: LSME
+    title: "evaluation approaches"
+    url: "https://docs.langchain.com/langsmith/evaluation-approaches"
+    locator: "https://docs.langchain.com/langsmith/evaluation-approaches"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: LSME--trajectory-evals
+    source_id: LSME
+    title: "trajectory evals"
+    url: "https://docs.langchain.com/langsmith/trajectory-evals"
+    locator: "https://docs.langchain.com/langsmith/trajectory-evals"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

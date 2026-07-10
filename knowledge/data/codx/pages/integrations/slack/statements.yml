@@ -1,0 +1,25 @@
+statements:
+  - id: CODX-057
+    source_id: CODX
+    item_id: CODX--integrations/slack
+    status: ready_for_review
+    kind: fact
+    text: "В Slack Codex получает сообщение и историю ветки для создания задачи; администратор Enterprise может запретить публикацию итогового ответа, оставив только ссылку на задачу."
+    excerpt: |-
+      Enterprise data controls
+      By default, Codex replies in the thread with an answer, which can include information from the environment it ran in.
+      To prevent this, an Enterprise admin can clear
+      Allow Codex Slack app to post answers on task completion
+      in
+      ChatGPT workspace settings
+      . When an admin turns off answers, Codex replies only with a link to the task.
+      Data usage, privacy, and security
+      When you mention
+      @Codex
+      , Codex receives your message and thread history to understand your request and create a task.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Enterprise data controls"
+      limitations: "Относится к интеграции Codex и Slack."
+    open_questions: []

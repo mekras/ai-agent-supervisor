@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-012
+    source_id: APMP
+    item_id: APMP--author-primitives
+    status: ready_for_review
+    kind: fact
+    text: "Каталог `.apm/` пакета содержит примитивы, которые проецируют контекст агента на поддерживаемые среды."
+    excerpt: ".apm/"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Author primitives"
+      limitations: "Фрагмент относится к модели APM."
+    open_questions: []

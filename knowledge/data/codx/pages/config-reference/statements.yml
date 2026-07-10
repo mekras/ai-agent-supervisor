@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-015
+    source_id: CODX
+    item_id: CODX--config-reference
+    status: ready_for_review
+    kind: fact
+    text: "Проектная настройка Codex не может переопределять параметры поставщика модели, аутентификации и телеметрии."
+    excerpt: "Project-scoped config can’t override machine-local provider, auth,"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Configuration Reference"
+      limitations: "Относится к конфигурации Codex."
+    open_questions: []

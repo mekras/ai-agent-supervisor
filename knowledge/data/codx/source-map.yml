@@ -1,0 +1,421 @@
+source_id: CODX
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "not_started"
+  extraction_status: "not_started"
+structure:
+  units:
+    - id: CODX--agent-approvals-security
+      title: "agent approvals security"
+      order: 1
+    - id: CODX--agents-md
+      title: "agents md"
+      order: 2
+    - id: CODX--app
+      title: "app"
+      order: 3
+    - id: CODX--app-server
+      title: "app server"
+      order: 4
+    - id: CODX--app/automations
+      title: "app / automations"
+      order: 5
+    - id: CODX--app/commands
+      title: "app / commands"
+      order: 6
+    - id: CODX--app/features
+      title: "app / features"
+      order: 7
+    - id: CODX--app/local-environments
+      title: "app / local environments"
+      order: 8
+    - id: CODX--app/settings
+      title: "app / settings"
+      order: 9
+    - id: CODX--app/troubleshooting
+      title: "app / troubleshooting"
+      order: 10
+    - id: CODX--app/worktrees
+      title: "app / worktrees"
+      order: 11
+    - id: CODX--changelog
+      title: "changelog"
+      order: 12
+    - id: CODX--cli
+      title: "cli"
+      order: 13
+    - id: CODX--cli/features
+      title: "cli / features"
+      order: 14
+    - id: CODX--cli/reference
+      title: "cli / reference"
+      order: 15
+    - id: CODX--cli/slash-commands
+      title: "cli / slash commands"
+      order: 16
+    - id: CODX--cloud
+      title: "cloud"
+      order: 17
+    - id: CODX--cloud/environments
+      title: "cloud / environments"
+      order: 18
+    - id: CODX--cloud/internet-access
+      title: "cloud / internet access"
+      order: 19
+    - id: CODX--concepts/customization
+      title: "concepts / customization"
+      order: 20
+    - id: CODX--concepts/sandboxing
+      title: "concepts / sandboxing"
+      order: 21
+    - id: CODX--concepts/subagents
+      title: "concepts / subagents"
+      order: 22
+    - id: CODX--config-advanced
+      title: "config advanced"
+      order: 23
+    - id: CODX--config-basic
+      title: "config basic"
+      order: 24
+    - id: CODX--config-reference
+      title: "config reference"
+      order: 25
+    - id: CODX--config-sample
+      title: "config sample"
+      order: 26
+    - id: CODX--enterprise/access-tokens
+      title: "enterprise / access tokens"
+      order: 27
+    - id: CODX--enterprise/admin-setup
+      title: "enterprise / admin setup"
+      order: 28
+    - id: CODX--enterprise/governance
+      title: "enterprise / governance"
+      order: 29
+    - id: CODX--enterprise/managed-configuration
+      title: "enterprise / managed configuration"
+      order: 30
+    - id: CODX--environment-variables
+      title: "environment variables"
+      order: 31
+    - id: CODX--github-action
+      title: "github action"
+      order: 32
+    - id: CODX--guides/agents-md
+      title: "guides / agents md"
+      order: 33
+    - id: CODX--hooks
+      title: "hooks"
+      order: 34
+    - id: CODX--ide
+      title: "ide"
+      order: 35
+    - id: CODX--ide/commands
+      title: "ide / commands"
+      order: 36
+    - id: CODX--ide/features
+      title: "ide / features"
+      order: 37
+    - id: CODX--ide/settings
+      title: "ide / settings"
+      order: 38
+    - id: CODX--ide/slash-commands
+      title: "ide / slash commands"
+      order: 39
+    - id: CODX--integrations/github
+      title: "integrations / github"
+      order: 40
+    - id: CODX--integrations/linear
+      title: "integrations / linear"
+      order: 41
+    - id: CODX--integrations/slack
+      title: "integrations / slack"
+      order: 42
+    - id: CODX--learn/best-practices
+      title: "learn / best practices"
+      order: 43
+    - id: CODX--mcp
+      title: "mcp"
+      order: 44
+    - id: CODX--memories
+      title: "memories"
+      order: 45
+    - id: CODX--memories/chronicle
+      title: "memories / chronicle"
+      order: 46
+    - id: CODX--migrate
+      title: "migrate"
+      order: 47
+    - id: CODX--models
+      title: "models"
+      order: 48
+    - id: CODX--noninteractive
+      title: "noninteractive"
+      order: 49
+    - id: CODX--permissions
+      title: "permissions"
+      order: 50
+    - id: CODX--plugins
+      title: "plugins"
+      order: 51
+    - id: CODX--plugins/build
+      title: "plugins / build"
+      order: 52
+    - id: CODX--prompting
+      title: "prompting"
+      order: 53
+    - id: CODX--quickstart
+      title: "quickstart"
+      order: 54
+    - id: CODX--remote-connections
+      title: "remote connections"
+      order: 55
+    - id: CODX--rules
+      title: "rules"
+      order: 56
+    - id: CODX--sdk
+      title: "sdk"
+      order: 57
+    - id: CODX--security
+      title: "security"
+      order: 58
+    - id: CODX--security/faq
+      title: "security / faq"
+      order: 59
+    - id: CODX--security/plugin
+      title: "security / plugin"
+      order: 60
+    - id: CODX--security/setup
+      title: "security / setup"
+      order: 61
+    - id: CODX--security/threat-model
+      title: "security / threat model"
+      order: 62
+    - id: CODX--sites
+      title: "sites"
+      order: 63
+    - id: CODX--skills
+      title: "skills"
+      order: 64
+    - id: CODX--speed
+      title: "speed"
+      order: 65
+    - id: CODX--subagents
+      title: "subagents"
+      order: 66
+    - id: CODX--web
+      title: "web"
+      order: 67
+    - id: CODX--workflows
+      title: "workflows"
+      order: 68
+coverage:
+  units:
+    - unit_id: CODX--agent-approvals-security
+      status: extracted
+      statements: [pages/agent-approvals-security/statements.yml]
+    - unit_id: CODX--agents-md
+      status: extracted
+      statements: [pages/agents-md/statements.yml]
+    - unit_id: CODX--app
+      status: extracted
+      statements: [pages/app/statements.yml]
+    - unit_id: CODX--app-server
+      status: extracted
+      statements: [pages/app-server/statements.yml]
+    - unit_id: CODX--app/automations
+      status: extracted
+      statements: [pages/app/automations/statements.yml]
+    - unit_id: CODX--app/commands
+      status: extracted
+      statements: [pages/app/commands/statements.yml]
+    - unit_id: CODX--app/features
+      status: extracted
+      statements: [pages/app/features/statements.yml]
+    - unit_id: CODX--app/local-environments
+      status: extracted
+      statements: [pages/app/local-environments/statements.yml]
+    - unit_id: CODX--app/settings
+      status: extracted
+      statements: [pages/app/settings/statements.yml]
+    - unit_id: CODX--app/troubleshooting
+      status: extracted
+      statements: [pages/app/troubleshooting/statements.yml]
+    - unit_id: CODX--app/worktrees
+      status: extracted
+      statements: [pages/app/worktrees/statements.yml]
+    - unit_id: CODX--changelog
+      status: extracted
+      statements: [pages/changelog/statements.yml]
+    - unit_id: CODX--cli
+      status: extracted
+      statements: [pages/cli/statements.yml]
+    - unit_id: CODX--cli/features
+      status: extracted
+      statements: [pages/cli/features/statements.yml]
+    - unit_id: CODX--cli/reference
+      status: extracted
+      statements: [pages/cli/reference/statements.yml]
+    - unit_id: CODX--cli/slash-commands
+      status: extracted
+      statements: [pages/cli/slash-commands/statements.yml]
+    - unit_id: CODX--cloud
+      status: extracted
+      statements: [pages/cloud/statements.yml]
+    - unit_id: CODX--cloud/environments
+      status: extracted
+      statements: [pages/cloud/environments/statements.yml]
+    - unit_id: CODX--cloud/internet-access
+      status: extracted
+      statements: [pages/cloud/internet-access/statements.yml]
+    - unit_id: CODX--concepts/customization
+      status: extracted
+      statements: [pages/concepts/customization/statements.yml]
+    - unit_id: CODX--concepts/sandboxing
+      status: extracted
+      statements: [pages/concepts/sandboxing/statements.yml]
+    - unit_id: CODX--concepts/subagents
+      status: extracted
+      statements: [pages/concepts/subagents/statements.yml]
+    - unit_id: CODX--config-advanced
+      status: extracted
+      statements: [pages/config-advanced/statements.yml]
+    - unit_id: CODX--config-basic
+      status: extracted
+      statements: [pages/config-basic/statements.yml]
+    - unit_id: CODX--config-reference
+      status: extracted
+      statements: [pages/config-reference/statements.yml]
+    - unit_id: CODX--config-sample
+      status: extracted
+      statements: [pages/config-sample/statements.yml]
+    - unit_id: CODX--enterprise/access-tokens
+      status: extracted
+      statements: [pages/enterprise/access-tokens/statements.yml]
+    - unit_id: CODX--enterprise/admin-setup
+      status: extracted
+      statements: [pages/enterprise/admin-setup/statements.yml]
+    - unit_id: CODX--enterprise/governance
+      status: extracted
+      statements: [pages/enterprise/governance/statements.yml]
+    - unit_id: CODX--enterprise/managed-configuration
+      status: extracted
+      statements: [pages/enterprise/managed-configuration/statements.yml]
+    - unit_id: CODX--environment-variables
+      status: extracted
+      statements: [pages/environment-variables/statements.yml]
+    - unit_id: CODX--github-action
+      status: extracted
+      statements: [pages/github-action/statements.yml]
+    - unit_id: CODX--guides/agents-md
+      status: extracted
+      statements: [pages/guides/agents-md/statements.yml]
+    - unit_id: CODX--hooks
+      status: extracted
+      statements: [pages/hooks/statements.yml]
+    - unit_id: CODX--ide
+      status: extracted
+      statements: [pages/ide/statements.yml]
+    - unit_id: CODX--ide/commands
+      status: extracted
+      statements: [pages/ide/commands/statements.yml]
+    - unit_id: CODX--ide/features
+      status: extracted
+      statements: [pages/ide/features/statements.yml]
+    - unit_id: CODX--ide/settings
+      status: extracted
+      statements: [pages/ide/settings/statements.yml]
+    - unit_id: CODX--ide/slash-commands
+      status: extracted
+      statements: [pages/ide/slash-commands/statements.yml]
+    - unit_id: CODX--integrations/github
+      status: extracted
+      statements: [pages/integrations/github/statements.yml]
+    - unit_id: CODX--integrations/linear
+      status: extracted
+      statements: [pages/integrations/linear/statements.yml]
+    - unit_id: CODX--integrations/slack
+      status: extracted
+      statements: [pages/integrations/slack/statements.yml]
+    - unit_id: CODX--learn/best-practices
+      status: extracted
+      statements: [pages/learn/best-practices/statements.yml]
+    - unit_id: CODX--mcp
+      status: extracted
+      statements: [pages/mcp/statements.yml]
+    - unit_id: CODX--memories
+      status: extracted
+      statements: [pages/memories/statements.yml]
+    - unit_id: CODX--memories/chronicle
+      status: extracted
+      statements: [pages/memories/chronicle/statements.yml]
+    - unit_id: CODX--migrate
+      status: extracted
+      statements: [pages/migrate/statements.yml]
+    - unit_id: CODX--models
+      status: extracted
+      statements: [pages/models/statements.yml]
+    - unit_id: CODX--noninteractive
+      status: extracted
+      statements: [pages/noninteractive/statements.yml]
+    - unit_id: CODX--permissions
+      status: extracted
+      statements: [pages/permissions/statements.yml]
+    - unit_id: CODX--plugins
+      status: extracted
+      statements: [pages/plugins/statements.yml]
+    - unit_id: CODX--plugins/build
+      status: extracted
+      statements: [pages/plugins/build/statements.yml]
+    - unit_id: CODX--prompting
+      status: extracted
+      statements: [pages/prompting/statements.yml]
+    - unit_id: CODX--quickstart
+      status: extracted
+      statements: [pages/quickstart/statements.yml]
+    - unit_id: CODX--remote-connections
+      status: extracted
+      statements: [pages/remote-connections/statements.yml]
+    - unit_id: CODX--rules
+      status: extracted
+      statements: [pages/rules/statements.yml]
+    - unit_id: CODX--sdk
+      status: extracted
+      statements: [pages/sdk/statements.yml]
+    - unit_id: CODX--security
+      status: extracted
+      statements: [pages/security/statements.yml]
+    - unit_id: CODX--security/faq
+      status: extracted
+      statements: [pages/security/faq/statements.yml]
+    - unit_id: CODX--security/plugin
+      status: extracted
+      statements: [pages/security/plugin/statements.yml]
+    - unit_id: CODX--security/setup
+      status: extracted
+      statements: [pages/security/setup/statements.yml]
+    - unit_id: CODX--security/threat-model
+      status: extracted
+      statements: [pages/security/threat-model/statements.yml]
+    - unit_id: CODX--sites
+      status: extracted
+      statements: [pages/sites/statements.yml]
+    - unit_id: CODX--skills
+      status: extracted
+      statements: [pages/skills/statements.yml]
+    - unit_id: CODX--speed
+      status: extracted
+      statements: [pages/speed/statements.yml]
+    - unit_id: CODX--subagents
+      status: extracted
+      statements: [pages/subagents/statements.yml]
+    - unit_id: CODX--web
+      status: extracted
+      statements: [pages/web/statements.yml]
+    - unit_id: CODX--workflows
+      status: extracted
+      statements: [pages/workflows/statements.yml]

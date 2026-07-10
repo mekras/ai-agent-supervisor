@@ -1,0 +1,16 @@
+statements:
+  - id: CODX-064
+    source_id: CODX
+    item_id: CODX--remote-connections
+    status: ready_for_review
+    kind: fact
+    text: "При удалённом подключении Codex использует проекты, файлы, учётные данные, разрешения, плагины и локальные инструменты подключённого хоста."
+    excerpt: |-
+      Remote access uses the connected host’s projects, threads, files, credentials,
+      permissions, plugins, Computer Use, browser setup, and local tools.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Remote connections"
+      limitations: "Относится к удалённым соединениям Codex."
+    open_questions: []

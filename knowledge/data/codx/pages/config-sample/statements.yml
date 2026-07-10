@@ -1,0 +1,19 @@
+statements:
+  - id: CODX-041
+    source_id: CODX
+    item_id: CODX--config-sample
+    status: ready_for_review
+    kind: fact
+    text: "Пример конфигурации Codex предназначен как справочник: в пользовательский или проектный `config.toml` следует переносить только нужные ключи и разделы, адаптируя их под среду."
+    excerpt: |-
+      Use the snippet below as a reference. Copy only the keys and sections you need into
+      ~/.codex/config.toml
+      (or into a project-scoped
+      .codex/config.toml
+      ), then adjust values for your setup.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Sample Configuration"
+      limitations: "Относится к конфигурации Codex."
+    open_questions: []

@@ -1,0 +1,19 @@
+source_id: LCMS
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "local normalized snapshot inspection"
+  extraction_status: "source_checked"
+structure:
+  units:
+    - id: LCMS--how-and-when-to-build-multi-agent-systems
+      title: "how and when to build multi agent systems"
+      order: 1
+coverage:
+  units:
+    - unit_id: LCMS--how-and-when-to-build-multi-agent-systems
+      status: no_significant_content
+      reason: "Локальный нормализованный снимок пуст; утверждения извлечь невозможно."

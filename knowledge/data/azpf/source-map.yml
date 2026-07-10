@@ -1,0 +1,19 @@
+source_id: AZPF
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "not_started"
+  extraction_status: "not_started"
+structure:
+  units:
+    - id: AZPF--evaluation-flow
+      title: "evaluation flow"
+      order: 1
+coverage:
+  units:
+    - unit_id: AZPF--evaluation-flow
+      status: extracted
+      statements: [pages/evaluation-flow/statements.yml]

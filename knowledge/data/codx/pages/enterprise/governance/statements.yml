@@ -1,0 +1,22 @@
+statements:
+  - id: CODX-044
+    source_id: CODX
+    item_id: CODX--enterprise/governance
+    status: ready_for_review
+    kind: fact
+    text: "Для мониторинга Codex Enterprise предусмотрены три уровня: панель аналитики для оперативного контроля, Analytics API для программной отчётности и Compliance API для детальных журналов аудита."
+    excerpt: |-
+      Ways to track Codex usage
+      There are three ways to monitor Codex usage, depending on what you need:
+      Analytics Dashboard
+      : quick visibility into adoption, usage, and code review impact.
+      Analytics API
+      : pull structured daily metrics into your data warehouse or BI tools.
+      Compliance API
+      : exports detailed activity logs for audit, monitoring, and investigations.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Ways to track Codex usage"
+      limitations: "Относится к корпоративному управлению Codex."
+    open_questions: []

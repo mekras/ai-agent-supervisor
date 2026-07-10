@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-010
+    source_id: CODX
+    item_id: CODX--web
+    status: ready_for_review
+    kind: fact
+    text: "Доступ Codex web к репозиториям требует подключения учётной записи GitHub."
+    excerpt: "connect your GitHub account. This lets Codex work with the code in your repositories"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Codex web setup"
+      limitations: "Относится к Codex web."
+    open_questions: []

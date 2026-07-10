@@ -1,0 +1,25 @@
+items:
+  - id: ASKL--best-practices
+    source_id: ASKL
+    title: "best practices"
+    url: "https://agentskills.io/skill-creation/best-practices"
+    locator: "https://agentskills.io/skill-creation/best-practices"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: ASKL--optimizing-descriptions
+    source_id: ASKL
+    title: "optimizing descriptions"
+    url: "https://agentskills.io/skill-creation/optimizing-descriptions"
+    locator: "https://agentskills.io/skill-creation/optimizing-descriptions"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: ASKL--evaluating-skills
+    source_id: ASKL
+    title: "evaluating skills"
+    url: "https://agentskills.io/skill-creation/evaluating-skills"
+    locator: "https://agentskills.io/skill-creation/evaluating-skills"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed

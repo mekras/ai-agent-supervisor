@@ -1,0 +1,23 @@
+statements:
+  - id: CODX-043
+    source_id: CODX
+    item_id: CODX--enterprise/admin-setup
+    status: ready_for_review
+    kind: fact
+    text: "Перед внедрением Codex в Enterprise нужно назначить владельцев рабочего пространства, безопасности и аналитики, а затем определить используемые поверхности Codex."
+    excerpt: |-
+      Pre-requisites: Determine owners and rollout strategy
+      During your rollout, team members may support different aspects of integrating Codex into your organization. Ensure you have the following owners:
+      ChatGPT Enterprise workspace owner:
+      required to configure Codex settings in your workspace.
+      Security owner:
+      determines agent permissions settings for Codex.
+      Analytics owner:
+      integrates analytics and compliance APIs into your data pipelines.
+      Decide which Codex surfaces you will use:
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Pre-requisites: Determine owners and rollout strategy"
+      limitations: "Относится к внедрению в ChatGPT Enterprise."
+    open_questions: []

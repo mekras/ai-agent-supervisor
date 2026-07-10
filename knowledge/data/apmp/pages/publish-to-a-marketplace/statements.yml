@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-007
+    source_id: APMP
+    item_id: APMP--publish-to-a-marketplace
+    status: ready_for_review
+    kind: fact
+    text: "В APM маркетплейс представляет собой публикуемый одним репозиторием каталог пакетов, который устанавливают другие репозитории."
+    excerpt: "a curated index of packages that one repo publishes and many repos install from."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Publish to a marketplace"
+      limitations: "Фрагмент описывает механизм APM."
+    open_questions: []

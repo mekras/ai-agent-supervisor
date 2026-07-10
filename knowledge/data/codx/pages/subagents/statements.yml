@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-003
+    source_id: CODX
+    item_id: CODX--subagents
+    status: ready_for_review
+    kind: fact
+    text: "Codex может запускать специализированных подагентов параллельно и собирать их результаты в одном ответе."
+    excerpt: "Codex can run subagent workflows by spawning specialized agents in parallel and then collecting their results in one response."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Use subagents and custom agents in Codex"
+      limitations: "Подагенты запускаются только по явному запросу."
+    open_questions: []

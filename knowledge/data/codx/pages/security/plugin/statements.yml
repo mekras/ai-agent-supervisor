@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-005
+    source_id: CODX
+    item_id: CODX--security/plugin
+    status: ready_for_review
+    kind: fact
+    text: "Первую проверку безопасности следует выполнять без записи, пока пользователь явно не запросит подготовку исправления."
+    excerpt: "Keep the first scan read-only unless you explicitly ask Codex to prepare a"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Keep security work authorized and reviewable"
+      limitations: "Рекомендация документации плагина Codex Security."
+    open_questions: []

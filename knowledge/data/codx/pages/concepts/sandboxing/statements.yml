@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-039
+    source_id: CODX
+    item_id: CODX--concepts/sandboxing
+    status: ready_for_review
+    kind: fact
+    text: "Песочница определяет технические границы действий Codex, а политика подтверждений — когда агент обязан остановиться перед их пересечением; это разные взаимодополняющие механизмы."
+    excerpt: |-
+      Sandboxing and approvals are different controls that work together. The
+      sandbox defines technical boundaries. The approval policy decides when Codex
+      must stop and ask before crossing them.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Sandbox"
+      limitations: "Относится к локальным поверхностям Codex."
+    open_questions: []

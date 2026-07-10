@@ -1,0 +1,18 @@
+statements:
+  - id: CODX-049
+    source_id: CODX
+    item_id: CODX--hooks
+    status: ready_for_review
+    kind: fact
+    text: "Немодерируемый командный хук запускается только после просмотра и доверия к точному определению; при изменении хука он снова требует проверки по новому хешу."
+    excerpt: |-
+      Before a
+      non-managed command hook can run, Codex requires you to review and trust the
+      exact hook definition. Codex records trust against the hook’s current hash, so
+      new or changed hooks are marked for review and skipped until trusted.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Review and trust hooks"
+      limitations: "Относится к hooks Codex, не управляемым политикой администратора."
+    open_questions: []

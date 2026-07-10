@@ -1,0 +1,21 @@
+statements:
+  - id: LSME-001
+    source_id: LSME
+    item_id: LSME--evaluation
+    status: ready_for_review
+    kind: fact
+    text: "Офлайн-оценка проверяет версии на подготовленных наборах данных до выпуска, а онлайн-оценка отслеживает реальные взаимодействия в production."
+    excerpt: |-
+      LangSmith supports two types of evaluations based on when and where they run:
+      Offline Evaluation
+      Test before you ship
+      Run evaluations on curated datasets during development to compare versions, benchmark performance, and catch regressions.
+      Online Evaluation
+      Monitor in production
+      Evaluate real user interactions in real-time to detect issues and measure quality on live traffic.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "LangSmith Evaluation"
+      limitations: "Относится к подходам LangSmith к оценке."
+    open_questions: []

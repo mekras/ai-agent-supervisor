@@ -1,0 +1,736 @@
+items:
+  - id: AENG--building-effective-agents
+    source_id: AENG
+    title: "building effective agents"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://www.anthropic.com/engineering/building-effective-agents"
+  - id: AENG--multi-agent-research-system
+    source_id: AENG
+    title: "multi agent research system"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://www.anthropic.com/engineering/multi-agent-research-system"
+  - id: AENG--effective-context-engineering-for-ai-agents
+    source_id: AENG
+    title: "effective context engineering for ai agents"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+  - id: AENG--demystifying-evals-for-ai-agents
+    source_id: AENG
+    title: "demystifying evals for ai agents"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+  - id: APMP--overview
+    source_id: APMP
+    title: "overview"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/"
+  - id: APMP--author-primitives
+    source_id: APMP
+    title: "author primitives"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/author-primitives/"
+  - id: APMP--author-primitives-hooks-and-commands
+    source_id: APMP
+    title: "author primitives hooks and commands"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/author-primitives/hooks-and-commands/"
+  - id: APMP--author-primitives-instructions-and-agents
+    source_id: APMP
+    title: "author primitives instructions and agents"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/author-primitives/instructions-and-agents/"
+  - id: APMP--author-primitives-mcp-as-primitive
+    source_id: APMP
+    title: "author primitives mcp as primitive"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/author-primitives/mcp-as-primitive/"
+  - id: APMP--author-primitives-prompts
+    source_id: APMP
+    title: "author primitives prompts"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/author-primitives/prompts/"
+  - id: APMP--author-primitives-skills
+    source_id: APMP
+    title: "author primitives skills"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/author-primitives/skills/"
+  - id: APMP--compile
+    source_id: APMP
+    title: "compile"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/compile/"
+  - id: APMP--pack-a-bundle
+    source_id: APMP
+    title: "pack a bundle"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/pack-a-bundle/"
+  - id: APMP--package-relative-links
+    source_id: APMP
+    title: "package relative links"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/package-relative-links/"
+  - id: APMP--preview-and-validate
+    source_id: APMP
+    title: "preview and validate"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/preview-and-validate/"
+  - id: APMP--publish-to-a-marketplace
+    source_id: APMP
+    title: "publish to a marketplace"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/producer/publish-to-a-marketplace/"
+  - id: APMP--consumer-manage-dependencies
+    source_id: APMP
+    title: "consumer manage dependencies"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/consumer/manage-dependencies/"
+  - id: APMP--consumer-drift-and-secure-by-default
+    source_id: APMP
+    title: "consumer drift and secure by default"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://microsoft.github.io/apm/consumer/drift-and-secure-by-default/"
+  - id: ASES--standard
+    source_id: ASES
+    title: "standard"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://ukgovernmentbeis.github.io/as-evaluation-standard/"
+  - id: ASKL--best-practices
+    source_id: ASKL
+    title: "best practices"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://agentskills.io/skill-creation/best-practices"
+  - id: ASKL--optimizing-descriptions
+    source_id: ASKL
+    title: "optimizing descriptions"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://agentskills.io/skill-creation/optimizing-descriptions"
+  - id: ASKL--evaluating-skills
+    source_id: ASKL
+    title: "evaluating skills"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://agentskills.io/skill-creation/evaluating-skills"
+  - id: AZPF--evaluation-flow
+    source_id: AZPF
+    title: "evaluation flow"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/how-to-develop-an-evaluation-flow"
+  - id: CODX--agent-approvals-security
+    source_id: CODX
+    title: "agent approvals security"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/agent-approvals-security"
+  - id: CODX--agents-md
+    source_id: CODX
+    title: "agents md"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/guides/agents-md"
+  - id: CODX--app
+    source_id: CODX
+    title: "app"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app"
+  - id: CODX--app-server
+    source_id: CODX
+    title: "app server"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app-server"
+  - id: CODX--app/automations
+    source_id: CODX
+    title: "app / automations"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app/automations"
+  - id: CODX--app/commands
+    source_id: CODX
+    title: "app / commands"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app/commands"
+  - id: CODX--app/features
+    source_id: CODX
+    title: "app / features"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app/features"
+  - id: CODX--app/local-environments
+    source_id: CODX
+    title: "app / local environments"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app/local-environments"
+  - id: CODX--app/settings
+    source_id: CODX
+    title: "app / settings"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app/settings"
+  - id: CODX--app/troubleshooting
+    source_id: CODX
+    title: "app / troubleshooting"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app/troubleshooting"
+  - id: CODX--app/worktrees
+    source_id: CODX
+    title: "app / worktrees"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/app/worktrees"
+  - id: CODX--changelog
+    source_id: CODX
+    title: "changelog"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/changelog"
+  - id: CODX--cli
+    source_id: CODX
+    title: "cli"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/cli"
+  - id: CODX--cli/features
+    source_id: CODX
+    title: "cli / features"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/cli/features"
+  - id: CODX--cli/reference
+    source_id: CODX
+    title: "cli / reference"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/cli/reference"
+  - id: CODX--cli/slash-commands
+    source_id: CODX
+    title: "cli / slash commands"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/cli/slash-commands"
+  - id: CODX--cloud
+    source_id: CODX
+    title: "cloud"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/cloud"
+  - id: CODX--cloud/environments
+    source_id: CODX
+    title: "cloud / environments"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/cloud/environments"
+  - id: CODX--cloud/internet-access
+    source_id: CODX
+    title: "cloud / internet access"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/cloud/internet-access"
+  - id: CODX--concepts/customization
+    source_id: CODX
+    title: "concepts / customization"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/concepts/customization"
+  - id: CODX--concepts/sandboxing
+    source_id: CODX
+    title: "concepts / sandboxing"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/concepts/sandboxing"
+  - id: CODX--concepts/subagents
+    source_id: CODX
+    title: "concepts / subagents"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/concepts/subagents"
+  - id: CODX--config-advanced
+    source_id: CODX
+    title: "config advanced"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/config-advanced"
+  - id: CODX--config-basic
+    source_id: CODX
+    title: "config basic"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/config-basic"
+  - id: CODX--config-reference
+    source_id: CODX
+    title: "config reference"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/config-reference"
+  - id: CODX--config-sample
+    source_id: CODX
+    title: "config sample"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/config-sample"
+  - id: CODX--enterprise/access-tokens
+    source_id: CODX
+    title: "enterprise / access tokens"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/enterprise/access-tokens"
+  - id: CODX--enterprise/admin-setup
+    source_id: CODX
+    title: "enterprise / admin setup"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/enterprise/admin-setup"
+  - id: CODX--enterprise/governance
+    source_id: CODX
+    title: "enterprise / governance"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/enterprise/governance"
+  - id: CODX--enterprise/managed-configuration
+    source_id: CODX
+    title: "enterprise / managed configuration"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/enterprise/managed-configuration"
+  - id: CODX--environment-variables
+    source_id: CODX
+    title: "environment variables"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/environment-variables"
+  - id: CODX--github-action
+    source_id: CODX
+    title: "github action"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/github-action"
+  - id: CODX--guides/agents-md
+    source_id: CODX
+    title: "guides / agents md"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/guides/agents-md"
+  - id: CODX--hooks
+    source_id: CODX
+    title: "hooks"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/hooks"
+  - id: CODX--ide
+    source_id: CODX
+    title: "ide"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/ide"
+  - id: CODX--ide/commands
+    source_id: CODX
+    title: "ide / commands"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/ide/commands"
+  - id: CODX--ide/features
+    source_id: CODX
+    title: "ide / features"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/ide/features"
+  - id: CODX--ide/settings
+    source_id: CODX
+    title: "ide / settings"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/ide/settings"
+  - id: CODX--ide/slash-commands
+    source_id: CODX
+    title: "ide / slash commands"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/ide/slash-commands"
+  - id: CODX--integrations/github
+    source_id: CODX
+    title: "integrations / github"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/integrations/github"
+  - id: CODX--integrations/linear
+    source_id: CODX
+    title: "integrations / linear"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/integrations/linear"
+  - id: CODX--integrations/slack
+    source_id: CODX
+    title: "integrations / slack"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/integrations/slack"
+  - id: CODX--learn/best-practices
+    source_id: CODX
+    title: "learn / best practices"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/learn/best-practices"
+  - id: CODX--mcp
+    source_id: CODX
+    title: "mcp"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/mcp"
+  - id: CODX--memories
+    source_id: CODX
+    title: "memories"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/memories"
+  - id: CODX--memories/chronicle
+    source_id: CODX
+    title: "memories / chronicle"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/memories/chronicle"
+  - id: CODX--migrate
+    source_id: CODX
+    title: "migrate"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/migrate"
+  - id: CODX--models
+    source_id: CODX
+    title: "models"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/models"
+  - id: CODX--noninteractive
+    source_id: CODX
+    title: "noninteractive"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/noninteractive"
+  - id: CODX--permissions
+    source_id: CODX
+    title: "permissions"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/permissions"
+  - id: CODX--plugins
+    source_id: CODX
+    title: "plugins"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/plugins"
+  - id: CODX--plugins/build
+    source_id: CODX
+    title: "plugins / build"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/plugins/build"
+  - id: CODX--prompting
+    source_id: CODX
+    title: "prompting"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/prompting"
+  - id: CODX--quickstart
+    source_id: CODX
+    title: "quickstart"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/quickstart"
+  - id: CODX--remote-connections
+    source_id: CODX
+    title: "remote connections"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/remote-connections"
+  - id: CODX--rules
+    source_id: CODX
+    title: "rules"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/rules"
+  - id: CODX--sdk
+    source_id: CODX
+    title: "sdk"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/sdk"
+  - id: CODX--security
+    source_id: CODX
+    title: "security"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/security"
+  - id: CODX--security/faq
+    source_id: CODX
+    title: "security / faq"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/security/faq"
+  - id: CODX--security/plugin
+    source_id: CODX
+    title: "security / plugin"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/security/plugin"
+  - id: CODX--security/setup
+    source_id: CODX
+    title: "security / setup"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/security/setup"
+  - id: CODX--security/threat-model
+    source_id: CODX
+    title: "security / threat model"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/security/threat-model"
+  - id: CODX--sites
+    source_id: CODX
+    title: "sites"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/sites"
+  - id: CODX--skills
+    source_id: CODX
+    title: "skills"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/skills"
+  - id: CODX--speed
+    source_id: CODX
+    title: "speed"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/speed"
+  - id: CODX--subagents
+    source_id: CODX
+    title: "subagents"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/subagents"
+  - id: CODX--web
+    source_id: CODX
+    title: "web"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/web"
+  - id: CODX--workflows
+    source_id: CODX
+    title: "workflows"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://developers.openai.com/codex/workflows"
+  - id: GHAB--how-to-write-a-great-agents-md-lessons-from-over-2500-repositories
+    source_id: GHAB
+    title: "how to write a great agents md lessons from over 2500 repositories"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/"
+  - id: GIST--7c8f65572930a21efa62623557d83f6e
+    source_id: GIST
+    title: "7c8f65572930a21efa62623557d83f6e"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://gist.github.com/0xfauzi/7c8f65572930a21efa62623557d83f6e"
+  - id: INSP--docs
+    source_id: INSP
+    title: "docs"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://inspect.aisi.org.uk/"
+  - id: LCMS--how-and-when-to-build-multi-agent-systems
+    source_id: LCMS
+    title: "how and when to build multi agent systems"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems"
+  - id: LSME--evaluation
+    source_id: LSME
+    title: "evaluation"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://docs.langchain.com/langsmith/evaluation"
+  - id: LSME--evaluation-approaches
+    source_id: LSME
+    title: "evaluation approaches"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://docs.langchain.com/langsmith/evaluation-approaches"
+  - id: LSME--trajectory-evals
+    source_id: LSME
+    title: "trajectory evals"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://docs.langchain.com/langsmith/trajectory-evals"
+  - id: PHSC--writing-good-agents
+    source_id: PHSC
+    title: "writing good agents"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://www.philschmid.de/writing-good-agents"
+  - id: PPRX--designing-refining-maintaining-agent-skills
+    source_id: PPRX
+    title: "designing refining maintaining agent skills"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity"
+  - id: PRFO--intro
+    source_id: PRFO
+    title: "intro"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://www.promptfoo.dev/docs/intro/"
+  - id: VSCD--custom-instructions
+    source_id: VSCD
+    title: "custom instructions"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://code.visualstudio.com/docs/agent-customization/custom-instructions"
+  - id: XEM7--status
+    source_id: XEM7
+    title: "status"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://x.com/EXM7777/status/2060736517564477901"
+  - id: XEM7--article
+    source_id: XEM7
+    title: "article"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://x.com/i/article/2060729909690224640"
+  - id: XEM7--article-body
+    source_id: XEM7
+    title: "article body"
+    path:
+    workflow_stage: indexed
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    url: "https://x.com/i/article/2060729909690224640"

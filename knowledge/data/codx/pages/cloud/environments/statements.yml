@@ -1,0 +1,18 @@
+statements:
+  - id: CODX-036
+    source_id: CODX
+    item_id: CODX--cloud/environments
+    status: ready_for_review
+    kind: fact
+    text: "Секреты облачного окружения доступны только сценариям настройки и удаляются до фазы агента; это ограничение снижает риск их раскрытия агенту."
+    excerpt: |-
+      Secrets
+      are similar to environment variables, except:
+      They are stored with an additional layer of encryption and are only decrypted for task execution.
+      They are only available to setup scripts. For security reasons, secrets are removed before the agent phase starts.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Environment variables and secrets"
+      limitations: "Относится к облачным задачам Codex."
+    open_questions: []

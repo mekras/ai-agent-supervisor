@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-002
+    source_id: CODX
+    item_id: CODX--rules
+    status: ready_for_review
+    kind: fact
+    text: "Правила Codex могут ограничивать команды, которые разрешено запускать вне песочницы."
+    excerpt: "Use rules to control which commands Codex can run outside the sandbox."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Rules"
+      limitations: "Правила помечены документацией как экспериментальные."
+    open_questions: []

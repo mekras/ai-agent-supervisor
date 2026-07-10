@@ -1,0 +1,17 @@
+statements:
+  - id: LSME-003
+    source_id: LSME
+    item_id: LSME--trajectory-evals
+    status: ready_for_review
+    kind: fact
+    text: "Детерминированное сравнение траекторий подходит для чётко определённых процессов с ожидаемыми инструментами и порядком вызовов; оно быстро и не требует дополнительного вызова модели."
+    excerpt: |-
+      Trajectory match
+      Hard-code a reference trajectory for a given input and validate the run via a step-by-step comparison.
+      Ideal for testing well-defined workflows where you know the expected behavior. Use when you have specific expectations about which tools should be called and in what order. This approach is deterministic, fast, and cost-effective since it doesn’t require additional LLM calls.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "How to evaluate your agent with trajectory evaluations"
+      limitations: "Относится к AgentEvals и оценке траекторий."
+    open_questions: []

@@ -1,0 +1,14 @@
+statements:
+  - id: AENG-001
+    source_id: AENG
+    item_id: AENG--building-effective-agents
+    status: ready_for_review
+    kind: fact
+    text: "Для LLM-приложений следует начинать с наиболее простого решения и усложнять его только при необходимости."
+    excerpt: "we recommend finding the simplest solution possible, and only increasing complexity when needed."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "When (and when not) to use agents"
+      limitations: "Рекомендация авторов статьи."
+    open_questions: []

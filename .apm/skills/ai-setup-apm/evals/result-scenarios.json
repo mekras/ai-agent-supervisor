@@ -3,59 +3,51 @@
   "source_basis": [
     {
       "claim_id": "APMP-001",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/overview/statements.yml"
     },
     {
       "claim_id": "APMP-002",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml"
     },
     {
       "claim_id": "APMP-003",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml"
     },
     {
       "claim_id": "APMP-004",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/compile/statements.yml"
     },
     {
       "claim_id": "APMP-005",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/pack-a-bundle/statements.yml"
     },
     {
-      "claim_id": "ASKL-006",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-003",
+      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
     },
     {
-      "claim_id": "ASKL-009",
-      "statement_path": "knowledge/statements/ASKL.md"
-    },
-    {
-      "claim_id": "ASKL-010",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-004",
+      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
     },
     {
       "claim_id": "PPRX-001",
-      "statement_path": "knowledge/statements/PPRX.md"
-    },
-    {
-      "claim_id": "PPRX-002",
-      "statement_path": "knowledge/statements/PPRX.md"
+      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
     },
     {
       "claim_id": "APMP-006",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/preview-and-validate/statements.yml"
     },
     {
       "claim_id": "APMP-007",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/publish-to-a-marketplace/statements.yml"
     },
     {
       "claim_id": "APMP-008",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/package-relative-links/statements.yml"
     },
     {
       "claim_id": "APMP-009",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/author-primitives-skills/statements.yml"
     }
   ],
   "cases": [
@@ -88,8 +80,8 @@
         "APMP-001",
         "APMP-003",
         "APMP-004",
-        "ASKL-009",
-        "ASKL-010",
+        "ASKL-004",
+        "ASKL-004",
         "PPRX-001"
       ],
       "expected_output": {
@@ -126,8 +118,8 @@
             "severity": "high",
             "corpus_claims": [
               "APMP-003",
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "команда apm run tests не настроена и не может служить повторяемой проверкой коллекции.",
             "expected_conclusion": "scripts.tests должен запускать реальные тесты коллекции, включая проверку скрытых Unicode-символов и бюджет description, а не заглушку или несуществующие файлы",
@@ -216,8 +208,8 @@
         "APMP-002",
         "APMP-003",
         "APMP-004",
-        "ASKL-006",
-        "ASKL-010"
+        "ASKL-003",
+        "ASKL-004"
       ],
       "expected_output": {
         "report_structure": [
@@ -232,7 +224,7 @@
             "severity": "high",
             "corpus_claims": [
               "APMP-003",
-              "ASKL-010"
+              "ASKL-004"
             ],
             "observed_problem": "существующий манифест APM не содержит scripts.tests с проверкой бюджета description, поэтому стандартная команда проверки коллекции неполна.",
             "expected_conclusion": "нужно добавить scripts.tests, сохранив существующие метаданные",
@@ -326,7 +318,7 @@
         "APMP-001",
         "APMP-003",
         "APMP-004",
-        "ASKL-010",
+        "ASKL-004",
         "PPRX-001"
       ],
       "expected_output": {
@@ -353,7 +345,7 @@
             "severity": "high",
             "corpus_claims": [
               "APMP-003",
-              "ASKL-010"
+              "ASKL-004"
             ],
             "observed_problem": "apm.yml не содержит includes, поэтому локальные примитивы из .apm не разворачиваются при установке пакета.",
             "expected_conclusion": "для обычного локального дерева .apm нужен includes: auto или явный список публикуемых путей",
@@ -427,9 +419,9 @@
       ],
       "required_corpus_claims": [
         "APMP-003",
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
         "PPRX-001"
       ],
       "expected_output": {
@@ -445,7 +437,7 @@
             "severity": "high",
             "corpus_claims": [
               "APMP-003",
-              "ASKL-010"
+              "ASKL-004"
             ],
             "observed_problem": "ускорение предлагается как постоянное урезание полного прогона или возврат модельных вызовов в контроль качества tests, из-за чего проверка коллекции перестаёт быть полной по умолчанию или теряет переносимость.",
             "expected_conclusion": "полный модельный прогон evals должен остаться поведением по умолчанию, а ускорение должно задаваться явным фильтром пути или идентификатора сценария без возврата модели в tests",
@@ -454,8 +446,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-006",
-              "ASKL-009",
+              "ASKL-003",
+              "ASKL-004",
               "PPRX-001"
             ],
             "observed_problem": "модельный прогон не различает проверку одного навыка и одного сценария результата, поэтому разработчик вынужден прогонять всю коллекцию после каждой локальной правки.",
@@ -521,7 +513,7 @@
         "APMP-001",
         "APMP-003",
         "APMP-004",
-        "ASKL-010",
+        "ASKL-004",
         "PPRX-001"
       ],
       "expected_output": {
@@ -548,7 +540,7 @@
             "severity": "medium",
             "corpus_claims": [
               "APMP-003",
-              "ASKL-010"
+              "ASKL-004"
             ],
             "observed_problem": "apm audit --ci --no-policy --no-drift может пройти даже при пропущенной проверке дрейфа и не доказывает полную готовность коллекции.",
             "expected_conclusion": "такой audit полезен как частичное подтверждение, но его нужно явно отделять от структурной приёмки",
@@ -607,10 +599,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -624,8 +616,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "проект-потребитель с devDependencies.apm ошибочно принимается за публикуемый пакет только из-за apm.yml и APM-зависимости.",
             "expected_conclusion": "нужно классифицировать проект как потребителя, не создавать producer-структуру и вернуть настройку клиентского контура в клиентский маршрут",
@@ -634,7 +626,7 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-010"
+              "ASKL-004"
             ],
             "observed_problem": "цель `claude` в `targets` теряется при маршрутизации, хотя она указывает на отдельную клиентскую обвязку.",
             "expected_conclusion": "ветка ai-setup-apm должна явно назвать признак `claude`, но не настраивать `CLAUDE.md` самостоятельно",
@@ -701,8 +693,8 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-009",
-        "ASKL-010",
+        "ASKL-004",
+        "ASKL-004",
         "APMP-006",
         "APMP-008"
       ],
@@ -774,8 +766,8 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-009",
-        "ASKL-010",
+        "ASKL-004",
+        "ASKL-004",
         "APMP-009"
       ],
       "expected_output": {

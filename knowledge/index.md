@@ -5,13 +5,15 @@
 
 В этой же папке лежат источниковые и производные слои корпуса:
 
-- `knowledge/inventory/*.md` — карточки источников.
-- `knowledge/statements/*.md` — извлечённые утверждения.
-- `knowledge/reports/source-impact/*.md` — отчёты о влиянии источников на проект.
-- `knowledge/normalized/` и `knowledge/primary/` — отобранные нормализованные и
-  первичные артефакты.
+- `knowledge/catalog.yml` — каталог источников.
+- `knowledge/data/<source>/source.yml` и `items.yml` — карточка источника и его
+  единиц.
+- `knowledge/data/<source>/pages/<item>/statements.yml` — извлечённые
+  утверждения с проверяемыми фрагментами.
+- `knowledge/data/<source>/pages/<item>/*.local.*` — локальные, неотслеживаемые
+  снимки и нормализации.
 - `knowledge/source-attribution.md` — правовая атрибуция и условия использования.
 
 При добавлении новых источников обновляй `knowledge/sources-manifest.yml` и при
-необходимости карточки инвентаризации, а устойчивые выводы поднимай в
+необходимости карточки в `knowledge/data/`, а устойчивые выводы поднимай в
 `knowledge/`.

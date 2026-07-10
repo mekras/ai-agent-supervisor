@@ -1,0 +1,14 @@
+statements:
+  - id: ASKL-003
+    source_id: ASKL
+    item_id: ASKL--optimizing-descriptions
+    status: ready_for_review
+    kind: fact
+    text: "Описание навыка служит основным механизмом выбора навыка агентом."
+    excerpt: "The description field in your SKILL.md frontmatter is the primary mechanism agents use to decide whether to load a skill for a given task."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Optimizing skill descriptions"
+      limitations: "Рекомендация источника."
+    open_questions: []

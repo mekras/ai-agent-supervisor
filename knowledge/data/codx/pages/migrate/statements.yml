@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-012
+    source_id: CODX
+    item_id: CODX--migrate
+    status: ready_for_review
+    kind: fact
+    text: "После импорта настроек Codex предлагает проверить перенесённые файлы и продолжить миграцию, если осталась работа."
+    excerpt: "Offers to continue the migration in a new thread if anything still needs follow-up work."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "How migration works"
+      limitations: "Относится к импорту настроек в Codex."
+    open_questions: []

@@ -1,0 +1,23 @@
+statements:
+  - id: CODX-055
+    source_id: CODX
+    item_id: CODX--integrations/github
+    status: ready_for_review
+    kind: fact
+    text: "При обзоре pull request Codex находит `AGENTS.md` и применяет разделы с правилами рецензирования; для изменённых файлов действует ближайшая инструкция."
+    excerpt: |-
+      Customize what Codex reviews
+      Codex searches your repository for
+      AGENTS.md
+      files and follows any
+      Review guidelines
+      you include.
+      Codex applies guidance from the closest
+      AGENTS.md
+      to each changed file.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Customize what Codex reviews"
+      limitations: "Относится к рецензированию GitHub pull request в Codex."
+    open_questions: []

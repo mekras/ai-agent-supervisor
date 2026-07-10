@@ -1,0 +1,20 @@
+statements:
+  - id: CODX-042
+    source_id: CODX
+    item_id: CODX--enterprise/access-tokens
+    status: ready_for_review
+    kind: fact
+    text: "Токен доступа Codex следует хранить как секрет автоматизации, не записывать в журналы и регулярно ротировать; применять его допустимо только на доверенных исполнителях."
+    excerpt: |-
+      Codex checks the token when a run starts and ties the run to that workspace identity. Treat the token like any other automation secret: store it in a secret manager, keep it out of logs, and rotate it regularly.
+      Main risks to avoid:
+      Leaked secrets:
+      anyone with the token can start Codex runs as the token creator. Store tokens in a secret manager, keep them out of logs, and rotate them regularly.
+      Untrusted runners:
+      public CI, forked pull requests, or shared machines can expose tokens to people outside your workspace. Use access tokens only on trusted runners.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "How access tokens work"
+      limitations: "Относится к токенам доступа Codex для программных локальных процессов."
+    open_questions: []

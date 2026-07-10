@@ -1,0 +1,19 @@
+statements:
+  - id: APMP-009
+    source_id: APMP
+    item_id: APMP--author-primitives-skills
+    status: ready_for_review
+    kind: fact
+    text: "Навык выбирается агентом по описанию, загружает `SKILL.md` и выполняет ограниченную задачу."
+    excerpt: |-
+      is a model-invoked guide. The agent picks it up at runtime
+      based on its
+      description
+      , reads
+      SKILL.md
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Author a skill"
+      limitations: "Фрагмент описывает примитив навыка APM."
+    open_questions: []

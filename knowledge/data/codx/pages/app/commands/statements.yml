@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-024
+    source_id: CODX
+    item_id: CODX--app/commands
+    status: ready_for_review
+    kind: fact
+    text: "Slash-команды позволяют управлять Codex из поля ввода текущей ветки, а доступный набор зависит от окружения и прав доступа."
+    excerpt: "Slash commands let you control Codex without leaving the thread composer. Available commands vary based on your environment and access."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Slash commands"
+      limitations: "Относится к приложению Codex."
+    open_questions: []

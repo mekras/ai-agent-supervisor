@@ -1,0 +1,24 @@
+contract_version: 1
+tracked_data:
+  root: data
+  source_pattern: data/<source>/source.yml
+  source_map_pattern: data/<source>/source-map.yml
+  source_unit_pattern: data/<source>/pages/<slug>/item.yml
+  statement_pattern: data/<source>/pages/<slug>/statements.yml
+local_data:
+  gitignore_rules: ["*.local.*", "*.local", "*.tmp.*"]
+  local_file_pattern: "*.local.*"
+  local_dir_pattern: "*.local"
+  temporary_file_pattern: "*.tmp.*"
+source_units:
+  website:
+    unit: page
+    path_pattern: data/<source>/pages/<slug>
+indexes:
+  sources: catalog.yml
+  items: index/items.yml
+workflow_stages: [indexed, needs_fetch, fetched, needs_transcript, raw_transcribed, normalized, statements_extracted, source_checked, blocked, rejected]
+sensitive_data_policy:
+  rules:
+    - "Не добавлять в Git токены, cookies, сессии, пароли и закрытые ссылки."
+    - "Временная структура миграции не заменяет проверяемое извлечение утверждений."

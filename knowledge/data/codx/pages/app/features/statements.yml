@@ -1,0 +1,23 @@
+statements:
+  - id: CODX-025
+    source_id: CODX
+    item_id: CODX--app/features
+    status: ready_for_review
+    kind: fact
+    text: "Для каждого диалога приложения Codex можно выбрать режим Local, Worktree или Cloud; режим Worktree изолирует изменения в Git-worktree."
+    excerpt: |-
+      Each thread runs in a selected mode. When starting a thread, you can choose:
+      Local
+      : work directly in your current project directory.
+      Worktree
+      : isolate changes in a Git worktree.
+      Learn more
+      .
+      Cloud
+      : run remotely in a configured cloud environment.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Modes"
+      limitations: "Относится к настольному приложению Codex."
+    open_questions: []

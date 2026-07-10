@@ -1,0 +1,14 @@
+statements:
+  - id: AENG-003
+    source_id: AENG
+    item_id: AENG--multi-agent-research-system
+    status: ready_for_review
+    kind: fact
+    text: "Многоагентная система вводит дополнительные сложности координации, оценки и надёжности."
+    excerpt: "Systems with multiple agents introduce new challenges in agent coordination, evaluation, and reliability."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "How we built our multi-agent research system"
+      limitations: "Наблюдение авторов статьи."
+    open_questions: []

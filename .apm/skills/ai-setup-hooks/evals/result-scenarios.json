@@ -3,11 +3,11 @@
   "source_basis": [
     {
       "claim_id": "APMP-004",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/compile/statements.yml"
     },
     {
       "claim_id": "APMP-002",
-      "statement_path": "knowledge/statements/APMP.md"
+      "statement_path": "knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml"
     }
   ],
   "cases": [
@@ -24,7 +24,9 @@
           "purpose": "Процедура навыка: граница детерминируемости и размещение хуков."
         }
       ],
-      "required_corpus_claims": ["APMP-004"],
+      "required_corpus_claims": [
+        "APMP-004"
+      ],
       "expected_output": {
         "report_structure": [
           "Обследованные события и источники правил",
@@ -39,21 +41,27 @@
             "observed_problem": "Правило сообщений коммитов привязано к событию commit-msg и проверяется детерминированно, но его логику легко зашить в переносимую часть коллекции.",
             "expected_conclusion": "Проверку сообщения коммита предложить как хук, а её логику разместить как артефакт целевого проекта, потому что хуки — target-specific и opt-in примитив, а не основной переносимый путь доставки.",
             "acceptable_fix_direction": "Тонкий хук commit-msg в проекте плюс логика проверки в проектном каталоге; в переносимом навыке остаётся только паттерн.",
-            "corpus_claims": ["APMP-004"]
+            "corpus_claims": [
+              "APMP-004"
+            ]
           },
           {
             "severity": "medium",
             "observed_problem": "Есть соблазн поместить логику контроля туда, где её подхватит установка пакета как переносимый примитив.",
             "expected_conclusion": "Логика хука доставляется и активируется в целевом проекте, а не компилируется в корневой контекст как инструкция.",
             "acceptable_fix_direction": "Разместить проверку как проектный артефакт и описать воспроизводимую активацию хука в клоне.",
-            "corpus_claims": ["APMP-002"]
+            "corpus_claims": [
+              "APMP-002"
+            ]
           },
           {
             "severity": "medium",
             "observed_problem": "Правило понятных комментариев требует суждения о смысле и не имеет наблюдаемого детерминированного признака.",
             "expected_conclusion": "Детерминированный хук для него невозможен; хук-напоминание не считается контролем и не предлагается.",
             "acceptable_fix_direction": "Оставить правило зоне применения навыка или ревью человека и явно сообщить о невозможности внешнего контроля.",
-            "corpus_claims": ["APMP-004"]
+            "corpus_claims": [
+              "APMP-004"
+            ]
           }
         ]
       },

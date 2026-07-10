@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-051
+    source_id: CODX
+    item_id: CODX--ide/features
+    status: ready_for_review
+    kind: fact
+    text: "Расширение Codex для IDE использует того же агента и ту же конфигурацию, что и CLI; контекст открытых файлов и выделенного кода позволяет сокращать запросы и повышать их релевантность."
+    excerpt: |-
+      The Codex IDE extension gives you access to Codex directly in VS Code, Cursor, Windsurf, and other VS Code-compatible editors. It uses the same agent as the Codex CLI and shares the same configuration.
+      Prompting Codex
+      Use Codex in your editor to chat, edit, and preview changes seamlessly. When Codex has context from open files and selected code, you can write shorter prompts and get faster, more relevant results.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Codex IDE extension features"
+      limitations: "Относится к расширению Codex для совместимых с VS Code редакторов."
+    open_questions: []

@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-011
+    source_id: CODX
+    item_id: CODX--sdk
+    status: ready_for_review
+    kind: fact
+    text: "Python SDK управляет локальным приложением Codex через JSON-RPC и требует Python 3.10 или новее."
+    excerpt: "The Python SDK controls the local Codex app-server over JSON-RPC. It requires Python 3.10 or later."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Python library"
+      limitations: "Относится к Python SDK Codex."
+    open_questions: []

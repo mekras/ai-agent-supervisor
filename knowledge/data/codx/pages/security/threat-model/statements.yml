@@ -1,0 +1,14 @@
+statements:
+  - id: CODX-007
+    source_id: CODX
+    item_id: CODX--security/threat-model
+    status: ready_for_review
+    kind: fact
+    text: "Модель угроз задаёт краткое описание безопасности репозитория и используется как контекст будущих сканирований, приоритизации и проверки."
+    excerpt: "the system uses it as scan context for future scans, prioritization, and review."
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "What a threat model is"
+      limitations: "Относится к Codex Security."
+    open_questions: []

@@ -2,20 +2,16 @@
   "skill_name": "ai-skill-development",
   "source_basis": [
     {
-      "claim_id": "ASKL-006",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-003",
+      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
     },
     {
-      "claim_id": "ASKL-009",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-004",
+      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
     },
     {
-      "claim_id": "ASKL-010",
-      "statement_path": "knowledge/statements/ASKL.md"
-    },
-    {
-      "claim_id": "PPRX-002",
-      "statement_path": "knowledge/statements/PPRX.md"
+      "claim_id": "PPRX-001",
+      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
     }
   ],
   "cases": [
@@ -29,10 +25,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -45,8 +41,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "сопровождаемый навык меняет поведение, но не имеет постоянных проверок срабатывания.",
             "expected_conclusion": "изменение нельзя закрывать без добавления хотя бы положительных, отрицательных и пограничных проверок маршрутизации",
@@ -55,8 +51,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "новое ограничение и порядок работы требуют проверяемого сценария результата.",
             "expected_conclusion": "тест должен фиксировать реалистичный запрос, ожидаемый результат и проверяемые утверждения о прохождении",
@@ -122,9 +118,9 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -138,8 +134,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "после изменения description существующий evals/triggers.json не содержит близких отрицательных и пограничных запросов.",
             "expected_conclusion": "тестовое покрытие есть формально, но оно устарело и не проверяет новую границу с соседним навыком",
@@ -148,7 +144,7 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-010"
+              "ASKL-004"
             ],
             "observed_problem": "отчёт о сопровождении не даёт проверяемого свидетельства, что новые кейсы действительно добавлены, а обновлённый description проходит бюджетную проверку коллекции.",
             "expected_conclusion": "результат должен фиксировать, какие утверждения о покрытии теперь проверяются, какой командой и как проверен бюджет description",
@@ -207,10 +203,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -223,9 +219,9 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "ASKL-010",
-              "PPRX-002"
+              "ASKL-003",
+              "ASKL-004",
+              "PPRX-001"
             ],
             "observed_problem": "существующий eval результата проверяет только косвенный сигнал и не доказывает применение навыка как процедуры.",
             "expected_conclusion": "такой eval полезен как вспомогательная проверка, но не закрывает качество применения навыка",
@@ -234,7 +230,7 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009"
+              "ASKL-004"
             ],
             "observed_problem": "в сценарии нет негативного контроля, показывающего, что тест упал бы без навыка или при пропуске обязательного шага.",
             "expected_conclusion": "регрессионный тест должен отличать применение навыка от случайно удачного ответа",
@@ -296,10 +292,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -312,8 +308,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "агент добавляет новое правило, не проверив весь навык и не устранив источник повторного сбоя.",
             "expected_conclusion": "для сопровождения навыка нужно сначала понять целевую процедуру целиком и выбрать масштаб изменения по качеству результата",
@@ -322,8 +318,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "устаревшие проверки не фиксируют новый критерий: качество важнее размера правки.",
             "expected_conclusion": "регрессионный сценарий должен проваливать ответы, которые выбирают малую правку вместо достаточного исправления",
@@ -386,10 +382,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -402,8 +398,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "агент либо запускает всю коллекцию после каждой локальной правки, либо ради скорости пропускает проверки срабатывания и результата.",
             "expected_conclusion": "правила сопровождения должны предписывать самый узкий достаточный запуск без удаления поверхностей проверки",
@@ -412,8 +408,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "отчёт о тестах не показывает, какую поверхность покрывал выборочный запуск и какие проверки были отложены.",
             "expected_conclusion": "выборочный запуск должен сопровождаться явным объяснением покрытия, остаточного риска и условия полного запуска",

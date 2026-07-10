@@ -1,0 +1,24 @@
+statements:
+  - id: CODX-058
+    source_id: CODX
+    item_id: CODX--learn/best-practices
+    status: ready_for_review
+    kind: fact
+    text: "Чтобы снизить число предположений и упростить рецензию, запрос к Codex должен задавать цель, релевантный контекст, ограничения и проверяемое условие готовности."
+    excerpt: |-
+      A good default is to include four things in your prompt:
+      Goal:
+      What are you trying to change or build?
+      Context:
+      Which files, folders, docs, examples, or errors matter for this task? You can @ mention certain files as context.
+      Constraints:
+      What standards, architecture, safety requirements, or conventions should Codex follow?
+      Done when:
+      What should be true before the task is complete, such as tests passing, behavior changing, or a bug no longer reproducing?
+      This helps Codex stay scoped, make fewer assumptions, and produce work that’s easier to review.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Strong first use: Context and prompts"
+      limitations: "Практическая рекомендация для Codex."
+    open_questions: []

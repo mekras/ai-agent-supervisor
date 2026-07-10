@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-004
+    source_id: APMP
+    item_id: APMP--compile
+    status: ready_for_review
+    kind: fact
+    text: "Команда `apm compile` обрабатывает примитивы инструкций, а навыки и агенты развёртываются напрямую через `apm install`."
+    excerpt: "commands — are NOT compiled by this command. They are deployed by"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Compile your package"
+      limitations: "Фрагмент описывает текущую модель APM."
+    open_questions: []

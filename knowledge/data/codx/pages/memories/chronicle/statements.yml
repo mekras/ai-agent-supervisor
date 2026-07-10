@@ -1,0 +1,26 @@
+statements:
+  - id: CODX-060
+    source_id: CODX
+    item_id: CODX--memories/chronicle
+    status: ready_for_review
+    kind: fact
+    text: "Chronicle — предварительная функция по явному включению: она использует экранный контекст, ускоряет расход лимитов, повышает риск инъекций и хранит воспоминания локально без шифрования."
+    excerpt: |-
+      Chronicle is in an
+      opt-in research preview
+      . It is only available for
+      ChatGPT Pro subscribers on macOS, and is not yet available in the EU, UK and
+      Switzerland. Please review the
+      Privacy and Security
+      section for details and to understand the current risks before enabling.
+      Chronicle augments Codex memories with context from your screen.
+      Chronicle is available as an opt-in research preview in the Codex app on macOS.
+      It requires macOS Screen Recording and Accessibility permissions. Before
+      enabling, be aware that Chronicle uses rate limits quickly, increases risk of
+      prompt injection, and stores memories unencrypted on your device.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Chronicle"
+      limitations: "Состояние предварительной функции на дату источника."
+    open_questions: []

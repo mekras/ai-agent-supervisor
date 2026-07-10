@@ -2,16 +2,16 @@
   "skill_name": "ai-work-control",
   "source_basis": [
     {
-      "claim_id": "ASKL-006",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-003",
+      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
     },
     {
-      "claim_id": "ASKL-009",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-004",
+      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
     },
     {
-      "claim_id": "PPRX-002",
-      "statement_path": "knowledge/statements/PPRX.md"
+      "claim_id": "PPRX-001",
+      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
     }
   ],
   "cases": [
@@ -29,9 +29,9 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -45,8 +45,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "изменение источника истины запускается без фиксации цели, контекста, границ автономности и способа приёмки.",
             "expected_conclusion": "перед содержательной правкой нужен контроль запуска, иначе ИИ может принять проектное решение без достаточного основания",
@@ -55,7 +55,7 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009"
+              "ASKL-004"
             ],
             "observed_problem": "не определено, что требует решения человека.",
             "expected_conclusion": "ИИ не должен самостоятельно утверждать риск, который нельзя принять автоматически",

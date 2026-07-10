@@ -1,0 +1,19 @@
+source_id: PHSC
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "local normalized snapshot inspection"
+  extraction_status: "source_checked"
+structure:
+  units:
+    - id: PHSC--writing-good-agents
+      title: "writing good agents"
+      order: 1
+coverage:
+  units:
+    - unit_id: PHSC--writing-good-agents
+      status: no_significant_content
+      reason: "Локальный нормализованный снимок пуст; утверждения извлечь невозможно."

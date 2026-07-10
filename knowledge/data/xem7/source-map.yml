@@ -1,0 +1,31 @@
+source_id: XEM7
+long_source: true
+extraction_passport:
+  format: "legacy web snapshot set"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
+  metadata_source: "source.yml"
+  extraction_tool: "local normalized snapshot inspection"
+  extraction_status: "in_progress"
+structure:
+  units:
+    - id: XEM7--status
+      title: "status"
+      order: 1
+    - id: XEM7--article
+      title: "article"
+      order: 2
+    - id: XEM7--article-body
+      title: "article body"
+      order: 3
+coverage:
+  units:
+    - unit_id: XEM7--status
+      status: no_significant_content
+      reason: "Короткий технический фрагмент без содержательного текста; основное содержание находится в article-body."
+    - unit_id: XEM7--article
+      status: no_significant_content
+      reason: "Короткий технический фрагмент без содержательного текста; основное содержание находится в article-body."
+    - unit_id: XEM7--article-body
+      status: no_significant_content
+      reason: "Нормализованный снимок содержит необработанную HTML-страницу ошибки X и служебную разметку, а не текст статьи."

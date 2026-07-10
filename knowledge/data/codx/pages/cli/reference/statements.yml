@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-034
+    source_id: CODX
+    item_id: CODX--cli/reference
+    status: ready_for_review
+    kind: fact
+    text: "Флаг `--dangerously-bypass-approvals-and-sandbox` запускает все команды без подтверждений и песочницы и допустим только в среде с внешней защитой."
+    excerpt: |-
+      --dangerously-bypass-approvals-and-sandbox, --yolo
+      boolean
+      Run every command without approvals or sandboxing. Only use inside an externally hardened environment.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Global flags"
+      limitations: "Относится к CLI Codex; описание содержит прямое ограничение безопасности."
+    open_questions: []

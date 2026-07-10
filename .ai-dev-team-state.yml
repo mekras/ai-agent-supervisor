@@ -1,0 +1,15 @@
+product: mekras/ai-dev-team
+updated_at: 2026-07-10
+setup:
+  visibility: public
+  git:
+    enabled: true
+  changelog:
+    status: present
+    path: CHANGELOG.md
+  knowledge:
+    status: present
+    path: knowledge/
+    layout: portable_data
+    migration_status: completed
+    migration_completed_at: 2026-07-10

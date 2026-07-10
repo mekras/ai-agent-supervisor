@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-053
+    source_id: CODX
+    item_id: CODX--ide/settings
+    status: ready_for_review
+    kind: fact
+    text: "Расширение IDE использует CLI Codex, поэтому настройки модели, подтверждений и песочницы задаются в общем `~/.codex/config.toml`, а не в настройках редактора."
+    excerpt: |-
+      The Codex IDE extension uses the Codex CLI. Configure some behavior, such as the default model, approvals, and sandbox settings, in the shared
+      ~/.codex/config.toml
+      file instead of in editor settings.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Change a setting"
+      limitations: "Относится к расширению Codex для IDE."
+    open_questions: []

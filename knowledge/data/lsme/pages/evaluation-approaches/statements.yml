@@ -1,0 +1,15 @@
+statements:
+  - id: LSME-002
+    source_id: LSME
+    item_id: LSME--evaluation-approaches
+    status: ready_for_review
+    kind: fact
+    text: "Оценка отдельного шага агента помогает локализовать сбои и выполняется быстрее, но не охватывает поведение агента целиком."
+    excerpt: |-
+      There are several benefits to this type of evaluation. It allows you to evaluate individual actions, which lets you hone in where your application may be failing. They are also relatively fast to run (because they only involve a single LLM call) and evaluation often uses simple heuristic evaluation of the selected tool relative to the reference tool. One downside is that they don’t capture the full agent - only one particular step.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Evaluating a single step of an agent"
+      limitations: "Относится к подходам LangSmith к оценке агентов."
+    open_questions: []

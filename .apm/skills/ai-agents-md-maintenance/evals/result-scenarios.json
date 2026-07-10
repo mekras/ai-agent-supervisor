@@ -3,27 +3,23 @@
   "source_basis": [
     {
       "claim_id": "CODX-002",
-      "statement_path": "knowledge/statements/CODX.md"
+      "statement_path": "knowledge/data/codx/pages/rules/statements.yml"
     },
     {
       "claim_id": "CODX-003",
-      "statement_path": "knowledge/statements/CODX.md"
+      "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
     },
     {
-      "claim_id": "GIST-001",
-      "statement_path": "knowledge/statements/GIST.md"
+      "claim_id": "CODX-001",
+      "statement_path": "knowledge/data/codx/pages/agents-md/statements.yml"
     },
     {
-      "claim_id": "PHSC-003",
-      "statement_path": "knowledge/statements/PHSC.md"
+      "claim_id": "ASKL-004",
+      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
     },
     {
-      "claim_id": "VSCD-002",
-      "statement_path": "knowledge/statements/VSCD.md"
-    },
-    {
-      "claim_id": "VSCD-005",
-      "statement_path": "knowledge/statements/VSCD.md"
+      "claim_id": "VSCD-001",
+      "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
     }
   ],
   "cases": [
@@ -50,9 +46,9 @@
       "required_corpus_claims": [
         "CODX-002",
         "CODX-003",
-        "GIST-001",
-        "PHSC-003",
-        "VSCD-005"
+        "CODX-001",
+        "ASKL-004",
+        "VSCD-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -67,7 +63,7 @@
             "corpus_claims": [
               "CODX-002",
               "CODX-003",
-              "VSCD-005"
+              "VSCD-001"
             ],
             "observed_problem": "корневой AGENTS.md содержит локальные правила подкаталога и не объясняет, как они соотносятся с вложенными инструкциями.",
             "expected_conclusion": "иерархия инструкций остаётся неоднозначной и может привести к конфликту команд",
@@ -76,8 +72,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "GIST-001",
-              "PHSC-003"
+              "CODX-001",
+              "ASKL-004"
             ],
             "observed_problem": "AGENTS.md дублирует README и содержит общие советы без команды, пути или условия применения.",
             "expected_conclusion": "файл перегружает машинный контекст и не снижает риск конкретной ошибки",
@@ -130,10 +126,10 @@
       "required_corpus_claims": [
         "CODX-002",
         "CODX-003",
-        "GIST-001",
-        "PHSC-003",
-        "VSCD-002",
-        "VSCD-005"
+        "CODX-001",
+        "ASKL-004",
+        "VSCD-001",
+        "VSCD-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -146,8 +142,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "VSCD-002",
-              "VSCD-005"
+              "VSCD-001",
+              "VSCD-001"
             ],
             "observed_problem": "обвязка Claude читает `CLAUDE.md`, а канонические правила проекта живут только в `AGENTS.md`.",
             "expected_conclusion": "нужна совместимая точка входа для Claude без появления второго независимого набора правил",
@@ -201,9 +197,9 @@
         }
       ],
       "required_corpus_claims": [
-        "GIST-001",
-        "PHSC-003",
-        "VSCD-005"
+        "CODX-001",
+        "ASKL-004",
+        "VSCD-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -216,8 +212,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "GIST-001",
-              "PHSC-003"
+              "CODX-001",
+              "ASKL-004"
             ],
             "observed_problem": "запрос только на проверку обрабатывается как сопровождение и приводит к правке AGENTS.md.",
             "expected_conclusion": "чистый review должен маршрутизироваться в ai-audit-agents-md, потому что выходом является отчёт, а не изменение файлов",
@@ -226,7 +222,7 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "VSCD-005"
+              "VSCD-001"
             ],
             "observed_problem": "проверка конфликтов между инструкциями начинается без построения контура файлов.",
             "expected_conclusion": "для review нужно сначала понять цепочку инструкций и порядок применения",
@@ -284,9 +280,9 @@
       "required_corpus_claims": [
         "CODX-002",
         "CODX-003",
-        "GIST-001",
-        "PHSC-003",
-        "VSCD-005"
+        "CODX-001",
+        "ASKL-004",
+        "VSCD-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -299,8 +295,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "GIST-001",
-              "PHSC-003"
+              "CODX-001",
+              "ASKL-004"
             ],
             "observed_problem": "AGENTS.md обновляется без устойчивых операционных разделов про границы изменений и Git.",
             "expected_conclusion": "при создании или содержательной переработке файла нужен узнаваемый каркас с операционными разделами, если они применимы к проекту",

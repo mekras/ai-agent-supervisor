@@ -2,20 +2,16 @@
   "skill_name": "ai-rule-failure-analysis",
   "source_basis": [
     {
-      "claim_id": "ASKL-006",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-003",
+      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
     },
     {
-      "claim_id": "ASKL-009",
-      "statement_path": "knowledge/statements/ASKL.md"
+      "claim_id": "ASKL-004",
+      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
     },
     {
-      "claim_id": "ASKL-010",
-      "statement_path": "knowledge/statements/ASKL.md"
-    },
-    {
-      "claim_id": "PPRX-002",
-      "statement_path": "knowledge/statements/PPRX.md"
+      "claim_id": "PPRX-001",
+      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
     }
   ],
   "cases": [
@@ -33,10 +29,10 @@
         }
       ],
       "required_corpus_claims": [
-        "ASKL-006",
-        "ASKL-009",
-        "ASKL-010",
-        "PPRX-002"
+        "ASKL-003",
+        "ASKL-004",
+        "ASKL-004",
+        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -49,8 +45,8 @@
           {
             "severity": "high",
             "corpus_claims": [
-              "ASKL-006",
-              "PPRX-002"
+              "ASKL-003",
+              "PPRX-001"
             ],
             "observed_problem": "разбор закрывает провал фразой о разовой ошибке модели без проверки правила и маршрута.",
             "expected_conclusion": "сначала нужно искать слабость правила, обнаружимости, порядка действий, проверки или условия остановки",
@@ -59,8 +55,8 @@
           {
             "severity": "medium",
             "corpus_claims": [
-              "ASKL-009",
-              "ASKL-010"
+              "ASKL-004",
+              "ASKL-004"
             ],
             "observed_problem": "повторяемый провал не переводится в постоянную проверку.",
             "expected_conclusion": "если сбой может повториться, его нужно закрыть тестовым случаем или явно назвать остаточный риск",

@@ -1,0 +1,14 @@
+statements:
+  - id: APMP-010
+    source_id: APMP
+    item_id: APMP--author-primitives-hooks-and-commands
+    status: ready_for_review
+    kind: fact
+    text: "Хуки и слэш-команды APM предназначены для ограниченного набора сред и не становятся частью `AGENTS.md`."
+    excerpt: "Unlike skills or instructions, they ship to a strict subset of harnesses, never get folded into AGENTS.md"
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Hooks and commands"
+      limitations: "Фрагмент относится к примитивам APM."
+    open_questions: []

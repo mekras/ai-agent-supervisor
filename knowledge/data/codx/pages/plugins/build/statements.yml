@@ -1,0 +1,17 @@
+statements:
+  - id: CODX-021
+    source_id: CODX
+    item_id: CODX--plugins/build
+    status: ready_for_review
+    kind: fact
+    text: "Для публикации общего рабочего процесса с интеграциями приложений, конфигурацией MCP или хуками жизненного цикла в Codex следует создавать плагин."
+    excerpt: |-
+      Build a plugin
+      when you want to share that workflow across teams, bundle app integrations or
+      MCP config, package lifecycle hooks, or publish a stable package.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Build plugins"
+      limitations: "Рекомендация относится к авторам плагинов Codex."
+    open_questions: []

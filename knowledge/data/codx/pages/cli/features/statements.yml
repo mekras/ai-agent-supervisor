@@ -1,0 +1,19 @@
+statements:
+  - id: CODX-033
+    source_id: CODX
+    item_id: CODX--cli/features
+    status: ready_for_review
+    kind: fact
+    text: "Возобновлённый запуск Codex сохраняет исходную стенограмму, историю плана и подтверждения; перед запуском можно изменить рабочий каталог или добавить корни."
+    excerpt: |-
+      Each resumed run keeps the original transcript, plan history, and approvals, so Codex can use prior context while you supply new instructions. Override the working directory with
+      --cd
+      or add extra roots with
+      --add-dir
+      if you need to steer the environment before resuming.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Resuming conversations"
+      limitations: "Относится к возможностям CLI Codex."
+    open_questions: []

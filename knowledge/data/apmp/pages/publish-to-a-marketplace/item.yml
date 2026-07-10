@@ -1,0 +1,10 @@
+id: APMP--publish-to-a-marketplace
+source_id: APMP
+title: publish to a marketplace
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: statements_extracted
+files:
+  local:
+  - normalized.local.md

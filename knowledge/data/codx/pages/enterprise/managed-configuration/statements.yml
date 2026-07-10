@@ -1,0 +1,19 @@
+statements:
+  - id: CODX-045
+    source_id: CODX
+    item_id: CODX--enterprise/managed-configuration
+    status: ready_for_review
+    kind: fact
+    text: "Управляемая конфигурация Enterprise разделяет обязательные ограничения, которые пользователь не может переопределить, и управляемые значения по умолчанию, которые применяются при старте и могут меняться в ходе сессии."
+    excerpt: |-
+      Enterprise admins can control local Codex behavior in two ways:
+      Requirements
+      : admin-enforced constraints that users can’t override.
+      Managed defaults
+      : starting values applied when Codex launches. Users can still change settings during a session; Codex reapplies managed defaults the next time it starts.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Managed configuration"
+      limitations: "Относится к Enterprise-администрированию Codex."
+    open_questions: []

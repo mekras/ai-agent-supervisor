@@ -1,0 +1,16 @@
+statements:
+  - id: CODX-027
+    source_id: CODX
+    item_id: CODX--app/local-environments
+    status: ready_for_review
+    kind: fact
+    text: "Сценарии настройки запускаются автоматически при создании Codex нового worktree и могут устанавливать зависимости либо выполнять сборку, нужную для окружения."
+    excerpt: |-
+      Setup scripts run automatically when Codex creates a new worktree at the start of a new thread.
+      Use this script to run any command required to configure your environment, such as installing dependencies or running a build process.
+    artifact: normalized.local.md
+    checked_at: 2026-07-10
+    scope:
+      section_title: "Setup scripts"
+      limitations: "Относится к локальным окружениям приложения Codex."
+    open_questions: []

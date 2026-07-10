@@ -1,0 +1,25 @@
+items:
+  - id: XEM7--status
+    source_id: XEM7
+    title: "status"
+    url: "https://x.com/EXM7777/status/2060736517564477901"
+    locator: "https://x.com/EXM7777/status/2060736517564477901"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: XEM7--article
+    source_id: XEM7
+    title: "article"
+    url: "https://x.com/i/article/2060729909690224640"
+    locator: "https://x.com/i/article/2060729909690224640"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
+  - id: XEM7--article-body
+    source_id: XEM7
+    title: "article body"
+    url: "https://x.com/i/article/2060729909690224640"
+    locator: "https://x.com/i/article/2060729909690224640"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: indexed
