@@ -42,13 +42,13 @@
 Для Codex:
 
 ```bash
-apm install --dev mekras/ai-agent-supervisor#^0.5.2 --target codex
+apm install --dev mekras/ai-agent-supervisor#^1.0.0 --target codex
 ```
 
 Для Claude Code:
 
 ```bash
-apm install --dev mekras/ai-agent-supervisor#^0.5.2 --target claude
+apm install --dev mekras/ai-agent-supervisor#^1.0.0 --target claude
 ```
 
 После установки навыки коллекции станут доступны агенту в этом проекте.
