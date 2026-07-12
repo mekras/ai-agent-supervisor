@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [1.0.0] - 2026-07-12
+
 ### Изменено
 
 - Навык настройки подагентов теперь получает каталог моделей от активной
@@ -18,6 +20,8 @@
   утверждения, привязанные к конкретным материалам источников.
 - Образец локальных настроек модельных прогонов больше не навязывает
   конкретные модели: можно выбрать подходящие модели и адаптеры в своей среде.
+- README теперь объясняет назначение коллекции, её подключение к Codex и
+  Claude Code и значимые источники, на которые она опирается.
 
 ### Исправлено
 
@@ -192,7 +196,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.2...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.2...1.0.0
 [0.5.2]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.4.5...0.5.0
