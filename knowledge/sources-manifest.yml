@@ -8,12 +8,12 @@ registry:
 tracked_data:
   root: knowledge/data
   source_pattern: knowledge/data/<source>/source.yml
-  item_pattern: knowledge/data/<source>/pages/<item>/item.yml
-  statement_pattern: knowledge/data/<source>/pages/<item>/statements.yml
+  item_pattern: knowledge/data/<source>/pages/<path>/item.yml
+  statement_pattern: knowledge/data/<source>/pages/<path>/statements.yml
   source_map_pattern: knowledge/data/<source>/source-map.yml
 
 local_data:
-  pattern: knowledge/data/<source>/pages/<item>/*.local.*
+  pattern: knowledge/data/<source>/pages/<path>/*.local.*
   policy: "Локальные исходные и нормализованные снимки не отслеживаются Git."
 
 source_ids: [AENG, APMP, ASES, ASKL, AZPF, CODX, GHAB, GIST, INSP, LCMS, LSME, PHSC, PPRX, PRFO, VSCD, XEM7]

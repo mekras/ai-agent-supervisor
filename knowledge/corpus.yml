@@ -3,8 +3,8 @@ tracked_data:
   root: data
   source_pattern: data/<source>/source.yml
   source_map_pattern: data/<source>/source-map.yml
-  source_unit_pattern: data/<source>/pages/<slug>/item.yml
-  statement_pattern: data/<source>/pages/<slug>/statements.yml
+  source_unit_pattern: data/<source>/pages/<path>/item.yml
+  statement_pattern: data/<source>/pages/<path>/statements.yml
 local_data:
   gitignore_rules: ["*.local.*", "*.local", "*.tmp.*"]
   local_file_pattern: "*.local.*"
@@ -13,7 +13,7 @@ local_data:
 source_units:
   website:
     unit: page
-    path_pattern: data/<source>/pages/<slug>
+    path_pattern: data/<source>/pages/<path>
 indexes:
   sources: catalog.yml
   items: index/items.yml

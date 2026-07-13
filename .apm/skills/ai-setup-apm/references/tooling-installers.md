@@ -45,7 +45,8 @@
 Навык `ai-setup-apm` доставляет оснастку модельных прогонов и переносимые
 валидаторы коллекции:
 
-- источник — `scripts/eval-tools/` (средство запуска `run-skill-evals.py`,
+- источник — `scripts/eval-tools/` (модуль разбора утверждений
+  `corpus_statements.py`, средство запуска `run-skill-evals.py`,
   валидаторы `validate-*.py`, включая проверку скрытых Unicode-символов,
   адаптеры `adapters/codex` и `adapters/claude`, образец
   `evals.local.yml.sample`);

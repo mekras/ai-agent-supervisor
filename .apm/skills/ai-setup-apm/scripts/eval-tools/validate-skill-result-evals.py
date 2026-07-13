@@ -5,17 +5,16 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 from pathlib import Path
 from typing import Any
 
-
-MARKDOWN_CLAIM_RE = re.compile(r"^### ([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
-YAML_CLAIM_RE = re.compile(r"^\s*-\s+id:\s*([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
-PORTABLE_STATEMENT_PATH_RE = re.compile(
-    r"^knowledge/data/[a-z0-9][a-z0-9-]*/pages/.+/statements\.yml$"
+from corpus_statements import (
+    collect_claim_ids,
+    extract_claim_block,
+    PORTABLE_STATEMENT_PATH_RE,
 )
+
 
 
 def parse_args() -> argparse.Namespace:
@@ -86,8 +85,7 @@ def collect_claims(repo_root: Path, statement_paths: set[str]) -> set[str]:
         if not path.is_file():
             continue
         content = path.read_text(encoding="utf-8")
-        claims.update(MARKDOWN_CLAIM_RE.findall(content))
-        claims.update(YAML_CLAIM_RE.findall(content))
+        claims.update(collect_claim_ids(content))
     return claims
 
 
@@ -125,6 +123,12 @@ def validate_source_basis(
                 )
             if not (repo_root / statement_path).is_file():
                 errors.append(f"{item_label}: statement_path does not exist")
+            elif isinstance(claim_id, str):
+                statement_text = (repo_root / statement_path).read_text(encoding="utf-8")
+                if not extract_claim_block(statement_text, claim_id):
+                    errors.append(
+                        f"{item_label}: claim_id {claim_id!r} has no readable statement block",
+                    )
 
     known_claims = collect_claims(repo_root, statement_paths)
     for claim_id in sorted(basis_claims - known_claims):

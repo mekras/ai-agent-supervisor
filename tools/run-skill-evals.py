@@ -18,7 +18,6 @@ import argparse
 import itertools
 import json
 import os
-import re
 import shlex
 import subprocess
 import sys
@@ -26,10 +25,11 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable
 
+from corpus_statements import extract_claim_block
+
 
 CONFIG_NAME = "evals.local.yml"
 SAMPLE_NAME = "evals.local.yml.sample"
-CLAIM_RE = re.compile(r"^### ([A-Z0-9]+-\d+)\s*$", re.MULTILINE)
 
 
 TRIGGER_SCHEMA = {
@@ -546,17 +546,6 @@ def filter_result_groups(
         if selected:
             filtered.append((skill_dir, data, selected))
     return filtered
-
-
-def extract_claim_block(statement_text: str, claim_id: str) -> str:
-    matches = list(CLAIM_RE.finditer(statement_text))
-    for index, match in enumerate(matches):
-        if match.group(1) != claim_id:
-            continue
-        start = match.start()
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(statement_text)
-        return statement_text[start:end].strip()
-    return ""
 
 
 def collect_source_basis_text(repo_root: Path, data: dict[str, Any]) -> list[dict[str, str]]:

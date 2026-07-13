@@ -2,7 +2,9 @@
 # Поля через '|': путь в пакете | путь от корня проекта | режим.
 # Единый источник отображения для install-eval-tools и check-eval-tools-drift.py.
 # Строки-комментарии начинаются с '#', пустые строки игнорируются.
+corpus_statements.py|tools/corpus_statements.py|644
 run-skill-evals.py|tools/run-skill-evals.py|644
+test-corpus-statements.py|tools/test-corpus-statements.py|644
 validate-hidden-unicode.py|tools/validate-hidden-unicode.py|644
 validate-skill-descriptions.py|tools/validate-skill-descriptions.py|644
 validate-trigger-evals.py|tools/validate-trigger-evals.py|644
