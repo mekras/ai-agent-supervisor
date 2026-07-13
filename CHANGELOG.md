@@ -7,6 +7,14 @@
 
 ## [Невыпущено]
 
+## [1.0.1] - 2026-07-13
+
+### Исправлено
+
+- Оснастка модельных проверок теперь извлекает утверждения из файлов YAML и
+  передаёт их текст проверяемой модели. Проверка сценариев результата также
+  принимает разные типы единиц корпуса, включая страницы, элементы и разделы.
+
 ## [1.0.0] - 2026-07-12
 
 ### Изменено
@@ -196,7 +204,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.2...1.0.0
 [0.5.2]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.0...0.5.1
