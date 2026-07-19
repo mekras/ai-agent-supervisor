@@ -6,7 +6,6 @@ statements:
     kind: fact
     text: "Токен доступа Codex следует хранить как секрет автоматизации, не записывать в журналы и регулярно ротировать; применять его допустимо только на доверенных исполнителях."
     excerpt: |-
-      Codex checks the token when a run starts and ties the run to that workspace identity. Treat the token like any other automation secret: store it in a secret manager, keep it out of logs, and rotate it regularly.
       Main risks to avoid:
       Leaked secrets:
       anyone with the token can start Codex runs as the token creator. Store tokens in a secret manager, keep them out of logs, and rotate them regularly.
