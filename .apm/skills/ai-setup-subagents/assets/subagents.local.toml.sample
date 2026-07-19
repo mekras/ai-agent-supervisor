@@ -1,6 +1,13 @@
 # Локальная политика подагентов. Не добавляйте рабочий файл в Git.
 # Идентификатор модели берите только из нативного каталога активной оснастки.
 
+[policy_review]
+# Состояния: "configured" или "creation_declined".
+# state = "configured"
+# interval_days = 30
+# Дата последней успешной проверки в формате YYYY-MM-DD.
+# last_checked_at = "YYYY-MM-DD"
+
 [adapters]
 # codex = ["tools/adapters/codex-subagents"]
 # claude = ["tools/adapters/claude-subagents"]
