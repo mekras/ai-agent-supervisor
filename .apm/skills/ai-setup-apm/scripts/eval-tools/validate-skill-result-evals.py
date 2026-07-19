@@ -371,7 +371,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print(f"Проверено файлов result-scenario eval: {checked}.")
+    print(f"Проверено сценариев результата: {checked}.")
     return 0
 
 

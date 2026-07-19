@@ -14,7 +14,8 @@ DEFAULT_TESTS = (
     "python3 tools/test-corpus-statements.py; "
     "python3 tools/validate-skill-descriptions.py \"$target\"; "
     "python3 tools/validate-trigger-evals.py \"$target\" --require-all; "
-    "python3 tools/validate-skill-result-evals.py \"$target\"'"
+    "python3 tools/validate-skill-result-evals.py \"$target\"; "
+    "python3 tools/validate-fixture-evals.py'"
 )
 
 # Optional model run kept out of the gate.

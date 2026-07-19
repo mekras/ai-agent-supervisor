@@ -1,0 +1,1 @@
+{"success_criteria":["модельный прогон вынесен из tests","сохранена отдельная цель evals","tests остаются детерминированными"],"failure_indicators":["модельный вызов остался в tests","модельный прогон удалён без отдельной цели"],"required_diff":{"paths":["apm.yml"],"must_include":["evals:"]}}

@@ -142,7 +142,7 @@ project/
 интеграции. Для репозитория с валидаторами навыков:
 
 ```bash
-sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/test-corpus-statements.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"'
+sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/test-corpus-statements.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/validate-fixture-evals.py'
 ```
 
 `scripts.evals` — опциональный модельный прогон. Это измерение качества, а не
@@ -181,6 +181,11 @@ python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"
 Средство запуска само вкладывает требование вернуть JSON в текст запроса и
 разбирает JSON из ответа, поэтому адаптеру достаточно вернуть текст модели.
 
+Если адаптер знает фактические метрики провайдера, он может вернуть обёртку
+`{"output":"<ответ>","usage":{...}}`. В `usage` допустимы `input_tokens`,
+`output_tokens`, `cost` и `elapsed_seconds`. Старый текстовый ответ остаётся
+совместимым; его метрики в отчёте являются оценочными.
+
 Адаптеры, список моделей и модель-судью задаёт локальный файл настроек
 `evals.local.yml` в корне проекта. В разделе `adapters` задают соответствие
 имени адаптера и команды, а модели и судью указывают в формате `адаптер:модель`,
@@ -195,6 +200,22 @@ python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"
 канонический источник и установщик в целевой проект описывает
 `tooling-installers.md`; не переписывай эти файлы в целевом проекте вручную, а
 ставь установщиком.
+
+## Project-fixture evals
+
+Для измерения реального вклада навыка создавай отдельный мини-проект в
+`evals/fixtures/<case>/`. В `evals/fixtures/registry.json` укажи запрос,
+целевой навык, каталог fixture и путь к оракулу. Оракул храни вне каталога
+fixture — например, в `evals/oracles/<case>.json`: он попадает только к
+модели-судье, а не в запрос кандидата.
+
+Средство запуска повторяет каждый fixture в трёх режимах: `baseline` без
+навыка, `skill` с целевым навыком и `catalog` с полным каталогом и проверкой
+маршрута. Число повторов задаётся только в локальном `evals.local.yml`
+(`repetitions`, по умолчанию 3). JSON-отчёт в `results_dir` содержит каждый
+прогон, долю прохождения по режимам, время и оценочные токены; стоимость
+появится, если локально заданы ставки `pricing`. Это оценка, а не точный счёт
+провайдера, поэтому не используй её как основание для биллинга.
 
 ## Выборочный запуск
 

@@ -215,7 +215,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print(f"Проверено файлов trigger-eval: {checked}.")
+    print(f"Проверено сценариев выбора навыка: {checked}.")
     return 0
 
 

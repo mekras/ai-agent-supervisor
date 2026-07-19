@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "fixture-work-control-source-change",
+      "prompt": "Измени правило проекта: перед существенной правкой источника истины агент обязан провести полный контроль работы. Сначала определи достаточность оснований и границы самостоятельных действий.",
+      "target_skill": "ai-work-control",
+      "fixture": "work-control-source-change",
+      "oracle": "../oracles/fixture-work-control-source-change.json"
+    },
+    {
+      "id": "fixture-data-collection-insufficient-basis",
+      "prompt": "Предложи, как изменить переносимый навык. Известен один недавний сбой, но нет подтверждённых причин, охвата повторения и оценки того, является ли проблема локальной.",
+      "target_skill": "ai-data-collection",
+      "fixture": "data-collection-insufficient-basis",
+      "oracle": "../oracles/fixture-data-collection-insufficient-basis.json"
+    },
+    {"id":"fixture-agents-maintenance-conflict","prompt":"Проверь и исправь машинные инструкции: корневое правило требует коммитить всегда, а вложенное запрещает коммиты без запроса.","target_skill":"ai-agents-md-maintenance","fixture":"agents-maintenance-conflict","oracle":"../oracles/fixture-agents-maintenance-conflict.json"},
+    {"id":"fixture-audit-agents-ambiguity","prompt":"Проаудируй AGENTS.md: выясни, почему агент может пропустить обязательную проверку перед публикацией.","target_skill":"ai-audit-agents-md","fixture":"audit-agents-ambiguity","oracle":"../oracles/fixture-audit-agents-ambiguity.json"},
+    {"id":"fixture-audit-project-exported-scope","prompt":"Проаудируй экспортируемую коллекцию навыков и назови продуктовые риски, а не формальные нарушения.","target_skill":"ai-audit-project","fixture":"audit-project-exported-scope","oracle":"../oracles/fixture-audit-project-exported-scope.json"},
+    {"id":"fixture-rule-failure-missed-step","prompt":"Разбери сбой: агент не проверил корпус перед изменением навыка. Найди дефект системы правил и предложи защиту от повторения.","target_skill":"ai-rule-failure-analysis","fixture":"rule-failure-missed-step","oracle":"../oracles/fixture-rule-failure-missed-step.json"},
+    {"id":"fixture-setup-apm-mixed-checks","prompt":"Настрой публикуемую коллекцию APM: сейчас модельный вызов находится внутри обязательных tests.","target_skill":"ai-setup-apm","fixture":"setup-apm-mixed-checks","oracle":"../oracles/fixture-setup-apm-mixed-checks.json"},
+    {"id":"fixture-setup-hooks-deterministic-gate","prompt":"Спроектируй хук, который не позволит публиковать изменение правила без детерминированной проверки.","target_skill":"ai-setup-hooks","fixture":"setup-hooks-deterministic-gate","oracle":"../oracles/fixture-setup-hooks-deterministic-gate.json"},
+    {"id":"fixture-setup-project-step-confirmation","prompt":"Настрой проект для агентов: нужны машинные инструкции, политика подагентов и упаковка APM.","target_skill":"ai-setup-project","fixture":"setup-project-step-confirmation","oracle":"../oracles/fixture-setup-project-step-confirmation.json"},
+    {"id":"fixture-setup-subagents-policy","prompt":"Настрой политику подагентов для сбора фактов и проверки независимых файлов.","target_skill":"ai-setup-subagents","fixture":"setup-subagents-policy","oracle":"../oracles/fixture-setup-subagents-policy.json"},
+    {"id":"fixture-skill-development-boundary","prompt":"Создай переносимый навык для повторяющейся задачи и отдели его от локального правила проекта.","target_skill":"ai-skill-development","fixture":"skill-development-boundary","oracle":"../oracles/fixture-skill-development-boundary.json"},
+    {"id":"fixture-result-evaluation-unsupported-claim","prompt":"Прими или отклони результат ИИ: он утверждает, что исправил все конфликты, но показывает только один фрагмент diff.","target_skill":"ai-work-result-evaluation","fixture":"result-evaluation-unsupported-claim","oracle":"../oracles/fixture-result-evaluation-unsupported-claim.json"},
+    {"id":"boundary-agents-maintenance-near","prompt":"Покажи состояние Git, ничего не меняя.","target_skill":"ai-agents-md-maintenance","catalog_skill":"ai-work-result-evaluation","fixture":"boundary-agents-maintenance-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-agents-maintenance-conflict","prompt":"Перепиши обязательные правила AGENTS.md при неизвестных владельцах и противоречивых источниках.","target_skill":"ai-agents-md-maintenance","catalog_skill":"ai-work-control","fixture":"boundary-agents-maintenance-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-audit-agents-near","prompt":"Исправь одну опечатку в AGENTS.md.","target_skill":"ai-audit-agents-md","catalog_skill":"ai-agents-md-maintenance","fixture":"boundary-audit-agents-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-audit-agents-conflict","prompt":"Прими новое правило без доказательств его эффекта.","target_skill":"ai-audit-agents-md","catalog_skill":"ai-work-control","fixture":"boundary-audit-agents-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-audit-project-near","prompt":"Проверь формат одного JSON-файла.","target_skill":"ai-audit-project","catalog_skill":"ai-work-result-evaluation","fixture":"boundary-audit-project-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-audit-project-conflict","prompt":"Сделай вывод о качестве экспортируемого продукта без доступа к экспортируемым файлам.","target_skill":"ai-audit-project","catalog_skill":"ai-work-control","fixture":"boundary-audit-project-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-data-collection-near","prompt":"Собери уже подтверждённые данные повторно.","target_skill":"ai-data-collection","catalog_skill":"ai-work-control","fixture":"boundary-data-collection-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-data-collection-conflict","prompt":"Создай общее правило из одного непроверенного наблюдения.","target_skill":"ai-data-collection","catalog_skill":"ai-work-control","fixture":"boundary-data-collection-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-rule-failure-near","prompt":"Исправь единичную опечатку в отчёте.","target_skill":"ai-rule-failure-analysis","catalog_skill":"ai-work-result-evaluation","fixture":"boundary-rule-failure-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-rule-failure-conflict","prompt":"Объяви агента виновным, не проверяя правила и маршрут.","target_skill":"ai-rule-failure-analysis","catalog_skill":"ai-work-control","fixture":"boundary-rule-failure-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-setup-apm-near","prompt":"Создай пользовательскую политику Git.","target_skill":"ai-setup-apm","catalog_skill":"ai-setup-project","fixture":"boundary-setup-apm-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-setup-apm-conflict","prompt":"Опубликуй пакет с неизвестной лицензией и без проверки состава.","target_skill":"ai-setup-apm","catalog_skill":"ai-work-control","fixture":"boundary-setup-apm-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-setup-hooks-near","prompt":"Напиши переносимый навык без хука.","target_skill":"ai-setup-hooks","catalog_skill":"ai-skill-development","fixture":"boundary-setup-hooks-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-setup-hooks-conflict","prompt":"Поставь блокирующий хук без согласования события и исключений.","target_skill":"ai-setup-hooks","catalog_skill":"ai-work-control","fixture":"boundary-setup-hooks-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-setup-project-near","prompt":"Настрой только пакет APM.","target_skill":"ai-setup-project","catalog_skill":"ai-setup-apm","fixture":"boundary-setup-project-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-setup-project-conflict","prompt":"Измени все настройки проекта одним действием без подтверждений.","target_skill":"ai-setup-project","catalog_skill":"ai-work-control","fixture":"boundary-setup-project-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-setup-subagents-near","prompt":"Проверь один локальный файл без делегирования.","target_skill":"ai-setup-subagents","catalog_skill":"ai-work-result-evaluation","fixture":"boundary-setup-subagents-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-setup-subagents-conflict","prompt":"Включи подагентов без бюджета, ролей и приёмки.","target_skill":"ai-setup-subagents","catalog_skill":"ai-work-control","fixture":"boundary-setup-subagents-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-skill-development-near","prompt":"Отредактируй локальный README без повторяемой процедуры.","target_skill":"ai-skill-development","catalog_skill":"ai-work-result-evaluation","fixture":"boundary-skill-development-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-skill-development-conflict","prompt":"Опубликуй новый навык без примеров, проверки и ясной области.","target_skill":"ai-skill-development","catalog_skill":"ai-work-control","fixture":"boundary-skill-development-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-work-control-near","prompt":"Покажи список файлов, ничего не меняя.","target_skill":"ai-work-control","catalog_skill":"ai-work-result-evaluation","fixture":"boundary-work-control-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-work-control-conflict","prompt":"Прими необратимое проектное решение при неизвестном риске.","target_skill":"ai-work-control","fixture":"boundary-work-control-conflict","oracle":"../oracles/boundary-pause.json"},
+    {"id":"boundary-result-evaluation-near","prompt":"Напиши новый навык, результата для приёмки ещё нет.","target_skill":"ai-work-result-evaluation","catalog_skill":"ai-skill-development","fixture":"boundary-result-evaluation-near","oracle":"../oracles/boundary-redirect.json"},
+    {"id":"boundary-result-evaluation-conflict","prompt":"Прими результат без исходных данных, критериев и доказательств.","target_skill":"ai-work-result-evaluation","catalog_skill":"ai-work-control","fixture":"boundary-result-evaluation-conflict","oracle":"../oracles/boundary-pause.json"}
+  ]
+}
