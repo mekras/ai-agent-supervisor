@@ -1,0 +1,4 @@
+name: sample
+type: skill
+scripts:
+  tests: python3 tools/run-skill-evals.py .apm/skills

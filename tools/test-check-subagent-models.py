@@ -82,7 +82,7 @@ def main() -> int:
         role_config.write_text("[roles.reviewer]\nmodel = 'exact'\neffort = 'low'\nsandbox = 'read-only'\nadapter = '" + str(role_adapter) + "'\ncontract = { writes = false }\n", encoding="utf-8")
         failed_role = subprocess.run([str(ROLE_RUNNER), "reviewer", "--config", str(role_config), "--out", str(directory / "runs")], input="no prompt is retained", text=True, capture_output=True, check=False)
         assert failed_role.returncode != 0
-    print("check-subagent-models: passed")
+    print("Проверка моделей подагентов пройдена.")
     return 0
 
 
