@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.0.0] - 2026-07-20
+
 ### Изменено
 
 - Навык создания и сопровождения навыков теперь явно оценивает, какие
@@ -17,6 +19,17 @@
   `ai-work-control`, чтобы не повторять одну проверку дважды.
 - Сбор данных не повторяет уже подтверждённые сведения и запускается только
   при недостаточных, противоречивых или непроверяемых основаниях.
+
+### Удалено
+
+- Навык `ai-application-check`; его быстрый предварительный контроль перенесён
+  в `ai-work-control`.
+
+### Действия при обновлении
+
+- Замените ссылки и маршрутизацию через `ai-application-check` на
+  `ai-work-control`: для неочевидной задачи используйте режим `screening`,
+  для изменения источника истины — `full`.
 
 ### Исправлено
 
@@ -222,7 +235,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.1...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.1...2.0.0
 [1.0.1]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.2...1.0.0
 [0.5.2]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.1...0.5.2
