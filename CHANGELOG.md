@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.0.1] - 2026-07-22
+
 ### Добавлено
 
 - Добавлен реестр требований к публикуемой коллекции. Первое требование
@@ -248,7 +250,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.1...HEAD
+[2.0.1]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.1...2.0.0
 [1.0.1]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/mekras/ai-agent-supervisor/compare/0.5.2...1.0.0
