@@ -90,13 +90,12 @@ description: >
      каталога навыка и отдельного сценария через переменную среды.
    Не записывай команды, которые ссылаются на отсутствующие файлы; сначала
    найди существующие проверки либо создай недостающий скрипт в рамках задачи.
-9. Для стандартной структуры этого репозитория после переноса исходников
-   в `.apm/skills` используй две команды.
+9. Для коллекции с исходниками в `.apm/skills` используй две команды.
 
    Контроль качества без модели:
 
    ```bash
-   sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/test-corpus-statements.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"'
+   sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"'
    ```
 
    Опциональный модельный прогон:

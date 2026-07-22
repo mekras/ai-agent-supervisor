@@ -1,0 +1,1178 @@
+{
+  "format_version": 1,
+  "purpose": "Внутренняя прослеживаемость сценариев результата к источникам проекта; файл не входит в публикуемую коллекцию.",
+  "skills": {
+    "ai-agents-md-maintenance": {
+      "source_basis": [
+        {
+          "claim_id": "CODX-002",
+          "statement_path": "knowledge/data/codx/pages/rules/statements.yml"
+        },
+        {
+          "claim_id": "CODX-003",
+          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
+        },
+        {
+          "claim_id": "CODX-001",
+          "statement_path": "knowledge/data/codx/pages/agents-md/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "VSCD-001",
+          "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-agents-md-maintenance-result-split-overloaded-root",
+          "required_claims": [
+            "CODX-002",
+            "CODX-003",
+            "CODX-001",
+            "ASKL-004",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-002",
+              "CODX-003",
+              "VSCD-001"
+            ],
+            [
+              "CODX-001",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-add-claude-entrypoint-without-rule-duplication",
+          "required_claims": [
+            "CODX-002",
+            "CODX-003",
+            "CODX-001",
+            "ASKL-004",
+            "VSCD-001",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "VSCD-001",
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-review-only-routes-to-audit",
+          "required_claims": [
+            "CODX-001",
+            "ASKL-004",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004"
+            ],
+            [
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-preserve-existing-git-policy",
+          "required_claims": [
+            "CODX-002",
+            "CODX-003",
+            "CODX-001",
+            "ASKL-004",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004"
+            ],
+            [
+              "CODX-002",
+              "CODX-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-apply-agent-only-git-policy",
+          "required_claims": [
+            "CODX-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-audit-agents-md": {
+      "source_basis": [
+        {
+          "claim_id": "CODX-002",
+          "statement_path": "knowledge/data/codx/pages/rules/statements.yml"
+        },
+        {
+          "claim_id": "CODX-003",
+          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
+        },
+        {
+          "claim_id": "CODX-004",
+          "statement_path": "knowledge/data/codx/pages/security/statements.yml"
+        },
+        {
+          "claim_id": "CODX-001",
+          "statement_path": "knowledge/data/codx/pages/agents-md/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "VSCD-001",
+          "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-audit-agents-md-result-machine-entry-vs-readme",
+          "required_claims": [
+            "CODX-001",
+            "ASKL-004",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agents-md-result-duplicate-claude-entrypoint",
+          "required_claims": [
+            "CODX-002",
+            "CODX-003",
+            "VSCD-001",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "VSCD-001",
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agents-md-result-nested-conflict",
+          "required_claims": [
+            "CODX-002",
+            "CODX-003",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-002",
+              "CODX-003"
+            ],
+            [
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agents-md-result-operational-specificity",
+          "required_claims": [
+            "CODX-001",
+            "CODX-001",
+            "ASKL-004",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004",
+              "CODX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agents-md-result-context-size-and-splitting",
+          "required_claims": [
+            "CODX-004",
+            "ASKL-004",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-004"
+            ],
+            [
+              "ASKL-004",
+              "VSCD-001"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-audit-project": {
+      "source_basis": [
+        {
+          "claim_id": "CODX-002",
+          "statement_path": "knowledge/data/codx/pages/rules/statements.yml"
+        },
+        {
+          "claim_id": "CODX-001",
+          "statement_path": "knowledge/data/codx/pages/agents-md/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "VSCD-001",
+          "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-audit-project-result-apm-skills-rules",
+          "required_claims": [
+            "CODX-002",
+            "CODX-001",
+            "ASKL-004",
+            "VSCD-001",
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ],
+            [
+              "CODX-002",
+              "CODX-001",
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-project-result-human-readme-context",
+          "required_claims": [
+            "CODX-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-project-result-open-problem-taxonomy",
+          "required_claims": [
+            "ASKL-004",
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004",
+              "ASKL-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-project-result-weak-skill-evals",
+          "required_claims": [
+            "ASKL-004",
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-data-collection": {
+      "source_basis": [
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "PPRX-001",
+          "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-data-collection-result-skill-change-basis",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-rule-failure-analysis": {
+      "source_basis": [
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "PPRX-001",
+          "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-rule-failure-analysis-result-missed-required-step",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-setup-apm": {
+      "source_basis": [
+        {
+          "claim_id": "APMP-001",
+          "statement_path": "knowledge/data/apmp/pages/overview/statements.yml"
+        },
+        {
+          "claim_id": "APMP-002",
+          "statement_path": "knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml"
+        },
+        {
+          "claim_id": "APMP-003",
+          "statement_path": "knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml"
+        },
+        {
+          "claim_id": "APMP-004",
+          "statement_path": "knowledge/data/apmp/pages/compile/statements.yml"
+        },
+        {
+          "claim_id": "APMP-005",
+          "statement_path": "knowledge/data/apmp/pages/pack-a-bundle/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "PPRX-001",
+          "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        },
+        {
+          "claim_id": "APMP-006",
+          "statement_path": "knowledge/data/apmp/pages/preview-and-validate/statements.yml"
+        },
+        {
+          "claim_id": "APMP-008",
+          "statement_path": "knowledge/data/apmp/pages/package-relative-links/statements.yml"
+        },
+        {
+          "claim_id": "APMP-009",
+          "statement_path": "knowledge/data/apmp/pages/author-primitives-skills/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-setup-apm-result-create-manifest-with-tests",
+          "required_claims": [
+            "APMP-001",
+            "APMP-003",
+            "APMP-004",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "APMP-001",
+              "PPRX-001"
+            ],
+            [
+              "APMP-001",
+              "APMP-004",
+              "PPRX-001"
+            ],
+            [
+              "APMP-003",
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-update-existing-manifest-preserve-metadata",
+          "required_claims": [
+            "APMP-001",
+            "APMP-002",
+            "APMP-003",
+            "APMP-004",
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "APMP-003",
+              "ASKL-004"
+            ],
+            [
+              "APMP-001",
+              "APMP-004"
+            ],
+            [
+              "APMP-002",
+              "APMP-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-root-skills-to-apm-source-tree",
+          "required_claims": [
+            "APMP-001",
+            "APMP-003",
+            "APMP-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "APMP-001",
+              "APMP-004",
+              "PPRX-001"
+            ],
+            [
+              "APMP-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-selective-tests-preserve-full-run",
+          "required_claims": [
+            "APMP-003",
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "APMP-003",
+              "ASKL-004"
+            ],
+            [
+              "ASKL-003",
+              "ASKL-004",
+              "PPRX-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-do-not-stop-after-first-packaging-defect",
+          "required_claims": [
+            "APMP-001",
+            "APMP-003",
+            "APMP-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "APMP-001",
+              "APMP-004",
+              "PPRX-001"
+            ],
+            [
+              "APMP-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-stop-on-consumer-apm-dependency",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-keep-direct-dependency-intent",
+          "required_claims": [
+            "ASKL-004",
+            "ASKL-004",
+            "APMP-006",
+            "APMP-008"
+          ],
+          "finding_claims": [
+            [
+              "APMP-006",
+              "APMP-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-interpret-apm-audit-drift",
+          "required_claims": [
+            "ASKL-004",
+            "ASKL-004",
+            "APMP-009"
+          ],
+          "finding_claims": [
+            [
+              "APMP-009"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-portable-tests-split",
+          "required_claims": [
+            "APMP-003",
+            "APMP-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "APMP-003",
+              "PPRX-001"
+            ],
+            [
+              "APMP-004",
+              "APMP-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-deliver-eval-tools-via-installer",
+          "required_claims": [
+            "APMP-004",
+            "APMP-005",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "APMP-004",
+              "APMP-005"
+            ],
+            [
+              "APMP-004",
+              "PPRX-001"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-setup-hooks": {
+      "source_basis": [
+        {
+          "claim_id": "APMP-004",
+          "statement_path": "knowledge/data/apmp/pages/compile/statements.yml"
+        },
+        {
+          "claim_id": "APMP-002",
+          "statement_path": "knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-setup-hooks-result-split-checkable-rules",
+          "required_claims": [
+            "APMP-004"
+          ],
+          "finding_claims": [
+            [
+              "APMP-004"
+            ],
+            [
+              "APMP-002"
+            ],
+            [
+              "APMP-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-setup-project": {
+      "source_basis": [
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "APMP-002",
+          "statement_path": "knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml"
+        },
+        {
+          "claim_id": "VSCD-001",
+          "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-setup-project-result-delegate-by-steps",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003"
+            ],
+            [
+              "ASKL-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-offer-claude-entrypoint-from-apm-targets",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-003",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-003",
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-apm-consumer-product-route",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-003",
+            "APMP-002",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-003"
+            ],
+            [
+              "APMP-002",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-select-git-index-policy",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-subagent-review-expired",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-subagent-review-explicit-request-overrides-refusal",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-subagent-review-missing-decision",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-subagent-review-fresh-policy-skipped",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-subagent-review-declined-skipped",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-setup-subagents": {
+      "source_basis": [
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "PPRX-001",
+          "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-setup-subagents-result-codex-implementation-boundary",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-claude-entrypoint-keeps-single-policy-source",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-policy-only-no-edits",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-target-project-policy-boundary",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-local-policy-model-adapters",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-periodic-review-state",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-skill-development": {
+      "source_basis": [
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "PPRX-001",
+          "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        },
+        {
+          "claim_id": "AENG-002",
+          "statement_path": "knowledge/data/aeng/pages/effective-context-engineering-for-ai-agents/statements.yml"
+        },
+        {
+          "claim_id": "LSME-003",
+          "statement_path": "knowledge/data/lsme/pages/trajectory-evals/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-skill-development-result-maintained-skill-missing-tests",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-stale-existing-tests",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-proxy-only-eval-insufficient",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-review-whole-skill-before-patching",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-selective-tests-with-quality-gate",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-script-decision",
+          "required_claims": [
+            "ASKL-004",
+            "AENG-002",
+            "LSME-003"
+          ],
+          "finding_claims": [
+            [
+              "AENG-002",
+              "LSME-003"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-work-control": {
+      "source_basis": [
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "PPRX-001",
+          "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-work-control-result-before-source-of-truth-change",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-work-control-result-screening-ambiguous-task",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-work-control-result-full-sufficient-basis-skips-data-collection",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-work-result-evaluation": {
+      "source_basis": [
+        {
+          "claim_id": "ASKL-003",
+          "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "PPRX-001",
+          "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-work-result-evaluation-result-subagent-evidence",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004",
+              "ASKL-004"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

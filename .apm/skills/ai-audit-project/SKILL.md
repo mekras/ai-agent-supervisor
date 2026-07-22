@@ -25,26 +25,6 @@ description: >
 как правила учитывай только явные обращения к ИИ, агенту, помощнику или
 инструменту автоматизации.
 
-## Основания корпуса знаний
-
-Навык опирается на локальный корпус:
-
-- `knowledge/data/codx/pages/agents-md/statements.yml` — обнаружение и объединение `AGENTS.md`,
-  область действия и риск лимита контекста;
-- `knowledge/data/codx/pages/agents-md/statements.yml` — ценность конкретных инструкций, команд,
-  границ, ролей и примеров;
-- `knowledge/data/codx/pages/agents-md/statements.yml` — разделение машинных инструкций и README,
-  риски секретов, раздувания и устаревания;
-- `knowledge/data/askl/pages/evaluating-skills/statements.yml` — вред перегруженных инструкций и польза
-  структуры `WHAT/WHY/HOW`;
-- `knowledge/data/vscd/pages/custom-instructions/statements.yml` — несколько файлов инструкций и риск
-  неопределённого порядка применения;
-- `knowledge/data/askl/pages/evaluating-skills/statements.yml` и `knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml` — правила
-  разработки навыков, проверки триггеров и сопровождения по реальным ошибкам.
-
-Положения корпуса являются основанием для проверки, но не заменяют чтение
-текущих файлов проекта.
-
 Контрольные маршруты проекта проверяй по рабочим навыкам:
 
 - `ai-work-control`;

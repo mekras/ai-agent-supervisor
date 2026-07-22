@@ -142,7 +142,7 @@ project/
 интеграции. Для репозитория с валидаторами навыков:
 
 ```bash
-sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/test-corpus-statements.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/validate-fixture-evals.py'
+sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/validate-fixture-evals.py'
 ```
 
 `scripts.evals` — опциональный модельный прогон. Это измерение качества, а не

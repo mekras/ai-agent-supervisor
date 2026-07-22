@@ -1,55 +1,5 @@
 {
   "skill_name": "ai-setup-apm",
-  "source_basis": [
-    {
-      "claim_id": "APMP-001",
-      "statement_path": "knowledge/data/apmp/pages/overview/statements.yml"
-    },
-    {
-      "claim_id": "APMP-002",
-      "statement_path": "knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml"
-    },
-    {
-      "claim_id": "APMP-003",
-      "statement_path": "knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml"
-    },
-    {
-      "claim_id": "APMP-004",
-      "statement_path": "knowledge/data/apmp/pages/compile/statements.yml"
-    },
-    {
-      "claim_id": "APMP-005",
-      "statement_path": "knowledge/data/apmp/pages/pack-a-bundle/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-003",
-      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-004",
-      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-    },
-    {
-      "claim_id": "PPRX-001",
-      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
-    },
-    {
-      "claim_id": "APMP-006",
-      "statement_path": "knowledge/data/apmp/pages/preview-and-validate/statements.yml"
-    },
-    {
-      "claim_id": "APMP-007",
-      "statement_path": "knowledge/data/apmp/pages/publish-to-a-marketplace/statements.yml"
-    },
-    {
-      "claim_id": "APMP-008",
-      "statement_path": "knowledge/data/apmp/pages/package-relative-links/statements.yml"
-    },
-    {
-      "claim_id": "APMP-009",
-      "statement_path": "knowledge/data/apmp/pages/author-primitives-skills/statements.yml"
-    }
-  ],
   "cases": [
     {
       "id": "ai-setup-apm-result-create-manifest-with-tests",
@@ -76,14 +26,6 @@
           "purpose": "запуск тестов навыков"
         }
       ],
-      "required_corpus_claims": [
-        "APMP-001",
-        "APMP-003",
-        "APMP-004",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "назван созданный apm.yml",
@@ -95,32 +37,18 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-001",
-              "PPRX-001"
-            ],
             "observed_problem": "репозиторий с .apm/skills не имеет манифеста APM и поэтому не оформлен как пакет коллекции.",
             "expected_conclusion": "нужно создать минимальный apm.yml для публикации коллекции навыков",
             "acceptable_fix_direction": "создать манифест с именем, версией, type skill, targets, includes auto, dependencies и scripts.tests с валидатором budget description"
           },
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-001",
-              "APMP-004",
-              "PPRX-001"
-            ],
             "observed_problem": "локальные навыки оформлены как исходники APM, но манифест не включает их через includes.",
             "expected_conclusion": "обычная коллекция с .apm/skills должна иметь includes: auto или явный список путей .apm/skills",
             "acceptable_fix_direction": "добавить includes: auto в новый манифест или проверить существующий явный includes"
           },
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-003",
-              "ASKL-004",
-              "ASKL-004"
-            ],
             "observed_problem": "команда apm run tests не настроена и не может служить повторяемой проверкой коллекции.",
             "expected_conclusion": "scripts.tests должен запускать реальные тесты коллекции, включая проверку скрытых Unicode-символов и бюджет description, а не заглушку или несуществующие файлы",
             "acceptable_fix_direction": "записать команду, которая вызывает найденные валидаторы скрытых Unicode-символов, бюджета description и сценариев навыков"
@@ -175,7 +103,7 @@
         {
           "path": "apm.yml",
           "purpose": "существующий манифест APM",
-          "content": "name: example-collection\nversion: 0.2.3\ndescription: Пример коллекции навыков\nauthor: example-team\nlicense: MIT\ntarget:\n- codex\ntype: skill\ndependencies:\n  apm:\n  - example-org/example-corpus#^0.4.0\n  mcp: []\n"
+          "content": "name: example-collection\nversion: 0.2.3\ndescription: Пример коллекции навыков\nauthor: example-team\nlicense: MIT\ntarget:\n- codex\ntype: skill\ndependencies:\n  apm:\n  - example-org/example-analysis#^0.4.0\n  mcp: []\n"
         },
         {
           "path": ".apm/skills/example-skill/SKILL.md",
@@ -203,14 +131,6 @@
           "content": "#!/usr/bin/env python3\n\"\"\"Validate result scenario files.\"\"\"\n"
         }
       ],
-      "required_corpus_claims": [
-        "APMP-001",
-        "APMP-002",
-        "APMP-003",
-        "APMP-004",
-        "ASKL-003",
-        "ASKL-004"
-      ],
       "expected_output": {
         "report_structure": [
           "названы сохранённые поля существующего apm.yml",
@@ -222,30 +142,18 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-003",
-              "ASKL-004"
-            ],
             "observed_problem": "существующий манифест APM не содержит scripts.tests с проверкой бюджета description, поэтому стандартная команда проверки коллекции неполна.",
             "expected_conclusion": "нужно добавить scripts.tests, сохранив существующие метаданные",
             "acceptable_fix_direction": "обновить только недостающую секцию scripts или поле tests"
           },
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-001",
-              "APMP-004"
-            ],
             "observed_problem": "существующий манифест APM не содержит includes при локальном дереве .apm/skills, поэтому установка пакета может не разворачивать локальные примитивы.",
             "expected_conclusion": "нужно добавить includes: auto или проверить явный список includes, не меняя метаданные пакета",
             "acceptable_fix_direction": "добавить includes: auto, если includes отсутствует"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "APMP-002",
-              "APMP-004"
-            ],
             "observed_problem": "пакет только из .apm/skills ошибочно получает обязательный шаг apm compile или commands, зависящие от целевой среды, вместо переносимой настройки scripts.tests.",
             "expected_conclusion": "для коллекции только из .apm/skills compile не является обязательным, а scripts.tests достаточно для apm run tests",
             "acceptable_fix_direction": "не добавлять compile в обязательный тестовый цикл без instructions и не подменять переносимую настройку hooks/commands"
@@ -314,13 +222,6 @@
           "purpose": "средство запуска модельных проверок"
         }
       ],
-      "required_corpus_claims": [
-        "APMP-001",
-        "APMP-003",
-        "APMP-004",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названо расхождение: корневой skills/ не является обычным исходным деревом APM-пакета",
@@ -332,21 +233,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-001",
-              "APMP-004",
-              "PPRX-001"
-            ],
             "observed_problem": "пакет хранит переносимые навыки в корневом skills/, поэтому локальная установка APM не видит исходное дерево .apm/skills.",
             "expected_conclusion": "исходники коллекции с несколькими навыками нужно разместить в .apm/skills/**, а корневой skills/ не считать достаточной APM-структурой без явной совместимой схемы",
             "acceptable_fix_direction": "перенести каталоги навыков в .apm/skills и обновить документацию или команды, которые ссылались на старый путь"
           },
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-003",
-              "ASKL-004"
-            ],
             "observed_problem": "apm.yml не содержит includes, поэтому локальные примитивы из .apm не разворачиваются при установке пакета.",
             "expected_conclusion": "для обычного локального дерева .apm нужен includes: auto или явный список публикуемых путей",
             "acceptable_fix_direction": "добавить includes: auto, если нет осознанного явного includes"
@@ -417,13 +309,6 @@
           "content": "parser.add_argument(\"--case-id\", action=\"append\", default=[])\nenv_case_ids = os.environ.get(\"APM_EVAL_CASE_ID\", \"\")\n# The runner filters trigger and result scenarios by the selected id before model calls.\n"
         }
       ],
-      "required_corpus_claims": [
-        "APMP-003",
-        "ASKL-003",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названы команды полного модельного прогона и выборочного запуска",
@@ -435,21 +320,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-003",
-              "ASKL-004"
-            ],
             "observed_problem": "ускорение предлагается как постоянное урезание полного прогона или возврат модельных вызовов в контроль качества tests, из-за чего проверка коллекции перестаёт быть полной по умолчанию или теряет переносимость.",
             "expected_conclusion": "полный модельный прогон evals должен остаться поведением по умолчанию, а ускорение должно задаваться явным фильтром пути или идентификатора сценария без возврата модели в tests",
             "acceptable_fix_direction": "оставить scripts.evals полным по умолчанию и запускать узкий цикл через APM_EVAL_PATH=.apm/skills/<name> и APM_EVAL_CASE_ID=<id>"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-003",
-              "ASKL-004",
-              "PPRX-001"
-            ],
             "observed_problem": "модельный прогон не различает проверку одного навыка и одного сценария результата, поэтому разработчик вынужден прогонять всю коллекцию после каждой локальной правки.",
             "expected_conclusion": "инфраструктура коллекции должна позволять узкий прогон без удаления проверок качества",
             "acceptable_fix_direction": "документировать варианты запуска evals для .apm/skills/<name> и конкретного id сценария"
@@ -509,13 +385,6 @@
           "purpose": "средство запуска проверок навыков"
         }
       ],
-      "required_corpus_claims": [
-        "APMP-001",
-        "APMP-003",
-        "APMP-004",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "назван локальный дефект упаковки и его исправление",
@@ -527,21 +396,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-001",
-              "APMP-004",
-              "PPRX-001"
-            ],
             "observed_problem": "локальный дефект публикуемого состава может скрыть незавершённую структурную приёмку всей коллекции APM.",
             "expected_conclusion": "удаление одного .pyc не завершает setup без отдельной проверки манифеста, .apm/skills, includes, scripts.tests и повторной упаковки после правки",
             "acceptable_fix_direction": "исправить артефакт и затем пройти явный чек-лист структурной готовности или назвать непроверенные свойства"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "APMP-003",
-              "ASKL-004"
-            ],
             "observed_problem": "apm audit --ci --no-policy --no-drift может пройти даже при пропущенной проверке дрейфа и не доказывает полную готовность коллекции.",
             "expected_conclusion": "такой audit полезен как частичное подтверждение, но его нужно явно отделять от структурной приёмки",
             "acceptable_fix_direction": "в отчёте назвать сниженное покрытие и не использовать этот запуск как единственное доказательство готовности"
@@ -590,19 +450,13 @@
         {
           "path": "apm.yml",
           "purpose": "потребительский манифест APM",
-          "content": "name: knowlege\nversion: 0.1.0\ntargets:\n  - claude\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.2.0\n"
+          "content": "name: example-project\nversion: 0.1.0\ntargets:\n  - claude\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.2.0\n"
         },
         {
           "path": "AGENTS.md",
           "purpose": "локальные инструкции клиентского проекта",
           "content": "# AGENTS.md\n\nЛокальные инструкции проекта.\n"
         }
-      ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -615,19 +469,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "PPRX-001"
-            ],
             "observed_problem": "проект-потребитель с devDependencies.apm ошибочно принимается за публикуемый пакет только из-за apm.yml и APM-зависимости.",
             "expected_conclusion": "нужно классифицировать проект как потребителя, не создавать producer-структуру и вернуть настройку клиентского контура в клиентский маршрут",
             "acceptable_fix_direction": "явно назвать отсутствие .apm/skills, .apm/agents и publishable .apm/instructions, не менять apm.yml как producer-манифест и перенаправить настройку клиентского контура в ai-setup-project, ai-agents-md-maintenance или клиентские инструкции"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004"
-            ],
             "observed_problem": "цель `claude` в `targets` теряется при маршрутизации, хотя она указывает на отдельную клиентскую обвязку.",
             "expected_conclusion": "ветка ai-setup-apm должна явно назвать признак `claude`, но не настраивать `CLAUDE.md` самостоятельно",
             "acceptable_fix_direction": "зафиксировать в отчёте, что `targets: [claude]` относится к клиентскому маршруту и требует проверки `CLAUDE.md` в ai-setup-project или ai-agents-md-maintenance"
@@ -674,29 +521,23 @@
     },
     {
       "id": "ai-setup-apm-result-keep-direct-dependency-intent",
-      "prompt": "В проекте-потребителе в apm.yml напрямую указан только example-org/example-skills в devDependencies.apm, а в apm.lock.yaml и .agents/skills развёрнуты ещё example-collection, example-language, example-corpus и example-text. Предлагаю перенести их все в dependencies.apm, чтобы apm.yml отражал фактический набор навыков. Разберись, нужно ли это.",
+      "prompt": "В проекте-потребителе в apm.yml напрямую указан только example-org/example-skills в devDependencies.apm, а в apm.lock.yaml и .agents/skills развёрнуты ещё example-collection, example-language, example-analysis и example-text. Предлагаю перенести их все в dependencies.apm, чтобы apm.yml отражал фактический набор навыков. Разберись, нужно ли это.",
       "input_files": [
         {
           "path": "apm.yml",
           "purpose": "манифест проекта-потребителя с одной прямой зависимостью APM",
-          "content": "name: knowlege\nversion: 1.0.0\ndependencies:\n  apm: []\n  mcp: []\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.4.0\n"
+          "content": "name: example-project\nversion: 1.0.0\ndependencies:\n  apm: []\n  mcp: []\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.4.0\n"
         },
         {
           "path": "apm.lock.yaml",
           "purpose": "файл блокировки с развёрнутым графом прямого и транзитивных пакетов",
-          "content": "lockfile_version: '2'\ndependencies:\n  - repo_url: example-org/example-skills\n    constraint: ^0.4.0\n  - repo_url: example-org/example-collection\n    constraint: ^0.4.4\n  - repo_url: example-org/example-language\n    constraint: ^1.2.4\n  - repo_url: example-org/example-corpus\n    constraint: ^0.5.0\n  - repo_url: example-org/example-text\n    constraint: ^1.8.0\n"
+          "content": "lockfile_version: '2'\ndependencies:\n  - repo_url: example-org/example-skills\n    constraint: ^0.4.0\n  - repo_url: example-org/example-collection\n    constraint: ^0.4.4\n  - repo_url: example-org/example-language\n    constraint: ^1.2.4\n  - repo_url: example-org/example-analysis\n    constraint: ^0.5.0\n  - repo_url: example-org/example-text\n    constraint: ^1.8.0\n"
         },
         {
           "path": ".agents/skills/example-skill/SKILL.md",
           "purpose": "пример развёрнутого транзитивного навыка",
           "content": "---\nname: example-skill\ndescription: Русский язык для агентных сообщений.\n---\n"
         }
-      ],
-      "required_corpus_claims": [
-        "ASKL-004",
-        "ASKL-004",
-        "APMP-006",
-        "APMP-008"
       ],
       "expected_output": {
         "report_structure": [
@@ -708,10 +549,6 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-006",
-              "APMP-008"
-            ],
             "observed_problem": "предложение перенести все пакеты из файла блокировки в dependencies.apm путает прямое намерение проекта с разрешённым графом установки.",
             "expected_conclusion": "файл блокировки уже фиксирует фактический граф, включая транзитивные пакеты, поэтому копировать его в прямые зависимости не нужно; прямые зависимости меняют только как новое смысловое решение проекта",
             "acceptable_fix_direction": "оставить dependencies.apm и devDependencies.apm как декларацию намерения, объяснить роль apm.lock.yaml и не добавлять транзитивные пакеты в прямые зависимости без отдельного решения подключить их напрямую"
@@ -725,7 +562,7 @@
       "oracle": {
         "success_criteria": [
           "ответ называет example-org/example-skills единственной прямой зависимостью APM из apm.yml",
-          "ответ относит example-collection, example-language, example-corpus и example-text к транзитивно установленным пакетам разрешённого графа",
+          "ответ относит example-collection, example-language, example-analysis и example-text к транзитивно установленным пакетам разрешённого графа",
           "ответ объясняет, что apm.lock.yaml генерируется apm install и уже хранит весь граф, поэтому копировать его в манифест не нужно",
           "ответ требует отдельного решения человека перед добавлением новых прямых зависимостей APM"
         ],
@@ -757,18 +594,13 @@
         {
           "path": "apm.yml",
           "purpose": "манифест проекта-потребителя",
-          "content": "name: knowlege\nversion: 1.0.0\ndependencies:\n  apm: []\n  mcp: []\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.4.0\n"
+          "content": "name: example-project\nversion: 1.0.0\ndependencies:\n  apm: []\n  mcp: []\ndevDependencies:\n  apm:\n    - example-org/example-skills#^0.4.0\n"
         },
         {
           "path": "audit-output.txt",
           "purpose": "вывод apm audit с двумя видами расхождения",
           "content": "drift: orphaned .agents/skills/old-skill/SKILL.md\ndrift: modified .agents/skills/example-skill/SKILL.md\n"
         }
-      ],
-      "required_corpus_claims": [
-        "ASKL-004",
-        "ASKL-004",
-        "APMP-009"
       ],
       "expected_output": {
         "report_structure": [
@@ -780,9 +612,6 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-009"
-            ],
             "observed_problem": "предложение убрать пакет из dependencies.apm и закоммитить правку развёрнутого файла трактует категории apm audit неверно: orphaned относится к развёрнутому файлу без источника, а modified лечится возвратом правки в источник.",
             "expected_conclusion": "orphaned закрывается командой apm install (автоматическая очистка развёрнутого файла без источника), modified — возвратом правки в источник или apm install; правка apm.yml для этого не нужна",
             "acceptable_fix_direction": "объяснить категории unintegrated, modified и orphaned, предложить apm install и возврат правки example-skill в источник, не менять dependencies.apm и не коммитить ручную правку развёрнутого файла"
@@ -842,11 +671,6 @@
           "content": "---\nname: example-skill\ndescription: Пример навыка для коллекции.\n---\n\n# example-skill\n\nКороткий пример публикуемого навыка.\n"
         }
       ],
-      "required_corpus_claims": [
-        "APMP-003",
-        "APMP-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названа причина непереносимости: модельный шаг внутри контроля качества tests",
@@ -858,20 +682,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-003",
-              "PPRX-001"
-            ],
             "observed_problem": "контроль качества apm run tests включает живой модельный шаг, поэтому участник без нужного окружения, подписки или модели не может его выполнить, а проверка перестаёт быть повторяемой.",
             "expected_conclusion": "детерминированные проверки нужно оставить в scripts.tests как переносимый контроль качества без модели, а модельный прогон вынести в отдельную опциональную цель scripts.evals",
             "acceptable_fix_direction": "убрать вызов средства запуска из scripts.tests и добавить scripts.evals с модельным прогоном"
           },
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-004",
-              "APMP-003"
-            ],
             "observed_problem": "средство запуска привязано к конкретному инструменту командной строки и конкретным моделям, а имена моделей рискуют попасть в переносимый манифест или навыки.",
             "expected_conclusion": "модель нужно вызывать через адаптер по переносимому контракту, а инструмент, список моделей и модель-судью задавать локальными настройками вне Git",
             "acceptable_fix_direction": "ввести контракт адаптера (вызов с моделью, промпт на входе, текст на выходе) и локальные настройки evals.local.yml, добавляемые в .git/info/exclude, без имён моделей в apm.yml и навыках"
@@ -938,11 +754,6 @@
           "purpose": "манифест с контролем качества tests"
         }
       ],
-      "required_corpus_claims": [
-        "APMP-004",
-        "APMP-005",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названо, что переносимую оснастку доставляет установщик из пакета навыка, а не ручное копирование",
@@ -954,20 +765,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-004",
-              "APMP-005"
-            ],
             "observed_problem": "переносимая оснастка модельных прогонов переписывается в каждом проекте вручную, потому что не доставляется как часть пакета навыка.",
             "expected_conclusion": "оснастку нужно держать каноническим источником в scripts/ навыка и ставить в целевой проект установщиком, потому что в целевой проект попадает только содержимое пакета навыка",
             "acceptable_fix_direction": "поместить средство запуска, валидаторы, адаптеры и образец в scripts/ навыка и добавить установщик install-* [project-root], который копирует их в tools/"
           },
           {
             "severity": "high",
-            "corpus_claims": [
-              "APMP-004",
-              "PPRX-001"
-            ],
             "observed_problem": "проект-издатель и производит оснастку, и сам её запускает из tools/, поэтому рабочие копии могут разойтись с источником без переустановки.",
             "expected_conclusion": "расхождение рабочих копий с каноническим источником должна ловить детерминированная проверка в контроле качества tests без вызовов модели",
             "acceptable_fix_direction": "добавить в scripts.tests проверку совпадения копий в tools/ с источником в пакете и править источник, а не рабочую копию"

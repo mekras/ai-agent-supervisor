@@ -11,7 +11,6 @@ from pathlib import Path
 # Deterministic gate: structure validators only, no model or network calls.
 DEFAULT_TESTS = (
     "sh -c 'set -e; target=\"${APM_EVAL_PATH:-.apm/skills}\"; "
-    "python3 tools/test-corpus-statements.py; "
     "python3 tools/validate-skill-descriptions.py \"$target\"; "
     "python3 tools/validate-trigger-evals.py \"$target\" --require-all; "
     "python3 tools/validate-skill-result-evals.py \"$target\"; "
@@ -61,7 +60,6 @@ def parse_args() -> argparse.Namespace:
 
 def detect_test_command(root: Path) -> str | None:
     required = [
-        root / "tools" / "test-corpus-statements.py",
         root / "tools" / "validate-skill-descriptions.py",
         root / "tools" / "validate-trigger-evals.py",
         root / "tools" / "validate-skill-result-evals.py",

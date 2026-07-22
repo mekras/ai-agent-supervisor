@@ -9,22 +9,6 @@
 определялось только впечатлением от одного ответа. Результат должен сравниваться
 с заранее заданными случаями, критериями и порогом пригодности.
 
-## Внешние основания
-
-Этот порядок опирается на извлечённые утверждения из корпуса данных:
-
-- `knowledge/data/ases/pages/standard/statements.yml`;
-- `knowledge/data/azpf/pages/evaluation-flow/statements.yml`;
-- `knowledge/data/askl/pages/evaluating-skills/statements.yml`;
-- `knowledge/data/lsme/pages/evaluation/statements.yml`;
-- `knowledge/data/prfo/pages/intro/statements.yml`;
-- `knowledge/data/askl/pages/evaluating-skills/statements.yml`;
-- `knowledge/data/askl/pages/evaluating-skills/statements.yml`.
-
-Положения источников не являются правилами проекта сами по себе. Они
-используются как основание для переносимого порядка проверки после анализа
-применимости к этому продукту.
-
 ## Когда применять
 
 Проверку нужно применять, если результат работы ИИ:

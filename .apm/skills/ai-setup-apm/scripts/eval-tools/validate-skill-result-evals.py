@@ -9,14 +9,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from corpus_statements import (
-    collect_claim_ids,
-    extract_claim_block,
-    PORTABLE_STATEMENT_PATH_RE,
-)
-
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Проверить файлы evals/result-scenarios.json в каталогах навыков.",
@@ -78,65 +70,6 @@ def require_string_list(value: Any, label: str, errors: list[str]) -> None:
         require_string(item, f"{label}[{index}]", errors)
 
 
-def collect_claims(repo_root: Path, statement_paths: set[str]) -> set[str]:
-    claims: set[str] = set()
-    for statement_path in statement_paths:
-        path = repo_root / statement_path
-        if not path.is_file():
-            continue
-        content = path.read_text(encoding="utf-8")
-        claims.update(collect_claim_ids(content))
-    return claims
-
-
-def validate_source_basis(
-    data: dict[str, Any],
-    repo_root: Path,
-    label: str,
-    errors: list[str],
-) -> tuple[set[str], set[str]]:
-    source_basis = data.get("source_basis")
-    if not isinstance(source_basis, list) or not source_basis:
-        errors.append(f"{label}: source_basis must be a non-empty array")
-        return set(), set()
-
-    basis_claims: set[str] = set()
-    statement_paths: set[str] = set()
-    for index, item in enumerate(source_basis):
-        item_label = f"{label}: source_basis[{index}]"
-        if not isinstance(item, dict):
-            errors.append(f"{item_label}: must be an object")
-            continue
-        claim_id = item.get("claim_id")
-        statement_path = item.get("statement_path")
-        require_string(claim_id, f"{item_label}.claim_id", errors)
-        require_string(statement_path, f"{item_label}.statement_path", errors)
-        if isinstance(claim_id, str):
-            if claim_id in basis_claims:
-                errors.append(f"{item_label}: duplicate claim_id {claim_id!r}")
-            basis_claims.add(claim_id)
-        if isinstance(statement_path, str):
-            statement_paths.add(statement_path)
-            if not PORTABLE_STATEMENT_PATH_RE.fullmatch(statement_path):
-                errors.append(
-                    f"{item_label}.statement_path: must reference a portable statements.yml file"
-                )
-            if not (repo_root / statement_path).is_file():
-                errors.append(f"{item_label}: statement_path does not exist")
-            elif isinstance(claim_id, str):
-                statement_text = (repo_root / statement_path).read_text(encoding="utf-8")
-                if not extract_claim_block(statement_text, claim_id):
-                    errors.append(
-                        f"{item_label}: claim_id {claim_id!r} has no readable statement block",
-                    )
-
-    known_claims = collect_claims(repo_root, statement_paths)
-    for claim_id in sorted(basis_claims - known_claims):
-        errors.append(f"{label}: claim_id {claim_id!r} not found in statement files")
-
-    return basis_claims, known_claims
-
-
 def validate_input_files(value: Any, label: str, errors: list[str]) -> None:
     if not isinstance(value, list) or not value:
         errors.append(f"{label}: input_files must be a non-empty array")
@@ -153,7 +86,6 @@ def validate_input_files(value: Any, label: str, errors: list[str]) -> None:
 def validate_expected_output(
     value: Any,
     label: str,
-    known_claims: set[str],
     errors: list[str],
 ) -> None:
     if not isinstance(value, dict):
@@ -192,14 +124,6 @@ def validate_expected_output(
             f"{finding_label}.acceptable_fix_direction",
             errors,
         )
-        claim_ids = finding.get("corpus_claims")
-        require_string_list(claim_ids, f"{finding_label}.corpus_claims", errors)
-        if isinstance(claim_ids, list):
-            for claim_id in claim_ids:
-                if isinstance(claim_id, str) and claim_id not in known_claims:
-                    errors.append(f"{finding_label}: unknown claim_id {claim_id!r}")
-
-
 def validate_oracle(value: Any, label: str, errors: list[str]) -> None:
     if not isinstance(value, dict):
         errors.append(f"{label}.oracle: must be an object")
@@ -252,8 +176,6 @@ def validate_case(
     case: Any,
     index: int,
     skill_name: str,
-    basis_claims: set[str],
-    known_claims: set[str],
     seen_ids: set[str],
     seen_prompts: set[str],
     errors: list[str],
@@ -282,25 +204,13 @@ def validate_case(
 
     validate_input_files(case.get("input_files"), label, errors)
 
-    required_claims = case.get("required_corpus_claims")
-    require_string_list(required_claims, f"{label}.required_corpus_claims", errors)
-    if isinstance(required_claims, list):
-        for claim_id in required_claims:
-            if isinstance(claim_id, str):
-                if claim_id not in known_claims:
-                    errors.append(f"{label}: unknown claim_id {claim_id!r}")
-                if claim_id not in basis_claims:
-                    errors.append(
-                        f"{label}: claim_id {claim_id!r} is not listed in source_basis",
-                    )
-
-    validate_expected_output(case.get("expected_output"), label, known_claims, errors)
+    validate_expected_output(case.get("expected_output"), label, errors)
     validate_application_contract(case, label, errors)
     require_string_list(case.get("assertions"), f"{label}.assertions", errors)
     require_string_list(case.get("must_not"), f"{label}.must_not", errors)
 
 
-def validate_result_file(skill_dir: Path, repo_root: Path) -> list[str]:
+def validate_result_file(skill_dir: Path) -> list[str]:
     errors: list[str] = []
     result_path = skill_dir / "evals" / "result-scenarios.json"
     if not result_path.exists():
@@ -321,13 +231,6 @@ def validate_result_file(skill_dir: Path, repo_root: Path) -> list[str]:
             f"got {data.get('skill_name')!r}",
         )
 
-    basis_claims, known_claims = validate_source_basis(
-        data,
-        repo_root,
-        str(result_path),
-        errors,
-    )
-
     cases = data.get("cases")
     if not isinstance(cases, list) or not cases:
         errors.append(f"{result_path}: cases must be a non-empty array")
@@ -340,8 +243,6 @@ def validate_result_file(skill_dir: Path, repo_root: Path) -> list[str]:
             case,
             index,
             skill_name,
-            basis_claims,
-            known_claims,
             seen_ids,
             seen_prompts,
             errors,
@@ -353,7 +254,6 @@ def validate_result_file(skill_dir: Path, repo_root: Path) -> list[str]:
 def main() -> int:
     args = parse_args()
     roots = args.paths or [Path.cwd()]
-    repo_root = Path.cwd().resolve()
     skill_dirs = find_skill_dirs(roots)
     if not skill_dirs:
         print("Каталоги навыков не найдены.", file=sys.stderr)
@@ -364,7 +264,7 @@ def main() -> int:
     for skill_dir in skill_dirs:
         if (skill_dir / "evals" / "result-scenarios.json").exists():
             checked += 1
-        errors.extend(validate_result_file(skill_dir, repo_root))
+        errors.extend(validate_result_file(skill_dir))
 
     if errors:
         for error in errors:

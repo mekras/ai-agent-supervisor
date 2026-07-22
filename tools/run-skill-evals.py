@@ -35,9 +35,6 @@ import time
 from pathlib import Path
 from typing import Any, Callable
 
-from corpus_statements import extract_claim_block
-
-
 CONFIG_NAME = "evals.local.yml"
 SAMPLE_NAME = "evals.local.yml.sample"
 
@@ -764,27 +761,6 @@ def filter_result_groups(
     return filtered
 
 
-def collect_source_basis_text(repo_root: Path, data: dict[str, Any]) -> list[dict[str, str]]:
-    basis_text: list[dict[str, str]] = []
-    for item in data.get("source_basis", []):
-        claim_id = item.get("claim_id")
-        statement_path = item.get("statement_path")
-        if not isinstance(claim_id, str) or not isinstance(statement_path, str):
-            continue
-        path = repo_root / statement_path
-        if not path.is_file():
-            continue
-        statement_text = path.read_text(encoding="utf-8")
-        basis_text.append(
-            {
-                "claim_id": claim_id,
-                "statement_path": statement_path,
-                "text": extract_claim_block(statement_text, claim_id),
-            },
-        )
-    return basis_text
-
-
 def answer_prompt(
     repo_root: Path,
     skill_dir: Path,
@@ -817,13 +793,11 @@ def answer_prompt(
         "изменяемых файлов, какие фрагменты куда переносятся или удаляются, "
         "и какие правила остаются в каждом файле. Не отвечай планом: формулируй "
         "результат так, как будто применение навыка уже выполнено. Для каждого "
-        "ключевого вывода используй поля severity, corpus_claims, "
+        "ключевого вывода используй поля severity, "
         "observed_problem, expected_conclusion и acceptable_fix_direction. "
         "Не упоминай, что это тест.\n"
         f"Навык:\n{skill_text}\n\n"
         f"Сценарии:\n{json.dumps(target_cases, ensure_ascii=False, indent=2)}\n"
-        "Фактические основания source_basis:\n"
-        f"{json.dumps(collect_source_basis_text(repo_root, data), ensure_ascii=False, indent=2)}\n"
     )
 
 

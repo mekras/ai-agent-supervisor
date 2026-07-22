@@ -1,27 +1,5 @@
 {
   "skill_name": "ai-agents-md-maintenance",
-  "source_basis": [
-    {
-      "claim_id": "CODX-002",
-      "statement_path": "knowledge/data/codx/pages/rules/statements.yml"
-    },
-    {
-      "claim_id": "CODX-003",
-      "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
-    },
-    {
-      "claim_id": "CODX-001",
-      "statement_path": "knowledge/data/codx/pages/agents-md/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-004",
-      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-    },
-    {
-      "claim_id": "VSCD-001",
-      "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
-    }
-  ],
   "cases": [
     {
       "id": "ai-agents-md-maintenance-result-split-overloaded-root",
@@ -43,13 +21,6 @@
           "content": "# API Platform\n\nREST API, админка, интеграции с платежами.\n\n## Установка\n\nnpm install\nnpm run dev\n\n## Архитектура\n\nОписание модулей и сценариев разработки."
         }
       ],
-      "required_corpus_claims": [
-        "CODX-002",
-        "CODX-003",
-        "CODX-001",
-        "ASKL-004",
-        "VSCD-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названы созданные или изменённые файлы инструкций",
@@ -60,21 +31,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "CODX-002",
-              "CODX-003",
-              "VSCD-001"
-            ],
             "observed_problem": "корневой AGENTS.md содержит локальные правила подкаталога и не объясняет, как они соотносятся с вложенными инструкциями.",
             "expected_conclusion": "иерархия инструкций остаётся неоднозначной и может привести к конфликту команд",
             "acceptable_fix_direction": "оставить общий контракт в корне, локальные команды перенести во вложенный AGENTS.md и явно описать область действия"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "CODX-001",
-              "ASKL-004"
-            ],
             "observed_problem": "AGENTS.md дублирует README и содержит общие советы без команды, пути или условия применения.",
             "expected_conclusion": "файл перегружает машинный контекст и не снижает риск конкретной ошибки",
             "acceptable_fix_direction": "перенести человеческое описание в README, а в AGENTS.md оставить проверяемые операционные правила"
@@ -99,7 +61,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -123,14 +85,6 @@
           "content": "# Правила проекта\n\n- Запускай npm test перед сдачей.\n- Не делай commit без явной команды владельца."
         }
       ],
-      "required_corpus_claims": [
-        "CODX-002",
-        "CODX-003",
-        "CODX-001",
-        "ASKL-004",
-        "VSCD-001",
-        "VSCD-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названы изменённые или созданные файлы инструкций",
@@ -141,10 +95,6 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "VSCD-001",
-              "VSCD-001"
-            ],
             "observed_problem": "обвязка Claude читает `CLAUDE.md`, а канонические правила проекта живут только в `AGENTS.md`.",
             "expected_conclusion": "нужна совместимая точка входа для Claude без появления второго независимого набора правил",
             "acceptable_fix_direction": "создать `CLAUDE.md` с текстом `@AGENTS.md` или символьную ссылку `CLAUDE.md -> AGENTS.md`, явно сохранив `AGENTS.md` каноническим источником"
@@ -169,7 +119,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "добавление Claude-совместимой точки входа без второго источника истины",
@@ -196,11 +146,6 @@
           "purpose": "соседний навык для чистой проверки"
         }
       ],
-      "required_corpus_claims": [
-        "CODX-001",
-        "ASKL-004",
-        "VSCD-001"
-      ],
       "expected_output": {
         "report_structure": [
           "явно указано, что это чистая проверка без редактирования",
@@ -211,19 +156,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "CODX-001",
-              "ASKL-004"
-            ],
             "observed_problem": "запрос только на проверку обрабатывается как сопровождение и приводит к правке AGENTS.md.",
             "expected_conclusion": "чистый review должен маршрутизироваться в ai-audit-agents-md, потому что выходом является отчёт, а не изменение файлов",
             "acceptable_fix_direction": "остановить редактирование и выполнить независимую проверку через ai-audit-agents-md"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "VSCD-001"
-            ],
             "observed_problem": "проверка конфликтов между инструкциями начинается без построения контура файлов.",
             "expected_conclusion": "для review нужно сначала понять цепочку инструкций и порядок применения",
             "acceptable_fix_direction": "передать задачу в ai-audit-agents-md и строить отчёт по контуру инструкций"
@@ -248,7 +186,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -277,13 +215,6 @@
           "content": "Область действия: packages/api/**.\n\n- Для API запускай npm run test:api."
         }
       ],
-      "required_corpus_claims": [
-        "CODX-002",
-        "CODX-003",
-        "CODX-001",
-        "ASKL-004",
-        "VSCD-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названы изменённые файлы инструкций",
@@ -294,20 +225,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "CODX-001",
-              "ASKL-004"
-            ],
             "observed_problem": "AGENTS.md обновляется без устойчивых операционных разделов про границы изменений и Git.",
             "expected_conclusion": "при создании или содержательной переработке файла нужен узнаваемый каркас с операционными разделами, если они применимы к проекту",
             "acceptable_fix_direction": "добавить или сохранить разделы про внесение изменений и Git, не создавая пустые разделы"
           },
           {
             "severity": "high",
-            "corpus_claims": [
-              "CODX-002",
-              "CODX-003"
-            ],
             "observed_problem": "выбранная пользователем политика ручного добавления файлов в индекс механически заменяется другим вариантом политики.",
             "expected_conclusion": "навык сопровождения сохраняет существующую политику Git и не возвращает проект к другому варианту без решения пользователя",
             "acceptable_fix_direction": "сохранить пользовательскую политику Git и сообщить, что повторный выбор не требуется"
@@ -332,7 +255,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "сохранение уже выбранной политики Git при сопровождении AGENTS.md",
@@ -357,7 +280,6 @@
           "content": "# Правила проекта\n\n## Проверки\n\n- Перед сдачей запускай npm test.\n"
         }
       ],
-      "required_corpus_claims": ["CODX-001", "ASKL-004"],
       "expected_output": {
         "report_structure": [
           "назван выбранный вариант политики Git",
@@ -368,7 +290,6 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": ["CODX-001", "ASKL-004"],
             "observed_problem": "формулировка только про свои изменения допускает добавление целого файла, в котором до задачи уже были изменения пользователя.",
             "expected_conclusion": "выбранная политика должна сохранять состояние прежних изменений и запрещать добавление целого смешанного файла без надёжного разделения фрагментов",
             "acceptable_fix_direction": "добавить правило о файлах с прежними изменениями и сообщении пользователю, если собственные фрагменты нельзя отделить"

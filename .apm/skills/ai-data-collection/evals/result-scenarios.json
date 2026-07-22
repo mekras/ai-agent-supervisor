@@ -1,19 +1,5 @@
 {
   "skill_name": "ai-data-collection",
-  "source_basis": [
-    {
-      "claim_id": "ASKL-003",
-      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-004",
-      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-    },
-    {
-      "claim_id": "PPRX-001",
-      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
-    }
-  ],
   "cases": [
     {
       "id": "ai-data-collection-result-skill-change-basis",
@@ -24,15 +10,9 @@
           "purpose": "кандидат на изменение источника истины"
         },
         {
-          "path": "knowledge/data/askl/pages/evaluating-skills/statements.yml",
-          "purpose": "корпусное основание для сопровождения навыков"
+          "path": "evidence/skill-incidents.md",
+          "purpose": "проверяемые наблюдения о применении навыка"
         }
-      ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -44,20 +24,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "PPRX-001"
-            ],
             "observed_problem": "изменение навыка предлагается без проверяемого основания и без связи с реальной задачей или повторяемым сбоем.",
             "expected_conclusion": "переход к проектированию преждевременен, пока не отделены факты от допущений и не названы пробелы",
-            "acceptable_fix_direction": "собрать свидетельства из репозитория, корпуса или задачи пользователя и явно указать, какое изменение они обосновывают"
+            "acceptable_fix_direction": "собрать свидетельства из репозитория, доступных источников или задачи пользователя и явно указать, какое изменение они обосновывают"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004",
-              "ASKL-004"
-            ],
             "observed_problem": "непонятно, нужен ли переносимый навык или достаточно локального правила проекта.",
             "expected_conclusion": "граница между локальной инструкцией и переносимым навыком должна быть проверена до изменения источника истины",
             "acceptable_fix_direction": "сравнить повторяемость сценария, область применения и стоимость сопровождения, затем зафиксировать условие перехода к проектированию"
@@ -82,7 +54,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",

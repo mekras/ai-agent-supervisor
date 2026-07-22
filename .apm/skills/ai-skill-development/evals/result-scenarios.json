@@ -1,27 +1,5 @@
 {
   "skill_name": "ai-skill-development",
-  "source_basis": [
-    {
-      "claim_id": "ASKL-003",
-      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-004",
-      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-    },
-    {
-      "claim_id": "PPRX-001",
-      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
-    },
-    {
-      "claim_id": "AENG-002",
-      "statement_path": "knowledge/data/aeng/pages/effective-context-engineering-for-ai-agents/statements.yml"
-    },
-    {
-      "claim_id": "LSME-003",
-      "statement_path": "knowledge/data/lsme/pages/trajectory-evals/statements.yml"
-    }
-  ],
   "cases": [
     {
       "id": "ai-skill-development-result-maintained-skill-missing-tests",
@@ -31,12 +9,6 @@
           "path": "skills/example-skill/SKILL.md",
           "purpose": "сопровождаемый навык"
         }
-      ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
       ],
       "expected_output": {
         "report_structure": [
@@ -48,20 +20,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "PPRX-001"
-            ],
             "observed_problem": "сопровождаемый навык меняет поведение, но не имеет постоянных проверок срабатывания.",
             "expected_conclusion": "изменение нельзя закрывать без добавления хотя бы положительных, отрицательных и пограничных проверок маршрутизации",
             "acceptable_fix_direction": "создать evals/triggers.json или обновить существующий файл под новое поведение"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004",
-              "ASKL-004"
-            ],
             "observed_problem": "новое ограничение и порядок работы требуют проверяемого сценария результата.",
             "expected_conclusion": "тест должен фиксировать реалистичный запрос, ожидаемый результат и проверяемые утверждения о прохождении",
             "acceptable_fix_direction": "добавить сценарий результата, регрессионный случай или негативный тест ограничения по риску изменения"
@@ -86,7 +50,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -125,11 +89,6 @@
           "content": "#!/usr/bin/env python3\n\"\"\"Validate trigger eval files.\"\"\"\n"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названо, какие существующие тесты проверены",
@@ -141,19 +100,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "PPRX-001"
-            ],
             "observed_problem": "после изменения description существующий evals/triggers.json не содержит близких отрицательных и пограничных запросов.",
             "expected_conclusion": "тестовое покрытие есть формально, но оно устарело и не проверяет новую границу с соседним навыком",
             "acceptable_fix_direction": "обновить evals/triggers.json: добавить положительный случай для новой области, отрицательный для общего аудита правил и пограничный случай для соседнего навыка"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004"
-            ],
             "observed_problem": "отчёт о сопровождении не даёт проверяемого свидетельства, что новые кейсы действительно добавлены, а обновлённый description проходит бюджетную проверку коллекции.",
             "expected_conclusion": "результат должен фиксировать, какие утверждения о покрытии теперь проверяются, какой командой и как проверен бюджет description",
             "acceptable_fix_direction": "запустить валидатор eval-файлов и валидатор бюджета description, затем назвать обновлённые кейсы в отчёте"
@@ -178,7 +130,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -210,12 +162,6 @@
           "purpose": "повторяемый запуск eval"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "названа проверяемая поверхность текущего eval",
@@ -226,20 +172,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "ASKL-004",
-              "PPRX-001"
-            ],
             "observed_problem": "существующий eval результата проверяет только косвенный сигнал и не доказывает применение навыка как процедуры.",
             "expected_conclusion": "такой eval полезен как вспомогательная проверка, но не закрывает качество применения навыка",
             "acceptable_fix_direction": "добавить scenario/oracle, который проверяет обязательный шаг, ограничение, артефакт или другой наблюдаемый след применения навыка"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004"
-            ],
             "observed_problem": "в сценарии нет негативного контроля, показывающего, что тест упал бы без навыка или при пропуске обязательного шага.",
             "expected_conclusion": "регрессионный тест должен отличать применение навыка от случайно удачного ответа",
             "acceptable_fix_direction": "добавить negative_control или явно зафиксировать, почему он невозможен и какой риск остаётся"
@@ -299,12 +237,6 @@
           "content": "{\"skill_name\":\"example-skill\",\"cases\":[{\"id\":\"example-old-result\",\"prompt\":\"Добавь правило\",\"assertions\":[\"Результат добавляет пункт в SKILL.md\"],\"must_not\":[]}]}\n"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "перед изменением прочитаны целевой SKILL.md и релевантные материалы навыка",
@@ -315,20 +247,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "PPRX-001"
-            ],
             "observed_problem": "агент добавляет новое правило, не проверив весь навык и не устранив источник повторного сбоя.",
             "expected_conclusion": "для сопровождения навыка нужно сначала понять целевую процедуру целиком и выбрать масштаб изменения по качеству результата",
             "acceptable_fix_direction": "переработать порядок, структуру или проверки навыка, если это лучше закрывает причину проблемы, чем локальная добавка"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004",
-              "ASKL-004"
-            ],
             "observed_problem": "устаревшие проверки не фиксируют новый критерий: качество важнее размера правки.",
             "expected_conclusion": "регрессионный сценарий должен проваливать ответы, которые выбирают малую правку вместо достаточного исправления",
             "acceptable_fix_direction": "добавить или обновить сценарий результата и негативный контроль для выбора масштаба изменения"
@@ -389,12 +313,6 @@
           "purpose": "средство запуска проверок навыков"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "назван текущий риск долгих проверок",
@@ -405,20 +323,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "PPRX-001"
-            ],
             "observed_problem": "агент либо запускает всю коллекцию после каждой локальной правки, либо ради скорости пропускает проверки срабатывания и результата.",
             "expected_conclusion": "правила сопровождения должны предписывать самый узкий достаточный запуск без удаления поверхностей проверки",
             "acceptable_fix_direction": "добавить процедуру: валидаторы изменённого навыка, модельный запуск нужного навыка или id, затем расширение до полного набора по риску"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004",
-              "ASKL-004"
-            ],
             "observed_problem": "отчёт о тестах не показывает, какую поверхность покрывал выборочный запуск и какие проверки были отложены.",
             "expected_conclusion": "выборочный запуск должен сопровождаться явным объяснением покрытия, остаточного риска и условия полного запуска",
             "acceptable_fix_direction": "требовать в отчёте путь навыка или id сценария, выполненные команды, не выполненные проверки и причину достаточности для текущего шага"
@@ -472,11 +382,6 @@
           "content": "team,planned,actual\nalpha,10,12\nbeta,8,8\n"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-004",
-        "AENG-002",
-        "LSME-003"
-      ],
       "expected_output": {
         "report_structure": [
           "перечислены кандидаты на скрипт и действия модели",
@@ -487,19 +392,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "AENG-002",
-              "LSME-003"
-            ],
             "observed_problem": "агент может повторно поручить модели извлечение столбцов и проверку формата CSV, хотя результат определяется известными правилами.",
             "expected_conclusion": "извлечение, проверку формата и расчёт отклонений следует вынести в детерминированный скрипт, а объяснение причин отклонений оставить модели.",
             "acceptable_fix_direction": "добавить скрипт с ограниченными входами и проверяемым выводом, затем передавать модели только подготовленные данные"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004"
-            ],
             "observed_problem": "решение о скрипте нельзя принять по одному названию действия без границ входа, выхода и ошибки.",
             "expected_conclusion": "скрипт требует явного контракта, проверки ошибочного входа и границы записи, а оценка причин отклонений остаётся за моделью.",
             "acceptable_fix_direction": "описать контракт скрипта и добавить детерминированную проверку, не заменяя интерпретацию набором эвристик"
