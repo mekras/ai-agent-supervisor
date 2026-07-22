@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.0.2] - 2026-07-22
+
 ### Исправлено
 
 - Запускатель подагента Codex сохраняет журнал, итоговый ответ и вывод ошибок,
@@ -257,7 +259,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.1...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.2...HEAD
+[2.0.2]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.1...2.0.0
 [1.0.1]: https://github.com/mekras/ai-agent-supervisor/compare/1.0.0...1.0.1
