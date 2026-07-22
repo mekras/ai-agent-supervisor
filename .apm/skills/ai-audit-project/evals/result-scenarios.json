@@ -1,27 +1,5 @@
 {
   "skill_name": "ai-audit-project",
-  "source_basis": [
-    {
-      "claim_id": "CODX-002",
-      "statement_path": "knowledge/data/codx/pages/rules/statements.yml"
-    },
-    {
-      "claim_id": "CODX-001",
-      "statement_path": "knowledge/data/codx/pages/agents-md/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-004",
-      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-    },
-    {
-      "claim_id": "VSCD-001",
-      "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-003",
-      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
-    }
-  ],
   "cases": [
     {
       "id": "ai-audit-project-result-apm-skills-rules",
@@ -43,13 +21,6 @@
           "content": "{\"skill_name\":\"example-skill\",\"cases\":[{\"id\":\"example-positive\",\"prompt\":\"Проверь пример\",\"should_trigger\":true,\"rationale\":\"Прямая просьба применить примерный навык\"}]}\n"
         }
       ],
-      "required_corpus_claims": [
-        "CODX-002",
-        "CODX-001",
-        "ASKL-004",
-        "VSCD-001",
-        "ASKL-003"
-      ],
       "expected_output": {
         "report_structure": [
           "построена карта проверенных источников правил",
@@ -60,21 +31,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "ASKL-004"
-            ],
             "observed_problem": "публикуемый навык содержит длинные процедурные блоки без достаточного разделения между SKILL.md и references.",
             "expected_conclusion": "перегруженный SKILL.md повышает стоимость контекста и усложняет сопровождение правил",
             "acceptable_fix_direction": "оставить в SKILL.md короткий порядок и границы, а подробности вынести в references"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "CODX-002",
-              "CODX-001",
-              "VSCD-001"
-            ],
             "observed_problem": "несколько источников инструкций задают пересекающиеся правила без ясного приоритета или области применения.",
             "expected_conclusion": "агент может применить правила недетерминированно или потратить контекст на дубли",
             "acceptable_fix_direction": "развести области действия и оставить дубли только там, где они задают приоритет или важное усиление"
@@ -99,7 +61,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -130,9 +92,6 @@
           "purpose": "человеко-ориентированное описание навыка"
         }
       ],
-      "required_corpus_claims": [
-        "CODX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "README учтён как контекст проекта",
@@ -142,9 +101,6 @@
         "findings": [
           {
             "severity": "medium",
-            "corpus_claims": [
-              "CODX-001"
-            ],
             "observed_problem": "человеко-ориентированная документация может содержать полезный контекст, но не должна неявно становиться машинными правилами",
             "expected_conclusion": "агент отделяет сведения о проекте от обязательных инструкций для себя",
             "acceptable_fix_direction": "переносить явные правила для агента в AGENTS.md, навык или другой машинный источник, а README оставлять пользовательским описанием"
@@ -169,7 +125,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -203,10 +159,6 @@
           "content": "# Справочный список\n\nТиповые проблемы:\n\n- дубли правил;\n- противоречия между инструкциями;\n- устаревшие команды;\n- неясная область действия.\n\nСписок используется как стартовая сетка и не должен закрывать другие подтверждённые проблемы.\n"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-004",
-        "ASKL-003"
-      ],
       "expected_output": {
         "report_structure": [
           "типовые категории использованы как стартовая сетка",
@@ -216,10 +168,6 @@
         "findings": [
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004",
-              "ASKL-003"
-            ],
             "observed_problem": "закрытый список типов проблем может скрыть новые классы сбоев правил",
             "expected_conclusion": "аудитор обязан искать любые подтверждённые дефекты правил, а не только заранее перечисленные категории",
             "acceptable_fix_direction": "использовать список типов проблем как неисчерпывающую таксономию и явно помечать новые типы при обнаружении"
@@ -244,7 +192,7 @@
       },
       "application_evidence": [
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -279,10 +227,6 @@
           "purpose": "структурный валидатор сценариев результата"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-004",
-        "ASKL-003"
-      ],
       "expected_output": {
         "report_structure": [
           "проверены навыки, evals и связанный валидатор как часть источников правил",
@@ -293,10 +237,6 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "ASKL-004"
-            ],
             "observed_problem": "evals формально существуют, но проверяют только косвенные сигналы и не доказывают применение навыка агентом.",
             "expected_conclusion": "коллекция не должна считать такие evals достаточной защитой от регрессий навыков",
             "acceptable_fix_direction": "усилить общий контракт result evals: поверхность проверки, признаки применения, oracle и негативный контроль"

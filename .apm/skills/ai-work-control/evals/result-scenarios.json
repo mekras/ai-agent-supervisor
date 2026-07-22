@@ -1,19 +1,5 @@
 {
   "skill_name": "ai-work-control",
-  "source_basis": [
-    {
-      "claim_id": "ASKL-003",
-      "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
-    },
-    {
-      "claim_id": "ASKL-004",
-      "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-    },
-    {
-      "claim_id": "PPRX-001",
-      "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
-    }
-  ],
   "cases": [
     {
       "id": "ai-work-control-result-before-source-of-truth-change",
@@ -28,11 +14,6 @@
           "purpose": "соседний источник правил, влияющий на маршрут"
         }
       ],
-      "required_corpus_claims": [
-        "ASKL-003",
-        "ASKL-004",
-        "PPRX-001"
-      ],
       "expected_output": {
         "report_structure": [
           "Задача: ожидаемый результат и почему её берёт ИИ",
@@ -44,19 +25,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": [
-              "ASKL-003",
-              "PPRX-001"
-            ],
             "observed_problem": "изменение источника истины запускается без фиксации цели, контекста, границ автономности и способа приёмки.",
             "expected_conclusion": "перед содержательной правкой нужен контроль запуска, иначе ИИ может принять проектное решение без достаточного основания",
             "acceptable_fix_direction": "зафиксировать задачу, контекст, роли, риски, границы действий, способ приёмки и решение по запуску"
           },
           {
             "severity": "medium",
-            "corpus_claims": [
-              "ASKL-004"
-            ],
             "observed_problem": "не определено, что требует решения человека.",
             "expected_conclusion": "ИИ не должен самостоятельно утверждать риск, который нельзя принять автоматически",
             "acceptable_fix_direction": "явно назвать решения человека или указать, что дополнительных решений сейчас не требуется"
@@ -82,7 +56,7 @@
       "application_evidence": [
         "результат сразу выбирает режим full без отдельного предварительного отчёта screening",
         "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
-        "результат называет findings из expected_output.findings и связывает их с required_corpus_claims",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
         "результат соблюдает assertions и не нарушает must_not"
       ],
       "evaluation_surface": "результат применения навыка к реалистичному запросу",
@@ -103,10 +77,15 @@
       "id": "ai-work-control-result-screening-ambiguous-task",
       "prompt": "Пользователь предлагает автоматизировать спорное проектное решение, но контекст неполный и пока неизвестно, подходит ли задача для ИИ. Выполни только достаточную предварительную проверку.",
       "input_files": [
-        {"path": "AGENTS.md", "purpose": "локальные ограничения проекта"},
-        {"path": "README.md", "purpose": "доступный контекст задачи"}
+        {
+          "path": "AGENTS.md",
+          "purpose": "локальные ограничения проекта"
+        },
+        {
+          "path": "README.md",
+          "purpose": "доступный контекст задачи"
+        }
       ],
-      "required_corpus_claims": ["ASKL-003", "ASKL-004", "PPRX-001"],
       "expected_output": {
         "report_structure": [
           "назван режим screening",
@@ -117,14 +96,12 @@
         "findings": [
           {
             "severity": "high",
-            "corpus_claims": ["ASKL-003", "PPRX-001"],
             "observed_problem": "неочевидная задача запускается как обычная работа без достаточного контекста и решения о применимости ИИ.",
             "expected_conclusion": "нужно остановиться на быстром решении и выбрать следующий маршрут, не проектируя изменение",
             "acceptable_fix_direction": "вернуть паузу, переопределение, полный контроль или передачу человеку с кратким основанием"
           },
           {
             "severity": "medium",
-            "corpus_claims": ["ASKL-004"],
             "observed_problem": "быстрый режим повторяет полный контроль с подробной маршрутизацией ролей и полным отчётом.",
             "expected_conclusion": "screening должен ограничиться достаточным решением о следующем маршруте",
             "acceptable_fix_direction": "не заполнять полный шаблон и не выполнять предметное проектирование"
@@ -168,10 +145,15 @@
       "id": "ai-work-control-result-full-sufficient-basis-skips-data-collection",
       "prompt": "Полный контроль перед изменением правила: проблема подтверждена тремя наблюдаемыми сбоями, область — один навык, пользователь утвердил ожидаемый результат и ограничения. Определи маршрут.",
       "input_files": [
-        {"path": "AGENTS.md", "purpose": "действующие правила проекта"},
-        {"path": "knowledge/data/example/statements.yml", "purpose": "проверяемые свидетельства трёх сбоев"}
+        {
+          "path": "AGENTS.md",
+          "purpose": "действующие правила проекта"
+        },
+        {
+          "path": "evidence/confirmed-incidents.md",
+          "purpose": "проверяемые свидетельства трёх сбоев"
+        }
       ],
-      "required_corpus_claims": ["ASKL-003", "ASKL-004", "PPRX-001"],
       "expected_output": {
         "report_structure": [
           "назван режим full",
@@ -182,7 +164,6 @@
         "findings": [
           {
             "severity": "medium",
-            "corpus_claims": ["ASKL-003", "PPRX-001"],
             "observed_problem": "сбор данных запускается повторно, хотя полный контроль уже подтвердил основания, область и ограничения.",
             "expected_conclusion": "повторный сбор не требуется; маршрут переходит к профильному навыку изменения",
             "acceptable_fix_direction": "зафиксировать достаточность оснований и не включать ai-data-collection без сигнала о пробеле или противоречии"

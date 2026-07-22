@@ -23,13 +23,13 @@
       "id": "ai-audit-agents-md-positive-machine-entry-vs-readme",
       "prompt": "Проверь, не смешивает ли AGENTS.md машинные инструкции с README: много обзора проекта, истории и вводного текста для человека.",
       "should_trigger": true,
-      "rationale": "Корпус фиксирует AGENTS.md как машинный вход, дополняющий README, поэтому запрос относится к специализированной проверке AGENTS.md."
+      "rationale": "Запрос проверяет границу между машинным входом AGENTS.md и пользовательским README, поэтому относится к специализированной проверке AGENTS.md."
     },
     {
       "id": "ai-audit-agents-md-positive-codex-scope-order",
       "prompt": "В проекте несколько AGENTS.md. Восстанови порядок применения от корня к текущему каталогу и найди конфликтующие override-правила.",
       "should_trigger": true,
-      "rationale": "Корпусные утверждения CODX-002 и CODX-003 требуют проверки иерархии и порядка применения инструкций."
+      "rationale": "Запрос требует восстановить иерархию и порядок применения нескольких файлов инструкций."
     },
     {
       "id": "ai-audit-agents-md-positive-context-cost",
