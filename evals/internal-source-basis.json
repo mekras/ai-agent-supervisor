@@ -940,6 +940,23 @@
           ]
         },
         {
+          "id": "ai-setup-subagents-result-execution-class-model-mismatch",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "PPRX-001"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "PPRX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
           "id": "ai-setup-subagents-result-periodic-review-state",
           "required_claims": [
             "ASKL-003",

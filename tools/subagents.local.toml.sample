@@ -7,11 +7,23 @@
 
 # models = ["codex:название-модели", "claude:название-модели"]
 
-[roles.cheap_explorer]
-# model = "точный-идентификатор"
+[execution_classes.cheap_readonly_research]
+# writes = false
+# result = "status, items, evidence, confidence, risk, open_questions, escalation_needed"
+# stop = "неоднозначность, конфликтующие свидетельства или выход за границу"
+
+[targets.codex.execution_classes.cheap_readonly_research]
+# model = "точный-идентификатор-из-каталога-codex"
 # effort = "low"
 # sandbox = "read-only"
-# adapter = "tools/adapters/codex-role"
-# contract = { result = "status, items, evidence, confidence, risk, open_questions, escalation_needed", writes = false }
+# adapter = ["tools/adapters/codex-role"]
 
-# Не добавляйте в этот образец фактические модели или роли конкретного проекта.
+[targets.claude.execution_classes.cheap_readonly_research]
+# model = "точный-идентификатор-или-псевдоним-claude"
+# actual_model_prefix = "идентификатор-фактически-допустимого-семейства-"
+# effort = "low"
+# sandbox = "read-only"
+# adapter = ["tools/adapters/claude-role"]
+
+# Для точного идентификатора `actual_model_prefix` не нужен. Не добавляйте в
+# образец модели, лимиты или классы конкретного проекта.

@@ -6,8 +6,8 @@ usage() {
 Usage:
   install-subagent-tools [project-root]
 
-Copies the portable model-check tool and its local configuration sample into
-<project-root>/tools. Add adapters for the active harnesses separately.
+Copies portable subagent tools and their local configuration sample into
+<project-root>/tools. Install adapters for the active harness separately.
 EOF
 }
 
@@ -21,7 +21,7 @@ project_root="${1:-$(git rev-parse --show-toplevel)}"
 target_dir="$project_root/tools"
 
 mkdir -p "$target_dir"
-for name in check-subagent-models discover-subagent-models analyze-subagent-sessions run-subagent-role; do
+for name in check-subagent-models discover-subagent-models analyze-subagent-sessions run-subagent-role run-execution-class; do
   install -m 0755 "$script_dir/$name" "$target_dir/$name"
 done
 install -m 0644 "$script_dir/../assets/subagents.local.toml.sample" \
