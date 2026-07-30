@@ -1,6 +1,7 @@
 *.py[cod]
 /.agents
-/.claude
+/.claude/*
+!/.claude/CLAUDE.md
 /.codex
 /.idea
 /knowledge/private.local/
