@@ -8,6 +8,11 @@ statements:
     excerpt: |-
       AGENTS.md
       gives Codex durable project guidance that travels with your repository and applies before the agent starts work. Keep it small.
+      Use it for the rules you want Codex to follow every time in a repo, such as:
+      Build and test commands
+      Review expectations
+      repo-specific conventions
+      Directory-specific instructions
       When the agent makes incorrect assumptions about your codebase, correct them in
       AGENTS.md
       and ask the agent to update

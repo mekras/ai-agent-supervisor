@@ -20,7 +20,9 @@ def write_project(
     root: Path,
     *,
     active_owner: str = ".",
+    adapter_owner: str = ".",
     extra_failure: bool = False,
+    local_hash_drift: bool = False,
     phantom_bytecode: bool = False,
     present_bytecode: bool = False,
 ) -> Path:
@@ -31,8 +33,8 @@ def write_project(
     deployed.parent.mkdir(parents=True)
     source.write_text("local source\n", encoding="utf-8")
     deployed.write_text("local source\n", encoding="utf-8")
-    adapter_source = root / ".apm" / "skills" / "example" / "scripts" / "adapter"
-    adapter_deployed = root / ".agents" / "skills" / "example" / "scripts" / "adapter"
+    adapter_source = root / ".apm" / "skills" / "example" / "scripts" / "adapter.py"
+    adapter_deployed = root / ".agents" / "skills" / "example" / "scripts" / "adapter.py"
     adapter_source.parent.mkdir(parents=True)
     adapter_deployed.parent.mkdir(parents=True)
     adapter_source.write_text("#!/bin/sh\n", encoding="utf-8")
@@ -44,9 +46,9 @@ deployments:
 - value: .agents/skills/example/SKILL.md
   owners: [example/local-package, .]
   active_owner: {active_owner}
-- value: .agents/skills/example/scripts/adapter
-  owners: [example/local-package, .]
-  active_owner: .
+- value: .agents/skills/example/scripts/adapter.py
+  owners: [example/local-package, {adapter_owner}]
+  active_owner: {adapter_owner}
 """
     (root / "apm.lock.yaml").write_text(lockfile, encoding="utf-8")
     checks = [
@@ -55,6 +57,17 @@ deployments:
     ]
     if extra_failure:
         checks.append({"name": "content-integrity", "passed": False})
+    if local_hash_drift:
+        checks.append(
+            {
+                "name": "content-integrity",
+                "passed": False,
+                "details": [
+                    "hash-drift: .agents/skills/example/SKILL.md "
+                    "(dep=<self>, expected=old, actual=new)"
+                ],
+            }
+        )
     drift = [
         {
             "path": ".agents/skills/example/SKILL.md",
@@ -63,13 +76,13 @@ deployments:
         }
     ]
     if phantom_bytecode:
-        bytecode = root / ".agents" / "skills" / "example" / "scripts" / "__pycache__" / "adaptercpython-313.pyc"
+        bytecode = root / ".agents" / "skills" / "example" / "scripts" / "__pycache__" / "adapter.cpython-313.pyc"
         if present_bytecode:
             bytecode.parent.mkdir(parents=True)
             bytecode.write_bytes(b"not phantom")
         drift.append(
             {
-                "path": ".agents/skills/example/scripts/__pycache__/adaptercpython-313.pyc",
+            "path": ".agents/skills/example/scripts/__pycache__/adapter.cpython-313.pyc",
                 "kind": "unintegrated",
                 "package": "",
             }
@@ -117,6 +130,25 @@ def main() -> int:
         accepted = run(root, write_project(root, phantom_bytecode=True))
         assert accepted.returncode == 0, accepted.stdout + accepted.stderr
         assert "подтверждено файлов — 2" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        accepted = run(
+            root,
+            write_project(
+                root,
+                phantom_bytecode=True,
+                adapter_owner="example/other-package",
+            ),
+        )
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "подтверждено файлов — 2" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        accepted = run(root, write_project(root, local_hash_drift=True))
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "подтверждено файлов — 1" in accepted.stdout
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)

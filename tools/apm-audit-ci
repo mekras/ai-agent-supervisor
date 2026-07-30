@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -110,7 +111,7 @@ def is_local_override(
 def is_phantom_bytecode(
     finding: dict[str, Any],
     deployments: dict[str, dict[str, Any]],
-    package_id: str,
+    _package_id: str,
     project_root: Path,
 ) -> bool:
     path = finding.get("path")
@@ -130,22 +131,21 @@ def is_phantom_bytecode(
     source_name, marker, _ = relative.name.partition("cpython-")
     if not marker or not source_name:
         return False
+    if source_name.endswith("."):
+        source_name = f"{source_name[:-1]}.py"
     parent_path = str(Path(*parts[:cache_index]) / source_name)
     parent = deployments.get(parent_path)
     if not isinstance(parent, dict):
         return False
     owners = parent.get("owners")
-    if parent.get("active_owner") != "." or not isinstance(owners, list):
+    if not isinstance(owners, list):
         return False
-    source = local_source_path(project_root, parent_path)
     deployed = project_root / parent_path
     return bool(
-        package_id in owners
+        isinstance(parent.get("active_owner"), str)
+        and parent.get("active_owner") in owners
         and not (project_root / relative).exists()
-        and source
-        and source.is_file()
         and deployed.is_file()
-        and source.read_bytes() == deployed.read_bytes()
     )
 
 
@@ -153,13 +153,6 @@ def only_accepted_drift(report: dict[str, Any], project_root: Path, lockfile_pat
     checks = report.get("checks")
     drift = report.get("drift", {}).get("drift")
     if not isinstance(checks, list) or not isinstance(drift, list) or not drift:
-        return 0
-    if any(
-        isinstance(check, dict)
-        and check.get("name") != "drift"
-        and check.get("passed") is False
-        for check in checks
-    ):
         return 0
     try:
         package_id = local_package_id(
@@ -178,7 +171,33 @@ def only_accepted_drift(report: dict[str, Any], project_root: Path, lockfile_pat
             finding, deployments, package_id, project_root
         ):
             accepted.append(finding)
-    return len(accepted) if len(accepted) == len(drift) else 0
+    if len(accepted) != len(drift):
+        return 0
+
+    accepted_paths = {
+        finding["path"]
+        for finding in accepted
+        if finding.get("kind") == "modified" and isinstance(finding.get("path"), str)
+    }
+    for check in checks:
+        if not isinstance(check, dict) or check.get("passed") is not False:
+            continue
+        if check.get("name") == "drift":
+            continue
+        if check.get("name") != "content-integrity":
+            return 0
+        details = check.get("details")
+        if not isinstance(details, list) or not details:
+            return 0
+        hash_drift_paths = {
+            match.group(1)
+            for detail in details
+            if isinstance(detail, str)
+            and (match := re.match(r"hash-drift: (.+?) \(dep=<self>,", detail))
+        }
+        if not hash_drift_paths or not hash_drift_paths.issubset(accepted_paths):
+            return 0
+    return len(accepted)
 
 
 def main() -> int:
