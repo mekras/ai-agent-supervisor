@@ -1,9 +1,22 @@
 product: mekras/ai-dev-team
-updated_at: 2026-07-19
+updated_at: 2026-07-30
 setup:
+  applied_version: 0.22.0
   visibility: public
   operating_context:
     kind: noncommercial
+  project_profile:
+    forms: [ai-skills]
+    users: [developer, maintainer]
+    interfaces: [agent-tooling, cli]
+    delivery: [published-apm-package]
+  commit_messages:
+    scheme: custom
+    custom:
+      format: "Русская тема с прописной буквы в форме результата"
+      examples:
+        - "Стабилизирована публикация коллекции"
+        - "Исправлено обновление манифеста APM"
   git:
     enabled: true
   changelog:
