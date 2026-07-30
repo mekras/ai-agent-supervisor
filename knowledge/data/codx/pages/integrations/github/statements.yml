@@ -12,6 +12,14 @@ statements:
       files and follows any
       Review guidelines
       you include.
+      To set guidelines for a repository, add or update a top-level
+      AGENTS.md
+      with a section like this:
+      ## Review guidelines
+      -
+      Don't log PII.
+      -
+      Verify that authentication middleware wraps every route.
       Codex applies guidance from the closest
       AGENTS.md
       to each changed file.

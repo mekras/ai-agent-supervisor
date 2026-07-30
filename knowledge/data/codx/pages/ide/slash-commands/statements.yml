@@ -7,6 +7,16 @@ statements:
     text: "Slash-команды расширения IDE управляют Codex из поля чата, в том числе показывают статус, переключают локальный и облачный режимы и запускают цель."
     excerpt: |-
       Slash commands let you control Codex without leaving the chat input. Use them to check status, switch between local and cloud mode, or send feedback.
+      Use a slash command
+      In the Codex chat input, type
+      /
+      .
+      Select a command from the list, or keep typing to filter (for example,
+      /status
+      ).
+      Press
+      Enter
+      .
       Available slash commands
       Slash command
       Description

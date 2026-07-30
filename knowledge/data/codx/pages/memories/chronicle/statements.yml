@@ -13,7 +13,9 @@ statements:
       Switzerland. Please review the
       Privacy and Security
       section for details and to understand the current risks before enabling.
-      Chronicle augments Codex memories with context from your screen.
+      Chronicle augments Codex memories with context from your screen. When you prompt
+      Codex, those memories can help it understand what you’ve been working on with
+      less need for you to restate context.
       Chronicle is available as an opt-in research preview in the Codex app on macOS.
       It requires macOS Screen Recording and Accessibility permissions. Before
       enabling, be aware that Chronicle uses rate limits quickly, increases risk of
