@@ -1,0 +1,219 @@
+#!/usr/bin/env python3
+"""Строгий APM-аудит с узким обходом известного ложного drift."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Запустить apm audit --ci и проверить локальные переопределения.",
+    )
+    parser.add_argument("--apm", default="apm", help="Путь к исполняемому APM.")
+    parser.add_argument(
+        "--project-root",
+        type=Path,
+        default=Path.cwd(),
+        help="Корень APM-проекта. По умолчанию текущий каталог.",
+    )
+    parser.add_argument(
+        "--lockfile",
+        type=Path,
+        help="Путь к apm.lock.yaml. По умолчанию <корень>/apm.lock.yaml.",
+    )
+    return parser.parse_args()
+
+
+def load_yaml(path: Path) -> dict[str, Any]:
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"Ожидался YAML-объект: {path}")
+    return data
+
+
+def local_package_id(manifest: dict[str, Any], lockfile: dict[str, Any]) -> str | None:
+    name = manifest.get("name")
+    if not isinstance(name, str):
+        return None
+    matches = [
+        dependency.get("repo_url")
+        for dependency in lockfile.get("dependencies", [])
+        if isinstance(dependency, dict)
+        and dependency.get("name") == name
+        and isinstance(dependency.get("repo_url"), str)
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def deployment_by_path(lockfile: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    deployments = lockfile.get("deployments", [])
+    if not isinstance(deployments, list):
+        return {}
+    return {
+        value: deployment
+        for deployment in deployments
+        if isinstance(deployment, dict)
+        and isinstance((value := deployment.get("value")), str)
+    }
+
+
+def local_source_path(project_root: Path, deployed_path: str) -> Path | None:
+    relative = Path(deployed_path)
+    parts = relative.parts
+    try:
+        skill_index = parts.index("skills")
+    except ValueError:
+        return None
+    if skill_index == len(parts) - 1 or relative.is_absolute() or ".." in parts:
+        return None
+    return project_root / ".apm" / "skills" / Path(*parts[skill_index + 1 :])
+
+
+def is_local_override(
+    finding: dict[str, Any],
+    deployments: dict[str, dict[str, Any]],
+    package_id: str,
+    project_root: Path,
+) -> bool:
+    path = finding.get("path")
+    if finding.get("kind") != "modified" or finding.get("package") != package_id:
+        return False
+    if not isinstance(path, str):
+        return False
+    deployment = deployments.get(path)
+    if not isinstance(deployment, dict):
+        return False
+    owners = deployment.get("owners")
+    if deployment.get("active_owner") != "." or not isinstance(owners, list):
+        return False
+    if package_id not in owners:
+        return False
+    source = local_source_path(project_root, path)
+    deployed = project_root / path
+    return bool(
+        source
+        and source.is_file()
+        and deployed.is_file()
+        and source.read_bytes() == deployed.read_bytes()
+    )
+
+
+def is_phantom_bytecode(
+    finding: dict[str, Any],
+    deployments: dict[str, dict[str, Any]],
+    package_id: str,
+    project_root: Path,
+) -> bool:
+    path = finding.get("path")
+    if (
+        finding.get("kind") != "unintegrated"
+        or finding.get("package") != ""
+        or not isinstance(path, str)
+    ):
+        return False
+    relative = Path(path)
+    parts = relative.parts
+    if relative.is_absolute() or ".." in parts or "__pycache__" not in parts:
+        return False
+    cache_index = parts.index("__pycache__")
+    if cache_index == 0 or cache_index != len(parts) - 2 or not relative.name.endswith(".pyc"):
+        return False
+    source_name, marker, _ = relative.name.partition("cpython-")
+    if not marker or not source_name:
+        return False
+    parent_path = str(Path(*parts[:cache_index]) / source_name)
+    parent = deployments.get(parent_path)
+    if not isinstance(parent, dict):
+        return False
+    owners = parent.get("owners")
+    if parent.get("active_owner") != "." or not isinstance(owners, list):
+        return False
+    source = local_source_path(project_root, parent_path)
+    deployed = project_root / parent_path
+    return bool(
+        package_id in owners
+        and not (project_root / relative).exists()
+        and source
+        and source.is_file()
+        and deployed.is_file()
+        and source.read_bytes() == deployed.read_bytes()
+    )
+
+
+def only_accepted_drift(report: dict[str, Any], project_root: Path, lockfile_path: Path) -> int:
+    checks = report.get("checks")
+    drift = report.get("drift", {}).get("drift")
+    if not isinstance(checks, list) or not isinstance(drift, list) or not drift:
+        return 0
+    if any(
+        isinstance(check, dict)
+        and check.get("name") != "drift"
+        and check.get("passed") is False
+        for check in checks
+    ):
+        return 0
+    try:
+        package_id = local_package_id(
+            load_yaml(project_root / "apm.yml"), load_yaml(lockfile_path)
+        )
+        deployments = deployment_by_path(load_yaml(lockfile_path))
+    except (OSError, ValueError, yaml.YAMLError):
+        return 0
+    if not package_id:
+        return 0
+    accepted = []
+    for finding in drift:
+        if not isinstance(finding, dict):
+            continue
+        if is_local_override(finding, deployments, package_id, project_root) or is_phantom_bytecode(
+            finding, deployments, package_id, project_root
+        ):
+            accepted.append(finding)
+    return len(accepted) if len(accepted) == len(drift) else 0
+
+
+def main() -> int:
+    args = parse_args()
+    project_root = args.project_root.resolve()
+    lockfile_path = (args.lockfile or project_root / "apm.lock.yaml").resolve()
+    result = subprocess.run(
+        [args.apm, "audit", "--ci", "--no-fail-fast", "--format", "json"],
+        cwd=project_root,
+        env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode == 0:
+        sys.stdout.write(result.stdout)
+        sys.stderr.write(result.stderr)
+        return 0
+    try:
+        report = json.loads(result.stdout)
+    except json.JSONDecodeError:
+        report = {}
+    accepted = only_accepted_drift(report, project_root, lockfile_path)
+    if accepted:
+        sys.stderr.write(result.stderr)
+        print(
+            "APM-аудит пройден с известным локальным переопределением: "
+            f"подтверждено файлов — {accepted}."
+        )
+        return 0
+    sys.stdout.write(result.stdout)
+    sys.stderr.write(result.stderr)
+    return result.returncode or 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

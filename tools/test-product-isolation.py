@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_SKILLS = ROOT / ".apm" / "skills"
 BOUNDARY_CHECK = ROOT / "tools" / "validate-product-boundary.py"
+CLAUDE_INSTRUCTIONS = ROOT / ".claude" / "CLAUDE.md"
 
 
 def run(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -27,6 +28,9 @@ def run(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
 
 
 def main() -> int:
+    assert not (ROOT / "CLAUDE.md").exists()
+    assert CLAUDE_INSTRUCTIONS.read_text(encoding="utf-8") == "@../AGENTS.md\n"
+
     with tempfile.TemporaryDirectory() as temporary:
         project = Path(temporary)
         skills = project / ".apm" / "skills"
@@ -73,6 +77,40 @@ scripts:
         )
         apm_test = run("apm", "run", "tests", cwd=project)
         assert apm_test.returncode == 0, apm_test.stdout + apm_test.stderr
+
+        shutil.copy(ROOT / "AGENTS.md", project / "AGENTS.md")
+        (project / ".claude").mkdir()
+        shutil.copy(CLAUDE_INSTRUCTIONS, project / ".claude" / "CLAUDE.md")
+
+        with tempfile.TemporaryDirectory() as consumer_temporary:
+            consumer = Path(consumer_temporary)
+            local_install = run(
+                "apm",
+                "install",
+                str(project),
+                "--target",
+                "claude",
+                cwd=consumer,
+            )
+            assert local_install.returncode == 0, (
+                local_install.stdout + local_install.stderr
+            )
+
+            compile_result = run(
+                "apm",
+                "compile",
+                "--target",
+                "claude",
+                cwd=consumer,
+            )
+            assert compile_result.returncode == 0, (
+                compile_result.stdout + compile_result.stderr
+            )
+            assert not (consumer / "CLAUDE.md").exists()
+            dependency_entries = list(
+                (consumer / "apm_modules").rglob(".claude/CLAUDE.md")
+            )
+            assert len(dependency_entries) == 1
 
         leaking = project / "leaking-product"
         leaking.mkdir()

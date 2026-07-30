@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "graph": {
+    "name": "ai-agent-supervisor",
+    "description": "Направления возможного влияния между концепцией, договором продукта и публикуемой коллекцией навыков.",
+    "default_facet": "semantic",
+    "unmapped_paths": "block",
+    "ignore": [
+      ".git/**",
+      ".agents/**",
+      ".claude/agents/**",
+      ".claude/commands/**",
+      ".claude/rules/**",
+      ".claude/skills/**",
+      ".codex/**",
+      ".idea/**",
+      "apm_modules/**",
+      "local/**",
+      "evals.local.yml"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "concept",
+      "title": "Концепция проекта",
+      "kind": "concept",
+      "paths": ["README.md"],
+      "checks": ["ait-docs-concept"]
+    },
+    {
+      "id": "product-contract",
+      "title": "Публичный договор коллекции",
+      "kind": "documentation",
+      "paths": ["docs/product-contract.md"],
+      "checks": ["ait-req-validation", "tools/validate-product-boundary.py"]
+    },
+    {
+      "id": "requirements",
+      "title": "Требования и план развития",
+      "kind": "requirements",
+      "paths": ["docs/requirements/**", "BACKLOG.md"],
+      "checks": ["ait-req-management", "ait-req-validation"]
+    },
+    {
+      "id": "decisions",
+      "title": "Проектные решения",
+      "kind": "decision",
+      "paths": ["docs/decisions/**"],
+      "checks": ["ait-decisions"]
+    },
+    {
+      "id": "knowledge",
+      "title": "Корпус знаний",
+      "kind": "knowledge",
+      "paths": ["knowledge/**"],
+      "checks": ["kc-validation"]
+    },
+    {
+      "id": "skills",
+      "title": "Публикуемая коллекция навыков",
+      "kind": "implementation",
+      "paths": [".apm/skills/**"],
+      "checks": ["ai-skill-development", "apm run tests"]
+    },
+    {
+      "id": "verification",
+      "title": "Проверки и модельные сценарии",
+      "kind": "test",
+      "paths": ["tools/**", "evals/**"],
+      "checks": ["ait-code-testing", "apm run tests"]
+    },
+    {
+      "id": "configuration",
+      "title": "Настройки проекта",
+      "kind": "configuration",
+      "paths": [
+        "AGENTS.md",
+        ".claude/CLAUDE.md",
+        ".ai-dev-team-state.yml",
+        "project-impact.json",
+        "subagents.local.toml",
+        ".gitignore",
+        "evals.local.yml.sample"
+      ],
+      "checks": ["ai-agents-md-maintenance", "ai-setup-subagents"]
+    },
+    {
+      "id": "delivery",
+      "title": "Поставка и журнал изменений",
+      "kind": "delivery",
+      "paths": ["apm.yml", "apm.lock.yaml", "CHANGELOG.md", "LICENSE"],
+      "checks": ["ai-setup-apm", "ait-changelog", "python3 tools/apm-audit-ci"]
+    }
+  ],
+  "edges": [
+    {
+      "from": "concept",
+      "to": "product-contract",
+      "relation": "constrains",
+      "facets": ["semantic", "interface"],
+      "rationale": "Публичный договор раскрывает назначение коллекции и её точки интеграции."
+    },
+    {
+      "from": "concept",
+      "to": "requirements",
+      "relation": "constrains",
+      "facets": ["semantic"],
+      "rationale": "Требования к коллекции не должны противоречить назначению проекта."
+    },
+    {
+      "from": "product-contract",
+      "to": "requirements",
+      "relation": "constrains",
+      "facets": ["semantic", "interface"],
+      "rationale": "Требования уточняют границу публичного продукта и его обязательства."
+    },
+    {
+      "from": "knowledge",
+      "to": "requirements",
+      "relation": "informs",
+      "facets": ["semantic", "quality"],
+      "rationale": "Корпус даёт проверяемые основания для развития публикуемой коллекции."
+    },
+    {
+      "from": "knowledge",
+      "to": "skills",
+      "relation": "informs",
+      "facets": ["semantic", "quality"],
+      "rationale": "Навыки используют проверяемые основания корпуса в пределах опубликованной коллекции."
+    },
+    {
+      "from": "decisions",
+      "to": "requirements",
+      "relation": "constrains",
+      "facets": ["semantic", "quality", "operation"],
+      "rationale": "Принятые решения ограничивают выбор требований и порядок развития коллекции."
+    },
+    {
+      "from": "requirements",
+      "to": "skills",
+      "relation": "realizes",
+      "facets": ["semantic", "interface", "quality", "structure"],
+      "rationale": "Публикуемые навыки реализуют требования к продукту."
+    },
+    {
+      "from": "product-contract",
+      "to": "skills",
+      "relation": "constrains",
+      "facets": ["interface", "structure"],
+      "rationale": "Исходники навыков должны соблюдать публичную границу и намеренные точки интеграции."
+    },
+    {
+      "from": "skills",
+      "to": "verification",
+      "relation": "verifies",
+      "facets": ["semantic", "interface", "quality", "structure"],
+      "rationale": "Проверки и сценарии подтверждают свойства публикуемых навыков."
+    },
+    {
+      "from": "configuration",
+      "to": "skills",
+      "relation": "governs",
+      "facets": ["operation", "quality"],
+      "rationale": "Правила и настройки определяют порядок сопровождения коллекции."
+    },
+    {
+      "from": "configuration",
+      "to": "verification",
+      "relation": "configures",
+      "facets": ["operation", "quality"],
+      "rationale": "Настройки задают доступную оснастку и порядок проверок."
+    },
+    {
+      "from": "skills",
+      "to": "delivery",
+      "relation": "packages",
+      "facets": ["interface", "structure", "quality"],
+      "rationale": "Манифест и журнал изменений поставляют и описывают коллекцию навыков."
+    },
+    {
+      "from": "verification",
+      "to": "delivery",
+      "relation": "verifies",
+      "facets": ["quality", "operation"],
+      "rationale": "Результаты проверок подтверждают готовность поставки."
+    }
+  ]
+}

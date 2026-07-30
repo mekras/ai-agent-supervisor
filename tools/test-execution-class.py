@@ -13,6 +13,8 @@ import textwrap
 from pathlib import Path
 
 
+sys.dont_write_bytecode = True
+
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / ".apm/skills/ai-setup-subagents/scripts/run-execution-class"
 CLAUDE_ROLE = ROOT / ".apm/skills/ai-setup-subagents/scripts/adapters/claude-role"

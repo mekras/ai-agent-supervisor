@@ -2,6 +2,8 @@ product: mekras/ai-dev-team
 updated_at: 2026-07-19
 setup:
   visibility: public
+  operating_context:
+    kind: noncommercial
   git:
     enabled: true
   changelog:
@@ -13,6 +15,10 @@ setup:
     layout: portable_data
     migration_status: completed
     migration_completed_at: 2026-07-10
+  impact_graph:
+    status: present
+    path: project-impact.json
+    schema_version: 1
   decision_records:
     status: present
     scope: project_decisions
