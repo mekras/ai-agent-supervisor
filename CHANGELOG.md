@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.2.0] - 2026-07-30
+
 ### Добавлено
 
 - Навык `ai-setup-apm` поставляет валидатор, который обнаруживает в индексе Git
@@ -283,7 +285,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.1.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.2.0...HEAD
+[2.2.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.2...2.1.0
 [2.0.2]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.0...2.0.1
