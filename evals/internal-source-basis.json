@@ -639,6 +639,21 @@
           ]
         },
         {
+          "id": "ai-setup-apm-result-git-boundary-for-dependencies",
+          "required_claims": [
+            "APMP-002",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "APMP-002"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
           "id": "ai-setup-apm-result-isolate-published-product",
           "required_claims": [
             "APMP-007",
