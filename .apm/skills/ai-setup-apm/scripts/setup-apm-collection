@@ -4,8 +4,14 @@
 from __future__ import annotations
 
 import argparse
-import re
 from pathlib import Path
+
+try:
+    import yaml
+except ImportError as error:
+    raise SystemExit(
+        "Для обновления apm.yml нужен PyYAML (pip install pyyaml).",
+    ) from error
 
 
 # Deterministic gate: structure validators only, no model or network calls.
@@ -80,96 +86,75 @@ def ensure_source_tree(root: Path, skills_source: Path) -> None:
     source.mkdir(parents=True, exist_ok=True)
 
 
-def block_bounds(lines: list[str], key: str) -> tuple[int, int] | None:
-    pattern = re.compile(rf"^{re.escape(key)}:\s*(?:#.*)?$")
-    for index, line in enumerate(lines):
-        if not pattern.match(line):
-            continue
-        end = index + 1
-        while end < len(lines):
-            current = lines[end]
-            if current and not current.startswith((" ", "-")):
-                break
-            end += 1
-        return index, end
-    return None
+class UniqueKeyLoader(yaml.SafeLoader):
+    """Загрузчик YAML, который отклоняет повторяющиеся ключи отображения."""
 
 
-def yaml_double_quote(value: str) -> str:
-    return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+def construct_unique_mapping(
+    loader: yaml.SafeLoader,
+    node: yaml.MappingNode,
+    deep: bool = False,
+) -> dict[object, object]:
+    mapping: dict[object, object] = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        if key in mapping:
+            raise yaml.constructor.ConstructorError(
+                "while constructing a mapping",
+                node.start_mark,
+                f"found duplicate key {key!r}",
+                key_node.start_mark,
+            )
+        mapping[key] = loader.construct_object(value_node, deep=deep)
+    return mapping
 
 
-def ensure_block(lines: list[str], key: str, block: list[str]) -> list[str]:
-    bounds = block_bounds(lines, key)
-    if bounds is None:
-        if lines and lines[-1].strip():
-            lines.append("")
-        lines.extend(block)
-        return lines
-    start, end = bounds
-    return lines[:start] + block + lines[end:]
+UniqueKeyLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    construct_unique_mapping,
+)
 
 
-def ensure_targets(text: str, targets: list[str]) -> str:
-    lines = text.splitlines()
-    if block_bounds(lines, "target") is not None or block_bounds(lines, "targets") is not None:
-        return text
-    block = ["targets:", *(f"  - {target}" for target in targets)]
-    return "\n".join(ensure_block(lines, "targets", block)).rstrip() + "\n"
+def mapping_field(manifest: dict[object, object], key: str) -> dict[object, object]:
+    value = manifest.get(key)
+    if value is None:
+        value = {}
+        manifest[key] = value
+    if not isinstance(value, dict):
+        raise SystemExit(f"apm.yml: поле {key} должно быть отображением YAML.")
+    return value
 
 
-def ensure_type(text: str) -> str:
-    lines = text.splitlines()
-    if block_bounds(lines, "type") is not None:
-        return text
-    lines = ensure_block(lines, "type", ['type: "skill"'])
-    return "\n".join(lines).rstrip() + "\n"
+def load_manifest(path: Path) -> dict[object, object]:
+    try:
+        data = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeyLoader)
+    except yaml.YAMLError as error:
+        raise SystemExit(f"Не удалось разобрать {path}: {error}") from error
+    if not isinstance(data, dict):
+        raise SystemExit(f"{path}: корень манифеста должен быть отображением YAML.")
+    return data
 
 
-def ensure_dependencies(text: str) -> str:
-    lines = text.splitlines()
-    bounds = block_bounds(lines, "dependencies")
-    if bounds is None:
-        block = ["dependencies:", "  apm: []", "  mcp: []"]
-        return "\n".join(ensure_block(lines, "dependencies", block)).rstrip() + "\n"
+def update_manifest(
+    manifest: dict[object, object],
+    targets: list[str],
+    command: str,
+    evals_command: str | None,
+) -> dict[object, object]:
+    scripts = mapping_field(manifest, "scripts")
+    scripts["tests"] = command
+    if evals_command:
+        scripts["evals"] = evals_command
 
-    start, end = bounds
-    block = lines[start:end]
-    while block and not block[-1].strip():
-        block.pop()
-    if not any(re.match(r"^  apm:\s*", line) for line in block):
-        block.append("  apm: []")
-    if not any(re.match(r"^  mcp:\s*", line) for line in block):
-        block.append("  mcp: []")
-    lines = lines[:start] + block + lines[end:]
-    return "\n".join(lines).rstrip() + "\n"
+    manifest.setdefault("type", "skill")
+    if "target" not in manifest and "targets" not in manifest:
+        manifest["targets"] = targets
+    manifest.setdefault("includes", "auto")
 
-
-def ensure_includes(text: str) -> str:
-    lines = text.splitlines()
-    if block_bounds(lines, "includes") is not None:
-        return text
-    lines = ensure_block(lines, "includes", ["includes: auto"])
-    return "\n".join(lines).rstrip() + "\n"
-
-
-def ensure_script(text: str, key: str, command: str) -> str:
-    lines = text.splitlines()
-    scripts = block_bounds(lines, "scripts")
-    scripts_block = ["scripts:", f"  {key}: {yaml_double_quote(command)}"]
-    if scripts is None:
-        return "\n".join(ensure_block(lines, "scripts", scripts_block)).rstrip() + "\n"
-
-    start, end = scripts
-    block = lines[start:end]
-    for index, line in enumerate(block):
-        if re.match(rf"^  {re.escape(key)}:\s*", line):
-            block[index] = f"  {key}: {yaml_double_quote(command)}"
-            break
-    else:
-        block.append(f"  {key}: {yaml_double_quote(command)}")
-    lines = lines[:start] + block + lines[end:]
-    return "\n".join(lines).rstrip() + "\n"
+    dependencies = mapping_field(manifest, "dependencies")
+    dependencies.setdefault("apm", [])
+    dependencies.setdefault("mcp", [])
+    return manifest
 
 
 def create_manifest(
@@ -181,9 +166,9 @@ def create_manifest(
     name = args.name or root.name
     targets = args.target or ["codex"]
     target_lines = "\n".join(f"  - {target}" for target in targets)
-    scripts = f"scripts:\n  tests: {yaml_double_quote(command)}\n"
+    scripts = f"scripts:\n  tests: {command!r}\n"
     if evals_command:
-        scripts += f"  evals: {yaml_double_quote(evals_command)}\n"
+        scripts += f"  evals: {evals_command!r}\n"
     return (
         f"name: {name}\n"
         "version: 0.1.0\n"
@@ -217,13 +202,8 @@ def main() -> int:
     ensure_source_tree(root, Path(args.skills_source))
 
     if manifest.exists():
-        text = ensure_script(manifest.read_text(encoding="utf-8"), "tests", command)
-        if evals_command:
-            text = ensure_script(text, "evals", evals_command)
-        text = ensure_type(text)
-        text = ensure_targets(text, targets)
-        text = ensure_includes(text)
-        text = ensure_dependencies(text)
+        data = update_manifest(load_manifest(manifest), targets, command, evals_command)
+        text = yaml.safe_dump(data, allow_unicode=True, sort_keys=False)
     else:
         text = create_manifest(root, args, command, evals_command)
 
