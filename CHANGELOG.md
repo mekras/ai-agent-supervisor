@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.0] - 2026-08-05
+
 ### Добавлено
 
 - Добавлен навык настройки пользовательской политики выполнения: он разделяет
@@ -309,7 +311,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.2.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.0...HEAD
+[2.3.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.2...2.1.0
 [2.0.2]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.1...2.0.2
