@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -26,6 +27,10 @@ def run(project: Path, *extra: str) -> subprocess.CompletedProcess[str]:
 def main() -> int:
     with tempfile.TemporaryDirectory(prefix="навык с пробелом ") as temporary:
         project = Path(temporary)
+        shutil.copytree(
+            ROOT / ".apm" / "skills" / "ai-setup-apm",
+            project / ".apm" / "skills" / "ai-setup-apm",
+        )
         created = run(
             project,
             "--name",
@@ -45,6 +50,17 @@ def main() -> int:
         assert 'tests: "python tools/run-collection-checks.py"' in manifest
         assert 'evals: "python tools/run-skill-evals.py"' in manifest
         assert (project / ".apm" / "skills").is_dir()
+        assert (project / "tools" / "run-collection-checks.py").is_file()
+        assert (project / "tools" / "validate-skill-descriptions.py").is_file()
+        checks = subprocess.run(
+            [sys.executable, str(project / "tools" / "run-collection-checks.py")],
+            cwd=project,
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        assert checks.returncode == 0, checks.stdout + checks.stderr
 
         repeated = run(project)
         assert repeated.returncode == 2
@@ -60,7 +76,7 @@ def main() -> int:
     )
     assert help_result.returncode == 0
     assert "Create apm.yml" in help_result.stdout
-    print("Создание apm.yml без внешнего YAML-пакета проверено.")
+    print("Создание apm.yml и оснастки проверок без внешнего YAML-пакета проверено.")
     return 0
 
 
