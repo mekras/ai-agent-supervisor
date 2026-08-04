@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -27,6 +29,40 @@ def parse_args() -> argparse.Namespace:
 
 def quoted(value: str) -> str:
     return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def install_eval_tools(root: Path) -> None:
+    """Install the collection checks shipped beside this setup script."""
+    source_root = Path(__file__).resolve().parent / "eval-tools"
+    manifest = source_root / "manifest.txt"
+    if not manifest.is_file():
+        raise RuntimeError(f"Не найден манифест оснастки: {manifest}")
+
+    for line_number, line in enumerate(
+        manifest.read_text(encoding="utf-8").splitlines(),
+        start=1,
+    ):
+        if not line or line.startswith("#"):
+            continue
+        try:
+            source, destination, mode = line.split("|")
+            file_mode = int(mode, 8)
+        except ValueError as exc:
+            raise RuntimeError(
+                f"Некорректная строка манифеста {manifest}:{line_number}",
+            ) from exc
+        source_path = source_root / source
+        destination_relative = Path(destination)
+        destination_path = root / destination_relative
+        if not source_path.is_file():
+            raise RuntimeError(f"Не найден источник оснастки: {source_path}")
+        if destination_relative.is_absolute() or ".." in destination_relative.parts:
+            raise RuntimeError(
+                f"Некорректное назначение оснастки: {destination}",
+            )
+        destination_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source_path, destination_path)
+        os.chmod(destination_path, file_mode)
 
 
 def create_manifest(root: Path, args: argparse.Namespace) -> str:
@@ -65,9 +101,15 @@ def main() -> int:
     source = Path(args.skills_source)
     source = source if source.is_absolute() else root / source
     source.mkdir(parents=True, exist_ok=True)
+    try:
+        install_eval_tools(root)
+    except (OSError, RuntimeError) as exc:
+        print(exc, file=sys.stderr)
+        return 1
     manifest.write_text(create_manifest(root, args), encoding="utf-8")
     print(f"manifest={manifest}")
     print(f"skills_source={source.resolve()}")
+    print(f"installed_tools={root / 'tools'}")
     print(f"tests={args.test_command or DEFAULT_TESTS}")
     print(f"evals={DEFAULT_EVALS}")
     return 0
