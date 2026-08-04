@@ -36,7 +36,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 CONFIG_NAME = "evals.local.yml"
-SAMPLE_NAME = "evals.local.yml.sample"
+SAMPLE_NAME = "evals.sample.yml"
 
 
 TRIGGER_SCHEMA = {
@@ -230,17 +230,9 @@ def load_config(repo_root: Path, config_path: Path) -> dict[str, Any] | None:
         bootstrap_config(repo_root, config_path)
         return None
     try:
-        import yaml
-    except ImportError:
-        print(
-            "Для модельных evals нужен PyYAML (pip install pyyaml). "
-            "Модельные evals пропущены.",
-            file=sys.stderr,
-        )
-        return None
-    data = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
-    if not isinstance(data, dict):
-        print(f"Настройки {config_path} должны быть YAML-объектом.", file=sys.stderr)
+        data = parse_evals_yaml(config_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, ValueError) as error:
+        print(f"Не удалось прочитать {config_path}: {error}", file=sys.stderr)
         return None
 
     raw_adapters = data.get("adapters")
@@ -310,6 +302,168 @@ def load_config(repo_root: Path, config_path: Path) -> dict[str, Any] | None:
         "results_dir": str(data.get("results_dir") or "eval-results"),
         "pricing": data.get("pricing") if isinstance(data.get("pricing"), dict) else {},
     }
+
+
+def parse_evals_yaml(source: str) -> dict[str, Any]:
+    """Разобрать документированное подмножество YAML без сторонних пакетов.
+
+    Конфигурация evals намеренно имеет небольшую схему. Поддерживаются корневые
+    скаляры, разделы ``adapters`` и ``pricing``, а также списки ``models`` и
+    ``workspace_models``. Остальной YAML отклоняется с номером строки, чтобы
+    расширение формата не превратилось в неявную зависимость от PyYAML.
+    """
+    result: dict[str, Any] = {}
+    section: str | None = None
+    pricing_model: str | None = None
+
+    for line_number, raw_line in enumerate(source.splitlines(), start=1):
+        line = strip_yaml_comment(raw_line).rstrip()
+        if not line.strip():
+            continue
+        if "\t" in raw_line[: len(raw_line) - len(raw_line.lstrip())]:
+            raise ValueError(f"строка {line_number}: отступы должны состоять из пробелов")
+        indent = len(line) - len(line.lstrip(" "))
+        content = line.lstrip(" ")
+
+        if indent == 0:
+            key, raw_value = split_yaml_pair(content, line_number)
+            pricing_model = None
+            if raw_value:
+                result[key] = parse_yaml_scalar(raw_value, line_number)
+                section = None
+            elif key in {"adapters", "pricing"}:
+                result[key] = {}
+                section = key
+            elif key in {"models", "workspace_models"}:
+                result[key] = []
+                section = key
+            else:
+                raise ValueError(
+                    f"строка {line_number}: для {key!r} требуется значение"
+                )
+            continue
+
+        if indent == 2 and section in {"models", "workspace_models"}:
+            if not content.startswith("- "):
+                raise ValueError(f"строка {line_number}: ожидается элемент списка")
+            result[section].append(parse_yaml_scalar(content[2:].strip(), line_number))
+            continue
+
+        if indent == 2 and section == "adapters":
+            key, raw_value = split_yaml_pair(content, line_number)
+            if not raw_value:
+                raise ValueError(f"строка {line_number}: команда адаптера не задана")
+            result[section][key] = parse_yaml_scalar(raw_value, line_number)
+            continue
+
+        if indent == 2 and section == "pricing":
+            key, raw_value = split_yaml_pair(content, line_number)
+            if raw_value:
+                raise ValueError(
+                    f"строка {line_number}: тариф модели должен быть разделом"
+                )
+            result[section][key] = {}
+            pricing_model = key
+            continue
+
+        if indent == 4 and section == "pricing" and pricing_model:
+            key, raw_value = split_yaml_pair(content, line_number)
+            if not raw_value:
+                raise ValueError(f"строка {line_number}: ставка не задана")
+            result[section][pricing_model][key] = parse_yaml_scalar(
+                raw_value,
+                line_number,
+            )
+            continue
+
+        raise ValueError(
+            f"строка {line_number}: конструкция не входит в поддерживаемую схему evals"
+        )
+
+    return result
+
+
+def strip_yaml_comment(line: str) -> str:
+    """Удалить комментарий YAML, не затрагивая решётку внутри кавычек."""
+    quote: str | None = None
+    escaped = False
+    for index, char in enumerate(line):
+        if escaped:
+            escaped = False
+            continue
+        if char == "\\" and quote == '"':
+            escaped = True
+            continue
+        if char in {'"', "'"}:
+            if quote is None:
+                quote = char
+            elif quote == char:
+                quote = None
+            continue
+        if char == "#" and quote is None and (index == 0 or line[index - 1].isspace()):
+            return line[:index]
+    return line
+
+
+def split_yaml_pair(content: str, line_number: int) -> tuple[str, str]:
+    """Разделить пару YAML по двоеточию перед пробелом или концом строки."""
+    quote: str | None = None
+    escaped = False
+    for index, char in enumerate(content):
+        if escaped:
+            escaped = False
+            continue
+        if char == "\\" and quote == '"':
+            escaped = True
+            continue
+        if char in {'"', "'"}:
+            if quote is None:
+                quote = char
+            elif quote == char:
+                quote = None
+            continue
+        if char == ":" and quote is None and (
+            index + 1 == len(content) or content[index + 1].isspace()
+        ):
+            key = content[:index].strip()
+            value = content[index + 1 :].strip()
+            if not key:
+                raise ValueError(f"строка {line_number}: ключ не задан")
+            return key, value
+    raise ValueError(f"строка {line_number}: ожидается пара ключ: значение")
+
+
+def parse_yaml_scalar(value: str, line_number: int) -> Any:
+    """Разобрать простой скаляр из поддерживаемой схемы evals."""
+    if value == "[]":
+        return []
+    if value == "{}":
+        return {}
+    if value in {"null", "Null", "NULL", "~"}:
+        return None
+    if value.lower() in {"true", "false"}:
+        return value.lower() == "true"
+    if re.fullmatch(r"[-+]?\d+", value):
+        return int(value)
+    if re.fullmatch(r"[-+]?(?:\d+\.\d*|\d*\.\d+)", value):
+        return float(value)
+    if value.startswith('"'):
+        try:
+            parsed = json.loads(value)
+        except json.JSONDecodeError as error:
+            raise ValueError(
+                f"строка {line_number}: неправильная строка в двойных кавычках"
+            ) from error
+        if not isinstance(parsed, str):
+            raise ValueError(f"строка {line_number}: ожидается строка")
+        return parsed
+    if value.startswith("'"):
+        if len(value) < 2 or not value.endswith("'"):
+            raise ValueError(
+                f"строка {line_number}: неправильная строка в одинарных кавычках"
+            )
+        return value[1:-1].replace("''", "'")
+    return value
 
 
 def resolve_run(

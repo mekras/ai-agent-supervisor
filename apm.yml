@@ -12,12 +12,8 @@ dependencies:
   apm: []
   mcp: []
 scripts:
-  tests: sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 .apm/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py; python3 tools/test-apm-audit-ci.py; python3 tools/test-check-subagent-models.py; python3 tools/test-execution-class.py; python3 tools/test-codex-model-subagent.py; python3 tools/test-run-skill-evals.py; python3 tools/test-setup-apm-collection.py; python3 tools/test-validate-apm-git-boundary.py; python3 tools/test-product-isolation.py; python3 tools/test-validate-statement-excerpts.py; python3 tools/validate-internal-source-basis.py; python3 tools/validate-statement-excerpts.py;
-    python3 tools/validate-hidden-unicode.py; python3 tools/validate-product-boundary.py "$target";
-    python3 tools/validate-skill-descriptions.py
-    "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all;
-    python3 tools/validate-skill-result-evals.py "$target"; python3 tools/validate-fixture-evals.py'
-  evals: python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"
+  tests: python tools/run-project-tests.py
+  evals: python tools/run-skill-evals.py
 devDependencies:
   apm:
   - mekras/ai-dev-team#^0.22.0

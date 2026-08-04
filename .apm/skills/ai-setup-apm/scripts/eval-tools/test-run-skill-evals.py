@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import runpy
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -20,6 +21,55 @@ def main() -> int:
     assert runner["russian_count"](5, "сценарий", "сценария", "сценариев") == "5 сценариев"
     assert runner["russian_count"](11, "сценарий", "сценария", "сценариев") == "11 сценариев"
     assert runner["russian_count"](21, "сценарий", "сценария", "сценариев") == "21 сценарий"
+
+    parsed_config = runner["parse_evals_yaml"](
+        """# Комментарии не требуют отдельного YAML-пакета.
+adapters:
+  adapter: "tools/adapter --flag # не комментарий"
+models:
+  - adapter:model
+workspace_models: []
+judge: adapter:judge-model
+timeout: 900
+repetitions: 3
+judge_repetitions: 3
+results_dir: eval-results # комментарий
+pricing:
+  adapter:model:
+    input_per_million: 1.5
+    output_per_million: 2
+"""
+    )
+    assert parsed_config == {
+        "adapters": {"adapter": "tools/adapter --flag # не комментарий"},
+        "models": ["adapter:model"],
+        "workspace_models": [],
+        "judge": "adapter:judge-model",
+        "timeout": 900,
+        "repetitions": 3,
+        "judge_repetitions": 3,
+        "results_dir": "eval-results",
+        "pricing": {
+            "adapter:model": {
+                "input_per_million": 1.5,
+                "output_per_million": 2,
+            }
+        },
+    }
+    try:
+        runner["parse_evals_yaml"]("models:\n    - adapter:model\n")
+    except ValueError as error:
+        assert "поддерживаемую схему" in str(error)
+    else:
+        raise AssertionError("Неподдерживаемый отступ YAML должен отклоняться")
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        sample = root / "evals.sample.yml"
+        sample.write_text("models: []\n", encoding="utf-8")
+        config = root / "evals.local.yml"
+        runner["bootstrap_config"](root, config)
+        assert config.read_text(encoding="utf-8") == "models: []\n"
 
     answer = extract_answer_text(
         """<<ANSWER>>

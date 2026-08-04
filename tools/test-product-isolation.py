@@ -66,12 +66,7 @@ def main() -> int:
 version: 0.0.0
 type: skill
 scripts:
-  tests: >-
-    sh -c 'set -e; target=".apm/skills";
-    python3 tools/validate-hidden-unicode.py;
-    python3 tools/validate-skill-descriptions.py "$target";
-    python3 tools/validate-trigger-evals.py "$target" --require-all;
-    python3 tools/validate-skill-result-evals.py "$target"'
+  tests: python tools/run-collection-checks.py
 """,
             encoding="utf-8",
         )

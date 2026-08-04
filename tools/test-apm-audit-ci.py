@@ -25,8 +25,17 @@ def write_project(
     local_hash_drift: bool = False,
     phantom_bytecode: bool = False,
     present_bytecode: bool = False,
+    echoed_ref_mismatch: bool = False,
+    actual_ref_mismatch: bool = False,
+    local_addition: bool = False,
+    changed_local_addition: bool = False,
+    local_removal: bool = False,
+    unowned_removal: bool = False,
 ) -> Path:
-    (root / "apm.yml").write_text("name: local-package\n", encoding="utf-8")
+    (root / "apm.yml").write_text(
+        "name: local-package\nversion: 1.0.0\n",
+        encoding="utf-8",
+    )
     source = root / ".apm" / "skills" / "example" / "SKILL.md"
     deployed = root / ".agents" / "skills" / "example" / "SKILL.md"
     source.parent.mkdir(parents=True)
@@ -42,6 +51,7 @@ def write_project(
     lockfile = f"""dependencies:
 - repo_url: example/local-package
   name: local-package
+  version: 1.0.0
 deployments:
 - value: .agents/skills/example/SKILL.md
   owners: [example/local-package, .]
@@ -50,11 +60,39 @@ deployments:
   owners: [example/local-package, {adapter_owner}]
   active_owner: {adapter_owner}
 """
+    if local_removal or unowned_removal:
+        removal_path = ".agents/skills/example/references/removed.md"
+        removal_owners = (
+            "[example/local-package]" if local_removal else "[example/other-package]"
+        )
+        lockfile += f"""- value: {removal_path}
+  owners: {removal_owners}
+  active_owner: example/local-package
+"""
     (root / "apm.lock.yaml").write_text(lockfile, encoding="utf-8")
-    checks = [
-        {"name": "lockfile-exists", "passed": True},
-        {"name": "drift", "passed": False},
-    ]
+    checks = [{"name": "lockfile-exists", "passed": True}]
+    if echoed_ref_mismatch or actual_ref_mismatch:
+        manifest_ref = "^0.22.0"
+        lockfile_ref = manifest_ref if echoed_ref_mismatch else "0.22.0"
+        checks.append(
+            {
+                "name": "ref-consistency",
+                "passed": False,
+                "details": [
+                    f"example/local-package: manifest ref '{manifest_ref}' != lockfile ref '{lockfile_ref}'"
+                ],
+            }
+        )
+        drift = []
+    else:
+        checks.append({"name": "drift", "passed": False})
+        drift = [
+            {
+                "path": ".agents/skills/example/SKILL.md",
+                "kind": "modified",
+                "package": "example/local-package",
+            }
+        ]
     if extra_failure:
         checks.append({"name": "content-integrity", "passed": False})
     if local_hash_drift:
@@ -68,13 +106,6 @@ deployments:
                 ],
             }
         )
-    drift = [
-        {
-            "path": ".agents/skills/example/SKILL.md",
-            "kind": "modified",
-            "package": "example/local-package",
-        }
-    ]
     if phantom_bytecode:
         bytecode = root / ".agents" / "skills" / "example" / "scripts" / "__pycache__" / "adapter.cpython-313.pyc"
         if present_bytecode:
@@ -85,6 +116,38 @@ deployments:
             "path": ".agents/skills/example/scripts/__pycache__/adapter.cpython-313.pyc",
                 "kind": "unintegrated",
                 "package": "",
+            }
+        )
+    if local_addition or changed_local_addition:
+        added_source = root / ".apm" / "skills" / "example" / "references" / "new.md"
+        added_deployed = root / ".agents" / "skills" / "example" / "references" / "new.md"
+        added_source.parent.mkdir(parents=True, exist_ok=True)
+        added_deployed.parent.mkdir(parents=True, exist_ok=True)
+        added_source.write_text("new local source\n", encoding="utf-8")
+        added_deployed.write_text(
+            "changed\n" if changed_local_addition else "new local source\n",
+            encoding="utf-8",
+        )
+        drift.append(
+            {
+                "path": ".agents/skills/example/references/new.md",
+                "kind": "orphaned",
+                "package": ".",
+            }
+        )
+    if local_removal or unowned_removal:
+        checks.append(
+            {
+                "name": "deployed-files-present",
+                "passed": False,
+                "details": [removal_path],
+            }
+        )
+        drift.append(
+            {
+                "path": removal_path,
+                "kind": "unintegrated",
+                "package": "example/local-package",
             }
         )
     report = {
@@ -152,6 +215,30 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
+        accepted = run(root, write_project(root, local_addition=True))
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "подтверждено файлов — 2" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        rejected = run(root, write_project(root, changed_local_addition=True))
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+        assert '"orphaned"' in rejected.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        accepted = run(root, write_project(root, local_removal=True))
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "подтверждено файлов — 2" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        rejected = run(root, write_project(root, unowned_removal=True))
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+        assert '"deployed-files-present"' in rejected.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
         rejected = run(
             root,
             write_project(root, phantom_bytecode=True, present_bytecode=True),
@@ -161,7 +248,12 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
-        rejected = run(root, write_project(root, active_owner="example/local-package"))
+        accepted = run(root, write_project(root, active_owner="example/local-package"))
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        rejected = run(root, write_project(root, active_owner="example/other-package"))
         assert rejected.returncode == 1, rejected.stdout + rejected.stderr
         assert '"passed": false' in rejected.stdout
 
@@ -170,6 +262,18 @@ def main() -> int:
         rejected = run(root, write_project(root, extra_failure=True))
         assert rejected.returncode == 1, rejected.stdout + rejected.stderr
         assert '"content-integrity"' in rejected.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        accepted = run(root, write_project(root, echoed_ref_mismatch=True))
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "самопротиворечивым сообщением" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        rejected = run(root, write_project(root, actual_ref_mismatch=True))
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+        assert '"ref-consistency"' in rejected.stdout
 
     print("Узкий обход ложного APM drift проверен.")
     return 0
