@@ -9,7 +9,6 @@ import tempfile
 import shutil
 from pathlib import Path
 
-import yaml
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -40,14 +39,23 @@ def create_project() -> Path:
 
 
 def write_lock(project: Path, dependencies: list[dict[str, object]]) -> None:
-    (project / "apm.lock.yaml").write_text(
-        yaml.safe_dump(
-            {"lockfile_version": "2", "dependencies": dependencies},
-            allow_unicode=True,
-            sort_keys=False,
-        ),
-        encoding="utf-8",
-    )
+    lines = [
+        "lockfile_version: '2'",
+        "generated_at: '2026-08-05T00:00:00+00:00'",
+        "apm_version: 0.27.0",
+        "dependencies:",
+    ]
+    for item in dependencies:
+        lines.append(f"- repo_url: {item['name']}")
+        lines.append(f"  name: {str(item['name']).split('/')[-1]}")
+        lines.append("  host: example.invalid")
+        lines.append("  resolved_commit: 0000000000000000000000000000000000000000")
+        lines.append("  resolved_ref: 1.0.0")
+        lines.append("  version: 1.0.0")
+        lines.append("  package_type: apm_package")
+        lines.append("  deployed_files:")
+        lines.extend(f"  - {path}" for path in item["deployed_files"])
+    (project / "apm.lock.yaml").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def write_file(project: Path, path: str) -> None:

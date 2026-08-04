@@ -1,0 +1,34 @@
+name: Portability
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  skill-portability:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Validate public scripts and portability declarations
+        run: python tools/validate-skill-portability.py .apm/skills
+      - name: Test portability failures and Unicode paths
+        run: python tools/test-skill-portability.py
+      - name: Test manifest creation without third-party packages
+        run: python tools/test-setup-apm-collection.py
+      - name: Test model eval runner without PyYAML
+        run: python tools/test-run-skill-evals.py

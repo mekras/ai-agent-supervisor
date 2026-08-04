@@ -141,15 +141,15 @@ project/
 командной строки, поэтому проходят у стороннего участника и в непрерывной
 интеграции. Для репозитория с валидаторами навыков:
 
-```bash
-sh -c 'set -e; target="${APM_EVAL_PATH:-.apm/skills}"; python3 tools/validate-hidden-unicode.py; python3 tools/validate-skill-descriptions.py "$target"; python3 tools/validate-trigger-evals.py "$target" --require-all; python3 tools/validate-skill-result-evals.py "$target"; python3 tools/validate-fixture-evals.py'
+```text
+<команда Python 3> tools/run-collection-checks.py [путь-к-навыку]
 ```
 
 `scripts.evals` — опциональный модельный прогон. Это измерение качества, а не
 условие приёмки, поэтому его держат отдельной целью:
 
-```bash
-python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"
+```text
+<команда Python 3> tools/run-skill-evals.py [путь-к-навыку]
 ```
 
 Проверка `tools/validate-hidden-unicode.py` сканирует исходники пакета на
@@ -187,13 +187,15 @@ python3 tools/run-skill-evals.py "${APM_EVAL_PATH:-.apm/skills}"
 совместимым; его метрики в отчёте являются оценочными.
 
 Адаптеры, список моделей и модель-судью задаёт локальный файл настроек
-`evals.local.yml` в корне проекта. В разделе `adapters` задают соответствие
+`evals.local.yml` в корне проекта. В поле `adapters` задают соответствие
 имени адаптера и команды, а модели и судью указывают в формате `адаптер:модель`,
 поэтому один прогон может сочетать модели от разных адаптеров. Файл содержит
 только настройки моделей, а не секреты: ключи и подписки передают через
 переменные окружения адаптера. Файл не попадает в Git: средство запуска создаёт
-его из образца `evals.local.yml.sample` при первом запуске и добавляет в
-`.git/info/exclude`. В Git хранятся только образец и пример адаптера; имена
+его из образца `evals.sample.yml` при первом запуске и добавляет в
+`.git/info/exclude`. Запускатель разбирает только документированную схему этого
+YAML средствами стандартной библиотеки. Поэтому комментарии сохраняются, а
+PyYAML не требуется. В Git хранятся только образец и пример адаптера. Имена
 моделей в `apm.yml` и навыках не фиксируй.
 
 Средство запуска, валидаторы, адаптеры и образец — переносимая оснастка. Её

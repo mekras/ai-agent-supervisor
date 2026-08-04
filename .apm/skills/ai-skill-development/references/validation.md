@@ -34,15 +34,15 @@
 
 Структуру проверяй командой:
 
-```bash
-python3 tools/validate-trigger-evals.py --require-all
+```text
+<команда Python 3> tools/validate-trigger-evals.py --require-all
 ```
 
 Для одного навыка передавай путь к его каталогу:
 
-```bash
-python3 tools/validate-skill-descriptions.py .apm/skills/<name>
-python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
+```text
+<команда Python 3> tools/validate-skill-descriptions.py .apm/skills/<name>
+<команда Python 3> tools/validate-trigger-evals.py .apm/skills/<name> --require-all
 ```
 
 ## Проверки качества результата
@@ -101,18 +101,18 @@ python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
 модель, сеть или внешний инструмент командной строки, поэтому проходят у
 стороннего участника и в непрерывной интеграции. Это условие приёмки:
 
-```bash
-python3 tools/validate-skill-descriptions.py .apm/skills/<name>
-python3 tools/validate-trigger-evals.py .apm/skills/<name> --require-all
-python3 tools/validate-skill-result-evals.py .apm/skills/<name>
+```text
+<команда Python 3> tools/validate-skill-descriptions.py .apm/skills/<name>
+<команда Python 3> tools/validate-trigger-evals.py .apm/skills/<name> --require-all
+<команда Python 3> tools/validate-skill-result-evals.py .apm/skills/<name>
 ```
 
 Модельный прогон применяет навык к сценариям через модель. Это измерение
 качества, а не условие приёмки, поэтому его держат отдельной целью и не вносят в
 контроль качества:
 
-```bash
-python3 tools/run-skill-evals.py .apm/skills/<name>
+```text
+<команда Python 3> tools/run-skill-evals.py .apm/skills/<name>
 ```
 
 Не помещай модельный прогон в контроль качества. Если модельный шаг попадает в
@@ -132,7 +132,7 @@ python3 tools/run-skill-evals.py .apm/skills/<name>
 
 Средство запуска само вкладывает требование вернуть JSON в текст запроса и
 разбирает JSON из ответа. Адаптеры (имя адаптера → команда), список моделей и
-модель-судью задаёт локальный файл настроек `evals.local.yml` вне Git; средство
+модель-судью задаёт локальный файл настроек `evals.local.yml` вне Git. Средство
 запуска создаёт его из образца при первом запуске. Модели и судью указывают в
 формате `адаптер:модель`, поэтому один прогон может сочетать модели от разных
 адаптеров. Имена моделей в навыках и манифесте не фиксируй. Каждая запись
@@ -149,8 +149,8 @@ python3 tools/run-skill-evals.py .apm/skills/<name>
 
 Если нужно повторить один модельный сценарий, запускай его по идентификатору:
 
-```bash
-python3 tools/run-skill-evals.py .apm/skills/<name> --case-id <id>
+```text
+<команда Python 3> tools/run-skill-evals.py .apm/skills/<name> --case-id <id>
 ```
 
 Через APM контроль качества и модельный прогон вызываются разными командами, а
@@ -201,6 +201,9 @@ APM_EVAL_PATH=.apm/skills/<name> APM_EVAL_CASE_ID=<id> apm run evals
   навигации из `SKILL.md`.
 - Тесты скриптов: запуск или сухая проверка команд из `scripts/`, если навык
   полагается на повторяемую механику.
+- Тесты переносимости: полезный P0 без поставляемого скрипта, предварительная
+  проверка P1 и P2, отсутствие рантайма или пакета, путь с пробелами и символами
+  вне ASCII, заявленные операционные системы.
 - Интеграционные тесты проекта: сценарий совместного применения навыка с
   `AGENTS.md`, соседними навыками и локальными правилами целевого проекта.
 
@@ -218,6 +221,7 @@ APM_EVAL_PATH=.apm/skills/<name> APM_EVAL_CASE_ID=<id> apm run evals
 - какие файлы навыка изменены: `SKILL.md`, `agents/openai.yaml`, `references/`,
   `assets/`, `scripts/`, `evals/`;
 - какой риск изменения появился или изменился;
+- какой класс переносимости имеет основной маршрут и каждый скрипт;
 - какие постоянные тесты добавлены или обновлены под этот риск;
 - какие проверки запущены и что они подтвердили.
 
