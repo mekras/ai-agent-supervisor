@@ -287,21 +287,32 @@
             ]
           ]
         },
-        {
-          "id": "ai-audit-project-result-open-problem-taxonomy",
-          "required_claims": [
-            "ASKL-004",
-            "ASKL-003"
+    {
+      "id": "ai-audit-project-result-open-problem-taxonomy",
+      "required_claims": [
+        "ASKL-004",
+        "ASKL-003"
           ],
           "finding_claims": [
             [
               "ASKL-004",
               "ASKL-003"
-            ]
-          ]
-        },
-        {
-          "id": "ai-audit-project-result-weak-skill-evals",
+        ]
+      ]
+    },
+    {
+      "id": "ai-audit-project-result-apm-script-contract-gap",
+      "required_claims": [
+        "ASKL-004"
+      ],
+      "finding_claims": [
+        [
+          "ASKL-004"
+        ]
+      ]
+    },
+    {
+      "id": "ai-audit-project-result-weak-skill-evals",
           "required_claims": [
             "ASKL-004",
             "ASKL-003"
