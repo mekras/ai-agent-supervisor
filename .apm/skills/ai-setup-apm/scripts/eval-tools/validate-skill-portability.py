@@ -6,11 +6,13 @@ from __future__ import annotations
 import argparse
 import ast
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 
 SCRIPT_SUFFIXES = {".py", ".sh", ".bash"}
+CONTRACT_RUNNER = Path(__file__).with_name("run-skill-script-contract-tests.py")
 HIDDEN_INSTALL_PATTERNS = (
     re.compile(r"\bpip(?:3)?\s+install\b"),
     re.compile(r"\buv\s+run\b"),
@@ -150,6 +152,20 @@ def validate_skill(skill: Path) -> list[str]:
     return errors
 
 
+def run_script_contracts(paths: list[Path]) -> int:
+    if not CONTRACT_RUNNER.is_file():
+        print(
+            f"Не найден запускатель контрактов скриптов: {CONTRACT_RUNNER}",
+            file=sys.stderr,
+        )
+        return 2
+    result = subprocess.run(
+        [sys.executable, str(CONTRACT_RUNNER), *(str(path) for path in paths)],
+        check=False,
+    )
+    return result.returncode
+
+
 def main() -> int:
     args = parse_args()
     missing = [str(path) for path in args.paths if not path.exists()]
@@ -164,6 +180,9 @@ def main() -> int:
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1
+    contracts_result = run_script_contracts(args.paths)
+    if contracts_result != 0:
+        return contracts_result
     print("Декларации переносимости и зависимости скриптов проверены.")
     return 0
 

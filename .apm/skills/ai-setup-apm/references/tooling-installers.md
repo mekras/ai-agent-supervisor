@@ -47,7 +47,7 @@
 
 - источник — `scripts/eval-tools/` (средства запуска `run-skill-evals.py` и
   `run-collection-checks.py`, валидаторы `validate-*.py`, включая проверки
-  переносимости и скрытых Unicode-символов,
+  переносимости, скрытых Unicode-символов и скомпилированных Python-артефактов,
   адаптеры `adapters/codex` и `adapters/claude`, образец
   `evals.sample.yml`).
 - установщик — `scripts/install-eval-tools`;

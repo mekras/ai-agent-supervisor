@@ -1196,6 +1196,10 @@
         {
           "claim_id": "APMP-007",
           "statement_path": "knowledge/data/apmp/pages/publish-to-a-marketplace/statements.yml"
+        },
+        {
+          "claim_id": "AENG-004",
+          "statement_path": "knowledge/data/aeng/pages/demystifying-evals-for-ai-agents/statements.yml"
         }
       ],
       "cases": [
@@ -1338,6 +1342,21 @@
             ],
             [
               "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-script-state-contract",
+          "required_claims": [
+            "ASKL-004",
+            "LSME-003",
+            "AENG-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004",
+              "LSME-003",
+              "AENG-004"
             ]
           ]
         }

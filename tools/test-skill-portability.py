@@ -33,6 +33,24 @@ def write_skill(root: Path, frontmatter: str, procedure: str, script: str) -> No
         encoding="utf-8",
     )
     (scripts / "check.py").write_text(script, encoding="utf-8")
+    fixture = skill / "evals" / "script-fixtures" / "empty"
+    fixture.mkdir(parents=True)
+    (skill / "evals" / "script-contract-tests.json").write_text(
+        """{
+  "version": 1,
+  "cases": [
+    {
+      "id": "check",
+      "script": "scripts/check.py",
+      "fixture": "evals/script-fixtures/empty",
+      "command": ["{python}", "{script}"],
+      "expect": {"stdout_contains": ["ok"]}
+    }
+  ]
+}
+""",
+        encoding="utf-8",
+    )
 
 
 def main() -> int:
@@ -72,6 +90,30 @@ def main() -> int:
         failed = run(root)
         assert failed.returncode == 1
         assert "скрытая установка" in failed.stderr
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        skill = root / "навык с пробелом"
+        scripts = skill / "scripts"
+        scripts.mkdir(parents=True)
+        (skill / "SKILL.md").write_text(
+            """---
+name: example
+compatibility: P0 не требует Python. P1 требует Python 3.
+---
+
+# Example
+
+## Переносимость
+
+P0 работает без скрипта. Если Python недоступен, проверка помечается как невыполненная.
+""",
+            encoding="utf-8",
+        )
+        (scripts / "check.py").write_text("print('ok')\n", encoding="utf-8")
+        failed = run(root)
+        assert failed.returncode == 1
+        assert "script-contract-tests.json" in failed.stderr
 
     print("Валидатор переносимости навыков проверен.")
     return 0
