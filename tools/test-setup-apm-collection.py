@@ -52,6 +52,8 @@ def main() -> int:
         assert (project / ".apm" / "skills").is_dir()
         assert (project / "tools" / "run-collection-checks.py").is_file()
         assert (project / "tools" / "validate-skill-descriptions.py").is_file()
+        assert (project / "tools" / "validate-python-artifacts.py").is_file()
+        assert (project / "tools" / "run-skill-script-contract-tests.py").is_file()
         checks = subprocess.run(
             [sys.executable, str(project / "tools" / "run-collection-checks.py")],
             cwd=project,
@@ -61,6 +63,20 @@ def main() -> int:
             stderr=subprocess.PIPE,
         )
         assert checks.returncode == 0, checks.stdout + checks.stderr
+
+        cache = project / ".apm" / "skills" / "example" / "__pycache__"
+        cache.mkdir(parents=True)
+        (cache / "check.cpython-313.pyc").write_bytes(b"bytecode")
+        rejected = subprocess.run(
+            [sys.executable, str(project / "tools" / "run-collection-checks.py")],
+            cwd=project,
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        assert rejected.returncode == 1
+        assert "скомпилированные Python-артефакты" in rejected.stderr
 
         repeated = run(project)
         assert repeated.returncode == 2

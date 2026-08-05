@@ -26,6 +26,7 @@ def main() -> int:
     tools = root / "tools"
     checks = [
         [tools / "validate-hidden-unicode.py"],
+        [tools / "validate-python-artifacts.py", Path(".apm")],
         [tools / "validate-skill-descriptions.py", Path(args.skills_path)],
         [tools / "validate-trigger-evals.py", Path(args.skills_path), "--require-all"],
         [tools / "validate-skill-result-evals.py", Path(args.skills_path)],
@@ -39,7 +40,12 @@ def main() -> int:
             print(f"Не найдена обязательная проверка: {script}", file=sys.stderr)
             return 2
         rendered = [sys.executable, *(str(value) for value in command)]
-        result = subprocess.run(rendered, cwd=root, check=False)
+        result = subprocess.run(
+            rendered,
+            cwd=root,
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+            check=False,
+        )
         if result.returncode != 0:
             return result.returncode
     print("Детерминированные проверки коллекции пройдены.")

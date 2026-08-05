@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "reject-missing-project",
+      "script": "scripts/validate-apm-git-boundary.py",
+      "fixture": "evals/script-fixtures/empty-project",
+      "command": ["{python}", "{script}", "{fixture}/missing-project"],
+      "expect": {
+        "exit_code": 2,
+        "stderr_contains": ["не найден каталог проекта"]
+      }
+    }
+  ]
+}

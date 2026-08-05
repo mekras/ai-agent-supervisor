@@ -19,6 +19,8 @@ SCRIPTS = [
     "tools/test-codex-model-subagent.py",
     "tools/test-run-skill-evals.py",
     "tools/test-setup-apm-collection.py",
+    "tools/test-run-skill-script-contract-tests.py",
+    "tools/test-validate-python-artifacts.py",
     "tools/test-skill-portability.py",
     "tools/test-validate-apm-git-boundary.py",
     "tools/test-product-isolation.py",
@@ -32,6 +34,7 @@ SCRIPTS = [
     "tools/validate-skill-result-evals.py",
     "tools/validate-skill-portability.py",
     "tools/validate-fixture-evals.py",
+    "tools/validate-python-artifacts.py",
 ]
 
 
@@ -49,7 +52,12 @@ def main() -> int:
             args.append(target)
         elif relative.endswith("validate-skill-portability.py"):
             args.append(target)
-        result = subprocess.run(args, cwd=ROOT, check=False)
+        result = subprocess.run(
+            args,
+            cwd=ROOT,
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+            check=False,
+        )
         if result.returncode != 0:
             return result.returncode
     print("Все проверки проекта пройдены.")
