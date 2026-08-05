@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.3] - 2026-08-05
+
 ### Исправлено
 
 - Аудит правил APM-коллекции теперь не принимает промежуточный вывод команды
@@ -346,7 +348,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.3...HEAD
+[2.3.3]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.2...2.3.3
 [2.3.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.0.2...2.1.0
