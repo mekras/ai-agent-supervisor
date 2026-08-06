@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.7] - 2026-08-06
+
 ### Исправлено
 
 - Контракты скриптов теперь проверяют репрезентативность фикстур: необязательные
@@ -409,7 +411,9 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.5...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.7...HEAD
+[2.3.7]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.6...2.3.7
+[2.3.6]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.5...2.3.6
 [2.3.5]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.4...2.3.5
 [2.3.4]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.3...2.3.4
 [2.3.3]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.2...2.3.3
