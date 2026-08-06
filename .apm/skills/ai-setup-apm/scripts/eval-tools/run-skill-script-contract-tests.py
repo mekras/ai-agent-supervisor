@@ -9,9 +9,9 @@
 которые меняют поведение операции, объявляются в ``operations[].inputs``:
 каждый объявленный вход обязан присутствовать хотя бы в одной фикстуре
 успешного сценария этой операции, иначе зависящая от него ветвь остаётся
-непроверенной. Во время успешного сценария запускатель наблюдает проверки
-отсутствующих путей внутри фикстуры и отклоняет пути, не объявленные в
-``inputs`` покрываемой операции.
+непроверенной. Во время успешного сценария запускатель наблюдает отсутствующие
+пути внутри фикстуры, исключает пути, созданные или заменённые самой операцией,
+и отклоняет оставшиеся пути, не объявленные в ``inputs`` покрываемой операции.
 Если в контракте есть независимая ошибка полноты, запускатель всё равно
 выполняет корректно описанные сценарии и сообщает все найденные ошибки за один
 запуск.
@@ -48,9 +48,13 @@ _original_is_file = Path.is_file
 _original_is_dir = Path.is_dir
 _original_path_open = Path.open
 _original_open = builtins.open
+_original_os_open = os.open
 _original_os_exists = os.path.exists
 _original_os_isfile = os.path.isfile
 _original_os_isdir = os.path.isdir
+_original_os_replace = os.replace
+_original_os_rename = os.rename
+_original_os_mkdir = os.mkdir
 
 
 def _relative(value):
@@ -69,12 +73,12 @@ def _relative(value):
     return relative.replace(os.sep, "/")
 
 
-def _record(value):
+def _record(value, event):
     relative = _relative(value)
     if relative is None:
         return
-    payload = (json.dumps({"path": relative}, ensure_ascii=False) + "\n").encode("utf-8")
-    descriptor = os.open(_log, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
+    payload = (json.dumps({"path": relative, "event": event}, ensure_ascii=False) + "\n").encode("utf-8")
+    descriptor = _original_os_open(_log, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
     try:
         os.write(descriptor, payload)
     finally:
@@ -85,7 +89,7 @@ def _probe(original):
     def wrapped(self):
         result = original(self)
         if not result:
-            _record(self)
+            _record(self, "missing")
         return result
     return wrapped
 
@@ -94,25 +98,58 @@ def _os_probe(original):
     def wrapped(value):
         result = original(value)
         if not result:
-            _record(value)
+            _record(value, "missing")
         return result
     return wrapped
 
 
 def _path_open(self, *args, **kwargs):
+    mode = kwargs.get("mode", args[0] if args else "r")
     try:
-        return _original_path_open(self, *args, **kwargs)
+        result = _original_path_open(self, *args, **kwargs)
     except FileNotFoundError:
-        _record(self)
+        _record(self, "missing")
         raise
+    if any(marker in mode for marker in "wax+"):
+        _record(self, "write")
+    return result
 
 
 def _open(file, *args, **kwargs):
+    mode = kwargs.get("mode", args[0] if args else "r")
     try:
-        return _original_open(file, *args, **kwargs)
+        result = _original_open(file, *args, **kwargs)
     except FileNotFoundError:
-        _record(file)
+        _record(file, "missing")
         raise
+    if isinstance(mode, str) and any(marker in mode for marker in "wax+"):
+        _record(file, "write")
+    return result
+
+
+def _os_open(file, flags, *args, **kwargs):
+    result = _original_os_open(file, flags, *args, **kwargs)
+    if flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND):
+        _record(file, "write")
+    return result
+
+
+def _replace(source, destination, *args, **kwargs):
+    result = _original_os_replace(source, destination, *args, **kwargs)
+    _record(destination, "write")
+    return result
+
+
+def _rename(source, destination, *args, **kwargs):
+    result = _original_os_rename(source, destination, *args, **kwargs)
+    _record(destination, "write")
+    return result
+
+
+def _mkdir(path, *args, **kwargs):
+    result = _original_os_mkdir(path, *args, **kwargs)
+    _record(path, "write")
+    return result
 
 
 Path.exists = _probe(_original_exists)
@@ -120,12 +157,16 @@ Path.is_file = _probe(_original_is_file)
 Path.is_dir = _probe(_original_is_dir)
 Path.open = _path_open
 builtins.open = _open
+os.open = _os_open
 os.path.exists = _os_probe(_original_os_exists)
 os.path.isfile = _os_probe(_original_os_isfile)
 os.path.isdir = _os_probe(_original_os_isdir)
+os.replace = _replace
+os.rename = _rename
+os.mkdir = _mkdir
 
 if _marker:
-    descriptor = os.open(_marker, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    descriptor = _original_os_open(_marker, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
     os.close(descriptor)
 '''
 
@@ -478,16 +519,22 @@ def trace_environment(tracer: Path, fixture: Path, log: Path, marker: Path) -> d
 def observed_conditional_inputs(log: Path) -> set[str]:
     if not log.is_file():
         return set()
-    result: set[str] = set()
+    missing: set[str] = set()
+    written: set[str] = set()
     for line in log.read_text(encoding="utf-8").splitlines():
         try:
             item = json.loads(line)
         except json.JSONDecodeError:
             continue
         path = safe_relative(item.get("path")) if isinstance(item, dict) else None
-        if path is not None:
-            result.add(path.as_posix())
-    return result
+        if path is None:
+            continue
+        value = path.as_posix()
+        if item.get("event") == "write":
+            written.add(value)
+        elif item.get("event") in {None, "missing"}:
+            missing.add(value)
+    return missing - written
 
 
 def run_case(skill: Path, case: dict[str, Any]) -> list[str]:

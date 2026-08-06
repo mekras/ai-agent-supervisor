@@ -159,16 +159,31 @@ print("state_saved")
 
         write_contract(skill)
 
-        conditional_input_script = script.replace(
+        output_probe_script = script.replace(
+            'args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")',
+            '''state = json.loads(args.output.read_text(encoding="utf-8")) if args.output.is_file() else {"status": "ready"}
+temporary_output = args.output.with_suffix(".tmp")
+temporary_output.write_text(json.dumps(state), encoding="utf-8")
+os.replace(temporary_output, args.output)''',
+        )
+        write_script(skill, output_probe_script)
+        output_is_not_input = run(skill)
+        assert output_is_not_input.returncode == 0, output_is_not_input.stderr
+
+        mixed_paths_script = script.replace(
             'args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")',
             '''impact_path = Path("project-impact.json")
 impact = json.loads(impact_path.read_text(encoding="utf-8")) if impact_path.is_file() else None
-args.output.write_text(
-    json.dumps({"status": "ready", "impact": impact}),
+state = json.loads(args.output.read_text(encoding="utf-8")) if args.output.is_file() else {"status": "ready"}
+state["impact"] = impact
+temporary_output = args.output.with_suffix(".tmp")
+temporary_output.write_text(
+    json.dumps(state),
     encoding="utf-8",
-)''',
+)
+os.replace(temporary_output, args.output)''',
         )
-        write_script(skill, conditional_input_script)
+        write_script(skill, mixed_paths_script)
         undeclared_conditional_input = run(skill)
         assert undeclared_conditional_input.returncode == 1
         assert (
@@ -176,6 +191,7 @@ args.output.write_text(
             "project-impact.json, но не объявляет его в inputs"
             in undeclared_conditional_input.stderr
         )
+        assert "state.json, но не объявляет его в inputs" not in undeclared_conditional_input.stderr
 
         contract = json.loads(contract_path.read_text(encoding="utf-8"))
         contract["operations"][0]["inputs"] = ["project-impact.json"]
