@@ -159,6 +159,34 @@ print("state_saved")
 
         write_contract(skill)
 
+        conditional_input_script = script.replace(
+            'args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")',
+            '''impact_path = Path("project-impact.json")
+impact = json.loads(impact_path.read_text(encoding="utf-8")) if impact_path.is_file() else None
+args.output.write_text(
+    json.dumps({"status": "ready", "impact": impact}),
+    encoding="utf-8",
+)''',
+        )
+        write_script(skill, conditional_input_script)
+        undeclared_conditional_input = run(skill)
+        assert undeclared_conditional_input.returncode == 1
+        assert (
+            "операция 'save-state' проверяет отсутствующий путь "
+            "project-impact.json, но не объявляет его в inputs"
+            in undeclared_conditional_input.stderr
+        )
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["operations"][0]["inputs"] = ["project-impact.json"]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        declared_input.write_text('{"version": 1}', encoding="utf-8")
+        traced_input_covered = run(skill)
+        assert traced_input_covered.returncode == 0, traced_input_covered.stderr
+        declared_input.unlink()
+
+        write_contract(skill)
+
         broken = script.replace('{"status": "ready"}', '{"status": {"ready"}}')
         write_script(skill, broken)
         failed = run(skill)

@@ -9,7 +9,9 @@
 которые меняют поведение операции, объявляются в ``operations[].inputs``:
 каждый объявленный вход обязан присутствовать хотя бы в одной фикстуре
 успешного сценария этой операции, иначе зависящая от него ветвь остаётся
-непроверенной.
+непроверенной. Во время успешного сценария запускатель наблюдает проверки
+отсутствующих путей внутри фикстуры и отклоняет пути, не объявленные в
+``inputs`` покрываемой операции.
 Если в контракте есть независимая ошибка полноты, запускатель всё равно
 выполняет корректно описанные сценарии и сообщает все найденные ошибки за один
 запуск.
@@ -29,6 +31,103 @@ from typing import Any
 
 
 FIXTURE_PREFIX = Path("evals/script-fixtures")
+
+TRACE_SITECUSTOMIZE = r'''"""Наблюдение за необъявленными условными входами контракта."""
+
+import builtins
+import json
+import os
+from pathlib import Path
+
+
+_root = os.environ.get("APM_CONTRACT_FIXTURE_ROOT")
+_log = os.environ.get("APM_CONTRACT_INPUT_LOG")
+_marker = os.environ.get("APM_CONTRACT_TRACE_MARKER")
+_original_exists = Path.exists
+_original_is_file = Path.is_file
+_original_is_dir = Path.is_dir
+_original_path_open = Path.open
+_original_open = builtins.open
+_original_os_exists = os.path.exists
+_original_os_isfile = os.path.isfile
+_original_os_isdir = os.path.isdir
+
+
+def _relative(value):
+    if not _root or not _log:
+        return None
+    try:
+        root = os.path.abspath(_root)
+        candidate = os.path.abspath(os.fspath(value))
+        if os.path.commonpath([root, candidate]) != root:
+            return None
+        relative = os.path.relpath(candidate, root)
+    except (OSError, TypeError, ValueError):
+        return None
+    if relative == "." or relative == os.pardir or relative.startswith(os.pardir + os.sep):
+        return None
+    return relative.replace(os.sep, "/")
+
+
+def _record(value):
+    relative = _relative(value)
+    if relative is None:
+        return
+    payload = (json.dumps({"path": relative}, ensure_ascii=False) + "\n").encode("utf-8")
+    descriptor = os.open(_log, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
+    try:
+        os.write(descriptor, payload)
+    finally:
+        os.close(descriptor)
+
+
+def _probe(original):
+    def wrapped(self):
+        result = original(self)
+        if not result:
+            _record(self)
+        return result
+    return wrapped
+
+
+def _os_probe(original):
+    def wrapped(value):
+        result = original(value)
+        if not result:
+            _record(value)
+        return result
+    return wrapped
+
+
+def _path_open(self, *args, **kwargs):
+    try:
+        return _original_path_open(self, *args, **kwargs)
+    except FileNotFoundError:
+        _record(self)
+        raise
+
+
+def _open(file, *args, **kwargs):
+    try:
+        return _original_open(file, *args, **kwargs)
+    except FileNotFoundError:
+        _record(file)
+        raise
+
+
+Path.exists = _probe(_original_exists)
+Path.is_file = _probe(_original_is_file)
+Path.is_dir = _probe(_original_is_dir)
+Path.open = _path_open
+builtins.open = _open
+os.path.exists = _os_probe(_original_os_exists)
+os.path.isfile = _os_probe(_original_os_isfile)
+os.path.isdir = _os_probe(_original_os_isdir)
+
+if _marker:
+    descriptor = os.open(_marker, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    os.close(descriptor)
+'''
 
 
 def parse_args() -> argparse.Namespace:
@@ -303,7 +402,13 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
             if not checks:
                 errors.append(f"{label}.expect: нужен хотя бы один проверяемый результат")
         if is_runnable_case(skill, case):
-            valid_cases.append(case)
+            runnable_case = dict(case)
+            runnable_case["_operation_inputs"] = {
+                operation_id: [path.as_posix() for path in operation_inputs[operation_id]]
+                for operation_id in covers
+                if operation_id in operation_inputs
+            }
+            valid_cases.append(runnable_case)
     missing_operation_success = sorted(set(operation_prefixes) - successfully_covered_operations)
     if missing_operation_success:
         errors.append(
@@ -356,12 +461,50 @@ def verify_output(case: dict[str, Any], fixture: Path) -> list[str]:
     return errors
 
 
+def trace_environment(tracer: Path, fixture: Path, log: Path, marker: Path) -> dict[str, str]:
+    python_path = str(tracer)
+    if inherited := os.environ.get("PYTHONPATH"):
+        python_path += os.pathsep + inherited
+    return {
+        **os.environ,
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": python_path,
+        "APM_CONTRACT_FIXTURE_ROOT": str(fixture),
+        "APM_CONTRACT_INPUT_LOG": str(log),
+        "APM_CONTRACT_TRACE_MARKER": str(marker),
+    }
+
+
+def observed_conditional_inputs(log: Path) -> set[str]:
+    if not log.is_file():
+        return set()
+    result: set[str] = set()
+    for line in log.read_text(encoding="utf-8").splitlines():
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        path = safe_relative(item.get("path")) if isinstance(item, dict) else None
+        if path is not None:
+            result.add(path.as_posix())
+    return result
+
+
 def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
     source_fixture = skill / case["fixture"]
     script = (skill / case["script"]).resolve()
     with tempfile.TemporaryDirectory(prefix="проверка скрипта ") as temporary:
-        fixture = Path(temporary) / "fixture"
+        temporary_path = Path(temporary)
+        fixture = temporary_path / "fixture"
+        tracer = temporary_path / "trace"
+        trace_log = temporary_path / "conditional-inputs.jsonl"
+        trace_marker = temporary_path / "trace-loaded"
         shutil.copytree(source_fixture, fixture)
+        tracer.mkdir()
+        (tracer / "sitecustomize.py").write_text(
+            TRACE_SITECUSTOMIZE,
+            encoding="utf-8",
+        )
         for index, prepare in enumerate(case.get("prepare", [])):
             prepared_command = render_command(prepare, script, fixture)
             try:
@@ -392,12 +535,14 @@ def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
                 text=True,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+                env=trace_environment(tracer, fixture, trace_log, trace_marker),
                 timeout=60,
             )
         except (OSError, subprocess.TimeoutExpired) as exc:
             return [f"не удалось выполнить контрактный сценарий за 60 с: {exc}"]
         errors: list[str] = []
+        if not trace_marker.is_file():
+            errors.append("не удалось включить наблюдение за условными входами")
         expect = case["expect"]
         expected_exit_code = expect.get("exit_code", 0)
         if result.returncode != expected_exit_code:
@@ -414,6 +559,15 @@ def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
             if value not in result.stderr:
                 errors.append(f"stderr не содержит {value!r}")
         errors.extend(verify_output(case, fixture))
+        if expected_exit_code == 0:
+            observed = observed_conditional_inputs(trace_log)
+            for operation_id, declared_values in case.get("_operation_inputs", {}).items():
+                undeclared = sorted(observed - set(declared_values))
+                for path in undeclared:
+                    errors.append(
+                        f"операция {operation_id!r} проверяет отсутствующий путь "
+                        f"{path}, но не объявляет его в inputs",
+                    )
         return errors
 
 
