@@ -2,6 +2,16 @@
   "version": 1,
   "cases": [
     {
+      "id": "accept-empty-git-project",
+      "script": "scripts/validate-apm-git-boundary.py",
+      "fixture": "evals/script-fixtures/empty-project",
+      "prepare": [["git", "init", "--quiet", "{fixture}"]],
+      "command": ["{python}", "{script}", "{fixture}"],
+      "expect": {
+        "stdout_contains": ["Отслеживаемых Git проекций зависимостей APM не найдено."]
+      }
+    },
+    {
       "id": "reject-missing-project",
       "script": "scripts/validate-apm-git-boundary.py",
       "fixture": "evals/script-fixtures/empty-project",
