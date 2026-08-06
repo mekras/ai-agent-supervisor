@@ -9,9 +9,11 @@
 которые меняют поведение операции, объявляются в ``operations[].inputs``:
 каждый объявленный вход обязан присутствовать хотя бы в одной фикстуре
 успешного сценария этой операции, иначе зависящая от него ветвь остаётся
-непроверенной. Во время успешного сценария запускатель наблюдает отсутствующие
-пути внутри фикстуры, исключает пути, созданные или заменённые самой операцией,
-и отклоняет оставшиеся пути, не объявленные в ``inputs`` покрываемой операции.
+непроверенной. Во время успешного сценария запускатель наблюдает действительно
+отсутствующие пути внутри фикстуры. Отрицательный результат проверки типа
+существующего пути не считается отсутствием. Запускатель исключает пути,
+созданные или заменённые самой операцией, и отклоняет оставшиеся пути, не
+объявленные в ``inputs`` покрываемой операции.
 Если в контракте есть независимая ошибка полноты, запускатель всё равно
 выполняет корректно описанные сценарии и сообщает все найденные ошибки за один
 запуск.
@@ -85,7 +87,7 @@ def _record(value, event):
         os.close(descriptor)
 
 
-def _probe(original):
+def _exists_probe(original):
     def wrapped(self):
         result = original(self)
         if not result:
@@ -94,10 +96,28 @@ def _probe(original):
     return wrapped
 
 
-def _os_probe(original):
+def _typed_path_probe(original):
+    def wrapped(self):
+        result = original(self)
+        if not result and not _original_exists(self):
+            _record(self, "missing")
+        return result
+    return wrapped
+
+
+def _os_exists_probe(original):
     def wrapped(value):
         result = original(value)
         if not result:
+            _record(value, "missing")
+        return result
+    return wrapped
+
+
+def _typed_os_probe(original):
+    def wrapped(value):
+        result = original(value)
+        if not result and not _original_os_exists(value):
             _record(value, "missing")
         return result
     return wrapped
@@ -152,15 +172,15 @@ def _mkdir(path, *args, **kwargs):
     return result
 
 
-Path.exists = _probe(_original_exists)
-Path.is_file = _probe(_original_is_file)
-Path.is_dir = _probe(_original_is_dir)
+Path.exists = _exists_probe(_original_exists)
+Path.is_file = _typed_path_probe(_original_is_file)
+Path.is_dir = _typed_path_probe(_original_is_dir)
 Path.open = _path_open
 builtins.open = _open
 os.open = _os_open
-os.path.exists = _os_probe(_original_os_exists)
-os.path.isfile = _os_probe(_original_os_isfile)
-os.path.isdir = _os_probe(_original_os_isdir)
+os.path.exists = _os_exists_probe(_original_os_exists)
+os.path.isfile = _typed_os_probe(_original_os_isfile)
+os.path.isdir = _typed_os_probe(_original_os_isdir)
 os.replace = _replace
 os.rename = _rename
 os.mkdir = _mkdir
