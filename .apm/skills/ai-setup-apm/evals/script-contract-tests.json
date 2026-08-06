@@ -1,10 +1,18 @@
 {
-  "version": 1,
+  "version": 2,
+  "operations": [
+    {
+      "id": "validate-git-boundary",
+      "script": "scripts/validate-apm-git-boundary.py",
+      "command_prefix": []
+    }
+  ],
   "cases": [
     {
       "id": "accept-empty-git-project",
       "script": "scripts/validate-apm-git-boundary.py",
       "fixture": "evals/script-fixtures/empty-project",
+      "covers": ["validate-git-boundary"],
       "prepare": [["git", "init", "--quiet", "{fixture}"]],
       "command": ["{python}", "{script}", "{fixture}"],
       "expect": {

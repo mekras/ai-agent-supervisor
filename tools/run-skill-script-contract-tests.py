@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Запустить контрактные проверки публичных Python-скриптов навыков.
 
-Каждый Python-скрипт первого уровня в ``scripts/`` должен иметь успешный
-рабочий сценарий в ``evals/script-contract-tests.json``. Сценарий запускает
-поставляемую команду в копии фикстуры и проверяет наблюдаемый результат.
-Ожидаемые отказы могут дополнять, но не заменять успешный сценарий.
+Каждая объявленная операция публичного Python-скрипта первого уровня в
+``scripts/`` должна иметь успешный рабочий сценарий в
+``evals/script-contract-tests.json``. Сценарий запускает поставляемую команду
+в копии фикстуры и проверяет наблюдаемый результат. Ожидаемые отказы могут
+дополнять, но не заменять успешный сценарий.
 Если в контракте есть независимая ошибка полноты, запускатель всё равно
 выполняет корректно описанные сценарии и сообщает все найденные ошибки за один
 запуск.
@@ -86,6 +87,15 @@ def command_list(value: Any) -> list[list[str]] | None:
     return result
 
 
+def command_matches_operation(command: list[str], prefix: list[str]) -> bool:
+    """Проверить, что команда запускает объявленную операцию скрипта."""
+    try:
+        script_index = command.index("{script}")
+    except ValueError:
+        return False
+    return command[script_index + 1 : script_index + 1 + len(prefix)] == prefix
+
+
 def is_runnable_case(skill: Path, case: dict[str, Any]) -> bool:
     """Проверить, достаточно ли данных случая для безопасного запуска."""
     script = safe_relative(case.get("script"))
@@ -118,18 +128,53 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
     except json.JSONDecodeError as exc:
         errors.append(f"{contract}: JSON не разобран: {exc}")
         return []
-    if not isinstance(data, dict) or data.get("version") != 1:
-        errors.append(f"{contract}: нужен объект с version: 1")
+    if not isinstance(data, dict) or data.get("version") != 2:
+        errors.append(f"{contract}: нужен объект с version: 2")
         return []
     cases = data.get("cases")
     if not isinstance(cases, list) or not cases:
         errors.append(f"{contract}: нужен непустой массив cases")
         return []
+    expected_scripts = {path.relative_to(skill) for path in public_python_scripts(skill)}
+    operations = data.get("operations")
+    if not isinstance(operations, list) or not operations:
+        errors.append(f"{contract}: нужен непустой массив operations")
+        operations = []
+    operation_prefixes: dict[str, tuple[Path, list[str]]] = {}
+    for index, operation in enumerate(operations):
+        label = f"{contract}: operations[{index}]"
+        if not isinstance(operation, dict):
+            errors.append(f"{label}: должен быть объект")
+            continue
+        identifier = operation.get("id")
+        if not isinstance(identifier, str) or not identifier:
+            errors.append(f"{label}.id: нужна непустая строка")
+            continue
+        if identifier in operation_prefixes:
+            errors.append(f"{label}.id: повтор {identifier!r}")
+            continue
+        script = safe_relative(operation.get("script"))
+        if script is None or script not in expected_scripts:
+            errors.append(f"{label}.script: нужен Python-скрипт первого уровня scripts/")
+            continue
+        prefix = string_list(operation.get("command_prefix"))
+        if prefix is None:
+            errors.append(f"{label}.command_prefix: нужен массив строк")
+            continue
+        operation_prefixes[identifier] = (script, prefix)
+    missing_operations = sorted(
+        expected_scripts - {script for script, _ in operation_prefixes.values()},
+    )
+    if missing_operations:
+        errors.append(
+            f"{contract}: не объявлена операция для: "
+            + ", ".join(path.as_posix() for path in missing_operations),
+        )
     valid_cases: list[dict[str, Any]] = []
     seen_ids: set[str] = set()
     covered: set[Path] = set()
     successfully_covered: set[Path] = set()
-    expected_scripts = {path.relative_to(skill) for path in public_python_scripts(skill)}
+    successfully_covered_operations: set[str] = set()
     for index, case in enumerate(cases):
         label = f"{contract}: cases[{index}]"
         if not isinstance(case, dict):
@@ -163,6 +208,29 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
             )
         elif any(item in {"--help", "-h"} for item in command):
             errors.append(f"{label}.command: --help не является контрактным сценарием")
+        covers = case.get("covers", [])
+        if not isinstance(covers, list) or not all(
+            isinstance(item, str) and item for item in covers
+        ):
+            errors.append(f"{label}.covers: нужен массив непустых идентификаторов")
+            covers = []
+        elif len(covers) != len(set(covers)):
+            errors.append(f"{label}.covers: идентификаторы не должны повторяться")
+        for operation_id in covers:
+            operation = operation_prefixes.get(operation_id)
+            if operation is None:
+                errors.append(f"{label}.covers: не объявлена операция {operation_id!r}")
+                continue
+            operation_script, prefix = operation
+            if script != operation_script:
+                errors.append(
+                    f"{label}.covers: операция {operation_id!r} относится к другому скрипту",
+                )
+                continue
+            if command is None or not command_matches_operation(command, prefix):
+                errors.append(
+                    f"{label}.covers: команда не начинается с command_prefix операции {operation_id!r}",
+                )
         prepare = case.get("prepare", [])
         if command_list(prepare) is None:
             errors.append(
@@ -178,6 +246,10 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
                 errors.append(f"{label}.expect.exit_code: нужен неотрицательный код")
             elif exit_code == 0 and script is not None:
                 successfully_covered.add(script)
+                for operation_id in covers:
+                    operation = operation_prefixes.get(operation_id)
+                    if operation is not None and operation[0] == script and command is not None and command_matches_operation(command, operation[1]):
+                        successfully_covered_operations.add(operation_id)
             for key in ("stdout_contains", "stderr_contains"):
                 value = expect.get(key)
                 if value is not None:
@@ -217,6 +289,12 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
         errors.append(
             f"{contract}: нет успешного рабочего сценария для: "
             + ", ".join(path.as_posix() for path in missing_success),
+        )
+    missing_operation_success = sorted(set(operation_prefixes) - successfully_covered_operations)
+    if missing_operation_success:
+        errors.append(
+            f"{contract}: нет успешного рабочего сценария для операций: "
+            + ", ".join(missing_operation_success),
         )
     return valid_cases
 
