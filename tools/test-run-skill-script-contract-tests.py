@@ -40,6 +40,13 @@ def write_contract(skill: Path) -> None:
                     "--output",
                     "{fixture}/state.json",
                 ],
+                "prepare": [
+                    [
+                        "{python}",
+                        "-c",
+                        "from pathlib import Path; Path('prepared.txt').write_text('yes')",
+                    ],
+                ],
                 "expect": {
                     "stdout_contains": ["state_saved"],
                     "files": [
@@ -75,6 +82,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--output", type=Path, required=True)
 args = parser.parse_args()
 assert os.environ.get("PYTHONDONTWRITEBYTECODE") == "1"
+assert Path("prepared.txt").read_text(encoding="utf-8") == "yes"
 args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")
 print("state_saved")
 '''
@@ -100,6 +108,17 @@ print("state_saved")
         help_only = run(skill)
         assert help_only.returncode == 1
         assert "--help не является контрактным сценарием" in help_only.stderr
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["cases"][0]["command"] = ["{python}", "{script}"]
+        contract["cases"][0]["expect"] = {
+            "exit_code": 2,
+            "stderr_contains": ["required"],
+        }
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        failure_only = run(skill)
+        assert failure_only.returncode == 1
+        assert "нет успешного рабочего сценария" in failure_only.stderr
 
     with tempfile.TemporaryDirectory() as temporary:
         skill = Path(temporary) / "навык"

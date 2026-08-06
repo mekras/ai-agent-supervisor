@@ -300,8 +300,19 @@
         ]
       ]
     },
+        {
+          "id": "ai-audit-project-result-apm-script-contract-gap",
+      "required_claims": [
+        "ASKL-004"
+      ],
+      "finding_claims": [
+        [
+          "ASKL-004"
+        ]
+      ]
+    },
     {
-      "id": "ai-audit-project-result-apm-script-contract-gap",
+      "id": "ai-audit-project-result-formal-script-contract",
       "required_claims": [
         "ASKL-004"
       ],

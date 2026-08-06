@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Запустить контрактные проверки публичных Python-скриптов навыков.
 
-Каждый Python-скрипт первого уровня в ``scripts/`` должен иметь реальный
-сценарий в ``evals/script-contract-tests.json``. Сценарий запускает именно
+Каждый Python-скрипт первого уровня в ``scripts/`` должен иметь успешный
+рабочий сценарий в ``evals/script-contract-tests.json``. Сценарий запускает
 поставляемую команду в копии фикстуры и проверяет наблюдаемый результат.
+Ожидаемые отказы могут дополнять, но не заменять успешный сценарий.
 """
 
 from __future__ import annotations
@@ -70,6 +71,18 @@ def string_list(value: Any) -> list[str] | None:
     return value
 
 
+def command_list(value: Any) -> list[list[str]] | None:
+    if not isinstance(value, list):
+        return None
+    result: list[list[str]] = []
+    for item in value:
+        command = string_list(item)
+        if command is None or not command:
+            return None
+        result.append(command)
+    return result
+
+
 def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
     contract = skill / "evals" / "script-contract-tests.json"
     if not contract.is_file():
@@ -91,6 +104,7 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
     valid_cases: list[dict[str, Any]] = []
     seen_ids: set[str] = set()
     covered: set[Path] = set()
+    successfully_covered: set[Path] = set()
     expected_scripts = {path.relative_to(skill) for path in public_python_scripts(skill)}
     for index, case in enumerate(cases):
         label = f"{contract}: cases[{index}]"
@@ -125,6 +139,11 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
             )
         elif any(item in {"--help", "-h"} for item in command):
             errors.append(f"{label}.command: --help не является контрактным сценарием")
+        prepare = case.get("prepare", [])
+        if command_list(prepare) is None:
+            errors.append(
+                f"{label}.prepare: нужен массив непустых массивов команд",
+            )
         expect = case.get("expect")
         if not isinstance(expect, dict):
             errors.append(f"{label}.expect: нужен объект с наблюдаемым результатом")
@@ -133,6 +152,8 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
             exit_code = expect.get("exit_code", 0)
             if not isinstance(exit_code, int) or exit_code < 0:
                 errors.append(f"{label}.expect.exit_code: нужен неотрицательный код")
+            elif exit_code == 0 and script is not None:
+                successfully_covered.add(script)
             for key in ("stdout_contains", "stderr_contains"):
                 value = expect.get(key)
                 if value is not None:
@@ -165,6 +186,12 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
         errors.append(
             f"{contract}: нет контрактного сценария для: "
             + ", ".join(path.as_posix() for path in missing),
+        )
+    missing_success = sorted(expected_scripts - successfully_covered)
+    if missing_success:
+        errors.append(
+            f"{contract}: нет успешного рабочего сценария для: "
+            + ", ".join(path.as_posix() for path in missing_success),
         )
     return valid_cases
 
@@ -209,6 +236,27 @@ def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
     with tempfile.TemporaryDirectory(prefix="проверка скрипта ") as temporary:
         fixture = Path(temporary) / "fixture"
         shutil.copytree(source_fixture, fixture)
+        for index, prepare in enumerate(case.get("prepare", [])):
+            prepared_command = render_command(prepare, script, fixture)
+            try:
+                prepared = subprocess.run(
+                    prepared_command,
+                    cwd=fixture,
+                    check=False,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+                    timeout=60,
+                )
+            except (OSError, subprocess.TimeoutExpired) as exc:
+                return [f"не удалось запустить подготовительную команду {index}: {exc}"]
+            if prepared.returncode != 0:
+                details = prepared.stderr.strip() or prepared.stdout.strip()
+                return [
+                    f"подготовительная команда {index} завершилась с кодом "
+                    f"{prepared.returncode}: {details}",
+                ]
         command = render_command(case["command"], script, fixture)
         try:
             result = subprocess.run(
@@ -221,8 +269,8 @@ def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
                 env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
                 timeout=60,
             )
-        except subprocess.TimeoutExpired:
-            return ["превышено время контрактного сценария 60 с"]
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            return [f"не удалось выполнить контрактный сценарий за 60 с: {exc}"]
         errors: list[str] = []
         expect = case["expect"]
         expected_exit_code = expect.get("exit_code", 0)
