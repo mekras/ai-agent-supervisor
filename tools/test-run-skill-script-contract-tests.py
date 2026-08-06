@@ -100,6 +100,14 @@ print("state_saved")
         assert failed.returncode == 1
         assert "Object of type set is not JSON serializable" in failed.stderr
 
+        other_script = skill / "scripts" / "other.py"
+        other_script.write_text("print('other')\n", encoding="utf-8")
+        failed_with_coverage_gap = run(skill)
+        assert failed_with_coverage_gap.returncode == 1
+        assert "Object of type set is not JSON serializable" in failed_with_coverage_gap.stderr
+        assert "нет контрактного сценария для: scripts/other.py" in failed_with_coverage_gap.stderr
+        other_script.unlink()
+
         write_script(skill, script)
         contract_path = skill / "evals" / "script-contract-tests.json"
         contract = json.loads(contract_path.read_text(encoding="utf-8"))

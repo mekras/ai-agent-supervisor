@@ -5,6 +5,9 @@
 рабочий сценарий в ``evals/script-contract-tests.json``. Сценарий запускает
 поставляемую команду в копии фикстуры и проверяет наблюдаемый результат.
 Ожидаемые отказы могут дополнять, но не заменять успешный сценарий.
+Если в контракте есть независимая ошибка полноты, запускатель всё равно
+выполняет корректно описанные сценарии и сообщает все найденные ошибки за один
+запуск.
 """
 
 from __future__ import annotations
@@ -81,6 +84,27 @@ def command_list(value: Any) -> list[list[str]] | None:
             return None
         result.append(command)
     return result
+
+
+def is_runnable_case(skill: Path, case: dict[str, Any]) -> bool:
+    """Проверить, достаточно ли данных случая для безопасного запуска."""
+    script = safe_relative(case.get("script"))
+    fixture = safe_relative(case.get("fixture"))
+    command = string_list(case.get("command"))
+    return (
+        script is not None
+        and script in {path.relative_to(skill) for path in public_python_scripts(skill)}
+        and fixture is not None
+        and fixture.is_relative_to(FIXTURE_PREFIX)
+        and (skill / fixture).is_dir()
+        and command is not None
+        and command
+        and command[0] == "{python}"
+        and "{script}" in command
+        and not any(item in {"--help", "-h"} for item in command)
+        and command_list(case.get("prepare", [])) is not None
+        and isinstance(case.get("expect"), dict)
+    )
 
 
 def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
@@ -180,7 +204,8 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
                         checks += 1
             if not checks:
                 errors.append(f"{label}.expect: нужен хотя бы один проверяемый результат")
-        valid_cases.append(case)
+        if is_runnable_case(skill, case):
+            valid_cases.append(case)
     missing = sorted(expected_scripts - covered)
     if missing:
         errors.append(
@@ -302,9 +327,6 @@ def main() -> int:
         skill: load_cases(skill, errors)
         for skill in skill_directories(args.paths)
     }
-    if errors:
-        print("\n".join(errors), file=sys.stderr)
-        return 1
     run_errors: list[str] = []
     count = 0
     for skill, cases in cases_by_skill.items():
@@ -312,8 +334,9 @@ def main() -> int:
             count += 1
             for error in run_case(skill, case):
                 run_errors.append(f"{skill}::{case['id']}: {error}")
-    if run_errors:
-        print("\n".join(run_errors), file=sys.stderr)
+    all_errors = errors + run_errors
+    if all_errors:
+        print("\n".join(all_errors), file=sys.stderr)
         return 1
     print(f"Контрактные сценарии скриптов пройдены: {count}.")
     return 0
