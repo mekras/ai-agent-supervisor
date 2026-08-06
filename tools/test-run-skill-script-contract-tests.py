@@ -159,6 +159,32 @@ print("state_saved")
 
         write_contract(skill)
 
+        existing_file = (
+            skill / "evals" / "script-fixtures" / "проект с пробелом" / "project-impact.json"
+        )
+        existing_directory = (
+            skill / "evals" / "script-fixtures" / "проект с пробелом" / "src"
+        )
+        existing_file.write_text('{"version": 1}', encoding="utf-8")
+        existing_directory.mkdir()
+        type_probe_script = script.replace(
+            'args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")',
+            '''impact_path = Path("project-impact.json")
+source_path = Path("src")
+assert not impact_path.is_dir()
+assert not source_path.is_file()
+assert not os.path.isdir("project-impact.json")
+assert not os.path.isfile("src")
+args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")''',
+        )
+        write_script(skill, type_probe_script)
+        existing_paths_are_not_missing_inputs = run(skill)
+        assert existing_paths_are_not_missing_inputs.returncode == 0, (
+            existing_paths_are_not_missing_inputs.stderr
+        )
+        existing_file.unlink()
+        existing_directory.rmdir()
+
         output_probe_script = script.replace(
             'args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")',
             '''state = json.loads(args.output.read_text(encoding="utf-8")) if args.output.is_file() else {"status": "ready"}
