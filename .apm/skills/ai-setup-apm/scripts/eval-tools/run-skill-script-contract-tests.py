@@ -5,7 +5,11 @@
 ``scripts/`` должна иметь успешный рабочий сценарий в
 ``evals/script-contract-tests.json``. Сценарий запускает поставляемую команду
 в копии фикстуры и проверяет наблюдаемый результат. Ожидаемые отказы могут
-дополнять, но не заменять успешный сценарий.
+дополнять, но не заменять успешный сценарий. Необязательные входные файлы,
+которые меняют поведение операции, объявляются в ``operations[].inputs``:
+каждый объявленный вход обязан присутствовать хотя бы в одной фикстуре
+успешного сценария этой операции, иначе зависящая от него ветвь остаётся
+непроверенной.
 Если в контракте есть независимая ошибка полноты, запускатель всё равно
 выполняет корректно описанные сценарии и сообщает все найденные ошибки за один
 запуск.
@@ -141,6 +145,7 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
         errors.append(f"{contract}: нужен непустой массив operations")
         operations = []
     operation_prefixes: dict[str, tuple[Path, list[str]]] = {}
+    operation_inputs: dict[str, list[Path]] = {}
     for index, operation in enumerate(operations):
         label = f"{contract}: operations[{index}]"
         if not isinstance(operation, dict):
@@ -161,7 +166,23 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
         if prefix is None:
             errors.append(f"{label}.command_prefix: нужен массив строк")
             continue
+        inputs_value = operation.get("inputs", [])
+        inputs = string_list(inputs_value) if isinstance(inputs_value, list) else None
+        declared_inputs: list[Path] = []
+        if inputs is None:
+            errors.append(f"{label}.inputs: нужен массив непустых строк")
+        else:
+            for input_value in inputs:
+                input_path = safe_relative(input_value)
+                if input_path is None:
+                    errors.append(
+                        f"{label}.inputs: нужен безопасный относительный путь, "
+                        f"получено {input_value!r}",
+                    )
+                else:
+                    declared_inputs.append(input_path)
         operation_prefixes[identifier] = (script, prefix)
+        operation_inputs[identifier] = declared_inputs
     missing_operations = sorted(
         expected_scripts - {script for script, _ in operation_prefixes.values()},
     )
@@ -172,9 +193,8 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
         )
     valid_cases: list[dict[str, Any]] = []
     seen_ids: set[str] = set()
-    covered: set[Path] = set()
-    successfully_covered: set[Path] = set()
     successfully_covered_operations: set[str] = set()
+    success_fixtures: dict[str, set[Path]] = {}
     for index, case in enumerate(cases):
         label = f"{contract}: cases[{index}]"
         if not isinstance(case, dict):
@@ -190,8 +210,6 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
         script = safe_relative(case.get("script"))
         if script is None or script not in expected_scripts:
             errors.append(f"{label}.script: нужен Python-скрипт первого уровня scripts/")
-        else:
-            covered.add(script)
         fixture = safe_relative(case.get("fixture"))
         if fixture is None or not fixture.is_relative_to(FIXTURE_PREFIX):
             errors.append(
@@ -245,11 +263,12 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
             if not isinstance(exit_code, int) or exit_code < 0:
                 errors.append(f"{label}.expect.exit_code: нужен неотрицательный код")
             elif exit_code == 0 and script is not None:
-                successfully_covered.add(script)
                 for operation_id in covers:
                     operation = operation_prefixes.get(operation_id)
                     if operation is not None and operation[0] == script and command is not None and command_matches_operation(command, operation[1]):
                         successfully_covered_operations.add(operation_id)
+                        if fixture is not None and (skill / fixture).is_dir():
+                            success_fixtures.setdefault(operation_id, set()).add(fixture)
             for key in ("stdout_contains", "stderr_contains"):
                 value = expect.get(key)
                 if value is not None:
@@ -278,24 +297,21 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
                 errors.append(f"{label}.expect: нужен хотя бы один проверяемый результат")
         if is_runnable_case(skill, case):
             valid_cases.append(case)
-    missing = sorted(expected_scripts - covered)
-    if missing:
-        errors.append(
-            f"{contract}: нет контрактного сценария для: "
-            + ", ".join(path.as_posix() for path in missing),
-        )
-    missing_success = sorted(expected_scripts - successfully_covered)
-    if missing_success:
-        errors.append(
-            f"{contract}: нет успешного рабочего сценария для: "
-            + ", ".join(path.as_posix() for path in missing_success),
-        )
     missing_operation_success = sorted(set(operation_prefixes) - successfully_covered_operations)
     if missing_operation_success:
         errors.append(
             f"{contract}: нет успешного рабочего сценария для операций: "
             + ", ".join(missing_operation_success),
         )
+    for operation_id, declared_inputs in sorted(operation_inputs.items()):
+        fixtures = success_fixtures.get(operation_id, set())
+        for input_path in declared_inputs:
+            if not any((skill / fixture / input_path).is_file() for fixture in fixtures):
+                errors.append(
+                    f"{contract}: объявленный вход {input_path.as_posix()} "
+                    f"отсутствует во всех фикстурах успешных сценариев "
+                    f"операции {operation_id!r}",
+                )
     return valid_cases
 
 
