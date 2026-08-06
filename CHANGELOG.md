@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.9] - 2026-08-06
+
 ### Исправлено
 
 - Аудит исполнимых контрактов теперь требует явную инвентаризацию условных
@@ -442,7 +444,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.8...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.9...HEAD
+[2.3.9]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.8...2.3.9
 [2.3.8]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.7...2.3.8
 [2.3.7]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.6...2.3.7
 [2.3.6]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.5...2.3.6
