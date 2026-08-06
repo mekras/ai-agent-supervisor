@@ -37,12 +37,20 @@ def write_skill(root: Path, frontmatter: str, procedure: str, script: str) -> No
     fixture.mkdir(parents=True)
     (skill / "evals" / "script-contract-tests.json").write_text(
         """{
-  "version": 1,
+  "version": 2,
+  "operations": [
+    {
+      "id": "check",
+      "script": "scripts/check.py",
+      "command_prefix": []
+    }
+  ],
   "cases": [
     {
       "id": "check",
       "script": "scripts/check.py",
       "fixture": "evals/script-fixtures/empty",
+      "covers": ["check"],
       "command": ["{python}", "{script}"],
       "expect": {"stdout_contains": ["ok"]}
     }

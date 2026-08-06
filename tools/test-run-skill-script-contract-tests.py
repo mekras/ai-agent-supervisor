@@ -26,14 +26,22 @@ def run(path: Path) -> subprocess.CompletedProcess[str]:
 
 def write_contract(skill: Path) -> None:
     fixture = skill / "evals" / "script-fixtures" / "проект с пробелом"
-    fixture.mkdir(parents=True)
+    fixture.mkdir(parents=True, exist_ok=True)
     contract = {
-        "version": 1,
+        "version": 2,
+        "operations": [
+            {
+                "id": "save-state",
+                "script": "scripts/save_state.py",
+                "command_prefix": ["--output"],
+            },
+        ],
         "cases": [
             {
                 "id": "save-state",
                 "script": "scripts/save_state.py",
                 "fixture": "evals/script-fixtures/проект с пробелом",
+                "covers": ["save-state"],
                 "command": [
                     "{python}",
                     "{script}",
@@ -94,6 +102,30 @@ print("state_saved")
         assert passed.returncode == 0, passed.stderr
         assert "Контрактные сценарии скриптов пройдены: 1." in passed.stdout
 
+        contract_path = skill / "evals" / "script-contract-tests.json"
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["operations"][0]["command_prefix"] = ["--inspect"]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        mismatched_prefix = run(skill)
+        assert mismatched_prefix.returncode == 1
+        assert "команда не начинается с command_prefix операции 'save-state'" in mismatched_prefix.stderr
+
+        write_contract(skill)
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["operations"].append(
+            {
+                "id": "inspect-state",
+                "script": "scripts/save_state.py",
+                "command_prefix": ["--inspect"],
+            },
+        )
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        missing_operation = run(skill)
+        assert missing_operation.returncode == 1
+        assert "нет успешного рабочего сценария для операций: inspect-state" in missing_operation.stderr
+
+        write_contract(skill)
+
         broken = script.replace('{"status": "ready"}', '{"status": {"ready"}}')
         write_script(skill, broken)
         failed = run(skill)
@@ -109,7 +141,6 @@ print("state_saved")
         other_script.unlink()
 
         write_script(skill, script)
-        contract_path = skill / "evals" / "script-contract-tests.json"
         contract = json.loads(contract_path.read_text(encoding="utf-8"))
         contract["cases"][0]["command"] = ["{python}", "{script}", "--help"]
         contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")

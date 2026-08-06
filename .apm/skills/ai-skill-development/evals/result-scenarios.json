@@ -599,7 +599,7 @@
             "severity": "high",
             "observed_problem": "публичная команда init не запускалась на реалистичной фикстуре и не проверяла запись состояния, поэтому множество попало в json.dumps.",
             "expected_conclusion": "статическая проверка и unit-тесты не заменяют контрактный запуск поставляемой команды с проверкой её файла состояния.",
-            "acceptable_fix_direction": "добавить evals/script-contract-tests.json, который запускает scripts/project_review.py init в копии фикстуры и повторно читает state.json как JSON, затем подключить этот запуск к scripts.tests"
+            "acceptable_fix_direction": "объявить init обязательной операцией в evals/script-contract-tests.json, добавить успешный сценарий scripts/project_review.py init в копии фикстуры с повторным чтением state.json как JSON и подключить этот запуск к scripts.tests"
           }
         ]
       },

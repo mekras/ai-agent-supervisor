@@ -230,12 +230,20 @@ APM_EVAL_PATH=.apm/skills/<name> APM_EVAL_CASE_ID=<id> apm run evals
 
 ```json
 {
-  "version": 1,
+  "version": 2,
+  "operations": [
+    {
+      "id": "create-state",
+      "script": "scripts/create_state.py",
+      "command_prefix": ["--output"]
+    }
+  ],
   "cases": [
     {
       "id": "create-state",
       "script": "scripts/create_state.py",
       "fixture": "evals/script-fixtures/basic-project",
+      "covers": ["create-state"],
       "prepare": [["git", "init", "--quiet", "{fixture}"]],
       "command": ["{python}", "{script}", "--output", "{fixture}/state.json"],
       "expect": {
@@ -252,9 +260,12 @@ APM_EVAL_PATH=.apm/skills/<name> APM_EVAL_CASE_ID=<id> apm run evals
 команды. `expect` должен содержать хотя бы один наблюдаемый результат: фрагмент
 `stdout` или `stderr`, созданный файл, проверку JSON либо ожидаемый текст файла.
 В `command` обязательны `{python}` и `{script}`. Ожидаемый код возврата `0`
-означает успешный рабочий сценарий. Для каждого скрипта нужен хотя бы один такой
-сценарий. Отдельно сопоставь команды, указанные в процедуре навыка, с командами
-контракта, чтобы успешная проверка вспомогательной ветви не скрыла отказ
+означает успешный рабочий сценарий. В `operations` перечисли обязательные
+операции: идентификатор, скрипт и `command_prefix` после `{script}`. Успешный
+случай указывает покрываемые операции в `covers`; запускатель принимает его
+только при совпадении скрипта и префикса команды. Для каждой объявленной
+операции нужен такой сценарий. Сопоставь с `operations` команды, указанные в
+процедуре навыка, чтобы успешная проверка вспомогательной ветви не скрыла отказ
 основного пути. Поставляемая оснастка выполняет контракты командой:
 
 ```text
