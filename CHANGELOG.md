@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.11] - 2026-08-06
+
 ### Исправлено
 
 - Контрактные проверки отличают необъявленные условные входы от файлов и
@@ -460,7 +462,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.10...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.11...HEAD
+[2.3.11]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.10...2.3.11
 [2.3.10]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.9...2.3.10
 [2.3.9]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.8...2.3.9
 [2.3.8]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.7...2.3.8
