@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.12] - 2026-08-06
+
 ### Исправлено
 
 - Контрактные проверки больше не принимают существующий файл или каталог за
@@ -469,7 +471,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.11...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.12...HEAD
+[2.3.12]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.11...2.3.12
 [2.3.11]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.10...2.3.11
 [2.3.10]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.9...2.3.10
 [2.3.9]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.8...2.3.9
