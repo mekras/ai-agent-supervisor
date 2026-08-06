@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.8] - 2026-08-06
+
 ### Исправлено
 
 - Аудит правил проекта теперь начинается с проверки свежести выполняемого
@@ -427,7 +429,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.7...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.8...HEAD
+[2.3.8]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.7...2.3.8
 [2.3.7]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.6...2.3.7
 [2.3.6]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.5...2.3.6
 [2.3.5]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.4...2.3.5
