@@ -42,7 +42,8 @@ def write_skill(root: Path, frontmatter: str, procedure: str, script: str) -> No
     {
       "id": "check",
       "script": "scripts/check.py",
-      "command_prefix": []
+      "command_prefix": [],
+      "inputs": []
     }
   ],
   "cases": [

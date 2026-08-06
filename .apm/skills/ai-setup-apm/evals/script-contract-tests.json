@@ -4,7 +4,8 @@
     {
       "id": "validate-git-boundary",
       "script": "scripts/validate-apm-git-boundary.py",
-      "command_prefix": []
+      "command_prefix": [],
+      "inputs": []
     }
   ],
   "cases": [

@@ -34,6 +34,7 @@ def write_contract(skill: Path) -> None:
                 "id": "save-state",
                 "script": "scripts/save_state.py",
                 "command_prefix": ["--output"],
+                "inputs": [],
             },
         ],
         "cases": [
@@ -104,6 +105,18 @@ print("state_saved")
 
         contract_path = skill / "evals" / "script-contract-tests.json"
         contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        del contract["operations"][0]["inputs"]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        missing_input_inventory = run(skill)
+        assert missing_input_inventory.returncode == 1
+        assert (
+            ".inputs: нужен явный массив. Пустой массив означает, "
+            "что условные входы операции проверены и не найдены"
+            in missing_input_inventory.stderr
+        )
+
+        write_contract(skill)
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
         contract["operations"][0]["command_prefix"] = ["--inspect"]
         contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
         mismatched_prefix = run(skill)
@@ -117,6 +130,7 @@ print("state_saved")
                 "id": "inspect-state",
                 "script": "scripts/save_state.py",
                 "command_prefix": ["--inspect"],
+                "inputs": [],
             },
         )
         contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
