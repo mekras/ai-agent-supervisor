@@ -125,6 +125,25 @@ print("state_saved")
         assert "нет успешного рабочего сценария для операций: inspect-state" in missing_operation.stderr
 
         write_contract(skill)
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["operations"][0]["inputs"] = ["project-impact.json"]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        missing_input = run(skill)
+        assert missing_input.returncode == 1
+        assert (
+            "объявленный вход project-impact.json отсутствует во всех фикстурах "
+            "успешных сценариев операции 'save-state'" in missing_input.stderr
+        )
+
+        declared_input = (
+            skill / "evals" / "script-fixtures" / "проект с пробелом" / "project-impact.json"
+        )
+        declared_input.write_text('{"version": 1}', encoding="utf-8")
+        covered_input = run(skill)
+        assert covered_input.returncode == 0, covered_input.stderr
+        declared_input.unlink()
+
+        write_contract(skill)
 
         broken = script.replace('{"status": "ready"}', '{"status": {"ready"}}')
         write_script(skill, broken)
@@ -137,7 +156,7 @@ print("state_saved")
         failed_with_coverage_gap = run(skill)
         assert failed_with_coverage_gap.returncode == 1
         assert "Object of type set is not JSON serializable" in failed_with_coverage_gap.stderr
-        assert "нет контрактного сценария для: scripts/other.py" in failed_with_coverage_gap.stderr
+        assert "не объявлена операция для: scripts/other.py" in failed_with_coverage_gap.stderr
         other_script.unlink()
 
         write_script(skill, script)
