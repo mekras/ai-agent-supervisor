@@ -166,7 +166,14 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
         if prefix is None:
             errors.append(f"{label}.command_prefix: нужен массив строк")
             continue
-        inputs_value = operation.get("inputs", [])
+        if "inputs" not in operation:
+            errors.append(
+                f"{label}.inputs: нужен явный массив. Пустой массив означает, "
+                "что условные входы операции проверены и не найдены",
+            )
+            inputs_value = []
+        else:
+            inputs_value = operation["inputs"]
         inputs = string_list(inputs_value) if isinstance(inputs_value, list) else None
         declared_inputs: list[Path] = []
         if inputs is None:
