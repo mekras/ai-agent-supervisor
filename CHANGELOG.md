@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.5] - 2026-08-06
+
 ### Исправлено
 
 - Контрактные проверки теперь выполняют корректно описанные сценарии даже при
@@ -370,7 +372,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.4...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.5...HEAD
+[2.3.5]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.4...2.3.5
 [2.3.4]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.3...2.3.4
 [2.3.3]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.2...2.3.3
 [2.3.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.2.0...2.3.0
