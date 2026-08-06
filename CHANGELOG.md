@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.10] - 2026-08-06
+
 ### Исправлено
 
 - Контрактные проверки больше не доверяют пустому `inputs` только по декларации:
@@ -450,7 +452,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.9...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.10...HEAD
+[2.3.10]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.9...2.3.10
 [2.3.9]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.8...2.3.9
 [2.3.8]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.7...2.3.8
 [2.3.7]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.6...2.3.7
