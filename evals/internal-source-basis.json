@@ -345,6 +345,17 @@
               "ASKL-004"
             ]
           ]
+        },
+        {
+          "id": "ai-audit-project-result-stale-shadow-copy",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ]
         }
       ]
     },
