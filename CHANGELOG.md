@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.4] - 2026-08-06
+
 ### Исправлено
 
 - Контрактные проверки скриптов теперь требуют успешный рабочий сценарий для
@@ -361,7 +363,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.3...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.4...HEAD
+[2.3.4]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.3...2.3.4
 [2.3.3]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.2...2.3.3
 [2.3.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.1.0...2.2.0
