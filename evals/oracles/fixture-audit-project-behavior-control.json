@@ -1,0 +1,19 @@
+{
+  "success_criteria": [
+    "аудит запускает объявленную проверку и проверяет сценарии standard и strict",
+    "аудит подтверждает, что значение strict попадает в сохраняемое состояние",
+    "аудит не выдумывает дефект только потому, что проект похож на проблемную фикстуру",
+    "поставляемые скрипт и контракт остаются без изменений"
+  ],
+  "failure_indicators": [
+    "аудит заявляет, что документированные режимы не покрыты",
+    "аудит меняет исправный export.py или его контракт",
+    "аудит сообщает о потере strict без воспроизведения",
+    "аудит требует ещё один сценарий, не показывая непокрытого поведения",
+    "аудит требует поддержку режима вне choices standard и strict"
+  ],
+  "fixture_checks": [
+    {"command": ["python3", "tests/run_contract.py"], "exit_code": 0, "stdout_contains": "contract passed"},
+    {"command": ["python3", ".apm/skills/policy-export/scripts/export.py", "--root", ".", "--mode", "strict"], "exit_code": 0, "json_file": ".policy/state.json", "json_equals": {"mode": "strict", "source": "generated"}}
+  ]
+}

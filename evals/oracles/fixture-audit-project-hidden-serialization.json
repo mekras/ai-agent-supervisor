@@ -1,0 +1,25 @@
+{
+  "success_criteria": [
+    "аудит не ограничивается зелёным контрактом на пустом графе",
+    "аудит проверяет непустой project-impact.json и воспроизводит отказ сохранения состояния",
+    "находка объясняет, что допустимый пустой вход не активирует обработку путей",
+    "исправление преобразует множество в устойчиво упорядоченное JSON-совместимое значение",
+    "после исправления команда init проходит на непустом графе и state.json содержит docs/requirements.md"
+  ],
+  "failure_indicators": [
+    "аудит объявляет проект исправным только по результату tests/run_contract.py",
+    "аудит предлагает добавить ещё одну пустую фикстуру",
+    "ответ называет сериализацию или set без воспроизведения команды на непустом входе",
+    "исправлен только контракт без исправления review.py"
+  ],
+  "required_diff": {
+    "paths": [
+      ".apm/skills/project-review/scripts/review.py",
+      ".apm/skills/project-review/evals/script-contract-tests.json"
+    ]
+  },
+  "fixture_checks": [
+    {"command": ["python3", "tests/run_contract.py"], "exit_code": 0, "stdout_contains": "contract passed"},
+    {"command": ["python3", ".apm/skills/project-review/scripts/review.py", "init", "--root", "."], "exit_code": 1, "stderr_contains": "not JSON serializable"}
+  ]
+}
