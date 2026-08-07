@@ -17,6 +17,14 @@
 Если в контракте есть независимая ошибка полноты, запускатель всё равно
 выполняет корректно описанные сценарии и сообщает все найденные ошибки за один
 запуск.
+
+Объявленный вход в формате JSON обязан быть содержательным хотя бы в одной
+фикстуре успешного сценария операции: если во всех таких фикстурах все его
+коллекции пусты, вход считается вырожденным и не доказывает обработку
+элементов. Дополнительно запускатель измеряет, какие исполняемые строки
+каждого публичного скрипта выполнили сценарии, и печатает по каждому скрипту
+отчёт о невыполненных строках. Отчёт не меняет код возврата, но является
+обязательной очередью проверки для аудита поставляемой автоматизации.
 """
 
 from __future__ import annotations
@@ -28,6 +36,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import types
 from pathlib import Path
 from typing import Any
 
@@ -188,6 +197,44 @@ os.mkdir = _mkdir
 if _marker:
     descriptor = _original_os_open(_marker, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
     os.close(descriptor)
+
+_coverage_script = os.environ.get("APM_CONTRACT_COVERAGE_SCRIPT")
+_coverage_log = os.environ.get("APM_CONTRACT_COVERAGE_LOG")
+
+if _coverage_script and _coverage_log:
+    import atexit
+    import sys
+    import threading
+
+    _executed_lines = set()
+
+    def _line_tracer(frame, event, arg):
+        if event == "line":
+            _executed_lines.add(frame.f_lineno)
+        return _line_tracer
+
+    def _call_tracer(frame, event, arg):
+        if frame.f_code.co_filename == _coverage_script:
+            _executed_lines.add(frame.f_lineno)
+            return _line_tracer
+        return None
+
+    def _dump_coverage():
+        sys.settrace(None)
+        payload = (json.dumps(sorted(_executed_lines)) + "\n").encode("utf-8")
+        descriptor = _original_os_open(
+            _coverage_log,
+            os.O_WRONLY | os.O_CREAT | os.O_APPEND,
+            0o600,
+        )
+        try:
+            os.write(descriptor, payload)
+        finally:
+            os.close(descriptor)
+
+    atexit.register(_dump_coverage)
+    threading.settrace(_call_tracer)
+    sys.settrace(_call_tracer)
 '''
 
 
@@ -479,13 +526,96 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
     for operation_id, declared_inputs in sorted(operation_inputs.items()):
         fixtures = success_fixtures.get(operation_id, set())
         for input_path in declared_inputs:
-            if not any((skill / fixture / input_path).is_file() for fixture in fixtures):
+            present = [
+                skill / fixture / input_path
+                for fixture in fixtures
+                if (skill / fixture / input_path).is_file()
+            ]
+            if not present:
                 errors.append(
                     f"{contract}: объявленный вход {input_path.as_posix()} "
                     f"отсутствует во всех фикстурах успешных сценариев "
                     f"операции {operation_id!r}",
                 )
+            elif input_path.suffix == ".json" and all(
+                degenerate_json_input(path) for path in present
+            ):
+                errors.append(
+                    f"{contract}: объявленный вход {input_path.as_posix()} "
+                    f"операции {operation_id!r} во всех фикстурах успешных "
+                    "сценариев содержит только пустые коллекции; вырожденный "
+                    "вход не доказывает обработку элементов — добавь успешный "
+                    "сценарий с фикстурой, где этот вход содержит данные",
+                )
     return valid_cases
+
+
+def degenerate_json_input(path: Path) -> bool:
+    """Определить, что JSON-вход содержит только пустые коллекции."""
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return False
+    if value == {} or value == []:
+        return True
+    arrays: list[list[Any]] = []
+    stack = [value]
+    while stack:
+        current = stack.pop()
+        if isinstance(current, list):
+            arrays.append(current)
+            stack.extend(current)
+        elif isinstance(current, dict):
+            stack.extend(current.values())
+    return bool(arrays) and all(not array for array in arrays)
+
+
+def executable_lines(script: Path) -> set[int]:
+    """Собрать номера исполняемых строк скрипта по его байт-коду."""
+    source = script.read_text(encoding="utf-8")
+    code = compile(source, str(script), "exec")
+    lines: set[int] = set()
+    stack = [code]
+    while stack:
+        current = stack.pop()
+        lines.update(
+            line for _, _, line in current.co_lines() if line is not None and line > 0
+        )
+        stack.extend(
+            constant
+            for constant in current.co_consts
+            if isinstance(constant, types.CodeType)
+        )
+    return lines
+
+
+def format_line_ranges(lines: set[int]) -> str:
+    ranges: list[list[int]] = []
+    for line in sorted(lines):
+        if ranges and line == ranges[-1][1] + 1:
+            ranges[-1][1] = line
+        else:
+            ranges.append([line, line])
+    return ", ".join(
+        str(first) if first == last else f"{first}-{last}"
+        for first, last in ranges
+    )
+
+
+def executed_lines_from_log(log: Path) -> set[int] | None:
+    if not log.is_file():
+        return None
+    executed: set[int] = set()
+    for line in log.read_text(encoding="utf-8").splitlines():
+        try:
+            values = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(values, list):
+            executed.update(
+                value for value in values if isinstance(value, int) and value > 0
+            )
+    return executed
 
 
 def render_command(command: list[str], script: Path, fixture: Path) -> list[str]:
@@ -522,7 +652,14 @@ def verify_output(case: dict[str, Any], fixture: Path) -> list[str]:
     return errors
 
 
-def trace_environment(tracer: Path, fixture: Path, log: Path, marker: Path) -> dict[str, str]:
+def trace_environment(
+    tracer: Path,
+    fixture: Path,
+    log: Path,
+    marker: Path,
+    script: Path,
+    coverage_log: Path,
+) -> dict[str, str]:
     python_path = str(tracer)
     if inherited := os.environ.get("PYTHONPATH"):
         python_path += os.pathsep + inherited
@@ -533,6 +670,8 @@ def trace_environment(tracer: Path, fixture: Path, log: Path, marker: Path) -> d
         "APM_CONTRACT_FIXTURE_ROOT": str(fixture),
         "APM_CONTRACT_INPUT_LOG": str(log),
         "APM_CONTRACT_TRACE_MARKER": str(marker),
+        "APM_CONTRACT_COVERAGE_SCRIPT": str(script),
+        "APM_CONTRACT_COVERAGE_LOG": str(coverage_log),
     }
 
 
@@ -557,7 +696,11 @@ def observed_conditional_inputs(log: Path) -> set[str]:
     return missing - written
 
 
-def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
+def run_case(
+    skill: Path,
+    case: dict[str, Any],
+    coverage: dict[Path, set[int]],
+) -> list[str]:
     source_fixture = skill / case["fixture"]
     script = (skill / case["script"]).resolve()
     with tempfile.TemporaryDirectory(prefix="проверка скрипта ") as temporary:
@@ -566,6 +709,7 @@ def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
         tracer = temporary_path / "trace"
         trace_log = temporary_path / "conditional-inputs.jsonl"
         trace_marker = temporary_path / "trace-loaded"
+        coverage_log = temporary_path / "coverage.jsonl"
         shutil.copytree(source_fixture, fixture)
         tracer.mkdir()
         (tracer / "sitecustomize.py").write_text(
@@ -602,7 +746,14 @@ def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
                 text=True,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                env=trace_environment(tracer, fixture, trace_log, trace_marker),
+                env=trace_environment(
+                    tracer,
+                    fixture,
+                    trace_log,
+                    trace_marker,
+                    script,
+                    coverage_log,
+                ),
                 timeout=60,
             )
         except (OSError, subprocess.TimeoutExpired) as exc:
@@ -610,6 +761,11 @@ def run_case(skill: Path, case: dict[str, Any]) -> list[str]:
         errors: list[str] = []
         if not trace_marker.is_file():
             errors.append("не удалось включить наблюдение за условными входами")
+        executed = executed_lines_from_log(coverage_log)
+        if executed is None:
+            errors.append("не удалось собрать покрытие строк скрипта")
+        else:
+            coverage.setdefault(script, set()).update(executed)
         expect = case["expect"]
         expected_exit_code = expect.get("exit_code", 0)
         if result.returncode != expected_exit_code:
@@ -651,11 +807,28 @@ def main() -> int:
     }
     run_errors: list[str] = []
     count = 0
+    coverage: dict[Path, set[int]] = {}
     for skill, cases in cases_by_skill.items():
         for case in cases:
             count += 1
-            for error in run_case(skill, case):
+            for error in run_case(skill, case, coverage):
                 run_errors.append(f"{skill}::{case['id']}: {error}")
+    for script, executed in sorted(coverage.items()):
+        try:
+            expected = executable_lines(script)
+        except (OSError, UnicodeError, SyntaxError, ValueError) as exc:
+            run_errors.append(f"{script}: не удалось определить исполняемые строки: {exc}")
+            continue
+        uncovered = expected - executed
+        if uncovered:
+            print(
+                f"{script}: сценарии не выполнили {len(uncovered)} из "
+                f"{len(expected)} исполняемых строк. Непроверенные строки — "
+                "обязательная очередь поведенческой проверки: "
+                f"{format_line_ranges(uncovered)}",
+            )
+        else:
+            print(f"{script}: сценарии выполнили все {len(expected)} исполняемых строк.")
     all_errors = errors + run_errors
     if all_errors:
         print("\n".join(all_errors), file=sys.stderr)

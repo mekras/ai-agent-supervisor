@@ -225,7 +225,41 @@ os.replace(temporary_output, args.output)''',
         declared_input.write_text('{"version": 1}', encoding="utf-8")
         traced_input_covered = run(skill)
         assert traced_input_covered.returncode == 0, traced_input_covered.stderr
+
+        declared_input.write_text(
+            '{"version": 1, "nodes": [], "edges": []}',
+            encoding="utf-8",
+        )
+        degenerate_input = run(skill)
+        assert degenerate_input.returncode == 1
+        assert "содержит только пустые коллекции" in degenerate_input.stderr
+
+        declared_input.write_text(
+            '{"version": 1, "nodes": [{"id": "a"}], "edges": []}',
+            encoding="utf-8",
+        )
+        meaningful_input = run(skill)
+        assert meaningful_input.returncode == 0, meaningful_input.stderr
         declared_input.unlink()
+
+        write_contract(skill)
+        dead_branch_script = script.replace(
+            'args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")',
+            '''state = {"status": "ready"}
+if os.environ.get("APM_NEVER_SET_MARKER"):
+    state["scope"] = {"paths": set()}
+args.output.write_text(json.dumps(state), encoding="utf-8")''',
+        )
+        write_script(skill, dead_branch_script)
+        uncovered_branch = run(skill)
+        assert uncovered_branch.returncode == 0, uncovered_branch.stderr
+        assert "сценарии не выполнили" in uncovered_branch.stdout
+        assert "обязательная очередь поведенческой проверки" in uncovered_branch.stdout
+
+        write_script(skill, script)
+        full_coverage = run(skill)
+        assert full_coverage.returncode == 0, full_coverage.stderr
+        assert "сценарии выполнили все" in full_coverage.stdout
 
         write_contract(skill)
 
