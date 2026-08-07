@@ -22,9 +22,13 @@
 фикстуре успешного сценария операции: если во всех таких фикстурах все его
 коллекции пусты, вход считается вырожденным и не доказывает обработку
 элементов. Дополнительно запускатель измеряет, какие исполняемые строки
-каждого публичного скрипта выполнили сценарии, и печатает по каждому скрипту
-отчёт о невыполненных строках. Отчёт не меняет код возврата, но является
-обязательной очередью проверки для аудита поставляемой автоматизации.
+каждого публичного скрипта выполнили сценарии. Функция скрипта, ни одна строка
+которой не выполнена ни одним сценарием, считается непроверенной: это ошибка,
+если функция не перечислена в ``unexercised_functions`` контракта с указанием
+скрипта, полного имени и причины. Запись о фактически выполненной функции
+устаревает и тоже считается ошибкой. Отчёт о прочих невыполненных строках не
+меняет код возврата, но является обязательной очередью проверки для аудита
+поставляемой автоматизации.
 """
 
 from __future__ import annotations
@@ -328,25 +332,65 @@ def is_runnable_case(skill: Path, case: dict[str, Any]) -> bool:
     )
 
 
-def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
+def load_unexercised_allowances(
+    skill: Path,
+    data: dict[str, Any],
+    expected_scripts: set[Path],
+    errors: list[str],
+) -> dict[Path, dict[str, str]]:
+    contract = skill / "evals" / "script-contract-tests.json"
+    entries = data.get("unexercised_functions", [])
+    allowances: dict[Path, dict[str, str]] = {}
+    if not isinstance(entries, list):
+        errors.append(f"{contract}: unexercised_functions должен быть массивом")
+        return allowances
+    for index, entry in enumerate(entries):
+        label = f"{contract}: unexercised_functions[{index}]"
+        if not isinstance(entry, dict):
+            errors.append(f"{label}: должна быть запись со script, function и reason")
+            continue
+        script = safe_relative(entry.get("script"))
+        if script is None or script not in expected_scripts:
+            errors.append(f"{label}.script: нужен Python-скрипт первого уровня scripts/")
+            continue
+        function = entry.get("function")
+        if not isinstance(function, str) or not function:
+            errors.append(f"{label}.function: нужно полное имя функции")
+            continue
+        reason = entry.get("reason")
+        if not isinstance(reason, str) or not reason.strip():
+            errors.append(f"{label}.reason: нужна непустая причина")
+            continue
+        if function in allowances.setdefault(script, {}):
+            errors.append(f"{label}.function: повтор {function!r}")
+            continue
+        allowances[script][function] = reason.strip()
+    return allowances
+
+
+def load_cases(
+    skill: Path,
+    errors: list[str],
+) -> tuple[list[dict[str, Any]], dict[Path, dict[str, str]]]:
     contract = skill / "evals" / "script-contract-tests.json"
     if not contract.is_file():
         if public_python_scripts(skill):
             errors.append(f"{skill}: нет {contract.relative_to(skill)}")
-        return []
+        return [], {}
     try:
         data = json.loads(contract.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         errors.append(f"{contract}: JSON не разобран: {exc}")
-        return []
+        return [], {}
     if not isinstance(data, dict) or data.get("version") != 2:
         errors.append(f"{contract}: нужен объект с version: 2")
-        return []
+        return [], {}
     cases = data.get("cases")
     if not isinstance(cases, list) or not cases:
         errors.append(f"{contract}: нужен непустой массив cases")
-        return []
+        return [], {}
     expected_scripts = {path.relative_to(skill) for path in public_python_scripts(skill)}
+    allowances = load_unexercised_allowances(skill, data, expected_scripts, errors)
     operations = data.get("operations")
     if not isinstance(operations, list) or not operations:
         errors.append(f"{contract}: нужен непустой массив operations")
@@ -547,7 +591,7 @@ def load_cases(skill: Path, errors: list[str]) -> list[dict[str, Any]]:
                     "вход не доказывает обработку элементов — добавь успешный "
                     "сценарий с фикстурой, где этот вход содержит данные",
                 )
-    return valid_cases
+    return valid_cases, allowances
 
 
 def degenerate_json_input(path: Path) -> bool:
@@ -587,6 +631,35 @@ def executable_lines(script: Path) -> set[int]:
             if isinstance(constant, types.CodeType)
         )
     return lines
+
+
+def script_functions(script: Path) -> dict[str, set[int]]:
+    """Собрать функции скрипта и номера строк, исполняемых только их телом.
+
+    Строка ``def`` исполняется объемлющим кодом при определении функции,
+    поэтому строки объемлющего кода исключаются: остаются строки, которые
+    выполняются только при фактическом вызове функции.
+    """
+    source = script.read_text(encoding="utf-8")
+    code = compile(source, str(script), "exec")
+    functions: dict[str, set[int]] = {}
+    stack: list[tuple[types.CodeType, set[int]]] = [(code, set())]
+    while stack:
+        current, enclosing = stack.pop()
+        own = {
+            line for _, _, line in current.co_lines() if line is not None and line > 0
+        }
+        if current.co_name != "<module>" and not current.co_name.startswith("<"):
+            name = getattr(current, "co_qualname", current.co_name)
+            body_lines = own - enclosing
+            if body_lines:
+                functions.setdefault(name, set()).update(body_lines)
+        stack.extend(
+            (constant, own)
+            for constant in current.co_consts
+            if isinstance(constant, types.CodeType)
+        )
+    return functions
 
 
 def format_line_ranges(lines: set[int]) -> str:
@@ -699,7 +772,7 @@ def observed_conditional_inputs(log: Path) -> set[str]:
 def run_case(
     skill: Path,
     case: dict[str, Any],
-    coverage: dict[Path, set[int]],
+    coverage: dict[tuple[Path, Path], set[int]],
 ) -> list[str]:
     source_fixture = skill / case["fixture"]
     script = (skill / case["script"]).resolve()
@@ -765,7 +838,7 @@ def run_case(
         if executed is None:
             errors.append("не удалось собрать покрытие строк скрипта")
         else:
-            coverage.setdefault(script, set()).update(executed)
+            coverage.setdefault((skill, Path(case["script"])), set()).update(executed)
         expect = case["expect"]
         expected_exit_code = expect.get("exit_code", 0)
         if result.returncode != expected_exit_code:
@@ -801,24 +874,57 @@ def main() -> int:
         print(f"Пути не найдены: {', '.join(missing)}", file=sys.stderr)
         return 2
     errors: list[str] = []
-    cases_by_skill = {
-        skill: load_cases(skill, errors)
-        for skill in skill_directories(args.paths)
-    }
+    cases_by_skill = {}
+    allowances_by_skill = {}
+    for skill in skill_directories(args.paths):
+        cases, allowances = load_cases(skill, errors)
+        cases_by_skill[skill] = cases
+        allowances_by_skill[skill] = allowances
     run_errors: list[str] = []
     count = 0
-    coverage: dict[Path, set[int]] = {}
+    coverage: dict[tuple[Path, Path], set[int]] = {}
     for skill, cases in cases_by_skill.items():
         for case in cases:
             count += 1
             for error in run_case(skill, case, coverage):
                 run_errors.append(f"{skill}::{case['id']}: {error}")
-    for script, executed in sorted(coverage.items()):
+    checked_allowances: set[tuple[Path, Path]] = set()
+    for (skill, script_rel), executed in sorted(coverage.items()):
+        script = skill / script_rel
         try:
             expected = executable_lines(script)
+            functions = script_functions(script)
         except (OSError, UnicodeError, SyntaxError, ValueError) as exc:
             run_errors.append(f"{script}: не удалось определить исполняемые строки: {exc}")
             continue
+        allowed = allowances_by_skill.get(skill, {}).get(script_rel, {})
+        checked_allowances.add((skill, script_rel))
+        unexecuted = {
+            name for name, lines in functions.items() if not (lines & executed)
+        }
+        for name in sorted(unexecuted - set(allowed)):
+            run_errors.append(
+                f"{script}: функция {name} не выполнена ни одним сценарием — "
+                "добавь активирующий успешный сценарий либо запись в "
+                "unexercised_functions с причиной",
+            )
+        for name in sorted(allowed):
+            if name not in functions:
+                run_errors.append(
+                    f"{script}: unexercised_functions называет неизвестную "
+                    f"функцию {name}",
+                )
+            elif name not in unexecuted:
+                run_errors.append(
+                    f"{script}: запись unexercised_functions о функции {name} "
+                    "устарела — функция выполняется сценариями, удали запись",
+                )
+        acknowledged = sorted(unexecuted & set(allowed))
+        if acknowledged:
+            print(
+                f"{script}: непроверенные функции по объявленным причинам: "
+                + ", ".join(acknowledged),
+            )
         uncovered = expected - executed
         if uncovered:
             print(
@@ -829,6 +935,14 @@ def main() -> int:
             )
         else:
             print(f"{script}: сценарии выполнили все {len(expected)} исполняемых строк.")
+    for skill, allowances in allowances_by_skill.items():
+        for script_rel in sorted(set(allowances) - {
+            script for owner, script in checked_allowances if owner == skill
+        }):
+            run_errors.append(
+                f"{skill / script_rel}: unexercised_functions объявлен, но нет "
+                "данных покрытия — у скрипта нет выполненных сценариев",
+            )
     all_errors = errors + run_errors
     if all_errors:
         print("\n".join(all_errors), file=sys.stderr)

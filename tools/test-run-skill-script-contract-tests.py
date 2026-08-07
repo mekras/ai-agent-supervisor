@@ -261,6 +261,63 @@ args.output.write_text(json.dumps(state), encoding="utf-8")''',
         assert full_coverage.returncode == 0, full_coverage.stderr
         assert "сценарии выполнили все" in full_coverage.stdout
 
+        dead_function_script = script.replace(
+            'args.output.write_text(json.dumps({"status": "ready"}), encoding="utf-8")',
+            '''def build_scope():
+    return {"paths": []}
+
+state = {"status": "ready"}
+if os.environ.get("APM_NEVER_SET_MARKER"):
+    state["scope"] = build_scope()
+args.output.write_text(json.dumps(state), encoding="utf-8")''',
+        )
+        write_script(skill, dead_function_script)
+        unexecuted_function = run(skill)
+        assert unexecuted_function.returncode == 1
+        assert (
+            "функция build_scope не выполнена ни одним сценарием"
+            in unexecuted_function.stderr
+        )
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["unexercised_functions"] = [
+            {
+                "script": "scripts/save_state.py",
+                "function": "build_scope",
+                "reason": "ветвь активируется только внешней переменной среды",
+            },
+        ]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        acknowledged_function = run(skill)
+        assert acknowledged_function.returncode == 0, acknowledged_function.stderr
+        assert (
+            "непроверенные функции по объявленным причинам: build_scope"
+            in acknowledged_function.stdout
+        )
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["unexercised_functions"][0]["function"] = "missing_helper"
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        unknown_function = run(skill)
+        assert unknown_function.returncode == 1
+        assert "неизвестную функцию missing_helper" in unknown_function.stderr
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["unexercised_functions"][0]["function"] = "build_scope"
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        live_function_script = dead_function_script.replace(
+            '''if os.environ.get("APM_NEVER_SET_MARKER"):
+    state["scope"] = build_scope()''',
+            'state["scope"] = build_scope()',
+        )
+        write_script(skill, live_function_script)
+        stale_allowance = run(skill)
+        assert stale_allowance.returncode == 1
+        assert (
+            "запись unexercised_functions о функции build_scope устарела"
+            in stale_allowance.stderr
+        )
+
         write_contract(skill)
 
         broken = script.replace('{"status": "ready"}', '{"status": {"ready"}}')
