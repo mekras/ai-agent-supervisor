@@ -336,7 +336,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-minimal-fixture-hidden-branch",
+          "id": "ai-audit-project-result-behavioral-coverage",
           "required_claims": [
             "ASKL-004"
           ],

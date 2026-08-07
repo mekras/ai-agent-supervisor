@@ -93,6 +93,14 @@ FIXTURE_ANSWER_SCHEMA = {
 }
 
 
+CATALOG_SELECTION_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": ["selected_skill"],
+    "properties": {"selected_skill": {"type": "string"}},
+}
+
+
 JUDGE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
@@ -1127,6 +1135,7 @@ def fixture_candidate_prompt(
     mode: str,
     skill_dirs: list[Path],
     workspace: bool = False,
+    selected_skill: str | None = None,
 ) -> str:
     fixture = fixture_snapshot(case["fixture_dir"])
     task = {
@@ -1136,18 +1145,12 @@ def fixture_candidate_prompt(
     }
     if mode == "baseline":
         context = "Специального навыка нет: реши задачу обычным рабочим способом."
-    elif mode == "skill":
-        target = str(case["target_skill"])
+    elif mode in {"skill", "catalog"}:
+        target = selected_skill or str(case["target_skill"])
         selected = next((item for item in catalog_payload(skill_dirs, True) if item["name"] == target), None)
         if selected is None:
-            raise RuntimeError(f"{case['id']}: не найден target_skill {target!r}.")
+            raise RuntimeError(f"{case['id']}: не найден выбранный навык {target!r}.")
         context = "Примени данный навык:\n" + json.dumps(selected, ensure_ascii=False)
-    else:
-        context = (
-            "Тебе доступен полный каталог навыков. Выбери один наиболее подходящий "
-            "навык, укажи его в selected_skill и примени его.\n"
-            + json.dumps(catalog_payload(skill_dirs, True), ensure_ascii=False)
-        )
     workspace_note = (
         "Копия fixture доступна в рабочей папке APM_EVAL_WORKSPACE. Выполни "
         "нужные изменения в ней; итоговый diff будет проверен. " if workspace else ""
@@ -1161,13 +1164,32 @@ def fixture_candidate_prompt(
     )
 
 
+def fixture_catalog_selection_prompt(case: dict[str, Any], skill_dirs: list[Path]) -> str:
+    task = {
+        "user_prompt": case["prompt"],
+        "project_paths": [item["path"] for item in fixture_snapshot(case["fixture_dir"])],
+    }
+    return (
+        "Выбери один наиболее подходящий навык для задачи. Верни только его имя "
+        "в selected_skill. Выбирай по описаниям; содержимое выбранного навыка "
+        "будет загружено отдельным шагом.\n"
+        f"Каталог:\n{json.dumps(catalog_payload(skill_dirs, False), ensure_ascii=False)}\n"
+        f"Задача:\n{json.dumps(task, ensure_ascii=False)}"
+    )
+
+
 def fixture_judge_prompt(case: dict[str, Any], answer: dict[str, Any], mode: str, workspace_diff: str = "") -> str:
     """Только судье передаётся оракул: кандидат его не видел."""
+    judge_oracle = {
+        key: value
+        for key, value in case["oracle_data"].items()
+        if key != "fixture_checks"
+    }
     payload = {
         "case_id": case["id"],
         "mode": mode,
         "expected_skill": case.get("catalog_skill", case.get("target_skill")),
-        "oracle": case["oracle_data"],
+        "oracle": judge_oracle,
         "answer": answer,
         "workspace_diff": workspace_diff,
     }
@@ -1251,15 +1273,47 @@ def run_fixture_evals(
                         shutil.copytree(case["fixture_dir"], workspace)
                         shutil.copytree(case["fixture_dir"], before)
                     call = make_model_call(run["adapter"], run["model"], timeout, workspace if run.get("workspace") else None)
-                    prompt = fixture_candidate_prompt(case, mode, skill_dirs, bool(run.get("workspace")))
                     started = time.monotonic()
-                    answer = call(prompt, FIXTURE_ANSWER_SCHEMA)
+                    selection_prompt = ""
+                    selected_skill = None
+                    candidate_error = ""
+                    prompt = ""
+                    try:
+                        if mode == "catalog":
+                            selection_prompt = fixture_catalog_selection_prompt(case, skill_dirs)
+                            selection = call(selection_prompt, CATALOG_SELECTION_SCHEMA)
+                            selected_skill = str(selection.get("selected_skill", ""))
+                        known_skills = {item["name"] for item in catalog_payload(skill_dirs, False)}
+                        if mode == "catalog" and selected_skill not in known_skills:
+                            prompt = selection_prompt
+                            answer = {
+                                "answer": f"Выбран неизвестный навык: {selected_skill}",
+                                "selected_skill": selected_skill,
+                            }
+                        else:
+                            prompt = fixture_candidate_prompt(
+                                case,
+                                "skill" if mode == "catalog" else mode,
+                                skill_dirs,
+                                bool(run.get("workspace")),
+                                selected_skill,
+                            )
+                            answer = call(prompt, FIXTURE_ANSWER_SCHEMA)
+                            if mode == "catalog":
+                                answer["selected_skill"] = selected_skill
+                    except RuntimeError as error:
+                        candidate_error = str(error)
+                        answer = {"answer": candidate_error}
+                        if selected_skill:
+                            answer["selected_skill"] = selected_skill
                     elapsed = time.monotonic() - started
-                    candidate_actual = getattr(call, "last_metrics", {})
+                    candidate_actual = {} if mode == "catalog" else getattr(call, "last_metrics", {})
+                    metric_prompt = selection_prompt + prompt
                     workspace_diff = directory_diff(before, workspace) if run.get("workspace") else ""
                 verdicts: list[dict[str, Any]] = []
                 judge_elapsed = 0.0
-                for _ in range(judge_repetitions):
+                verdict = None
+                for _ in range(0 if candidate_error else judge_repetitions):
                     judge_started = time.monotonic()
                     verdict_data = judge_call(fixture_judge_prompt(case, answer, mode, workspace_diff), JUDGE_SCHEMA)
                     judge_elapsed += time.monotonic() - judge_started
@@ -1267,22 +1321,23 @@ def run_fixture_evals(
                     if verdict:
                         verdicts.append(verdict)
                 judge_actual = getattr(judge_call, "last_metrics", {})
-                passed = sum(item.get("passed") is True for item in verdicts) >= judge_repetitions // 2 + 1
+                passed = not candidate_error and sum(item.get("passed") is True for item in verdicts) >= judge_repetitions // 2 + 1
                 diff_errors = check_required_diff(case["oracle_data"], workspace_diff) if mode != "baseline" and run.get("workspace") else []
                 passed = passed and not diff_errors
                 record = {
                     "case_id": case["id"], "mode": mode, "repetition": repetition,
                     "model": run["label"], "judge": judge["label"], "passed": passed,
                     "answer": answer, "judge_results": verdicts, "judge_quorum": judge_repetitions // 2 + 1, "diff_errors": diff_errors,
+                    "candidate_error": candidate_error,
                     "workspace_diff": workspace_diff,
                     "metrics": {
-                        "candidate": estimate_metrics(prompt, str(answer.get("answer", "")), elapsed, pricing, run["label"], candidate_actual),
+                        "candidate": estimate_metrics(metric_prompt, str(answer.get("answer", "")), elapsed, pricing, run["label"], candidate_actual),
                         "judge": estimate_metrics("", json.dumps(verdict or {}, ensure_ascii=False), judge_elapsed, pricing, judge["label"], judge_actual),
                     },
                 }
                 records.append(record)
                 if mode != "baseline" and not passed:
-                    detail = "; ".join(diff_errors)
+                    detail = "; ".join([*diff_errors, *([candidate_error] if candidate_error else [])])
                     errors.append(f"{case['id']} [{mode}, повтор {repetition}]: не пройдено. {detail}")
     for case in cases:
         for mode in ("skill", "catalog"):
@@ -1332,11 +1387,12 @@ def write_fixture_report(repo_root: Path, output: Path, records: list[dict[str, 
 
 def confirm_model_run(*, runs: list[dict[str, Any]], fixture_cases: list[dict[str, Any]], trigger_cases: list[dict[str, Any]], result_groups: list[tuple[Path, dict[str, Any], list[dict[str, Any]]]], repetitions: int, judge_repetitions: int, yes: bool) -> bool:
     run_count = len(runs)
-    fixture_calls = run_count * len(fixture_cases) * 3 * repetitions
+    fixture_runs = run_count * len(fixture_cases) * 3 * repetitions
+    catalog_selection_calls = run_count * len(fixture_cases) * repetitions
     trigger_calls = run_count * len({case["skill_name"] for case in trigger_cases})
     result_calls = run_count * sum(len(cases) for _, _, cases in result_groups)
-    candidate_calls = fixture_calls + trigger_calls + result_calls
-    judge_calls = fixture_calls * judge_repetitions + result_calls
+    candidate_calls = fixture_runs + catalog_selection_calls + trigger_calls + result_calls
+    judge_calls = fixture_runs * judge_repetitions + result_calls
     print(
         "Модельный прогон потребует не менее запросов: "
         f"к кандидату — {candidate_calls}, к судье — {judge_calls}. "

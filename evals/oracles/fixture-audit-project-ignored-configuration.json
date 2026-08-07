@@ -1,0 +1,25 @@
+{
+  "success_criteria": [
+    "аудит проверяет не только наличие policy.json в inputs, но и наблюдаемый эффект его содержимого",
+    "аудит сравнивает результат без настройки и с mode strict",
+    "находка указывает, что команда завершается успешно, но сохраняет неверное состояние",
+    "исправление записывает configured_mode в state.json",
+    "контракт получает отдельный успешный сценарий с policy.json и проверкой значения strict"
+  ],
+  "failure_indicators": [
+    "аудит принимает stdout configured mode как доказательство корректного состояния",
+    "аудит считает объявленный inputs достаточным покрытием",
+    "исправлен только текст навыка или только контракт",
+    "аудит ищет только аварийное завершение команды"
+  ],
+  "required_diff": {
+    "paths": [
+      ".apm/skills/policy-export/scripts/export.py",
+      ".apm/skills/policy-export/evals/script-contract-tests.json"
+    ]
+  },
+  "fixture_checks": [
+    {"command": ["python3", "tests/run_contract.py"], "exit_code": 0, "stdout_contains": "contract passed"},
+    {"command": ["python3", ".apm/skills/policy-export/scripts/export.py", "--root", "."], "exit_code": 0, "json_file": ".policy/state.json", "json_equals": {"mode": "standard", "source": "generated"}}
+  ]
+}

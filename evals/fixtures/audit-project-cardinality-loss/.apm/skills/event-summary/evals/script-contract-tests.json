@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "operations": [
+    {
+      "id": "summarize",
+      "command_prefix": ["python3", ".apm/skills/event-summary/scripts/summarize.py"],
+      "inputs": ["events.json"]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "summarize-single",
+      "fixture": "script-fixtures/single",
+      "command": ["python3", ".apm/skills/event-summary/scripts/summarize.py", "--root", "."],
+      "covers": ["summarize"],
+      "expect": {"exit_code": 0, "files": [{"path": ".events/summary.json", "json": true, "contains": "event_count"}]}
+    }
+  ]
+}

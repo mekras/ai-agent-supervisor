@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "operations": [
+    {
+      "id": "export",
+      "command_prefix": ["python3", ".apm/skills/policy-export/scripts/export.py"],
+      "inputs": []
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "export-default",
+      "fixture": "script-fixtures/project",
+      "command": ["python3", ".apm/skills/policy-export/scripts/export.py", "--root", "."],
+      "covers": ["export"],
+      "expect": {"exit_code": 0, "files": [{"path": ".policy/state.json", "json": true, "contains": "standard"}]}
+    },
+    {
+      "id": "export-configured",
+      "fixture": "script-fixtures/project",
+      "command": ["python3", ".apm/skills/policy-export/scripts/export.py", "--root", ".", "--mode", "strict"],
+      "covers": ["export"],
+      "expect": {"exit_code": 0, "files": [{"path": ".policy/state.json", "json": true, "contains": "strict"}]}
+    }
+  ]
+}

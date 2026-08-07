@@ -34,6 +34,7 @@ def main() -> int:
     ]
     if (root / "evals" / "fixtures" / "registry.json").is_file():
         checks.append([tools / "validate-fixture-evals.py"])
+        checks.append([tools / "run-fixture-checks.py"])
     for command in checks:
         script = command[0]
         if not script.is_file():

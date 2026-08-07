@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "operations": [
+    {
+      "id": "init",
+      "command_prefix": ["python3", ".apm/skills/project-review/scripts/review.py", "init"],
+      "inputs": ["project-impact.json"]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "init-empty-graph",
+      "fixture": "script-fixtures/empty-graph",
+      "command": ["python3", ".apm/skills/project-review/scripts/review.py", "init", "--root", "."],
+      "covers": ["init"],
+      "expect": {"exit_code": 0, "files": [{"path": ".review/state.json", "json": true, "contains": "status"}]}
+    }
+  ]
+}

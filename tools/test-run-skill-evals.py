@@ -143,6 +143,77 @@ pricing:
         "```md\n# AGENTS.md\n```"
     )
 
+    judge_prompt = runner["fixture_judge_prompt"](
+        {
+            "id": "fixture-case",
+            "target_skill": "example",
+            "oracle_data": {
+                "success_criteria": ["результат подтверждён"],
+                "failure_indicators": ["результат не подтверждён"],
+                "fixture_checks": [{"command": ["python3", "check.py"], "exit_code": 1}],
+            },
+        },
+        {"answer": "готово"},
+        "skill",
+    )
+    assert "fixture_checks" not in judge_prompt
+    assert "результат подтверждён" in judge_prompt
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        fixture = root / "fixture"
+        fixture.mkdir()
+        (fixture / "AGENTS.md").write_text("Проверь проект.\n", encoding="utf-8")
+        skill_dirs = []
+        for name, description, body in (
+            ("audit", "Аудит проекта", "SECRET AUDIT BODY"),
+            ("writing", "Документация", "SECRET WRITING BODY"),
+        ):
+            skill_dir = root / name
+            skill_dir.mkdir()
+            (skill_dir / "SKILL.md").write_text(
+                f"---\nname: {name}\ndescription: {description}\n---\n\n{body}\n",
+                encoding="utf-8",
+            )
+            skill_dirs.append(skill_dir)
+        fixture_case = {"id": "fixture", "prompt": "Проверь проект", "fixture_dir": fixture, "target_skill": "audit"}
+        selection_prompt = runner["fixture_catalog_selection_prompt"](fixture_case, skill_dirs)
+        assert "Аудит проекта" in selection_prompt
+        assert "SECRET AUDIT BODY" not in selection_prompt
+        application_prompt = runner["fixture_candidate_prompt"](
+            fixture_case,
+            "catalog",
+            skill_dirs,
+            False,
+            "audit",
+        )
+        assert "SECRET AUDIT BODY" in application_prompt
+        assert "SECRET WRITING BODY" not in application_prompt
+
+        invalid_adapter = [sys.executable, "-c", "print('not-json')"]
+        fixture_case.update(
+            {
+                "oracle_data": {
+                    "success_criteria": ["успех"],
+                    "failure_indicators": ["провал"],
+                }
+            }
+        )
+        errors, records = runner["run_fixture_evals"](
+            repo_root=root,
+            cases=[fixture_case],
+            skill_dirs=skill_dirs,
+            run={"adapter": invalid_adapter, "model": "candidate", "label": "invalid", "workspace": False},
+            judge={"adapter": invalid_adapter, "model": "judge", "label": "invalid-judge"},
+            timeout=10,
+            repetitions=1,
+            judge_repetitions=1,
+            pricing={},
+        )
+        assert len(records) == 3
+        assert all(record["candidate_error"] for record in records)
+        assert len(errors) == 2
+
     print("Проверки разбора длинных ответов модельного прогона пройдены.")
     return 0
 

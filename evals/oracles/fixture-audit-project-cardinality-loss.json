@@ -1,0 +1,25 @@
+{
+  "success_criteria": [
+    "аудит проверяет границу между одной записью и несколькими записями с одинаковым идентификатором",
+    "аудит обнаруживает тихую потерю события при преобразовании списка в словарь",
+    "находка подтверждена значением event_count 1 при двух входных событиях",
+    "исправление считает исходные записи, не меняя допустимость повторяющихся идентификаторов",
+    "контракт получает сценарий с повторяющимся идентификатором и проверяет event_count 2"
+  ],
+  "failure_indicators": [
+    "аудит принимает сценарий с одной записью как репрезентативный для коллекции",
+    "аудит запрещает повторяющиеся идентификаторы вопреки интерфейсу навыка",
+    "исправлен только ожидаемый результат теста",
+    "аудит ищет только исключения и не проверяет тихую потерю данных"
+  ],
+  "required_diff": {
+    "paths": [
+      ".apm/skills/event-summary/scripts/summarize.py",
+      ".apm/skills/event-summary/evals/script-contract-tests.json"
+    ]
+  },
+  "fixture_checks": [
+    {"command": ["python3", "tests/run_contract.py"], "exit_code": 0, "stdout_contains": "contract passed"},
+    {"command": ["python3", ".apm/skills/event-summary/scripts/summarize.py", "--root", "."], "exit_code": 0, "json_file": ".events/summary.json", "json_equals": {"event_count": 1, "event_ids": ["deploy"]}}
+  ]
+}

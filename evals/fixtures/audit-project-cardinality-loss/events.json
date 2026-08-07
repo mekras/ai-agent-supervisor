@@ -1,0 +1,4 @@
+[
+  {"id": "deploy", "source": "api"},
+  {"id": "deploy", "source": "worker"}
+]
