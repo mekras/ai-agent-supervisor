@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.15] - 2026-08-07
+
 ### Исправлено
 
 - Функция публичного скрипта, ни одна строка тела которой не выполнена ни
@@ -528,7 +530,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.14...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.15...HEAD
+[2.3.15]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.14...2.3.15
 [2.3.14]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.13...2.3.14
 [2.3.13]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.12...2.3.13
 [2.3.12]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.11...2.3.12
