@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.3.14] - 2026-08-07
+
 ### Исправлено
 
 - Запускатель контрактных проверок отклоняет вырожденный объявленный JSON-вход:
@@ -504,7 +506,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.13...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.14...HEAD
+[2.3.14]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.13...2.3.14
 [2.3.13]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.12...2.3.13
 [2.3.12]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.11...2.3.12
 [2.3.11]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.10...2.3.11
