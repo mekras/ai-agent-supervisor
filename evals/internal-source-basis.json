@@ -493,6 +493,10 @@
         {
           "claim_id": "APMP-007",
           "statement_path": "knowledge/data/apmp/pages/publish-to-a-marketplace/statements.yml"
+        },
+        {
+          "claim_id": "APMP-013",
+          "statement_path": "knowledge/data/apmp/pages/consumer-drift-and-secure-by-default/statements.yml"
         }
       ],
       "cases": [
@@ -654,6 +658,21 @@
           "finding_claims": [
             [
               "APMP-009"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-recover-broken-release-without-erasing-project-files",
+          "required_claims": [
+            "APMP-013",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "APMP-013"
+            ],
+            [
+              "ASKL-004"
             ]
           ]
         },
