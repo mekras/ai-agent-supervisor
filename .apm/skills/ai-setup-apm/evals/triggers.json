@@ -68,6 +68,12 @@
       "rationale": "Это диагностика зависимостей и установки проекта-потребителя APM, которую ведёт ветка «Проект-потребитель» навыка."
     },
     {
+      "id": "ai-setup-apm-positive-consumer-recover-broken-release",
+      "prompt": "После обновления APM audit не проходит: выпуск требует файл, которого в пакете нет. Восстанови установку безопасно.",
+      "should_trigger": true,
+      "rationale": "Нужно диагностировать и безопасно пересоздать повреждённое состояние зависимостей APM либо доказать дефект выпуска."
+    },
+    {
       "id": "ai-setup-apm-positive-consumer-lockfile-vs-manifest",
       "prompt": "В apm.yml одна прямая зависимость, а в apm.lock.yaml ещё несколько пакетов. Думаю перенести их все в dependencies.apm. Проверь, нужно ли это.",
       "should_trigger": true,
