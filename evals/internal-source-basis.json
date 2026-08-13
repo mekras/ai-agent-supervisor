@@ -616,6 +616,20 @@
           ]
         },
         {
+          "id": "ai-setup-apm-result-prevent-python-cache-drift",
+          "required_claims": [
+            "APMP-006",
+            "APMP-009",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "APMP-009",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
           "id": "ai-setup-apm-result-stop-on-consumer-apm-dependency",
           "required_claims": [
             "ASKL-003",
@@ -1112,6 +1126,10 @@
     "ai-setup-subagents": {
       "source_basis": [
         {
+          "claim_id": "AENG-004",
+          "statement_path": "knowledge/data/aeng/pages/demystifying-evals-for-ai-agents/statements.yml"
+        },
+        {
           "claim_id": "ASKL-003",
           "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
         },
@@ -1122,6 +1140,18 @@
         {
           "claim_id": "PPRX-001",
           "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        },
+        {
+          "claim_id": "LSME-001",
+          "statement_path": "knowledge/data/lsme/pages/evaluation/statements.yml"
+        },
+        {
+          "claim_id": "LSME-002",
+          "statement_path": "knowledge/data/lsme/pages/evaluation-approaches/statements.yml"
+        },
+        {
+          "claim_id": "LSME-003",
+          "statement_path": "knowledge/data/lsme/pages/trajectory-evals/statements.yml"
         }
       ],
       "cases": [
@@ -1240,6 +1270,27 @@
             [
               "ASKL-003",
               "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-sequential-project-model-evaluation",
+          "required_claims": [
+            "AENG-004",
+            "ASKL-004",
+            "LSME-001",
+            "LSME-002",
+            "LSME-003"
+          ],
+          "finding_claims": [
+            [
+              "AENG-004",
+              "LSME-001"
+            ],
+            [
+              "ASKL-004",
+              "LSME-002",
+              "LSME-003"
             ]
           ]
         }

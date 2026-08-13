@@ -15,6 +15,7 @@ SCRIPTS = [
     "tools/test-apm-audit-ci.py",
     "tools/test-check-subagent-models.py",
     "tools/test-execution-class.py",
+    "tools/test-model-selection-evaluator.py",
     "tools/test-execution-policy.py",
     "tools/test-codex-model-subagent.py",
     "tools/test-run-skill-evals.py",
