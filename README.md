@@ -117,6 +117,7 @@ P2 требуют явно названной операционной сист�
 
 - [Публичный договор коллекции](docs/product-contract.md)
 - [Требования](docs/requirements/README.md)
+- [Гипотезы](docs/hypotheses/README.md)
 - [Журнал решений](docs/decisions/README.md)
 
 ## Разработка

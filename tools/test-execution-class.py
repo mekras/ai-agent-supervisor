@@ -17,6 +17,8 @@ sys.dont_write_bytecode = True
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / ".apm/skills/ai-setup-subagents/scripts/run-execution-class"
+MODEL_EVALUATOR = ROOT / ".apm/skills/ai-setup-subagents/scripts/evaluate-model-selection.py"
+MODEL_EVALUATOR_SAMPLE = ROOT / ".apm/skills/ai-setup-subagents/assets/model-selection-input.sample.json"
 CLAUDE_ROLE = ROOT / ".apm/skills/ai-setup-subagents/scripts/adapters/claude-role"
 CLAUDE_INSTALLER = ROOT / ".apm/skills/ai-setup-subagents/scripts/install-claude-tools"
 LOADER = importlib.machinery.SourceFileLoader("claude_role", str(CLAUDE_ROLE))
@@ -122,8 +124,12 @@ def main() -> int:
         assert installed.returncode == 0, installed.stderr
         assert "installed=" in installed.stdout
         installed_runner = installed_root / "tools/run-execution-class"
+        installed_evaluator = installed_root / "tools/evaluate-model-selection.py"
+        installed_sample = installed_root / "tools/model-selection-input.sample.json"
         installed_adapter = installed_root / "tools/adapters/claude-role"
         assert installed_runner.read_bytes() == RUNNER.read_bytes()
+        assert installed_evaluator.read_bytes() == MODEL_EVALUATOR.read_bytes()
+        assert installed_sample.read_bytes() == MODEL_EVALUATOR_SAMPLE.read_bytes()
         assert installed_adapter.read_bytes() == CLAUDE_ROLE.read_bytes()
 
     stream = "\n".join(

@@ -109,11 +109,12 @@ def test_root_apm_file_and_project_client_file_pass() -> None:
     try:
         own_path = ".apm/skills/own/SKILL.md"
         project_path = ".claude/project instructions.md"
+        marker_path = ".agents/.gitkeep"
         dependency_path = ".agents/skills/dependency/SKILL.md"
-        for path in (own_path, project_path, dependency_path):
+        for path in (own_path, project_path, marker_path, dependency_path):
             write_file(project, path)
         write_lock(project, [dependency("example/dependency", dependency_path)])
-        track(project, own_path, project_path)
+        track(project, own_path, project_path, marker_path)
 
         result = run_validator(project)
         assert result.returncode == 0, result.stderr
