@@ -12,6 +12,16 @@ import tomllib
 from pathlib import Path
 
 
+INFRASTRUCTURE_MARKERS = (
+    "failed to refresh available models",
+    "timeout waiting for child process",
+    "reconnecting",
+    "connection reset",
+    "connection refused",
+    "network is unreachable",
+)
+
+
 def parse_model(value: str) -> tuple[str, str]:
     if ":" not in value:
         raise ValueError("ожидается запись адаптер:модель")
@@ -41,6 +51,14 @@ def load_config(path: Path) -> tuple[dict[str, list[str]], list[str]]:
         if not parsed[name]:
             raise ValueError(f"adapters.{name} не должен быть пустым")
     return parsed, models
+
+
+def infrastructure_reason(stderr: str, stdout: str) -> str | None:
+    """Вернуть сбой среды, который нельзя приписывать модели."""
+    output = f"{stderr}\n{stdout}".casefold()
+    if any(marker in output for marker in INFRASTRUCTURE_MARKERS):
+        return "сбой среды Codex или сети: " + (stderr.strip() or stdout.strip())
+    return None
 
 
 def main() -> int:
@@ -121,8 +139,12 @@ def main() -> int:
         if completed.returncode == 0 and completed.stdout.strip():
             results.append({"model": spec, "status": "available", "reason": "адаптер вернул непустой ответ"})
         else:
-            reason = completed.stderr.strip() or f"адаптер завершился с кодом {completed.returncode}"
-            results.append({"model": spec, "status": "unavailable", "reason": reason})
+            infrastructure = infrastructure_reason(completed.stderr, completed.stdout)
+            if infrastructure:
+                results.append({"model": spec, "status": "unverified", "reason": infrastructure})
+            else:
+                reason = completed.stderr.strip() or f"адаптер завершился с кодом {completed.returncode}"
+                results.append({"model": spec, "status": "unavailable", "reason": reason})
 
     if args.json:
         print(json.dumps({"models": results}, ensure_ascii=False))

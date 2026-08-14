@@ -43,6 +43,28 @@ def main() -> int:
         code, result = run("--adapter", f"bad={bad}", "--model", "bad:denied")
         assert code == 1 and result["models"][0]["status"] == "unavailable"
 
+        infrastructure = make_adapter(
+            directory,
+            "infrastructure",
+            "cat >/dev/null\necho 'failed to refresh available models: timeout waiting for child process to exit' >&2\nexit 9\n",
+        )
+        code, result = run("--adapter", f"infrastructure={infrastructure}", "--model", "infrastructure:unknown")
+        assert code == 1 and result["models"][0]["status"] == "unverified"
+        assert "сбой среды Codex или сети" in result["models"][0]["reason"]
+
+        serial = make_adapter(
+            directory,
+            "serial",
+            "lock=\"$0.lock\"\n[ ! -e \"$lock\" ] || exit 9\ntouch \"$lock\"\ntrap 'rm -f \"$lock\"' EXIT\ncat >/dev/null\nsleep 0.1\nprintf 'OK\\n'\n",
+        )
+        code, result = run(
+            "--adapter", f"serial={serial}",
+            "--model", "serial:first",
+            "--model", "serial:second",
+            "--model", "serial:third",
+        )
+        assert code == 0 and all(item["status"] == "available" for item in result["models"])
+
         code, result = run("--adapter", f"slow={slow}", "--timeout", "1", "--model", "slow:late")
         assert code == 1 and result["models"][0]["status"] == "unverified"
 
