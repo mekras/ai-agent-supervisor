@@ -53,6 +53,8 @@ def main() -> int:
         assert (project / "tools" / "run-collection-checks.py").is_file()
         assert (project / "tools" / "validate-skill-descriptions.py").is_file()
         assert (project / "tools" / "validate-python-artifacts.py").is_file()
+        assert (project / "tools" / "validate-python-syntax.py").is_file()
+        assert (project / "tools" / "run-apm-safe.py").is_file()
         assert (project / "tools" / "run-skill-script-contract-tests.py").is_file()
         checks = subprocess.run(
             [sys.executable, str(project / "tools" / "run-collection-checks.py")],

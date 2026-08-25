@@ -25,6 +25,7 @@ def write_project(
     local_hash_drift: bool = False,
     phantom_bytecode: bool = False,
     present_bytecode: bool = False,
+    lock_bytecode: bool = False,
     echoed_ref_mismatch: bool = False,
     actual_ref_mismatch: bool = False,
     local_addition: bool = False,
@@ -70,6 +71,14 @@ deployments:
   active_owner: example/local-package
 """
     (root / "apm.lock.yaml").write_text(lockfile, encoding="utf-8")
+    if lock_bytecode:
+        with (root / "apm.lock.yaml").open("a", encoding="utf-8") as stream:
+            stream.write(
+                "- value: .agents/skills/example/scripts/__pycache__/"
+                "adapter.cpython-313.pyc\n"
+                "  owners: [example/local-package]\n"
+                "  active_owner: example/local-package\n"
+            )
     checks = [{"name": "lockfile-exists", "passed": True}]
     if echoed_ref_mismatch or actual_ref_mismatch:
         manifest_ref = "^0.22.0"
@@ -193,6 +202,15 @@ def main() -> int:
         accepted = run(root, write_project(root, phantom_bytecode=True))
         assert accepted.returncode == 0, accepted.stdout + accepted.stderr
         assert "подтверждено файлов — 2" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        rejected = run(
+            root,
+            write_project(root, phantom_bytecode=True, lock_bytecode=True),
+        )
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+        assert "apm.lock.yaml" in rejected.stderr
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)

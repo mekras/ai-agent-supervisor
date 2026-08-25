@@ -4,10 +4,15 @@
 # Строки-комментарии начинаются с '#', пустые строки игнорируются.
 run-skill-evals.py|tools/run-skill-evals.py|644
 run-collection-checks.py|tools/run-collection-checks.py|644
+run-apm-safe.py|tools/run-apm-safe.py|644
 test-run-skill-evals.py|tools/test-run-skill-evals.py|644
 test-run-fixture-checks.py|tools/test-run-fixture-checks.py|644
+test-run-apm-safe.py|tools/test-run-apm-safe.py|644
+test-validate-python-artifacts.py|tools/test-validate-python-artifacts.py|644
+test-validate-python-syntax.py|tools/test-validate-python-syntax.py|644
 validate-hidden-unicode.py|tools/validate-hidden-unicode.py|644
 validate-python-artifacts.py|tools/validate-python-artifacts.py|644
+validate-python-syntax.py|tools/validate-python-syntax.py|644
 validate-skill-descriptions.py|tools/validate-skill-descriptions.py|644
 validate-trigger-evals.py|tools/validate-trigger-evals.py|644
 validate-skill-result-evals.py|tools/validate-skill-result-evals.py|644

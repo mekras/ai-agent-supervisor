@@ -5,6 +5,20 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/),
 проект использует [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.20] - 2026-08-25
+
+### Исправлено
+
+- Защита APM от Python-байткода теперь охватывает исходники, развёрнутые
+  проекции, оснастку и файл блокировки. Явный компилятор больше не считается
+  безопасным с `-B` или `PYTHONDONTWRITEBYTECODE=1`, а установка и аудит
+  окружены обязательными проверками чистоты.
+
+### Действия при обновлении
+
+- Переустановите оснастку `ai-setup-apm`, чтобы получить безопасный запуск APM,
+  синтаксическую проверку без байткода и расширенный валидатор lock-файла.
+
 ## [2.3.19] - 2026-08-25
 
 ### Добавлено
@@ -596,7 +610,10 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.17...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.20...HEAD
+[2.3.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.19...2.3.20
+[2.3.19]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.18...2.3.19
+[2.3.18]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.17...2.3.18
 [2.3.17]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.16...2.3.17
 [2.3.16]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.15...2.3.16
 [2.3.15]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.14...2.3.15

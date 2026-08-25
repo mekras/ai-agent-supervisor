@@ -8,6 +8,12 @@
       "rationale": "Нужно создать новый навык агента."
     },
     {
+      "id": "ai-skill-development-positive-apm-source-self-application",
+      "prompt": "Измени процедуру навыка в .apm/skills/example/SKILL.md, проверь его Python-скрипты и переустанови локальную коллекцию APM.",
+      "should_trigger": true,
+      "rationale": "Изменение исходника навыка требует ai-skill-development, а путь .apm и последующее самоприменение одновременно требуют ai-setup-apm."
+    },
+    {
       "id": "ai-skill-development-positive-update-description",
       "prompt": "Улучши SKILL.md: description слишком широкий и навык срабатывает не по делу.",
       "should_trigger": true,

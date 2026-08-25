@@ -58,6 +58,12 @@
 принимает только подтверждённое локальное переопределение исходника `.apm` над
 той же транзитивной версией пакета.
 
+После изменения `.apm/skills/**` не запускай прямой `apm install`. Используй
+`python3 tools/run-apm-safe.py --audit-runner tools/apm-audit-ci`. Команда
+проверяет исходники, проекции и `apm.lock.yaml` до установки и после неё. Не
+запускай `py_compile` или `compileall` над `.apm`, `.agents`, `.claude`,
+`.codex` и `tools`, даже с ключом `-B` или `PYTHONDONTWRITEBYTECODE=1`.
+
 ## Концепция проекта
 
 Концепция проекта описана в [README.md](README.md). Перед предметной работой

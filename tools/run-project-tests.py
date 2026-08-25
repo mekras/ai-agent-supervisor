@@ -11,6 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = [
+    "tools/validate-python-artifacts.py",
+    "tools/validate-python-syntax.py",
     ".apm/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py",
     "tools/test-apm-audit-ci.py",
     "tools/test-check-subagent-models.py",
@@ -22,7 +24,9 @@ SCRIPTS = [
     "tools/test-run-fixture-checks.py",
     "tools/test-setup-apm-collection.py",
     "tools/test-run-skill-script-contract-tests.py",
+    "tools/test-run-apm-safe.py",
     "tools/test-validate-python-artifacts.py",
+    "tools/test-validate-python-syntax.py",
     "tools/test-skill-portability.py",
     "tools/test-validate-apm-git-boundary.py",
     "tools/test-product-isolation.py",

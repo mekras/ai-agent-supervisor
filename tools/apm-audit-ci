@@ -211,6 +211,42 @@ def is_phantom_bytecode(
     )
 
 
+def has_phantom_bytecode_finding(report: dict[str, Any]) -> bool:
+    drift = report.get("drift", {}).get("drift")
+    if not isinstance(drift, list):
+        return False
+    return any(
+        isinstance(finding, dict)
+        and finding.get("kind") == "unintegrated"
+        and finding.get("package") == ""
+        and isinstance((path := finding.get("path")), str)
+        and "__pycache__" in Path(path).parts
+        and path.endswith(".pyc")
+        for finding in drift
+    )
+
+
+def python_artifacts_clean(project_root: Path, lockfile_path: Path) -> bool:
+    validator = Path(__file__).with_name("validate-python-artifacts.py")
+    if not validator.is_file():
+        print(f"Не найден обязательный валидатор: {validator}", file=sys.stderr)
+        return False
+    result = subprocess.run(
+        [sys.executable, str(validator), "--lock-file", str(lockfile_path)],
+        cwd=project_root,
+        env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        sys.stdout.write(result.stdout)
+        sys.stderr.write(result.stderr)
+        return False
+    return True
+
+
 def only_accepted_drift(report: dict[str, Any], project_root: Path, lockfile_path: Path) -> int:
     checks = report.get("checks")
     drift = report.get("drift", {}).get("drift")
@@ -323,6 +359,13 @@ def main() -> int:
         report = json.loads(result.stdout)
     except json.JSONDecodeError:
         report = {}
+    if has_phantom_bytecode_finding(report) and not python_artifacts_clean(
+        project_root,
+        lockfile_path,
+    ):
+        sys.stdout.write(result.stdout)
+        sys.stderr.write(result.stderr)
+        return result.returncode or 1
     accepted = only_accepted_drift(report, project_root, lockfile_path)
     if accepted:
         sys.stderr.write(result.stderr)
