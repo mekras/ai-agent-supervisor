@@ -16,6 +16,21 @@ ANALYZER = ROOT / ".apm/skills/ai-setup-subagents/scripts/analyze-subagent-sessi
 ROLE_RUNNER = ROOT / ".apm/skills/ai-setup-subagents/scripts/run-subagent-role"
 
 
+def run_role(
+    role_config: Path, output: Path, obligation: str | None = None
+) -> subprocess.CompletedProcess[str]:
+    arguments = [str(ROLE_RUNNER), "reviewer", "--config", str(role_config), "--out", str(output)]
+    if obligation is not None:
+        arguments.extend(["--obligation", obligation])
+    return subprocess.run(
+        arguments,
+        input="no prompt is retained",
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+
 def make_adapter(directory: Path, name: str, body: str) -> Path:
     path = directory / name
     path.write_text("#!/usr/bin/env sh\n" + body, encoding="utf-8")
@@ -102,8 +117,37 @@ def main() -> int:
         role_adapter = make_adapter(directory, "role", "cat >/dev/null\nprintf '{\"model\":\"wrong\"}\\n'\n")
         role_config = directory / "roles.toml"
         role_config.write_text("[roles.reviewer]\nmodel = 'exact'\neffort = 'low'\nsandbox = 'read-only'\nadapter = '" + str(role_adapter) + "'\ncontract = { writes = false }\n", encoding="utf-8")
-        failed_role = subprocess.run([str(ROLE_RUNNER), "reviewer", "--config", str(role_config), "--out", str(directory / "runs")], input="no prompt is retained", text=True, capture_output=True, check=False)
+        failed_role = run_role(role_config, directory / "runs", "legal-review")
         assert failed_role.returncode != 0
+        failed_record = json.loads(failed_role.stderr)
+        assert failed_record["obligation_id"] == "legal-review"
+        assert failed_record["run_id"]
+        assert failed_record["result_available"]
+        assert not failed_record["model_matches"]
+
+        matching_role_adapter = make_adapter(
+            directory, "matching-role", "cat >/dev/null\nprintf '{\"model\":\"exact\"}\\n'\n"
+        )
+        role_config.write_text(
+            "[roles.reviewer]\n"
+            "model = 'exact'\n"
+            "effort = 'low'\n"
+            "sandbox = 'read-only'\n"
+            f"adapter = '{matching_role_adapter}'\n"
+            "contract = { writes = false }\n",
+            encoding="utf-8",
+        )
+        successful_role = run_role(role_config, directory / "successful-runs", "legal-review")
+        assert successful_role.returncode == 0, successful_role.stderr
+        successful_record = json.loads(successful_role.stdout)
+        assert successful_record["obligation_id"] == "legal-review"
+        for key in ("run_id", "assigned_model", "actual_model", "journal", "result_path", "returncode"):
+            assert key in successful_record
+        assert successful_record["result_available"]
+
+        legacy_role = run_role(role_config, directory / "legacy-runs")
+        assert legacy_role.returncode == 0, legacy_role.stderr
+        assert "obligation_id" not in json.loads(legacy_role.stdout)
     print("Проверка моделей подагентов пройдена.")
     return 0
 

@@ -70,20 +70,25 @@ def write_config(directory: Path, adapter: Path, prefix: str = "") -> Path:
     return config
 
 
-def run(config: Path, out: Path, input_file: Path) -> subprocess.CompletedProcess[str]:
+def run(
+    config: Path, out: Path, input_file: Path, obligation: str | None = None
+) -> subprocess.CompletedProcess[str]:
+    arguments = [
+        str(RUNNER),
+        "cheap_readonly_research",
+        "--target",
+        "claude",
+        "--config",
+        str(config),
+        "--out",
+        str(out),
+        "--input",
+        str(input_file),
+    ]
+    if obligation is not None:
+        arguments.extend(["--obligation", obligation])
     return subprocess.run(
-        [
-            str(RUNNER),
-            "cheap_readonly_research",
-            "--target",
-            "claude",
-            "--config",
-            str(config),
-            "--out",
-            str(out),
-            "--input",
-            str(input_file),
-        ],
+        arguments,
         input="Найди один факт.",
         text=True,
         capture_output=True,
@@ -99,20 +104,33 @@ def main() -> int:
 
         matching = write_fixture(directory, "claude-haiku-4-5")
         config = write_config(directory, matching, "claude-haiku-")
-        success = run(config, directory / "success", input_file)
+        success = run(config, directory / "success", input_file, "security-review")
         assert success.returncode == 0, success.stderr
         record = json.loads(success.stdout)
         assert record["assigned_model"] == "haiku"
         assert record["actual_model"] == "claude-haiku-4-5"
         assert record["model_matches"]
+        assert record["obligation_id"] == "security-review"
+        assert record["run_id"]
+        assert record["result_available"]
+        assert record["returncode"] == 0
+        assert record["result_path"] == record["final"]
         for key in ("final", "stderr", "journal"):
             assert Path(record[key]).is_file()
 
         mismatched = write_fixture(directory, "claude-opus-4-8")
         failed_config = write_config(directory, mismatched, "claude-haiku-")
-        failed = run(failed_config, directory / "failed", input_file)
+        failed = run(failed_config, directory / "failed", input_file, "security-review")
         assert failed.returncode == 1
-        assert not json.loads(failed.stderr)["model_matches"]
+        failed_record = json.loads(failed.stderr)
+        assert failed_record["obligation_id"] == "security-review"
+        assert not failed_record["model_matches"]
+
+        matching = write_fixture(directory, "claude-haiku-4-5")
+        config = write_config(directory, matching, "claude-haiku-")
+        legacy = run(config, directory / "legacy", input_file)
+        assert legacy.returncode == 0, legacy.stderr
+        assert "obligation_id" not in json.loads(legacy.stdout)
 
         installed_root = directory / "installed-project"
         installed = subprocess.run(
@@ -128,6 +146,9 @@ def main() -> int:
         installed_sample = installed_root / "tools/model-selection-input.sample.json"
         installed_adapter = installed_root / "tools/adapters/claude-role"
         assert installed_runner.read_bytes() == RUNNER.read_bytes()
+        assert (installed_root / "tools/run-subagent-role").read_bytes() == (
+            ROOT / ".apm/skills/ai-setup-subagents/scripts/run-subagent-role"
+        ).read_bytes()
         assert installed_evaluator.read_bytes() == MODEL_EVALUATOR.read_bytes()
         assert installed_sample.read_bytes() == MODEL_EVALUATOR_SAMPLE.read_bytes()
         assert installed_adapter.read_bytes() == CLAUDE_ROLE.read_bytes()
