@@ -5,6 +5,13 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/),
 проект использует [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.21] - 2026-08-26
+
+### Изменено
+
+- Для разработки коллекции зависимость `mekras/ai-dev-team` обновлена с версии
+  0.22.x до 0.26.x.
+
 ## [2.3.20] - 2026-08-25
 
 ### Исправлено
@@ -610,7 +617,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.20...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.21...HEAD
+[2.3.21]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.20...2.3.21
 [2.3.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.19...2.3.20
 [2.3.19]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.18...2.3.19
 [2.3.18]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.17...2.3.18

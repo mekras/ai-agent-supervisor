@@ -1,5 +1,5 @@
 lockfile_version: '2'
-generated_at: '2026-08-26T08:46:17.244582+00:00'
+generated_at: '2026-08-26T13:56:24.869608+00:00'
 apm_version: 0.28.0
 dependencies:
 - repo_url: mekras/ai-dev-team
@@ -1174,8 +1174,8 @@ dependencies:
 - repo_url: mekras/ai-agent-supervisor
   name: ai-agent-supervisor
   host: github.com
-  resolved_commit: de4899d6d8c2fc8f3039f5756145ac8ccedf115e
-  resolved_ref: 2.3.20
+  resolved_commit: ae8097712a18d258de4663e1100f43e3dd6abb68
+  resolved_ref: ^2.3.20
   version: 2.3.20
   depth: 2
   resolved_by: mekras/ai-dev-team
@@ -1722,9 +1722,6 @@ dependencies:
     .claude/skills/ai-work-result-evaluation/references/work-result-evaluation.md: sha256:80e7a25161b08f657a335bd83f66e7d17ed7250fb49a5f3b83bfa86a99387fd5
   content_hash: sha256:7eb3d2bf65ec8dd3fa37c68cf3b64bd4dd8575e309b3db9fddb8a2b417785dd4
   is_dev: true
-  constraint: ^2.3.20
-  resolved_tag: 2.3.20
-  resolved_at: '2026-08-26T08:46:11+00:00'
   declared_license: MIT
 - repo_url: mekras/ai-russian-language
   name: ai-russian-language
