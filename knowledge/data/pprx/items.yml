@@ -1,6 +1,7 @@
 items:
   - id: PPRX--designing-refining-maintaining-agent-skills
     source_id: PPRX
+    path: pages/designing-refining-maintaining-agent-skills
     title: "designing refining maintaining agent skills"
     url: "https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity"
     locator: "https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity"

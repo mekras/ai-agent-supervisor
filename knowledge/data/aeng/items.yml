@@ -1,6 +1,7 @@
 items:
   - id: AENG--building-effective-agents
     source_id: AENG
+    path: pages/building-effective-agents
     title: "building effective agents"
     url: "https://www.anthropic.com/engineering/building-effective-agents"
     locator: "https://www.anthropic.com/engineering/building-effective-agents"
@@ -9,6 +10,7 @@ items:
     workflow_stage: indexed
   - id: AENG--multi-agent-research-system
     source_id: AENG
+    path: pages/multi-agent-research-system
     title: "multi agent research system"
     url: "https://www.anthropic.com/engineering/multi-agent-research-system"
     locator: "https://www.anthropic.com/engineering/multi-agent-research-system"
@@ -17,6 +19,7 @@ items:
     workflow_stage: indexed
   - id: AENG--effective-context-engineering-for-ai-agents
     source_id: AENG
+    path: pages/effective-context-engineering-for-ai-agents
     title: "effective context engineering for ai agents"
     url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
     locator: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
@@ -25,6 +28,7 @@ items:
     workflow_stage: indexed
   - id: AENG--demystifying-evals-for-ai-agents
     source_id: AENG
+    path: pages/demystifying-evals-for-ai-agents
     title: "demystifying evals for ai agents"
     url: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
     locator: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"

@@ -1,0 +1,45 @@
+operations_version: 1
+
+# Отчёт и состояние прохода являются локальными рабочими данными, а не частью
+# публикуемого корпуса.
+report:
+  path: .local/reports/corpus-operations.md
+run_state:
+  path: .local/state/corpus-pipeline.json
+human_attention:
+  max_active_groups: 20
+normalized_artifacts:
+  - normalized.md
+  - message.md
+  - stenogram.txt
+
+# Содержательные очереди — content_selection, normalize, statements,
+# semantic_review, strong_review, corroboration, concepts, impact_audit и
+# apply_changes — выполняет агент через соответствующие kc-навыки. Для них нет
+# безопасной универсальной команды: она не должна подменять смысловой разбор.
+# Очереди fetch, transcribe и traceability сейчас пусты. В source_check остаются
+# ранее извлечённые материалы: агент сверяет их с карточками источников и
+# локальными артефактами по мере предметной работы. Для любой непустой очереди
+# исполнитель выбирается по карточке источника и ограничениям доступа, а не по
+# фиктивному адаптеру.
+stages:
+  corpus_validation:
+    commands:
+      - id: validate-corpus-layout
+        argv:
+          - python3
+          - .agents/skills/kc-inventory/scripts/validate-corpus-layout.py
+          - knowledge
+          - --strict-statements
+          - --strict-concepts
+        working_directory: .
+        write_paths: [knowledge]
+        required: true
+
+# Все текущие источники используют адаптер manual. Реестр намеренно пуст: новый
+# адаптер требует отдельной проверки доступа, происхождения и границы записи.
+adapters: {}
+
+# Производные индексы пересобираются через
+# ``python3 tools/rebuild-corpus-indexes.py``. Мост приводит базовый каталог
+# путей к договору корпуса, не изменяя установленные APM-зависимости.

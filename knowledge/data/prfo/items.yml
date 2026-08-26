@@ -1,6 +1,7 @@
 items:
   - id: PRFO--intro
     source_id: PRFO
+    path: pages/intro
     title: "intro"
     url: "https://www.promptfoo.dev/docs/intro/"
     locator: "https://www.promptfoo.dev/docs/intro/"

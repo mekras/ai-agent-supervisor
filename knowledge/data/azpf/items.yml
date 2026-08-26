@@ -1,6 +1,7 @@
 items:
   - id: AZPF--evaluation-flow
     source_id: AZPF
+    path: pages/evaluation-flow
     title: "evaluation flow"
     url: "https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/how-to-develop-an-evaluation-flow"
     locator: "https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/how-to-develop-an-evaluation-flow"

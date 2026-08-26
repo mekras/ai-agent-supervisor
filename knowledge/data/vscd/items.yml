@@ -1,6 +1,7 @@
 items:
   - id: VSCD--custom-instructions
     source_id: VSCD
+    path: pages/custom-instructions
     title: "custom instructions"
     url: "https://code.visualstudio.com/docs/agent-customization/custom-instructions"
     locator: "https://code.visualstudio.com/docs/agent-customization/custom-instructions"

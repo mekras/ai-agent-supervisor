@@ -1,6 +1,7 @@
 items:
   - id: GIST--7c8f65572930a21efa62623557d83f6e
     source_id: GIST
+    path: pages/7c8f65572930a21efa62623557d83f6e
     title: "7c8f65572930a21efa62623557d83f6e"
     url: "https://gist.github.com/0xfauzi/7c8f65572930a21efa62623557d83f6e"
     locator: "https://gist.github.com/0xfauzi/7c8f65572930a21efa62623557d83f6e"

@@ -1,6 +1,7 @@
 items:
   - id: CODX--agent-approvals-security
     source_id: CODX
+    path: pages/agent-approvals-security
     title: "agent approvals security"
     url: "https://developers.openai.com/codex/agent-approvals-security"
     locator: "https://developers.openai.com/codex/agent-approvals-security"
@@ -9,6 +10,7 @@ items:
     workflow_stage: indexed
   - id: CODX--agents-md
     source_id: CODX
+    path: pages/agents-md
     title: "agents md"
     url: "https://developers.openai.com/codex/guides/agents-md"
     locator: "https://developers.openai.com/codex/guides/agents-md"
@@ -17,6 +19,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app
     source_id: CODX
+    path: pages/app
     title: "app"
     url: "https://developers.openai.com/codex/app"
     locator: "https://developers.openai.com/codex/app"
@@ -25,6 +28,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app-server
     source_id: CODX
+    path: pages/app-server
     title: "app server"
     url: "https://developers.openai.com/codex/app-server"
     locator: "https://developers.openai.com/codex/app-server"
@@ -33,6 +37,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app/automations
     source_id: CODX
+    path: pages/app/automations
     title: "app / automations"
     url: "https://developers.openai.com/codex/app/automations"
     locator: "https://developers.openai.com/codex/app/automations"
@@ -41,6 +46,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app/commands
     source_id: CODX
+    path: pages/app/commands
     title: "app / commands"
     url: "https://developers.openai.com/codex/app/commands"
     locator: "https://developers.openai.com/codex/app/commands"
@@ -49,6 +55,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app/features
     source_id: CODX
+    path: pages/app/features
     title: "app / features"
     url: "https://developers.openai.com/codex/app/features"
     locator: "https://developers.openai.com/codex/app/features"
@@ -57,6 +64,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app/local-environments
     source_id: CODX
+    path: pages/app/local-environments
     title: "app / local environments"
     url: "https://developers.openai.com/codex/app/local-environments"
     locator: "https://developers.openai.com/codex/app/local-environments"
@@ -65,6 +73,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app/settings
     source_id: CODX
+    path: pages/app/settings
     title: "app / settings"
     url: "https://developers.openai.com/codex/app/settings"
     locator: "https://developers.openai.com/codex/app/settings"
@@ -73,6 +82,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app/troubleshooting
     source_id: CODX
+    path: pages/app/troubleshooting
     title: "app / troubleshooting"
     url: "https://developers.openai.com/codex/app/troubleshooting"
     locator: "https://developers.openai.com/codex/app/troubleshooting"
@@ -81,6 +91,7 @@ items:
     workflow_stage: indexed
   - id: CODX--app/worktrees
     source_id: CODX
+    path: pages/app/worktrees
     title: "app / worktrees"
     url: "https://developers.openai.com/codex/app/worktrees"
     locator: "https://developers.openai.com/codex/app/worktrees"
@@ -89,6 +100,7 @@ items:
     workflow_stage: indexed
   - id: CODX--changelog
     source_id: CODX
+    path: pages/changelog
     title: "changelog"
     url: "https://developers.openai.com/codex/changelog"
     locator: "https://developers.openai.com/codex/changelog"
@@ -97,6 +109,7 @@ items:
     workflow_stage: indexed
   - id: CODX--cli
     source_id: CODX
+    path: pages/cli
     title: "cli"
     url: "https://developers.openai.com/codex/cli"
     locator: "https://developers.openai.com/codex/cli"
@@ -105,6 +118,7 @@ items:
     workflow_stage: indexed
   - id: CODX--cli/features
     source_id: CODX
+    path: pages/cli/features
     title: "cli / features"
     url: "https://developers.openai.com/codex/cli/features"
     locator: "https://developers.openai.com/codex/cli/features"
@@ -113,6 +127,7 @@ items:
     workflow_stage: indexed
   - id: CODX--cli/reference
     source_id: CODX
+    path: pages/cli/reference
     title: "cli / reference"
     url: "https://developers.openai.com/codex/cli/reference"
     locator: "https://developers.openai.com/codex/cli/reference"
@@ -121,6 +136,7 @@ items:
     workflow_stage: indexed
   - id: CODX--cli/slash-commands
     source_id: CODX
+    path: pages/cli/slash-commands
     title: "cli / slash commands"
     url: "https://developers.openai.com/codex/cli/slash-commands"
     locator: "https://developers.openai.com/codex/cli/slash-commands"
@@ -129,6 +145,7 @@ items:
     workflow_stage: indexed
   - id: CODX--cloud
     source_id: CODX
+    path: pages/cloud
     title: "cloud"
     url: "https://developers.openai.com/codex/cloud"
     locator: "https://developers.openai.com/codex/cloud"
@@ -137,6 +154,7 @@ items:
     workflow_stage: indexed
   - id: CODX--cloud/environments
     source_id: CODX
+    path: pages/cloud/environments
     title: "cloud / environments"
     url: "https://developers.openai.com/codex/cloud/environments"
     locator: "https://developers.openai.com/codex/cloud/environments"
@@ -145,6 +163,7 @@ items:
     workflow_stage: indexed
   - id: CODX--cloud/internet-access
     source_id: CODX
+    path: pages/cloud/internet-access
     title: "cloud / internet access"
     url: "https://developers.openai.com/codex/cloud/internet-access"
     locator: "https://developers.openai.com/codex/cloud/internet-access"
@@ -153,6 +172,7 @@ items:
     workflow_stage: indexed
   - id: CODX--concepts/customization
     source_id: CODX
+    path: pages/concepts/customization
     title: "concepts / customization"
     url: "https://developers.openai.com/codex/concepts/customization"
     locator: "https://developers.openai.com/codex/concepts/customization"
@@ -161,6 +181,7 @@ items:
     workflow_stage: indexed
   - id: CODX--concepts/sandboxing
     source_id: CODX
+    path: pages/concepts/sandboxing
     title: "concepts / sandboxing"
     url: "https://developers.openai.com/codex/concepts/sandboxing"
     locator: "https://developers.openai.com/codex/concepts/sandboxing"
@@ -169,6 +190,7 @@ items:
     workflow_stage: indexed
   - id: CODX--concepts/subagents
     source_id: CODX
+    path: pages/concepts/subagents
     title: "concepts / subagents"
     url: "https://developers.openai.com/codex/concepts/subagents"
     locator: "https://developers.openai.com/codex/concepts/subagents"
@@ -177,6 +199,7 @@ items:
     workflow_stage: indexed
   - id: CODX--config-advanced
     source_id: CODX
+    path: pages/config-advanced
     title: "config advanced"
     url: "https://developers.openai.com/codex/config-advanced"
     locator: "https://developers.openai.com/codex/config-advanced"
@@ -185,6 +208,7 @@ items:
     workflow_stage: indexed
   - id: CODX--config-basic
     source_id: CODX
+    path: pages/config-basic
     title: "config basic"
     url: "https://developers.openai.com/codex/config-basic"
     locator: "https://developers.openai.com/codex/config-basic"
@@ -193,6 +217,7 @@ items:
     workflow_stage: indexed
   - id: CODX--config-reference
     source_id: CODX
+    path: pages/config-reference
     title: "config reference"
     url: "https://developers.openai.com/codex/config-reference"
     locator: "https://developers.openai.com/codex/config-reference"
@@ -201,6 +226,7 @@ items:
     workflow_stage: indexed
   - id: CODX--config-sample
     source_id: CODX
+    path: pages/config-sample
     title: "config sample"
     url: "https://developers.openai.com/codex/config-sample"
     locator: "https://developers.openai.com/codex/config-sample"
@@ -209,6 +235,7 @@ items:
     workflow_stage: indexed
   - id: CODX--enterprise/access-tokens
     source_id: CODX
+    path: pages/enterprise/access-tokens
     title: "enterprise / access tokens"
     url: "https://developers.openai.com/codex/enterprise/access-tokens"
     locator: "https://developers.openai.com/codex/enterprise/access-tokens"
@@ -217,6 +244,7 @@ items:
     workflow_stage: indexed
   - id: CODX--enterprise/admin-setup
     source_id: CODX
+    path: pages/enterprise/admin-setup
     title: "enterprise / admin setup"
     url: "https://developers.openai.com/codex/enterprise/admin-setup"
     locator: "https://developers.openai.com/codex/enterprise/admin-setup"
@@ -225,6 +253,7 @@ items:
     workflow_stage: indexed
   - id: CODX--enterprise/governance
     source_id: CODX
+    path: pages/enterprise/governance
     title: "enterprise / governance"
     url: "https://developers.openai.com/codex/enterprise/governance"
     locator: "https://developers.openai.com/codex/enterprise/governance"
@@ -233,6 +262,7 @@ items:
     workflow_stage: indexed
   - id: CODX--enterprise/managed-configuration
     source_id: CODX
+    path: pages/enterprise/managed-configuration
     title: "enterprise / managed configuration"
     url: "https://developers.openai.com/codex/enterprise/managed-configuration"
     locator: "https://developers.openai.com/codex/enterprise/managed-configuration"
@@ -241,6 +271,7 @@ items:
     workflow_stage: indexed
   - id: CODX--environment-variables
     source_id: CODX
+    path: pages/environment-variables
     title: "environment variables"
     url: "https://developers.openai.com/codex/environment-variables"
     locator: "https://developers.openai.com/codex/environment-variables"
@@ -249,6 +280,7 @@ items:
     workflow_stage: indexed
   - id: CODX--github-action
     source_id: CODX
+    path: pages/github-action
     title: "github action"
     url: "https://developers.openai.com/codex/github-action"
     locator: "https://developers.openai.com/codex/github-action"
@@ -257,6 +289,7 @@ items:
     workflow_stage: indexed
   - id: CODX--guides/agents-md
     source_id: CODX
+    path: pages/guides/agents-md
     title: "guides / agents md"
     url: "https://developers.openai.com/codex/guides/agents-md"
     locator: "https://developers.openai.com/codex/guides/agents-md"
@@ -265,6 +298,7 @@ items:
     workflow_stage: indexed
   - id: CODX--hooks
     source_id: CODX
+    path: pages/hooks
     title: "hooks"
     url: "https://developers.openai.com/codex/hooks"
     locator: "https://developers.openai.com/codex/hooks"
@@ -273,6 +307,7 @@ items:
     workflow_stage: indexed
   - id: CODX--ide
     source_id: CODX
+    path: pages/ide
     title: "ide"
     url: "https://developers.openai.com/codex/ide"
     locator: "https://developers.openai.com/codex/ide"
@@ -281,6 +316,7 @@ items:
     workflow_stage: indexed
   - id: CODX--ide/commands
     source_id: CODX
+    path: pages/ide/commands
     title: "ide / commands"
     url: "https://developers.openai.com/codex/ide/commands"
     locator: "https://developers.openai.com/codex/ide/commands"
@@ -289,6 +325,7 @@ items:
     workflow_stage: indexed
   - id: CODX--ide/features
     source_id: CODX
+    path: pages/ide/features
     title: "ide / features"
     url: "https://developers.openai.com/codex/ide/features"
     locator: "https://developers.openai.com/codex/ide/features"
@@ -297,6 +334,7 @@ items:
     workflow_stage: indexed
   - id: CODX--ide/settings
     source_id: CODX
+    path: pages/ide/settings
     title: "ide / settings"
     url: "https://developers.openai.com/codex/ide/settings"
     locator: "https://developers.openai.com/codex/ide/settings"
@@ -305,6 +343,7 @@ items:
     workflow_stage: indexed
   - id: CODX--ide/slash-commands
     source_id: CODX
+    path: pages/ide/slash-commands
     title: "ide / slash commands"
     url: "https://developers.openai.com/codex/ide/slash-commands"
     locator: "https://developers.openai.com/codex/ide/slash-commands"
@@ -313,6 +352,7 @@ items:
     workflow_stage: indexed
   - id: CODX--integrations/github
     source_id: CODX
+    path: pages/integrations/github
     title: "integrations / github"
     url: "https://developers.openai.com/codex/integrations/github"
     locator: "https://developers.openai.com/codex/integrations/github"
@@ -321,6 +361,7 @@ items:
     workflow_stage: indexed
   - id: CODX--integrations/linear
     source_id: CODX
+    path: pages/integrations/linear
     title: "integrations / linear"
     url: "https://developers.openai.com/codex/integrations/linear"
     locator: "https://developers.openai.com/codex/integrations/linear"
@@ -329,6 +370,7 @@ items:
     workflow_stage: indexed
   - id: CODX--integrations/slack
     source_id: CODX
+    path: pages/integrations/slack
     title: "integrations / slack"
     url: "https://developers.openai.com/codex/integrations/slack"
     locator: "https://developers.openai.com/codex/integrations/slack"
@@ -337,6 +379,7 @@ items:
     workflow_stage: indexed
   - id: CODX--learn/best-practices
     source_id: CODX
+    path: pages/learn/best-practices
     title: "learn / best practices"
     url: "https://developers.openai.com/codex/learn/best-practices"
     locator: "https://developers.openai.com/codex/learn/best-practices"
@@ -345,6 +388,7 @@ items:
     workflow_stage: indexed
   - id: CODX--mcp
     source_id: CODX
+    path: pages/mcp
     title: "mcp"
     url: "https://developers.openai.com/codex/mcp"
     locator: "https://developers.openai.com/codex/mcp"
@@ -353,6 +397,7 @@ items:
     workflow_stage: indexed
   - id: CODX--memories
     source_id: CODX
+    path: pages/memories
     title: "memories"
     url: "https://developers.openai.com/codex/memories"
     locator: "https://developers.openai.com/codex/memories"
@@ -361,6 +406,7 @@ items:
     workflow_stage: indexed
   - id: CODX--memories/chronicle
     source_id: CODX
+    path: pages/memories/chronicle
     title: "memories / chronicle"
     url: "https://developers.openai.com/codex/memories/chronicle"
     locator: "https://developers.openai.com/codex/memories/chronicle"
@@ -369,6 +415,7 @@ items:
     workflow_stage: indexed
   - id: CODX--migrate
     source_id: CODX
+    path: pages/migrate
     title: "migrate"
     url: "https://developers.openai.com/codex/migrate"
     locator: "https://developers.openai.com/codex/migrate"
@@ -377,6 +424,7 @@ items:
     workflow_stage: indexed
   - id: CODX--models
     source_id: CODX
+    path: pages/models
     title: "models"
     url: "https://developers.openai.com/codex/models"
     locator: "https://developers.openai.com/codex/models"
@@ -385,6 +433,7 @@ items:
     workflow_stage: indexed
   - id: CODX--noninteractive
     source_id: CODX
+    path: pages/noninteractive
     title: "noninteractive"
     url: "https://developers.openai.com/codex/noninteractive"
     locator: "https://developers.openai.com/codex/noninteractive"
@@ -393,6 +442,7 @@ items:
     workflow_stage: indexed
   - id: CODX--permissions
     source_id: CODX
+    path: pages/permissions
     title: "permissions"
     url: "https://developers.openai.com/codex/permissions"
     locator: "https://developers.openai.com/codex/permissions"
@@ -401,6 +451,7 @@ items:
     workflow_stage: indexed
   - id: CODX--plugins
     source_id: CODX
+    path: pages/plugins
     title: "plugins"
     url: "https://developers.openai.com/codex/plugins"
     locator: "https://developers.openai.com/codex/plugins"
@@ -409,6 +460,7 @@ items:
     workflow_stage: indexed
   - id: CODX--plugins/build
     source_id: CODX
+    path: pages/plugins/build
     title: "plugins / build"
     url: "https://developers.openai.com/codex/plugins/build"
     locator: "https://developers.openai.com/codex/plugins/build"
@@ -417,6 +469,7 @@ items:
     workflow_stage: indexed
   - id: CODX--prompting
     source_id: CODX
+    path: pages/prompting
     title: "prompting"
     url: "https://developers.openai.com/codex/prompting"
     locator: "https://developers.openai.com/codex/prompting"
@@ -425,6 +478,7 @@ items:
     workflow_stage: indexed
   - id: CODX--quickstart
     source_id: CODX
+    path: pages/quickstart
     title: "quickstart"
     url: "https://developers.openai.com/codex/quickstart"
     locator: "https://developers.openai.com/codex/quickstart"
@@ -433,6 +487,7 @@ items:
     workflow_stage: indexed
   - id: CODX--remote-connections
     source_id: CODX
+    path: pages/remote-connections
     title: "remote connections"
     url: "https://developers.openai.com/codex/remote-connections"
     locator: "https://developers.openai.com/codex/remote-connections"
@@ -441,6 +496,7 @@ items:
     workflow_stage: indexed
   - id: CODX--rules
     source_id: CODX
+    path: pages/rules
     title: "rules"
     url: "https://developers.openai.com/codex/rules"
     locator: "https://developers.openai.com/codex/rules"
@@ -449,6 +505,7 @@ items:
     workflow_stage: indexed
   - id: CODX--sdk
     source_id: CODX
+    path: pages/sdk
     title: "sdk"
     url: "https://developers.openai.com/codex/sdk"
     locator: "https://developers.openai.com/codex/sdk"
@@ -457,6 +514,7 @@ items:
     workflow_stage: indexed
   - id: CODX--security
     source_id: CODX
+    path: pages/security
     title: "security"
     url: "https://developers.openai.com/codex/security"
     locator: "https://developers.openai.com/codex/security"
@@ -465,6 +523,7 @@ items:
     workflow_stage: indexed
   - id: CODX--security/faq
     source_id: CODX
+    path: pages/security/faq
     title: "security / faq"
     url: "https://developers.openai.com/codex/security/faq"
     locator: "https://developers.openai.com/codex/security/faq"
@@ -473,6 +532,7 @@ items:
     workflow_stage: indexed
   - id: CODX--security/plugin
     source_id: CODX
+    path: pages/security/plugin
     title: "security / plugin"
     url: "https://developers.openai.com/codex/security/plugin"
     locator: "https://developers.openai.com/codex/security/plugin"
@@ -481,6 +541,7 @@ items:
     workflow_stage: indexed
   - id: CODX--security/setup
     source_id: CODX
+    path: pages/security/setup
     title: "security / setup"
     url: "https://developers.openai.com/codex/security/setup"
     locator: "https://developers.openai.com/codex/security/setup"
@@ -489,6 +550,7 @@ items:
     workflow_stage: indexed
   - id: CODX--security/threat-model
     source_id: CODX
+    path: pages/security/threat-model
     title: "security / threat model"
     url: "https://developers.openai.com/codex/security/threat-model"
     locator: "https://developers.openai.com/codex/security/threat-model"
@@ -497,6 +559,7 @@ items:
     workflow_stage: indexed
   - id: CODX--sites
     source_id: CODX
+    path: pages/sites
     title: "sites"
     url: "https://developers.openai.com/codex/sites"
     locator: "https://developers.openai.com/codex/sites"
@@ -505,6 +568,7 @@ items:
     workflow_stage: indexed
   - id: CODX--skills
     source_id: CODX
+    path: pages/skills
     title: "skills"
     url: "https://developers.openai.com/codex/skills"
     locator: "https://developers.openai.com/codex/skills"
@@ -513,6 +577,7 @@ items:
     workflow_stage: indexed
   - id: CODX--speed
     source_id: CODX
+    path: pages/speed
     title: "speed"
     url: "https://developers.openai.com/codex/speed"
     locator: "https://developers.openai.com/codex/speed"
@@ -521,6 +586,7 @@ items:
     workflow_stage: indexed
   - id: CODX--subagents
     source_id: CODX
+    path: pages/subagents
     title: "subagents"
     url: "https://developers.openai.com/codex/subagents"
     locator: "https://developers.openai.com/codex/subagents"
@@ -529,6 +595,7 @@ items:
     workflow_stage: indexed
   - id: CODX--web
     source_id: CODX
+    path: pages/web
     title: "web"
     url: "https://developers.openai.com/codex/web"
     locator: "https://developers.openai.com/codex/web"
@@ -537,6 +604,7 @@ items:
     workflow_stage: indexed
   - id: CODX--workflows
     source_id: CODX
+    path: pages/workflows
     title: "workflows"
     url: "https://developers.openai.com/codex/workflows"
     locator: "https://developers.openai.com/codex/workflows"

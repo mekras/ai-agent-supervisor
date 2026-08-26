@@ -1,6 +1,7 @@
 items:
   - id: ASES--standard
     source_id: ASES
+    path: pages/standard
     title: "standard"
     url: "https://ukgovernmentbeis.github.io/as-evaluation-standard/"
     locator: "https://ukgovernmentbeis.github.io/as-evaluation-standard/"

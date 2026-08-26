@@ -1,7 +1,7 @@
 product: mekras/ai-dev-team
-updated_at: 2026-07-30
+applied_version: 0.26.7
+updated_at: 2026-08-26
 setup:
-  applied_version: 0.22.0
   visibility: public
   operating_context:
     kind: noncommercial
@@ -30,8 +30,8 @@ setup:
     migration_completed_at: 2026-07-10
   impact_graph:
     status: present
-    path: project-impact.json
-    schema_version: 1
+    path: .ai-dev-team/project-impact.json
+    schema_version: 2
   decision_records:
     status: present
     scope: project_decisions

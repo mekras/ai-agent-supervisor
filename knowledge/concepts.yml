@@ -1,0 +1,80 @@
+concept_contract_version: 1
+concepts:
+  - id: agent-skill
+    primary: "навык агента"
+    forms: ["Agent Skill", "skill"]
+    definition: "Переиспользуемый пакет инструкций, ресурсов и необязательных скриптов, задающий специализацию и порядок выполнения задачи агентом."
+    boundaries:
+      includes:
+        - "Инструкции и метаданные навыка, а также связанные с ним ресурсы и необязательные скрипты."
+        - "Описание, по которому агент выбирает навык для задачи."
+      excludes:
+        - "Общая проектная инструкция, не относящаяся к одной специализированной процедуре."
+        - "Самостоятельный плагин или иной механизм поставки навыков."
+    authority:
+      type: "official-documentation"
+      ref: "CODX: Agent Skills"
+    defined_by: ["CODX-019", "ASKL-001", "ASKL-002", "ASKL-003"]
+    cite_as: ["CODX", "ASKL"]
+    relationships:
+      - type: "is-guided-by"
+        target: "agent-instruction"
+      - type: "is-verified-by"
+        target: "agent-evaluation"
+    synonyms_by_source:
+      CODX: ["Agent Skills", "skill"]
+      ASKL: ["Agent Skills", "skill"]
+    reconciliation: "Русская основная форма закреплена для проектных материалов; английские формы сохранены как формы первоисточников."
+    collisions:
+      - "Не путать с плагином: плагин является единицей поставки и может включать навыки."
+
+  - id: agent-instruction
+    primary: "проектная инструкция агента"
+    forms: ["AGENTS.md", "agent instruction"]
+    definition: "Постоянное операционное правило проекта, которое агент читает до работы и применяет в пределах своей области действия."
+    boundaries:
+      includes:
+        - "Корневые и вложенные правила для агента, применимые к текущему каталогу."
+        - "Указания о командах, ограничениях и маршрутах работы проекта."
+      excludes:
+        - "Пользовательская документация, не меняющая действия агента."
+        - "Временные заметки, гипотезы и непроверенные планы."
+    authority:
+      type: "official-documentation"
+      ref: "CODX: Custom instructions with AGENTS.md"
+    defined_by: ["CODX-001"]
+    cite_as: ["CODX"]
+    relationships:
+      - type: "guides"
+        target: "agent-skill"
+    synonyms_by_source:
+      CODX: ["AGENTS.md", "custom instructions"]
+    reconciliation: "Термин описывает назначение проектного правила, а не конкретный формат файла: `AGENTS.md` — основная форма его записи в этом проекте."
+    collisions:
+      - "Не путать с README: README объясняет проект человеку, а проектная инструкция направляет действия агента."
+
+  - id: agent-evaluation
+    primary: "проверка агента"
+    forms: ["agent evaluation", "eval"]
+    definition: "Проверяемый сценарий с ожидаемым результатом, предназначенный для выявления проблем и изменений поведения агента до их воздействия на пользователей."
+    boundaries:
+      includes:
+        - "Реалистичный запрос, ожидаемый результат и необходимые входные файлы проверочного случая."
+        - "Детерминированные или модельные измерения качества результата агента."
+      excludes:
+        - "Обычная проверка наличия файлов без сценария поведения агента."
+        - "Неформальное мнение о качестве без наблюдаемого критерия."
+    authority:
+      type: "official-and-practice-source"
+      ref: "AENG: Demystifying Evals for AI Agents; ASKL: Evaluating Skills"
+    defined_by: ["AENG-004", "ASKL-004"]
+    cite_as: ["AENG", "ASKL"]
+    relationships:
+      - type: "verifies"
+        target: "agent-skill"
+    synonyms_by_source:
+      AENG: ["evals", "evaluations"]
+      ASKL: ["evaluation case", "test case"]
+    reconciliation: "Основная форма охватывает проверку поведения агента; английские формы сохранены для связи с источниками и оснасткой."
+    collisions:
+      - "Не путать с единичным запуском агента: запуск становится проверкой только при заданных критериях и ожидаемом результате."

@@ -1,6 +1,7 @@
 items:
   - id: XEM7--status
     source_id: XEM7
+    path: pages/status
     title: "status"
     url: "https://x.com/EXM7777/status/2060736517564477901"
     locator: "https://x.com/EXM7777/status/2060736517564477901"
@@ -9,6 +10,7 @@ items:
     workflow_stage: indexed
   - id: XEM7--article
     source_id: XEM7
+    path: pages/article
     title: "article"
     url: "https://x.com/i/article/2060729909690224640"
     locator: "https://x.com/i/article/2060729909690224640"
@@ -17,6 +19,7 @@ items:
     workflow_stage: indexed
   - id: XEM7--article-body
     source_id: XEM7
+    path: pages/article-body
     title: "article body"
     url: "https://x.com/i/article/2060729909690224640"
     locator: "https://x.com/i/article/2060729909690224640"

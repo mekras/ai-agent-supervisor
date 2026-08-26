@@ -1,6 +1,7 @@
 items:
   - id: LSME--evaluation
     source_id: LSME
+    path: pages/evaluation
     title: "evaluation"
     url: "https://docs.langchain.com/langsmith/evaluation"
     locator: "https://docs.langchain.com/langsmith/evaluation"
@@ -9,6 +10,7 @@ items:
     workflow_stage: indexed
   - id: LSME--evaluation-approaches
     source_id: LSME
+    path: pages/evaluation-approaches
     title: "evaluation approaches"
     url: "https://docs.langchain.com/langsmith/evaluation-approaches"
     locator: "https://docs.langchain.com/langsmith/evaluation-approaches"
@@ -17,6 +19,7 @@ items:
     workflow_stage: indexed
   - id: LSME--trajectory-evals
     source_id: LSME
+    path: pages/trajectory-evals
     title: "trajectory evals"
     url: "https://docs.langchain.com/langsmith/trajectory-evals"
     locator: "https://docs.langchain.com/langsmith/trajectory-evals"

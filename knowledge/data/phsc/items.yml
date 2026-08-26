@@ -1,6 +1,7 @@
 items:
   - id: PHSC--writing-good-agents
     source_id: PHSC
+    path: pages/writing-good-agents
     title: "writing good agents"
     url: "https://www.philschmid.de/writing-good-agents"
     locator: "https://www.philschmid.de/writing-good-agents"

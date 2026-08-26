@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "graph": {
     "name": "ai-agent-supervisor",
     "description": "Направления возможного влияния между концепцией, договором продукта и публикуемой коллекцией навыков.",
@@ -24,6 +24,8 @@
       "id": "concept",
       "title": "Концепция проекта",
       "kind": "concept",
+      "semantic_type": "концепция проекта",
+      "authority": "canonical",
       "paths": ["README.md"],
       "checks": ["ait-docs-concept"]
     },
@@ -31,6 +33,8 @@
       "id": "product-contract",
       "title": "Публичный договор коллекции",
       "kind": "documentation",
+      "semantic_type": "публичный договор продукта",
+      "authority": "canonical",
       "paths": ["docs/product-contract.md"],
       "checks": ["ait-req-validation", "tools/validate-product-boundary.py"]
     },
@@ -38,13 +42,26 @@
       "id": "requirements",
       "title": "Требования и план развития",
       "kind": "requirements",
+      "semantic_type": "требования и план развития",
+      "authority": "canonical",
       "paths": ["docs/requirements/**", "BACKLOG.md"],
       "checks": ["ait-req-management", "ait-req-validation"]
+    },
+    {
+      "id": "hypotheses",
+      "title": "Гипотезы развития",
+      "kind": "other",
+      "semantic_type": "проверяемые гипотезы развития",
+      "authority": "canonical",
+      "paths": ["docs/hypotheses/**"],
+      "checks": ["ait-hypotheses"]
     },
     {
       "id": "decisions",
       "title": "Проектные решения",
       "kind": "decision",
+      "semantic_type": "журнал проектных решений",
+      "authority": "canonical",
       "paths": ["docs/decisions/**"],
       "checks": ["ait-decisions"]
     },
@@ -52,6 +69,8 @@
       "id": "knowledge",
       "title": "Корпус знаний",
       "kind": "knowledge",
+      "semantic_type": "корпус проверяемых оснований",
+      "authority": "canonical",
       "paths": ["knowledge/**"],
       "checks": ["kc-validation"]
     },
@@ -59,6 +78,8 @@
       "id": "skills",
       "title": "Публикуемая коллекция навыков",
       "kind": "implementation",
+      "semantic_type": "переносимые навыки для применения ИИ",
+      "authority": "canonical",
       "paths": [".apm/skills/**"],
       "checks": ["ai-skill-development", "apm run tests"]
     },
@@ -66,6 +87,8 @@
       "id": "verification",
       "title": "Проверки и модельные сценарии",
       "kind": "test",
+      "semantic_type": "проверки и сценарии оценки",
+      "authority": "supporting",
       "paths": ["tools/**", "evals/**", ".github/workflows/**"],
       "checks": ["ait-code-testing", "apm run tests"]
     },
@@ -73,11 +96,13 @@
       "id": "configuration",
       "title": "Настройки проекта",
       "kind": "configuration",
+      "semantic_type": "операционные настройки и инструкции",
+      "authority": "canonical",
       "paths": [
         "AGENTS.md",
         ".claude/CLAUDE.md",
-        ".ai-dev-team-state.yml",
-        "project-impact.json",
+        ".ai-dev-team/state.yml",
+        ".ai-dev-team/project-impact.json",
         "subagents.local.toml",
         ".gitignore",
         "evals.sample.yml"
@@ -88,6 +113,8 @@
       "id": "delivery",
       "title": "Поставка и журнал изменений",
       "kind": "delivery",
+      "semantic_type": "поставка публикуемой коллекции",
+      "authority": "canonical",
       "paths": ["apm.yml", "apm.lock.yaml", "CHANGELOG.md", "LICENSE"],
       "checks": ["ai-setup-apm", "ait-changelog", "python3 tools/apm-audit-ci"]
     }
@@ -113,6 +140,13 @@
       "relation": "constrains",
       "facets": ["semantic", "interface"],
       "rationale": "Требования уточняют границу публичного продукта и его обязательства."
+    },
+    {
+      "from": "hypotheses",
+      "to": "requirements",
+      "relation": "informs",
+      "facets": ["semantic", "quality"],
+      "rationale": "Проверенные гипотезы могут дать основания для изменения требований и плана развития."
     },
     {
       "from": "knowledge",

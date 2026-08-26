@@ -1,6 +1,7 @@
 items:
   - id: APMP--overview
     source_id: APMP
+    path: pages/overview
     title: "overview"
     url: "https://microsoft.github.io/apm/producer/"
     locator: "https://microsoft.github.io/apm/producer/"
@@ -9,6 +10,7 @@ items:
     workflow_stage: indexed
   - id: APMP--author-primitives
     source_id: APMP
+    path: pages/author-primitives
     title: "author primitives"
     url: "https://microsoft.github.io/apm/producer/author-primitives/"
     locator: "https://microsoft.github.io/apm/producer/author-primitives/"
@@ -17,6 +19,7 @@ items:
     workflow_stage: indexed
   - id: APMP--author-primitives-hooks-and-commands
     source_id: APMP
+    path: pages/author-primitives-hooks-and-commands
     title: "author primitives hooks and commands"
     url: "https://microsoft.github.io/apm/producer/author-primitives/hooks-and-commands/"
     locator: "https://microsoft.github.io/apm/producer/author-primitives/hooks-and-commands/"
@@ -25,6 +28,7 @@ items:
     workflow_stage: indexed
   - id: APMP--author-primitives-instructions-and-agents
     source_id: APMP
+    path: pages/author-primitives-instructions-and-agents
     title: "author primitives instructions and agents"
     url: "https://microsoft.github.io/apm/producer/author-primitives/instructions-and-agents/"
     locator: "https://microsoft.github.io/apm/producer/author-primitives/instructions-and-agents/"
@@ -33,6 +37,7 @@ items:
     workflow_stage: indexed
   - id: APMP--author-primitives-mcp-as-primitive
     source_id: APMP
+    path: pages/author-primitives-mcp-as-primitive
     title: "author primitives mcp as primitive"
     url: "https://microsoft.github.io/apm/producer/author-primitives/mcp-as-primitive/"
     locator: "https://microsoft.github.io/apm/producer/author-primitives/mcp-as-primitive/"
@@ -41,6 +46,7 @@ items:
     workflow_stage: indexed
   - id: APMP--author-primitives-prompts
     source_id: APMP
+    path: pages/author-primitives-prompts
     title: "author primitives prompts"
     url: "https://microsoft.github.io/apm/producer/author-primitives/prompts/"
     locator: "https://microsoft.github.io/apm/producer/author-primitives/prompts/"
@@ -49,6 +55,7 @@ items:
     workflow_stage: indexed
   - id: APMP--author-primitives-skills
     source_id: APMP
+    path: pages/author-primitives-skills
     title: "author primitives skills"
     url: "https://microsoft.github.io/apm/producer/author-primitives/skills/"
     locator: "https://microsoft.github.io/apm/producer/author-primitives/skills/"
@@ -57,6 +64,7 @@ items:
     workflow_stage: indexed
   - id: APMP--compile
     source_id: APMP
+    path: pages/compile
     title: "compile"
     url: "https://microsoft.github.io/apm/producer/compile/"
     locator: "https://microsoft.github.io/apm/producer/compile/"
@@ -65,6 +73,7 @@ items:
     workflow_stage: indexed
   - id: APMP--pack-a-bundle
     source_id: APMP
+    path: pages/pack-a-bundle
     title: "pack a bundle"
     url: "https://microsoft.github.io/apm/producer/pack-a-bundle/"
     locator: "https://microsoft.github.io/apm/producer/pack-a-bundle/"
@@ -73,6 +82,7 @@ items:
     workflow_stage: indexed
   - id: APMP--package-relative-links
     source_id: APMP
+    path: pages/package-relative-links
     title: "package relative links"
     url: "https://microsoft.github.io/apm/producer/package-relative-links/"
     locator: "https://microsoft.github.io/apm/producer/package-relative-links/"
@@ -81,6 +91,7 @@ items:
     workflow_stage: indexed
   - id: APMP--preview-and-validate
     source_id: APMP
+    path: pages/preview-and-validate
     title: "preview and validate"
     url: "https://microsoft.github.io/apm/producer/preview-and-validate/"
     locator: "https://microsoft.github.io/apm/producer/preview-and-validate/"
@@ -89,6 +100,7 @@ items:
     workflow_stage: indexed
   - id: APMP--publish-to-a-marketplace
     source_id: APMP
+    path: pages/publish-to-a-marketplace
     title: "publish to a marketplace"
     url: "https://microsoft.github.io/apm/producer/publish-to-a-marketplace/"
     locator: "https://microsoft.github.io/apm/producer/publish-to-a-marketplace/"
@@ -97,6 +109,7 @@ items:
     workflow_stage: indexed
   - id: APMP--consumer-manage-dependencies
     source_id: APMP
+    path: pages/consumer-manage-dependencies
     title: "consumer manage dependencies"
     url: "https://microsoft.github.io/apm/consumer/manage-dependencies/"
     locator: "https://microsoft.github.io/apm/consumer/manage-dependencies/"
@@ -105,6 +118,7 @@ items:
     workflow_stage: indexed
   - id: APMP--consumer-drift-and-secure-by-default
     source_id: APMP
+    path: pages/consumer-drift-and-secure-by-default
     title: "consumer drift and secure by default"
     url: "https://microsoft.github.io/apm/consumer/drift-and-secure-by-default/"
     locator: "https://microsoft.github.io/apm/consumer/drift-and-secure-by-default/"

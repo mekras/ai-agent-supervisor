@@ -1,0 +1,1702 @@
+statements:
+- id: AENG-001
+  source_id: AENG
+  item_id: AENG--building-effective-agents
+  path: knowledge/data/aeng/pages/building-effective-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Для LLM-приложений следует начинать с наиболее простого решения и усложнять
+    его только при необходимости.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: AENG-003
+  source_id: AENG
+  item_id: AENG--multi-agent-research-system
+  path: knowledge/data/aeng/pages/multi-agent-research-system/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Многоагентная система вводит дополнительные сложности координации, оценки
+    и надёжности.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: AENG-002
+  source_id: AENG
+  item_id: AENG--effective-context-engineering-for-ai-agents
+  path: knowledge/data/aeng/pages/effective-context-engineering-for-ai-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Контекст агента ограничен и требует отбора наиболее полезных токенов для достижения
+    результата.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: AENG-004
+  source_id: AENG
+  item_id: AENG--demystifying-evals-for-ai-agents
+  path: knowledge/data/aeng/pages/demystifying-evals-for-ai-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Проверки делают проблемы и изменения поведения агентов видимыми до воздействия
+    на пользователей.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-001
+  source_id: APMP
+  item_id: APMP--overview
+  path: knowledge/data/apmp/pages/overview/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Пакет APM использует `apm.yml` как манифест, а устанавливаемые примитивы размещает
+    в `.apm/`.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-012
+  source_id: APMP
+  item_id: APMP--author-primitives
+  path: knowledge/data/apmp/pages/author-primitives/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Каталог `.apm/` пакета содержит примитивы, которые проецируют контекст агента
+    на поддерживаемые среды.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-010
+  source_id: APMP
+  item_id: APMP--author-primitives-hooks-and-commands
+  path: knowledge/data/apmp/pages/author-primitives-hooks-and-commands/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Хуки и слэш-команды APM предназначены для ограниченного набора сред и не становятся
+    частью `AGENTS.md`.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-003
+  source_id: APMP
+  item_id: APMP--author-primitives-instructions-and-agents
+  path: knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Инструкция APM привязана к области файлов, а агент APM представляет именуемого
+    специалиста, которого пользователь вызывает явно.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-011
+  source_id: APMP
+  item_id: APMP--author-primitives-mcp-as-primitive
+  path: knowledge/data/apmp/pages/author-primitives-mcp-as-primitive/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: При установке пакета APM зависимости MCP задаются через блок `dependencies.mcp`
+    манифеста.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-014
+  source_id: APMP
+  item_id: APMP--author-primitives-prompts
+  path: knowledge/data/apmp/pages/author-primitives-prompts/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Подсказка APM — однозадачный параметризованный рабочий процесс, который потребитель
+    вызывает по требованию.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-009
+  source_id: APMP
+  item_id: APMP--author-primitives-skills
+  path: knowledge/data/apmp/pages/author-primitives-skills/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Навык выбирается агентом по описанию, загружает `SKILL.md` и выполняет ограниченную
+    задачу.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-004
+  source_id: APMP
+  item_id: APMP--compile
+  path: knowledge/data/apmp/pages/compile/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Команда `apm compile` обрабатывает примитивы инструкций, а навыки и агенты
+    развёртываются напрямую через `apm install`.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-005
+  source_id: APMP
+  item_id: APMP--pack-a-bundle
+  path: knowledge/data/apmp/pages/pack-a-bundle/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: По умолчанию `apm pack` создаёт каталог пакета в `./build/` и включает в него
+    файл блокировки с хэшами файлов.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-008
+  source_id: APMP
+  item_id: APMP--package-relative-links
+  path: knowledge/data/apmp/pages/package-relative-links/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: APM переписывает обычные относительные Markdown-ссылки примитивов при установке,
+    чтобы они сохраняли работоспособность в каталоге среды потребителя.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-006
+  source_id: APMP
+  item_id: APMP--preview-and-validate
+  path: knowledge/data/apmp/pages/preview-and-validate/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Перед публикацией APM рекомендует последовательность предварительной проверки:
+    `compile --dry-run`, затем `apm view` и `apm audit`.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-007
+  source_id: APMP
+  item_id: APMP--publish-to-a-marketplace
+  path: knowledge/data/apmp/pages/publish-to-a-marketplace/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: В APM маркетплейс представляет собой публикуемый одним репозиторием каталог
+    пакетов, который устанавливают другие репозитории.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-002
+  source_id: APMP
+  item_id: APMP--consumer-manage-dependencies
+  path: knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: '`apm.lock.yaml` создаётся командой `apm install` и не предназначен для ручного
+    редактирования.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-013
+  source_id: APMP
+  item_id: APMP--consumer-drift-and-secure-by-default
+  path: knowledge/data/apmp/pages/consumer-drift-and-secure-by-default/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: При установке APM сопоставляет манифест и файл блокировки, проверяет хэши
+    полученного содержимого и поддерживает воспроизводимость установки.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: ASES-001
+  source_id: ASES
+  item_id: ASES--standard
+  path: knowledge/data/ases/pages/standard/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Оценка должна иметь полностью автоматизированное выставление результатов без
+    ручных шагов.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: ASKL-001
+  source_id: ASKL
+  item_id: ASKL--best-practices
+  path: knowledge/data/askl/pages/best-practices/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Навык следует выводить из реальной задачи с проектным контекстом, исправлениями
+    и ограничениями.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: ASKL-002
+  source_id: ASKL
+  item_id: ASKL--best-practices
+  path: knowledge/data/askl/pages/best-practices/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Содержание навыка должно включать сведения, которых модели не хватает без
+    проектного контекста.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: ASKL-003
+  source_id: ASKL
+  item_id: ASKL--optimizing-descriptions
+  path: knowledge/data/askl/pages/optimizing-descriptions/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Описание навыка служит основным механизмом выбора навыка агентом.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: ASKL-004
+  source_id: ASKL
+  item_id: ASKL--evaluating-skills
+  path: knowledge/data/askl/pages/evaluating-skills/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Проверочный случай навыка включает реалистичный запрос, ожидаемый результат
+    и при необходимости входные файлы.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: AZPF-001
+  source_id: AZPF
+  item_id: AZPF--evaluation-flow
+  path: knowledge/data/azpf/pages/evaluation-flow/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Потоки оценки вычисляют метрики для проверки того, насколько результаты запуска
+    отвечают заданным критериям и целям.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-017
+  source_id: CODX
+  item_id: CODX--agent-approvals-security
+  path: knowledge/data/codx/pages/agent-approvals-security/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Локально Codex по умолчанию использует ограниченную песочницу, отключённую
+    сеть и политику согласования действий.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-001
+  source_id: CODX
+  item_id: CODX--agents-md
+  path: knowledge/data/codx/pages/agents-md/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Codex читает файлы `AGENTS.md` до начала работы и объединяет глобальные и
+    проектные инструкции.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-026
+  source_id: CODX
+  item_id: CODX--app
+  path: knowledge/data/codx/pages/app/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Приложение Codex доступно для macOS и Windows; исключения для конкретных платформ
+    должны быть отмечены в соответствующей документации.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-032
+  source_id: CODX
+  item_id: CODX--app-server
+  path: knowledge/data/codx/pages/app-server/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Codex App Server предоставляет постраничный метод model/list: для текущей
+    учётной записи он возвращает доступные модели, а записи содержат точный идентификатор,
+    признак скрытости, поддерживаемые и рекомендуемые усилия и возможности. Для полного
+    каталога клиент передаёт includeHidden: true.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-031
+  source_id: CODX
+  item_id: CODX--app-server
+  path: knowledge/data/codx/pages/app-server/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: WebSocket-транспорт app-server экспериментальный и не поддерживается; перед
+    его удалённым раскрытием необходимо настроить аутентификацию, так как не-loopback
+    listener по умолчанию может принимать неаутентифицированные подключения.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-023
+  source_id: CODX
+  item_id: CODX--app/automations
+  path: knowledge/data/codx/pages/app/automations/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Автоматизация в Git-репозитории может выполняться в локальном проекте или
+    в новом worktree; worktree изолирует её изменения от незавершённой локальной работы.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-024
+  source_id: CODX
+  item_id: CODX--app/commands
+  path: knowledge/data/codx/pages/app/commands/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Slash-команды позволяют управлять Codex из поля ввода текущей ветки, а доступный
+    набор зависит от окружения и прав доступа.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-025
+  source_id: CODX
+  item_id: CODX--app/features
+  path: knowledge/data/codx/pages/app/features/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Для каждого диалога приложения Codex можно выбрать режим Local, Worktree или
+    Cloud; режим Worktree изолирует изменения в Git-worktree.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-027
+  source_id: CODX
+  item_id: CODX--app/local-environments
+  path: knowledge/data/codx/pages/app/local-environments/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Сценарии настройки запускаются автоматически при создании Codex нового worktree
+    и могут устанавливать зависимости либо выполнять сборку, нужную для окружения.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-028
+  source_id: CODX
+  item_id: CODX--app/settings
+  path: knowledge/data/codx/pages/app/settings/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Агенты Codex в приложении наследуют ту же конфигурацию, что и расширения IDE
+    и CLI; общие настройки доступны в интерфейсе, расширенные — в `config.toml`.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-029
+  source_id: CODX
+  item_id: CODX--app/troubleshooting
+  path: knowledge/data/codx/pages/app/troubleshooting/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Worktree содержит только файлы, сохранённые в Git, поэтому для запуска проекта
+    в нём могут потребоваться сценарии настройки локального окружения.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-030
+  source_id: CODX
+  item_id: CODX--app/worktrees
+  path: knowledge/data/codx/pages/app/worktrees/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Worktree позволяет Codex выполнять независимые задачи в одном проекте параллельно,
+    не создавая взаимных помех; автоматизации Git-репозиториев используют отдельные
+    фоновые worktree.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-069
+  source_id: CODX
+  item_id: CODX--changelog
+  path: knowledge/data/codx/pages/changelog/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: В выпуске Codex CLI 0.137.0 для плагинов добавлены машиночитаемый вывод `codex
+    plugin list --json` и кэшированные предложения удалённых каталогов.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-016
+  source_id: CODX
+  item_id: CODX--cli
+  path: knowledge/data/codx/pages/cli/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Команда `codex exec` предназначена для автоматизации повторяемых рабочих процессов.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-033
+  source_id: CODX
+  item_id: CODX--cli/features
+  path: knowledge/data/codx/pages/cli/features/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Возобновлённый запуск Codex сохраняет исходную стенограмму, историю плана
+    и подтверждения; перед запуском можно изменить рабочий каталог или добавить корни.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-034
+  source_id: CODX
+  item_id: CODX--cli/reference
+  path: knowledge/data/codx/pages/cli/reference/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Флаг `--dangerously-bypass-approvals-and-sandbox` запускает все команды без
+    подтверждений и песочницы и допустим только в среде с внешней защитой.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-035
+  source_id: CODX
+  item_id: CODX--cli/slash-commands
+  path: knowledge/data/codx/pages/cli/slash-commands/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Во время выполняющейся задачи slash-команду можно поставить в очередь клавишей
+    Tab; Codex обработает её на следующем ходу после окончания текущего.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-009
+  source_id: CODX
+  item_id: CODX--cloud
+  path: knowledge/data/codx/pages/cloud/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Codex cloud может выполнять фоновые задачи в собственном облачном окружении,
+    в том числе параллельно.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-036
+  source_id: CODX
+  item_id: CODX--cloud/environments
+  path: knowledge/data/codx/pages/cloud/environments/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Секреты облачного окружения доступны только сценариям настройки и удаляются
+    до фазы агента; это ограничение снижает риск их раскрытия агенту.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-037
+  source_id: CODX
+  item_id: CODX--cloud/internet-access
+  path: knowledge/data/codx/pages/cloud/internet-access/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Доступ агента к интернету в облачных задачах по умолчанию заблокирован; при
+    включении следует ограничивать домены и HTTP-методы, поскольку возрастает риск
+    инъекций, утечки и вредоносных зависимостей.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-038
+  source_id: CODX
+  item_id: CODX--concepts/customization
+  path: knowledge/data/codx/pages/concepts/customization/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: '`AGENTS.md` должен оставаться компактным и содержать постоянные правила репозитория;
+    неверные предположения агента следует исправлять в нём, чтобы это сохранялось
+    для следующих сессий.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-039
+  source_id: CODX
+  item_id: CODX--concepts/sandboxing
+  path: knowledge/data/codx/pages/concepts/sandboxing/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Песочница определяет технические границы действий Codex, а политика подтверждений
+    — когда агент обязан остановиться перед их пересечением; это разные взаимодополняющие
+    механизмы.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-040
+  source_id: CODX
+  item_id: CODX--concepts/subagents
+  path: knowledge/data/codx/pages/concepts/subagents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Codex не запускает подагентов автоматически: их следует использовать только
+    по явному запросу на подагентов или параллельную работу, учитывая дополнительный
+    расход токенов.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-014
+  source_id: CODX
+  item_id: CODX--config-advanced
+  path: knowledge/data/codx/pages/config-advanced/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Профиль Codex накладывает именованный слой настроек поверх пользовательского
+    `config.toml`.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-013
+  source_id: CODX
+  item_id: CODX--config-basic
+  path: knowledge/data/codx/pages/config-basic/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Codex загружает проектный слой `.codex/` только для доверенного проекта.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-015
+  source_id: CODX
+  item_id: CODX--config-reference
+  path: knowledge/data/codx/pages/config-reference/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Проектная настройка Codex не может переопределять параметры поставщика модели,
+    аутентификации и телеметрии.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-041
+  source_id: CODX
+  item_id: CODX--config-sample
+  path: knowledge/data/codx/pages/config-sample/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Пример конфигурации Codex предназначен как справочник: в пользовательский
+    или проектный `config.toml` следует переносить только нужные ключи и разделы,
+    адаптируя их под среду.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-042
+  source_id: CODX
+  item_id: CODX--enterprise/access-tokens
+  path: knowledge/data/codx/pages/enterprise/access-tokens/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Токен доступа Codex следует хранить как секрет автоматизации, не записывать
+    в журналы и регулярно ротировать; применять его допустимо только на доверенных
+    исполнителях.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-043
+  source_id: CODX
+  item_id: CODX--enterprise/admin-setup
+  path: knowledge/data/codx/pages/enterprise/admin-setup/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Перед внедрением Codex в Enterprise нужно назначить владельцев рабочего пространства,
+    безопасности и аналитики, а затем определить используемые поверхности Codex.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-044
+  source_id: CODX
+  item_id: CODX--enterprise/governance
+  path: knowledge/data/codx/pages/enterprise/governance/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Для мониторинга Codex Enterprise предусмотрены три уровня: панель аналитики
+    для оперативного контроля, Analytics API для программной отчётности и Compliance
+    API для детальных журналов аудита.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-045
+  source_id: CODX
+  item_id: CODX--enterprise/managed-configuration
+  path: knowledge/data/codx/pages/enterprise/managed-configuration/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Управляемая конфигурация Enterprise разделяет обязательные ограничения, которые
+    пользователь не может переопределить, и управляемые значения по умолчанию, которые
+    применяются при старте и могут меняться в ходе сессии.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-046
+  source_id: CODX
+  item_id: CODX--environment-variables
+  path: knowledge/data/codx/pages/environment-variables/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Для постоянных настроек Codex используется `config.toml`, а переменные окружения
+    предназначены для ограниченных оболочкой переопределений, секретов автоматизации,
+    установки и диагностики.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-047
+  source_id: CODX
+  item_id: CODX--github-action
+  path: knowledge/data/codx/pages/github-action/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: GitHub Action Codex позволяет запускать Codex в заданиях CI/CD, применять
+    патчи и публиковать рецензии из workflow GitHub Actions.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-048
+  source_id: CODX
+  item_id: CODX--guides/agents-md
+  path: knowledge/data/codx/pages/guides/agents-md/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Codex строит цепочку `AGENTS.md` от корня к рабочему каталогу: более близкие
+    файлы имеют приоритет, а общий размер инструкций ограничен параметром `project_doc_max_bytes`.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-049
+  source_id: CODX
+  item_id: CODX--hooks
+  path: knowledge/data/codx/pages/hooks/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Немодерируемый командный хук запускается только после просмотра и доверия
+    к точному определению; при изменении хука он снова требует проверки по новому
+    хешу.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-052
+  source_id: CODX
+  item_id: CODX--ide
+  path: knowledge/data/codx/pages/ide/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Интеграции Codex для совместимых с VS Code редакторов и JetBrains IDE доступны
+    на macOS, Windows и Linux; в Windows возможны нативная песочница или WSL2.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-050
+  source_id: CODX
+  item_id: CODX--ide/commands
+  path: knowledge/data/codx/pages/ide/commands/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Команды расширения Codex для VS Code доступны через Command Palette и могут
+    быть переназначены на сочетания клавиш.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-051
+  source_id: CODX
+  item_id: CODX--ide/features
+  path: knowledge/data/codx/pages/ide/features/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Расширение Codex для IDE использует того же агента и ту же конфигурацию, что
+    и CLI; контекст открытых файлов и выделенного кода позволяет сокращать запросы
+    и повышать их релевантность.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-053
+  source_id: CODX
+  item_id: CODX--ide/settings
+  path: knowledge/data/codx/pages/ide/settings/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Расширение IDE использует CLI Codex, поэтому настройки модели, подтверждений
+    и песочницы задаются в общем `~/.codex/config.toml`, а не в настройках редактора.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-054
+  source_id: CODX
+  item_id: CODX--ide/slash-commands
+  path: knowledge/data/codx/pages/ide/slash-commands/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Slash-команды расширения IDE управляют Codex из поля чата, в том числе показывают
+    статус, переключают локальный и облачный режимы и запускают цель.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-055
+  source_id: CODX
+  item_id: CODX--integrations/github
+  path: knowledge/data/codx/pages/integrations/github/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: При обзоре pull request Codex находит `AGENTS.md` и применяет разделы с правилами
+    рецензирования; для изменённых файлов действует ближайшая инструкция.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-056
+  source_id: CODX
+  item_id: CODX--integrations/linear
+  path: knowledge/data/codx/pages/integrations/linear/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: В Linear поручение Codex через назначение задачи или упоминание создаёт облачную
+    задачу, а в ответе публикуются ход работы и результаты.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-057
+  source_id: CODX
+  item_id: CODX--integrations/slack
+  path: knowledge/data/codx/pages/integrations/slack/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: В Slack Codex получает сообщение и историю ветки для создания задачи; администратор
+    Enterprise может запретить публикацию итогового ответа, оставив только ссылку
+    на задачу.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-058
+  source_id: CODX
+  item_id: CODX--learn/best-practices
+  path: knowledge/data/codx/pages/learn/best-practices/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Чтобы снизить число предположений и упростить рецензию, запрос к Codex должен
+    задавать цель, релевантный контекст, ограничения и проверяемое условие готовности.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-059
+  source_id: CODX
+  item_id: CODX--mcp
+  path: knowledge/data/codx/pages/mcp/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Конфигурация MCP хранится в `config.toml` и общая для CLI и IDE; проектные
+    MCP-серверы допускаются в `.codex/config.toml` только для доверенных проектов.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-018
+  source_id: CODX
+  item_id: CODX--memories
+  path: knowledge/data/codx/pages/memories/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Файлы памяти Codex являются сгенерированным состоянием; перед передачей их
+    следует проверить.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-060
+  source_id: CODX
+  item_id: CODX--memories/chronicle
+  path: knowledge/data/codx/pages/memories/chronicle/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Chronicle — предварительная функция по явному включению: она использует экранный
+    контекст, ускоряет расход лимитов, повышает риск инъекций и хранит воспоминания
+    локально без шифрования.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-012
+  source_id: CODX
+  item_id: CODX--migrate
+  path: knowledge/data/codx/pages/migrate/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: После импорта настроек Codex предлагает проверить перенесённые файлы и продолжить
+    миграцию, если осталась работа.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-068
+  source_id: CODX
+  item_id: CODX--models
+  path: knowledge/data/codx/pages/models/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: В Codex можно использовать модель и поставщика, поддерживающие Chat Completions
+    или Responses API, но поддержка Chat Completions API объявлена устаревающей.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-061
+  source_id: CODX
+  item_id: CODX--noninteractive
+  path: knowledge/data/codx/pages/noninteractive/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: '`codex exec` по умолчанию работает в песочнице только для чтения; в автоматизации
+    следует задавать минимально необходимые разрешения, а полный доступ допустим лишь
+    в контролируемой среде.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-062
+  source_id: CODX
+  item_id: CODX--permissions
+  path: knowledge/data/codx/pages/permissions/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Профили разрешений Codex реализуют границы минимальных привилегий для локальных
+    команд через правила файловой системы и сети.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-020
+  source_id: CODX
+  item_id: CODX--plugins
+  path: knowledge/data/codx/pages/plugins/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Плагин Codex объединяет навыки, интеграции приложений и MCP-серверы в повторно
+    используемые рабочие процессы.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-021
+  source_id: CODX
+  item_id: CODX--plugins/build
+  path: knowledge/data/codx/pages/plugins/build/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Для публикации общего рабочего процесса с интеграциями приложений, конфигурацией
+    MCP или хуками жизненного цикла в Codex следует создавать плагин.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-022
+  source_id: CODX
+  item_id: CODX--prompting
+  path: knowledge/data/codx/pages/prompting/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Codex даёт более качественный результат, когда может проверить выполненную
+    работу; в запросе следует указывать воспроизведение, проверку функции и команды
+    контроля качества.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-063
+  source_id: CODX
+  item_id: CODX--quickstart
+  path: knowledge/data/codx/pages/quickstart/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Поскольку Codex способен изменять кодовую базу, перед и после каждой задачи
+    рекомендуется создавать контрольные точки Git для удобного отката.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-064
+  source_id: CODX
+  item_id: CODX--remote-connections
+  path: knowledge/data/codx/pages/remote-connections/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: При удалённом подключении Codex использует проекты, файлы, учётные данные,
+    разрешения, плагины и локальные инструменты подключённого хоста.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-002
+  source_id: CODX
+  item_id: CODX--rules
+  path: knowledge/data/codx/pages/rules/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Правила Codex могут ограничивать команды, которые разрешено запускать вне
+    песочницы.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-011
+  source_id: CODX
+  item_id: CODX--sdk
+  path: knowledge/data/codx/pages/sdk/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Python SDK управляет локальным приложением Codex через JSON-RPC и требует
+    Python 3.10 или новее.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-004
+  source_id: CODX
+  item_id: CODX--security
+  path: knowledge/data/codx/pages/security/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Codex Security cloud проверяет подключённые репозитории GitHub на вероятные
+    проблемы безопасности.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-008
+  source_id: CODX
+  item_id: CODX--security/faq
+  path: knowledge/data/codx/pages/security/faq/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Codex Security не применяет предложенные исправления автоматически: их проверяет
+    пользователь перед созданием запроса на включение.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-005
+  source_id: CODX
+  item_id: CODX--security/plugin
+  path: knowledge/data/codx/pages/security/plugin/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Первую проверку безопасности следует выполнять без записи, пока пользователь
+    явно не запросит подготовку исправления.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-006
+  source_id: CODX
+  item_id: CODX--security/setup
+  path: knowledge/data/codx/pages/security/setup/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Первичная проверка Codex Security может занимать несколько часов, особенно
+    для больших репозиториев или длинной истории.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-007
+  source_id: CODX
+  item_id: CODX--security/threat-model
+  path: knowledge/data/codx/pages/security/threat-model/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Модель угроз задаёт краткое описание безопасности репозитория и используется
+    как контекст будущих сканирований, приоритизации и проверки.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-065
+  source_id: CODX
+  item_id: CODX--sites
+  path: knowledge/data/codx/pages/sites/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Каждый URL развёртывания Sites является production-развёртыванием; перед публикацией
+    сборку следует сохранить без развёртывания для проверки.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-019
+  source_id: CODX
+  item_id: CODX--skills
+  path: knowledge/data/codx/pages/skills/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Codex применяет постепенное раскрытие: сначала видит имя и описание навыка,
+    а полный `SKILL.md` читает при выборе навыка.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-066
+  source_id: CODX
+  item_id: CODX--speed
+  path: knowledge/data/codx/pages/speed/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Режим Fast повышает скорость поддерживаемых моделей, но расходует кредиты
+    быстрее стандартного режима.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-003
+  source_id: CODX
+  item_id: CODX--subagents
+  path: knowledge/data/codx/pages/subagents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Codex может запускать специализированных подагентов параллельно и собирать
+    их результаты в одном ответе.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-010
+  source_id: CODX
+  item_id: CODX--web
+  path: knowledge/data/codx/pages/web/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Доступ Codex web к репозиториям требует подключения учётной записи GitHub.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-067
+  source_id: CODX
+  item_id: CODX--workflows
+  path: knowledge/data/codx/pages/workflows/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Для надёжной работы Codex нужно задавать явный контекст и чёткое определение
+    готовности.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: LSME-001
+  source_id: LSME
+  item_id: LSME--evaluation
+  path: knowledge/data/lsme/pages/evaluation/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Офлайн-оценка проверяет версии на подготовленных наборах данных до выпуска,
+    а онлайн-оценка отслеживает реальные взаимодействия в production.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: LSME-002
+  source_id: LSME
+  item_id: LSME--evaluation-approaches
+  path: knowledge/data/lsme/pages/evaluation-approaches/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Оценка отдельного шага агента помогает локализовать сбои и выполняется быстрее,
+    но не охватывает поведение агента целиком.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: LSME-003
+  source_id: LSME
+  item_id: LSME--trajectory-evals
+  path: knowledge/data/lsme/pages/trajectory-evals/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Детерминированное сравнение траекторий подходит для чётко определённых процессов
+    с ожидаемыми инструментами и порядком вызовов; оно быстро и не требует дополнительного
+    вызова модели.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: PPRX-001
+  source_id: PPRX
+  item_id: PPRX--designing-refining-maintaining-agent-skills
+  path: knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Описание навыка — это триггер маршрутизации, а не внутренняя документация:
+    оно должно сообщать, когда навык загружать.'
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: PRFO-001
+  source_id: PRFO
+  item_id: PRFO--intro
+  path: knowledge/data/prfo/pages/intro/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Систематическая разработка LLM требует определять ключевые сценарии и отказы,
+    запускать оценки, анализировать результаты и расширять тестовые случаи по обратной
+    связи.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: VSCD-001
+  source_id: VSCD
+  item_id: VSCD--custom-instructions
+  path: knowledge/data/vscd/pages/custom-instructions/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Генерация рабочих инструкций VS Code обнаруживает существующие соглашения,
+    включая `AGENTS.md`, анализирует структуру и практики проекта, а затем создаёт
+    инструкции для всех запросов чата в рабочей области.
+  artifact: normalized.local.md
+  checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
