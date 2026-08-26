@@ -23,6 +23,16 @@ normalized_artifacts:
 # исполнитель выбирается по карточке источника и ограничениям доступа, а не по
 # фиктивному адаптеру.
 stages:
+  source_check:
+    commands:
+      - id: check-extracted-sources
+        argv:
+          - python3
+          - tools/check-corpus-sources.py
+          - knowledge
+        working_directory: .
+        write_paths: [knowledge]
+        required: true
   corpus_validation:
     commands:
       - id: validate-corpus-layout

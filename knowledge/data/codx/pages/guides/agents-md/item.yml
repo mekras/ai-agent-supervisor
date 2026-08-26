@@ -4,7 +4,7 @@ title: guides / agents md
 access: Публичная веб-страница; условия копирования проверяются перед публикацией
   фрагментов.
 status: indexed
-workflow_stage: statements_extracted
+workflow_stage: source_checked
 files:
   local:
   - normalized.local.md
