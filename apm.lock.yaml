@@ -1,13 +1,13 @@
 lockfile_version: '2'
-generated_at: '2026-08-27T07:35:04.272985+00:00'
+generated_at: '2026-08-27T15:00:56.727440+00:00'
 apm_version: 0.28.0
 dependencies:
 - repo_url: mekras/ai-dev-team
   name: ai-dev-team
   host: github.com
-  resolved_commit: 086a0d1898d494e5bb57c03b8af6f8ae1f14e55b
-  resolved_ref: 0.27.0
-  version: 0.27.0
+  resolved_commit: 47316c44813de0df2f6ec1dae6b002594f69c69a
+  resolved_ref: 0.27.2
+  version: 0.27.2
   package_type: apm_package
   deployed_files:
   - .agents/skills/ait-analysis
@@ -888,9 +888,9 @@ dependencies:
     .agents/skills/ait-sec-threat-modeling/references/risk-and-validation.md: sha256:7aae1335a5ee6c2b7d57b6035e264d622496c3f0a4f8199d8138488f44e3e167
     .agents/skills/ait-sec-tooling/SKILL.md: sha256:b3193f5f6214bf93d50c40e9451ac993315494dd1c4c908f1fb73d32be384af0
     .agents/skills/ait-sec-tooling/evals/triggers.json: sha256:2326a3a717462754f4057a4d9bb54b8ba94c9682dec204642fc7a392ce5cb8b1
-    .agents/skills/ait-session-analysis/SKILL.md: sha256:4f3ca5fae0cd63227c076ed674dab3e7c3f0ce9fe8cf0b7e55f36b92395210e6
-    .agents/skills/ait-session-analysis/evals/result-scenarios.json: sha256:847e909a490fbecd17706cb7aab71584dd736e7589b8ee68aa5481b49bf15b8d
-    .agents/skills/ait-session-analysis/evals/script-contract-tests.json: sha256:03ff81372f000a2a0ee803a093d1a6819cf56869696834329a767638e96946a3
+    .agents/skills/ait-session-analysis/SKILL.md: sha256:74b0b28fefb5fa44ab5be5f799662d3897f75173d6d90a3428ee9722c668603d
+    .agents/skills/ait-session-analysis/evals/result-scenarios.json: sha256:8dedf1bd664d38474cb1c086e2d5f327464ce1c388c6c888ca6962ee8e23ea4c
+    .agents/skills/ait-session-analysis/evals/script-contract-tests.json: sha256:1f1372cc11ab6433cbf39a8b80b194f26736279b1d37d4adad5a6ed9e666fa75
     .agents/skills/ait-session-analysis/evals/script-fixtures/basic/claude/session.jsonl: sha256:9041bafe85151aec46dbda05264c2d76c02f566508cd67b2daaefea0e605c6d7
     .agents/skills/ait-session-analysis/evals/script-fixtures/basic/codex/session.jsonl: sha256:f49330554233580dfab4563d56b3286f22dffccb7dc25669b5013f09f6714f5a
     .agents/skills/ait-session-analysis/evals/script-fixtures/basic/project/README.md: sha256:0baf168604350cefae457498370cdd9be46e8c1e80f7d9a0edfb9f8a991a9b44
@@ -902,8 +902,8 @@ dependencies:
     : sha256:694ff60b8fa08c3df3bc8acf79dd84ea9da54b66cf1597d9ecc4bd6d02d446c8
     .agents/skills/ait-session-analysis/evals/script-fixtures/existing/project/.ai-dev-team/local/session-analysis/state.json: sha256:547b8a378ac3a98c6f0d0f8326c028604423e6e62247d9947301c0a2307c8703
     .agents/skills/ait-session-analysis/evals/script-fixtures/existing/project/README.md: sha256:0baf168604350cefae457498370cdd9be46e8c1e80f7d9a0edfb9f8a991a9b44
-    .agents/skills/ait-session-analysis/evals/triggers.json: sha256:feee55505f4a92be8e9d8e669ee697645481e51ac468e833ae5fac8904b56fa5
-    .agents/skills/ait-session-analysis/scripts/session_analysis.py: sha256:a2bd48a31974a94d05c55b866aa3ba01cfa17a061f19761f1bef1e365418839a
+    .agents/skills/ait-session-analysis/evals/triggers.json: sha256:76b0566f892b1ac4423083f66413b6536306820d363089eb7ac8122ae1563952
+    .agents/skills/ait-session-analysis/scripts/session_analysis.py: sha256:ac776aa890c7cc3a419b7b080d83a60e139244c1b0812f4fa57d4790bf05d1dc
     .agents/skills/ait-session-report-review/SKILL.md: sha256:2d18a0b6cf545be3bf136f2ac312e1840e31a3e12325e48560ebbca3292f4149
     .agents/skills/ait-session-report-review/evals/result-scenarios.json: sha256:0e14af5a3db9b9a29231027b00b9ee3c087ddf781cf80ad71c4397c12684348c
     .agents/skills/ait-session-report-review/evals/triggers.json: sha256:669c2e99fe2a17a8719454e8ed6b77a406fc060d2364f974f3121b2f4aca9aca
@@ -1181,9 +1181,9 @@ dependencies:
     .claude/skills/ait-sec-threat-modeling/references/risk-and-validation.md: sha256:7aae1335a5ee6c2b7d57b6035e264d622496c3f0a4f8199d8138488f44e3e167
     .claude/skills/ait-sec-tooling/SKILL.md: sha256:b3193f5f6214bf93d50c40e9451ac993315494dd1c4c908f1fb73d32be384af0
     .claude/skills/ait-sec-tooling/evals/triggers.json: sha256:2326a3a717462754f4057a4d9bb54b8ba94c9682dec204642fc7a392ce5cb8b1
-    .claude/skills/ait-session-analysis/SKILL.md: sha256:4f3ca5fae0cd63227c076ed674dab3e7c3f0ce9fe8cf0b7e55f36b92395210e6
-    .claude/skills/ait-session-analysis/evals/result-scenarios.json: sha256:847e909a490fbecd17706cb7aab71584dd736e7589b8ee68aa5481b49bf15b8d
-    .claude/skills/ait-session-analysis/evals/script-contract-tests.json: sha256:03ff81372f000a2a0ee803a093d1a6819cf56869696834329a767638e96946a3
+    .claude/skills/ait-session-analysis/SKILL.md: sha256:74b0b28fefb5fa44ab5be5f799662d3897f75173d6d90a3428ee9722c668603d
+    .claude/skills/ait-session-analysis/evals/result-scenarios.json: sha256:8dedf1bd664d38474cb1c086e2d5f327464ce1c388c6c888ca6962ee8e23ea4c
+    .claude/skills/ait-session-analysis/evals/script-contract-tests.json: sha256:1f1372cc11ab6433cbf39a8b80b194f26736279b1d37d4adad5a6ed9e666fa75
     .claude/skills/ait-session-analysis/evals/script-fixtures/basic/claude/session.jsonl: sha256:9041bafe85151aec46dbda05264c2d76c02f566508cd67b2daaefea0e605c6d7
     .claude/skills/ait-session-analysis/evals/script-fixtures/basic/codex/session.jsonl: sha256:f49330554233580dfab4563d56b3286f22dffccb7dc25669b5013f09f6714f5a
     .claude/skills/ait-session-analysis/evals/script-fixtures/basic/project/README.md: sha256:0baf168604350cefae457498370cdd9be46e8c1e80f7d9a0edfb9f8a991a9b44
@@ -1195,8 +1195,8 @@ dependencies:
     : sha256:694ff60b8fa08c3df3bc8acf79dd84ea9da54b66cf1597d9ecc4bd6d02d446c8
     .claude/skills/ait-session-analysis/evals/script-fixtures/existing/project/.ai-dev-team/local/session-analysis/state.json: sha256:547b8a378ac3a98c6f0d0f8326c028604423e6e62247d9947301c0a2307c8703
     .claude/skills/ait-session-analysis/evals/script-fixtures/existing/project/README.md: sha256:0baf168604350cefae457498370cdd9be46e8c1e80f7d9a0edfb9f8a991a9b44
-    .claude/skills/ait-session-analysis/evals/triggers.json: sha256:feee55505f4a92be8e9d8e669ee697645481e51ac468e833ae5fac8904b56fa5
-    .claude/skills/ait-session-analysis/scripts/session_analysis.py: sha256:a2bd48a31974a94d05c55b866aa3ba01cfa17a061f19761f1bef1e365418839a
+    .claude/skills/ait-session-analysis/evals/triggers.json: sha256:76b0566f892b1ac4423083f66413b6536306820d363089eb7ac8122ae1563952
+    .claude/skills/ait-session-analysis/scripts/session_analysis.py: sha256:ac776aa890c7cc3a419b7b080d83a60e139244c1b0812f4fa57d4790bf05d1dc
     .claude/skills/ait-session-report-review/SKILL.md: sha256:2d18a0b6cf545be3bf136f2ac312e1840e31a3e12325e48560ebbca3292f4149
     .claude/skills/ait-session-report-review/evals/result-scenarios.json: sha256:0e14af5a3db9b9a29231027b00b9ee3c087ddf781cf80ad71c4397c12684348c
     .claude/skills/ait-session-report-review/evals/triggers.json: sha256:669c2e99fe2a17a8719454e8ed6b77a406fc060d2364f974f3121b2f4aca9aca
@@ -1241,11 +1241,11 @@ dependencies:
     .codex/agents/statement-extractor.toml: sha256:93a102c56805353c4124104deb3d2ef6aeec070e38cb571366789b2aec3df247
     .codex/agents/technical-writer.toml: sha256:6d6601ab4c850e0c2f3cfcc3b373f996367349960158c9e9920720443562cbd8
     .codex/agents/ux-specialist.toml: sha256:caaaebb82015e3061fab7f4fd929d038e4f71826bc812c44ae395cce1725ea67
-  content_hash: sha256:9ddde83e8cb1bc460b85244eefa42047410de4e10ade7f1015fd24bfa659a86d
+  content_hash: sha256:2a12fd05ab2b53069f65b51de0638b2cd65b437cceac090e1269583a537bf0aa
   is_dev: true
   constraint: ^0.27.0
-  resolved_tag: 0.27.0
-  resolved_at: '2026-08-27T07:34:47+00:00'
+  resolved_tag: 0.27.2
+  resolved_at: '2026-08-27T15:00:33+00:00'
   declared_license: MIT
 - repo_url: mekras/ai-agent-supervisor
   name: ai-agent-supervisor
@@ -1800,7 +1800,7 @@ dependencies:
   is_dev: true
   constraint: ^2.3.20
   resolved_tag: 2.3.21
-  resolved_at: '2026-08-27T07:25:08+00:00'
+  resolved_at: '2026-08-27T15:00:41+00:00'
   declared_license: MIT
 - repo_url: mekras/ai-russian-language
   name: ai-russian-language
@@ -1859,7 +1859,7 @@ dependencies:
   is_dev: true
   constraint: ^2.1.5
   resolved_tag: 2.1.5
-  resolved_at: '2026-08-27T07:25:08+00:00'
+  resolved_at: '2026-08-27T15:00:41+00:00'
   declared_license: MIT
 - repo_url: mekras/project-knowlege-corpus
   name: project-knowledge-corpus
@@ -2344,7 +2344,7 @@ dependencies:
   is_dev: true
   constraint: 0.19.5
   resolved_tag: 0.19.5
-  resolved_at: '2026-08-27T07:25:08+00:00'
+  resolved_at: '2026-08-27T15:00:41+00:00'
   declared_license: MIT
 - repo_url: talkstream/ru-text
   name: ru-text
@@ -6464,7 +6464,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:4f3ca5fae0cd63227c076ed674dab3e7c3f0ce9fe8cf0b7e55f36b92395210e6
+  content_hash: sha256:74b0b28fefb5fa44ab5be5f799662d3897f75173d6d90a3428ee9722c668603d
 - kind: project-relative
   target: claude
   value: .claude/skills/ait-session-analysis/evals/result-scenarios.json
@@ -6473,7 +6473,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:847e909a490fbecd17706cb7aab71584dd736e7589b8ee68aa5481b49bf15b8d
+  content_hash: sha256:8dedf1bd664d38474cb1c086e2d5f327464ce1c388c6c888ca6962ee8e23ea4c
 - kind: project-relative
   target: claude
   value: .claude/skills/ait-session-analysis/evals/script-contract-tests.json
@@ -6482,7 +6482,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:03ff81372f000a2a0ee803a093d1a6819cf56869696834329a767638e96946a3
+  content_hash: sha256:1f1372cc11ab6433cbf39a8b80b194f26736279b1d37d4adad5a6ed9e666fa75
 - kind: project-relative
   target: claude
   value: .claude/skills/ait-session-analysis/evals/script-fixtures/basic/claude/session.jsonl
@@ -6572,7 +6572,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:feee55505f4a92be8e9d8e669ee697645481e51ac468e833ae5fac8904b56fa5
+  content_hash: sha256:76b0566f892b1ac4423083f66413b6536306820d363089eb7ac8122ae1563952
 - kind: project-relative
   target: claude
   value: .claude/skills/ait-session-analysis/scripts/session_analysis.py
@@ -6581,7 +6581,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:a2bd48a31974a94d05c55b866aa3ba01cfa17a061f19761f1bef1e365418839a
+  content_hash: sha256:ac776aa890c7cc3a419b7b080d83a60e139244c1b0812f4fa57d4790bf05d1dc
 - kind: project-relative
   target: claude
   value: .claude/skills/ait-session-report-review
@@ -12032,7 +12032,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:4f3ca5fae0cd63227c076ed674dab3e7c3f0ce9fe8cf0b7e55f36b92395210e6
+  content_hash: sha256:74b0b28fefb5fa44ab5be5f799662d3897f75173d6d90a3428ee9722c668603d
 - kind: project-relative
   target: codex
   value: .agents/skills/ait-session-analysis/evals/result-scenarios.json
@@ -12041,7 +12041,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:847e909a490fbecd17706cb7aab71584dd736e7589b8ee68aa5481b49bf15b8d
+  content_hash: sha256:8dedf1bd664d38474cb1c086e2d5f327464ce1c388c6c888ca6962ee8e23ea4c
 - kind: project-relative
   target: codex
   value: .agents/skills/ait-session-analysis/evals/script-contract-tests.json
@@ -12050,7 +12050,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:03ff81372f000a2a0ee803a093d1a6819cf56869696834329a767638e96946a3
+  content_hash: sha256:1f1372cc11ab6433cbf39a8b80b194f26736279b1d37d4adad5a6ed9e666fa75
 - kind: project-relative
   target: codex
   value: .agents/skills/ait-session-analysis/evals/script-fixtures/basic/claude/session.jsonl
@@ -12140,7 +12140,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:feee55505f4a92be8e9d8e669ee697645481e51ac468e833ae5fac8904b56fa5
+  content_hash: sha256:76b0566f892b1ac4423083f66413b6536306820d363089eb7ac8122ae1563952
 - kind: project-relative
   target: codex
   value: .agents/skills/ait-session-analysis/scripts/session_analysis.py
@@ -12149,7 +12149,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:a2bd48a31974a94d05c55b866aa3ba01cfa17a061f19761f1bef1e365418839a
+  content_hash: sha256:ac776aa890c7cc3a419b7b080d83a60e139244c1b0812f4fa57d4790bf05d1dc
 - kind: project-relative
   target: codex
   value: .agents/skills/ait-session-report-review
