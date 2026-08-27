@@ -81,6 +81,25 @@ def local_source_path(project_root: Path, deployed_path: str) -> Path | None:
     return project_root / ".apm" / "skills" / Path(*parts[skill_index + 1 :])
 
 
+def matches_local_source(source: Path, deployed: Path) -> bool:
+    """Подтвердить источник с учётом переписанных APM относительных ссылок."""
+    source_bytes = source.read_bytes()
+    deployed_bytes = deployed.read_bytes()
+    if source_bytes == deployed_bytes:
+        return True
+    try:
+        source_text = source_bytes.decode("utf-8")
+        deployed_text = deployed_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return False
+    restored = re.sub(
+        r"\]\(\.\./\.\./\.\./\.apm/skills/([^)]*)\)",
+        r"](../\1)",
+        deployed_text,
+    )
+    return restored == source_text
+
+
 def is_local_override(
     finding: dict[str, Any],
     deployments: dict[str, dict[str, Any]],
@@ -108,7 +127,7 @@ def is_local_override(
         source
         and source.is_file()
         and deployed.is_file()
-        and source.read_bytes() == deployed.read_bytes()
+        and matches_local_source(source, deployed)
     )
 
 
@@ -127,7 +146,7 @@ def is_local_addition(finding: dict[str, Any], project_root: Path) -> bool:
         source
         and source.is_file()
         and deployed.is_file()
-        and source.read_bytes() == deployed.read_bytes()
+        and matches_local_source(source, deployed)
     )
 
 
@@ -147,6 +166,27 @@ def is_confirmed_local_removal_path(
     source = local_source_path(project_root, path)
     deployed = project_root / path
     return bool(source and not source.exists() and not deployed.exists())
+
+
+def is_confirmed_local_source_path(
+    path: str,
+    deployments: dict[str, dict[str, Any]],
+    package_id: str,
+    project_root: Path,
+) -> bool:
+    deployment = deployments.get(path)
+    source = local_source_path(project_root, path)
+    deployed = project_root / path
+    owners = deployment.get("owners") if isinstance(deployment, dict) else None
+    return bool(
+        source
+        and source.is_file()
+        and deployed.is_file()
+        and isinstance(owners, list)
+        and package_id in owners
+        and "." in owners
+        and matches_local_source(source, deployed)
+    )
 
 
 def is_local_removal(
@@ -291,11 +331,19 @@ def only_accepted_drift(report: dict[str, Any], project_root: Path, lockfile_pat
                 return 0
             if not all(
                 isinstance(path, str)
-                and is_confirmed_local_removal_path(
-                    path,
-                    deployments,
-                    package_id,
-                    project_root,
+                and (
+                    is_confirmed_local_removal_path(
+                        path,
+                        deployments,
+                        package_id,
+                        project_root,
+                    )
+                    or is_confirmed_local_source_path(
+                        path,
+                        deployments,
+                        package_id,
+                        project_root,
+                    )
                 )
                 for path in details
             ):

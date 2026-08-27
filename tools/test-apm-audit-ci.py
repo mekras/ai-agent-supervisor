@@ -32,6 +32,8 @@ def write_project(
     changed_local_addition: bool = False,
     local_removal: bool = False,
     unowned_removal: bool = False,
+    rewritten_local_source: bool = False,
+    local_source_presence: bool = False,
 ) -> Path:
     (root / "apm.yml").write_text(
         "name: local-package\nversion: 1.0.0\n",
@@ -41,8 +43,16 @@ def write_project(
     deployed = root / ".agents" / "skills" / "example" / "SKILL.md"
     source.parent.mkdir(parents=True)
     deployed.parent.mkdir(parents=True)
-    source.write_text("local source\n", encoding="utf-8")
-    deployed.write_text("local source\n", encoding="utf-8")
+    source.write_text(
+        "[skill](../other/README.md)\n" if rewritten_local_source else "local source\n",
+        encoding="utf-8",
+    )
+    deployed.write_text(
+        "[skill](../../../.apm/skills/other/README.md)\n"
+        if rewritten_local_source
+        else "local source\n",
+        encoding="utf-8",
+    )
     adapter_source = root / ".apm" / "skills" / "example" / "scripts" / "adapter.py"
     adapter_deployed = root / ".agents" / "skills" / "example" / "scripts" / "adapter.py"
     adapter_source.parent.mkdir(parents=True)
@@ -125,6 +135,14 @@ deployments:
             "path": ".agents/skills/example/scripts/__pycache__/adapter.cpython-313.pyc",
                 "kind": "unintegrated",
                 "package": "",
+            }
+        )
+    if local_source_presence:
+        checks.append(
+            {
+                "name": "deployed-files-present",
+                "passed": False,
+                "details": [".agents/skills/example/SKILL.md"],
             }
         )
     if local_addition or changed_local_addition:
@@ -228,6 +246,20 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         accepted = run(root, write_project(root, local_hash_drift=True))
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "подтверждено файлов — 1" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        accepted = run(
+            root,
+            write_project(
+                root,
+                local_hash_drift=True,
+                rewritten_local_source=True,
+                local_source_presence=True,
+            ),
+        )
         assert accepted.returncode == 0, accepted.stdout + accepted.stderr
         assert "подтверждено файлов — 1" in accepted.stdout
 

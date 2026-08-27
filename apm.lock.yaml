@@ -1,5 +1,5 @@
 lockfile_version: '2'
-generated_at: '2026-08-27T06:59:11.231957+00:00'
+generated_at: '2026-08-27T07:35:04.272985+00:00'
 apm_version: 0.28.0
 dependencies:
 - repo_url: mekras/ai-dev-team
@@ -1245,7 +1245,7 @@ dependencies:
   is_dev: true
   constraint: ^0.27.0
   resolved_tag: 0.27.0
-  resolved_at: '2026-08-27T06:58:46+00:00'
+  resolved_at: '2026-08-27T07:34:47+00:00'
   declared_license: MIT
 - repo_url: mekras/ai-agent-supervisor
   name: ai-agent-supervisor
@@ -1800,7 +1800,7 @@ dependencies:
   is_dev: true
   constraint: ^2.3.20
   resolved_tag: 2.3.21
-  resolved_at: '2026-08-27T06:58:56+00:00'
+  resolved_at: '2026-08-27T07:25:08+00:00'
   declared_license: MIT
 - repo_url: mekras/ai-russian-language
   name: ai-russian-language
@@ -1859,7 +1859,7 @@ dependencies:
   is_dev: true
   constraint: ^2.1.5
   resolved_tag: 2.1.5
-  resolved_at: '2026-08-27T06:58:56+00:00'
+  resolved_at: '2026-08-27T07:25:08+00:00'
   declared_license: MIT
 - repo_url: mekras/project-knowlege-corpus
   name: project-knowledge-corpus
@@ -2344,7 +2344,7 @@ dependencies:
   is_dev: true
   constraint: 0.19.5
   resolved_tag: 0.19.5
-  resolved_at: '2026-08-27T06:58:56+00:00'
+  resolved_at: '2026-08-27T07:25:08+00:00'
   declared_license: MIT
 - repo_url: talkstream/ru-text
   name: ru-text
