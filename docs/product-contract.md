@@ -27,11 +27,10 @@
   `.apm/skills/**`, `.agents/skills/**` и `apm_modules/**`;
 - публичные файлы APM: `apm.yml`, `apm.lock.yaml` и документированные поля этих
   форматов;
-- реестр APM `ai-agent-supervisor`, описанный полем `marketplace` в `apm.yml`,
-  и его сгенерированные файлы `.claude-plugin/marketplace.json` и
-  `.agents/plugins/marketplace.json`. Реестр позволяет подключить коллекцию
-  командой `apm marketplace add mekras/ai-agent-supervisor` и установить пакет
-  по имени `ai-agent-supervisor`;
+- установку через общий реестр APM `mekras/apm-marketplace`: потребитель
+  подключает его командой `apm marketplace add mekras/apm-marketplace` и
+  устанавливает пакет `ai-agent-supervisor@mekras`. Выпуск по тегу переносит
+  опубликованный состав в этот реестр и пересобирает его описания;
 - устанавливаемые средства в `tools/**`, их установщики `install-*` и локальные
   настройки `evals.local.yml`.
 - средство `run-skill-script-contract-tests.py` из навыка `ai-setup-apm`: оно

@@ -40,19 +40,19 @@
 и выполните в корне проекта команду для используемого агента:
 
 ```bash
-apm marketplace add mekras/ai-agent-supervisor --ref master
+apm marketplace add mekras/apm-marketplace --ref master
 ```
 
 Для Codex:
 
 ```bash
-apm install ai-agent-supervisor@ai-agent-supervisor --target codex
+apm install ai-agent-supervisor@mekras --target codex
 ```
 
 Для Claude Code:
 
 ```bash
-apm install ai-agent-supervisor@ai-agent-supervisor --target claude
+apm install ai-agent-supervisor@mekras --target claude
 ```
 
 После установки навыки коллекции станут доступны агенту в этом проекте.
@@ -397,3 +397,18 @@ APM_EVAL_LIMIT=1 apm run evals
 оценки добавьте `--yes` напрямую к запускателю. После изменения экспортируемого
 навыка сохраните отчёт затронутых фикстур; после изменения общей маршрутизации
 или оценочной оснастки запускайте все фикстуры.
+
+## Выпуск
+
+Перед выпуском обновите `version` в `apm.yml` и перенесите изменения из раздела
+«Невыпущено» в раздел этой версии в `CHANGELOG.md`. Номер тега исходного
+репозитория должен в точности совпадать с `version`, например `2.3.22`.
+
+После отправки такого тега GitHub Actions проверяет коллекцию, переносит её
+публичный состав в `mekras/apm-marketplace`, пересобирает описания реестра и
+создаёт тег пакета `ai-agent-supervisor--v<версия>`.
+
+Для первого автоматического выпуска добавьте в настройках репозитория
+`mekras/ai-agent-supervisor` секрет Actions `APM_MARKETPLACE_TOKEN`. Это должен
+быть тонко настроенный personal access token с правом **Contents: Read and
+write** только для репозитория `mekras/apm-marketplace`.
