@@ -1,5 +1,9 @@
 *.py[cod]
-/.agents
+/.agents/*
+!/.agents/plugins/
+!/.agents/plugins/marketplace.json
+/.claude-plugin/*
+!/.claude-plugin/marketplace.json
 /.claude/*
 !/.claude/CLAUDE.md
 /.codex
@@ -12,3 +16,4 @@
 /knowledge/data/**/*.tmp.*
 __pycache__
 apm_modules/
+build/

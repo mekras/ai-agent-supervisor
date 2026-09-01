@@ -17,3 +17,20 @@ scripts:
 devDependencies:
   apm:
   - mekras/ai-dev-team#^0.27.0
+marketplace:
+  name: ai-agent-supervisor
+  description: Коллекция навыков для управления применением ИИ
+  owner:
+    name: mekras
+    url: https://github.com/mekras
+  build:
+    tagPattern: "{version}"
+  outputs:
+    claude: {}
+    codex: {}
+  packages:
+  - name: ai-agent-supervisor
+    description: Коллекция навыков для управления применением ИИ
+    source: mekras/ai-agent-supervisor
+    version: ^2.3.21
+    category: Productivity

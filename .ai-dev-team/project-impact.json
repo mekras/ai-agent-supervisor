@@ -115,7 +115,14 @@
       "kind": "delivery",
       "semantic_type": "поставка публикуемой коллекции",
       "authority": "canonical",
-      "paths": ["apm.yml", "apm.lock.yaml", "CHANGELOG.md", "LICENSE"],
+      "paths": [
+        "apm.yml",
+        "apm.lock.yaml",
+        "CHANGELOG.md",
+        "LICENSE",
+        ".claude-plugin/marketplace.json",
+        ".agents/plugins/marketplace.json"
+      ],
       "checks": ["ai-setup-apm", "ait-changelog", "python3 tools/apm-audit-ci"]
     }
   ],

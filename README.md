@@ -36,19 +36,23 @@
 
 ## Установка
 
-Установите [APM](https://microsoft.github.io/apm/) и выполните в корне проекта
-команду для используемого агента.
+Установите [APM](https://microsoft.github.io/apm/), подключите реестр коллекции
+и выполните в корне проекта команду для используемого агента:
+
+```bash
+apm marketplace add mekras/ai-agent-supervisor --ref main
+```
 
 Для Codex:
 
 ```bash
-apm install --dev mekras/ai-agent-supervisor#^2.0.0 --target codex
+apm install ai-agent-supervisor@ai-agent-supervisor --target codex
 ```
 
 Для Claude Code:
 
 ```bash
-apm install --dev mekras/ai-agent-supervisor#^2.0.0 --target claude
+apm install ai-agent-supervisor@ai-agent-supervisor --target claude
 ```
 
 После установки навыки коллекции станут доступны агенту в этом проекте.
@@ -60,7 +64,7 @@ apm install --dev mekras/ai-agent-supervisor#^2.0.0 --target claude
 Чтобы обновить установленную коллекцию, выполните:
 
 ```bash
-apm update mekras/ai-agent-supervisor
+apm update
 ```
 
 ### Необязательные зависимости
