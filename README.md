@@ -40,7 +40,7 @@
 и выполните в корне проекта команду для используемого агента:
 
 ```bash
-apm marketplace add mekras/ai-agent-supervisor --ref main
+apm marketplace add mekras/ai-agent-supervisor --ref master
 ```
 
 Для Codex:
