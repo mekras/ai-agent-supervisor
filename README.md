@@ -294,17 +294,17 @@ apm update
 
 ### Проектная документация
 
-- [Публичный договор коллекции](docs/product-contract.md)
-- [Требования](docs/requirements/README.md)
-- [Гипотезы](docs/hypotheses/README.md)
-- [Журнал решений](docs/decisions/README.md)
+- [Публичный договор коллекции](https://github.com/mekras/ai-agent-supervisor/blob/master/docs/product-contract.md)
+- [Требования](https://github.com/mekras/ai-agent-supervisor/tree/master/docs/requirements)
+- [Гипотезы](https://github.com/mekras/ai-agent-supervisor/tree/master/docs/hypotheses)
+- [Журнал решений](https://github.com/mekras/ai-agent-supervisor/tree/master/docs/decisions)
 
 ### Проверки
 
 Проверки разделены на две команды.
 
-Обязательная проверка не вызывает модель или сеть и требует Python 3 со
-стандартной библиотекой:
+Обязательная проверка не вызывает модель или сеть. Для проверки исходного
+репозитория нужны Python 3, Git, APM и пакет PyYAML:
 
 ```bash
 apm run tests

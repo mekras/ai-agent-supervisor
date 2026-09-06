@@ -11,6 +11,10 @@ on:
         required: true
         type: string
 
+concurrency:
+  group: publish-ai-agent-supervisor
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -61,17 +65,20 @@ jobs:
             marketplace
 
       - name: Синхронизировать состав пакета
+        id: sync-package
         shell: bash
         run: |
           set -euo pipefail
           package_dir="marketplace/packages/${PACKAGE_NAME}"
-          cp "$package_dir/apm.yml" "$RUNNER_TEMP/${PACKAGE_NAME}.apm.yml"
-          rm -rf "$package_dir"
-          mkdir -p "$package_dir"
-          cp -a .apm "$package_dir/.apm"
-          cp README.md CHANGELOG.md LICENSE "$package_dir/"
-          cp "$RUNNER_TEMP/${PACKAGE_NAME}.apm.yml" "$package_dir/apm.yml"
-          RELEASE_VERSION="$RELEASE_VERSION" PACKAGE_DIR="$package_dir" python3 - <<'PY'
+          candidate_dir="$RUNNER_TEMP/${PACKAGE_NAME}-candidate"
+          previous_dir="$RUNNER_TEMP/${PACKAGE_NAME}-previous"
+          test -f "$package_dir/apm.yml"
+          rm -rf "$candidate_dir" "$previous_dir"
+          mkdir -p "$candidate_dir"
+          cp -a .apm "$candidate_dir/.apm"
+          cp README.md CHANGELOG.md LICENSE "$candidate_dir/"
+          cp "$package_dir/apm.yml" "$candidate_dir/apm.yml"
+          RELEASE_VERSION="$RELEASE_VERSION" PACKAGE_DIR="$candidate_dir" python3 - <<'PY'
           import os
           import re
           from pathlib import Path
@@ -84,7 +91,28 @@ jobs:
           if count != 1:
               raise SystemExit("Не найдена версия манифеста пакета")
           package_manifest.write_text(text, encoding="utf-8")
+          PY
+          package_tag="${PACKAGE_NAME}--v${RELEASE_VERSION}"
+          if git -C marketplace rev-parse --verify --quiet "${package_tag}^{commit}" >/dev/null; then
+            mkdir -p "$previous_dir"
+            git -C marketplace archive "$package_tag" "packages/${PACKAGE_NAME}" | \
+              tar -x -C "$previous_dir" --strip-components=2
+            if diff -ruN "$previous_dir" "$candidate_dir"; then
+              echo "Версия ${RELEASE_VERSION} уже опубликована с тем же составом."
+              echo "already_published=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Тег ${package_tag} уже указывает на другой состав пакета." >&2
+            exit 1
+          fi
+          rm -rf "$package_dir"
+          mv "$candidate_dir" "$package_dir"
+          RELEASE_VERSION="$RELEASE_VERSION" python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
 
+          version = os.environ["RELEASE_VERSION"]
           marketplace_manifest = Path("marketplace/apm.yml")
           text = marketplace_manifest.read_text(encoding="utf-8")
           pattern = (r"(source: \./packages/ai-agent-supervisor\n"
@@ -101,6 +129,7 @@ jobs:
           fi
 
       - name: Собрать и проверить реестр
+        if: steps.sync-package.outputs.already_published != 'true'
         working-directory: marketplace
         shell: bash
         run: |
@@ -111,6 +140,7 @@ jobs:
           git diff --check
 
       - name: Опубликовать версию пакета
+        if: steps.sync-package.outputs.already_published != 'true'
         working-directory: marketplace
         shell: bash
         run: |
@@ -119,16 +149,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "Опубликована коллекция ${PACKAGE_NAME} ${RELEASE_VERSION}"
-            git push origin master
-          fi
-          if git ls-remote --exit-code --tags origin "refs/tags/${package_tag}"; then
-            test "$(git rev-parse "${package_tag}^{}")" = "$(git rev-parse HEAD)"
-          else
-            git tag -a "$package_tag" -m "Опубликована коллекция ${PACKAGE_NAME} ${RELEASE_VERSION}"
-            git push origin "$package_tag"
-          fi
+          git diff --cached --quiet && {
+            echo "Состав новой версии не отличается от текущего реестра." >&2
+            exit 1
+          }
+          git commit -m "Опубликована коллекция ${PACKAGE_NAME} ${RELEASE_VERSION}"
+          git tag -a "$package_tag" -m "Опубликована коллекция ${PACKAGE_NAME} ${RELEASE_VERSION}"
+          git push --atomic origin master "$package_tag"
 
       - name: Создать GitHub Release исходной коллекции
         env:
