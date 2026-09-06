@@ -61,9 +61,26 @@ def test_skipped_source_text_fails() -> None:
         assert "не найдена непрерывно" in errors[0]
 
 
+def test_absent_local_artifact_is_skipped() -> None:
+    with tempfile.TemporaryDirectory() as temporary:
+        corpus = Path(temporary)
+        page = corpus / "data" / "source" / "pages" / "page"
+        page.mkdir(parents=True)
+        (page / "statements.yml").write_text(
+            """statements:
+  - id: TEST-001
+    excerpt: Citation kept in a local artifact.
+    artifact: normalized.local.md
+""",
+            encoding="utf-8",
+        )
+        assert MODULE.validate(corpus) == []
+
+
 def main() -> int:
     test_line_wrapping_is_ignored()
     test_skipped_source_text_fails()
+    test_absent_local_artifact_is_skipped()
     print("Проверки непрерывности цитат утверждений пройдены.")
     return 0
 

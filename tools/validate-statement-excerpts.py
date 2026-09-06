@@ -17,6 +17,10 @@ def normalize_whitespace(value: str) -> str:
     return " ".join(value.split())
 
 
+def is_local_artifact(path: Path) -> bool:
+    return ".local." in path.name or path.name.endswith(".local")
+
+
 def load_statements(path: Path) -> list[dict[str, Any]]:
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -36,6 +40,7 @@ def load_statements(path: Path) -> list[dict[str, Any]]:
 def validate(corpus: Path) -> list[str]:
     errors: list[str] = []
     checked = 0
+    skipped = 0
     for statements_path in sorted(corpus.glob("data/**/statements.yml")):
         try:
             statements = load_statements(statements_path)
@@ -58,6 +63,9 @@ def validate(corpus: Path) -> list[str]:
                 errors.append(f"{label}: путь к артефакту выходит за пределы единицы")
                 continue
             artifact_path = statements_path.parent / artifact_relative
+            if is_local_artifact(artifact_relative) and not artifact_path.is_file():
+                skipped += 1
+                continue
             try:
                 artifact_text = artifact_path.read_text(encoding="utf-8")
             except OSError as exc:
@@ -70,6 +78,8 @@ def validate(corpus: Path) -> list[str]:
                 )
     if not errors:
         print(f"Цитаты утверждений проверены: {checked}.")
+        if skipped:
+            print(f"Цитаты в недоступных локальных артефактах пропущены: {skipped}.")
     return errors
 
 
