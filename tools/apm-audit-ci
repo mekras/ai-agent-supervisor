@@ -42,19 +42,36 @@ def load_yaml(path: Path) -> dict[str, Any]:
 
 
 def local_package_id(manifest: dict[str, Any], lockfile: dict[str, Any]) -> str | None:
+    """Получить точный идентификатор владельца без угадывания неполных данных."""
     name = manifest.get("name")
     version = manifest.get("version")
-    if not isinstance(name, str) or not isinstance(version, str):
+    if not isinstance(name, str) or not name.strip() or not isinstance(version, str) or not version.strip():
+        return None
+    dependencies = lockfile.get("dependencies", [])
+    if not isinstance(dependencies, list):
         return None
     matches = [
-        dependency.get("repo_url")
-        for dependency in lockfile.get("dependencies", [])
+        dependency
+        for dependency in dependencies
         if isinstance(dependency, dict)
         and dependency.get("name") == name
         and dependency.get("version") == version
-        and isinstance(dependency.get("repo_url"), str)
     ]
-    return matches[0] if len(matches) == 1 else None
+    if len(matches) != 1:
+        return None
+    dependency = matches[0]
+    repo_url = dependency.get("repo_url")
+    if not isinstance(repo_url, str) or not repo_url.strip():
+        return None
+    is_virtual = dependency.get("is_virtual", False)
+    virtual_path = dependency.get("virtual_path")
+    if is_virtual is False:
+        return repo_url if virtual_path in (None, "") else None
+    if is_virtual is not True or not isinstance(virtual_path, str) or not virtual_path.strip():
+        return None
+    if "\\" in virtual_path or any(part in {"", ".", ".."} for part in virtual_path.split("/")):
+        return None
+    return f"{repo_url}/{virtual_path}"
 
 
 def deployment_by_path(lockfile: dict[str, Any]) -> dict[str, dict[str, Any]]:

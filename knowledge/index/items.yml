@@ -143,6 +143,28 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: ARXC--2601.20404v2
+  source_id: ARXC
+  path: data/arxc/pages/2601.20404v2
+  title: On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents
+  date_published: null
+  workflow_stage: normalized
+  access: Публичная страница выбранной версии.
+- id: ARXC--2602.11988v2
+  source_id: ARXC
+  path: data/arxc/pages/2602.11988v2
+  title: 'Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding
+    Agents?'
+  date_published: null
+  workflow_stage: normalized
+  access: Публичная страница выбранной версии.
+- id: ARXC--2607.27250v1
+  source_id: ARXC
+  path: data/arxc/pages/2607.27250v1
+  title: Do Context Files Help Coding Agents? A Two-Agent Ablation Study on Real Repositories
+  date_published: null
+  workflow_stage: normalized
+  access: Публичная страница выбранной версии.
 - id: ASES--standard
   source_id: ASES
   path: data/ases/pages/standard

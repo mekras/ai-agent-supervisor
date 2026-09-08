@@ -1,0 +1,12 @@
+id: "ARXC--2602.11988v2"
+source_id: "ARXC"
+path: "pages/2602.11988v2"
+title: "Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?"
+locator: "https://arxiv.org/abs/2602.11988v2"
+url: "https://arxiv.org/abs/2602.11988v2"
+access: "Публичная страница выбранной версии."
+status: "normalized"
+workflow_stage: "normalized"
+version_date: "2026-06-23"
+checked_at: "2026-09-07"
+known_limitations: ["Извлечено выбранное сообщение из аннотации. Остальное содержание отложено в source-map.yml, полная статья и воспроизводимость не проверены."]

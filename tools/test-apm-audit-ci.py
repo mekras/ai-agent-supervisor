@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import runpy
 import stat
 import subprocess
 import sys
@@ -34,6 +35,9 @@ def write_project(
     unowned_removal: bool = False,
     rewritten_local_source: bool = False,
     local_source_presence: bool = False,
+    package_id: str = "example/local-package",
+    dependency: dict[str, object] | None = None,
+    duplicate_dependency: bool = False,
 ) -> Path:
     (root / "apm.yml").write_text(
         "name: local-package\nversion: 1.0.0\n",
@@ -59,16 +63,17 @@ def write_project(
     adapter_deployed.parent.mkdir(parents=True)
     adapter_source.write_text("#!/bin/sh\n", encoding="utf-8")
     adapter_deployed.write_text("#!/bin/sh\n", encoding="utf-8")
-    lockfile = f"""dependencies:
-- repo_url: example/local-package
-  name: local-package
-  version: 1.0.0
+    dependency = dependency if dependency is not None else {
+        "repo_url": "example/local-package", "name": "local-package", "version": "1.0.0",
+    }
+    dependencies = [dependency, dependency] if duplicate_dependency else [dependency]
+    lockfile = f"""dependencies: {json.dumps(dependencies)}
 deployments:
 - value: .agents/skills/example/SKILL.md
-  owners: [example/local-package, .]
+  owners: [{package_id}, .]
   active_owner: {active_owner}
 - value: .agents/skills/example/scripts/adapter.py
-  owners: [example/local-package, {adapter_owner}]
+  owners: [{package_id}, {adapter_owner}]
   active_owner: {adapter_owner}
 """
     if local_removal or unowned_removal:
@@ -109,7 +114,7 @@ deployments:
             {
                 "path": ".agents/skills/example/SKILL.md",
                 "kind": "modified",
-                "package": "example/local-package",
+                "package": package_id,
             }
         ]
     if extra_failure:
@@ -209,6 +214,7 @@ def run(root: Path, fake_apm: Path) -> subprocess.CompletedProcess[str]:
 
 
 def main() -> int:
+    test_package_identity()
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         accepted = run(root, write_project(root))
@@ -327,6 +333,60 @@ def main() -> int:
 
     print("Узкий обход ложного APM drift проверен.")
     return 0
+
+
+def test_package_identity() -> None:
+    package_id = "example/marketplace/packages/local-package"
+    virtual = {
+        "name": "local-package", "version": "1.0.0", "repo_url": "example/marketplace",
+        "is_virtual": True, "virtual_path": "packages/local-package",
+    }
+    for active_owner in (".", package_id):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            accepted = run(root, write_project(root, dependency=virtual,
+                package_id=package_id, active_owner=active_owner))
+            assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+            assert "подтверждено файлов — 1" in accepted.stdout
+
+    for options in (
+        {"dependency": {key: value for key, value in virtual.items() if key != "virtual_path"}},
+        {"dependency": virtual, "duplicate_dependency": True},
+        {"dependency": {**virtual, "version": "2.0.0"}},
+        {"dependency": virtual, "active_owner": "example/other-package"},
+        {"dependency": virtual, "extra_failure": True},
+    ):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            rejected = run(root, write_project(root, package_id=package_id, **options))
+            assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+            assert '"passed": false' in rejected.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        fake_apm = write_project(root, dependency=virtual, package_id=package_id)
+        (root / ".agents/skills/example/SKILL.md").write_text("unrelated edit\n", encoding="utf-8")
+        rejected = run(root, fake_apm)
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+
+    resolve = runpy.run_path(str(AUDIT))["local_package_id"]
+    manifest = {"name": "local-package", "version": "1.0.0"}
+    ordinary = {key: value for key, value in virtual.items() if key not in {"is_virtual", "virtual_path"}}
+    assert resolve(manifest, {"dependencies": [ordinary]}) == "example/marketplace"
+    assert resolve(manifest, {"dependencies": [{**ordinary, "is_virtual": False}]}) == "example/marketplace"
+    for invalid in (
+        {**virtual, "is_virtual": "true"},
+        {**virtual, "is_virtual": False},
+        {**virtual, "virtual_path": ""},
+        {**virtual, "virtual_path": 42},
+        {**virtual, "virtual_path": "../local-package"},
+        {**virtual, "virtual_path": "packages/./local-package"},
+        {**virtual, "virtual_path": r"packages\local-package"},
+        {**virtual, "virtual_path": "/packages/local-package"},
+        {**virtual, "repo_url": ""},
+    ):
+        assert resolve(manifest, {"dependencies": [invalid]}) is None, invalid
+    assert resolve(manifest, {"dependencies": [ordinary, {**ordinary, "repo_url": None}]}) is None
 
 
 if __name__ == "__main__":

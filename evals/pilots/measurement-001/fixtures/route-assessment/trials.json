@@ -1,0 +1,8 @@
+{
+  "task_class": "documentation_review",
+  "observations": [
+    {"case_id": "sample-doc-01", "route": "economy", "executor_claim": "успешно", "independent_acceptance": null, "cost": null}
+  ],
+  "reference_route_results": [],
+  "shared_acceptance_criteria": null
+}

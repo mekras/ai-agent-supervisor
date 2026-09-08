@@ -1,0 +1,49 @@
+id: ARXC
+slug: arxc
+title: "arXiv: исследования контекстных инструкций"
+status: draft
+priority: normal
+carrier_type: website
+source_kind: research
+long_source: true
+adapter: web.run
+storage_strategy: external_reference
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: selected_fragments
+allowed_use: "Точечное чтение и краткие атрибутированные фрагменты для разбора. Полные тексты и аннотации в Git не копируются. Условия каждой работы указаны в её normalized.md."
+requires_access_check: true
+locator: "https://arxiv.org"
+public_reference: "https://arxiv.org"
+access:
+  default: "Публичные страницы выбранных работ без авторизации. Перед новым использованием проверить доступ и условия."
+reliability: primary_research
+stability: versioned
+refresh_policy: on_demand
+last_checked_at: "2026-09-07"
+affects: [".apm/skills/"]
+sensitivity: public
+retrieval:
+  method: "Точечное открытие URL выбранной версии встроенным веб-инструментом агента."
+  owner: "Агент текущей задачи"
+  automated_pipeline: unsupported-adapter
+  limitation: "web.run использован в текущей сессии, но не зарегистрирован как автоматический адаптер конвейера."
+normalization:
+  required_before_statements: true
+  input: "Выбранный раздел конкретной версии по ссылке из items.yml."
+  output: "Локальный нормализованный фрагмент с URL, разделом и ограничениями."
+  restriction: "До получения и проверки фрагмента индекс не является основанием содержательного вывода."
+use_policy:
+  action: store_selected_fragments
+  status: permitted
+  basis: "Проверены ссылки view license выбранных версий. Для двух работ указана CC BY 4.0 с атрибуцией. Для 2601.20404v2 нет общей лицензии на повторную публикацию, сохранена только трёхсловная цитата для разбора."
+  scope: "Три кратких фрагмента аннотаций и отдельные утверждения о сообщениях авторов."
+  checked_at: "2026-09-07"
+  restrictions: ["Полное копирование и публикация текста не разрешены этой записью."]
+known_limitations:
+  - "Проверены страницы с аннотациями, полные статьи и воспроизводимость не проверены."
+  - "Работы о контекстных файлах не подтверждают автоматически эффект коллекции навыков."
+  - "Результаты разных выборок и методов нельзя объединять голосованием источников."
+processing_notes:
+  - "Выборка нужна для проверки необходимости инструкций наряду с руководствами по их реализации."
+  - "Из каждой аннотации извлечено одно ограниченное утверждение о сообщении авторов. Остальное содержание отложено с явной картой охвата."

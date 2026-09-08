@@ -305,6 +305,84 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: ARXC-001
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2
+  path: knowledge/data/arxc/pages/2601.20404v2/statements.yml
+  status: null
+  kind: fact
+  text: Авторы сообщают, что в их выборке наличие AGENTS.md связано с меньшей медианной
+    длительностью выполнения задач.
+  artifact: normalized.md
+  checked_at: '2026-09-07'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Подтверждено сообщение авторов в аннотации, не истинность и воспроизводимость
+    результата.
+  - Полная методика и результаты не проверены. Вывод ограничен выборкой исследования.
+  - Контекстные файлы не тождественны публикуемой коллекции навыков.
+- id: ARXC-002
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2
+  path: knowledge/data/arxc/pages/2602.11988v2/statements.yml
+  status: null
+  kind: fact
+  text: Авторы сообщают, что в исследованных условиях предоставление контекстных файлов
+    в общем случае не повышает долю успешно решённых задач.
+  artifact: normalized.md
+  checked_at: '2026-09-07'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Подтверждено сообщение авторов в аннотации, не истинность и воспроизводимость
+    результата.
+  - Полная методика и результаты не проверены. Вывод ограничен выборкой исследования.
+  - Контекстные файлы не тождественны публикуемой коллекции навыков.
+- id: ARXC-003
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1
+  path: knowledge/data/arxc/pages/2607.27250v1/statements.yml
+  status: null
+  kind: fact
+  text: Авторы сообщают, что в их эксперименте изменение стратегии контекста не дало
+    измеримого изменения правильности результата.
+  artifact: normalized.md
+  checked_at: '2026-09-07'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Подтверждено сообщение авторов в аннотации, не истинность и воспроизводимость
+    результата.
+  - Полная методика и результаты не проверены. Вывод ограничен выборкой исследования.
+  - Контекстные файлы не тождественны публикуемой коллекции навыков.
 - id: ASES-001
   source_id: ASES
   item_id: ASES--standard

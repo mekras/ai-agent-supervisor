@@ -3,12 +3,14 @@
 
 from __future__ import annotations
 
+import json
 import os
 import stat
 import subprocess
 import sys
 import tempfile
 import textwrap
+import tomllib
 from pathlib import Path
 
 
@@ -99,6 +101,9 @@ def qualify(core: Path, project: Path, output: Path, *, escalated: bool = False,
     assert prepared.returncode == 0, prepared.stderr
     traces = output.parent / "traces"
     traces.mkdir(exist_ok=True)
+    checks = output.parent / "checks"
+    checks.mkdir(exist_ok=True)
+    (checks / "result.txt").write_text("Конечные критерии всего маршрута проверены.\n", encoding="utf-8")
     (traces / "reference.jsonl").write_text("reference\n", encoding="utf-8")
     (traces / "candidate.jsonl").write_text("candidate\n", encoding="utf-8")
     content = output.read_text(encoding="utf-8")
@@ -115,6 +120,24 @@ def qualify(core: Path, project: Path, output: Path, *, escalated: bool = False,
         content = content.replace("preserved_results = []", 'preserved_results = ["artifacts/phase-one.md"]')
     if rework:
         content = content.replace("rework_required = false", "rework_required = true")
+    task_class = tomllib.loads(project.read_text(encoding="utf-8"))["task_classes"][0]
+    route_record = {
+        "scope": "whole_route",
+        "candidate_steps": task_class.get("candidate_steps", ["candidate"]),
+        "candidate_conditions": task_class.get("candidate_conditions", []),
+        "transition_evidence": ["checks/result.txt"] * len(task_class.get("candidate_conditions", [])),
+        "actual_candidate_steps": task_class.get("candidate_steps", ["candidate"]),
+        "rework_required": rework,
+        "criterion_results": {criterion: "passed" for criterion in task_class["acceptance_criteria"]},
+        "result_evidence": {"test-result": "checks/result.txt"},
+        "assessment_basis": "Проверен весь указанный маршрут с конечной приёмкой и ограничениями.",
+        "rework_reason": "Исправление результата после обнаружения ошибки." if rework else "",
+        "preserved_results": [],
+        "discarded_results": ["первая версия результата"] if rework else [],
+    }
+    route_file = output.with_suffix(".route.json")
+    route_file.write_text(json.dumps(route_record), encoding="utf-8")
+    content = content.replace('route_evidence = ""', f'route_evidence = {json.dumps(route_file.name)}')
     output.write_text(content, encoding="utf-8")
 
 
@@ -174,8 +197,67 @@ def main() -> int:
             "--task-class",
             "checked-change",
         )
-        assert reworked.returncode == 1
-        assert "переделывание работы запрещает" in reworked.stderr
+        assert reworked.returncode == 0, reworked.stderr
+        assert "rework_required=true" in reworked.stdout
+        assert "automatic_candidate=qualified" in reworked.stdout
+
+        rework_evidence_file = reworked_qualification.with_suffix(".route.json")
+        rework_evidence = json.loads(rework_evidence_file.read_text(encoding="utf-8"))
+        for key, value in (
+            ("actual_candidate_steps", ["candidate", "reference"]),
+            ("rework_required", False), ("rework_reason", ""),
+            ("assessment_basis", ""), ("preserved_results", None),
+            ("discarded_results", None), ("criterion_results", {"all-tests-pass": "failed"}),
+            ("result_evidence", {"test-result": "absent.txt"}),
+            ("transition_evidence", ["checks/result.txt"]),
+        ):
+            rework_evidence_file.write_text(json.dumps({**rework_evidence, key: value}), encoding="utf-8")
+            rejected = run("check", "--user-core", str(core), "--project-overlay", str(project),
+                           "--qualification", str(reworked_qualification), "--task-class", "checked-change")
+            assert rejected.returncode == 1, (key, rejected.stdout)
+        rework_evidence_file.write_text(json.dumps(rework_evidence), encoding="utf-8")
+
+        missing_route = directory / "missing-route.toml"
+        missing_route.write_text(
+            qualification.read_text(encoding="utf-8").replace('route_evidence = "qualification.route.json"', 'route_evidence = "absent.json"'),
+            encoding="utf-8",
+        )
+        rejected = run("check", "--user-core", str(core), "--project-overlay", str(project),
+                       "--qualification", str(missing_route), "--task-class", "checked-change")
+        assert rejected.returncode == 1
+        assert "неполное свидетельство всего маршрута" in rejected.stderr
+
+        planned = directory / "planned"
+        planned.mkdir()
+        planned_core, planned_project = write_policy(planned)
+        planned_project.write_text(
+            planned_project.read_text(encoding="utf-8").replace(
+                'id = "checked-change"',
+                'id = "checked-change"\ncandidate_steps = ["candidate", "reference"]\n'
+                'candidate_conditions = ["первый результат не прошёл проверку"]',
+            ), encoding="utf-8",
+        )
+        planned_qualification = planned / "qualification.toml"
+        qualify(planned_core, planned_project, planned_qualification, escalated=True, rework=True)
+        planned_ready = run("check", "--user-core", str(planned_core), "--project-overlay", str(planned_project),
+                            "--qualification", str(planned_qualification), "--task-class", "checked-change")
+        assert planned_ready.returncode == 0, planned_ready.stderr
+        planned_qualification.write_text(
+            planned_qualification.read_text(encoding="utf-8").replace(
+                'preserved_results = ["artifacts/phase-one.md"]', 'preserved_results = []',
+            ), encoding="utf-8",
+        )
+        fully_reworked = run("check", "--user-core", str(planned_core), "--project-overlay", str(planned_project),
+                             "--qualification", str(planned_qualification), "--task-class", "checked-change")
+        assert fully_reworked.returncode == 0, fully_reworked.stderr
+        assert "automatic_candidate=qualified" in fully_reworked.stdout
+        planned_project.write_text(
+            planned_project.read_text(encoding="utf-8").replace("первый результат не прошёл проверку", "всегда"), encoding="utf-8",
+        )
+        stale_plan = run("check", "--user-core", str(planned_core), "--project-overlay", str(planned_project),
+                         "--qualification", str(planned_qualification), "--task-class", "checked-change")
+        assert stale_plan.returncode == 1
+        assert "требует пересмотра" in stale_plan.stderr
 
         incomplete_qualification = directory / "incomplete-qualification.toml"
         prepared = run(
@@ -261,12 +343,41 @@ def main() -> int:
         handoff_content = handoff_content.replace("rework_required: <true|false>", "rework_required: false")
         handoff_content = handoff_content.replace("confirmed: <true|false>", "confirmed: true")
         handoff_content = handoff_content.replace("basis: <заполнить>", "basis: сопоставлены результаты проверок")
+        economy_record = {
+            "scope": "whole_task",
+            "task_completed": True,
+            "quality_preserved": True,
+            "constraints_preserved": True,
+            "comparable_conditions": True,
+            "complete_accounting": True,
+            "acceptance_evidence": "acceptance.txt",
+            "accounting_evidence": "accounting.txt",
+            "accounting_basis": "Учтены все попытки, переделки, проверка и труд человека по общей методике.",
+            "unit": "условная единица полной стоимости",
+            "reference_total": 100,
+            "candidate_total": 80,
+        }
+        economy_file = directory / "economy.json"
+        (directory / "acceptance.txt").write_text(
+            "Итоговые результаты обоих маршрутов приняты по одинаковым критериям.\n", encoding="utf-8",
+        )
+        (directory / "accounting.txt").write_text(
+            "Учебное свидетельство: эталон 100, кандидат 80. Учтены все попытки и участие человека.\n", encoding="utf-8",
+        )
+        economy_file.write_text(json.dumps(economy_record), encoding="utf-8")
+        handoff_content = handoff_content.replace(
+            "evidence: <путь к свидетельству JSON, обязателен при confirmed: true>",
+            "evidence: economy.json",
+        )
         complete_handoff.write_text(handoff_content, encoding="utf-8")
         complete = run("check-handoff", "--input", str(complete_handoff))
         assert complete.returncode == 0, complete.stderr
         assert "handoff_bytes=" in complete.stdout
         assert "handoff_continuation_status=continued" in complete.stdout
         assert "handoff_economy_confirmed=true" in complete.stdout
+        assert "economy_scope=whole_task" in complete.stdout
+        assert "evidence_check=structure_only" in complete.stdout
+        assert "economy_evidence_sha256=" in complete.stdout
 
         failed_handoff = directory / "failed-handoff.md"
         failed_handoff.write_text(
@@ -276,8 +387,50 @@ def main() -> int:
             encoding="utf-8",
         )
         failed = run("check-handoff", "--input", str(failed_handoff))
-        assert failed.returncode == 1
-        assert "неуспешная передача" in failed.stderr
+        assert failed.returncode == 0, failed.stderr
+        assert "handoff_continuation_status=failed" in failed.stdout
+        assert "handoff_economy_confirmed=true" in failed.stdout
+
+        # Экономия всей задачи не превращает неуспешную передачу в успешную.
+        failed_handoff.write_text(
+            handoff_content.replace("rework_required: false", "rework_required: true"),
+            encoding="utf-8",
+        )
+        inconsistent = run("check-handoff", "--input", str(failed_handoff))
+        assert inconsistent.returncode == 1
+        assert "требуют status: failed" in inconsistent.stderr
+
+        for key, value in (
+            ("task_completed", False), ("quality_preserved", False),
+            ("constraints_preserved", False), ("comparable_conditions", False),
+            ("complete_accounting", False), ("unit", ""),
+            ("acceptance_evidence", ""), ("accounting_basis", ""),
+            ("acceptance_evidence", "absent.txt"), ("accounting_evidence", "absent.txt"),
+            ("candidate_total", 100), ("candidate_total", 101),
+            ("candidate_total", -1), ("candidate_total", True),
+            ("candidate_total", float("nan")), ("reference_total", float("inf")),
+            ("scope", "handoff"),
+        ):
+            economy_file.write_text(json.dumps({**economy_record, key: value}), encoding="utf-8")
+            rejected = run("check-handoff", "--input", str(complete_handoff))
+            assert rejected.returncode == 1, (key, value, rejected.stdout)
+            assert "неподтверждённая экономия всей задачи" in rejected.stderr
+
+        for value in ("[]", "{", "null"):
+            economy_file.write_text(value, encoding="utf-8")
+            rejected = run("check-handoff", "--input", str(complete_handoff))
+            assert rejected.returncode == 1, rejected.stdout
+
+        complete_handoff.write_text(handoff_content.replace("economy.json", "absent.json"), encoding="utf-8")
+        missing_evidence = run("check-handoff", "--input", str(complete_handoff))
+        assert missing_evidence.returncode == 1
+        complete_handoff.write_text(
+            handoff_content.replace("confirmed: true", "confirmed: false").replace("economy.json", "absent.json"),
+            encoding="utf-8",
+        )
+        unknown_economy = run("check-handoff", "--input", str(complete_handoff))
+        assert unknown_economy.returncode == 0, unknown_economy.stderr
+        assert "handoff_economy_confirmed=false" in unknown_economy.stdout
 
         repository = directory / "repository"
         repository.mkdir()

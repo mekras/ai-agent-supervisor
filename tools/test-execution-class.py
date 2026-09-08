@@ -5,12 +5,16 @@ from __future__ import annotations
 
 import importlib.machinery
 import importlib.util
+import contextlib
+import io
 import json
+import runpy
 import subprocess
 import sys
 import tempfile
 import textwrap
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 
 sys.dont_write_bytecode = True
@@ -29,20 +33,25 @@ CLAUDE_ROLE_MODULE = importlib.util.module_from_spec(SPEC)
 LOADER.exec_module(CLAUDE_ROLE_MODULE)
 
 
-def write_fixture(directory: Path, actual_model: str) -> Path:
+def write_fixture(directory: Path, actual_model: str, *, evidence=True, journal=True,
+                  wrong_reference=False) -> Path:
     adapter = directory / "adapter.py"
     adapter.write_text(
+        f"#!{sys.executable}\n"
         "import json\n"
         "import os\n"
         "from pathlib import Path\n"
         "request = json.loads(input())\n"
         "assert request['contract']['writes'] is False\n"
         "assert request['inputs']\n"
-        "Path(os.environ['CODEX_ROLE_LOG']).write_text('{}\\n')\n"
-        f"print(json.dumps({{'model': '{actual_model}', 'usage': {{'input_tokens': 1}}}}))\n"
+        + (f"Path(os.environ['CODEX_ROLE_LOG']).write_text(json.dumps({{'message': {{'model': '{actual_model}'}}}}) + '\\n')\n" if journal else "")
+        + f"header = {{'model': '{actual_model}', 'usage': {{'input_tokens': 1}}}}\n"
+        + (f"header['model_evidence'] = {{'source': 'journal', 'line': {2 if wrong_reference else 1}, 'field': ['message', 'model']}}\n" if evidence else "")
+        + "print(json.dumps(header))\n"
         "print('готово')\n",
         encoding="utf-8",
     )
+    adapter.chmod(0o755)
     return adapter
 
 
@@ -62,6 +71,14 @@ def write_config(directory: Path, adapter: Path, prefix: str = "") -> Path:
             sandbox = "read-only"
             adapter = ["{sys.executable}", "{adapter}"]
             {prefix_line}
+
+            [roles.reviewer]
+            model = "claude-haiku-4-5"
+            effort = "low"
+            sandbox = "read-only"
+            adapter = "{adapter}"
+            [roles.reviewer.contract]
+            writes = false
             """
         ).strip()
         + "\n",
@@ -110,6 +127,9 @@ def main() -> int:
         assert record["assigned_model"] == "haiku"
         assert record["actual_model"] == "claude-haiku-4-5"
         assert record["model_matches"]
+        assert record["model_status"] == "confirmed"
+        assert record["model_evidence"]["line"] == 1
+        assert len(record["model_evidence"]["sha256"]) == 64
         assert record["obligation_id"] == "security-review"
         assert record["run_id"]
         assert record["result_available"]
@@ -132,6 +152,34 @@ def main() -> int:
         assert legacy.returncode == 0, legacy.stderr
         assert "obligation_id" not in json.loads(legacy.stdout)
 
+        for name, options in (
+            ("missing-evidence", {"evidence": False}),
+            ("missing-journal", {"journal": False}),
+            ("bad-reference", {"wrong_reference": True}),
+        ):
+            adapter = write_fixture(directory, "claude-haiku-4-5", **options)
+            config = write_config(directory, adapter, "claude-haiku-")
+            unknown = run(config, directory / name, input_file, "security-review")
+            assert unknown.returncode == 1, unknown.stdout
+            unknown_record = json.loads(unknown.stderr)
+            assert unknown_record["model_status"] == "unconfirmed"
+            assert unknown_record["actual_model"] is None
+            assert unknown_record["model_matches"] is None
+            assert unknown_record["result_available"]
+
+        for evidence in (False, True):
+            adapter = write_fixture(directory, "claude-haiku-4-5", evidence=evidence)
+            config = write_config(directory, adapter)
+            role = subprocess.run(
+                [str(RUNNER.with_name("run-subagent-role")), "reviewer",
+                 "--config", str(config), "--input", str(input_file),
+                 "--out", str(directory / f"role-{evidence}")],
+                input="Проверь факт.", text=True, capture_output=True, check=False,
+            )
+            assert role.returncode == (0 if evidence else 1), role.stderr
+            role_record = json.loads(role.stdout if evidence else role.stderr)
+            assert role_record["model_status"] == ("confirmed" if evidence else "unconfirmed")
+
         installed_root = directory / "installed-project"
         installed = subprocess.run(
             [str(CLAUDE_INSTALLER), str(installed_root)],
@@ -152,6 +200,9 @@ def main() -> int:
         assert installed_evaluator.read_bytes() == MODEL_EVALUATOR.read_bytes()
         assert installed_sample.read_bytes() == MODEL_EVALUATOR_SAMPLE.read_bytes()
         assert installed_adapter.read_bytes() == CLAUDE_ROLE.read_bytes()
+        assert (installed_root / "tools/lib/model_evidence.py").read_bytes() == (
+            RUNNER.parent / "lib/model_evidence.py"
+        ).read_bytes()
 
     stream = "\n".join(
         [
@@ -180,6 +231,30 @@ def main() -> int:
     assert usage == {"input_tokens": 1, "output_tokens": 1}
     assert result == "готово"
     assert notice == "Model \"haiku\" is restricted."
+
+    actual, reference = CLAUDE_ROLE_MODULE.model_evidence(stream)
+    assert actual == model and reference["line"] == 3
+    assert CLAUDE_ROLE_MODULE.model_evidence('{"type":"system","model":"assigned"}') == (None, None)
+    conflict = stream + '\n' + json.dumps({"type": "assistant", "message": {"model": "other"}})
+    assert CLAUDE_ROLE_MODULE.model_evidence(conflict) == (None, None)
+
+    # Успешный процесс без свидетельства модели не подтверждает назначение.
+    output = io.StringIO()
+    temporary = MagicMock()
+    temporary.__enter__.return_value = "/unused-model-evidence-test"
+    completed = subprocess.CompletedProcess([], 0, '{"type":"turn.completed","usage":{}}\n', '')
+    with patch('sys.argv', ['codex-role', 'requested-model', 'low', 'read-only']), \
+         patch('sys.stdin', io.StringIO('{}')), \
+         patch('tempfile.TemporaryDirectory', return_value=temporary), \
+         patch('subprocess.run', return_value=completed), \
+         patch('pathlib.Path.exists', return_value=False), \
+         patch('pathlib.Path.write_text'), contextlib.redirect_stdout(output):
+        try:
+            runpy.run_path(str(RUNNER.parent / 'adapters/codex-role'), run_name='__main__')
+        except SystemExit as exit_status:
+            assert exit_status.code == 0
+    assert json.loads(output.getvalue())["model"] is None
+    assert json.loads(output.getvalue())["model_evidence"] is None
 
     print("Проверка классов исполнения пройдена.")
     return 0

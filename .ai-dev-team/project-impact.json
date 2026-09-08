@@ -84,6 +84,17 @@
       "checks": ["ai-skill-development", "apm run tests"]
     },
     {
+      "id": "evaluation-protocol",
+      "title": "Протокол оценки полезности",
+      "kind": "process",
+      "semantic_type": "внутренний порядок сравнительной оценки пользовательского результата",
+      "authority": "canonical",
+      "representations": [
+        {"path": "docs/evaluation-protocol.md", "role": "canonical"}
+      ],
+      "checks": ["ait-writing", "ai-work-result-evaluation"]
+    },
+    {
       "id": "verification",
       "title": "Проверки и модельные сценарии",
       "kind": "test",
@@ -127,6 +138,34 @@
     }
   ],
   "edges": [
+    {
+      "from": "decisions",
+      "to": "evaluation-protocol",
+      "relation": "governs",
+      "facets": ["semantic", "quality", "operation"],
+      "rationale": "DR-0006 задаёт одобренные принципы и границы внутреннего протокола оценки полезности."
+    },
+    {
+      "from": "evaluation-protocol",
+      "to": "requirements",
+      "relation": "informs",
+      "facets": ["semantic", "quality", "operation"],
+      "rationale": "Изменение протокола требует проверить подготовку свидетельств для REQ-0003 и совместимость с условиями REQ-0005 и REQ-0006, само по себе оно не меняет обязательства и статусы требований."
+    },
+    {
+      "from": "evaluation-protocol",
+      "to": "skills",
+      "relation": "constrains",
+      "facets": ["semantic", "quality", "operation"],
+      "rationale": "Принципы реального применения и границы выводов реализуются переносимым ai-usage-analysis, который не зависит от внутреннего протокола у потребителя."
+    },
+    {
+      "from": "evaluation-protocol",
+      "to": "verification",
+      "relation": "constrains",
+      "facets": ["semantic", "quality", "operation"],
+      "rationale": "Протокол задаёт предмет и критерии будущих сравнений, соответствие действующей оснастки требует отдельной проверки и одобрения её изменений."
+    },
     {
       "from": "concept",
       "to": "product-contract",

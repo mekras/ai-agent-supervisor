@@ -43,10 +43,11 @@ codex exec \
   --ephemeral \
   --skip-git-repo-check \
   --color never \
+  --json \
   --sandbox "$sandbox" \
   --model "$model" \
   --output-last-message "$final" \
-  - >/dev/null <<EOF
+  - >"${APM_EVAL_TRACE:-/dev/null}" <<EOF
 $prompt
 EOF
 )

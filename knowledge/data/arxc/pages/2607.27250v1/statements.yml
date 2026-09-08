@@ -1,0 +1,37 @@
+{
+  "statement_contract_version": 2,
+  "statements": [
+    {
+      "id": "ARXC-003",
+      "source_id": "ARXC",
+      "item_id": "ARXC--2607.27250v1",
+      "kind": "fact",
+      "text": "Авторы сообщают, что в их эксперименте изменение стратегии контекста не дало измеримого изменения правильности результата.",
+      "excerpt": "does not measurably move correctness",
+      "artifact": "normalized.md",
+      "checked_at": "2026-09-07",
+      "scope": {
+        "section_title": "Abstract",
+        "url": "https://arxiv.org/abs/2607.27250v1"
+      },
+      "open_questions": [],
+      "processing_status": {
+        "extraction": "complete",
+        "traceability": "passed",
+        "semantic_review": "passed",
+        "strong_review": "not_required",
+        "corroboration_check": "complete"
+      },
+      "source_role": "primary",
+      "evidence_strength": "weak",
+      "confidence": "high",
+      "temporal_status": "historical",
+      "corroboration": "single_source",
+      "limitations": [
+        "Подтверждено сообщение авторов в аннотации, не истинность и воспроизводимость результата.",
+        "Полная методика и результаты не проверены. Вывод ограничен выборкой исследования.",
+        "Контекстные файлы не тождественны публикуемой коллекции навыков."
+      ]
+    }
+  ]
+}

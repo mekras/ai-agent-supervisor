@@ -1,0 +1,12 @@
+id: "ARXC--2601.20404v2"
+source_id: "ARXC"
+path: "pages/2601.20404v2"
+title: "On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents"
+locator: "https://arxiv.org/abs/2601.20404v2"
+url: "https://arxiv.org/abs/2601.20404v2"
+access: "Публичная страница выбранной версии."
+status: "normalized"
+workflow_stage: "normalized"
+version_date: "2026-03-30"
+checked_at: "2026-09-07"
+known_limitations: ["Извлечено выбранное сообщение из аннотации. Остальное содержание отложено в source-map.yml, полная статья и воспроизводимость не проверены."]

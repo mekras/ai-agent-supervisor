@@ -1,0 +1,37 @@
+{
+  "statement_contract_version": 2,
+  "statements": [
+    {
+      "id": "ARXC-001",
+      "source_id": "ARXC",
+      "item_id": "ARXC--2601.20404v2",
+      "kind": "fact",
+      "text": "Авторы сообщают, что в их выборке наличие AGENTS.md связано с меньшей медианной длительностью выполнения задач.",
+      "excerpt": "lower median runtime",
+      "artifact": "normalized.md",
+      "checked_at": "2026-09-07",
+      "scope": {
+        "section_title": "Abstract",
+        "url": "https://arxiv.org/abs/2601.20404v2"
+      },
+      "open_questions": [],
+      "processing_status": {
+        "extraction": "complete",
+        "traceability": "passed",
+        "semantic_review": "passed",
+        "strong_review": "not_required",
+        "corroboration_check": "complete"
+      },
+      "source_role": "primary",
+      "evidence_strength": "weak",
+      "confidence": "high",
+      "temporal_status": "historical",
+      "corroboration": "single_source",
+      "limitations": [
+        "Подтверждено сообщение авторов в аннотации, не истинность и воспроизводимость результата.",
+        "Полная методика и результаты не проверены. Вывод ограничен выборкой исследования.",
+        "Контекстные файлы не тождественны публикуемой коллекции навыков."
+      ]
+    }
+  ]
+}

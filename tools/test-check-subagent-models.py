@@ -111,10 +111,31 @@ def main() -> int:
         assert analysis["history_sufficient"] and analysis["parent_sessions"] == 1 and analysis["child_runs"] == 1 and analysis["file_change_sessions"] == 1
         assert "apply_patch" not in report.stdout and "parent.jsonl" not in report.stdout
         assert analysis["child_model_inheritance_signals"] == 1
+        assert analysis["task_coverage_status"] == "unknown"
+        assert analysis["activity_summary"] == {
+            "without_observed_write_events": 0, "with_observed_write_events": 1
+        }
+        assert analysis["history_scope"] and analysis["compatibility_notice"]
         insufficient = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "2", "--min-turns", "2", "--min-days", "2"], text=True, capture_output=True, check=False)
         assert not json.loads(insufficient.stdout)["history_sufficient"]
 
-        role_adapter = make_adapter(directory, "role", "cat >/dev/null\nprintf '{\"model\":\"wrong\"}\\n'\n")
+        # Даже достаточная история без события записи не определяет вид работы.
+        design_session = [
+            {"type": "session_meta", "payload": {"cwd": cwd}},
+            {"type": "turn_context", "payload": {"model": "exact-model"}},
+            {"type": "event_msg", "payload": {"type": "user_message", "message": "Сравни варианты архитектуры. Приватная задача."}},
+            {"type": "event_msg", "payload": {"type": "task_complete"}},
+        ]
+        (sessions / "design.jsonl").write_text("\n".join(json.dumps(x) for x in design_session), encoding="utf-8")
+        expanded = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "2", "--min-turns", "2", "--min-days", "1"], text=True, capture_output=True, check=False)
+        assert expanded.returncode == 0, expanded.stderr
+        expanded_analysis = json.loads(expanded.stdout)
+        assert expanded_analysis["history_sufficient"]
+        assert expanded_analysis["task_coverage_status"] == "unknown"
+        assert expanded_analysis["activity_summary"]["without_observed_write_events"] == 1
+        assert "Приватная задача" not in expanded.stdout
+
+        role_adapter = make_adapter(directory, "role", "cat >/dev/null\nprintf '{\"model\":\"wrong\"}\\n' > \"$CODEX_ROLE_LOG\"\nprintf '{\"model\":\"wrong\",\"model_evidence\":{\"source\":\"journal\",\"line\":1,\"field\":[\"model\"]}}\\n'\n")
         role_config = directory / "roles.toml"
         role_config.write_text("[roles.reviewer]\nmodel = 'exact'\neffort = 'low'\nsandbox = 'read-only'\nadapter = '" + str(role_adapter) + "'\ncontract = { writes = false }\n", encoding="utf-8")
         failed_role = run_role(role_config, directory / "runs", "legal-review")
@@ -126,7 +147,7 @@ def main() -> int:
         assert not failed_record["model_matches"]
 
         matching_role_adapter = make_adapter(
-            directory, "matching-role", "cat >/dev/null\nprintf '{\"model\":\"exact\"}\\n'\n"
+            directory, "matching-role", "cat >/dev/null\nprintf '{\"model\":\"exact\"}\\n' > \"$CODEX_ROLE_LOG\"\nprintf '{\"model\":\"exact\",\"model_evidence\":{\"source\":\"journal\",\"line\":1,\"field\":[\"model\"]}}\\n'\n"
         )
         role_config.write_text(
             "[roles.reviewer]\n"

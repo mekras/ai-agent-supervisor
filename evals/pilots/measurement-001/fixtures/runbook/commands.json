@@ -1,0 +1,4 @@
+{
+  "canonical_check_command": "python3 tools/check.py --local",
+  "scope": "Декларация команды для редактирования инструкции, выполнение не требуется."
+}

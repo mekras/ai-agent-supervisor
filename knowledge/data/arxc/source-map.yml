@@ -1,0 +1,99 @@
+{
+  "source_id": "ARXC",
+  "long_source": true,
+  "extraction_passport": {
+    "format": "Выбранные фрагменты аннотаций в Markdown",
+    "file_size_bytes": 3832,
+    "content_hash_absence_reason": "Размер относится к сохранённым фрагментам. Полные страницы и статьи не копировались, их хэш не вычислялся.",
+    "metadata_source": "Версионные страницы arXiv и ссылки view license, проверены 2026-09-07.",
+    "extraction_tool": "web.run и ручное выделение фрагментов",
+    "extraction_status": "normalized_fragments_ready"
+  },
+  "limitations": [
+    "Частичный охват. Деление на выбранный фрагмент и остаток введено составителем, внутреннее оглавление статей не проверено.",
+    "Сохранение сообщения автора не является подтверждением результата исследования."
+  ],
+  "structure": {
+    "units": [
+      {
+        "id": "ARXC--2601.20404v2-selected",
+        "title": "2601.20404v2: выбранное сообщение о результате",
+        "locator": "https://arxiv.org/abs/2601.20404v2#abstract"
+      },
+      {
+        "id": "ARXC--2601.20404v2-remainder",
+        "title": "2601.20404v2: остальная аннотация и полная статья",
+        "locator": "https://arxiv.org/abs/2601.20404v2"
+      },
+      {
+        "id": "ARXC--2602.11988v2-selected",
+        "title": "2602.11988v2: выбранное сообщение о результате",
+        "locator": "https://arxiv.org/abs/2602.11988v2#abstract"
+      },
+      {
+        "id": "ARXC--2602.11988v2-remainder",
+        "title": "2602.11988v2: остальная аннотация и полная статья",
+        "locator": "https://arxiv.org/abs/2602.11988v2"
+      },
+      {
+        "id": "ARXC--2607.27250v1-selected",
+        "title": "2607.27250v1: выбранное сообщение о результате",
+        "locator": "https://arxiv.org/abs/2607.27250v1#abstract"
+      },
+      {
+        "id": "ARXC--2607.27250v1-remainder",
+        "title": "2607.27250v1: остальная аннотация и полная статья",
+        "locator": "https://arxiv.org/abs/2607.27250v1"
+      }
+    ]
+  },
+  "coverage": {
+    "units": [
+      {
+        "unit_id": "ARXC--2601.20404v2-selected",
+        "status": "extracted",
+        "artifacts": [
+          "pages/2601.20404v2/normalized.md"
+        ],
+        "statements": [
+          "pages/2601.20404v2/statements.yml"
+        ]
+      },
+      {
+        "unit_id": "ARXC--2601.20404v2-remainder",
+        "status": "deferred",
+        "reason": "Ограниченный разбор сообщений авторов. Полная методика, результаты, остальные тезисы аннотации и структура статьи не исследованы. Необходимы перед переносом количественных или причинных выводов на продукт."
+      },
+      {
+        "unit_id": "ARXC--2602.11988v2-selected",
+        "status": "extracted",
+        "artifacts": [
+          "pages/2602.11988v2/normalized.md"
+        ],
+        "statements": [
+          "pages/2602.11988v2/statements.yml"
+        ]
+      },
+      {
+        "unit_id": "ARXC--2602.11988v2-remainder",
+        "status": "deferred",
+        "reason": "Ограниченный разбор сообщений авторов. Полная методика, результаты, остальные тезисы аннотации и структура статьи не исследованы. Необходимы перед переносом количественных или причинных выводов на продукт."
+      },
+      {
+        "unit_id": "ARXC--2607.27250v1-selected",
+        "status": "extracted",
+        "artifacts": [
+          "pages/2607.27250v1/normalized.md"
+        ],
+        "statements": [
+          "pages/2607.27250v1/statements.yml"
+        ]
+      },
+      {
+        "unit_id": "ARXC--2607.27250v1-remainder",
+        "status": "deferred",
+        "reason": "Ограниченный разбор сообщений авторов. Полная методика, результаты, остальные тезисы аннотации и структура статьи не исследованы. Необходимы перед переносом количественных или причинных выводов на продукт."
+      }
+    ]
+  }
+}

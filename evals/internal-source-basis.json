@@ -252,6 +252,10 @@
         {
           "claim_id": "ASKL-003",
           "statement_path": "knowledge/data/askl/pages/optimizing-descriptions/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-004",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -367,6 +371,17 @@
               "ASKL-004"
             ]
           ]
+        },
+        {
+          "id": "ai-audit-project-result-risk-based-coverage",
+          "required_claims": [
+            "AUDIT-004"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-004"
+            ]
+          ]
         }
       ]
     },
@@ -383,6 +398,10 @@
         {
           "claim_id": "PPRX-001",
           "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-007",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -404,6 +423,17 @@
               "ASKL-004"
             ]
           ]
+        },
+        {
+          "id": "ai-data-collection-result-necessity-before-expansion",
+          "required_claims": [
+            "AUDIT-007"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-007"
+            ]
+          ]
         }
       ]
     },
@@ -420,6 +450,10 @@
         {
           "claim_id": "PPRX-001",
           "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-003",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -439,6 +473,17 @@
             [
               "ASKL-004",
               "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-tool-failure-without-new-rule",
+          "required_claims": [
+            "AUDIT-003"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-003"
             ]
           ]
         }
@@ -775,6 +820,10 @@
         {
           "claim_id": "ASKL-004",
           "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-005",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -812,14 +861,17 @@
           "id": "ai-setup-execution-policy-result-qualification-before-automatic-route",
           "required_claims": [
             "CODX-022",
-            "ASKL-004"
+            "ASKL-004",
+            "AUDIT-005"
           ],
           "finding_claims": [
             [
-              "CODX-022"
+              "CODX-022",
+              "AUDIT-005"
             ],
             [
-              "ASKL-004"
+              "ASKL-004",
+              "AUDIT-005"
             ]
           ]
         },
@@ -857,14 +909,17 @@
           "id": "ai-setup-execution-policy-result-escalation-with-rework",
           "required_claims": [
             "CODX-022",
-            "ASKL-004"
+            "ASKL-004",
+            "AUDIT-005"
           ],
           "finding_claims": [
             [
-              "CODX-022"
+              "CODX-022",
+              "AUDIT-005"
             ],
             [
-              "ASKL-004"
+              "ASKL-004",
+              "AUDIT-005"
             ]
           ]
         },
@@ -900,14 +955,17 @@
           "id": "ai-setup-execution-policy-result-handoff-completed",
           "required_claims": [
             "CODX-033",
-            "ASKL-004"
+            "ASKL-004",
+            "AUDIT-005"
           ],
           "finding_claims": [
             [
-              "CODX-033"
+              "CODX-033",
+              "AUDIT-005"
             ],
             [
-              "ASKL-004"
+              "ASKL-004",
+              "AUDIT-005"
             ]
           ]
         },
@@ -930,14 +988,17 @@
           "id": "ai-setup-execution-policy-result-handoff-rework",
           "required_claims": [
             "CODX-033",
-            "ASKL-004"
+            "ASKL-004",
+            "AUDIT-005"
           ],
           "finding_claims": [
             [
-              "CODX-033"
+              "CODX-033",
+              "AUDIT-005"
             ],
             [
-              "ASKL-004"
+              "ASKL-004",
+              "AUDIT-005"
             ]
           ]
         }
@@ -952,6 +1013,10 @@
         {
           "claim_id": "APMP-002",
           "statement_path": "knowledge/data/apmp/pages/consumer-manage-dependencies/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-006",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -969,6 +1034,17 @@
             ],
             [
               "APMP-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-hooks-result-limited-enforcement",
+          "required_claims": [
+            "AUDIT-006"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-006"
             ]
           ]
         }
@@ -991,6 +1067,14 @@
         {
           "claim_id": "ASKL-004",
           "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "SETUP-001",
+          "statement_path": "evals/setup-policy-basis.yml"
+        },
+        {
+          "claim_id": "AUDIT-004",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -1120,6 +1204,50 @@
               "ASKL-004"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-project-result-first-policy",
+          "required_claims": [
+            "SETUP-001"
+          ],
+          "finding_claims": [
+            [
+              "SETUP-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-reuse-policy",
+          "required_claims": [
+            "SETUP-001"
+          ],
+          "finding_claims": [
+            [
+              "SETUP-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-decline-policy",
+          "required_claims": [
+            "SETUP-001"
+          ],
+          "finding_claims": [
+            [
+              "SETUP-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-explicit-autonomy",
+          "required_claims": [
+            "AUDIT-004"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-004"
+            ]
+          ]
         }
       ]
     },
@@ -1152,6 +1280,26 @@
         {
           "claim_id": "LSME-003",
           "statement_path": "knowledge/data/lsme/pages/trajectory-evals/statements.yml"
+        },
+        {
+          "claim_id": "MODEL-EVIDENCE-001",
+          "statement_path": "evals/model-evidence-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-001",
+          "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-002",
+          "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-003",
+          "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-005",
+          "statement_path": "evals/subagent-design-basis.yml"
         }
       ],
       "cases": [
@@ -1293,6 +1441,263 @@
               "LSME-003"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-subagents-result-unconfirmed-model",
+          "required_claims": [
+            "MODEL-EVIDENCE-001"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-EVIDENCE-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-existing-policy-expanded-catalog",
+          "required_claims": [
+            "SUBAGENT-DESIGN-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-preparation-without-approval",
+          "required_claims": [
+            "SUBAGENT-DESIGN-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-history-volume-is-not-task-coverage",
+          "required_claims": [
+            "SUBAGENT-DESIGN-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-small-task-direct-parent",
+          "required_claims": [
+            "SUBAGENT-DESIGN-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-implementation-shared-evidence-blocker",
+          "required_claims": [
+            "SUBAGENT-DESIGN-002",
+            "SUBAGENT-DESIGN-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-implementation-confirmed-evidence",
+          "required_claims": [
+            "SUBAGENT-DESIGN-002",
+            "SUBAGENT-DESIGN-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-implementation-microtask",
+          "required_claims": [
+            "SUBAGENT-DESIGN-002",
+            "SUBAGENT-DESIGN-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-first-run",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-repeat-policy",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-explicit-repair",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-no-answer",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-corrected-continuation",
+          "required_claims": [
+            "SUBAGENT-DESIGN-001",
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-saved-project",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-project-instructions",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-conflicting-sources",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-goals-confirmed-continuation",
+          "required_claims": [
+            "SUBAGENT-DESIGN-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-capable-parent",
+          "required_claims": [
+            "SUBAGENT-DESIGN-005"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-candidate-tradeoff",
+          "required_claims": [
+            "SUBAGENT-DESIGN-005"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-catalog-effort-uncertain",
+          "required_claims": [
+            "SUBAGENT-DESIGN-005"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-correction-whole-policy",
+          "required_claims": [
+            "SUBAGENT-DESIGN-005"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-proposal-versus-runtime",
+          "required_claims": [
+            "SUBAGENT-DESIGN-005"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-same-model-separate-review",
+          "required_claims": [
+            "SUBAGENT-DESIGN-005"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-005"
+            ]
+          ]
         }
       ]
     },
@@ -1325,6 +1730,18 @@
         {
           "claim_id": "AENG-004",
           "statement_path": "knowledge/data/aeng/pages/demystifying-evals-for-ai-agents/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-002",
+          "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "AUDIT-007",
+          "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-004",
+          "statement_path": "evals/subagent-design-basis.yml"
         }
       ],
       "cases": [
@@ -1484,6 +1901,39 @@
               "AENG-004"
             ]
           ]
+        },
+        {
+          "id": "ai-skill-development-result-success-without-skill",
+          "required_claims": [
+            "AUDIT-002"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-necessity-before-expansion",
+          "required_claims": [
+            "AUDIT-007"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-007"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-preserve-accepted-obligation",
+          "required_claims": [
+            "SUBAGENT-DESIGN-004"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-004"
+            ]
+          ]
         }
       ]
     },
@@ -1500,6 +1950,10 @@
         {
           "claim_id": "PPRX-001",
           "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-004",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -1550,6 +2004,17 @@
               "PPRX-001"
             ]
           ]
+        },
+        {
+          "id": "ai-work-control-result-bounded-control",
+          "required_claims": [
+            "AUDIT-004"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-004"
+            ]
+          ]
         }
       ]
     },
@@ -1566,6 +2031,14 @@
         {
           "claim_id": "PPRX-001",
           "statement_path": "knowledge/data/pprx/pages/designing-refining-maintaining-agent-skills/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-002",
+          "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "AUDIT-006",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -1585,6 +2058,104 @@
             [
               "ASKL-004",
               "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-success-without-skill",
+          "required_claims": [
+            "AUDIT-002"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-self-review-not-independent",
+          "required_claims": [
+            "AUDIT-006"
+          ],
+          "finding_claims": [
+            [
+              "AUDIT-006"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-usage-analysis": {
+      "source_basis": [
+        {
+          "claim_id": "USAGE-001",
+          "statement_path": "evals/usage-analysis-basis.yml"
+        },
+        {
+          "claim_id": "USAGE-002",
+          "statement_path": "evals/usage-analysis-basis.yml"
+        },
+        {
+          "claim_id": "USAGE-003",
+          "statement_path": "evals/usage-analysis-basis.yml"
+        },
+        {
+          "claim_id": "USAGE-004",
+          "statement_path": "evals/usage-analysis-basis.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-usage-analysis-result-current-resume",
+          "required_claims": [
+            "USAGE-001",
+            "USAGE-002"
+          ],
+          "finding_claims": [
+            [
+              "USAGE-001",
+              "USAGE-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-usage-analysis-result-global",
+          "required_claims": [
+            "USAGE-001",
+            "USAGE-002",
+            "USAGE-003"
+          ],
+          "finding_claims": [
+            [
+              "USAGE-001",
+              "USAGE-002",
+              "USAGE-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-usage-analysis-result-specified-readonly",
+          "required_claims": [
+            "USAGE-001",
+            "USAGE-003"
+          ],
+          "finding_claims": [
+            [
+              "USAGE-001",
+              "USAGE-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-usage-analysis-result-replaced-session",
+          "required_claims": [
+            "USAGE-002",
+            "USAGE-004"
+          ],
+          "finding_claims": [
+            [
+              "USAGE-002",
+              "USAGE-004"
             ]
           ]
         }

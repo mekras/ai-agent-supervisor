@@ -1,0 +1,10 @@
+# Предложенные параметры. Модели и адаптеры намеренно не заполнены.
+# Этот файл не разрешает запуск и не заменяет evals.local.yml пользователя.
+adapters: {}
+models: []
+workspace_models: []
+judge: ""
+repetitions: 1
+judge_repetitions: 1
+timeout: 300
+results_dir: eval-results/measurement-001

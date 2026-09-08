@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "measurement-001-draft-1",
+  "status": "draft_not_approved_for_model_calls",
+  "question": "Позволяет ли оснастка воспроизводимо различать три состава инструкций, проверять конечные артефакты и обнаруживать пробелы учёта?",
+  "common_background": "НЕ ПРОВЕРЕН. В фикстурах нет специальных инструкций агента и пакетов навыков. Пользовательский слой, глобальные навыки, память, инструменты, ограничения доступа и параметры оснастки должны быть обследованы перед утверждением плана.",
+  "collection": "../../../.apm/skills",
+  "fixture_registry": "registry.json",
+  "minimal_instructions": "minimal-instructions.md",
+  "case_ids": ["pilot-runbook", "pilot-release-review", "pilot-route-assessment"],
+  "seed": 37
+}

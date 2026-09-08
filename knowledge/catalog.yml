@@ -5,6 +5,9 @@ sources:
   - id: APMP
     title: "Agent Package Manager Producer Docs"
     path: data/apmp
+  - id: ARXC
+    title: "arXiv: исследования контекстных инструкций"
+    path: data/arxc
   - id: ASES
     title: "AI Safety Evaluation Standard"
     path: data/ases

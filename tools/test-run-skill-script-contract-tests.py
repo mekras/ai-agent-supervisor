@@ -254,7 +254,7 @@ args.output.write_text(json.dumps(state), encoding="utf-8")''',
         uncovered_branch = run(skill)
         assert uncovered_branch.returncode == 0, uncovered_branch.stderr
         assert "сценарии не выполнили" in uncovered_branch.stdout
-        assert "обязательная очередь поведенческой проверки" in uncovered_branch.stdout
+        assert "кандидаты проверки по риску" in uncovered_branch.stdout
 
         write_script(skill, script)
         full_coverage = run(skill)
