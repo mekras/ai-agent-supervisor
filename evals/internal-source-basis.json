@@ -373,6 +373,19 @@
           ]
         },
         {
+          "id": "ai-audit-project-result-diagnostic-object-report",
+          "required_claims": [
+            "CODX-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
           "id": "ai-audit-project-result-risk-based-coverage",
           "required_claims": [
             "AUDIT-004"
@@ -2013,6 +2026,21 @@
           "finding_claims": [
             [
               "LEARNING-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-setup-proposals",
+          "required_claims": [
+            "LEARNING-003",
+            "LEARNING-004"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-003"
+            ],
+            [
+              "LEARNING-004"
             ]
           ]
         },
