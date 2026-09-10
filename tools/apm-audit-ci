@@ -431,15 +431,24 @@ def main() -> int:
         sys.stdout.write(result.stdout)
         sys.stderr.write(result.stderr)
         return result.returncode or 1
+    echoed = only_echoed_ref_mismatch(report)
+    if echoed:
+        for check in report.get("checks", []):
+            if isinstance(check, dict) and check.get("name") == "ref-consistency":
+                check["passed"] = True
     accepted = only_accepted_drift(report, project_root, lockfile_path)
     if accepted:
         sys.stderr.write(result.stderr)
+        suffix = (
+            f", самопротиворечивых сообщений о ссылке — {echoed}"
+            if echoed
+            else ""
+        )
         print(
             "APM-аудит пройден с известным локальным переопределением: "
-            f"подтверждено файлов — {accepted}."
+            f"подтверждено файлов — {accepted}{suffix}."
         )
         return 0
-    echoed = only_echoed_ref_mismatch(report)
     if echoed:
         sys.stderr.write(result.stderr)
         print(

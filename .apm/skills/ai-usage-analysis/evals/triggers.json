@@ -48,6 +48,18 @@
       "prompt": "Запусти ait-session-analysis",
       "should_trigger": false,
       "rationale": "Точная команда другого навыка сохраняет свой маршрут."
+    },
+    {
+      "id": "ai-usage-analysis-positive-learning-after-history",
+      "prompt": "Проанализируй накопленную историю и подготовь наблюдения для последующего улучшения навыков.",
+      "should_trigger": true,
+      "rationale": "Нужен сбор наблюдений, право изменения навыков отдельно."
+    },
+    {
+      "id": "ai-usage-analysis-negative-current-task-learning",
+      "prompt": "Сохрани опыт только этой задачи в навыках, анализ всей истории не нужен.",
+      "should_trigger": false,
+      "rationale": "Готовый опыт передаётся ai-skill-development без повторного сбора."
     }
   ]
 }

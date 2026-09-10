@@ -1742,6 +1742,26 @@
         {
           "claim_id": "SUBAGENT-DESIGN-004",
           "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "LEARNING-001",
+          "statement_path": "evals/skill-learning-basis.yml"
+        },
+        {
+          "claim_id": "LEARNING-002",
+          "statement_path": "evals/skill-learning-basis.yml"
+        },
+        {
+          "claim_id": "LEARNING-003",
+          "statement_path": "evals/skill-learning-basis.yml"
+        },
+        {
+          "claim_id": "LEARNING-004",
+          "statement_path": "evals/skill-learning-basis.yml"
+        },
+        {
+          "claim_id": "LEARNING-005",
+          "statement_path": "evals/skill-learning-basis.yml"
         }
       ],
       "cases": [
@@ -1932,6 +1952,80 @@
           "finding_claims": [
             [
               "SUBAGENT-DESIGN-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-combined-restructure",
+          "required_claims": [
+            "LEARNING-001",
+            "LEARNING-002",
+            "LEARNING-005"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-001",
+              "LEARNING-002",
+              "LEARNING-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-insufficient-evidence",
+          "required_claims": [
+            "LEARNING-001",
+            "LEARNING-004"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-001",
+              "LEARNING-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-permission-boundary",
+          "required_claims": [
+            "LEARNING-004"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-restore-conflict",
+          "required_claims": [
+            "LEARNING-005"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-context-quality",
+          "required_claims": [
+            "LEARNING-002"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-manual-no-runtime",
+          "required_claims": [
+            "LEARNING-001",
+            "LEARNING-003"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-001",
+              "LEARNING-003"
             ]
           ]
         }

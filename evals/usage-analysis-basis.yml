@@ -1,6 +1,6 @@
 purpose: Основания сценариев нового навыка, внутренний материал проверки.
 source_role: user
-source: docs/decisions/DR-0006-protokol-otsenki-poleznosti.md
+source: docs/decisions/DR-0006.md
 source_section: Постоянный механизм наблюдений
 limitations:
   - Это запись согласованного договора, а не свидетельство эффективности навыка.

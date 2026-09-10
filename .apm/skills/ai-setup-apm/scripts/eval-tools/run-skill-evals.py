@@ -683,7 +683,7 @@ def resolve_adapter_paths(command: list[str], root: Path) -> list[str]:
 def make_model_call(adapter: list[str], model: str, timeout: int, workspace: Path | None = None,
                     *, call_records: list[dict[str, Any]] | None = None,
                     pricing: dict[str, Any] | None = None, label: str | None = None,
-                    context: dict[str, Any] | None = None) -> ModelCall:
+                    context: dict[str, Any] | None = None, read_only: bool = False) -> ModelCall:
     """Собрать вызов модели через адаптер по контракту prompt -> текст."""
 
     ledger = call_records if call_records is not None else []
@@ -717,6 +717,8 @@ def make_model_call(adapter: list[str], model: str, timeout: int, workspace: Pat
         environment["PYTHONDONTWRITEBYTECODE"] = "1"
         if workspace:
             environment["APM_EVAL_WORKSPACE"] = str(workspace)
+        if read_only:
+            environment["APM_EVAL_SANDBOX"] = "read-only"
         try:
             process = subprocess.Popen(
                 [*adapter, model],
@@ -1085,6 +1087,9 @@ def judge_prompt(
         "нарушает must_not и не содержит oracle.failure_indicators. Не засчитывай "
         "общие советы, пересказ схемы или формальное совпадение заголовков без "
         "признаков применения навыка. "
+        "Элементы expected_output.report_structure задают смысловые разделы, "
+        "а не буквальные заголовки: засчитывай понятный синоним, если он "
+        "содержит требуемые сведения. "
         + evidence_judging_rules() + "\n"
         f"Данные для проверки:\n{json.dumps(payload, ensure_ascii=False, indent=2)}\n"
     )
@@ -1126,7 +1131,7 @@ def run_result_evals(
                 workspace, before = Path(temp) / "workspace", Path(temp) / "before"
                 packages = prepare_trial(workspace, skill_dirs, input_files=case.get("input_files", []))
                 shutil.copytree(workspace, before)
-                call = call_factory(workspace)
+                call = call_factory(workspace, read_only=case.get("read_only", False))
                 call.context = {"role": "candidate", "phase": "result", "case_id": case["id"]}
                 try:
                     answer_result = call(answer_prompt(repo_root, skill_dir, data, single_case), ANSWER_SCHEMA)
@@ -1212,8 +1217,8 @@ def run_for_target(
     result_errors = run_result_evals(
         repo_root=repo_root,
         groups=result_groups,
-        call_factory=lambda workspace: make_model_call(run["adapter"], run["model"], timeout, workspace,
-            call_records=ledger, pricing=pricing, label=run["label"]),
+        call_factory=lambda workspace, read_only=False: make_model_call(run["adapter"], run["model"], timeout, workspace,
+            call_records=ledger, pricing=pricing, label=run["label"], read_only=read_only),
         judge_call=judge_call,
         skill_dirs=skill_dirs,
         records=result_records,

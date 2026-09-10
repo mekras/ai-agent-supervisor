@@ -502,7 +502,8 @@ def test_result_workspace() -> None:
             {"path": "input.txt", "content": "original"}, {"path": "unknown.txt", "purpose": "неизвестный вход"}],
             "oracle": {"required_diff": {"paths": ["input.txt"]}}}
         data = {"skill_name": "audit", "cases": [case]}
-        def factory(workspace: Path):
+        def factory(workspace: Path, read_only: bool = False):
+            assert read_only is False
             def call(prompt, schema):
                 assert "как будто применение навыка уже выполнено" not in prompt
                 assert (workspace / "input.txt").read_text() == "original"
