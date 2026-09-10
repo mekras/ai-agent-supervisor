@@ -1,3 +1,5 @@
+*.local.*
+*.local
 *.py[cod]
 /.agents/*
 !/.agents/plugins/
@@ -7,12 +9,9 @@
 /.claude/*
 !/.claude/CLAUDE.md
 /.codex
-/.idea
 /knowledge/private.local/
 /knowledge/raw.local/
 /knowledge/reports/source-inventory/
-/knowledge/data/**/*.local.*
-/knowledge/data/**/*.local
 /knowledge/data/**/*.tmp.*
 __pycache__
 apm_modules/
