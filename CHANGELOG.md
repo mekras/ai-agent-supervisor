@@ -7,6 +7,8 @@
 
 ## Невыпущено
 
+## [2.4.0] - 2026-09-11
+
 ### Добавлено
 
 - Обучение по опыту работы через `ai-skill-development`: создание и
@@ -762,7 +764,10 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.21...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.4.0...HEAD
+[2.4.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.23...2.4.0
+[2.3.23]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.22...2.3.23
+[2.3.22]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.21...2.3.22
 [2.3.21]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.20...2.3.21
 [2.3.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.19...2.3.20
 [2.3.19]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.18...2.3.19
