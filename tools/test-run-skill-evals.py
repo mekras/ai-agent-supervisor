@@ -645,7 +645,7 @@ else:
 ''')
         config = root / "evals.local.yml"
         template = f'''adapters:
-  local: "{sys.executable} tools/adapter.py"
+  local: '{sys.executable} tools/adapter.py'
 models:
   - local:candidate
 workspace_models: []
@@ -740,7 +740,7 @@ def test_skill_discovery() -> None:
             "sys.stdin.read()\n"
         )
         (root / "evals.local.yml").write_text(f'''adapters:
-  local: "{sys.executable} tools/adapter.py"
+  local: '{sys.executable} tools/adapter.py'
 models:
   - local:candidate
 workspace_models:
@@ -826,7 +826,7 @@ print(json.dumps({{"output":json.dumps(result),"usage":{{"cost":price,"currency"
 ''')
         config_path = root / "evals.local.yml"
         config_path.write_text(f'''adapters:
-  local: "{sys.executable} adapter.py"
+  local: '{sys.executable} adapter.py'
 models:
   - local:candidate-a
   - local:candidate-b
