@@ -62,6 +62,8 @@ def run(project: Path, fake: Path) -> subprocess.CompletedProcess[str]:
         ],
         check=False,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

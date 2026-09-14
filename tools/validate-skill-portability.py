@@ -137,6 +137,21 @@ def switches_output_to_utf8(tree: ast.AST) -> bool:
     return False
 
 
+def text_child_without_encoding(tree: ast.AST) -> int | None:
+    """Найти чтение вывода дочернего процесса без заданной кодировки."""
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        if called_name(node.func) not in {"run", "Popen", "check_output"}:
+            continue
+        keywords = {keyword.arg for keyword in node.keywords}
+        if not keywords & {"text", "universal_newlines"}:
+            continue
+        if "encoding" not in keywords:
+            return node.lineno
+    return None
+
+
 def python_tree(path: Path) -> ast.AST:
     return ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
 
@@ -185,6 +200,13 @@ def validate_skill(skill: Path) -> list[str]:
             except SyntaxError as error:
                 errors.append(f"{script}:{error.lineno}: не удалось разобрать Python")
                 continue
+            line = text_child_without_encoding(tree)
+            if line is not None:
+                errors.append(
+                    f"{script}:{line}: вывод дочернего процесса читается в "
+                    "текстовом режиме без encoding; кодовая страница системы "
+                    "не разберёт сообщения вне ASCII",
+                )
             if prints_non_ascii(tree) and not switches_output_to_utf8(tree):
                 errors.append(
                     f"{script}: печатает текст вне ASCII, но не переключает "

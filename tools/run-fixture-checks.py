@@ -47,6 +47,8 @@ def main() -> int:
                     cwd=workspace,
                     env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
                     text=True,
+                    encoding="utf-8",
+                    errors="replace",
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     check=False,

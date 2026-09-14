@@ -832,6 +832,8 @@ def run_case(
                     cwd=fixture,
                     check=False,
                     text=True,
+                    encoding="utf-8",
+                    errors="replace",
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
@@ -852,6 +854,8 @@ def run_case(
                 cwd=fixture,
                 check=False,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 env=trace_environment(

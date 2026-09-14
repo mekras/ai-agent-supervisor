@@ -729,6 +729,8 @@ def make_model_call(adapter: list[str], model: str, timeout: int, workspace: Pat
             process = subprocess.Popen(
                 [*adapter, model],
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
@@ -1352,7 +1354,7 @@ def prepare_trial(workspace: Path, skill_dirs: list[Path], fixture: Path | None 
                 target.write_text(item["content"], encoding="utf-8")
     # Отдельный корень Git не даёт командам git обнаружить родительский проект.
     initialized = subprocess.run(["git", "init", "--quiet", str(workspace)],
-                                 text=True, capture_output=True, check=False)
+                                 text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
     if initialized.returncode:
         raise RuntimeError(f"Не удалось создать корень тестового проекта: {initialized.stderr}")
     return install_trial_skills(workspace, skill_dirs)
@@ -1851,7 +1853,7 @@ def sha256_file(path: Path) -> str:
 
 
 def git_revision(repo_root: Path) -> str | None:
-    completed = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_root, text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=False)
+    completed = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_root, text=True, encoding="utf-8", errors="replace", stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=False)
     return completed.stdout.strip() if completed.returncode == 0 else None
 
 
@@ -1967,6 +1969,9 @@ def check_comparison_snapshot(comparison: dict[str, Any], cases: list[dict[str, 
 
 def freeze_comparison(repo_root: Path, plan_path: Path, config: dict[str, Any], frozen: Path) -> tuple[dict[str, Any], list[dict[str, Any]], list[Path]]:
     """Проверить план и сохранить фактические входы до первого вызова модели."""
+    # Корень и план сравниваются без символических ссылок: иначе проверка
+    # принадлежности проекту зависит от устройства файловой системы.
+    repo_root = repo_root.resolve()
     plan_path = plan_path.resolve()
     json.dumps(config, allow_nan=False)
     if len({run["label"] for run in config["runs"]}) != len(config["runs"]):

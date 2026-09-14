@@ -282,6 +282,8 @@ pricing:
             ["bash", str(CLAUDE_ADAPTER), "fixture-model"],
             input="проверка",
             text=True,
+            encoding="utf-8",
+            errors="replace",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             env={
@@ -640,11 +642,11 @@ results_dir: eval-results
         env = {key: value for key, value in os.environ.items() if not key.startswith("APM_EVAL_")}
         env["APM_EVAL_PATH"] = ".apm/skills/audit"
         command = [sys.executable, str(RUNNER), "--yes", "--output", "report.json"]
-        stopped = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+        stopped = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
         assert stopped.returncode == 1 and "workspace_models" in stopped.stderr
         assert not (root / "report.json").exists()
         config.write_text(template.replace("workspace_models: []", "workspace_models:\n  - local:candidate"))
-        done = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+        done = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
         assert done.returncode == 0, done.stdout + done.stderr
         report = json.loads((root / "report.json").read_text())
         assert len(report["runs"]) == 3
@@ -666,7 +668,7 @@ case = "trigger-one" if '"id": "trigger-one"' in p else "trigger-two"
 print(json.dumps({"output":json.dumps({"results":[{"id":case,"should_trigger":True}]}),"usage":{"cost":1,"currency":"USD"}}))
 ''')
         command.extend(["--case-id", "trigger-one", "--case-id", "trigger-two"])
-        done = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+        done = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
         assert done.returncode == 0, done.stdout + done.stderr
         report = json.loads((root / "report.json").read_text())
         assert not report["runs"] and not report["result_runs"]
@@ -676,7 +678,7 @@ print(json.dumps({"output":json.dumps({"results":[{"id":case,"should_trigger":Tr
         # Отчёт сохраняется и при ошибке ответа, и при неожиданной ошибке обработки результата.
         for output in ("not-json", '{"results":null}'):
             adapter.write_text(f"import json; print(json.dumps({{'output':{output!r},'usage':{{'cost':3,'currency':'USD'}}}}))")
-            done = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+            done = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
             assert done.returncode != 0
             report = json.loads((root / "report.json").read_text())
             assert report["accounting"]["calls"] == 1 and report["accounting"]["total_cost"] == 3
@@ -733,7 +735,7 @@ results_dir: eval-results
         env = {key: value for key, value in os.environ.items() if not key.startswith("APM_EVAL_")}
         stopped = subprocess.run(
             [sys.executable, str(RUNNER), "--yes"],
-            cwd=root, env=env, text=True, capture_output=True,
+            cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True,
         )
         assert stopped.returncode == 1, stopped.stdout + stopped.stderr
         assert "audit" in stopped.stderr and str(duplicate) in stopped.stderr, stopped.stderr
@@ -821,7 +823,7 @@ results_dir: eval-results
 ''')
         env = {key: value for key, value in os.environ.items() if not key.startswith("APM_EVAL_")}
         command = [sys.executable, str(RUNNER), "--comparison-plan", "evals/comparison/plan.json", "--output", "report.json", "--yes"]
-        done = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+        done = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
         assert done.returncode == 0, done.stdout + done.stderr
         report = json.loads((root / "report.json").read_text())
         assert report["schema_version"] == 3 and report["suite"] == "comparison" and not report["summary"]
@@ -860,7 +862,7 @@ results_dir: eval-results
                 config_path.unlink()
             else:
                 config_path.write_text(contents)
-            failure = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+            failure = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
             assert failure.returncode == 1 and marker.read_bytes() == initial_marker
             assert (root / "report.json").read_bytes() == initial_report
         config_path.write_text(original_config)
@@ -868,15 +870,15 @@ results_dir: eval-results
                       {"common_background": ""}, {"schema_version": True}, {"collection": "../../packages/audit"},
                       {"minimal_instructions": "../../../../outside.md"}):
             plan_path.write_text(json.dumps({**plan, **delta}))
-            failure = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+            failure = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
             assert failure.returncode == 1, delta
             assert marker.read_bytes() == initial_marker and (root / "report.json").read_bytes() == initial_report
         plan_path.write_text(json.dumps(plan))
         for extra in (["--case-id", "task"], ["--repetitions", "1"], ["packages"], ["--limit", "1"]):
-            failure = subprocess.run([*command, *extra], cwd=root, env=env, text=True, capture_output=True)
+            failure = subprocess.run([*command, *extra], cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
             assert failure.returncode == 1 and marker.read_bytes() == initial_marker
         (folder / "minimal.md").write_text("")
-        failure = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+        failure = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
         assert failure.returncode == 1 and marker.read_bytes() == initial_marker
         (folder / "minimal.md").write_text("MINIMALONLY")
         (fixture / "README.md").write_text("original")
@@ -916,7 +918,7 @@ results_dir: eval-results
             else:
                 raise AssertionError("Изменение зафиксированных входов должно остановить сравнение")
         adapter.write_text("print('not-json')")
-        failure = subprocess.run(command, cwd=root, env=env, text=True, capture_output=True)
+        failure = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
         assert failure.returncode == 1
         failed_report = json.loads((root / "report.json").read_text())
         assert failed_report["comparison"]["execution_status"] == "completed_with_errors"
