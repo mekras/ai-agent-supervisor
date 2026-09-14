@@ -353,6 +353,39 @@ args.output.write_text(json.dumps(state), encoding="utf-8")''',
         assert failure_only.returncode == 1
         assert "нет успешного рабочего сценария" in failure_only.stderr
 
+        # Внешняя команда сценария: отсутствие среды — не нарушение контракта.
+        write_contract(skill)
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["cases"][0]["requires"] = ["команда-которой-нет"]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        skipped = run(skill)
+        assert skipped.returncode == 0, skipped.stderr
+        assert "сценарий пропущен" in skipped.stdout and "команда-которой-нет" in skipped.stdout
+        assert "Пропущено сценариев из-за отсутствующих внешних команд: 1." in skipped.stdout
+        assert "Контрактные сценарии скриптов пройдены: 0." in skipped.stdout
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["cases"][0]["requires"] = ["git"]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        available = run(skill)
+        assert available.returncode == 0, available.stderr
+        assert "Контрактные сценарии скриптов пройдены: 1." in available.stdout
+        assert "пропущен" not in available.stdout
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["cases"][0]["requires"] = ["tools/apm"]
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        path_in_requires = run(skill)
+        assert path_in_requires.returncode == 1
+        assert "нужно имя внешней команды без пути" in path_in_requires.stderr
+
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["cases"][0]["requires"] = "apm"
+        contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+        broken_requires = run(skill)
+        assert broken_requires.returncode == 1
+        assert "нужен массив непустых имён внешних команд" in broken_requires.stderr
+
     with tempfile.TemporaryDirectory() as temporary:
         skill = Path(temporary) / "навык"
         write_script(skill, script)
