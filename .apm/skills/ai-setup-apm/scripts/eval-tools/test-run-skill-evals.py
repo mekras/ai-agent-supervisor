@@ -659,7 +659,9 @@ results_dir: eval-results
         env["APM_EVAL_PATH"] = ".apm/skills/audit"
         command = [sys.executable, str(RUNNER), "--yes", "--output", "report.json"]
         stopped = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
-        assert stopped.returncode == 1 and "workspace_models" in stopped.stderr
+        assert stopped.returncode == 1 and "workspace_models" in stopped.stderr, (
+            stopped.stdout + stopped.stderr
+        )
         assert not (root / "report.json").exists()
         config.write_text(template.replace("workspace_models: []", "workspace_models:\n  - local:candidate"))
         done = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
