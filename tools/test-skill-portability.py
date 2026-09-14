@@ -121,6 +121,20 @@ def main() -> int:
         assert failed.returncode == 1
         assert "не переключает" in failed.stderr
 
+    # Текстовый файл без кодировки читается кодовой страницей системы.
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        write_skill(
+            root,
+            "compatibility: P0 не требует Python. P1 требует Python 3.\n",
+            "P0 работает без скрипта, если Python недоступен.",
+            "#!/usr/bin/env python3\nfrom pathlib import Path\n"
+            "Path('data.txt').write_text('ok')\n",
+        )
+        failed = run(root)
+        assert failed.returncode == 1
+        assert "без encoding" in failed.stderr
+
     # Чтение вывода дочернего процесса без кодировки ломается на Windows.
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)

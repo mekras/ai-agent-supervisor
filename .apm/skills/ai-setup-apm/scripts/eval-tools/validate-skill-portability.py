@@ -152,6 +152,36 @@ def text_child_without_encoding(tree: ast.AST) -> int | None:
     return None
 
 
+def text_file_without_encoding(tree: ast.AST) -> int | None:
+    """Найти работу с текстовым файлом без заданной кодировки."""
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        name = called_name(node.func)
+        if name not in {"read_text", "write_text", "open"}:
+            continue
+        if (
+            isinstance(node.func, ast.Attribute)
+            and isinstance(node.func.value, ast.Name)
+            and node.func.value.id == "tokenize"
+        ):
+            # tokenize.open сам определяет кодировку по объявлению файла.
+            continue
+        if any(keyword.arg == "encoding" for keyword in node.keywords):
+            continue
+        if name == "open":
+            mode = None
+            if node.args and isinstance(node.args[-1], ast.Constant):
+                mode = node.args[-1].value
+            for keyword in node.keywords:
+                if keyword.arg == "mode" and isinstance(keyword.value, ast.Constant):
+                    mode = keyword.value.value
+            if isinstance(mode, str) and "b" in mode:
+                continue
+        return node.lineno
+    return None
+
+
 def python_tree(path: Path) -> ast.AST:
     return ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
 
@@ -200,6 +230,13 @@ def validate_skill(skill: Path) -> list[str]:
             except SyntaxError as error:
                 errors.append(f"{script}:{error.lineno}: не удалось разобрать Python")
                 continue
+            line = text_file_without_encoding(tree)
+            if line is not None:
+                errors.append(
+                    f"{script}:{line}: текстовый файл читается или пишется без "
+                    "encoding; кодовая страница системы исказит содержимое "
+                    "вне ASCII",
+                )
             line = text_child_without_encoding(tree)
             if line is not None:
                 errors.append(
