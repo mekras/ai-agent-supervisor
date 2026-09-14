@@ -32,6 +32,13 @@ def main() -> int:
     assert runner["russian_count"](11, "сценарий", "сценария", "сценариев") == "11 сценариев"
     assert runner["russian_count"](21, "сценарий", "сценария", "сценариев") == "21 сценарий"
 
+    split_command = runner["split_command"]
+    assert split_command("tools/adapter --flag", windows=False) == ["tools/adapter", "--flag"]
+    # В Windows обратная косая черта остаётся разделителем пути.
+    assert split_command(
+        r'"C:\Program Files\Python\python.exe" tools\adapter.py', windows=True
+    ) == ["C:\\Program Files\\Python\\python.exe", "tools\\adapter.py"]
+
     parsed_config = runner["parse_evals_yaml"](
         """# Комментарии не требуют отдельного YAML-пакета.
 adapters:

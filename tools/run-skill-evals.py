@@ -269,7 +269,7 @@ def load_config(repo_root: Path, config_path: Path) -> dict[str, Any] | None:
             file=sys.stderr,
         )
         return None
-    adapters = {name: shlex.split(str(command)) for name, command in raw_adapters.items()}
+    adapters = {name: split_command(str(command)) for name, command in raw_adapters.items()}
     adapters = {name: resolve_adapter_paths(command, repo_root) for name, command in adapters.items()}
 
     env_model = os.environ.get("APM_EVAL_MODEL")
@@ -853,6 +853,19 @@ def collect_skill_dirs(root: Path) -> Iterator[Path]:
             yield entry
         elif not entry.is_symlink():
             yield from collect_skill_dirs(entry)
+
+
+def split_command(value: str, windows: bool | None = None) -> list[str]:
+    """Разобрать команду адаптера с учётом разделителя пути системы."""
+    if windows is None:
+        windows = os.name == "nt"
+    if not windows:
+        return shlex.split(value)
+    # В Windows обратная косая черта — разделитель пути, а не экранирование.
+    return [
+        item[1:-1] if len(item) > 1 and item[0] == item[-1] == '"' else item
+        for item in shlex.split(value, posix=False)
+    ]
 
 
 def find_skill_dirs(paths: list[Path]) -> list[Path]:
