@@ -552,6 +552,10 @@ def test_result_workspace() -> None:
 
 
 def test_adapter_traces() -> None:
+    if os.name == "nt":
+        # Поставляемые адаптеры — маршрут P2: им нужна POSIX-среда.
+        print("Проверка следов POSIX-адаптеров пропущена: нужна POSIX-среда.")
+        return
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         workspace = root / "workspace"
