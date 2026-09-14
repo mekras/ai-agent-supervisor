@@ -5,6 +5,12 @@ from __future__ import annotations
 import json, os, subprocess, sys, tempfile
 from pathlib import Path
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 if len(sys.argv) != 4:
     raise SystemExit("Использование: codex-role <модель> <усилие> <режим>")
 model, effort, sandbox = sys.argv[1:]

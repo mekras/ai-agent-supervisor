@@ -39,6 +39,12 @@ import time
 from pathlib import Path
 from typing import Any, Callable, Iterator
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 CONFIG_NAME = "evals.local.yml"
 SAMPLE_NAME = "evals.sample.yml"
 REGRESSION_MODES = ("baseline", "skill", "catalog")
@@ -1155,7 +1161,10 @@ def run_result_evals(
             candidate_error = ""
             judge_error = ""
             with tempfile.TemporaryDirectory(prefix="apm-result-") as temp:
-                workspace, before = Path(temp) / "workspace", Path(temp) / "before"
+                # Путь без ссылок: адаптер сравнивает APM_EVAL_WORKSPACE
+                # со своим текущим каталогом, а он всегда разыменован.
+                root = Path(temp).resolve()
+                workspace, before = root / "workspace", root / "before"
                 packages = prepare_trial(workspace, skill_dirs, input_files=case.get("input_files", []))
                 shutil.copytree(workspace, before)
                 call = call_factory(workspace, read_only=case.get("read_only", False))
@@ -1730,8 +1739,9 @@ def run_fixture_evals(
                 context = {"case_id": case["id"], "mode": mode, "repetition": repetition,
                            "candidate_model": run["label"], "suite": "comparison" if comparison else "regression"}
                 with tempfile.TemporaryDirectory(prefix="apm-eval-") as temp:
-                    workspace = Path(temp) / "workspace"
-                    before = Path(temp) / "before"
+                    root = Path(temp).resolve()
+                    workspace = root / "workspace"
+                    before = root / "before"
                     has_collection = mode == "collection" if comparison else mode != "baseline"
                     packages = prepare_trial(workspace, skill_dirs if has_collection else [], case["fixture_dir"])
                     shutil.copytree(workspace, before)
@@ -2046,7 +2056,7 @@ def run_comparison(repo_root: Path, args: argparse.Namespace, config: dict[str, 
         raise RuntimeError("Все модели сравнения должны быть перечислены в workspace_models.")
     calls, records, errors = [], [], []
     with tempfile.TemporaryDirectory(prefix="apm-comparison-") as temp:
-        comparison, cases, skills = freeze_comparison(repo_root, args.comparison_plan, config, Path(temp))
+        comparison, cases, skills = freeze_comparison(repo_root, args.comparison_plan, config, Path(temp).resolve())
         if not confirm_model_run(runs=config["runs"], fixture_cases=cases, trigger_cases=[], result_groups=[],
                 repetitions=config["repetitions"], judge_repetitions=config["judge_repetitions"], yes=args.yes, comparison=True):
             print("Сравнение отменено до вызова моделей.", flush=True)

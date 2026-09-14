@@ -100,6 +100,32 @@ def main() -> int:
         assert failed.returncode == 1
         assert "скрытая установка" in failed.stderr
 
+    # Печать русского текста без переключения потоков ломает консоль Windows.
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        write_skill(
+            root,
+            "compatibility: P0 не требует Python. P1 требует Python 3.\n",
+            "P0 работает без скрипта, если Python недоступен.",
+            "#!/usr/bin/env python3\nprint('готово')\n",
+        )
+        failed = run(root)
+        assert failed.returncode == 1
+        assert "не переключает" in failed.stderr
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        write_skill(
+            root,
+            "compatibility: P0 не требует Python. P1 требует Python 3.\n",
+            "P0 работает без скрипта, если Python недоступен.",
+            "#!/usr/bin/env python3\nimport sys\n"
+            "sys.stdout.reconfigure(encoding='utf-8', errors='replace')\n"
+            "print('ok')\n",
+        )
+        passed = run(root)
+        assert passed.returncode == 0, passed.stderr
+
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         skill = root / "навык с пробелом"

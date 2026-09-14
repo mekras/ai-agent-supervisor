@@ -11,6 +11,12 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 
 RUNNER = Path(__file__).with_name("run-skill-evals.py")
 CLAUDE_ADAPTER = Path(__file__).parent / "adapters" / "claude"
@@ -339,6 +345,7 @@ def emit(value):
     print(json.dumps({{"output":json.dumps(value), "usage":{{"cost":1,"currency":"USD"}}}}))
 prompt = sys.stdin.read()
 workspace = Path(os.environ["APM_EVAL_WORKSPACE"])
+assert workspace == workspace.resolve()
 assert Path.cwd() == workspace
 assert not (workspace / "oracle.json").exists()
 packages = workspace / ".agents/skills"
@@ -611,6 +618,7 @@ elif '"required": ["selected_skills"]' in prompt:
     print(json.dumps({"selected_skills":[]}))
 else:
     root = Path(os.environ["APM_EVAL_WORKSPACE"])
+    assert root == root.resolve()
     assert Path.cwd() == root
     if (root / ".agents").exists():
         assert (root / ".agents/skills/writing/references/rules.md").is_file()
