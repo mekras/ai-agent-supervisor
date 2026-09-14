@@ -1883,9 +1883,9 @@ def write_fixture_report(repo_root: Path, output: Path, records: list[dict[str, 
         bucket["delta_to_baseline"] = round(bucket["pass_rate"] - baseline_rate, 4)
     provenance = comparison["provenance"] if comparison else {
         "git_revision": git_revision(repo_root),
-        "skills": {str(item.relative_to(repo_root)): {file.relative_to(item).as_posix(): sha256_file(file)
+        "skills": {item.relative_to(repo_root).as_posix(): {file.relative_to(item).as_posix(): sha256_file(file)
                    for file in sorted(item.rglob("*")) if file.is_file()} for item in skill_dirs},
-        "fixtures": {case["id"]: {"fixture": {str(file.relative_to(case["fixture_dir"])): sha256_file(file) for file in case["fixture_dir"].rglob("*") if file.is_file()}, "oracle_sha256": sha256_file(case.get("oracle_path", Path(case["fixture_dir"]).parent / case["oracle"]))} for case in cases},
+        "fixtures": {case["id"]: {"fixture": {file.relative_to(case["fixture_dir"]).as_posix(): sha256_file(file) for file in case["fixture_dir"].rglob("*") if file.is_file()}, "oracle_sha256": sha256_file(case.get("oracle_path", Path(case["fixture_dir"]).parent / case["oracle"]))} for case in cases},
         "modes": ["baseline", "skill", "catalog"], "repetitions": repetitions, "judge_repetitions": judge_repetitions,
     }
     calls = call_records if call_records is not None else []
@@ -2046,7 +2046,7 @@ def freeze_comparison(repo_root: Path, plan_path: Path, config: dict[str, Any], 
             "prompt": case["prompt"], "oracle": case["oracle_data"],
             "oracle_sha256": hashlib.sha256(oracle_text.encode()).hexdigest()}
         frozen_cases.append({**case, "fixture_dir": target})
-    metadata = {"plan": plan, "plan_path": str(plan_path.relative_to(repo_root)),
+    metadata = {"plan": plan, "plan_path": plan_path.relative_to(repo_root).as_posix(),
         "plan_sha256": hashlib.sha256(raw_plan).hexdigest(), "frozen_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "minimal_instructions": {"text": instructions, "sha256": hashlib.sha256(instructions.encode()).hexdigest(), "delivery": "candidate_prompt"},
         "configuration": config, "provenance": provenance,
