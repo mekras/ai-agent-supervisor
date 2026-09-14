@@ -6,6 +6,7 @@ license: MIT
 target:
 - claude
 - codex
+- hermes
 type: skill
 includes: auto
 dependencies:
