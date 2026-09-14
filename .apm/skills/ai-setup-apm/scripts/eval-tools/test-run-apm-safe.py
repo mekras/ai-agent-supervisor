@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import shutil
 import stat
 import subprocess
@@ -47,6 +48,15 @@ def prepare(project: Path, mode: str = "clean") -> Path:
         encoding="utf-8",
     )
     fake.chmod(fake.stat().st_mode | stat.S_IXUSR)
+    if os.name == "nt":
+        # Windows не исполняет файл по строке shebang, поэтому подставному
+        # средству нужен вызов интерпретатора через исполняемую обёртку.
+        wrapper = project / "fake-apm.cmd"
+        wrapper.write_text(
+            f'@"{sys.executable}" "{fake}" %*\n',
+            encoding="utf-8",
+        )
+        return wrapper
     return fake
 
 
