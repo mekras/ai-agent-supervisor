@@ -37,12 +37,7 @@ APM (блокировка зависимостей, установка, ауди
 
 ## Установка
 
-Установите [APM](https://microsoft.github.io/apm/), если ещё не установлен.
-
-> [!WARNING]
-> Для цели `hermes` нужен APM CLI версии 0.29.1 или новее: на версии 0.29.0
-> блокировка зависимостей и сборка пакета с этой целью завершались ошибкой.
-> Проверьте версию командой `apm --version` перед установкой.
+Для установки потребуется [APM](https://microsoft.github.io/apm/) не ниже 0.29.1.
 
 Подключите реестр коллекции:
 
@@ -53,17 +48,18 @@ apm marketplace add mekras/apm-marketplace --ref master
 
 Выполните **в корне проекта** команду для используемого агента.
 
-Для Codex:
+```bash
+apm install ai-agent-supervisor@mekras --target <цель>
+```
+
+`<цель>` — это  `claude`, `codex` или `hermes`.
+
+Пример для Codex:
 
 ```bash
 apm install ai-agent-supervisor@mekras --target codex
 ```
 
-Для Claude Code:
-
-```bash
-apm install ai-agent-supervisor@mekras --target claude
-```
 
 После установки навыки коллекции станут доступны агенту в этом проекте.
 
