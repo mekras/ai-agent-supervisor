@@ -7,6 +7,13 @@ import json
 import subprocess
 import tempfile
 from pathlib import Path
+import sys
+
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +33,8 @@ def run_role(
         arguments,
         input="no prompt is retained",
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         check=False,
     )
@@ -40,7 +49,7 @@ def make_adapter(directory: Path, name: str, body: str) -> Path:
 
 def run(*args: str) -> tuple[int, dict]:
     completed = subprocess.run(
-        [str(CHECKER), "--json", *args], text=True, capture_output=True, check=False
+        [str(CHECKER), "--json", *args], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False
     )
     return completed.returncode, json.loads(completed.stdout)
 
@@ -87,12 +96,12 @@ def main() -> int:
         assert code == 1 and result["models"][0]["status"] == "unverified"
 
         catalog = make_adapter(directory, "catalog", "if [ \"$1\" = list ]; then printf '%s\\n' '{\"harness\":\"other\",\"models\":[{\"id\":\"family-exact\",\"hidden\":false,\"supportedReasoningEfforts\":[{\"reasoningEffort\":\"low\"}]}]}'; else exit 2; fi\n")
-        discovered = subprocess.run([str(DISCOVER), "--adapter", str(catalog)], text=True, capture_output=True, check=False)
+        discovered = subprocess.run([str(DISCOVER), "--adapter", str(catalog)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         payload = json.loads(discovered.stdout)
         assert discovered.returncode == 0 and payload["harness"] == "other" and payload["models"][0]["id"] == "family-exact"
 
         unavailable = make_adapter(directory, "unavailable", "exit 5\n")
-        discovered = subprocess.run([str(DISCOVER), "--adapter", str(unavailable)], text=True, capture_output=True, check=False)
+        discovered = subprocess.run([str(DISCOVER), "--adapter", str(unavailable)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         assert discovered.returncode == 1 and json.loads(discovered.stdout)["status"] == "not_received"
 
         sessions = directory / "sessions" / "2026" / "07" / "10"; sessions.mkdir(parents=True)
@@ -106,7 +115,7 @@ def main() -> int:
         child = [{"type":"session_meta","payload":{"cwd":cwd,"source":{"subagent":{"thread_spawn":{"agent_path":None,"agent_role":None}}}}}, {"type":"event_msg","payload":{"type":"task_complete"}}]
         (sessions / "parent.jsonl").write_text("\n".join(json.dumps(x) for x in parent), encoding="utf-8")
         (sessions / "child.jsonl").write_text("\n".join(json.dumps(x) for x in child), encoding="utf-8")
-        report = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "1", "--min-turns", "1", "--min-days", "1"], text=True, capture_output=True, check=False)
+        report = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "1", "--min-turns", "1", "--min-days", "1"], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         analysis = json.loads(report.stdout)
         assert analysis["history_sufficient"] and analysis["parent_sessions"] == 1 and analysis["child_runs"] == 1 and analysis["file_change_sessions"] == 1
         assert "apply_patch" not in report.stdout and "parent.jsonl" not in report.stdout
@@ -116,7 +125,7 @@ def main() -> int:
             "without_observed_write_events": 0, "with_observed_write_events": 1
         }
         assert analysis["history_scope"] and analysis["compatibility_notice"]
-        insufficient = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "2", "--min-turns", "2", "--min-days", "2"], text=True, capture_output=True, check=False)
+        insufficient = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "2", "--min-turns", "2", "--min-days", "2"], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         assert not json.loads(insufficient.stdout)["history_sufficient"]
 
         # Даже достаточная история без события записи не определяет вид работы.
@@ -127,7 +136,7 @@ def main() -> int:
             {"type": "event_msg", "payload": {"type": "task_complete"}},
         ]
         (sessions / "design.jsonl").write_text("\n".join(json.dumps(x) for x in design_session), encoding="utf-8")
-        expanded = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "2", "--min-turns", "2", "--min-days", "1"], text=True, capture_output=True, check=False)
+        expanded = subprocess.run([str(ANALYZER), "--sessions", str(directory / "sessions"), "--cwd", cwd, "--min-sessions", "2", "--min-turns", "2", "--min-days", "1"], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         assert expanded.returncode == 0, expanded.stderr
         expanded_analysis = json.loads(expanded.stdout)
         assert expanded_analysis["history_sufficient"]

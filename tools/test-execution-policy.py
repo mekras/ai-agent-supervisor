@@ -13,6 +13,12 @@ import textwrap
 import tomllib
 from pathlib import Path
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / ".apm/skills/ai-setup-execution-policy/scripts/execution-policy"
@@ -25,6 +31,8 @@ def run(*arguments: str, cwd: Path | None = None) -> subprocess.CompletedProcess
         [str(SCRIPT), *arguments],
         cwd=cwd,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         check=False,
     )
@@ -434,7 +442,7 @@ def main() -> int:
 
         repository = directory / "repository"
         repository.mkdir()
-        initialized = subprocess.run(["git", "init", str(repository)], text=True, capture_output=True, check=False)
+        initialized = subprocess.run(["git", "init", str(repository)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         assert initialized.returncode == 0, initialized.stderr
         private_core = repository / "private.toml"
         refused = run("init-user", "--output", str(private_core))
@@ -467,7 +475,7 @@ def main() -> int:
         assert "исключён из Git" in qualification_refused.stderr
 
         installed_root = directory / "installed-project"
-        installed = subprocess.run([str(INSTALLER), str(installed_root)], text=True, capture_output=True, check=False)
+        installed = subprocess.run([str(INSTALLER), str(installed_root)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         assert installed.returncode == 0, installed.stderr
         installed_script = installed_root / "tools/execution-policy"
         assert installed_script.read_bytes() == SCRIPT.read_bytes()

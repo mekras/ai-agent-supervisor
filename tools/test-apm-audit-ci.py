@@ -12,6 +12,12 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 
 ROOT = Path(__file__).resolve().parent.parent
 AUDIT = ROOT / "tools" / "apm-audit-ci"
@@ -207,6 +213,8 @@ def run(root: Path, fake_apm: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, str(AUDIT), "--apm", str(fake_apm), "--project-root", str(root)],
         text=True,
+        encoding="utf-8",
+        errors="replace",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         check=False,

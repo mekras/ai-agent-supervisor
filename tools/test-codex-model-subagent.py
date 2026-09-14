@@ -7,6 +7,13 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
+import sys
+
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +67,8 @@ def run_case(runner: Path, directory: Path, mode: str) -> subprocess.CompletedPr
         [str(runner), "test-model", "acceptance", "test prompt"],
         cwd=ROOT,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         env=environment,
         check=False,

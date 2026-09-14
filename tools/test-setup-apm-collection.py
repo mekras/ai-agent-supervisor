@@ -9,6 +9,12 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SETUP = ROOT / ".apm/skills/ai-setup-apm/scripts/setup-apm-collection"
@@ -19,6 +25,8 @@ def run(project: Path, *extra: str) -> subprocess.CompletedProcess[str]:
         [sys.executable, str(SETUP), str(project), *extra],
         check=False,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -61,6 +69,8 @@ def main() -> int:
             cwd=project,
             check=False,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
@@ -74,6 +84,8 @@ def main() -> int:
             cwd=project,
             check=False,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
@@ -89,6 +101,8 @@ def main() -> int:
         [sys.executable, str(SETUP), "--help"],
         check=False,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

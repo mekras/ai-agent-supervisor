@@ -14,6 +14,12 @@ import shlex
 import subprocess
 import sys
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Получить каталог моделей подагентов")
@@ -24,7 +30,7 @@ def main() -> int:
         parser.error("--timeout должен быть положительным")
     command = shlex.split(args.adapter)
     try:
-        result = subprocess.run([*command, "list"], text=True, capture_output=True,
+        result = subprocess.run([*command, "list"], text=True, encoding="utf-8", errors="replace", capture_output=True,
                                 timeout=args.timeout, check=False)
         if result.returncode:
             raise RuntimeError(result.stderr.strip() or f"код выхода {result.returncode}")

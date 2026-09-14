@@ -8,6 +8,12 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 
 ROOT = Path(__file__).resolve().parent.parent
 VALIDATOR = ROOT / ".apm/skills/ai-setup-apm/scripts/eval-tools/validate-skill-portability.py"
@@ -18,6 +24,8 @@ def run(path: Path) -> subprocess.CompletedProcess[str]:
         [sys.executable, str(VALIDATOR), str(path)],
         check=False,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

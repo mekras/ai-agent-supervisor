@@ -6,6 +6,13 @@ from __future__ import annotations
 import importlib.util
 import tempfile
 from pathlib import Path
+import sys
+
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
 
 
 ROOT = Path(__file__).resolve().parent.parent

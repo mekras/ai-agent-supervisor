@@ -16,6 +16,12 @@ import textwrap
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+# Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
+for _stream in (sys.stdout, sys.stderr):
+    _reconfigure = getattr(_stream, "reconfigure", None)
+    if _reconfigure is not None:
+        _reconfigure(encoding="utf-8", errors="replace")
+
 
 sys.dont_write_bytecode = True
 
@@ -108,6 +114,8 @@ def run(
         arguments,
         input="Найди один факт.",
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         check=False,
     )
@@ -174,7 +182,7 @@ def main() -> int:
                 [str(RUNNER.with_name("run-subagent-role")), "reviewer",
                  "--config", str(config), "--input", str(input_file),
                  "--out", str(directory / f"role-{evidence}")],
-                input="Проверь факт.", text=True, capture_output=True, check=False,
+                input="Проверь факт.", text=True, encoding="utf-8", errors="replace", capture_output=True, check=False,
             )
             assert role.returncode == (0 if evidence else 1), role.stderr
             role_record = json.loads(role.stdout if evidence else role.stderr)
@@ -184,6 +192,8 @@ def main() -> int:
         installed = subprocess.run(
             [str(CLAUDE_INSTALLER), str(installed_root)],
             text=True,
+            encoding="utf-8",
+            errors="replace",
             capture_output=True,
             check=False,
         )
