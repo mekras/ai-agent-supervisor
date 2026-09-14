@@ -41,7 +41,7 @@ import subprocess
 import sys
 import tempfile
 import types
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 # Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
@@ -280,12 +280,22 @@ def public_python_scripts(skill: Path) -> list[Path]:
 
 
 def safe_relative(value: Any) -> Path | None:
+    """Принять путь, который остаётся внутри своего корня в любой системе."""
     if not isinstance(value, str) or not value.strip():
         return None
-    path = Path(value)
-    if path.is_absolute() or ".." in path.parts or path == Path("."):
+    windows = PureWindowsPath(value)
+    posix = PurePosixPath(value)
+    if (
+        windows.is_absolute()
+        or windows.drive
+        or windows.root
+        or posix.is_absolute()
+        or ".." in windows.parts
+        or ".." in posix.parts
+        or value in {".", ".."}
+    ):
         return None
-    return path
+    return Path(value)
 
 
 def string_list(value: Any) -> list[str] | None:

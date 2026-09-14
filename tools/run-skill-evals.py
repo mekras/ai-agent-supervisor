@@ -36,7 +36,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any, Callable, Iterator
 
 # Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
@@ -1287,11 +1287,26 @@ def evidence_judging_rules() -> str:
     )
 
 
+def unsafe_relative_value(value: str) -> bool:
+    """Отклонить путь, который в любой системе выходит за свой корень."""
+    windows = PureWindowsPath(value)
+    posix = PurePosixPath(value)
+    return (
+        not value
+        or windows.is_absolute()
+        or bool(windows.drive)
+        or bool(windows.root)
+        or posix.is_absolute()
+        or ".." in windows.parts
+        or ".." in posix.parts
+        or value in {".", ".."}
+    )
+
+
 def checked_relative_path(value: str) -> Path:
-    path = Path(value)
-    if not value or path.is_absolute() or ".." in path.parts or path == Path("."):
+    if unsafe_relative_value(value):
         raise RuntimeError(f"Недопустимый относительный путь: {value!r}.")
-    return path
+    return Path(value)
 
 
 def check_input_tree(root: Path) -> None:
