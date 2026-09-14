@@ -269,33 +269,38 @@ pricing:
         assert all(record["judge_execution"] for record in records)
         assert len(errors) == 2
 
-    with tempfile.TemporaryDirectory() as temporary:
-        root = Path(temporary)
-        workspace = root / "рабочая папка"
-        workspace.mkdir()
-        fake_bin = root / "bin"
-        fake_bin.mkdir()
-        fake_claude = fake_bin / "claude"
-        fake_claude.write_text("#!/usr/bin/env sh\npwd\ntouch changed-by-claude\n", encoding="utf-8")
-        fake_claude.chmod(0o755)
-        result = subprocess.run(
-            ["bash", str(CLAUDE_ADAPTER), "fixture-model"],
-            input="проверка",
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env={
-                **os.environ,
-                "APM_EVAL_WORKSPACE": str(workspace),
-                "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
-            },
-            check=False,
-        )
-        assert result.returncode == 0, result.stderr
-        assert result.stdout.strip() == str(workspace)
-        assert (workspace / "changed-by-claude").is_file()
+    # Поставляемый адаптер claude — маршрут P2: он требует POSIX-среды,
+    # поэтому вне её проверка не выполняется и названа как пропущенная.
+    if os.name == "nt":
+        print("Проверка POSIX-адаптера пропущена: нужна POSIX-среда.")
+    else:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            workspace = root / "рабочая папка"
+            workspace.mkdir()
+            fake_bin = root / "bin"
+            fake_bin.mkdir()
+            fake_claude = fake_bin / "claude"
+            fake_claude.write_text("#!/usr/bin/env sh\npwd\ntouch changed-by-claude\n", encoding="utf-8")
+            fake_claude.chmod(0o755)
+            result = subprocess.run(
+                ["bash", str(CLAUDE_ADAPTER), "fixture-model"],
+                input="проверка",
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env={
+                    **os.environ,
+                    "APM_EVAL_WORKSPACE": str(workspace),
+                    "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
+                },
+                check=False,
+            )
+            assert result.returncode == 0, result.stderr
+            assert result.stdout.strip() == str(workspace)
+            assert (workspace / "changed-by-claude").is_file()
 
     test_workspace_evidence()
     test_cost_accounting()
