@@ -721,6 +721,9 @@ def make_model_call(adapter: list[str], model: str, timeout: int, workspace: Pat
                        if key not in {"APM_EVAL_WORKSPACE", "APM_EVAL_TRACE"}}
         environment["APM_EVAL_TRACE"] = str(trace_path)
         environment["PYTHONDONTWRITEBYTECODE"] = "1"
+        # Запрос и ответ адаптера передаются в UTF-8 независимо от кодовой
+        # страницы системы.
+        environment["PYTHONIOENCODING"] = "utf-8"
         if workspace:
             environment["APM_EVAL_WORKSPACE"] = str(workspace)
         if read_only:
