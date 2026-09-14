@@ -7,6 +7,8 @@
 
 ## Невыпущено
 
+## [2.5.0] - 2026-09-14
+
 ### Добавлено
 
 - `ai-setup-apm` теперь сверяет ошибки установки, блокировки и выпуска со
@@ -789,7 +791,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.4.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.5.0...HEAD
+[2.5.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.23...2.4.0
 [2.3.23]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.22...2.3.23
 [2.3.22]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.21...2.3.22
