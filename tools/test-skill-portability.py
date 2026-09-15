@@ -162,6 +162,66 @@ def main() -> int:
         passed = run(root)
         assert passed.returncode == 0, passed.stderr
 
+    # Открытие файла без кодировки остаётся ошибкой.
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        write_skill(
+            root,
+            "compatibility: P0 не требует Python. P1 требует Python 3.\n",
+            "P0 работает без скрипта, если Python недоступен.",
+            "#!/usr/bin/env python3\n"
+            "with open('data.txt') as stream:\n    stream.read()\n",
+        )
+        failed = run(root)
+        assert failed.returncode == 1
+        assert "без encoding" in failed.stderr
+
+    # os.open возвращает дескриптор, кодировки у него нет.
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        write_skill(
+            root,
+            "compatibility: P0 не требует Python. P1 требует Python 3.\n",
+            "P0 работает без скрипта, если Python недоступен.",
+            "#!/usr/bin/env python3\nimport os\n"
+            "with open('data.bin', 'wb') as stream:\n    stream.write(b'ok')\n"
+            "fd = os.open('data.bin', os.O_RDONLY)\n"
+            "with os.fdopen(fd, 'rb') as stream:\n    stream.read()\n"
+            "print('ok')\n",
+        )
+        passed = run(root)
+        assert passed.returncode == 0, passed.stderr
+
+    # Режим, заданный выражением, не считается подтверждённым текстовым.
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        write_skill(
+            root,
+            "compatibility: P0 не требует Python. P1 требует Python 3.\n",
+            "P0 работает без скрипта, если Python недоступен.",
+            "#!/usr/bin/env python3\nmode = 'rb'\n"
+            "with open('data.bin', 'wb') as stream:\n    stream.write(b'ok')\n"
+            "with open('data.bin', mode) as stream:\n    stream.read()\n"
+            "print('ok')\n",
+        )
+        passed = run(root)
+        assert passed.returncode == 0, passed.stderr
+
+    # Двоичный режим у Path.open не требует кодировки.
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        write_skill(
+            root,
+            "compatibility: P0 не требует Python. P1 требует Python 3.\n",
+            "P0 работает без скрипта, если Python недоступен.",
+            "#!/usr/bin/env python3\nfrom pathlib import Path\n"
+            "with open('data.bin', 'wb') as stream:\n    stream.write(b'ok')\n"
+            "with Path('data.bin').open('rb') as stream:\n    stream.read()\n"
+            "print('ok')\n",
+        )
+        passed = run(root)
+        assert passed.returncode == 0, passed.stderr
+
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         skill = root / "навык с пробелом"
