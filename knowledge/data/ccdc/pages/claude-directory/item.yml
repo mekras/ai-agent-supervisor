@@ -1,0 +1,10 @@
+id: CCDC--claude-directory
+source_id: CCDC
+title: explore the .claude directory
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - normalized.local.md

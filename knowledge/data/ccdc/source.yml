@@ -1,0 +1,34 @@
+id: CCDC
+slug: ccdc
+title: "Claude Code Documentation"
+status: approved
+priority: normal
+carrier_type: website
+source_kind: reference
+long_source: true
+adapter: manual
+storage_strategy: local_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: "Точечная проверка нормализованных фрагментов с атрибуцией источника."
+requires_access_check: true
+url: "https://code.claude.com/docs"
+locator: "https://code.claude.com/docs/llms.txt"
+public_reference: "https://code.claude.com/docs"
+license_or_terms: "См. knowledge/source-attribution.md."
+access:
+  default: "Публичная документация; страницы доступны в машинной форме по адресу страницы с суффиксом `.md`. Условия публикации фрагментов проверяются перед использованием."
+reliability: official
+stability: mutable
+refresh_policy: manual
+retrieved_at: "2026-09-15"
+last_checked_at: "2026-09-15"
+scope:
+  includes: ["Страницы о составе каталога `.claude` и об окне контекста."]
+  excludes: ["Остальные страницы документации до отдельного решения об их обработке."]
+known_limitations:
+  - "Документация меняется без версионирования, поэтому фрагмент проверяй на дату сверки."
+  - "Снимки страниц хранятся локально и не отслеживаются Git."
+processing_notes:
+  - "Снимок получен запросом к машинной форме страницы, без ручной правки текста."

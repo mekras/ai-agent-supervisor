@@ -1,0 +1,27 @@
+statements:
+  - id: CCDC-003
+    source_id: CCDC
+    item_id: CCDC--context-window
+    status: ready_for_review
+    kind: fact
+    text: "Если правило должно сохраняться после сжатия контекста, документация предписывает убрать поле `paths:` или перенести текст в корневой контекстный файл проекта."
+    excerpt: "If a rule must persist across compaction, drop the `paths:` frontmatter or move it to the project-root CLAUDE.md."
+    artifact: normalized.local.md
+    checked_at: 2026-09-15
+    scope:
+      section_title: "Explore the context window"
+      limitations: "Фрагмент описывает поведение одной оснастки и может измениться без версионирования."
+    open_questions: []
+  - id: CCDC-004
+    source_id: CCDC
+    item_id: CCDC--context-window
+    status: ready_for_review
+    kind: fact
+    text: "Правило с условием по путям попадает в контекст как следствие чтения подходящего файла, поэтому его содержимое живёт в истории сообщений и перезагружается при последующих чтениях."
+    excerpt: "Path-scoped rules and nested CLAUDE.md files load into message history when their trigger file is read"
+    artifact: normalized.local.md
+    checked_at: 2026-09-15
+    scope:
+      section_title: "Explore the context window"
+      limitations: "Фрагмент описывает поведение одной оснастки."
+    open_questions: []

@@ -205,6 +205,22 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: CCDC--claude-directory
+  source_id: CCDC
+  path: data/ccdc/pages/claude-directory
+  title: explore the .claude directory
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичная веб-страница; условия копирования проверяются перед публикацией
+    фрагментов.
+- id: CCDC--context-window
+  source_id: CCDC
+  path: data/ccdc/pages/context-window
+  title: explore the context window
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичная веб-страница; условия копирования проверяются перед публикацией
+    фрагментов.
 - id: CODX--agent-approvals-security
   source_id: CODX
   path: data/codx/pages/agent-approvals-security

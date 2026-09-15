@@ -135,6 +135,41 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: APMP-015
+  source_id: APMP
+  item_id: APMP--author-primitives-instructions-and-agents
+  path: knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: 'Поле `applyTo` определяет способ доставки правила: без него правило считается
+    безусловным и вкладывается в собираемые контекстные файлы, а с ним каждая оснастка
+    оборачивает текст в собственный синтаксис области.'
+  artifact: normalized.local.md
+  checked_at: 2026-09-15
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: APMP-016
+  source_id: APMP
+  item_id: APMP--author-primitives-instructions-and-agents
+  path: knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Для цели `claude` инструкция с областью разворачивается отдельным файлом правила
+    в каталоге правил, а её область переносится в поле путей.
+  artifact: normalized.local.md
+  checked_at: 2026-09-15
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
 - id: APMP-011
   source_id: APMP
   item_id: APMP--author-primitives-mcp-as-primitive
@@ -477,6 +512,76 @@ statements:
     отвечают заданным критериям и целям.
   artifact: normalized.local.md
   checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CCDC-001
+  source_id: CCDC
+  item_id: CCDC--claude-directory
+  path: knowledge/data/ccdc/pages/claude-directory/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Правило без поля `paths:` загружается в начале сессии, а правило с полем `paths:`
+    загружается только когда агент читает подходящий файл.
+  artifact: normalized.local.md
+  checked_at: 2026-09-15
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CCDC-002
+  source_id: CCDC
+  item_id: CCDC--claude-directory
+  path: knowledge/data/ccdc/pages/claude-directory/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Правила — это указания, которые агент читает, а не конфигурация, исполнение
+    которой гарантирует оснастка; для гарантированного поведения документация направляет
+    к хукам и разрешениям.
+  artifact: normalized.local.md
+  checked_at: 2026-09-15
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CCDC-003
+  source_id: CCDC
+  item_id: CCDC--context-window
+  path: knowledge/data/ccdc/pages/context-window/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Если правило должно сохраняться после сжатия контекста, документация предписывает
+    убрать поле `paths:` или перенести текст в корневой контекстный файл проекта.
+  artifact: normalized.local.md
+  checked_at: 2026-09-15
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CCDC-004
+  source_id: CCDC
+  item_id: CCDC--context-window
+  path: knowledge/data/ccdc/pages/context-window/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Правило с условием по путям попадает в контекст как следствие чтения подходящего
+    файла, поэтому его содержимое живёт в истории сообщений и перезагружается при
+    последующих чтениях.
+  artifact: normalized.local.md
+  checked_at: 2026-09-15
   processing_status: null
   source_role: null
   evidence_strength: null

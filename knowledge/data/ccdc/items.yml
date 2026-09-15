@@ -1,0 +1,19 @@
+items:
+  - id: CCDC--claude-directory
+    source_id: CCDC
+    path: pages/claude-directory
+    title: "explore the .claude directory"
+    url: "https://code.claude.com/docs/en/claude-directory"
+    locator: "https://code.claude.com/docs/en/claude-directory.md"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: source_checked
+  - id: CCDC--context-window
+    source_id: CCDC
+    path: pages/context-window
+    title: "explore the context window"
+    url: "https://code.claude.com/docs/en/context-window"
+    locator: "https://code.claude.com/docs/en/context-window.md"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: source_checked

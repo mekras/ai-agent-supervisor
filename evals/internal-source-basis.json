@@ -256,6 +256,14 @@
         {
           "claim_id": "AUDIT-004",
           "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "CCDC-001",
+          "statement_path": "knowledge/data/ccdc/pages/claude-directory/statements.yml"
+        },
+        {
+          "claim_id": "APMP-016",
+          "statement_path": "knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml"
         }
       ],
       "cases": [
@@ -395,6 +403,22 @@
               "AUDIT-004"
             ]
           ]
+        },
+        {
+          "id": "ai-audit-project-result-undelivered-rule",
+          "required_claims": [
+            "CCDC-001",
+            "APMP-016"
+          ],
+          "finding_claims": [
+            [
+              "CCDC-001",
+              "APMP-016"
+            ],
+            [
+              "CCDC-001"
+            ]
+          ]
         }
       ]
     },
@@ -467,6 +491,14 @@
         {
           "claim_id": "AUDIT-003",
           "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "CCDC-001",
+          "statement_path": "knowledge/data/ccdc/pages/claude-directory/statements.yml"
+        },
+        {
+          "claim_id": "CCDC-003",
+          "statement_path": "knowledge/data/ccdc/pages/context-window/statements.yml"
         }
       ],
       "cases": [
@@ -497,6 +529,21 @@
           "finding_claims": [
             [
               "AUDIT-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-rule-not-delivered",
+          "required_claims": [
+            "CCDC-001",
+            "CCDC-003"
+          ],
+          "finding_claims": [
+            [
+              "CCDC-001"
+            ],
+            [
+              "CCDC-003"
             ]
           ]
         }
@@ -555,6 +602,14 @@
         {
           "claim_id": "APMP-013",
           "statement_path": "knowledge/data/apmp/pages/consumer-drift-and-secure-by-default/statements.yml"
+        },
+        {
+          "claim_id": "APMP-015",
+          "statement_path": "knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml"
+        },
+        {
+          "claim_id": "CCDC-001",
+          "statement_path": "knowledge/data/ccdc/pages/claude-directory/statements.yml"
         }
       ],
       "cases": [
@@ -811,6 +866,22 @@
             ],
             [
               "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-instruction-scope",
+          "required_claims": [
+            "APMP-015",
+            "CCDC-001"
+          ],
+          "finding_claims": [
+            [
+              "APMP-015",
+              "CCDC-001"
+            ],
+            [
+              "APMP-015"
             ]
           ]
         }

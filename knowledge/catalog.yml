@@ -17,6 +17,9 @@ sources:
   - id: AZPF
     title: "Microsoft Learn: evaluation flow for Prompt flow"
     path: data/azpf
+  - id: CCDC
+    title: "Claude Code Documentation"
+    path: data/ccdc
   - id: CODX
     title: "OpenAI Codex Documentation"
     path: data/codx

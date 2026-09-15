@@ -1,0 +1,16 @@
+source_id: CCDC
+long_source: true
+extraction_passport:
+  format: "machine-readable documentation pages"
+  metadata_source: "source.yml"
+  extraction_tool: "https-fetch"
+  extraction_status: "selected_units"
+  content_hash_absence_reason: "Снимки локальные и не отслеживаются Git, страницы меняются без версионирования."
+structure:
+  units:
+    - id: CCDC--claude-directory
+      title: "explore the .claude directory"
+      order: 1
+    - id: CCDC--context-window
+      title: "explore the context window"
+      order: 2

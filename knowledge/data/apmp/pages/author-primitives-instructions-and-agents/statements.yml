@@ -12,3 +12,29 @@ statements:
       section_title: "Instructions and agents"
       limitations: "Фрагмент описывает примитивы APM."
     open_questions: []
+  - id: APMP-015
+    source_id: APMP
+    item_id: APMP--author-primitives-instructions-and-agents
+    status: ready_for_review
+    kind: fact
+    text: "Поле `applyTo` определяет способ доставки правила: без него правило считается безусловным и вкладывается в собираемые контекстные файлы, а с ним каждая оснастка оборачивает текст в собственный синтаксис области."
+    excerpt: "is the load-bearing field. Without it the rule is treated as"
+    artifact: normalized.local.md
+    checked_at: 2026-09-15
+    scope:
+      section_title: "Instructions and agents"
+      limitations: "Фрагмент описывает модель примитивов APM."
+    open_questions: []
+  - id: APMP-016
+    source_id: APMP
+    item_id: APMP--author-primitives-instructions-and-agents
+    status: ready_for_review
+    kind: fact
+    text: "Для цели `claude` инструкция с областью разворачивается отдельным файлом правила в каталоге правил, а её область переносится в поле путей."
+    excerpt: ".claude/rules/<name>.md"
+    artifact: normalized.local.md
+    checked_at: 2026-09-15
+    scope:
+      section_title: "What compiles where"
+      limitations: "Фрагмент описывает таблицу целей компиляции APM."
+    open_questions: []

@@ -1,0 +1,27 @@
+statements:
+  - id: CCDC-001
+    source_id: CCDC
+    item_id: CCDC--claude-directory
+    status: ready_for_review
+    kind: fact
+    text: "Правило без поля `paths:` загружается в начале сессии, а правило с полем `paths:` загружается только когда агент читает подходящий файл."
+    excerpt: "Rules without <C>paths:</C> load at session start. Rules with <C>paths:</C> load when a matching file enters context"
+    artifact: normalized.local.md
+    checked_at: 2026-09-15
+    scope:
+      section_title: "Explore the .claude directory"
+      limitations: "Фрагмент описывает поведение одной оснастки и может измениться без версионирования."
+    open_questions: []
+  - id: CCDC-002
+    source_id: CCDC
+    item_id: CCDC--claude-directory
+    status: ready_for_review
+    kind: fact
+    text: "Правила — это указания, которые агент читает, а не конфигурация, исполнение которой гарантирует оснастка; для гарантированного поведения документация направляет к хукам и разрешениям."
+    excerpt: "rules are guidance Claude reads, not configuration Claude Code enforces"
+    artifact: normalized.local.md
+    checked_at: 2026-09-15
+    scope:
+      section_title: "Explore the .claude directory"
+      limitations: "Фрагмент описывает поведение одной оснастки."
+    open_questions: []
