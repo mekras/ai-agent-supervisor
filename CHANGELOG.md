@@ -7,6 +7,8 @@
 
 ## Невыпущено
 
+## [2.6.1] - 2026-09-15
+
 ### Исправлено
 
 - Проверка переносимости больше не считает текстовым файлом вызов `os.open`,
@@ -839,7 +841,8 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.0...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.1...HEAD
+[2.6.1]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.0...2.6.1
 [2.6.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.5.0...2.6.0
 [2.5.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.3.23...2.4.0
