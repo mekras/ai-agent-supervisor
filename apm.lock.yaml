@@ -1,13 +1,13 @@
 lockfile_version: '2'
-generated_at: '2026-09-16T13:01:44.266868+00:00'
+generated_at: '2026-09-16T14:17:19.822076+00:00'
 apm_version: 0.29.0
 dependencies:
 - repo_url: mekras/ai-dev-team
   name: ai-dev-team
   host: github.com
-  resolved_commit: fc0504cd769f41fa9383e161530d76f8d6fb92be
-  resolved_ref: 0.28.2
-  version: 0.28.2
+  resolved_commit: dfa49f8d914590d9baf2d297ad6258e71688e4e7
+  resolved_ref: 0.28.3
+  version: 0.28.3
   package_type: apm_package
   deployed_files:
   - .agents/skills/ait-analysis
@@ -861,7 +861,7 @@ dependencies:
     .agents/skills/ait-req-validation/SKILL.md: sha256:6d4aba5263b129b9aa67d9b9a0f7b362d8fb10f168447f8c37ba58897b1bc603
     .agents/skills/ait-req-validation/evals/result-scenarios.json: sha256:cd52966277a9072c18df9f5aa42dff3e2cf9491a0224f2de720980294902c331
     .agents/skills/ait-req-validation/evals/triggers.json: sha256:51f0be0044202c0e2e11d90b11cb97e79eeddfe6b09be05a76ecb3b7f223ac0d
-    .agents/skills/ait-routing/SKILL.md: sha256:0459ee354efa20747cc8aa7ff3cb501bb1806042b1f340aa776c15e3945d66a2
+    .agents/skills/ait-routing/SKILL.md: sha256:1cba6268c8594142a13cb19fe1e5fb1509fc69015acfccb54f8ba45c291e3bb2
     .agents/skills/ait-routing/evals/result-scenarios.json: sha256:6c07377778ef6a6a04e86427f1e7dfb47a76a20ebb4961bf723a14b755950bd0
     .agents/skills/ait-routing/evals/triggers.json: sha256:56fe16c31d3fbee74139fc1c2bbc1e1f5dd4202202628c12b5a853fb3c69eeef
     .agents/skills/ait-routing/references/skill-index.md: sha256:b4f8483a411c231b591c838618452a92996946ab703e1d50f0733d5ae4caa67c
@@ -1155,7 +1155,7 @@ dependencies:
     .claude/skills/ait-req-validation/SKILL.md: sha256:6d4aba5263b129b9aa67d9b9a0f7b362d8fb10f168447f8c37ba58897b1bc603
     .claude/skills/ait-req-validation/evals/result-scenarios.json: sha256:cd52966277a9072c18df9f5aa42dff3e2cf9491a0224f2de720980294902c331
     .claude/skills/ait-req-validation/evals/triggers.json: sha256:51f0be0044202c0e2e11d90b11cb97e79eeddfe6b09be05a76ecb3b7f223ac0d
-    .claude/skills/ait-routing/SKILL.md: sha256:0459ee354efa20747cc8aa7ff3cb501bb1806042b1f340aa776c15e3945d66a2
+    .claude/skills/ait-routing/SKILL.md: sha256:1cba6268c8594142a13cb19fe1e5fb1509fc69015acfccb54f8ba45c291e3bb2
     .claude/skills/ait-routing/evals/result-scenarios.json: sha256:6c07377778ef6a6a04e86427f1e7dfb47a76a20ebb4961bf723a14b755950bd0
     .claude/skills/ait-routing/evals/triggers.json: sha256:56fe16c31d3fbee74139fc1c2bbc1e1f5dd4202202628c12b5a853fb3c69eeef
     .claude/skills/ait-routing/references/skill-index.md: sha256:b4f8483a411c231b591c838618452a92996946ab703e1d50f0733d5ae4caa67c
@@ -1245,17 +1245,17 @@ dependencies:
     .codex/agents/statement-extractor.toml: sha256:93a102c56805353c4124104deb3d2ef6aeec070e38cb571366789b2aec3df247
     .codex/agents/technical-writer.toml: sha256:6d6601ab4c850e0c2f3cfcc3b373f996367349960158c9e9920720443562cbd8
     .codex/agents/ux-specialist.toml: sha256:caaaebb82015e3061fab7f4fd929d038e4f71826bc812c44ae395cce1725ea67
-  content_hash: sha256:bc860ed5258a37b44d8144a8a5155dc3cac7cdc6feb1841882d45b466157a04b
+  content_hash: sha256:8bdbeb646a412b095ed12370070e8279709a53cf8449e0790455f823f02ce7f2
   is_dev: true
-  constraint: ^0.28.2
-  resolved_tag: 0.28.2
-  resolved_at: '2026-09-16T13:00:58+00:00'
+  constraint: ^0.28.3
+  resolved_tag: 0.28.3
+  resolved_at: '2026-09-16T14:16:53+00:00'
   declared_license: MIT
 - repo_url: mekras/apm-marketplace
   name: ai-agent-supervisor
   host: github.com
-  resolved_commit: 803646b449887daa152ebbf0f614a5af09b6f09c
-  resolved_ref: ai-agent-supervisor--v2.6.2
+  resolved_commit: d26f5746b487452dda3c68b43fa73b5739d27c09
+  resolved_ref: ai-agent-supervisor--v2.6.1
   version: 2.6.1
   virtual_path: packages/ai-agent-supervisor
   is_virtual: true
@@ -6734,7 +6734,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:0459ee354efa20747cc8aa7ff3cb501bb1806042b1f340aa776c15e3945d66a2
+  content_hash: sha256:1cba6268c8594142a13cb19fe1e5fb1509fc69015acfccb54f8ba45c291e3bb2
 - kind: project-relative
   target: claude
   value: .claude/skills/ait-routing/evals/result-scenarios.json
@@ -12757,7 +12757,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:0459ee354efa20747cc8aa7ff3cb501bb1806042b1f340aa776c15e3945d66a2
+  content_hash: sha256:1cba6268c8594142a13cb19fe1e5fb1509fc69015acfccb54f8ba45c291e3bb2
 - kind: project-relative
   target: codex
   value: .agents/skills/ait-routing/evals/result-scenarios.json
