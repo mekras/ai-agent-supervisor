@@ -102,7 +102,29 @@ def main() -> int:
 
         unavailable = make_adapter(directory, "unavailable", "exit 5\n")
         discovered = subprocess.run([str(DISCOVER), "--adapter", str(unavailable)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
-        assert discovered.returncode == 1 and json.loads(discovered.stdout)["status"] == "not_received"
+        payload = json.loads(discovered.stdout)
+        assert discovered.returncode == 1 and payload["status"] == "not_received"
+        assert payload["reason_kind"] == "adapter_contract"
+
+        # Адаптер пробы отвечает на модель, но каталог по контракту не отдаёт.
+        probe_only = make_adapter(directory, "probe-only", "printf '%s\\n' OK\n")
+        discovered = subprocess.run([str(DISCOVER), "--adapter", str(probe_only)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
+        payload = json.loads(discovered.stdout)
+        assert discovered.returncode == 1 and payload["reason_kind"] == "adapter_contract"
+
+        broken_env = make_adapter(directory, "broken-env", "echo 'failed to refresh available models' >&2; exit 1\n")
+        discovered = subprocess.run([str(DISCOVER), "--adapter", str(broken_env)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
+        payload = json.loads(discovered.stdout)
+        assert discovered.returncode == 1 and payload["reason_kind"] == "environment"
+
+        discovered = subprocess.run([str(DISCOVER), "--adapter", str(directory / "no-such-adapter")], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
+        payload = json.loads(discovered.stdout)
+        assert discovered.returncode == 1 and payload["reason_kind"] == "adapter_missing"
+
+        slow_catalog = make_adapter(directory, "slow-catalog", "sleep 5\n")
+        discovered = subprocess.run([str(DISCOVER), "--adapter", str(slow_catalog), "--timeout", "1"], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
+        payload = json.loads(discovered.stdout)
+        assert discovered.returncode == 1 and payload["reason_kind"] == "timeout"
 
         sessions = directory / "sessions" / "2026" / "07" / "10"; sessions.mkdir(parents=True)
         cwd = "/project"
