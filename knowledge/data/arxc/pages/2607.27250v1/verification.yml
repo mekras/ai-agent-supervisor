@@ -1,0 +1,27 @@
+verification_contract_version: 1
+artifact: normalized.md
+hash:
+  algorithm: sha256
+  value: be7e907e47e022a852870724953ced4f4b3b036632fc823e3b2f8a9044cba688
+acquisition:
+  method: manual_copy
+  recorded_at: '2026-09-07'
+verification:
+  method: local_integrity_only
+  checked_at: '2026-09-16'
+  checked_by:
+    role: kc-pipeline агент
+  scope:
+    content: none
+    metadata: []
+  result:
+    overall: unverified
+    content_match: unverified
+    scope_completeness: not_assessed
+    metadata:
+      locator: unverified
+      author: unverified
+      publication_date: unverified
+  limitations:
+  - Проверена только локальная целостность сохранённого артефакта; сверка с текущим
+    состоянием источника и актуальность снимка не выполнялись.
