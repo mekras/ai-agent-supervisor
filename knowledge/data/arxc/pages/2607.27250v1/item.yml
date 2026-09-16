@@ -6,7 +6,7 @@ locator: "https://arxiv.org/abs/2607.27250v1"
 url: "https://arxiv.org/abs/2607.27250v1"
 access: "Публичная страница выбранной версии."
 status: "normalized"
-workflow_stage: "normalized"
+workflow_stage: source_checked
 version_date: "2026-07-28"
 checked_at: "2026-09-07"
 known_limitations: ["Извлечено выбранное сообщение из аннотации. Остальное содержание отложено в source-map.yml, полная статья и воспроизводимость не проверены."]
