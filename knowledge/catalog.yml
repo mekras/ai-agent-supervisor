@@ -23,6 +23,9 @@ sources:
   - id: CODX
     title: "OpenAI Codex Documentation"
     path: data/codx
+  - id: CXSR
+    title: "OpenAI Codex: исходный код (openai/codex)"
+    path: data/cxsr
   - id: GHAB
     title: "GitHub Blog: agents.md practices"
     path: data/ghab

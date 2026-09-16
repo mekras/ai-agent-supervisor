@@ -1,0 +1,25 @@
+source_id: CXSR
+long_source: true
+extraction_passport:
+  format: "source code excerpts"
+  file_size_bytes: 1
+  content_hash_absence_reason: "Фрагменты привязаны к коммиту репозитория, отдельный хеш снимка не рассчитывался."
+  metadata_source: "source.yml"
+  extraction_tool: "public repository interface"
+  extraction_status: "source_checked"
+structure:
+  units:
+    - id: CXSR--agent-role-loader
+      title: "codex-rs/agent-roles/src/loader.rs"
+      order: 1
+    - id: CXSR--session-config-load
+      title: "codex-rs/core/src/config/mod.rs"
+      order: 2
+coverage:
+  units:
+    - unit_id: CXSR--agent-role-loader
+      status: extracted
+      statements: [pages/agent-role-loader/statements.yml]
+    - unit_id: CXSR--session-config-load
+      status: extracted
+      statements: [pages/session-config-load/statements.yml]

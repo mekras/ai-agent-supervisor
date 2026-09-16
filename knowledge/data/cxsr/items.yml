@@ -1,0 +1,19 @@
+items:
+  - id: CXSR--agent-role-loader
+    source_id: CXSR
+    path: pages/agent-role-loader
+    title: "codex-rs/agent-roles/src/loader.rs"
+    url: "https://github.com/openai/codex/blob/50d77959bf927293c4b5ddcca81d05331ae582ea/codex-rs/agent-roles/src/loader.rs"
+    locator: "https://github.com/openai/codex/blob/50d77959bf927293c4b5ddcca81d05331ae582ea/codex-rs/agent-roles/src/loader.rs"
+    access: "Публичный репозиторий; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: source_checked
+  - id: CXSR--session-config-load
+    source_id: CXSR
+    path: pages/session-config-load
+    title: "codex-rs/core/src/config/mod.rs"
+    url: "https://github.com/openai/codex/blob/50d77959bf927293c4b5ddcca81d05331ae582ea/codex-rs/core/src/config/mod.rs"
+    locator: "https://github.com/openai/codex/blob/50d77959bf927293c4b5ddcca81d05331ae582ea/codex-rs/core/src/config/mod.rs"
+    access: "Публичный репозиторий; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: source_checked

@@ -12,3 +12,30 @@ statements:
       section_title: "Use subagents and custom agents in Codex"
       limitations: "Подагенты запускаются только по явному запросу."
     open_questions: []
+  - id: CODX-070
+    source_id: CODX
+    item_id: CODX--subagents
+    status: ready_for_review
+    kind: fact
+    text: "Проектные пользовательские агенты Codex задаются отдельными файлами TOML в каталоге `.codex/agents/`, личные — в `~/.codex/agents/`."
+    excerpt: "add standalone TOML files under ~/.codex/agents/ for personal agents or .codex/agents/ for project-scoped agents."
+    artifact: normalized.local.md
+    checked_at: 2026-09-16
+    scope:
+      section_title: "Custom agents"
+      limitations: "Документация изменяема; на 2026-09-16 страница отдаётся по адресу learn.chatgpt.com после перенаправления с developers.openai.com."
+    open_questions: []
+  - id: CODX-071
+    source_id: CODX
+    item_id: CODX--subagents
+    status: ready_for_review
+    kind: fact
+    text: "Каждый файл задаёт одного пользовательского агента, и Codex загружает эти файлы как слои конфигурации для порождаемых сеансов."
+    excerpt: "Each file defines one custom agent. Codex loads these files as configuration layers for spawned sessions, so custom agents can override the same settings as a normal Codex session config."
+    artifact: normalized.local.md
+    checked_at: 2026-09-16
+    scope:
+      section_title: "Custom agents"
+      limitations: "Документация не указывает момент чтения каталога относительно начала сеанса и не описывает перечитывание после изменения файлов."
+    open_questions:
+      - "Обнаруживает ли Codex файлы `.codex/agents/*.toml`, созданные уже после начала сеанса, без нового сеанса или перезапуска?"

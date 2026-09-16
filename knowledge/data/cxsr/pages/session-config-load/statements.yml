@@ -1,0 +1,29 @@
+statements:
+  - id: CXSR-003
+    source_id: CXSR
+    item_id: CXSR--session-config-load
+    status: ready_for_review
+    kind: fact
+    text: "Загрузка ролей агентов вызывается внутри построения объекта конфигурации Codex по слоям настроек."
+    excerpt: "let agent_roles = load_agent_roles(fs, &cfg, &config_layer_stack, &mut startup_warnings).await?;"
+    artifact: normalized.local.md
+    checked_at: 2026-09-16
+    scope:
+      section_title: "Config::load_config_with_layer_stack"
+      limitations: "Проверен один коммит ветки main. Фрагмент показывает место вызова, но не показывает, сколько раз и когда строится сам объект конфигурации."
+    open_questions: []
+  - id: CXSR-004
+    source_id: CXSR
+    item_id: CXSR--session-config-load
+    status: ready_for_review
+    kind: inference
+    text: "Если объект конфигурации строится один раз на сеанс, состав ролей определяется в этот момент, и файл роли, созданный позже, не попадёт в текущий сеанс."
+    excerpt: "let agent_roles = load_agent_roles(fs, &cfg, &config_layer_stack, &mut startup_warnings).await?;"
+    artifact: normalized.local.md
+    checked_at: 2026-09-16
+    scope:
+      section_title: "Config::load_config_with_layer_stack"
+      limitations: "Это вывод, а не подтверждённый факт. Посылка о единственном построении конфигурации на сеанс проверенными фрагментами не доказана; полный поиск путей перечитывания конфигурации по репозиторию не выполнялся."
+    open_questions:
+      - "Существует ли в Codex путь перечитывания конфигурации сеанса, который заново обнаружит роли без перезапуска?"
+      - "Сколько раз за сеанс строится объект конфигурации и происходит ли это при порождении подагента?"

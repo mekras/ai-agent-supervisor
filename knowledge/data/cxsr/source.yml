@@ -1,0 +1,33 @@
+id: CXSR
+slug: cxsr
+title: "OpenAI Codex: исходный код (openai/codex)"
+status: approved
+priority: normal
+carrier_type: repository
+source_kind: reference
+long_source: true
+adapter: manual
+storage_strategy: local_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: "Точечная проверка нормализованных фрагментов кода с атрибуцией источника и указанием коммита."
+requires_access_check: true
+url: "https://github.com/openai/codex"
+locator: "https://github.com/openai/codex/tree/50d77959bf927293c4b5ddcca81d05331ae582ea"
+public_reference: "https://github.com/openai/codex"
+license_or_terms: "См. knowledge/source-attribution.md."
+access:
+  default: "Публичный репозиторий; условия публикации фрагментов проверяются перед использованием."
+reliability: official
+stability: mutable
+refresh_policy: manual
+retrieved_at: "2026-09-16"
+last_checked_at: "2026-09-16"
+scope:
+  includes: ["Фрагменты, определяющие обнаружение и загрузку файлов ролей агентов."]
+  excludes: ["Остальной код репозитория и любые невоспроизводимые выводы о поведении сборок."]
+known_limitations:
+  - "Источник привязан к одному коммиту ветки main; поведение других версий и выпущенных сборок им не подтверждается."
+processing_notes:
+  - "Фрагменты получены через публичный интерфейс GitHub по фиксированному коммиту."

@@ -16,7 +16,7 @@ local_data:
   pattern: knowledge/data/<source>/pages/<path>/*.local.*
   policy: "Локальные исходные и нормализованные снимки не отслеживаются Git."
 
-source_ids: [AENG, APMP, ARXC, ASES, ASKL, AZPF, CCDC, CODX, GHAB, GIST, INSP, LCMS, LSME, PHSC, PPRX, PRFO, VSCD, XEM7]
+source_ids: [AENG, APMP, ARXC, ASES, ASKL, AZPF, CCDC, CODX, CXSR, GHAB, GIST, INSP, LCMS, LSME, PHSC, PPRX, PRFO, VSCD, XEM7]
 
 derived_documents: [knowledge, skills, README.md, CHANGELOG.md, AGENTS.md]
 

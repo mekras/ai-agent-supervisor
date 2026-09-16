@@ -1,0 +1,10 @@
+id: CXSR--session-config-load
+source_id: CXSR
+title: codex-rs/core/src/config/mod.rs
+access: Публичный репозиторий; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - normalized.local.md

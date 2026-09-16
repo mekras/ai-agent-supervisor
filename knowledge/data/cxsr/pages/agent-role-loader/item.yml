@@ -1,0 +1,10 @@
+id: CXSR--agent-role-loader
+source_id: CXSR
+title: codex-rs/agent-roles/src/loader.rs
+access: Публичный репозиторий; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - normalized.local.md

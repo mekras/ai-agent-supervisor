@@ -264,6 +264,22 @@
         {
           "claim_id": "APMP-016",
           "statement_path": "knowledge/data/apmp/pages/author-primitives-instructions-and-agents/statements.yml"
+        },
+        {
+          "claim_id": "CODX-070",
+          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
+        },
+        {
+          "claim_id": "CODX-071",
+          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
+        },
+        {
+          "claim_id": "CXSR-003",
+          "statement_path": "knowledge/data/cxsr/pages/session-config-load/statements.yml"
+        },
+        {
+          "claim_id": "CXSR-004",
+          "statement_path": "knowledge/data/cxsr/pages/session-config-load/statements.yml"
         }
       ],
       "cases": [
@@ -419,6 +435,38 @@
               "CCDC-001"
             ]
           ]
+        },
+        {
+          "id": "ai-audit-project-result-external-consumer-artifact",
+          "required_claims": [
+            "CODX-070",
+            "CODX-071",
+            "CXSR-003",
+            "CXSR-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-070"
+            ],
+            [
+              "CODX-071",
+              "CXSR-003",
+              "CXSR-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-project-result-internal-only-artifact",
+          "required_claims": [
+            "CODX-070",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-070",
+              "ASKL-004"
+            ]
+          ]
         }
       ]
     },
@@ -439,6 +487,22 @@
         {
           "claim_id": "AUDIT-007",
           "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "CODX-070",
+          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
+        },
+        {
+          "claim_id": "CODX-071",
+          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
+        },
+        {
+          "claim_id": "CXSR-003",
+          "statement_path": "knowledge/data/cxsr/pages/session-config-load/statements.yml"
+        },
+        {
+          "claim_id": "CXSR-004",
+          "statement_path": "knowledge/data/cxsr/pages/session-config-load/statements.yml"
         }
       ],
       "cases": [
@@ -469,6 +533,25 @@
           "finding_claims": [
             [
               "AUDIT-007"
+            ]
+          ]
+        },
+        {
+          "id": "ai-data-collection-result-artifact-consumer-lifecycle",
+          "required_claims": [
+            "CODX-070",
+            "CODX-071",
+            "CXSR-003",
+            "CXSR-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-070"
+            ],
+            [
+              "CODX-071",
+              "CXSR-003",
+              "CXSR-004"
             ]
           ]
         }

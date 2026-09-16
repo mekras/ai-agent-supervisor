@@ -1,0 +1,27 @@
+statements:
+  - id: CXSR-001
+    source_id: CXSR
+    item_id: CXSR--agent-role-loader
+    status: ready_for_review
+    kind: fact
+    text: "Codex обнаруживает файлы ролей агентов в подкаталоге `agents` каталога конфигурации каждого слоя настроек, а не только в одном фиксированном месте."
+    excerpt: "for (role_name, role) in discover_agent_roles_in_dir( fs, &config_folder.join(\"agents\"),"
+    artifact: normalized.local.md
+    checked_at: 2026-09-16
+    scope:
+      section_title: "load_agent_roles"
+      limitations: "Фрагмент относится к одному коммиту ветки main; соответствие установленной сборке отдельно не проверялось."
+    open_questions: []
+  - id: CXSR-002
+    source_id: CXSR
+    item_id: CXSR--agent-role-loader
+    status: ready_for_review
+    kind: fact
+    text: "Ошибки разбора файлов ролей агентов накапливаются в списке предупреждений запуска, который передаётся в загрузчик ролей."
+    excerpt: "pub async fn load_agent_roles( fs: &dyn ExecutorFileSystem, cfg: &ConfigToml, config_layer_stack: &ConfigLayerStack, startup_warnings: &mut Vec<String>,"
+    artifact: normalized.local.md
+    checked_at: 2026-09-16
+    scope:
+      section_title: "load_agent_roles"
+      limitations: "Из имени параметра нельзя заключить, в какой момент пользователь увидит предупреждение."
+    open_questions: []

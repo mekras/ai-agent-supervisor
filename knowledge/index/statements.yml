@@ -1745,6 +1745,40 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: CODX-070
+  source_id: CODX
+  item_id: CODX--subagents
+  path: knowledge/data/codx/pages/subagents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Проектные пользовательские агенты Codex задаются отдельными файлами TOML в
+    каталоге `.codex/agents/`, личные — в `~/.codex/agents/`.
+  artifact: normalized.local.md
+  checked_at: 2026-09-16
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CODX-071
+  source_id: CODX
+  item_id: CODX--subagents
+  path: knowledge/data/codx/pages/subagents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Каждый файл задаёт одного пользовательского агента, и Codex загружает эти
+    файлы как слои конфигурации для порождаемых сеансов.
+  artifact: normalized.local.md
+  checked_at: 2026-09-16
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
 - id: CODX-010
   source_id: CODX
   item_id: CODX--web
@@ -1771,6 +1805,74 @@ statements:
     готовности.
   artifact: normalized.local.md
   checked_at: 2026-07-10
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CXSR-001
+  source_id: CXSR
+  item_id: CXSR--agent-role-loader
+  path: knowledge/data/cxsr/pages/agent-role-loader/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Codex обнаруживает файлы ролей агентов в подкаталоге `agents` каталога конфигурации
+    каждого слоя настроек, а не только в одном фиксированном месте.
+  artifact: normalized.local.md
+  checked_at: 2026-09-16
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CXSR-002
+  source_id: CXSR
+  item_id: CXSR--agent-role-loader
+  path: knowledge/data/cxsr/pages/agent-role-loader/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Ошибки разбора файлов ролей агентов накапливаются в списке предупреждений
+    запуска, который передаётся в загрузчик ролей.
+  artifact: normalized.local.md
+  checked_at: 2026-09-16
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CXSR-003
+  source_id: CXSR
+  item_id: CXSR--session-config-load
+  path: knowledge/data/cxsr/pages/session-config-load/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Загрузка ролей агентов вызывается внутри построения объекта конфигурации Codex
+    по слоям настроек.
+  artifact: normalized.local.md
+  checked_at: 2026-09-16
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CXSR-004
+  source_id: CXSR
+  item_id: CXSR--session-config-load
+  path: knowledge/data/cxsr/pages/session-config-load/statements.yml
+  status: ready_for_review
+  kind: inference
+  text: Если объект конфигурации строится один раз на сеанс, состав ролей определяется
+    в этот момент, и файл роли, созданный позже, не попадёт в текущий сеанс.
+  artifact: normalized.local.md
+  checked_at: 2026-09-16
   processing_status: null
   source_role: null
   evidence_strength: null

@@ -765,6 +765,22 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: CXSR--agent-role-loader
+  source_id: CXSR
+  path: data/cxsr/pages/agent-role-loader
+  title: codex-rs/agent-roles/src/loader.rs
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный репозиторий; условия копирования проверяются перед публикацией
+    фрагментов.
+- id: CXSR--session-config-load
+  source_id: CXSR
+  path: data/cxsr/pages/session-config-load
+  title: codex-rs/core/src/config/mod.rs
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный репозиторий; условия копирования проверяются перед публикацией
+    фрагментов.
 - id: GHAB--how-to-write-a-great-agents-md-lessons-from-over-2500-repositories
   source_id: GHAB
   path: data/ghab/pages/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories

@@ -2,6 +2,7 @@ source_id: CCDC
 long_source: true
 extraction_passport:
   format: "machine-readable documentation pages"
+  file_size_bytes: 1
   metadata_source: "source.yml"
   extraction_tool: "https-fetch"
   extraction_status: "selected_units"
@@ -14,3 +15,11 @@ structure:
     - id: CCDC--context-window
       title: "explore the context window"
       order: 2
+coverage:
+  units:
+    - unit_id: CCDC--claude-directory
+      status: extracted
+      statements: [pages/claude-directory/statements.yml]
+    - unit_id: CCDC--context-window
+      status: extracted
+      statements: [pages/context-window/statements.yml]
