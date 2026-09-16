@@ -42,13 +42,14 @@ concepts:
     authority:
       type: "official-documentation"
       ref: "CODX: Custom instructions with AGENTS.md"
-    defined_by: ["CODX-001"]
-    cite_as: ["CODX"]
+    defined_by: ["CODX-001", "ARXC-001"]
+    cite_as: ["CODX", "ARXC"]
     relationships:
       - type: "guides"
         target: "agent-skill"
     synonyms_by_source:
       CODX: ["AGENTS.md", "custom instructions"]
+      ARXC: ["AGENTS.md"]
     reconciliation: "Термин описывает назначение проектного правила, а не конкретный формат файла: `AGENTS.md` — основная форма его записи в этом проекте."
     collisions:
       - "Не путать с README: README объясняет проект человеку, а проектная инструкция направляет действия агента."
