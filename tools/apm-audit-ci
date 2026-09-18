@@ -37,6 +37,14 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         help="Путь к apm.lock.yaml. По умолчанию <корень>/apm.lock.yaml.",
     )
+    parser.add_argument(
+        "--allow-unpublished-local-version",
+        action="store_true",
+        help=(
+            "Принять подтверждённое локальное переопределение пакета с тем же "
+            "именем, но ещё не опубликованной версией."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -47,7 +55,39 @@ def load_yaml(path: Path) -> dict[str, Any]:
     return data
 
 
-def local_package_id(manifest: dict[str, Any], lockfile: dict[str, Any]) -> str | None:
+def semantic_version_key(value: str) -> tuple[int, int, int, tuple[tuple[int, int | str], ...]] | None:
+    """Разобрать версию SemVer без внешней зависимости."""
+    match = re.fullmatch(
+        r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?",
+        value,
+    )
+    if not match:
+        return None
+    prerelease = match.group(4)
+    if prerelease is None:
+        prerelease_key: tuple[tuple[int, int | str], ...] = ((2, 0),)
+    else:
+        prerelease_key = tuple(
+            (0, int(part)) if part.isdigit() else (1, part)
+            for part in prerelease.split(".")
+        )
+    return (int(match.group(1)), int(match.group(2)), int(match.group(3)), prerelease_key)
+
+
+def is_newer_unpublished_version(manifest_version: str, locked_version: object) -> bool:
+    if not isinstance(locked_version, str):
+        return False
+    candidate = semantic_version_key(manifest_version)
+    locked = semantic_version_key(locked_version)
+    return bool(candidate and locked and candidate > locked)
+
+
+def local_package_id(
+    manifest: dict[str, Any],
+    lockfile: dict[str, Any],
+    *,
+    allow_unpublished_version: bool = False,
+) -> str | None:
     """Получить точный идентификатор владельца без угадывания неполных данных."""
     name = manifest.get("name")
     version = manifest.get("version")
@@ -63,6 +103,16 @@ def local_package_id(manifest: dict[str, Any], lockfile: dict[str, Any]) -> str 
         and dependency.get("name") == name
         and dependency.get("version") == version
     ]
+    if not matches and allow_unpublished_version:
+        matches = [
+            dependency
+            for dependency in dependencies
+            if isinstance(dependency, dict) and dependency.get("name") == name
+        ]
+        if len(matches) != 1 or not is_newer_unpublished_version(
+            version, matches[0].get("version")
+        ):
+            return None
     if len(matches) != 1:
         return None
     dependency = matches[0]
@@ -312,14 +362,22 @@ def python_artifacts_clean(project_root: Path, lockfile_path: Path) -> bool:
     return True
 
 
-def only_accepted_drift(report: dict[str, Any], project_root: Path, lockfile_path: Path) -> int:
+def only_accepted_drift(
+    report: dict[str, Any],
+    project_root: Path,
+    lockfile_path: Path,
+    *,
+    allow_unpublished_version: bool = False,
+) -> int:
     checks = report.get("checks")
     drift = report.get("drift", {}).get("drift")
     if not isinstance(checks, list) or not isinstance(drift, list) or not drift:
         return 0
     try:
         package_id = local_package_id(
-            load_yaml(project_root / "apm.yml"), load_yaml(lockfile_path)
+            load_yaml(project_root / "apm.yml"),
+            load_yaml(lockfile_path),
+            allow_unpublished_version=allow_unpublished_version,
         )
         deployments = deployment_by_path(load_yaml(lockfile_path))
     except (OSError, ValueError, yaml.YAMLError):
@@ -446,7 +504,12 @@ def main() -> int:
         for check in report.get("checks", []):
             if isinstance(check, dict) and check.get("name") == "ref-consistency":
                 check["passed"] = True
-    accepted = only_accepted_drift(report, project_root, lockfile_path)
+    accepted = only_accepted_drift(
+        report,
+        project_root,
+        lockfile_path,
+        allow_unpublished_version=args.allow_unpublished_local_version,
+    )
     if accepted:
         sys.stderr.write(result.stderr)
         suffix = (
@@ -454,10 +517,12 @@ def main() -> int:
             if echoed
             else ""
         )
-        print(
-            "APM-аудит пройден с известным локальным переопределением: "
-            f"подтверждено файлов — {accepted}{suffix}."
+        qualifier = (
+            "неопубликованной локальной версией"
+            if args.allow_unpublished_local_version
+            else "известным локальным переопределением"
         )
+        print(f"APM-аудит пройден с {qualifier}: подтверждено файлов — {accepted}{suffix}.")
         return 0
     if echoed:
         sys.stderr.write(result.stderr)

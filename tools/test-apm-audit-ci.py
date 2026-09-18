@@ -44,9 +44,10 @@ def write_project(
     package_id: str = "example/local-package",
     dependency: dict[str, object] | None = None,
     duplicate_dependency: bool = False,
+    manifest_version: str = "1.0.0",
 ) -> Path:
     (root / "apm.yml").write_text(
-        "name: local-package\nversion: 1.0.0\n",
+        f"name: local-package\nversion: {manifest_version}\n",
         encoding="utf-8",
     )
     source = root / ".apm" / "skills" / "example" / "SKILL.md"
@@ -209,9 +210,26 @@ deployments:
     return fake_apm
 
 
-def run(root: Path, fake_apm: Path) -> subprocess.CompletedProcess[str]:
+def run(
+    root: Path,
+    fake_apm: Path,
+    *,
+    allow_unpublished_version: bool = False,
+) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        [sys.executable, str(AUDIT), "--apm", str(fake_apm), "--project-root", str(root)],
+        [
+            sys.executable,
+            str(AUDIT),
+            "--apm",
+            str(fake_apm),
+            "--project-root",
+            str(root),
+            *(
+                ["--allow-unpublished-local-version"]
+                if allow_unpublished_version
+                else []
+            ),
+        ],
         text=True,
         encoding="utf-8",
         errors="replace",
@@ -228,6 +246,24 @@ def main() -> int:
         accepted = run(root, write_project(root))
         assert accepted.returncode == 0, accepted.stdout + accepted.stderr
         assert "подтверждено файлов — 1" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        fake_apm = write_project(root, manifest_version="1.1.0")
+        rejected = run(root, fake_apm)
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+        accepted = run(root, fake_apm, allow_unpublished_version=True)
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "неопубликованной локальной версией" in accepted.stdout
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        rejected = run(
+            root,
+            write_project(root, manifest_version="0.9.0"),
+            allow_unpublished_version=True,
+        )
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
