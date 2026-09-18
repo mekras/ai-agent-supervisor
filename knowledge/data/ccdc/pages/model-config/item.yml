@@ -1,0 +1,10 @@
+id: CCDC--model-config
+source_id: CCDC
+title: model configuration
+access: Публичная веб-страница; условия копирования проверяются перед публикацией
+  фрагментов.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - normalized.local.md

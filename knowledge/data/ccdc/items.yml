@@ -17,3 +17,21 @@ items:
     access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
     status: indexed
     workflow_stage: source_checked
+  - id: CCDC--sub-agents
+    source_id: CCDC
+    path: pages/sub-agents
+    title: "subagents"
+    url: "https://code.claude.com/docs/en/sub-agents"
+    locator: "https://code.claude.com/docs/en/sub-agents.md"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: source_checked
+  - id: CCDC--model-config
+    source_id: CCDC
+    path: pages/model-config
+    title: "model configuration"
+    url: "https://code.claude.com/docs/en/model-config"
+    locator: "https://code.claude.com/docs/en/model-config.md"
+    access: "Публичная веб-страница; условия копирования проверяются перед публикацией фрагментов."
+    status: indexed
+    workflow_stage: source_checked

@@ -22,10 +22,12 @@ access:
 reliability: official
 stability: mutable
 refresh_policy: manual
-retrieved_at: "2026-09-15"
-last_checked_at: "2026-09-15"
+retrieved_at: "2026-09-18"
+last_checked_at: "2026-09-18"
 scope:
-  includes: ["Страницы о составе каталога `.claude` и об окне контекста."]
+  includes:
+    - "Страницы о составе каталога `.claude` и об окне контекста."
+    - "Страницы о подагентах и настройке моделей."
   excludes: ["Остальные страницы документации до отдельного решения об их обработке."]
 known_limitations:
   - "Документация меняется без версионирования, поэтому фрагмент проверяй на дату сверки."
