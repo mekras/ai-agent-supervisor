@@ -221,6 +221,22 @@ items:
   workflow_stage: source_checked
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: CCDC--sub-agents
+  source_id: CCDC
+  path: data/ccdc/pages/sub-agents
+  title: subagents
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичная веб-страница; условия копирования проверяются перед публикацией
+    фрагментов.
+- id: CCDC--model-config
+  source_id: CCDC
+  path: data/ccdc/pages/model-config
+  title: model configuration
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичная веб-страница; условия копирования проверяются перед публикацией
+    фрагментов.
 - id: CODX--agent-approvals-security
   source_id: CODX
   path: data/codx/pages/agent-approvals-security

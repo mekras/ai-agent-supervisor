@@ -69,6 +69,9 @@
 - [Образец локальной настройки](assets/subagents.local.toml.sample) и [вход оценки](assets/model-selection-input.sample.json)
 - [Сценарии](evals/triggers.json), [проверки результата](evals/result-scenarios.json) и [контракты скриптов](evals/script-contract-tests.json)
 
+Средства, установленные в `tools/`, сверяются с источником навыка командой
+`scripts/check-subagent-tools-drift.py --profile <portable|codex|claude>`.
+
 ## Примеры запросов
 
 - «Настрой экономное использование подагентов для проекта.»

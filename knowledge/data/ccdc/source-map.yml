@@ -1,5 +1,6 @@
 source_id: CCDC
 long_source: true
+updated_at: '2026-09-18'
 extraction_passport:
   format: "machine-readable documentation pages"
   file_size_bytes: 1
@@ -15,6 +16,12 @@ structure:
     - id: CCDC--context-window
       title: "explore the context window"
       order: 2
+    - id: CCDC--sub-agents
+      title: "subagents"
+      order: 3
+    - id: CCDC--model-config
+      title: "model configuration"
+      order: 4
 coverage:
   units:
     - unit_id: CCDC--claude-directory
@@ -23,3 +30,9 @@ coverage:
     - unit_id: CCDC--context-window
       status: extracted
       statements: [pages/context-window/statements.yml]
+    - unit_id: CCDC--sub-agents
+      status: extracted
+      statements: [pages/sub-agents/statements.yml]
+    - unit_id: CCDC--model-config
+      status: extracted
+      statements: [pages/model-config/statements.yml]

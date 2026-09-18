@@ -1,0 +1,27 @@
+statements:
+  - id: CCDC-007
+    source_id: CCDC
+    item_id: CCDC--model-config
+    status: ready_for_review
+    kind: fact
+    text: "Ограничение `availableModels` распространяется на поле `model` в определении подагента."
+    excerpt: "- **Subagent and teammate models**: the `model` field in [subagent](https://code.claude.com/docs/en/sub-agents#choose-a-model) frontmatter"
+    artifact: normalized.local.md
+    checked_at: 2026-09-18
+    scope:
+      section_title: "Restrict model selection"
+      limitations: "Ограничение относится к конфигурации Claude Code и может зависеть от способа развёртывания."
+    open_questions: []
+  - id: CCDC-008
+    source_id: CCDC
+    item_id: CCDC--model-config
+    status: ready_for_review
+    kind: fact
+    text: "Документация Claude Code предусматривает переменную `CLAUDE_CODE_SUBAGENT_MODEL_FORCE` для принудительного выбора модели подагентов."
+    excerpt: "CLAUDE_CODE_SUBAGENT_MODEL_FORCE"
+    artifact: normalized.local.md
+    checked_at: 2026-09-18
+    scope:
+      section_title: "Run every subagent on one model"
+      limitations: "Поведение зависит от версии Claude Code и не относится к подагентам других оснасток."
+    open_questions: []

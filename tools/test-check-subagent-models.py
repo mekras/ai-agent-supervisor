@@ -21,6 +21,7 @@ CHECKER = ROOT / ".apm/skills/ai-setup-subagents/scripts/check-subagent-models"
 DISCOVER = ROOT / ".apm/skills/ai-setup-subagents/scripts/discover-subagent-models"
 ANALYZER = ROOT / ".apm/skills/ai-setup-subagents/scripts/analyze-subagent-sessions"
 ROLE_RUNNER = ROOT / ".apm/skills/ai-setup-subagents/scripts/run-subagent-role"
+CLAUDE_INSTALLER = ROOT / ".apm/skills/ai-setup-subagents/scripts/install-claude-tools"
 
 
 def run_role(
@@ -57,6 +58,31 @@ def run(*args: str) -> tuple[int, dict]:
 def main() -> int:
     with tempfile.TemporaryDirectory() as temp:
         directory = Path(temp)
+        installed_project = directory / "installed-project"
+        installed_project.mkdir()
+        installed = subprocess.run(
+            [str(CLAUDE_INSTALLER), str(installed_project)],
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            check=False,
+        )
+        assert installed.returncode == 0 and f"installed={installed_project / 'tools'}" in installed.stdout
+        capabilities = json.loads(
+            (installed_project / "tools/adapters/claude-capabilities.json").read_text(encoding="utf-8")
+        )
+        assert capabilities["harness"] == "claude"
+        assert capabilities["catalog_adapter"] == {
+            "status": "unavailable",
+            "reason_kind": "native_catalog_unsupported",
+            "reason": "Claude Code CLI не предоставляет документированного нативного контракта каталога моделей для адаптера.",
+        }
+        assert capabilities["execution_class_adapter"] == {
+            "status": "available",
+            "path": "tools/adapters/claude-role",
+        }
+
         good = make_adapter(directory, "good", "cat >/dev/null\nprintf 'OK\\n'\n")
         bad = make_adapter(directory, "bad", "cat >/dev/null\necho denied >&2\nexit 9\n")
         slow = make_adapter(directory, "slow", "cat >/dev/null\nsleep 2\n")

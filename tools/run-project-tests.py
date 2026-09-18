@@ -22,6 +22,7 @@ SCRIPTS = [
     ".apm/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py",
     "tools/test-apm-audit-ci.py",
     "tools/test-check-subagent-models.py",
+    "tools/test-subagent-tools-drift.py",
     "tools/test-execution-class.py",
     "tools/test-model-selection-evaluator.py",
     "tools/test-execution-policy.py",

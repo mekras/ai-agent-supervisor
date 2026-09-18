@@ -1,0 +1,27 @@
+statements:
+  - id: CCDC-005
+    source_id: CCDC
+    item_id: CCDC--sub-agents
+    status: ready_for_review
+    kind: fact
+    text: "Подагент Claude Code работает в отдельном контекстном окне с собственным системным запросом, доступом к инструментам и разрешениями."
+    excerpt: "Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions."
+    artifact: normalized.local.md
+    checked_at: 2026-09-18
+    scope:
+      section_title: "Subagents"
+      limitations: "Страница документации изменяема; утверждение описывает Claude Code на дату снимка."
+    open_questions: []
+  - id: CCDC-006
+    source_id: CCDC
+    item_id: CCDC--sub-agents
+    status: ready_for_review
+    kind: fact
+    text: "Параметр `model`, переданный при конкретном запуске подагента, имеет наивысший приоритет при выборе его модели."
+    excerpt: "1. The per-invocation `model` parameter"
+    artifact: normalized.local.md
+    checked_at: 2026-09-18
+    scope:
+      section_title: "Choose a model"
+      limitations: "Порядок и названия настроек зависят от версии Claude Code."
+    open_questions: []

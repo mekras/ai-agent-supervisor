@@ -589,6 +589,74 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: CCDC-005
+  source_id: CCDC
+  item_id: CCDC--sub-agents
+  path: knowledge/data/ccdc/pages/sub-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Подагент Claude Code работает в отдельном контекстном окне с собственным системным
+    запросом, доступом к инструментам и разрешениями.
+  artifact: normalized.local.md
+  checked_at: 2026-09-18
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CCDC-006
+  source_id: CCDC
+  item_id: CCDC--sub-agents
+  path: knowledge/data/ccdc/pages/sub-agents/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Параметр `model`, переданный при конкретном запуске подагента, имеет наивысший
+    приоритет при выборе его модели.
+  artifact: normalized.local.md
+  checked_at: 2026-09-18
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CCDC-007
+  source_id: CCDC
+  item_id: CCDC--model-config
+  path: knowledge/data/ccdc/pages/model-config/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Ограничение `availableModels` распространяется на поле `model` в определении
+    подагента.
+  artifact: normalized.local.md
+  checked_at: 2026-09-18
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
+- id: CCDC-008
+  source_id: CCDC
+  item_id: CCDC--model-config
+  path: knowledge/data/ccdc/pages/model-config/statements.yml
+  status: ready_for_review
+  kind: fact
+  text: Документация Claude Code предусматривает переменную `CLAUDE_CODE_SUBAGENT_MODEL_FORCE`
+    для принудительного выбора модели подагентов.
+  artifact: normalized.local.md
+  checked_at: 2026-09-18
+  processing_status: null
+  source_role: null
+  evidence_strength: null
+  confidence: null
+  temporal_status: null
+  corroboration: null
+  limitations: null
 - id: CODX-017
   source_id: CODX
   item_id: CODX--agent-approvals-security

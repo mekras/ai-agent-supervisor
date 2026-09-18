@@ -1,0 +1,26 @@
+verification_contract_version: 1
+artifact: normalized.local.md
+hash:
+  algorithm: sha256
+  value: 32fa2fbb8b04452683fcc85cce1065e37babeb9d55a5b965c1c516188962bfe6
+acquisition:
+  method: local_file
+  recorded_at: '2026-09-18'
+verification:
+  method: local_integrity_only
+  checked_at: '2026-09-18'
+  checked_by:
+    role: kc-pipeline агент
+  scope:
+    content: none
+    metadata: []
+  result:
+    overall: unverified
+    content_match: unverified
+    scope_completeness: not_assessed
+    metadata:
+      locator: unverified
+      author: unverified
+      publication_date: unverified
+  limitations:
+  - "Проверена локальная целостность снимка; внешняя сверка и подтверждение актуальности не записаны."
