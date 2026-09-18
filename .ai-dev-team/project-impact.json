@@ -2,7 +2,7 @@
   "schema_version": 2,
   "graph": {
     "name": "ai-agent-supervisor",
-    "description": "Направления возможного влияния между концепцией, договором продукта и публикуемой коллекцией навыков.",
+    "description": "Направления возможного влияния между концепцией, требованиями и публикуемой коллекцией навыков.",
     "default_facet": "semantic",
     "unmapped_paths": "block",
     "ignore": [
@@ -28,15 +28,6 @@
       "authority": "canonical",
       "paths": ["README.md"],
       "checks": ["ait-docs-concept"]
-    },
-    {
-      "id": "product-contract",
-      "title": "Публичный договор коллекции",
-      "kind": "documentation",
-      "semantic_type": "публичный договор продукта",
-      "authority": "canonical",
-      "paths": ["docs/product-contract.md"],
-      "checks": ["ait-req-validation", "tools/validate-product-boundary.py"]
     },
     {
       "id": "requirements",
@@ -168,24 +159,10 @@
     },
     {
       "from": "concept",
-      "to": "product-contract",
-      "relation": "constrains",
-      "facets": ["semantic", "interface"],
-      "rationale": "Публичный договор раскрывает назначение коллекции и её точки интеграции."
-    },
-    {
-      "from": "concept",
-      "to": "requirements",
-      "relation": "constrains",
-      "facets": ["semantic"],
-      "rationale": "Требования к коллекции не должны противоречить назначению проекта."
-    },
-    {
-      "from": "product-contract",
       "to": "requirements",
       "relation": "constrains",
       "facets": ["semantic", "interface"],
-      "rationale": "Требования уточняют границу публичного продукта и его обязательства."
+      "rationale": "Требования к коллекции не должны противоречить её назначению и определяют границу публичного продукта."
     },
     {
       "from": "hypotheses",
@@ -221,13 +198,6 @@
       "relation": "realizes",
       "facets": ["semantic", "interface", "quality", "structure"],
       "rationale": "Публикуемые навыки реализуют требования к продукту."
-    },
-    {
-      "from": "product-contract",
-      "to": "skills",
-      "relation": "constrains",
-      "facets": ["interface", "structure"],
-      "rationale": "Исходники навыков должны соблюдать публичную границу и намеренные точки интеграции."
     },
     {
       "from": "skills",
