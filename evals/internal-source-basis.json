@@ -467,6 +467,30 @@
               "ASKL-004"
             ]
           ]
+        },
+        {
+          "id": "ai-audit-project-result-backlog-intention-not-rule",
+          "required_claims": [
+            "CODX-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-project-result-unknown-delivery-mechanism",
+          "required_claims": [
+            "CODX-001",
+            "APMP-016"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "APMP-016"
+            ]
+          ]
         }
       ]
     },
