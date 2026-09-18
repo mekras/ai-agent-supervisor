@@ -67,7 +67,7 @@ items:
     subject: Обещания инструкций, обнаружения и технического предотвращения
     status: implementation_verified
     evidence:
-      - docs/product-contract.md
+      - .apm/skills/ai-work-control/references/work-control.md
       - .apm/skills/ai-setup-hooks/SKILL.md
       - .apm/skills/ai-work-result-evaluation/SKILL.md
     verification:
