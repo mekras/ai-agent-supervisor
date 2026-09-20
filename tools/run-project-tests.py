@@ -35,6 +35,7 @@ SCRIPTS = [
     "tools/test-validate-python-artifacts.py",
     "tools/test-validate-python-syntax.py",
     "tools/test-skill-portability.py",
+    "tools/test-workflow-release-gate.py",
     "tools/test-validate-apm-git-boundary.py",
     "tools/test-product-isolation.py",
     "tools/test-validate-statement-excerpts.py",

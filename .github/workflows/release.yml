@@ -19,7 +19,11 @@ permissions:
   contents: write
 
 jobs:
+  verify-portability:
+    uses: ./.github/workflows/portability-checks.yml
+
   publish:
+    needs: verify-portability
     name: Проверить и опубликовать
     runs-on: ubuntu-latest
     env:
