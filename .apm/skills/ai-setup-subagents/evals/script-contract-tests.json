@@ -24,7 +24,7 @@
         [
           "{python}",
           "-c",
-          "import os,subprocess,sys; pathlib=__import__('pathlib'); installer=str(pathlib.Path(sys.argv[1]).with_name('install-subagent-tools')); git=__import__('shutil').which('git'); shell=str(pathlib.Path(git).parent.parent/'bin'/'bash.exe') if os.name == 'nt' and git else 'bash'; raise SystemExit(subprocess.run([shell,installer,sys.argv[2]],check=False).returncode)",
+          "import os,subprocess,sys; pathlib=__import__('pathlib'); installer=str(pathlib.Path(sys.argv[1]).with_name('install-subagent-tools')); root=pathlib.Path(sys.argv[2]); target='/' + root.drive.rstrip(':').lower() + root.as_posix()[2:] if os.name == 'nt' else str(root); git=__import__('shutil').which('git'); shell=str(pathlib.Path(git).parent.parent/'bin'/'bash.exe') if os.name == 'nt' and git else 'bash'; raise SystemExit(subprocess.run([shell,installer,target],check=False).returncode)",
           "{script}",
           "{fixture}/project"
         ]
