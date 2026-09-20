@@ -1,5 +1,5 @@
 lockfile_version: '2'
-generated_at: '2026-09-20T17:58:41.431255+00:00'
+generated_at: '2026-09-20T18:04:15.806006+00:00'
 apm_version: 0.31.0
 dependencies:
 - repo_url: mekras/ai-dev-team
@@ -1777,9 +1777,9 @@ dependencies:
     .agents/skills/ai-setup-subagents/scripts/codex-usage-report: sha256:40ff4af176869fbf20059e72c7c7f9ebef96283189f045799ac2713cd6adc39e
     .agents/skills/ai-setup-subagents/scripts/discover-subagent-models: sha256:1bb187f8756794e5934e3f56021f13ba766d98afa3bd299022c36277ff8bbb96
     .agents/skills/ai-setup-subagents/scripts/evaluate-model-selection.py: sha256:3d13d3e4e852dbca399b95e7c20f52f643d740de5168d7c8eb56906814643b8e
-    .agents/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:244fb374017477d1533fad684c124091fdf97d6ef9517470e56bab40767f732c
-    .agents/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:4fb753e1662379e497bc5dfb248f62d2a270b3bc0d3045d8049181657a4365ae
-    .agents/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:81e31d91e7636f4b36761cc5cfe27e2449f3488fa9d4ec6647cc93866d20717c
+    .agents/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:eacad614d19415069d7ae29aca289e185760910a0252c9cdc0b242f8b9692bcf
+    .agents/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:32272803939d8fb4b4580b06c60a36a84c8ff1af825c553e3668cc4f9e343ac5
+    .agents/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:a80e741996402ef8c17df2518acb27fa243d2ee3273ffe658a0a9cbf17aade1c
     .agents/skills/ai-setup-subagents/scripts/lib/model_evidence.py: sha256:30431a4e9f709d280d9012cbf5ce081f963794fd190aec0d0b26dc69a211a763
     .agents/skills/ai-setup-subagents/scripts/run-execution-class: sha256:463a48b0fa8623b168d27bbdc904cd4be4b2f7c264452f51158caba204da2d5c
     .agents/skills/ai-setup-subagents/scripts/run-subagent-role: sha256:0804ffbe51847dad5821b85f4388ec5965c6726e799e9f36857ac241b8b92061
@@ -1963,9 +1963,9 @@ dependencies:
     .claude/skills/ai-setup-subagents/scripts/codex-usage-report: sha256:40ff4af176869fbf20059e72c7c7f9ebef96283189f045799ac2713cd6adc39e
     .claude/skills/ai-setup-subagents/scripts/discover-subagent-models: sha256:1bb187f8756794e5934e3f56021f13ba766d98afa3bd299022c36277ff8bbb96
     .claude/skills/ai-setup-subagents/scripts/evaluate-model-selection.py: sha256:3d13d3e4e852dbca399b95e7c20f52f643d740de5168d7c8eb56906814643b8e
-    .claude/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:244fb374017477d1533fad684c124091fdf97d6ef9517470e56bab40767f732c
-    .claude/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:4fb753e1662379e497bc5dfb248f62d2a270b3bc0d3045d8049181657a4365ae
-    .claude/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:81e31d91e7636f4b36761cc5cfe27e2449f3488fa9d4ec6647cc93866d20717c
+    .claude/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:eacad614d19415069d7ae29aca289e185760910a0252c9cdc0b242f8b9692bcf
+    .claude/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:32272803939d8fb4b4580b06c60a36a84c8ff1af825c553e3668cc4f9e343ac5
+    .claude/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:a80e741996402ef8c17df2518acb27fa243d2ee3273ffe658a0a9cbf17aade1c
     .claude/skills/ai-setup-subagents/scripts/lib/model_evidence.py: sha256:30431a4e9f709d280d9012cbf5ce081f963794fd190aec0d0b26dc69a211a763
     .claude/skills/ai-setup-subagents/scripts/run-execution-class: sha256:463a48b0fa8623b168d27bbdc904cd4be4b2f7c264452f51158caba204da2d5c
     .claude/skills/ai-setup-subagents/scripts/run-subagent-role: sha256:0804ffbe51847dad5821b85f4388ec5965c6726e799e9f36857ac241b8b92061
@@ -4080,7 +4080,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:244fb374017477d1533fad684c124091fdf97d6ef9517470e56bab40767f732c
+  content_hash: sha256:eacad614d19415069d7ae29aca289e185760910a0252c9cdc0b242f8b9692bcf
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-subagents/scripts/install-codex-tools
@@ -4090,7 +4090,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:4fb753e1662379e497bc5dfb248f62d2a270b3bc0d3045d8049181657a4365ae
+  content_hash: sha256:32272803939d8fb4b4580b06c60a36a84c8ff1af825c553e3668cc4f9e343ac5
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-subagents/scripts/install-subagent-tools
@@ -4100,7 +4100,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:81e31d91e7636f4b36761cc5cfe27e2449f3488fa9d4ec6647cc93866d20717c
+  content_hash: sha256:a80e741996402ef8c17df2518acb27fa243d2ee3273ffe658a0a9cbf17aade1c
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-subagents/scripts/lib/model_evidence.py
@@ -10274,7 +10274,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:244fb374017477d1533fad684c124091fdf97d6ef9517470e56bab40767f732c
+  content_hash: sha256:eacad614d19415069d7ae29aca289e185760910a0252c9cdc0b242f8b9692bcf
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-subagents/scripts/install-codex-tools
@@ -10284,7 +10284,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:4fb753e1662379e497bc5dfb248f62d2a270b3bc0d3045d8049181657a4365ae
+  content_hash: sha256:32272803939d8fb4b4580b06c60a36a84c8ff1af825c553e3668cc4f9e343ac5
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-subagents/scripts/install-subagent-tools
@@ -10294,7 +10294,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:81e31d91e7636f4b36761cc5cfe27e2449f3488fa9d4ec6647cc93866d20717c
+  content_hash: sha256:a80e741996402ef8c17df2518acb27fa243d2ee3273ffe658a0a9cbf17aade1c
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-subagents/scripts/lib/model_evidence.py
@@ -15923,9 +15923,9 @@ local_deployed_file_hashes:
   .agents/skills/ai-setup-subagents/scripts/codex-usage-report: sha256:40ff4af176869fbf20059e72c7c7f9ebef96283189f045799ac2713cd6adc39e
   .agents/skills/ai-setup-subagents/scripts/discover-subagent-models: sha256:1bb187f8756794e5934e3f56021f13ba766d98afa3bd299022c36277ff8bbb96
   .agents/skills/ai-setup-subagents/scripts/evaluate-model-selection.py: sha256:3d13d3e4e852dbca399b95e7c20f52f643d740de5168d7c8eb56906814643b8e
-  .agents/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:244fb374017477d1533fad684c124091fdf97d6ef9517470e56bab40767f732c
-  .agents/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:4fb753e1662379e497bc5dfb248f62d2a270b3bc0d3045d8049181657a4365ae
-  .agents/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:81e31d91e7636f4b36761cc5cfe27e2449f3488fa9d4ec6647cc93866d20717c
+  .agents/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:eacad614d19415069d7ae29aca289e185760910a0252c9cdc0b242f8b9692bcf
+  .agents/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:32272803939d8fb4b4580b06c60a36a84c8ff1af825c553e3668cc4f9e343ac5
+  .agents/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:a80e741996402ef8c17df2518acb27fa243d2ee3273ffe658a0a9cbf17aade1c
   .agents/skills/ai-setup-subagents/scripts/lib/model_evidence.py: sha256:30431a4e9f709d280d9012cbf5ce081f963794fd190aec0d0b26dc69a211a763
   .agents/skills/ai-setup-subagents/scripts/run-execution-class: sha256:463a48b0fa8623b168d27bbdc904cd4be4b2f7c264452f51158caba204da2d5c
   .agents/skills/ai-setup-subagents/scripts/run-subagent-role: sha256:0804ffbe51847dad5821b85f4388ec5965c6726e799e9f36857ac241b8b92061
@@ -16115,9 +16115,9 @@ local_deployed_file_hashes:
   .claude/skills/ai-setup-subagents/scripts/codex-usage-report: sha256:40ff4af176869fbf20059e72c7c7f9ebef96283189f045799ac2713cd6adc39e
   .claude/skills/ai-setup-subagents/scripts/discover-subagent-models: sha256:1bb187f8756794e5934e3f56021f13ba766d98afa3bd299022c36277ff8bbb96
   .claude/skills/ai-setup-subagents/scripts/evaluate-model-selection.py: sha256:3d13d3e4e852dbca399b95e7c20f52f643d740de5168d7c8eb56906814643b8e
-  .claude/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:244fb374017477d1533fad684c124091fdf97d6ef9517470e56bab40767f732c
-  .claude/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:4fb753e1662379e497bc5dfb248f62d2a270b3bc0d3045d8049181657a4365ae
-  .claude/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:81e31d91e7636f4b36761cc5cfe27e2449f3488fa9d4ec6647cc93866d20717c
+  .claude/skills/ai-setup-subagents/scripts/install-claude-tools: sha256:eacad614d19415069d7ae29aca289e185760910a0252c9cdc0b242f8b9692bcf
+  .claude/skills/ai-setup-subagents/scripts/install-codex-tools: sha256:32272803939d8fb4b4580b06c60a36a84c8ff1af825c553e3668cc4f9e343ac5
+  .claude/skills/ai-setup-subagents/scripts/install-subagent-tools: sha256:a80e741996402ef8c17df2518acb27fa243d2ee3273ffe658a0a9cbf17aade1c
   .claude/skills/ai-setup-subagents/scripts/lib/model_evidence.py: sha256:30431a4e9f709d280d9012cbf5ce081f963794fd190aec0d0b26dc69a211a763
   .claude/skills/ai-setup-subagents/scripts/run-execution-class: sha256:463a48b0fa8623b168d27bbdc904cd4be4b2f7c264452f51158caba204da2d5c
   .claude/skills/ai-setup-subagents/scripts/run-subagent-role: sha256:0804ffbe51847dad5821b85f4388ec5965c6726e799e9f36857ac241b8b92061
