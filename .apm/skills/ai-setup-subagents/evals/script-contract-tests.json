@@ -24,11 +24,12 @@
         [
           "{python}",
           "-c",
-          "import subprocess,sys; installer=str(__import__('pathlib').Path(sys.argv[1]).with_name('install-subagent-tools')); raise SystemExit(subprocess.run([installer,sys.argv[2]],check=False).returncode)",
+          "import subprocess,sys; installer=str(__import__('pathlib').Path(sys.argv[1]).with_name('install-subagent-tools')); raise SystemExit(subprocess.run(['bash',installer,sys.argv[2]],check=False).returncode)",
           "{script}",
           "{fixture}/project"
         ]
       ],
+      "requires": ["bash"],
       "command": [
         "{python}",
         "{script}",

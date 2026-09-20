@@ -1,5 +1,5 @@
 lockfile_version: '2'
-generated_at: '2026-09-20T14:22:24.464069+00:00'
+generated_at: '2026-09-20T17:23:52.408349+00:00'
 apm_version: 0.31.0
 dependencies:
 - repo_url: mekras/ai-dev-team
@@ -1760,7 +1760,7 @@ dependencies:
     .agents/skills/ai-setup-subagents/assets/model-selection-input.sample.json: sha256:1edde58db47794c683515eeee6b72776a0efd423876691ec87d35b61d131c49a
     .agents/skills/ai-setup-subagents/assets/subagents.local.toml.sample: sha256:fc3e2becc6b0cfcdb30ad209c2f171cf74d733a2bfb10925c64f8f05b0bab810
     .agents/skills/ai-setup-subagents/evals/result-scenarios.json: sha256:53d6c2758a27a35ae2f28e27221ea55a905fb68ccfe1a27e27ac1d6a2731a811
-    .agents/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:23dd5bd4bfd9dc74dd7807fd203358700009c23004e6cf05aa706aa28e3c85e1
+    .agents/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:756d8d352e65745b6f5fddb3d32ab1cf5804f13f257b8daa9f2452882cacc213
     .agents/skills/ai-setup-subagents/evals/script-fixtures/model-selection/complete.json: sha256:d425aea9c5f07fefc5729f458d452da2101710b4853de60cb5288e94c2e8dc39
     .agents/skills/ai-setup-subagents/evals/script-fixtures/model-selection/invalid.json: sha256:56fa780ad9c6eaabad1bd881f3b6f644ff77563e0ef6946dae81cb0516ae384b
     .agents/skills/ai-setup-subagents/evals/triggers.json: sha256:2e4df4cda5a30ab89b543cc541294bc2deb2de5f68e38b8318996ab082dc54f3
@@ -1946,7 +1946,7 @@ dependencies:
     .claude/skills/ai-setup-subagents/assets/model-selection-input.sample.json: sha256:1edde58db47794c683515eeee6b72776a0efd423876691ec87d35b61d131c49a
     .claude/skills/ai-setup-subagents/assets/subagents.local.toml.sample: sha256:fc3e2becc6b0cfcdb30ad209c2f171cf74d733a2bfb10925c64f8f05b0bab810
     .claude/skills/ai-setup-subagents/evals/result-scenarios.json: sha256:53d6c2758a27a35ae2f28e27221ea55a905fb68ccfe1a27e27ac1d6a2731a811
-    .claude/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:23dd5bd4bfd9dc74dd7807fd203358700009c23004e6cf05aa706aa28e3c85e1
+    .claude/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:756d8d352e65745b6f5fddb3d32ab1cf5804f13f257b8daa9f2452882cacc213
     .claude/skills/ai-setup-subagents/evals/script-fixtures/model-selection/complete.json: sha256:d425aea9c5f07fefc5729f458d452da2101710b4853de60cb5288e94c2e8dc39
     .claude/skills/ai-setup-subagents/evals/script-fixtures/model-selection/invalid.json: sha256:56fa780ad9c6eaabad1bd881f3b6f644ff77563e0ef6946dae81cb0516ae384b
     .claude/skills/ai-setup-subagents/evals/triggers.json: sha256:2e4df4cda5a30ab89b543cc541294bc2deb2de5f68e38b8318996ab082dc54f3
@@ -3883,7 +3883,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:23dd5bd4bfd9dc74dd7807fd203358700009c23004e6cf05aa706aa28e3c85e1
+  content_hash: sha256:756d8d352e65745b6f5fddb3d32ab1cf5804f13f257b8daa9f2452882cacc213
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-subagents/evals/script-fixtures/model-selection/complete.json
@@ -10104,7 +10104,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:23dd5bd4bfd9dc74dd7807fd203358700009c23004e6cf05aa706aa28e3c85e1
+  content_hash: sha256:756d8d352e65745b6f5fddb3d32ab1cf5804f13f257b8daa9f2452882cacc213
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-subagents/evals/script-fixtures/model-selection/complete.json
@@ -15903,7 +15903,7 @@ local_deployed_file_hashes:
   .agents/skills/ai-setup-subagents/assets/model-selection-input.sample.json: sha256:1edde58db47794c683515eeee6b72776a0efd423876691ec87d35b61d131c49a
   .agents/skills/ai-setup-subagents/assets/subagents.local.toml.sample: sha256:fc3e2becc6b0cfcdb30ad209c2f171cf74d733a2bfb10925c64f8f05b0bab810
   .agents/skills/ai-setup-subagents/evals/result-scenarios.json: sha256:53d6c2758a27a35ae2f28e27221ea55a905fb68ccfe1a27e27ac1d6a2731a811
-  .agents/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:23dd5bd4bfd9dc74dd7807fd203358700009c23004e6cf05aa706aa28e3c85e1
+  .agents/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:756d8d352e65745b6f5fddb3d32ab1cf5804f13f257b8daa9f2452882cacc213
   .agents/skills/ai-setup-subagents/evals/script-fixtures/model-selection/complete.json: sha256:d425aea9c5f07fefc5729f458d452da2101710b4853de60cb5288e94c2e8dc39
   .agents/skills/ai-setup-subagents/evals/script-fixtures/model-selection/invalid.json: sha256:56fa780ad9c6eaabad1bd881f3b6f644ff77563e0ef6946dae81cb0516ae384b
   .agents/skills/ai-setup-subagents/evals/script-fixtures/tools-drift/.gitkeep: sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
@@ -16095,7 +16095,7 @@ local_deployed_file_hashes:
   .claude/skills/ai-setup-subagents/assets/model-selection-input.sample.json: sha256:1edde58db47794c683515eeee6b72776a0efd423876691ec87d35b61d131c49a
   .claude/skills/ai-setup-subagents/assets/subagents.local.toml.sample: sha256:fc3e2becc6b0cfcdb30ad209c2f171cf74d733a2bfb10925c64f8f05b0bab810
   .claude/skills/ai-setup-subagents/evals/result-scenarios.json: sha256:53d6c2758a27a35ae2f28e27221ea55a905fb68ccfe1a27e27ac1d6a2731a811
-  .claude/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:23dd5bd4bfd9dc74dd7807fd203358700009c23004e6cf05aa706aa28e3c85e1
+  .claude/skills/ai-setup-subagents/evals/script-contract-tests.json: sha256:756d8d352e65745b6f5fddb3d32ab1cf5804f13f257b8daa9f2452882cacc213
   .claude/skills/ai-setup-subagents/evals/script-fixtures/model-selection/complete.json: sha256:d425aea9c5f07fefc5729f458d452da2101710b4853de60cb5288e94c2e8dc39
   .claude/skills/ai-setup-subagents/evals/script-fixtures/model-selection/invalid.json: sha256:56fa780ad9c6eaabad1bd881f3b6f644ff77563e0ef6946dae81cb0516ae384b
   .claude/skills/ai-setup-subagents/evals/script-fixtures/tools-drift/.gitkeep: sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
