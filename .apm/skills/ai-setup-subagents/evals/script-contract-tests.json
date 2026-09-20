@@ -24,12 +24,11 @@
         [
           "{python}",
           "-c",
-          "import subprocess,sys; installer=str(__import__('pathlib').Path(sys.argv[1]).with_name('install-subagent-tools')); raise SystemExit(subprocess.run(['bash',installer,sys.argv[2]],check=False).returncode)",
+          "import os,subprocess,sys; installer=str(__import__('pathlib').Path(sys.argv[1]).with_name('install-subagent-tools')); shell='gitbash.exe' if os.name == 'nt' else 'bash'; raise SystemExit(subprocess.run([shell,installer,sys.argv[2]],check=False).returncode)",
           "{script}",
           "{fixture}/project"
         ]
       ],
-      "requires": ["bash"],
       "command": [
         "{python}",
         "{script}",
