@@ -1418,19 +1418,32 @@
             ]
           ]
         },
-        {
-          "id": "ai-setup-project-result-decline-policy",
-          "required_claims": [
-            "SETUP-001"
+    {
+      "id": "ai-setup-project-result-decline-policy",
+      "required_claims": [
+        "SETUP-001"
           ],
           "finding_claims": [
             [
               "SETUP-001"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-project-result-explicit-autonomy",
+        ]
+      ]
+    },
+    {
+      "id": "ai-setup-project-result-subagent-tools-drift-repair",
+      "required_claims": [
+        "ASKL-003",
+        "ASKL-004"
+      ],
+      "finding_claims": [
+        [
+          "ASKL-003",
+          "ASKL-004"
+        ]
+      ]
+    },
+    {
+      "id": "ai-setup-project-result-explicit-autonomy",
           "required_claims": [
             "AUDIT-004"
           ],
