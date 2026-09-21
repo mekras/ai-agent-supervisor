@@ -161,6 +161,19 @@ jobs:
           git tag -a "$package_tag" -m "Опубликована коллекция ${PACKAGE_NAME} ${RELEASE_VERSION}"
           git push --atomic origin master "$package_tag"
 
+      - name: Проверить опубликованный пакет в изолированном проекте
+        shell: bash
+        run: |
+          set -euo pipefail
+          consumer_dir="$(mktemp -d)"
+          trap 'rm -rf "$consumer_dir"' EXIT
+          (
+            cd "$consumer_dir"
+            apm marketplace add "$GITHUB_WORKSPACE/marketplace" --name release-test
+            apm install "${PACKAGE_NAME}@release-test" --target codex
+            apm audit --ci
+          )
+
       - name: Создать GitHub Release исходной коллекции
         env:
           GH_TOKEN: ${{ github.token }}
