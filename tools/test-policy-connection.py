@@ -33,10 +33,16 @@ def main() -> int:
         config = root / "subagents.local.toml"
         config.write_text(
             """[policy_runtime]
-schema_version = 1
+schema_version = 2
 launcher = "tools/run-execution-class"
 target = "codex"
 direct_execution = ["microtask"]
+direct_execution_scope = "whole_parent_task"
+subtask_routing = "match_each_bounded_subtask"
+parent_comparison = "actual_current_session"
+unknown_parent_parameters = "comparison_unresolved"
+parent_change = "invalidate_comparison"
+assignment_basis = "historical_only"
 unavailable_route = "parent"
 execution_failure = "parent without result"
 unconfirmed_model = "parent decides whether the result is usable"
@@ -62,6 +68,25 @@ execution_class = "cheap_readonly_research"
         assert report["execution"] == {
             "process": "not_checked", "result": "not_checked", "acceptance_record": "not_checked", "quality": "not_evidenced", "model": "not_checked", "economy": "not_checked",
         }
+
+        config.write_text(
+            config.read_text(encoding="utf-8").replace(
+                'parent_comparison = "actual_current_session"',
+                'parent_comparison = "saved_assignment"',
+            ),
+            encoding="utf-8",
+        )
+        invalid_runtime = invoke(config, entrypoint)
+        assert invalid_runtime.returncode == 1
+        assert "parent_comparison" in json.loads(invalid_runtime.stdout)["errors"][0]
+
+        config.write_text(
+            config.read_text(encoding="utf-8").replace(
+                'parent_comparison = "saved_assignment"',
+                'parent_comparison = "actual_current_session"',
+            ),
+            encoding="utf-8",
+        )
 
         entrypoint.write_text("# Instructions\n", encoding="utf-8")
         missing_connection = invoke(config, entrypoint)
@@ -96,7 +121,7 @@ execution_class = "cheap_readonly_research"
             "process": "completed", "result": "available", "acceptance_record": "accepted_recorded", "quality": "assessment_recorded", "model": "confirmed", "economy": "measurement_recorded",
         }
 
-        config.write_text("[policy_runtime]\nschema_version = 1\n", encoding="utf-8")
+        config.write_text("[policy_runtime]\nschema_version = 2\n", encoding="utf-8")
         incomplete = invoke(config, entrypoint)
         assert incomplete.returncode == 1
         report = json.loads(incomplete.stdout)

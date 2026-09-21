@@ -1504,6 +1504,14 @@
         {
           "claim_id": "SUBAGENT-DESIGN-005",
           "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-006",
+          "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-007",
+          "statement_path": "evals/subagent-design-basis.yml"
         }
       ],
       "cases": [
@@ -1919,6 +1927,50 @@
             [
               "SUBAGENT-DESIGN-002",
               "MODEL-EVIDENCE-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-parent-task-bounded-readonly-subtask",
+          "required_claims": [
+            "SUBAGENT-DESIGN-006"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-006"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-runtime-microtask-stays-parent",
+          "required_claims": [
+            "SUBAGENT-DESIGN-006"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-006"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-runtime-parent-model-change-invalidates-comparison",
+          "required_claims": [
+            "SUBAGENT-DESIGN-007"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-007"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-runtime-same-model-needs-task-specific-reason",
+          "required_claims": [
+            "SUBAGENT-DESIGN-007"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-007"
             ]
           ]
         }

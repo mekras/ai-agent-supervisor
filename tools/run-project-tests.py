@@ -25,6 +25,7 @@ SCRIPTS = [
     "tools/test-subagent-tools-drift.py",
     "tools/test-execution-class.py",
     "tools/test-policy-connection.py",
+    "tools/test-subagent-policy-migration.py",
     "tools/test-model-selection-evaluator.py",
     "tools/test-execution-policy.py",
     "tools/test-codex-model-subagent.py",
