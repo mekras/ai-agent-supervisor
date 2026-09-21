@@ -103,7 +103,7 @@ def local_package_id(
         and dependency.get("name") == name
         and dependency.get("version") == version
     ]
-    if not matches and allow_unpublished_version:
+    if not matches:
         matches = [
             dependency
             for dependency in dependencies
@@ -520,7 +520,7 @@ def main() -> int:
         qualifier = (
             "неопубликованной локальной версией"
             if args.allow_unpublished_local_version
-            else "известным локальным переопределением"
+            else "локальной версией, не внесённой в файл блокировки"
         )
         print(f"APM-аудит пройден с {qualifier}: подтверждено файлов — {accepted}{suffix}.")
         return 0

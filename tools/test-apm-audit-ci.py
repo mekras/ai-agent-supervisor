@@ -250,8 +250,9 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         fake_apm = write_project(root, manifest_version="1.1.0")
-        rejected = run(root, fake_apm)
-        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+        accepted = run(root, fake_apm)
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "не внесённой в файл блокировки" in accepted.stdout
         accepted = run(root, fake_apm, allow_unpublished_version=True)
         assert accepted.returncode == 0, accepted.stdout + accepted.stderr
         assert "неопубликованной локальной версией" in accepted.stdout
