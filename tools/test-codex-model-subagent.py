@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Регрессии приёмки завершённого запуска Codex."""
+"""Регрессии приёмки завершённого запуска Codex в изолированном Git-репозитории."""
 
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
@@ -65,7 +66,7 @@ def run_case(runner: Path, directory: Path, mode: str) -> subprocess.CompletedPr
     }
     return subprocess.run(
         [str(runner), "test-model", "acceptance", "test prompt"],
-        cwd=ROOT,
+        cwd=directory,
         text=True,
         encoding="utf-8",
         errors="replace",
@@ -75,9 +76,37 @@ def run_case(runner: Path, directory: Path, mode: str) -> subprocess.CompletedPr
     )
 
 
+def run_from_non_git_package_root() -> None:
+    with tempfile.TemporaryDirectory(prefix="ai-agent-supervisor-package ") as temporary:
+        package = Path(temporary)
+        test_path = package / "tools/test-codex-model-subagent.py"
+        test_path.parent.mkdir(parents=True)
+        shutil.copy2(Path(__file__), test_path)
+        for runner in RUNNERS:
+            target = package / runner.relative_to(ROOT)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(runner, target)
+        result = subprocess.run(
+            [sys.executable, str(test_path)],
+            cwd=package,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            env={
+                **os.environ,
+                "CODEX_SUBAGENT_TEST_NON_GIT_PACKAGE": "1",
+                "PYTHONDONTWRITEBYTECODE": "1",
+            },
+            check=False,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+
+
 def main() -> int:
     with tempfile.TemporaryDirectory() as temporary:
         directory = Path(temporary)
+        subprocess.run(["git", "init", "--quiet"], cwd=directory, check=True)
         write_mock_codex(directory)
         for runner in RUNNERS:
             successful = run_case(runner, directory, "success")
@@ -99,6 +128,9 @@ def main() -> int:
             assert failed.returncode == 17
             assert "status=failed\n" in failed.stdout
             assert not parse_paths(failed.stdout)["final"].exists()
+
+    if os.environ.get("CODEX_SUBAGENT_TEST_NON_GIT_PACKAGE") != "1":
+        run_from_non_git_package_root()
 
     print("Проверки приёмки запускателя Codex пройдены.")
     return 0
