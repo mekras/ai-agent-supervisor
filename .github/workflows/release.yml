@@ -169,7 +169,7 @@ jobs:
           trap 'rm -rf "$consumer_dir"' EXIT
           (
             cd "$consumer_dir"
-            apm marketplace add "$GITHUB_WORKSPACE/marketplace" --name release-test
+            apm marketplace add "$GITHUB_WORKSPACE/marketplace" --name release-test --ref master
             apm install "${PACKAGE_NAME}@release-test" --target codex
             apm audit --ci
           )
