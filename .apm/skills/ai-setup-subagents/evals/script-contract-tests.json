@@ -2,6 +2,12 @@
   "version": 2,
   "operations": [
     {
+      "id": "assess-policy-connection",
+      "script": "scripts/assess-subagent-policy-connection.py",
+      "command_prefix": [],
+      "inputs": ["subagents.local.toml", "AGENTS.md"]
+    },
+    {
       "id": "evaluate-model-selection",
       "script": "scripts/evaluate-model-selection.py",
       "command_prefix": [],
@@ -15,6 +21,20 @@
     }
   ],
   "cases": [
+    {
+      "id": "assess-connected-policy",
+      "script": "scripts/assess-subagent-policy-connection.py",
+      "fixture": "evals/script-fixtures/policy-connection",
+      "covers": ["assess-policy-connection"],
+      "command": [
+        "{python}", "{script}", "--config", "{fixture}/subagents.local.toml",
+        "--entrypoint", "codex={fixture}/AGENTS.md", "--output", "{fixture}/report.json", "--json"
+      ],
+      "expect": {
+        "stdout_contains": ["\"instruction_entrypoints\": \"referenced\"", "\"working_sessions\": \"not_observed\""],
+        "files": [{"path": "report.json", "json": true}]
+      }
+    },
     {
       "id": "check-installed-portable-tools",
       "script": "scripts/check-subagent-tools-drift.py",

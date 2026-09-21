@@ -40,11 +40,12 @@ LOADER.exec_module(CLAUDE_ROLE_MODULE)
 
 
 def write_fixture(directory: Path, actual_model: str, *, evidence=True, journal=True,
-                  wrong_reference=False) -> Path:
+                  wrong_reference=False, returncode=0) -> Path:
     adapter = directory / "adapter.py"
     adapter.write_text(
         f"#!{sys.executable}\n"
         "import json\n"
+        "import sys\n"
         "import os\n"
         "from pathlib import Path\n"
         "request = json.loads(input())\n"
@@ -57,6 +58,8 @@ def write_fixture(directory: Path, actual_model: str, *, evidence=True, journal=
         "print('готово')\n",
         encoding="utf-8",
     )
+    if returncode:
+        adapter.write_text(adapter.read_text(encoding="utf-8") + f"raise SystemExit({returncode})\n", encoding="utf-8")
     adapter.chmod(0o755)
     return adapter
 
@@ -149,7 +152,7 @@ def main() -> int:
         mismatched = write_fixture(directory, "claude-opus-4-8")
         failed_config = write_config(directory, mismatched, "claude-haiku-")
         failed = run(failed_config, directory / "failed", input_file, "security-review")
-        assert failed.returncode == 1
+        assert failed.returncode == 3
         failed_record = json.loads(failed.stderr)
         assert failed_record["obligation_id"] == "security-review"
         assert not failed_record["model_matches"]
@@ -168,12 +171,18 @@ def main() -> int:
             adapter = write_fixture(directory, "claude-haiku-4-5", **options)
             config = write_config(directory, adapter, "claude-haiku-")
             unknown = run(config, directory / name, input_file, "security-review")
-            assert unknown.returncode == 1, unknown.stdout
+            assert unknown.returncode == 3, unknown.stdout
             unknown_record = json.loads(unknown.stderr)
             assert unknown_record["model_status"] == "unconfirmed"
             assert unknown_record["actual_model"] is None
             assert unknown_record["model_matches"] is None
             assert unknown_record["result_available"]
+
+        execution_failed = write_fixture(directory, "claude-haiku-4-5", returncode=7)
+        failed_config = write_config(directory, execution_failed, "claude-haiku-")
+        failed_process = run(failed_config, directory / "execution-failed", input_file, "security-review")
+        assert failed_process.returncode == 2
+        assert json.loads(failed_process.stderr)["returncode"] == 7
 
         for evidence in (False, True):
             adapter = write_fixture(directory, "claude-haiku-4-5", evidence=evidence)

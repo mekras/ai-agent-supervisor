@@ -1902,6 +1902,25 @@
               "SUBAGENT-DESIGN-005"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-subagents-result-working-policy-connection",
+          "required_claims": [
+            "SUBAGENT-DESIGN-001",
+            "SUBAGENT-DESIGN-002",
+            "SUBAGENT-DESIGN-005",
+            "MODEL-EVIDENCE-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-001",
+              "SUBAGENT-DESIGN-005"
+            ],
+            [
+              "SUBAGENT-DESIGN-002",
+              "MODEL-EVIDENCE-001"
+            ]
+          ]
         }
       ]
     },
