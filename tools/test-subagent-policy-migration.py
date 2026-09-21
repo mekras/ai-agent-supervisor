@@ -47,7 +47,7 @@ def main() -> int:
         config = root / "subagents.local.toml"
         entrypoint = root / "AGENTS.md"
         shutil.copy2(FIXTURE / config.name, config)
-        shutil.copy2(FIXTURE / entrypoint.name, entrypoint)
+        shutil.copy2(FIXTURE / "worker-instructions.md", entrypoint)
 
         first = run(config, entrypoint)
         assert first.returncode == 0, first.stderr
