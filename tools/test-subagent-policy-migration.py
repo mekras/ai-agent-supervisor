@@ -18,6 +18,28 @@ START = "<!-- ai-setup-subagents:runtime-policy:start -->"
 END = "<!-- ai-setup-subagents:runtime-policy:end -->"
 
 
+def assert_unambiguous_entrypoint(text: str) -> None:
+    normalized = " ".join(text.split())
+    required = [
+        "затем отдельно рассмотрите каждую потенциально делегируемую подзадачу",
+        "`direct_execution_scope = \"whole_parent_task\"` означает только, что саму родительскую задачу целиком не передают.",
+        "Оно не отменяет отдельного рассмотрения подходящей ограниченной read-only подзадачи.",
+        "`subtask_routing = \"match_each_bounded_subtask\"` требует отдельно проверить такую подзадачу и её маршрут.",
+        "Для рассматриваемой ограниченной read-only подзадачи дочернему исполнителю запрещены запись, утверждение решения и расширение области.",
+        "Это ограничение относится только к этому маршруту и не отменяет отдельный контракт класса, который явно разрешает ограниченную запись.",
+        "Независимо от класса дочерний исполнитель не изменяет защищённые источники, не утверждает решения и не расширяет область.",
+        "Родитель сохраняет запись в защищённых источниках, утверждение решений и итоговую приёмку результата.",
+        "Микрозадачи не декомпозируйте искусственно.",
+        "Если для выделения или передачи нет оправданного маршрута либо постановка, вход и приёмка дороже ожидаемой пользы, соответствующий объём работы выполняет родитель",
+    ]
+    for phrase in required:
+        assert phrase in normalized, phrase
+    assert "Если вся родительская задача совпала с `direct_execution`, выполните её у родителя целиком." not in normalized
+    assert "Если сама родительская задача попала в `direct_execution`, её не делегируют целиком." not in normalized
+    positions = [normalized.index(phrase) for phrase in required]
+    assert positions == sorted(positions)
+
+
 def run(config: Path, entrypoint: Path, check: bool = False) -> subprocess.CompletedProcess[str]:
     command = [
         "python3",
@@ -87,6 +109,7 @@ def main() -> int:
         assert migrated_entrypoint.count(END) == 1
         canonical = ASSET.read_text(encoding="utf-8")
         assert canonical in migrated_entrypoint
+        assert_unambiguous_entrypoint(canonical)
         assert "Keep this surrounding rule unchanged." in migrated_entrypoint
         assert "Keep this rule after the managed fragment unchanged." in migrated_entrypoint
 
@@ -98,6 +121,40 @@ def main() -> int:
         assert config.read_bytes() == saved_config
         assert entrypoint.read_bytes() == saved_entrypoint
         assert run(config, entrypoint, check=True).returncode == 0
+
+        entrypoint.write_text(
+            "# Installed rules from version 2.6.7\n\n"
+            + START
+            + "\n"
+            + "## Рабочая политика подагентов\n\n"
+            + "Если вся родительская задача совпала с `direct_execution`, выполните её у родителя целиком.\n"
+            + "Для отдельной подзадачи это условие не переносится: при подходящем маршруте передача допустима.\n"
+            + END
+            + "\n\n# Local rule preserved\n",
+            encoding="utf-8",
+        )
+        schema2_config = config.read_bytes()
+        repaired_schema2 = run(config, entrypoint)
+        assert repaired_schema2.returncode == 0, repaired_schema2.stderr
+        assert "Политика подагентов мигрирована." in repaired_schema2.stdout
+        assert config.read_bytes() == schema2_config
+        migrated_schema2 = entrypoint.read_text(encoding="utf-8")
+        assert canonical in migrated_schema2
+        assert_unambiguous_entrypoint(migrated_schema2)
+        assert "Installed rules from version 2.6.7" in migrated_schema2
+        assert "Local rule preserved" in migrated_schema2
+        schema2_data = tomllib.loads(config.read_text(encoding="utf-8"))
+        assert schema2_data["policy_runtime"]["schema_version"] == 2
+        assert schema2_data["policy_runtime"]["launcher"] == "local-launcher"
+        assert schema2_data["policy_runtime"]["target"] == "local-target"
+        assert schema2_data["policy_runtime"]["direct_execution"] == ["one-file microtask"]
+        assert schema2_data["policy_runtime"]["unavailable_route"] == "keep parent route"
+        stable_schema2_entrypoint = entrypoint.read_bytes()
+        stable_schema2 = run(config, entrypoint)
+        assert stable_schema2.returncode == 0, stable_schema2.stderr
+        assert "уже актуальна" in stable_schema2.stdout
+        assert config.read_bytes() == schema2_config
+        assert entrypoint.read_bytes() == stable_schema2_entrypoint
 
     print("Миграция политики подагентов проверена на изолированной установке.")
     return 0
