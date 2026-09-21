@@ -48,7 +48,7 @@ execution_class = "cheap_readonly_research"
 """,
             encoding="utf-8",
         )
-        entrypoint = root / "AGENTS.md"
+        entrypoint = root / "worker-instructions.md"
         entrypoint.write_text(ENTRYPOINT.read_text(encoding="utf-8"), encoding="utf-8")
 
         output = root / "report.json"
