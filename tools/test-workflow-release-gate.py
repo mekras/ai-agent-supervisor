@@ -38,7 +38,7 @@ def main() -> int:
     assert "needs: verify-portability" in release
     assert release.index("needs: verify-portability") < release.index("name: Проверить и опубликовать")
     assert "Проверить опубликованный пакет в изолированном проекте" in release
-    assert 'apm marketplace add "$GITHUB_WORKSPACE/marketplace" --name release-test' in release
+    assert 'apm marketplace add "$GITHUB_WORKSPACE/marketplace" --name release-test --ref master' in release
     assert 'apm install "${PACKAGE_NAME}@release-test" --target codex' in release
     assert release.index("Опубликовать версию пакета") < release.index(
         "Проверить опубликованный пакет в изолированном проекте"
