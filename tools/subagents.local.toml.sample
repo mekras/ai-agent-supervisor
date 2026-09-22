@@ -1,6 +1,32 @@
 # Локальная политика подагентов. Не добавляйте рабочий файл в Git.
 # Идентификатор модели берите только из нативного каталога активной оснастки.
 
+# Это единственный источник рабочей политики. Короткий фрагмент в реально
+# загружаемой инструкции оснастки только направляет агента сюда, не копируя
+# проектные правила. Состояния подключения и исполнения различаются.
+[policy_runtime]
+schema_version = 2
+launcher = "tools/run-execution-class"
+target = "codex"
+# direct_execution = ["микрозадача", "контракт и приёмка дороже ожидаемой пользы"]
+# direct_execution_scope = "whole_parent_task"
+# subtask_routing = "match_each_bounded_subtask"
+# parent_comparison = "actual_current_session"
+# unknown_parent_parameters = "comparison_unresolved"
+# parent_change = "invalidate_comparison"
+# assignment_basis = "historical_only"
+# comparison_evidence_level = "client_execution"
+# unavailable_route = "необязательную работу выполняет родитель; обязательную эскалировать владельцу"
+# execution_failure = "результат не использовать; применить unavailable_route; повторять только после изменения среды или маршрута"
+# unconfirmed_model = "результат можно принять только по result_acceptance, если задача не требует подтверждённой модели; иначе применить unavailable_route без повтора того же запуска"
+# result_acceptance = "родитель сверяет результат с критериями и использует только принятый результат"
+# execution_status = "not_checked" # not_checked, checked или blocked
+# economy_status = "not_measured" # not_measured, measured или confirmed
+
+[[policy_runtime.routes]]
+# when = "ограниченный поиск по нескольким файлам"
+# execution_class = "cheap_readonly_research"
+
 # Единое предложение заполните до технической настройки.
 # Запускатель не проверяет смысл этих полей. Сверьте их с итоговым ответом.
 # [policy_design]
@@ -11,9 +37,11 @@
 # [[policy_design.tasks]]
 # task = "сравнить варианты решения"
 # acceptance = "альтернативы сравнены по заданным критериям"
-# parent_model = "unknown"
-# parent_effort = "unknown"
-# parent_evidence = "метаданные активной сессии либо явная неизвестность"
+# parent_basis = "historical_setup_observation"
+# parent_basis_model = "unknown"
+# parent_basis_effort = "unknown"
+# parent_basis_evidence = "метаданные активной сессии на момент настройки либо явная неизвестность"
+# parent_basis_observed_at = "unknown"
 # delegation_reason = "польза относительно прямого выполнения и расходы всего маршрута"
 # proposed_effort = "unknown"
 # effort_reason = "достаточность для задачи пока не установлена"

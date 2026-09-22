@@ -43,6 +43,7 @@ parent_comparison = "actual_current_session"
 unknown_parent_parameters = "comparison_unresolved"
 parent_change = "invalidate_comparison"
 assignment_basis = "historical_only"
+comparison_evidence_level = "client_execution"
 unavailable_route = "parent"
 execution_failure = "parent without result"
 unconfirmed_model = "parent decides whether the result is usable"
@@ -66,7 +67,7 @@ execution_class = "cheap_readonly_research"
         assert report["working_sessions"] == "not_observed"
         assert json.loads(output.read_text(encoding="utf-8"))["instruction_entrypoints"] == "referenced"
         assert report["execution"] == {
-            "process": "not_checked", "result": "not_checked", "acceptance_record": "not_checked", "quality": "not_evidenced", "model": "not_checked", "economy": "not_checked",
+            "process": "not_checked", "result": "not_checked", "acceptance_record": "not_checked", "quality": "not_evidenced", "model": "not_checked", "effort": "not_checked", "client_route": "not_checked", "evidence_level": "client_execution", "economy": "not_checked",
         }
 
         config.write_text(
@@ -106,20 +107,66 @@ execution_class = "cheap_readonly_research"
         assert unconfirmed.returncode == 0, unconfirmed.stderr
         report = json.loads(unconfirmed.stdout)
         assert report["execution"] == {
-            "process": "completed", "result": "available", "acceptance_record": "not_checked", "quality": "not_evidenced", "model": "unconfirmed", "economy": "not_measured",
+            "process": "completed", "result": "available", "acceptance_record": "not_checked", "quality": "not_evidenced", "model": "unconfirmed", "effort": "unconfirmed", "client_route": "not_recorded", "evidence_level": "client_execution", "economy": "not_measured",
         }
 
         record.write_text(
             json.dumps({
                 "returncode": 0, "result_available": True, "result_path": str(entrypoint), "model_status": "confirmed", "model_matches": True,
+                "client_model_status": "confirmed", "client_effort_status": "confirmed", "effort_status": "confirmed", "effort_matches": True,
+                "client_model_matches": True, "client_effort_matches": True,
+                "execution_evidence": {"client": {"model": {"status": "confirmed"}, "effort": {"status": "confirmed"}}},
+                "client_route_status": "confirmed",
                 "acceptance": {"status": "accepted"}, "quality_assessment": {"status": "passed"}, "economy": {"status": "measured"},
             }), encoding="utf-8",
         )
         accepted = invoke(config, entrypoint, record)
         assert accepted.returncode == 0, accepted.stderr
         assert json.loads(accepted.stdout)["execution"] == {
-            "process": "completed", "result": "available", "acceptance_record": "accepted_recorded", "quality": "assessment_recorded", "model": "confirmed", "economy": "measurement_recorded",
+            "process": "completed", "result": "available", "acceptance_record": "accepted_recorded", "quality": "assessment_recorded", "model": "confirmed", "effort": "confirmed", "client_route": "confirmed", "evidence_level": "client_execution", "economy": "measurement_recorded",
         }
+
+        record.write_text(
+            json.dumps({
+                "returncode": 0,
+                "result_available": True,
+                "result_path": str(entrypoint),
+                "model_status": "conflict",
+                "model_matches": None,
+                "effort_status": "confirmed",
+                "effort_matches": True,
+                "client_model_status": "confirmed",
+                "client_effort_status": "confirmed",
+                "client_model_matches": True,
+                "client_effort_matches": True,
+                "server_model_status": "confirmed",
+                "server_effort_status": "confirmed",
+                "server_model_matches": False,
+                "server_effort_matches": True,
+                "execution_evidence": {
+                    "client": {
+                        "model": {"status": "confirmed"},
+                        "effort": {"status": "confirmed"},
+                    },
+                    "server": {
+                        "model": {"status": "confirmed"},
+                        "effort": {"status": "confirmed"},
+                    },
+                },
+                "client_route_status": "confirmed",
+            }),
+            encoding="utf-8",
+        )
+        config.write_text(
+            config.read_text(encoding="utf-8").replace(
+                'comparison_evidence_level = "client_execution"',
+                'comparison_evidence_level = "server_execution"',
+            ),
+            encoding="utf-8",
+        )
+        server_mismatch = invoke(config, entrypoint, record)
+        assert server_mismatch.returncode == 0, server_mismatch.stderr
+        assert json.loads(server_mismatch.stdout)["execution"]["model"] == "mismatch"
 
         config.write_text("[policy_runtime]\nschema_version = 2\n", encoding="utf-8")
         incomplete = invoke(config, entrypoint)
