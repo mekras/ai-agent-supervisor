@@ -86,6 +86,7 @@ def main() -> int:
         assert runtime["execution_status"] == "blocked"
         assert runtime["economy_status"] == "not_measured"
         assert runtime["routes"] == [{"when": "bounded read-only facts", "execution_class": "local-readonly"}]
+        assert runtime["comparison_evidence_level"] == "client_execution"
 
         task = data["policy_design"]["tasks"][0]
         assert task["parent_basis"] == "historical_setup_observation"

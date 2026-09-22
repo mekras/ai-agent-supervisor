@@ -138,6 +138,7 @@ def main() -> int:
         assert record["assigned_model"] == "haiku"
         assert record["actual_model"] == "claude-haiku-4-5"
         assert record["model_matches"]
+        assert record["client_model_matches"]
         assert record["model_status"] == "confirmed"
         assert record["model_evidence"]["line"] == 1
         assert len(record["model_evidence"]["sha256"]) == 64

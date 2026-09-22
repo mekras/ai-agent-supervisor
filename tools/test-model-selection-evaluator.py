@@ -46,8 +46,22 @@ def main() -> int:
     confirmed = evaluate(base())
     assert confirmed["hypothesis_status"] == "confirmed"
     assert confirmed["selected_candidate"] == "candidate-a"
+    assert confirmed["evidence_level"] == "client_execution"
     assert confirmed["policy_action"] == "owner_decision_required"
     assert confirmed["cost_comparison"]["total_cost_savings_percent"] > 40
+
+    different_efforts = base()
+    candidate(different_efforts, "candidate-a")["execution"] = {
+        "model": "same-model",
+        "effort": "low",
+    }
+    candidate(different_efforts, "candidate-b")["execution"] = {
+        "model": "same-model",
+        "effort": "high",
+    }
+    separate_effort_report = evaluate(different_efforts)
+    assert set(separate_effort_report["eligible_candidates"]) == {"candidate-a", "candidate-b"}
+    assert set(separate_effort_report["holdout"]["metrics"]) == {"candidate-a", "candidate-b"}
 
     missing_total = base()
     for run in missing_total["runs"]:
@@ -115,6 +129,15 @@ def main() -> int:
         assert "целое число" in str(error)
     else:
         raise AssertionError("дробное число повторов должно быть отклонено")
+
+    missing_evidence_level = base()
+    missing_evidence_level.pop("evidence_level")
+    try:
+        evaluate(missing_evidence_level)
+    except MODULE.InputError as error:
+        assert "evidence_level" in str(error)
+    else:
+        raise AssertionError("уровень свидетельства должен быть явным")
 
     negative = copy.deepcopy(base())
     negative["runs"][0]["model_cost_units"] = -1
