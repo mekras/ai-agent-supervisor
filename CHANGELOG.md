@@ -5,7 +5,7 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/),
 проект использует [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Невыпущено
+## [2.6.10] - 2026-09-24
 
 ### Исправлено
 
@@ -1009,7 +1009,9 @@
 
 - Выпущена начальная версия коллекции.
 
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.8...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.10...HEAD
+[2.6.10]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.9...2.6.10
+[2.6.9]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.8...2.6.9
 [2.6.8]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.7...2.6.8
 [2.6.7]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.6...2.6.7
 [2.6.6]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.5...2.6.6
