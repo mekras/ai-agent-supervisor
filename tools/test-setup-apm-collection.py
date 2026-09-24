@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -18,6 +19,13 @@ for _stream in (sys.stdout, sys.stderr):
 
 ROOT = Path(__file__).resolve().parent.parent
 SETUP = ROOT / ".apm/skills/ai-setup-apm/scripts/setup-apm-collection"
+
+
+def fixture_environment() -> dict[str, str]:
+    """Не передавать выбор навыков внешнего проекта во временный проект."""
+    environment = os.environ.copy()
+    environment.pop("APM_EVAL_PATH", None)
+    return environment
 
 
 def run(project: Path, *extra: str) -> subprocess.CompletedProcess[str]:
@@ -73,6 +81,7 @@ def main() -> int:
             errors="replace",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            env=fixture_environment(),
         )
         assert checks.returncode == 0, checks.stdout + checks.stderr
 
@@ -88,6 +97,7 @@ def main() -> int:
             errors="replace",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            env=fixture_environment(),
         )
         assert rejected.returncode == 1
         assert "скомпилированные Python-артефакты" in rejected.stderr

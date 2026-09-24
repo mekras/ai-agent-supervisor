@@ -107,7 +107,7 @@ execution_class = "cheap_readonly_research"
         assert unconfirmed.returncode == 0, unconfirmed.stderr
         report = json.loads(unconfirmed.stdout)
         assert report["execution"] == {
-            "process": "completed", "result": "available", "acceptance_record": "not_checked", "quality": "not_evidenced", "model": "unconfirmed", "effort": "unconfirmed", "client_route": "not_recorded", "evidence_level": "client_execution", "economy": "not_measured",
+            "process": "completed", "stop_reason": None, "result": "available", "acceptance_record": "not_checked", "quality": "not_evidenced", "model": "unconfirmed", "effort": "unconfirmed", "client_route": "not_recorded", "evidence_level": "client_execution", "economy": "not_measured",
         }
 
         record.write_text(
@@ -123,7 +123,7 @@ execution_class = "cheap_readonly_research"
         accepted = invoke(config, entrypoint, record)
         assert accepted.returncode == 0, accepted.stderr
         assert json.loads(accepted.stdout)["execution"] == {
-            "process": "completed", "result": "available", "acceptance_record": "accepted_recorded", "quality": "assessment_recorded", "model": "confirmed", "effort": "confirmed", "client_route": "confirmed", "evidence_level": "client_execution", "economy": "measurement_recorded",
+            "process": "completed", "stop_reason": None, "result": "available", "acceptance_record": "accepted_recorded", "quality": "assessment_recorded", "model": "confirmed", "effort": "confirmed", "client_route": "confirmed", "evidence_level": "client_execution", "economy": "measurement_recorded",
         }
 
         record.write_text(
