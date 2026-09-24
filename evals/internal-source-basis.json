@@ -1973,6 +1973,46 @@
               "SUBAGENT-DESIGN-007"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-subagents-result-runtime-route-decision-before-ordinary-analysis",
+          "required_claims": [
+            "SUBAGENT-DESIGN-001",
+            "SUBAGENT-DESIGN-006",
+            "SUBAGENT-DESIGN-007"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-006",
+              "SUBAGENT-DESIGN-007"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-runtime-bounded-delegation-with-acceptance",
+          "required_claims": [
+            "SUBAGENT-DESIGN-006",
+            "SUBAGENT-DESIGN-007"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-006",
+              "SUBAGENT-DESIGN-007"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-runtime-route-decision-without-direct-execution",
+          "required_claims": [
+            "SUBAGENT-DESIGN-006",
+            "SUBAGENT-DESIGN-007"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-006",
+              "SUBAGENT-DESIGN-007"
+            ]
+          ]
         }
       ]
     },
