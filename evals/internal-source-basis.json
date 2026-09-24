@@ -610,6 +610,27 @@
       ],
       "cases": [
         {
+          "id": "ai-rule-failure-analysis-result-multiple-independent-episodes",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004",
+            "AUDIT-003",
+            "CCDC-001",
+            "CCDC-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ],
+            [
+              "AUDIT-003",
+              "CCDC-001",
+              "CCDC-003"
+            ]
+          ]
+        },
+        {
           "id": "ai-rule-failure-analysis-result-missed-required-step",
           "required_claims": [
             "ASKL-003",
