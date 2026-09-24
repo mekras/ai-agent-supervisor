@@ -42,9 +42,9 @@ jobs:
         uses: microsoft/apm-action@v1
         with:
           setup-only: 'true'
-          apm-version: '0.29.0'
+          apm-version: '0.29.1'
 
-      - name: Проверить готовность выпуска
+      - name: Проверить готовность выпуска и README
         shell: bash
         run: |
           set -euo pipefail
@@ -52,6 +52,10 @@ jobs:
           manifest_version=$(awk '/^version:/ {print $2; exit}' apm.yml)
           test "$manifest_version" = "$RELEASE_VERSION"
           grep -Fq "## [$RELEASE_VERSION]" CHANGELOG.md
+          readme_versions=$(grep -oE 'ai-agent-supervisor@mekras#[0-9]+\.[0-9]+\.[0-9]+' README.md | sort -u)
+          test "$readme_versions" = "ai-agent-supervisor@mekras#$RELEASE_VERSION"
+          readme_apm_version=$(sed -nE 's/.*APM.*не ниже ([0-9]+\.[0-9]+\.[0-9]+).*/\1/p' README.md | head -n 1)
+          test "$readme_apm_version" = "0.29.1"
           apm run tests
 
       - name: Проверить доступ к реестру
