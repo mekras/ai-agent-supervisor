@@ -1,0 +1,165 @@
+schema_version: 2
+scope:
+  id: collection
+  name: Вся коллекция навыков
+environments:
+  - id: codex_cli
+    name: Codex CLI
+    declared_support: true
+  - id: claude_code
+    name: Claude Code
+    declared_support: true
+  - id: hermes_agent
+    name: Hermes Agent
+    declared_support: true
+capabilities:
+  - id: collection_installation
+    name: Установка коллекции
+    target_environments: [codex_cli, claude_code, hermes_agent]
+    package_presence:
+      status: included
+      basis:
+        - apm.yml#L1-L17
+        - .apm/skills/ai-setup-apm/SKILL.md#L30-L43
+    declared_implementation:
+      codex_cli:
+        status: documented
+        basis:
+          - apm.yml#L1-L17
+          - .apm/skills/ai-setup-apm/references/apm-collection-settings.md#L105-L143
+      claude_code:
+        status: documented
+        basis:
+          - apm.yml#L1-L17
+          - .apm/skills/ai-setup-apm/references/apm-collection-settings.md#L130-L143
+      hermes_agent:
+        status: documented
+        basis:
+          - apm.yml#L1-L17
+          - .apm/skills/ai-setup-apm/references/known-version-issues.md#L57-L91
+  - id: skill_loading_and_availability
+    name: Загрузка и доступность навыков
+    target_environments: [codex_cli, claude_code, hermes_agent]
+    package_presence:
+      status: included
+      basis:
+        - apm.yml#L1-L17
+        - .apm/skills/ai-setup-apm/references/apm-collection-settings.md#L141-L143
+    declared_implementation:
+      codex_cli:
+        status: documented
+        basis:
+          - .apm/skills/ai-setup-apm/references/apm-collection-settings.md#L141-L143
+          - .apm/skills/ai-setup-apm/references/apm-collection-settings.md#L364-L371
+      claude_code:
+        status: documented
+        basis:
+          - .apm/skills/ai-setup-apm/references/apm-collection-settings.md#L141-L143
+          - .apm/skills/ai-setup-apm/references/apm-collection-settings.md#L364-L371
+      hermes_agent:
+        status: not_established
+        note: Поставляемые материалы не устанавливают точку входа Hermes для загрузки навыков.
+  - id: project_and_instruction_setup
+    name: Настройка проекта и инструкций
+    target_environments: [codex_cli, claude_code, hermes_agent]
+    package_presence:
+      status: included
+      basis:
+        - .apm/skills/ai-setup-project/SKILL.md#L1-L17
+    declared_implementation:
+      codex_cli:
+        status: documented
+        basis:
+          - .apm/skills/ai-setup-project/SKILL.md#L62-L89
+      claude_code:
+        status: documented
+        basis:
+          - .apm/skills/ai-setup-project/SKILL.md#L84-L89
+          - .apm/skills/ai-setup-project/SKILL.md#L151-L158
+      hermes_agent:
+        status: not_established
+        note: Нет поставляемого описания точки входа инструкций Hermes.
+  - id: skill_creation_and_improvement
+    name: Создание и улучшение навыков
+    target_environments: [codex_cli, claude_code, hermes_agent]
+    package_presence:
+      status: included
+      basis:
+        - .apm/skills/ai-skill-development/SKILL.md#L1-L17
+    declared_implementation:
+      codex_cli:
+        status: documented
+        basis:
+          - .apm/skills/ai-skill-development/SKILL.md#L25-L31
+          - .apm/skills/ai-skill-development/SKILL.md#L51-L75
+      claude_code:
+        status: documented
+        basis:
+          - .apm/skills/ai-skill-development/SKILL.md#L25-L31
+          - .apm/skills/ai-skill-development/SKILL.md#L51-L75
+      hermes_agent:
+        status: not_established
+        note: Общая процедура разработки есть, но рабочая загрузка навыка в Hermes не установлена.
+  - id: subagent_setup_and_use
+    name: Настройка и применение подагентов
+    target_environments: [codex_cli, claude_code, hermes_agent]
+    package_presence:
+      status: included
+      basis:
+        - .apm/skills/ai-setup-subagents/SKILL.md#L1-L8
+    declared_implementation:
+      codex_cli:
+        status: documented
+        basis:
+          - .apm/skills/ai-setup-subagents/references/routing-patterns.md#L170-L188
+          - .apm/skills/ai-setup-subagents/references/operation-policy.md#L116-L148
+      claude_code:
+        status: documented
+        basis:
+          - .apm/skills/ai-setup-subagents/references/routing-patterns.md#L188-L195
+          - .apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342
+      hermes_agent:
+        status: not_established
+        note: Поставляемые материалы подтверждают только уровень APM, не рабочее применение подагентов.
+  - id: work_analysis_and_result_evaluation
+    name: Анализ работы и оценка результатов
+    target_environments: [codex_cli, claude_code, hermes_agent]
+    package_presence:
+      status: included
+      basis:
+        - .apm/skills/ai-usage-analysis/SKILL.md#L1-L8
+        - .apm/skills/ai-work-result-evaluation/SKILL.md#L1-L5
+    declared_implementation:
+      codex_cli:
+        status: partial
+        gap: ai-usage-analysis принимает доступную локальную историю или её экспорт, но не задаёт формат или адаптер нативной истории Codex CLI. Анализ требует совместимого экспорта или структурированного журнала. Общая оценка результата через ai-work-result-evaluation доступна без чтения истории.
+        basis:
+          - .apm/skills/ai-usage-analysis/SKILL.md#L25-L45
+          - .apm/skills/ai-work-result-evaluation/SKILL.md#L16-L38
+      claude_code:
+        status: partial
+        gap: ai-usage-analysis принимает доступную локальную историю или её экспорт, но не задаёт формат или адаптер нативной истории Claude Code. Анализ требует совместимого экспорта или структурированного журнала. Общая оценка результата через ai-work-result-evaluation доступна без чтения истории.
+        basis:
+          - .apm/skills/ai-usage-analysis/SKILL.md#L25-L45
+          - .apm/skills/ai-work-result-evaluation/SKILL.md#L16-L38
+      hermes_agent:
+        status: not_established
+        note: Не установлена доступная Hermes история сессий или рабочий след загрузки навыков.
+checks:
+  - id: hermes_apm_packaging_2_6_3
+    date: 2026-09-18
+    collection_version: 2.6.3
+    environment:
+      id: hermes_agent
+      version: not_participated
+      participation: not_participated
+      tooling:
+        apm_cli: 0.31.0
+    capability: collection_installation
+    conditions: Изолированный цикл блокировки зависимостей, установки и упаковки цели hermes
+    method: Проверка блокировки, установки и упаковки коллекции через APM CLI
+    verification_subject: packaging_tooling
+    result: passed
+    scope: Проверена только поставка APM для цели hermes. Hermes Agent не запускался и в испытании не участвовал. Загрузка и доступность навыков внутри Hermes не проверялись. Свидетельство — запись CHANGELOG, отдельный отчёт испытания в пакете не сохранён.
+    evidence:
+      - .apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12

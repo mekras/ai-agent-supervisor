@@ -40,6 +40,11 @@ def main() -> int:
     assert "Проверить опубликованный пакет в изолированном проекте" in release
     assert 'apm marketplace add "$GITHUB_WORKSPACE/marketplace" --name release-test --ref master' in release
     assert 'apm install "${PACKAGE_NAME}@release-test" --target codex' in release
+    assert "python3 tools/sync-marketplace-manifest.py" in release
+    assert "--source apm.yml" in release
+    assert '--package "$candidate_dir/apm.yml"' in release
+    assert '--version "$RELEASE_VERSION"' in release
+    assert "apm pack --marketplace=claude,codex" in release
     assert release.index("Опубликовать версию пакета") < release.index(
         "Проверить опубликованный пакет в изолированном проекте"
     )

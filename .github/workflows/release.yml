@@ -86,20 +86,10 @@ jobs:
           cp -a .apm "$candidate_dir/.apm"
           cp README.md CHANGELOG.md LICENSE "$candidate_dir/"
           cp "$package_dir/apm.yml" "$candidate_dir/apm.yml"
-          RELEASE_VERSION="$RELEASE_VERSION" PACKAGE_DIR="$candidate_dir" python3 - <<'PY'
-          import os
-          import re
-          from pathlib import Path
-
-          version = os.environ["RELEASE_VERSION"]
-          package_manifest = Path(os.environ["PACKAGE_DIR"]) / "apm.yml"
-          text = package_manifest.read_text(encoding="utf-8")
-          text, count = re.subn(r"^version: .+$", f"version: {version}", text,
-                                count=1, flags=re.MULTILINE)
-          if count != 1:
-              raise SystemExit("Не найдена версия манифеста пакета")
-          package_manifest.write_text(text, encoding="utf-8")
-          PY
+          python3 tools/sync-marketplace-manifest.py \
+            --source apm.yml \
+            --package "$candidate_dir/apm.yml" \
+            --version "$RELEASE_VERSION"
           package_tag="${PACKAGE_NAME}--v${RELEASE_VERSION}"
           if git -C marketplace rev-parse --verify --quiet "${package_tag}^{commit}" >/dev/null; then
             mkdir -p "$previous_dir"
