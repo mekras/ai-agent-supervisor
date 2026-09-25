@@ -25,6 +25,10 @@ SCRIPTS = [
     "tools/test-subagent-tools-drift.py",
     "tools/test-execution-class.py",
     "tools/test-model-evidence.py",
+    "tools/compatibility-summary.py",
+    "tools/test-compatibility-summary.py",
+    "tools/test-compatibility-edit-agents.py",
+    "tools/test-compatibility-runner.py",
     "tools/test-policy-connection.py",
     "tools/test-subagent-policy-migration.py",
     "tools/test-model-selection-evaluator.py",
@@ -39,6 +43,7 @@ SCRIPTS = [
     "tools/test-validate-python-syntax.py",
     "tools/test-skill-portability.py",
     "tools/test-workflow-release-gate.py",
+    "tools/test-sync-marketplace-manifest.py",
     "tools/test-validate-apm-git-boundary.py",
     "tools/test-product-isolation.py",
     "tools/test-validate-statement-excerpts.py",
@@ -62,6 +67,8 @@ def main() -> int:
         args = [sys.executable, str(ROOT / relative)]
         if relative.endswith("validate-product-boundary.py"):
             args.append(target)
+        elif relative == "tools/compatibility-summary.py":
+            args.append("--check")
         elif relative.endswith("validate-skill-descriptions.py"):
             args.append(target)
         elif relative.endswith("validate-trigger-evals.py"):
