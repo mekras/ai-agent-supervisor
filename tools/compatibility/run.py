@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import difflib
 import hashlib
 import json
 import os
@@ -22,6 +23,10 @@ SCENARIO_PATH = ROOT / "evals/compatibility/edit-agents/scenario.json"
 CHECK_PATH = ROOT / "evals/compatibility/edit-agents/check.py"
 ALLOWED_CHANGED_PATHS = {"AGENTS.md"}
 CHECK_TIMEOUT_SECONDS = 30
+AGENTS_PATH = Path("AGENTS.md")
+SOURCE_AGENTS_ARTIFACT = "source-agents.md"
+RESULT_AGENTS_ARTIFACT = "result-agents.md"
+AGENTS_DIFF_ARTIFACT = "agents.diff"
 
 PopenFactory = Callable[..., Any]
 RunFactory = Callable[..., Any]
@@ -51,18 +56,28 @@ def load_task(scenario_path: Path) -> tuple[str, str]:
     return scenario_id, prompt
 
 
-def file_snapshot(root: Path) -> dict[str, dict[str, Any]]:
+def file_snapshot(
+    root: Path, *, skip_unsafe: bool = False
+) -> dict[str, dict[str, Any]]:
     snapshot: dict[str, dict[str, Any]] = {}
     for path in sorted(root.rglob("*")):
         relative = path.relative_to(root).as_posix()
         if path.is_symlink():
+            if skip_unsafe:
+                continue
             raise ValueError(f"Символьные ссылки в проекте не поддерживаются: {relative}")
         if not path.is_file():
             continue
-        data = path.read_bytes()
+        try:
+            data = path.read_bytes()
+            mode = path.stat().st_mode & 0o777
+        except OSError:
+            if skip_unsafe:
+                continue
+            raise
         snapshot[relative] = {
             "sha256": hashlib.sha256(data).hexdigest(),
-            "mode": path.stat().st_mode & 0o777,
+            "mode": mode,
         }
     return snapshot
 
@@ -307,6 +322,85 @@ def write_json(path: Path, value: Any) -> None:
     )
 
 
+def save_agents_artifacts(
+    run_dir: Path, workspace: Path, source_content: bytes
+) -> dict[str, Any]:
+    source_artifact = run_dir / SOURCE_AGENTS_ARTIFACT
+    result_artifact = run_dir / RESULT_AGENTS_ARTIFACT
+    diff_artifact = run_dir / AGENTS_DIFF_ARTIFACT
+    source_artifact.write_bytes(source_content)
+    result_path = workspace / AGENTS_PATH
+    artifacts: dict[str, Any] = {
+        "status": "unavailable",
+        "source": SOURCE_AGENTS_ARTIFACT,
+        "result": None,
+        "diff": None,
+        "violations": [],
+    }
+    if result_path.is_symlink():
+        artifacts["status"] = "symlink"
+        artifacts["violations"].append(
+            {
+                "code": "result-agents-symlink",
+                "path": AGENTS_PATH.as_posix(),
+                "message": "Итоговый AGENTS.md заменён символьной ссылкой и не прочитан.",
+            }
+        )
+        return artifacts
+    if not result_path.exists():
+        artifacts["status"] = "missing"
+        artifacts["violations"].append(
+            {
+                "code": "result-agents-missing",
+                "path": AGENTS_PATH.as_posix(),
+                "message": "Итоговый AGENTS.md отсутствует.",
+            }
+        )
+        return artifacts
+    if not result_path.is_file():
+        artifacts["status"] = "not-regular-file"
+        artifacts["violations"].append(
+            {
+                "code": "result-agents-not-regular-file",
+                "path": AGENTS_PATH.as_posix(),
+                "message": "Итоговый AGENTS.md не является обычным файлом.",
+            }
+        )
+        return artifacts
+    try:
+        result_content = result_path.read_bytes()
+    except OSError as exc:
+        artifacts["status"] = "unreadable"
+        artifacts["violations"].append(
+            {
+                "code": "result-agents-unreadable",
+                "path": AGENTS_PATH.as_posix(),
+                "message": f"Итоговый AGENTS.md не удалось прочитать: {exc}",
+            }
+        )
+        return artifacts
+    result_artifact.write_bytes(result_content)
+    diff_artifact.write_text(
+        "".join(
+            difflib.unified_diff(
+                source_content.decode("utf-8", errors="replace").splitlines(
+                    keepends=True
+                ),
+                result_content.decode("utf-8", errors="replace").splitlines(
+                    keepends=True
+                ),
+                fromfile="AGENTS.md (исходный)",
+                tofile="AGENTS.md (итоговый)",
+            )
+        ),
+        encoding="utf-8",
+    )
+    artifacts["status"] = "available"
+    artifacts["result"] = RESULT_AGENTS_ARTIFACT
+    artifacts["diff"] = AGENTS_DIFF_ARTIFACT
+    return artifacts
+
+
 def run_case(
     project: Path,
     image: str,
@@ -339,10 +433,12 @@ def run_case(
 
     scenario_id, task = load_task(scenario_path)
     before = file_snapshot(project)
+    source_content = (project / AGENTS_PATH).read_bytes()
     results_dir.mkdir(parents=True, exist_ok=True)
     run_dir = results_dir / f"run-{uuid.uuid4().hex}"
     run_dir.mkdir()
     write_json(run_dir / "source-snapshot.json", before)
+    (run_dir / SOURCE_AGENTS_ARTIFACT).write_bytes(source_content)
 
     container_name = f"compatibility-{uuid.uuid4().hex}"
     with tempfile.TemporaryDirectory(prefix="compatibility-work-") as temporary:
@@ -370,10 +466,25 @@ def run_case(
             docker_executable,
             run_factory,
         )
-        after = file_snapshot(workspace)
+        after_snapshot_error = None
+        try:
+            after = file_snapshot(workspace)
+        except (OSError, ValueError) as exc:
+            after_snapshot_error = str(exc)
+            after = file_snapshot(workspace, skip_unsafe=True)
         changed = changed_paths(before, after)
         unexpected = sorted(set(changed) - ALLOWED_CHANGED_PATHS)
-        file_check = run_checker(workspace, check_path)
+        agents_artifacts = save_agents_artifacts(run_dir, workspace, source_content)
+        if agents_artifacts["status"] == "available":
+            file_check = run_checker(workspace, check_path)
+        else:
+            file_check = {
+                "status": "not_run",
+                "exit_code": None,
+                "duration_seconds": 0,
+                "stdout": "",
+                "stderr": "Проверка пропущена: итоговый AGENTS.md недоступен.",
+            }
         source_after = file_snapshot(project)
         source_changed = changed_paths(before, source_after)
 
@@ -385,7 +496,9 @@ def run_case(
     elif execution["status"] != "completed" or execution["exit_code"] != 0:
         status = "failed"
     elif (
-        unexpected
+        after_snapshot_error
+        or agents_artifacts["violations"]
+        or unexpected
         or source_changed
         or file_check["status"] != "passed"
         or execution["cleanup"]["errors"]
@@ -406,13 +519,18 @@ def run_case(
         "unexpected_changes": unexpected,
         "source_unchanged": not source_changed,
         "source_changed_paths": source_changed,
+        "workspace_snapshot_error": after_snapshot_error,
         "file_check": file_check,
+        "agents_artifacts": agents_artifacts,
         "skill_application": {
             "verified": False,
             "note": "Запущена тестовая заглушка. Применение навыка не проверялось.",
         },
         "artifacts": {
             "source_snapshot": "source-snapshot.json",
+            "source_agents": SOURCE_AGENTS_ARTIFACT,
+            "result_agents": agents_artifacts["result"],
+            "agents_diff": agents_artifacts["diff"],
             "stdout": "stdout.txt",
             "stderr": "stderr.txt",
             "report": "report.json",
