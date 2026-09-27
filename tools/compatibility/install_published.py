@@ -515,7 +515,14 @@ def run_case(
     validation = validate_installation(project, run_dir)
     (run_dir / "container.stdout").write_text(execution["stdout"], encoding="utf-8")
     (run_dir / "container.stderr").write_text(execution["stderr"], encoding="utf-8")
-    status = "passed" if image["status"] == "passed" and execution["status"] == "completed" and validation["passed"] else "failed"
+    status = (
+        "passed"
+        if image["status"] == "passed"
+        and execution["status"] == "completed"
+        and execution["cleanup"]["status"] == "passed"
+        and validation["passed"]
+        else "failed"
+    )
     report = {
         "status": status,
         "error": error,
