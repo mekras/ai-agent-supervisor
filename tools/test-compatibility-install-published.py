@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+"""Проверить команду установки опубликованной коллекции без Docker и сети."""
+
+from __future__ import annotations
+
+import hashlib
+import importlib.util
+import subprocess
+import tempfile
+from pathlib import Path
+from types import SimpleNamespace
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "tools/compatibility/install_published.py"
+
+
+def load_module():
+    spec = importlib.util.spec_from_file_location("install_published", SCRIPT)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("Не удалось загрузить команду установки")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+MODULE = load_module()
+
+
+class FakeProcess:
+    def __init__(self, arguments: list[str]) -> None:
+        self.arguments = arguments
+        self.returncode = 0
+
+    def communicate(self, timeout=None):
+        run_dir = Path(
+            next(
+                item.split("source=", 1)[1].rsplit(",destination=", 1)[0]
+                for item in self.arguments
+                if item.startswith("type=bind,source=") and item.endswith(",destination=/results")
+            )
+        )
+        project = run_dir / "prepared-project"
+        commands = run_dir / "commands"
+        for name, code, stdout in (
+            ("apm_version", 0, "APM version 0.31.0\n"),
+            ("marketplace_add", 0, "marketplace added\n"),
+            ("install", 0, "installed\n"),
+        ):
+            (commands / f"{name}.stdout").write_text(stdout, encoding="utf-8")
+            (commands / f"{name}.stderr").write_text("", encoding="utf-8")
+            (commands / f"{name}.exit_code").write_text(f"{code}\n", encoding="utf-8")
+
+        skill = project / ".agents/skills/ai-agents-md-maintenance"
+        (skill / "references").mkdir(parents=True)
+        files = {
+            "SKILL.md": "skill\n",
+            "README.md": "readme\n",
+            "references/check.md": "check\n",
+        }
+        hashes = {}
+        for relative, content in files.items():
+            path = skill / relative
+            path.write_text(content, encoding="utf-8")
+            hashes[f".agents/skills/ai-agents-md-maintenance/{relative}"] = "sha256:" + hashlib.sha256(content.encode()).hexdigest()
+        lock_lines = [
+            "apm_version: 0.31.0",
+            "dependencies:",
+            "- name: ai-agent-supervisor",
+            "  repo_url: mekras/apm-marketplace",
+            "  version: 2.6.12",
+            "  resolved_ref: ai-agent-supervisor--v2.6.12",
+            "  resolved_commit: commit",
+            "  deployed_file_hashes:",
+        ]
+        lock_lines.extend(f"    {key}: {value}" for key, value in hashes.items())
+        (project / "apm.lock.yaml").write_text("\n".join(lock_lines) + "\n", encoding="utf-8")
+        return "", ""
+
+    def kill(self) -> None:
+        self.returncode = -9
+
+
+class FakeDocker:
+    def __init__(self) -> None:
+        self.popen_arguments: list[str] | None = None
+        self.popen_kwargs: dict[str, object] = {}
+        self.calls: list[tuple[list[str], dict[str, object]]] = []
+
+    def run(self, arguments, **kwargs):
+        self.calls.append((list(arguments), kwargs))
+        if arguments[1:3] == ["image", "inspect"]:
+            return SimpleNamespace(returncode=0, stdout="sha256:local\n", stderr="")
+        return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+    def popen(self, arguments, **kwargs):
+        self.popen_arguments = list(arguments)
+        self.popen_kwargs = kwargs
+        return FakeProcess(list(arguments))
+
+
+def test_success_and_safe_container() -> None:
+    fake = FakeDocker()
+    with tempfile.TemporaryDirectory(prefix="install-published-test-") as directory:
+        report, report_path = MODULE.run_case(
+            "sha256:local",
+            Path(directory) / "results",
+            30,
+            docker_executable="docker",
+            popen_factory=fake.popen,
+            run_factory=fake.run,
+        )
+        assert report["status"] == "passed"
+        assert report_path.is_file()
+        assert report["validation"]["version_check"]["installed"] == "2.6.12"
+        assert report["validation"]["target_skill"]["passed"]
+        assert report["validation"]["projection"]["matches_lock_hashes"]
+        assert report["validation"]["installed_skills"] == ["ai-agents-md-maintenance"]
+        assert report["commands"]["marketplace_add"]["exit_code"] == 0
+        assert report["commands"]["install"]["exit_code"] == 0
+        arguments = fake.popen_arguments
+        assert arguments is not None
+        assert arguments[arguments.index("--pull=never")] == "--pull=never"
+        assert arguments[arguments.index("--network") + 1] == "bridge"
+        assert arguments[arguments.index("--user") + 1] != "0:0"
+        assert "--volume" not in arguments
+        assert "/var/run/docker.sock" not in " ".join(arguments)
+        assert str(ROOT) not in " ".join(arguments)
+        assert [arguments[index + 1] for index, value in enumerate(arguments[:-1]) if value == "--env"] == [
+            "HOME=/home/sandbox"
+        ]
+        assert fake.popen_kwargs["env"] == {}
+        assert fake.popen_kwargs["stdin"] is subprocess.DEVNULL
+        assert not (Path(report["prepared_project"]) / ".git").exists()
+        assert all(kwargs["env"] == {} for _, kwargs in fake.calls)
+
+
+def test_missing_local_image_keeps_partial_project() -> None:
+    fake = FakeDocker()
+
+    def failed_image(arguments, **kwargs):
+        fake.calls.append((list(arguments), kwargs))
+        return SimpleNamespace(
+            returncode=1,
+            stdout="",
+            stderr="No such image: sha256:missing\n",
+        )
+
+    with tempfile.TemporaryDirectory(prefix="install-published-test-") as directory:
+        report, report_path = MODULE.run_case(
+            "sha256:missing",
+            Path(directory) / "results",
+            30,
+            docker_executable="docker",
+            popen_factory=fake.popen,
+            run_factory=failed_image,
+        )
+        assert report["status"] == "failed"
+        assert report["image"]["status"] == "failed"
+        assert report["execution"]["status"] == "not_run"
+        assert report_path.is_file()
+        assert Path(report["prepared_project"]).is_dir()
+        assert not fake.popen_arguments
+
+
+def test_cli_contract() -> None:
+    args = MODULE.parse_args(["--image", "sha256:local", "--results-dir", "results", "--timeout", "45"])
+    assert args.image == "sha256:local"
+    assert args.timeout == 45
+    assert MODULE.COMMANDS["marketplace_add"] == [
+        "apm",
+        "marketplace",
+        "add",
+        "mekras/apm-marketplace",
+        "--ref",
+        "master",
+    ]
+    assert MODULE.COMMANDS["install"] == [
+        "apm",
+        "install",
+        "ai-agent-supervisor@mekras#2.6.12",
+        "--target",
+        "codex",
+    ]
+
+
+def main() -> int:
+    test_success_and_safe_container()
+    test_missing_local_image_keeps_partial_project()
+    test_cli_contract()
+    print("Проверки команды установки опубликованной коллекции пройдены.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

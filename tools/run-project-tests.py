@@ -29,6 +29,7 @@ SCRIPTS = [
     "tools/test-compatibility-summary.py",
     "tools/test-compatibility-edit-agents.py",
     "tools/test-compatibility-runner.py",
+    "tools/test-compatibility-install-published.py",
     "tools/test-policy-connection.py",
     "tools/test-subagent-policy-migration.py",
     "tools/test-model-selection-evaluator.py",
