@@ -27,6 +27,12 @@ AGENTS_PATH = Path("AGENTS.md")
 SOURCE_AGENTS_ARTIFACT = "source-agents.md"
 RESULT_AGENTS_ARTIFACT = "result-agents.md"
 AGENTS_DIFF_ARTIFACT = "agents.diff"
+CODEX_JSONL_ARTIFACT = "codex.jsonl"
+CODEX_FINAL_ANSWER_ARTIFACT = "final-answer.txt"
+CODEX_COMMAND_ARTIFACT = "codex-command.json"
+CODEX_VERSION = "0.155.1"
+COMMAND_MODE = "command"
+CODEX_MODE = "codex"
 
 PopenFactory = Callable[..., Any]
 RunFactory = Callable[..., Any]
@@ -113,9 +119,10 @@ def docker_command(
     command: Sequence[str],
     container_uid: int,
     container_gid: int,
+    output_workspace: Path | None = None,
 ) -> list[str]:
     container_user = f"{container_uid}:{container_gid}"
-    return [
+    arguments = [
         docker_executable,
         "run",
         "--interactive",
@@ -142,8 +149,39 @@ def docker_command(
         "HOME=/home/sandbox",
         "--mount",
         f"type=bind,source={workspace},destination=/workspace",
-        image,
-        *command,
+    ]
+    if output_workspace is not None:
+        arguments.extend(
+            [
+                "--mount",
+                f"type=bind,source={output_workspace},destination=/run-output",
+            ]
+        )
+    arguments.extend([image, *command])
+    return arguments
+
+
+def codex_command(model: str, effort: str) -> list[str]:
+    return [
+        "codex",
+        "exec",
+        "--json",
+        "--color",
+        "never",
+        "--strict-config",
+        "--skip-git-repo-check",
+        "--ignore-user-config",
+        "--ephemeral",
+        "--cd",
+        "/workspace",
+        "--dangerously-bypass-approvals-and-sandbox",
+        "--model",
+        model,
+        "-c",
+        f"model_reasoning_effort={json.dumps(effort)}",
+        "--output-last-message",
+        f"/run-output/{CODEX_FINAL_ANSWER_ARTIFACT}",
+        "-",
     ]
 
 
@@ -322,6 +360,34 @@ def write_json(path: Path, value: Any) -> None:
     )
 
 
+def save_codex_artifacts(
+    run_dir: Path, output_workspace: Path, execution: dict[str, Any]
+) -> dict[str, Any]:
+    jsonl_path = run_dir / CODEX_JSONL_ARTIFACT
+    jsonl_path.write_text(execution["stdout"], encoding="utf-8")
+    source_final = output_workspace / CODEX_FINAL_ANSWER_ARTIFACT
+    final_path = run_dir / CODEX_FINAL_ANSWER_ARTIFACT
+    if source_final.is_file():
+        shutil.copyfile(source_final, final_path)
+    return {
+        "jsonl": CODEX_JSONL_ARTIFACT,
+        "final_answer": CODEX_FINAL_ANSWER_ARTIFACT if final_path.is_file() else None,
+        "final_answer_status": "available" if final_path.is_file() else "missing",
+    }
+
+
+def prepared_execution() -> dict[str, Any]:
+    return {
+        "status": "not_run",
+        "reason": "preparation_only",
+        "exit_code": None,
+        "duration_seconds": 0,
+        "stdout": "",
+        "stderr": "",
+        "cleanup": {"actions": [], "errors": []},
+    }
+
+
 def save_agents_artifacts(
     run_dir: Path, workspace: Path, source_content: bytes
 ) -> dict[str, Any]:
@@ -404,7 +470,7 @@ def save_agents_artifacts(
 def run_case(
     project: Path,
     image: str,
-    command: Sequence[str],
+    command: Sequence[str] | None,
     results_dir: Path,
     timeout: float,
     *,
@@ -413,6 +479,10 @@ def run_case(
     run_factory: RunFactory = subprocess.run,
     scenario_path: Path = SCENARIO_PATH,
     check_path: Path = CHECK_PATH,
+    mode: str = COMMAND_MODE,
+    model: str | None = None,
+    effort: str | None = None,
+    prepare: bool = False,
 ) -> tuple[dict[str, Any], Path]:
     project = project.resolve()
     results_dir = results_dir.resolve()
@@ -424,8 +494,20 @@ def run_case(
         or any(character.isspace() for character in image)
     ):
         raise ValueError("Docker-образ должен быть одним именем без пробелов и ведущих параметров")
-    if not command:
-        raise ValueError("Команда контейнера не может быть пустой")
+    if mode not in {COMMAND_MODE, CODEX_MODE}:
+        raise ValueError(f"Неизвестный режим запуска: {mode}")
+    if mode == COMMAND_MODE:
+        if not command:
+            raise ValueError("Команда контейнера не может быть пустой")
+        if model is not None or effort is not None or prepare:
+            raise ValueError("Параметры Codex доступны только в режиме codex")
+    else:
+        if command:
+            raise ValueError("В режиме codex команда задаётся самим запускателем")
+        if not isinstance(model, str) or not model.strip():
+            raise ValueError("В режиме codex требуется непустой --model")
+        if not isinstance(effort, str) or not effort.strip():
+            raise ValueError("В режиме codex требуется непустой --effort")
     if timeout <= 0:
         raise ValueError("Тайм-аут должен быть положительным")
     if paths_overlap(project, results_dir):
@@ -441,79 +523,163 @@ def run_case(
     (run_dir / SOURCE_AGENTS_ARTIFACT).write_bytes(source_content)
 
     container_name = f"compatibility-{uuid.uuid4().hex}"
+    codex_artifacts = {
+        "jsonl": None,
+        "final_answer": None,
+        "final_answer_status": "not_applicable",
+    }
     with tempfile.TemporaryDirectory(prefix="compatibility-work-") as temporary:
         workspace = Path(temporary) / "project"
         shutil.copytree(project, workspace, symlinks=False)
+        output_workspace = None
+        if mode == CODEX_MODE:
+            output_workspace = Path(temporary) / "codex-output"
+            output_workspace.mkdir()
         owner = workspace.stat()
         if owner.st_uid == 0:
             raise ValueError(
                 "Рабочая копия принадлежит UID 0; запускатель не переходит к root автоматически"
             )
+        container_command = (
+            list(command)
+            if mode == COMMAND_MODE
+            else codex_command(model or "", effort or "")
+        )
         docker_argv = docker_command(
             docker_executable,
             container_name,
             workspace,
             image,
-            command,
+            container_command,
             owner.st_uid,
             owner.st_gid,
+            output_workspace=output_workspace,
         )
-        execution = run_container(
-            docker_argv,
-            task,
-            timeout,
-            popen_factory,
-            docker_executable,
-            run_factory,
-        )
-        after_snapshot_error = None
-        try:
-            after = file_snapshot(workspace)
-        except (OSError, ValueError) as exc:
-            after_snapshot_error = str(exc)
-            after = file_snapshot(workspace, skip_unsafe=True)
-        changed = changed_paths(before, after)
-        unexpected = sorted(set(changed) - ALLOWED_CHANGED_PATHS)
-        agents_artifacts = save_agents_artifacts(run_dir, workspace, source_content)
-        if agents_artifacts["status"] == "available":
-            file_check = run_checker(workspace, check_path)
-        else:
+        if mode == CODEX_MODE:
+            write_json(
+                run_dir / CODEX_COMMAND_ARTIFACT,
+                {
+                    "docker_argv": docker_argv,
+                    "codex_argv": container_command,
+                    "task_source": f"{scenario_path}:prompt",
+                    "task_via_stdin": True,
+                    "task_runner_prefix": "",
+                    "model": model,
+                    "effort": effort,
+                },
+            )
+        if prepare:
+            execution = prepared_execution()
+            after_snapshot_error = None
+            after = before
+            changed = []
+            unexpected = []
+            agents_artifacts = {
+                "status": "not_run",
+                "source": SOURCE_AGENTS_ARTIFACT,
+                "result": None,
+                "diff": None,
+                "violations": [],
+            }
             file_check = {
                 "status": "not_run",
                 "exit_code": None,
                 "duration_seconds": 0,
                 "stdout": "",
-                "stderr": "Проверка пропущена: итоговый AGENTS.md недоступен.",
+                "stderr": "Проверка пропущена: режим подготовки не выполняет задачу.",
             }
+        else:
+            execution = run_container(
+                docker_argv,
+                task,
+                timeout,
+                popen_factory,
+                docker_executable,
+                run_factory,
+            )
+            after_snapshot_error = None
+            try:
+                after = file_snapshot(workspace)
+            except (OSError, ValueError) as exc:
+                after_snapshot_error = str(exc)
+                after = file_snapshot(workspace, skip_unsafe=True)
+            changed = changed_paths(before, after)
+            unexpected = sorted(set(changed) - ALLOWED_CHANGED_PATHS)
+            agents_artifacts = save_agents_artifacts(run_dir, workspace, source_content)
+            if agents_artifacts["status"] == "available":
+                file_check = run_checker(workspace, check_path)
+            else:
+                file_check = {
+                    "status": "not_run",
+                    "exit_code": None,
+                    "duration_seconds": 0,
+                    "stdout": "",
+                    "stderr": "Проверка пропущена: итоговый AGENTS.md недоступен.",
+                }
+            if mode == CODEX_MODE:
+                codex_artifacts = save_codex_artifacts(
+                    run_dir, output_workspace, execution  # type: ignore[arg-type]
+                )
         source_after = file_snapshot(project)
         source_changed = changed_paths(before, source_after)
 
     (run_dir / "stdout.txt").write_text(execution["stdout"], encoding="utf-8")
     (run_dir / "stderr.txt").write_text(execution["stderr"], encoding="utf-8")
-    status = "passed"
-    if execution["status"] in {"timed_out", "interrupted"}:
+    status = "prepared" if prepare else "passed"
+    if not prepare and execution["status"] in {"timed_out", "interrupted"}:
         status = execution["status"]
-    elif execution["status"] != "completed" or execution["exit_code"] != 0:
+    elif not prepare and (execution["status"] != "completed" or execution["exit_code"] != 0):
         status = "failed"
-    elif (
+    elif not prepare and (
         after_snapshot_error
         or agents_artifacts["violations"]
         or unexpected
         or source_changed
         or file_check["status"] != "passed"
         or execution["cleanup"]["errors"]
+        or (mode == CODEX_MODE and codex_artifacts["final_answer_status"] != "available")
     ):
         status = "failed"
 
     report = {
         "scenario_id": scenario_id,
         "status": status,
+        "mode": mode,
+        "preparation": prepare,
         "execution": execution,
         "container": {
             "image": image,
-            "command": list(command),
+            "command": container_command,
             "name": container_name,
             "user": f"{owner.st_uid}:{owner.st_gid}",
+            "workdir": "/workspace",
+            "network": "none",
+            "rootfs": "read-only",
+            "embedded_sandbox": (
+                "disabled by --dangerously-bypass-approvals-and-sandbox"
+                if mode == CODEX_MODE
+                else None
+            ),
+            "external_isolation": "Docker",
+        },
+        "codex": (
+            {
+                "version": CODEX_VERSION,
+                "requested_model": model,
+                "requested_effort": effort,
+                "model_confirmed": False,
+                "effort_confirmed": False,
+                "json_journal": CODEX_JSONL_ARTIFACT,
+                "final_answer": codex_artifacts["final_answer"],
+            }
+            if mode == CODEX_MODE
+            else None
+        ),
+        "task": {
+            "source": f"{scenario_path}:prompt",
+            "via_stdin": mode == CODEX_MODE,
+            "runner_prefix": "",
+            "sent": not prepare,
         },
         "changed_paths": changed,
         "unexpected_changes": unexpected,
@@ -524,7 +690,11 @@ def run_case(
         "agents_artifacts": agents_artifacts,
         "skill_application": {
             "verified": False,
-            "note": "Запущена тестовая заглушка. Применение навыка не проверялось.",
+            "note": (
+                "Разбор свидетельств применения навыка пока не реализован."
+                if mode == CODEX_MODE
+                else "Запущена тестовая заглушка. Применение навыка не проверялось."
+            ),
         },
         "artifacts": {
             "source_snapshot": "source-snapshot.json",
@@ -533,6 +703,9 @@ def run_case(
             "agents_diff": agents_artifacts["diff"],
             "stdout": "stdout.txt",
             "stderr": "stderr.txt",
+            "codex_jsonl": codex_artifacts["jsonl"],
+            "codex_final_answer": codex_artifacts["final_answer"],
+            "codex_command": CODEX_COMMAND_ARTIFACT if mode == CODEX_MODE else None,
             "report": "report.json",
         },
     }
@@ -548,14 +721,36 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--results-dir", required=True, type=Path)
     parser.add_argument("--timeout", required=True, type=float)
     parser.add_argument(
+        "--mode",
+        choices=(COMMAND_MODE, CODEX_MODE),
+        default=COMMAND_MODE,
+        help="Режим запуска: произвольная команда или Codex CLI",
+    )
+    parser.add_argument("--model", help="Обязательная модель в режиме codex")
+    parser.add_argument("--effort", help="Обязательное усилие в режиме codex")
+    parser.add_argument(
+        "--prepare",
+        action="store_true",
+        help="Показать запуск Codex без создания контейнера и выполнения задачи",
+    )
+    parser.add_argument(
         "--command",
-        required=True,
         nargs=argparse.REMAINDER,
         help="Команда и её аргументы после всех параметров запускателя",
     )
     args = parser.parse_args(argv)
-    if not args.command:
-        parser.error("после --command нужно указать хотя бы один аргумент")
+    if args.mode == COMMAND_MODE:
+        if not args.command:
+            parser.error("в режиме command после --command нужен хотя бы один аргумент")
+        if args.model or args.effort or args.prepare:
+            parser.error("--model, --effort и --prepare доступны только в режиме codex")
+    else:
+        if args.command:
+            parser.error("в режиме codex параметр --command не используется")
+        if not args.model or not args.model.strip():
+            parser.error("в режиме codex обязателен непустой --model")
+        if not args.effort or not args.effort.strip():
+            parser.error("в режиме codex обязателен непустой --effort")
     if args.timeout <= 0:
         parser.error("--timeout должен быть положительным")
     return args
@@ -571,16 +766,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         report, report_path = run_case(
             args.project,
             args.image,
-            args.command,
+            args.command if args.mode == COMMAND_MODE else None,
             args.results_dir,
             args.timeout,
             docker_executable=docker,
+            mode=args.mode,
+            model=args.model,
+            effort=args.effort,
+            prepare=args.prepare,
         )
     except (OSError, ValueError) as exc:
         print(f"Запуск сценария не подготовлен: {exc}", file=sys.stderr)
         return 2
     print(report_path)
-    return 0 if report["status"] == "passed" else 1
+    return 0 if report["status"] in {"passed", "prepared"} else 1
 
 
 if __name__ == "__main__":
