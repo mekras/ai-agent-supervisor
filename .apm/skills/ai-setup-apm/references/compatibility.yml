@@ -6,12 +6,15 @@ environments:
   - id: codex_cli
     name: Codex CLI
     declared_support: true
+    user_summary: Предусмотрены установка и работа навыков. Для анализа истории может потребоваться её экспорт.
   - id: claude_code
     name: Claude Code
     declared_support: true
+    user_summary: Предусмотрены установка и работа навыков. Для анализа истории может потребоваться её экспорт.
   - id: hermes_agent
     name: Hermes Agent
     declared_support: true
+    user_summary: Предусмотрена установка через APM. Работа навыков внутри Hermes пока не подтверждена.
 capabilities:
   - id: collection_installation
     name: Установка коллекции

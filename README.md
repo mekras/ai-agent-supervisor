@@ -28,53 +28,19 @@
 - [документации Visual Studio Code о пользовательских инструкциях](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
 
 <!-- compatibility-summary:start -->
-## Состояние поддержки коллекции
+## Поддерживаемые среды
 
-Реестр описывает поддержку всей коллекции навыков и отдельно хранит наличие в пакете, заявленное по материалам пакета состояние и результаты проверок.
-Заявленное состояние по материалам пакета не подтверждает загрузку навыков и их работу в реальной среде. «Не установлено» означает, что даже это состояние не выяснено.
-Проверка установки, упаковки или тестовой заглушки подтверждает только указанный предмет проверки.
+Коллекция развивает поддержку Codex CLI, Claude Code и Hermes Agent.
 
-| Возможность | В пакете | Codex CLI: заявлено | Claude Code: заявлено | Hermes Agent: заявлено |
-| --- | --- | --- | --- | --- |
-| Установка коллекции | есть | описано в пакете | описано в пакете | описано в пакете |
-| Загрузка и доступность навыков | есть | описано в пакете | описано в пакете | не установлено |
-| Настройка проекта и инструкций | есть | описано в пакете | описано в пакете | не установлено |
-| Создание и улучшение навыков | есть | описано в пакете | описано в пакете | не установлено |
-| Настройка и применение подагентов | есть | описано в пакете | описано в пакете | не установлено |
-| Анализ работы и оценка результатов | есть | описано частично | описано частично | не установлено |
+| Среда | Текущее состояние |
+| --- | --- |
+| Codex CLI | Предусмотрены установка и работа навыков. Для анализа истории может потребоваться её экспорт. |
+| Claude Code | Предусмотрены установка и работа навыков. Для анализа истории может потребоваться её экспорт. |
+| Hermes Agent | Предусмотрена установка через APM. Работа навыков внутри Hermes пока не подтверждена. |
 
-Проверки не входят в заявленное состояние.
+Проверки поведения навыков в реальных средах пока не отражены в реестре. Проверка установки через APM не подтверждает работу самих навыков.
 
-### Основания заявленного состояния
-
-- **Установка коллекции**. В пакете: есть. Основания: [apm.yml#L1-L17](apm.yml#L1-L17), [.apm/skills/ai-setup-apm/SKILL.md#L30-L43](.apm/skills/ai-setup-apm/SKILL.md#L30-L43).
-  - Codex CLI — описано в пакете. Основание: [.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L105-L143](.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L105-L143).
-  - Claude Code — описано в пакете. Основание: [.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L130-L143](.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L130-L143).
-  - Hermes Agent — описано в пакете. Основание: [.apm/skills/ai-setup-apm/references/known-version-issues.md#L57-L91](.apm/skills/ai-setup-apm/references/known-version-issues.md#L57-L91).
-- **Загрузка и доступность навыков**. В пакете: есть. Основания: [apm.yml#L1-L17](apm.yml#L1-L17), [.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L141-L143](.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L141-L143).
-  - Codex CLI, Claude Code — описано в пакете. Основание: [.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L364-L371](.apm/skills/ai-setup-apm/references/apm-collection-settings.md#L364-L371).
-  - Hermes Agent — не установлено. Причина: Поставляемые материалы не устанавливают точку входа Hermes для загрузки навыков.
-- **Настройка проекта и инструкций**. В пакете: есть. Основания: [.apm/skills/ai-setup-project/SKILL.md#L1-L17](.apm/skills/ai-setup-project/SKILL.md#L1-L17).
-  - Codex CLI — описано в пакете. Основание: [.apm/skills/ai-setup-project/SKILL.md#L62-L89](.apm/skills/ai-setup-project/SKILL.md#L62-L89).
-  - Claude Code — описано в пакете. Основание: [.apm/skills/ai-setup-project/SKILL.md#L84-L89](.apm/skills/ai-setup-project/SKILL.md#L84-L89), [.apm/skills/ai-setup-project/SKILL.md#L151-L158](.apm/skills/ai-setup-project/SKILL.md#L151-L158).
-  - Hermes Agent — не установлено. Причина: Нет поставляемого описания точки входа инструкций Hermes.
-- **Создание и улучшение навыков**. В пакете: есть. Основания: [.apm/skills/ai-skill-development/SKILL.md#L1-L17](.apm/skills/ai-skill-development/SKILL.md#L1-L17).
-  - Codex CLI, Claude Code — описано в пакете. Основание: [.apm/skills/ai-skill-development/SKILL.md#L25-L31](.apm/skills/ai-skill-development/SKILL.md#L25-L31), [.apm/skills/ai-skill-development/SKILL.md#L51-L75](.apm/skills/ai-skill-development/SKILL.md#L51-L75).
-  - Hermes Agent — не установлено. Причина: Общая процедура разработки есть, но рабочая загрузка навыка в Hermes не установлена.
-- **Настройка и применение подагентов**. В пакете: есть. Основания: [.apm/skills/ai-setup-subagents/SKILL.md#L1-L8](.apm/skills/ai-setup-subagents/SKILL.md#L1-L8).
-  - Codex CLI — описано в пакете. Основание: [.apm/skills/ai-setup-subagents/references/routing-patterns.md#L170-L188](.apm/skills/ai-setup-subagents/references/routing-patterns.md#L170-L188), [.apm/skills/ai-setup-subagents/references/operation-policy.md#L116-L148](.apm/skills/ai-setup-subagents/references/operation-policy.md#L116-L148).
-  - Claude Code — описано в пакете. Основание: [.apm/skills/ai-setup-subagents/references/routing-patterns.md#L188-L195](.apm/skills/ai-setup-subagents/references/routing-patterns.md#L188-L195), [.apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342](.apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342).
-  - Hermes Agent — не установлено. Причина: Поставляемые материалы подтверждают только уровень APM, не рабочее применение подагентов.
-- **Анализ работы и оценка результатов**. В пакете: есть. Основания: [.apm/skills/ai-usage-analysis/SKILL.md#L1-L8](.apm/skills/ai-usage-analysis/SKILL.md#L1-L8), [.apm/skills/ai-work-result-evaluation/SKILL.md#L1-L5](.apm/skills/ai-work-result-evaluation/SKILL.md#L1-L5).
-  - Codex CLI — описано частично. Пробел: ai-usage-analysis принимает доступную локальную историю или её экспорт, но не задаёт формат или адаптер нативной истории Codex CLI. Анализ требует совместимого экспорта или структурированного журнала. Общая оценка результата через ai-work-result-evaluation доступна без чтения истории. Основание: [.apm/skills/ai-usage-analysis/SKILL.md#L25-L45](.apm/skills/ai-usage-analysis/SKILL.md#L25-L45), [.apm/skills/ai-work-result-evaluation/SKILL.md#L16-L38](.apm/skills/ai-work-result-evaluation/SKILL.md#L16-L38).
-  - Claude Code — описано частично. Пробел: ai-usage-analysis принимает доступную локальную историю или её экспорт, но не задаёт формат или адаптер нативной истории Claude Code. Анализ требует совместимого экспорта или структурированного журнала. Общая оценка результата через ai-work-result-evaluation доступна без чтения истории. Основание: [.apm/skills/ai-usage-analysis/SKILL.md#L25-L45](.apm/skills/ai-usage-analysis/SKILL.md#L25-L45), [.apm/skills/ai-work-result-evaluation/SKILL.md#L16-L38](.apm/skills/ai-work-result-evaluation/SKILL.md#L16-L38).
-  - Hermes Agent — не установлено. Причина: Не установлена доступная Hermes история сессий или рабочий след загрузки навыков.
-
-### Зарегистрированные проверки
-
-| Дата | Среда | Коллекция | Возможность | Результат | Граница | Свидетельство |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2026-09-18 | Hermes Agent (среда не участвовала, APM CLI: 0.31.0) | 2.6.3 | Установка коллекции | пройдена (упаковка и установка через инструментарий) | Проверена только поставка APM для цели hermes. Hermes Agent не запускался и в испытании не участвовал. Загрузка и доступность навыков внутри Hermes не проверялись. Свидетельство — запись CHANGELOG, отдельный отчёт испытания в пакете не сохранён. | [ссылка](.apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12) |
+Подробные сведения приведены в [реестре поддержки](.apm/skills/ai-setup-apm/references/compatibility.yml).
 
 <!-- compatibility-summary:end -->
 
@@ -105,7 +71,7 @@ apm install ai-agent-supervisor@mekras#2.6.12 --target codex
 ```
 
 
-После установки навыки коллекции станут доступны агенту в этом проекте.
+После установки коллекция будет размещена в проекте для выбранной среды. Для Hermes Agent доступность и работа навыков пока не подтверждены.
 
 ### Настройка проекта
 
