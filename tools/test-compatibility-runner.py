@@ -62,8 +62,30 @@ class FakeProcess:
             raise KeyboardInterrupt
         if self.docker.behavior == "communication-error":
             raise OSError("ошибка чтения Docker")
+        if "--json" in self.arguments:
+            mount_values = [
+                self.arguments[index + 1]
+                for index, value in enumerate(self.arguments[:-1])
+                if value == "--mount"
+            ]
+            output_mount = next(
+                value for value in mount_values if "destination=/run-output" in value
+            )
+            output_source = next(
+                part.split("=", 1)[1]
+                for part in output_mount.split(",")
+                if part.startswith("source=")
+            )
+            Path(output_source, "final-answer.txt").write_text(
+                "Поддельный итоговый ответ\n", encoding="utf-8"
+            )
         self.returncode = self.docker.exit_code
-        return self.docker.stdout, self.docker.stderr
+        stdout = (
+            '{"type":"turn.completed","usage":{}}\n'
+            if "--json" in self.arguments
+            else self.docker.stdout
+        )
+        return stdout, self.docker.stderr
 
     def kill(self) -> None:
         self.killed = True
@@ -140,6 +162,25 @@ def run_case(fake: FakeDocker, results: Path):
     )
 
 
+def run_codex_case(fake: FakeDocker, results: Path, *, prepare: bool = False):
+    return runner.run_case(
+        FIXTURE,
+        "compatibility-test:codex",
+        None,
+        results,
+        1,
+        docker_executable="docker",
+        popen_factory=fake.popen,
+        run_factory=fake.run,
+        scenario_path=SCENARIO,
+        check_path=CHECK,
+        mode="codex",
+        model="test-model",
+        effort="high",
+        prepare=prepare,
+    )
+
+
 def assert_safe_command(fake: FakeDocker, results: Path) -> None:
     assert fake.popen_arguments is not None
     arguments = fake.popen_arguments
@@ -192,6 +233,144 @@ def test_cli_parsing() -> None:
     )
     assert args.command == ["stub", "--flag", "value"]
     assert args.timeout == 12
+    codex_args = runner.parse_args(
+        [
+            "--project",
+            str(FIXTURE),
+            "--image",
+            "example:image",
+            "--results-dir",
+            "results",
+            "--timeout",
+            "12",
+            "--mode",
+            "codex",
+            "--model",
+            "test-model",
+            "--effort",
+            "high",
+        ]
+    )
+    assert codex_args.mode == "codex"
+    assert codex_args.command is None
+    assert codex_args.model == "test-model"
+    assert codex_args.effort == "high"
+
+
+def assert_codex_command(fake: FakeDocker, results: Path) -> None:
+    assert fake.popen_arguments is not None
+    arguments = fake.popen_arguments
+    joined = " ".join(arguments)
+    owner = FIXTURE.stat()
+    assert arguments[:2] == ["docker", "run"]
+    assert "--interactive" in arguments
+    assert "--network" in arguments
+    assert arguments[arguments.index("--network") + 1] == "none"
+    assert "--read-only" in arguments
+    assert "--security-opt" in arguments
+    assert arguments[arguments.index("--user") + 1] == f"{owner.st_uid}:{owner.st_gid}"
+    assert arguments[arguments.index("--workdir") + 1] == "/workspace"
+    assert "--memory=512m" in arguments
+    assert "--cpus=1.0" in arguments
+    assert "--pids-limit=64" in arguments
+    assert arguments.count("--mount") == 2
+    assert any("destination=/workspace" in value for value in arguments)
+    assert any("destination=/run-output" in value for value in arguments)
+    assert "compatibility-test:codex" in arguments
+    assert "/var/run/docker.sock" not in joined
+    assert str(FIXTURE.resolve()) not in joined
+    assert str(SCENARIO) not in joined
+    assert PROMPT not in arguments
+    codex_start = arguments.index("codex")
+    codex_arguments = arguments[codex_start:]
+    assert codex_arguments[:2] == ["codex", "exec"]
+    assert "--json" in codex_arguments
+    assert "--dangerously-bypass-approvals-and-sandbox" in codex_arguments
+    assert "--ignore-user-config" in codex_arguments
+    assert "--ephemeral" in codex_arguments
+    assert codex_arguments[codex_arguments.index("--model") + 1] == "test-model"
+    assert codex_arguments[codex_arguments.index("-c") + 1] == 'model_reasoning_effort="high"'
+    assert codex_arguments[codex_arguments.index("--output-last-message") + 1] == "/run-output/final-answer.txt"
+    assert codex_arguments[-1] == "-"
+    assert fake.popen_kwargs["env"] == {}
+    assert fake.popen_kwargs["stdin"] is subprocess.PIPE
+    assert fake.stdin_values == [PROMPT]
+
+
+def test_codex_mode_saves_outputs_and_keeps_workspace_clean() -> None:
+    source_before = (FIXTURE / "AGENTS.md").read_bytes()
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-codex-") as temporary:
+        results = Path(temporary) / "results"
+        fake = FakeDocker(mutator=edit_agents)
+        report, report_path = run_codex_case(fake, results)
+        assert report["status"] == "passed"
+        assert report["mode"] == "codex"
+        assert report["container"]["external_isolation"] == "Docker"
+        assert report["container"]["embedded_sandbox"] == (
+            "disabled by --dangerously-bypass-approvals-and-sandbox"
+        )
+        assert report["codex"]["version"] == "0.155.1"
+        assert report["codex"]["requested_model"] == "test-model"
+        assert report["codex"]["requested_effort"] == "high"
+        assert report["codex"]["model_confirmed"] is False
+        assert report["codex"]["effort_confirmed"] is False
+        assert report["changed_paths"] == ["AGENTS.md"]
+        assert report["unexpected_changes"] == []
+        assert report["skill_application"]["verified"] is False
+        assert "заглушка" not in report["skill_application"]["note"]
+        assert report["task"]["via_stdin"] is True
+        assert report["task"]["runner_prefix"] == ""
+        assert report_path.parent.joinpath("codex.jsonl").is_file()
+        assert report_path.parent.joinpath("final-answer.txt").read_text(encoding="utf-8") == (
+            "Поддельный итоговый ответ\n"
+        )
+        assert report_path.parent.joinpath("codex-command.json").is_file()
+        assert not (report_path.parent / "codex.jsonl").is_relative_to(FIXTURE)
+        assert not (report_path.parent / "final-answer.txt").is_relative_to(FIXTURE)
+        assert (FIXTURE / "AGENTS.md").read_bytes() == source_before
+        assert_codex_command(fake, results)
+
+
+def test_codex_preparation_does_not_execute() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-prepare-") as temporary:
+        results = Path(temporary) / "results"
+        fake = FakeDocker()
+        report, report_path = run_codex_case(fake, results, prepare=True)
+        assert fake.popen_arguments is None
+        assert fake.cleanup_calls == []
+        assert report["status"] == "prepared"
+        assert report["preparation"] is True
+        assert report["execution"]["status"] == "not_run"
+        assert report["execution"]["reason"] == "preparation_only"
+        assert report["task"]["sent"] is False
+        assert report["changed_paths"] == []
+        command = json.loads(
+            report_path.parent.joinpath("codex-command.json").read_text(encoding="utf-8")
+        )
+        assert command["task_via_stdin"] is True
+        assert command["task_runner_prefix"] == ""
+        assert command["codex_argv"][-1] == "-"
+
+
+def test_codex_requires_model_and_effort() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-required-") as temporary:
+        results = Path(temporary) / "results"
+        for model, effort in ((None, "high"), ("test-model", None)):
+            try:
+                runner.run_case(
+                    FIXTURE,
+                    "compatibility-test:codex",
+                    None,
+                    results,
+                    1,
+                    mode="codex",
+                    model=model,
+                    effort=effort,
+                )
+            except ValueError as error:
+                assert "требуется непустой" in str(error)
+            else:
+                raise AssertionError("Режим codex принял отсутствующий параметр")
 
 
 def test_success_and_isolation() -> None:
@@ -298,6 +477,9 @@ def assert_forced_cleanup(behavior: str, expected_status: str) -> None:
 
 def main() -> int:
     test_cli_parsing()
+    test_codex_requires_model_and_effort()
+    test_codex_preparation_does_not_execute()
+    test_codex_mode_saves_outputs_and_keeps_workspace_clean()
     test_success_and_isolation()
     test_unexpected_file_is_reported()
     test_command_failure_is_saved()
