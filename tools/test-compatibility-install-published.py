@@ -82,15 +82,22 @@ class FakeProcess:
 
 
 class FakeDocker:
-    def __init__(self) -> None:
+    def __init__(self, cleanup_result=None, cleanup_error=None) -> None:
         self.popen_arguments: list[str] | None = None
         self.popen_kwargs: dict[str, object] = {}
         self.calls: list[tuple[list[str], dict[str, object]]] = []
+        self.cleanup_result = cleanup_result
+        self.cleanup_error = cleanup_error
 
     def run(self, arguments, **kwargs):
         self.calls.append((list(arguments), kwargs))
         if arguments[1:3] == ["image", "inspect"]:
             return SimpleNamespace(returncode=0, stdout="sha256:local\n", stderr="")
+        if arguments[1:3] == ["rm", "-f"]:
+            if self.cleanup_error is not None:
+                raise self.cleanup_error
+            if self.cleanup_result is not None:
+                return self.cleanup_result
         return SimpleNamespace(returncode=0, stdout="", stderr="")
 
     def popen(self, arguments, **kwargs):
@@ -163,6 +170,47 @@ def test_missing_local_image_keeps_partial_project() -> None:
         assert not fake.popen_arguments
 
 
+def test_cleanup_failure_does_not_hide_successful_installation() -> None:
+    fake = FakeDocker(
+        cleanup_result=SimpleNamespace(
+            returncode=1,
+            stdout="",
+            stderr="docker rm failed\n",
+        )
+    )
+    with tempfile.TemporaryDirectory(prefix="install-published-test-") as directory:
+        report, _ = MODULE.run_case(
+            "sha256:local",
+            Path(directory) / "results",
+            30,
+            docker_executable="docker",
+            popen_factory=fake.popen,
+            run_factory=fake.run,
+        )
+        assert report["status"] == "failed"
+        assert report["validation"]["passed"] is True
+        assert report["execution"]["status"] == "completed"
+        assert report["execution"]["cleanup"]["status"] == "failed"
+        assert report["execution"]["cleanup"]["stderr"] == "docker rm failed\n"
+
+
+def test_cleanup_exception_does_not_hide_successful_installation() -> None:
+    fake = FakeDocker(cleanup_error=RuntimeError("docker rm unavailable"))
+    with tempfile.TemporaryDirectory(prefix="install-published-test-") as directory:
+        report, _ = MODULE.run_case(
+            "sha256:local",
+            Path(directory) / "results",
+            30,
+            docker_executable="docker",
+            popen_factory=fake.popen,
+            run_factory=fake.run,
+        )
+        assert report["status"] == "failed"
+        assert report["validation"]["passed"] is True
+        assert report["execution"]["cleanup"]["status"] == "failed"
+        assert report["execution"]["cleanup"]["stderr"] == "docker rm unavailable"
+
+
 def test_cli_contract() -> None:
     args = MODULE.parse_args(["--image", "sha256:local", "--results-dir", "results", "--timeout", "45"])
     assert args.image == "sha256:local"
@@ -187,6 +235,8 @@ def test_cli_contract() -> None:
 def main() -> int:
     test_success_and_safe_container()
     test_missing_local_image_keeps_partial_project()
+    test_cleanup_failure_does_not_hide_successful_installation()
+    test_cleanup_exception_does_not_hide_successful_installation()
     test_cli_contract()
     print("Проверки команды установки опубликованной коллекции пройдены.")
     return 0
