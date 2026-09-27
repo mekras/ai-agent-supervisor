@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import argparse
 import difflib
+import errno
 import hashlib
 import json
 import os
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -360,6 +362,47 @@ def write_json(path: Path, value: Any) -> None:
     )
 
 
+def read_regular_file(path: Path) -> tuple[bytes | None, str, str]:
+    """Прочитать только обычный файл без разыменования символической ссылки."""
+
+    try:
+        path_type = path.lstat().st_mode
+    except FileNotFoundError:
+        return None, "missing", "Файл итогового ответа отсутствует."
+    except OSError as exc:
+        return None, "metadata_error", f"Не удалось определить тип итогового ответа: {exc}"
+
+    if stat.S_ISLNK(path_type):
+        return None, "symlink", "Итоговый ответ представлен символической ссылкой."
+    if not stat.S_ISREG(path_type):
+        return None, "invalid_type", "Итоговый ответ не является обычным файлом."
+    no_follow = getattr(os, "O_NOFOLLOW", None)
+    if no_follow is None:
+        return None, "read_error", "ОС не поддерживает безопасное открытие без разыменования ссылки."
+
+    descriptor: int | None = None
+    try:
+        descriptor = os.open(path, os.O_RDONLY | no_follow)
+        descriptor_type = os.fstat(descriptor).st_mode
+        if not stat.S_ISREG(descriptor_type):
+            return None, "invalid_type", "Итоговый ответ не является обычным файлом."
+        with os.fdopen(descriptor, "rb") as stream:
+            descriptor = None
+            try:
+                return stream.read(), "available", "Итоговый ответ прочитан из обычного файла."
+            except OSError as exc:
+                return None, "read_error", f"Не удалось прочитать итоговый ответ: {exc}"
+    except FileNotFoundError:
+        return None, "missing", "Файл итогового ответа отсутствует."
+    except OSError as exc:
+        if exc.errno == errno.ELOOP:
+            return None, "symlink", "Итоговый ответ представлен символической ссылкой."
+        return None, "read_error", f"Не удалось открыть итоговый ответ для чтения: {exc}"
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+
+
 def save_codex_artifacts(
     run_dir: Path, output_workspace: Path, execution: dict[str, Any]
 ) -> dict[str, Any]:
@@ -367,12 +410,20 @@ def save_codex_artifacts(
     jsonl_path.write_text(execution["stdout"], encoding="utf-8")
     source_final = output_workspace / CODEX_FINAL_ANSWER_ARTIFACT
     final_path = run_dir / CODEX_FINAL_ANSWER_ARTIFACT
-    if source_final.is_file():
-        shutil.copyfile(source_final, final_path)
+    content, final_answer_status, final_answer_reason = read_regular_file(source_final)
+    final_answer = None
+    if content is not None:
+        try:
+            final_path.write_bytes(content)
+            final_answer = CODEX_FINAL_ANSWER_ARTIFACT
+        except OSError as exc:
+            final_answer_status = "write_error"
+            final_answer_reason = f"Не удалось сохранить итоговый ответ: {exc}"
     return {
         "jsonl": CODEX_JSONL_ARTIFACT,
-        "final_answer": CODEX_FINAL_ANSWER_ARTIFACT if final_path.is_file() else None,
-        "final_answer_status": "available" if final_path.is_file() else "missing",
+        "final_answer": final_answer,
+        "final_answer_status": final_answer_status,
+        "final_answer_reason": final_answer_reason,
     }
 
 
@@ -527,6 +578,7 @@ def run_case(
         "jsonl": None,
         "final_answer": None,
         "final_answer_status": "not_applicable",
+        "final_answer_reason": "Исполнение Codex не запускалось.",
     }
     with tempfile.TemporaryDirectory(prefix="compatibility-work-") as temporary:
         workspace = Path(temporary) / "project"
@@ -671,6 +723,8 @@ def run_case(
                 "effort_confirmed": False,
                 "json_journal": CODEX_JSONL_ARTIFACT,
                 "final_answer": codex_artifacts["final_answer"],
+                "final_answer_status": codex_artifacts["final_answer_status"],
+                "final_answer_reason": codex_artifacts["final_answer_reason"],
             }
             if mode == CODEX_MODE
             else None

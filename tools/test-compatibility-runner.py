@@ -11,6 +11,7 @@ import tempfile
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Callable
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,9 +77,15 @@ class FakeProcess:
                 for part in output_mount.split(",")
                 if part.startswith("source=")
             )
-            Path(output_source, "final-answer.txt").write_text(
-                "Поддельный итоговый ответ\n", encoding="utf-8"
-            )
+            final_path = Path(output_source, "final-answer.txt")
+            if self.docker.final_answer_mode == "regular":
+                final_path.write_text("Поддельный итоговый ответ\n", encoding="utf-8")
+            elif self.docker.final_answer_mode == "symlink":
+                external_path = Path(output_source, "external-final-answer.txt")
+                external_path.write_text("секрет из внешнего файла\n", encoding="utf-8")
+                final_path.symlink_to(external_path)
+            elif self.docker.final_answer_mode == "directory":
+                final_path.mkdir()
         self.returncode = self.docker.exit_code
         stdout = (
             '{"type":"turn.completed","usage":{}}\n'
@@ -97,10 +104,12 @@ class FakeDocker:
         behavior: str = "success",
         mutator: Callable[[Path, str], None] | None = None,
         exit_code: int = 0,
+        final_answer_mode: str = "regular",
     ) -> None:
         self.behavior = behavior
         self.mutator = mutator or (lambda workspace, task: None)
         self.exit_code = exit_code
+        self.final_answer_mode = final_answer_mode
         self.stdout = "заглушка stdout"
         self.stderr = "заглушка stderr"
         self.popen_arguments: list[str] | None = None
@@ -352,6 +361,45 @@ def test_codex_preparation_does_not_execute() -> None:
         assert command["codex_argv"][-1] == "-"
 
 
+def assert_codex_final_answer_failure(
+    final_answer_mode: str, expected_status: str, *, read_error: bool = False
+) -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-final-answer-") as temporary:
+        results = Path(temporary) / "results"
+        fake = FakeDocker(mutator=edit_agents, final_answer_mode=final_answer_mode)
+        if read_error:
+            real_open = runner.os.open
+
+            def fail_final_answer(path, *args, **kwargs):
+                if str(path).endswith("final-answer.txt"):
+                    raise OSError("read denied")
+                return real_open(path, *args, **kwargs)
+
+            with patch.object(runner.os, "open", side_effect=fail_final_answer):
+                report, report_path = run_codex_case(fake, results)
+        else:
+            report, report_path = run_codex_case(fake, results)
+        assert report["status"] == "failed"
+        assert report_path.is_file()
+        assert report["codex"]["final_answer_status"] == expected_status
+        assert report["codex"]["final_answer"] is None
+        assert report["execution"]["cleanup"]["errors"] == []
+        assert report_path.parent.joinpath("codex.jsonl").is_file()
+        assert not report_path.parent.joinpath("final-answer.txt").exists()
+        for artifact in report_path.parent.rglob("*"):
+            if artifact.is_file():
+                assert "секрет из внешнего файла" not in artifact.read_text(
+                    encoding="utf-8", errors="replace"
+                )
+
+
+def test_codex_final_answer_type_failures_are_reported() -> None:
+    assert_codex_final_answer_failure("missing", "missing")
+    assert_codex_final_answer_failure("directory", "invalid_type")
+    assert_codex_final_answer_failure("symlink", "symlink")
+    assert_codex_final_answer_failure("regular", "read_error", read_error=True)
+
+
 def test_codex_requires_model_and_effort() -> None:
     with tempfile.TemporaryDirectory(prefix="compatibility-runner-required-") as temporary:
         results = Path(temporary) / "results"
@@ -480,6 +528,7 @@ def main() -> int:
     test_codex_requires_model_and_effort()
     test_codex_preparation_does_not_execute()
     test_codex_mode_saves_outputs_and_keeps_workspace_clean()
+    test_codex_final_answer_type_failures_are_reported()
     test_success_and_isolation()
     test_unexpected_file_is_reported()
     test_command_failure_is_saved()
