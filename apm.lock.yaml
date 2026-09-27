@@ -1,5 +1,5 @@
 lockfile_version: '2'
-generated_at: '2026-09-25T19:09:52.551091+00:00'
+generated_at: '2026-09-25T19:41:22.793545+00:00'
 apm_version: 0.31.0
 dependencies:
 - repo_url: mekras/ai-dev-team
@@ -3463,7 +3463,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:36d4afbf48fc070921a64677b2d896490fdf1c2499be5b5b488c4122588012c9
+  content_hash: sha256:f190d0c867ebc00585080a6b02e0bcf0918d3827c88b0a11ea444889a75fe92e
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/references/instruction-scope.md
@@ -16392,7 +16392,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:36d4afbf48fc070921a64677b2d896490fdf1c2499be5b5b488c4122588012c9
+  content_hash: sha256:f190d0c867ebc00585080a6b02e0bcf0918d3827c88b0a11ea444889a75fe92e
 - kind: project-relative
   target: legacy
   value: .agents/skills/ai-setup-subagents/assets/worker-policy-entrypoint.md
@@ -16961,7 +16961,7 @@ local_deployed_file_hashes:
   .agents/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:ac4162eb1e96615362849ba2b8a8b45ce4ba18cdccbda80de15afc22d2c77b8e
   .agents/skills/ai-setup-apm/references/comparison-evals.md: sha256:33c1047d2c14509be8661045a0b95d192730e4e07932491b75ed6191c0f1a357
   .agents/skills/ai-setup-apm/references/compatibility-history.md: sha256:610f15f0295efc9f7bef52704294c8f28811942ce2fedfc7e97f8f20b9752e3b
-  .agents/skills/ai-setup-apm/references/compatibility.yml: sha256:36d4afbf48fc070921a64677b2d896490fdf1c2499be5b5b488c4122588012c9
+  .agents/skills/ai-setup-apm/references/compatibility.yml: sha256:f190d0c867ebc00585080a6b02e0bcf0918d3827c88b0a11ea444889a75fe92e
   .agents/skills/ai-setup-apm/references/instruction-scope.md: sha256:b409660df9302dfe2784410ca418eb1b0a8382eae51dbd4ea80bacd225959c0c
   .agents/skills/ai-setup-apm/references/known-version-issues.md: sha256:afd23dbb6a5fc8d5de011a9089bb509f4b3dd116345cf77616da7dd08842793a
   .agents/skills/ai-setup-apm/references/tooling-installers.md: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40
@@ -17165,7 +17165,7 @@ local_deployed_file_hashes:
   .claude/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:ac4162eb1e96615362849ba2b8a8b45ce4ba18cdccbda80de15afc22d2c77b8e
   .claude/skills/ai-setup-apm/references/comparison-evals.md: sha256:33c1047d2c14509be8661045a0b95d192730e4e07932491b75ed6191c0f1a357
   .claude/skills/ai-setup-apm/references/compatibility-history.md: sha256:610f15f0295efc9f7bef52704294c8f28811942ce2fedfc7e97f8f20b9752e3b
-  .claude/skills/ai-setup-apm/references/compatibility.yml: sha256:36d4afbf48fc070921a64677b2d896490fdf1c2499be5b5b488c4122588012c9
+  .claude/skills/ai-setup-apm/references/compatibility.yml: sha256:f190d0c867ebc00585080a6b02e0bcf0918d3827c88b0a11ea444889a75fe92e
   .claude/skills/ai-setup-apm/references/instruction-scope.md: sha256:b409660df9302dfe2784410ca418eb1b0a8382eae51dbd4ea80bacd225959c0c
   .claude/skills/ai-setup-apm/references/known-version-issues.md: sha256:afd23dbb6a5fc8d5de011a9089bb509f4b3dd116345cf77616da7dd08842793a
   .claude/skills/ai-setup-apm/references/tooling-installers.md: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40

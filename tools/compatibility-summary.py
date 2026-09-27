@@ -36,7 +36,6 @@ RESULT_LABELS = {
     "failed": "не пройдена",
     "inconclusive": "неопределённая",
 }
-TOOLING_LABELS = {"apm_cli": "APM CLI"}
 PACKAGE_PRESENCE_LABELS = {"included": "есть"}
 DECLARED_IMPLEMENTATION_LABELS = {
     "documented": "описано в пакете",
@@ -82,10 +81,12 @@ def validate_registry(data: dict[str, Any]) -> None:
     if any(
         not isinstance(item.get("name"), str)
         or item.get("declared_support") is not True
+        or not isinstance(item.get("user_summary"), str)
+        or not item["user_summary"].strip()
         for item in environments
         if isinstance(item, dict)
     ):
-        raise ValueError("каждая среда должна иметь имя и заявленную поддержку")
+        raise ValueError("каждая среда должна иметь имя, заявленную поддержку и краткую сводку")
 
     capabilities = data.get("capabilities")
     if not isinstance(capabilities, list):
@@ -185,134 +186,37 @@ def validate_basis(identifier: str, basis: Any, label: str) -> None:
         raise ValueError(f"{identifier}: нужно основание {label}")
 
 
-def check_date(check: dict[str, Any]) -> dt.date:
-    return dt.date.fromisoformat(str(check["date"]))
-
-
-def latest_checks(data: dict[str, Any]) -> dict[tuple[str, str], dict[str, Any]]:
-    latest: dict[tuple[str, str], dict[str, Any]] = {}
-    for check in data["checks"]:
-        key = (check["capability"], check["environment"]["id"])
-        previous = latest.get(key)
-        if previous is None or check_date(check) >= check_date(previous):
-            latest[key] = check
-    return latest
-
-
-def environment_name(data: dict[str, Any], environment_id: str) -> str:
-    return next(item["name"] for item in data["environments"] if item["id"] == environment_id)
-
-
-def capability_name(data: dict[str, Any], capability_id: str) -> str:
-    return next(item["name"] for item in data["capabilities"] if item["id"] == capability_id)
-
-
-def environment_version(check: dict[str, Any]) -> str:
-    environment = check["environment"]
-    if environment["participation"] == "not_participated":
-        parts = ["среда не участвовала"]
-    else:
-        version = "неизвестна" if environment["version"] == "unknown" else environment["version"]
-        parts = [f"версия среды: {version}"]
-    tooling = environment.get("tooling", {})
-    if isinstance(tooling, dict):
-        parts.extend(f"{TOOLING_LABELS.get(key, key)}: {value}" for key, value in tooling.items())
-    return ", ".join(parts)
-
-
-def check_cell(check: dict[str, Any] | None) -> str:
-    if check is None:
-        return "нет записей"
-    if check["environment"]["participation"] == "not_participated":
-        return f"среда не участвовала, {environment_version(check)}"
-    result = RESULT_LABELS[check["result"]]
-    return (
-        f"{result}, {check['date']}, "
-        f"коллекция {check['collection_version']}, {environment_version(check)}"
-    )
-
-
-def source_links(paths: list[str]) -> str:
-    return ", ".join(f"[{path}]({path})" for path in paths)
-
-
-def render_implementation_basis(data: dict[str, Any]) -> list[str]:
-    lines = ["### Основания заявленного состояния", ""]
-    for capability in data["capabilities"]:
-        package = capability["package_presence"]
-        lines.append(
-            f"- **{capability['name']}**. В пакете: {PACKAGE_PRESENCE_LABELS[package['status']]}. "
-            f"Основания: {source_links(package['basis'])}."
-        )
-        package_basis = set(package["basis"])
-        grouped: dict[tuple[str, tuple[str, ...], str], list[str]] = {}
-        for environment_id in ENVIRONMENT_IDS:
-            state = capability["declared_implementation"][environment_id]
-            key = (
-                state["status"],
-                tuple(path for path in state.get("basis", []) if path not in package_basis),
-                state.get("gap", state.get("note", "")),
-            )
-            grouped.setdefault(key, []).append(environment_name(data, environment_id))
-        for (status, basis, explanation), environments in grouped.items():
-            environment_text = ", ".join(environments)
-            detail = f" Пробел: {explanation}" if status == "partial" else ""
-            if status == "not_established":
-                detail = f" Причина: {explanation}"
-            basis_text = f" Основание: {source_links(list(basis))}." if basis else ""
-            lines.append(
-                f"  - {environment_text} — {DECLARED_IMPLEMENTATION_LABELS[status]}."
-                f"{detail}{basis_text}"
-            )
-    return lines
-
-
 def render_summary(data: dict[str, Any]) -> str:
     validate_registry(data)
-    latest = latest_checks(data)
-    capabilities = {item["id"]: item for item in data["capabilities"]}
+    environment_names = [item["name"] for item in data["environments"]]
+    if len(environment_names) > 1:
+        environment_list = ", ".join(environment_names[:-1]) + " и " + environment_names[-1]
+    else:
+        environment_list = environment_names[0]
     lines = [
         START_MARKER,
-        "## Состояние поддержки коллекции",
+        "## Поддерживаемые среды",
         "",
-        "Реестр описывает поддержку всей коллекции навыков и отдельно хранит наличие в пакете, заявленное по материалам пакета состояние и результаты проверок.",
-        "Заявленное состояние по материалам пакета не подтверждает загрузку навыков и их работу в реальной среде. «Не установлено» означает, что даже это состояние не выяснено.",
-        "Проверка установки, упаковки или тестовой заглушки подтверждает только указанный предмет проверки.",
+        f"Коллекция развивает поддержку {environment_list}.",
         "",
-        "| Возможность | В пакете | Codex CLI: заявлено | Claude Code: заявлено | Hermes Agent: заявлено |",
-        "| --- | --- | --- | --- | --- |",
+        "| Среда | Текущее состояние |",
+        "| --- | --- |",
     ]
-    for capability_id in CAPABILITY_IDS:
-        capability = capabilities[capability_id]
-        cells = [PACKAGE_PRESENCE_LABELS[capability["package_presence"]["status"]]]
-        for environment_id in ENVIRONMENT_IDS:
-            cells.append(DECLARED_IMPLEMENTATION_LABELS[capability["declared_implementation"][environment_id]["status"]])
-        lines.append(f"| {capability['name']} | {' | '.join(cells)} |")
-
-    lines.extend(["", "Проверки не входят в заявленное состояние.", ""])
-    lines.extend(render_implementation_basis(data))
-    lines.extend(["", "### Зарегистрированные проверки", ""])
-    if not data["checks"]:
-        lines.append("Проверок пока нет.")
-    else:
-        lines.extend(
-            [
-                "| Дата | Среда | Коллекция | Возможность | Результат | Граница | Свидетельство |",
-                "| --- | --- | --- | --- | --- | --- | --- |",
-            ]
-        )
-        for check in data["checks"]:
-            evidence = ", ".join(
-                f"[ссылка]({item})" for item in check["evidence"]
-            )
-            lines.append(
-                f"| {check['date']} | {environment_name(data, check['environment']['id'])} "
-                f"({environment_version(check)}) | {check['collection_version']} | "
-                f"{capability_name(data, check['capability'])} | "
-                f"{RESULT_LABELS[check['result']]} ({VERIFICATION_SUBJECT_LABELS[check['verification_subject']]}) | {check['scope']} | "
-                f"{evidence} |"
-            )
-    lines.extend(["", END_MARKER])
+    lines.extend(
+        [
+            f"| {item['name']} | {item['user_summary']} |" for item in data["environments"]
+        ]
+    )
+    lines.extend(
+        [
+            "",
+            "Проверки поведения навыков в реальных средах пока не отражены в реестре. Проверка установки через APM не подтверждает работу самих навыков.",
+            "",
+            "Подробные сведения приведены в [реестре поддержки](.apm/skills/ai-setup-apm/references/compatibility.yml).",
+            "",
+            END_MARKER,
+        ]
+    )
     return "\n".join(lines) + "\n"
 
 

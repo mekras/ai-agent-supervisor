@@ -19,9 +19,9 @@ exec(compile(SCRIPT.read_text(encoding="utf-8"), str(SCRIPT), "exec"), MODULE)
 
 def registry(checks: list[dict] | None = None) -> dict:
     environments = [
-        {"id": "codex_cli", "name": "Codex CLI", "declared_support": True},
-        {"id": "claude_code", "name": "Claude Code", "declared_support": True},
-        {"id": "hermes_agent", "name": "Hermes Agent", "declared_support": True},
+        {"id": "codex_cli", "name": "Codex CLI", "declared_support": True, "user_summary": "Сводка Codex CLI."},
+        {"id": "claude_code", "name": "Claude Code", "declared_support": True, "user_summary": "Сводка Claude Code."},
+        {"id": "hermes_agent", "name": "Hermes Agent", "declared_support": True, "user_summary": "Сводка Hermes Agent."},
     ]
     capability_ids = MODULE["CAPABILITY_IDS"]
     capabilities = [
@@ -88,27 +88,28 @@ def main() -> int:
     project = "project_and_instruction_setup"
 
     empty = render(registry())
-    assert "Проверок пока нет." in empty
-    assert "проверка поведения" not in empty
-    assert "описано в пакете" in empty
-    assert "не подтверждает загрузку навыков" in empty
-    assert "| Codex CLI: заявлено |" in empty
+    assert "Коллекция развивает поддержку Codex CLI, Claude Code и Hermes Agent." in empty
+    assert "| Среда | Текущее состояние |" in empty
+    assert "| Codex CLI | Сводка Codex CLI. |" in empty
+    assert "| Claude Code | Сводка Claude Code. |" in empty
+    assert "| Hermes Agent | Сводка Hermes Agent. |" in empty
+    assert "Проверки поведения навыков в реальных средах пока не отражены в реестре." in empty
+    assert "Проверка установки через APM не подтверждает работу самих навыков." in empty
+    assert "[реестре поддержки](.apm/skills/ai-setup-apm/references/compatibility.yml)" in empty
+    for detail in ("В пакете", "Основания заявленного состояния", "Зарегистрированные проверки", "old", "behavior"):
+        assert detail not in empty
 
     installation_pass = check(installation, "codex_cli", "2026-09-20", "passed", "old")
     with_installation = render(registry([installation_pass]))
-    assert "пройдена" in with_installation
-    assert "Codex CLI" in with_installation
-    assert "Проверок пока нет." not in with_installation
-    assert "проверка поведения" not in with_installation
+    assert with_installation == empty
 
     behavior_pass = check(project, "codex_cli", "2026-09-21", "passed", "behavior")
     with_behavior = render(registry([installation_pass, behavior_pass]))
-    assert with_behavior.count("пройдена") >= 2
+    assert with_behavior == empty
 
     failure = check(project, "codex_cli", "2026-09-22", "failed", "new-failure")
     history = render(registry([installation_pass, behavior_pass, failure]))
-    assert "не пройдена" in history
-    assert "old" in history and "behavior" in history and "new-failure" in history
+    assert history == empty
 
     actual = MODULE["load_registry"](ROOT / ".apm/skills/ai-setup-apm/references/compatibility.yml")
     actual_check = actual["checks"][0]
@@ -132,13 +133,12 @@ def main() -> int:
         assert environment_name in analysis["gap"]
         assert "ai-work-result-evaluation" in analysis["gap"]
     actual_rendered = render(actual)
-    assert "среда не участвовала" in actual_rendered
-    assert "пройдена (упаковка и установка через инструментарий)" in actual_rendered
-    assert "пройдена (работа в среде)" not in actual_rendered
-    assert "Загрузка и доступность навыков внутри Hermes не проверялись" in actual_rendered
-    assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" in actual_rendered
-    assert "Общая оценка результата через ai-work-result-evaluation доступна" in actual_rendered
-    assert ".apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12" in actual_rendered
+    assert "| Codex CLI | Предусмотрены установка и работа навыков." in actual_rendered
+    assert "| Hermes Agent | Предусмотрена установка через APM." in actual_rendered
+    assert "Загрузка и доступность навыков внутри Hermes не проверялись" not in actual_rendered
+    assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" not in actual_rendered
+    assert "Общая оценка результата через ai-work-result-evaluation доступна" not in actual_rendered
+    assert ".apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12" not in actual_rendered
     assert "<br>" not in actual_rendered
     assert "поставляется в коллекции" not in actual_rendered
 
@@ -179,6 +179,7 @@ def main() -> int:
         readme_path = root / "README.md"
         old_data = registry([installation_pass])
         new_data = registry([installation_pass, failure])
+        new_data["environments"][0]["user_summary"] = "Обновлённая сводка."
         registry_path.write_text(yaml.safe_dump(new_data, allow_unicode=True, sort_keys=False), encoding="utf-8")
         readme_path.write_text(render(old_data), encoding="utf-8")
         before = readme_path.read_bytes()
@@ -187,7 +188,7 @@ def main() -> int:
         assert readme_path.read_bytes() == before
         result = run_cli("--write", "--registry", str(registry_path), "--readme", str(readme_path))
         assert result.returncode == 0
-        assert "не пройдена" in readme_path.read_text(encoding="utf-8")
+        assert "Обновлённая сводка." in readme_path.read_text(encoding="utf-8")
         result = run_cli("--check", "--registry", str(registry_path), "--readme", str(readme_path))
         assert result.returncode == 0
 
