@@ -113,6 +113,18 @@ def add_unexpected_file(workspace: Path, task: str) -> None:
     (workspace / "notes.txt").write_text("лишний файл\n", encoding="utf-8")
 
 
+def remove_agents(workspace: Path, task: str) -> None:
+    (workspace / "AGENTS.md").unlink()
+
+
+def replace_agents_with_symlink(target: Path) -> Callable[[Path, str], None]:
+    def mutate(workspace: Path, task: str) -> None:
+        (workspace / "AGENTS.md").unlink()
+        (workspace / "AGENTS.md").symlink_to(target)
+
+    return mutate
+
+
 def run_case(fake: FakeDocker, results: Path):
     return runner.run_case(
         FIXTURE,
@@ -200,6 +212,17 @@ def test_success_and_isolation() -> None:
         assert report["skill_application"]["verified"] is False
         assert report_path.is_file()
         assert (report_path.parent / "source-snapshot.json").is_file()
+        assert report["agents_artifacts"]["status"] == "available"
+        assert report["artifacts"]["source_agents"] == "source-agents.md"
+        assert report["artifacts"]["result_agents"] == "result-agents.md"
+        assert report["artifacts"]["agents_diff"] == "agents.diff"
+        assert (report_path.parent / "source-agents.md").read_bytes() == source_before
+        assert "В итоговом ответе кратко описывай" in (
+            report_path.parent / "result-agents.md"
+        ).read_text(encoding="utf-8")
+        assert "--- AGENTS.md (исходный)" in (
+            report_path.parent / "agents.diff"
+        ).read_text(encoding="utf-8")
         assert (report_path.parent / "stdout.txt").read_text(encoding="utf-8") == "заглушка stdout"
         assert (FIXTURE / "AGENTS.md").read_bytes() == source_before
         assert len(fake.cleanup_calls) == 1
@@ -218,19 +241,48 @@ def test_unexpected_file_is_reported() -> None:
 
 def test_command_failure_is_saved() -> None:
     with tempfile.TemporaryDirectory(prefix="compatibility-runner-test-") as temporary:
-        fake = FakeDocker(behavior="failure", exit_code=7)
-        report, _ = run_case(fake, Path(temporary) / "results")
+        fake = FakeDocker(behavior="failure", mutator=edit_agents, exit_code=7)
+        report, report_path = run_case(fake, Path(temporary) / "results")
         assert report["status"] == "failed"
         assert report["execution"]["status"] == "failed"
         assert report["execution"]["exit_code"] == 7
         assert report["execution"]["stdout"] == "заглушка stdout"
         assert report["execution"]["stderr"] == "заглушка stderr"
+        assert report["agents_artifacts"]["status"] == "available"
+        assert report_path.parent.joinpath("result-agents.md").is_file()
+        assert report_path.parent.joinpath("agents.diff").is_file()
+
+
+def test_missing_agents_keeps_report() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-test-") as temporary:
+        fake = FakeDocker(mutator=remove_agents)
+        report, report_path = run_case(fake, Path(temporary) / "results")
+        assert report["status"] == "failed"
+        assert report_path.is_file()
+        assert report["agents_artifacts"]["status"] == "missing"
+        assert report["agents_artifacts"]["violations"][0]["code"] == "result-agents-missing"
+        assert report["file_check"]["status"] == "not_run"
+
+
+def test_symlink_agents_keeps_report_without_reading_target() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-test-") as temporary:
+        external = Path(temporary) / "external-agents.md"
+        external.write_text("Внешнее содержимое\n", encoding="utf-8")
+        fake = FakeDocker(mutator=replace_agents_with_symlink(external))
+        report, report_path = run_case(fake, Path(temporary) / "results")
+        assert report["status"] == "failed"
+        assert report_path.is_file()
+        assert report["agents_artifacts"]["status"] == "symlink"
+        assert report["agents_artifacts"]["violations"][0]["code"] == "result-agents-symlink"
+        assert report["file_check"]["status"] == "not_run"
+        assert not report_path.parent.joinpath("result-agents.md").exists()
+        assert "Внешнее содержимое" not in report_path.read_text(encoding="utf-8")
 
 
 def assert_forced_cleanup(behavior: str, expected_status: str) -> None:
     with tempfile.TemporaryDirectory(prefix="compatibility-runner-test-") as temporary:
-        fake = FakeDocker(behavior=behavior)
-        report, _ = run_case(fake, Path(temporary) / "results")
+        fake = FakeDocker(behavior=behavior, mutator=edit_agents)
+        report, report_path = run_case(fake, Path(temporary) / "results")
         assert report["status"] == expected_status
         assert report["execution"]["status"] == expected_status
         actions = report["execution"]["cleanup"]["actions"]
@@ -240,6 +292,8 @@ def assert_forced_cleanup(behavior: str, expected_status: str) -> None:
         assert all(kwargs["env"] == {} for _, kwargs in fake.cleanup_calls)
         assert all(kwargs["stdout"] is subprocess.PIPE for _, kwargs in fake.cleanup_calls)
         assert all(kwargs["stderr"] is subprocess.PIPE for _, kwargs in fake.cleanup_calls)
+        assert report["agents_artifacts"]["status"] == "available"
+        assert report_path.parent.joinpath("agents.diff").is_file()
 
 
 def main() -> int:
@@ -247,6 +301,8 @@ def main() -> int:
     test_success_and_isolation()
     test_unexpected_file_is_reported()
     test_command_failure_is_saved()
+    test_missing_agents_keeps_report()
+    test_symlink_agents_keeps_report_without_reading_target()
     assert_forced_cleanup("timeout", "timed_out")
     assert_forced_cleanup("interrupt", "interrupted")
     with tempfile.TemporaryDirectory(prefix="compatibility-runner-test-") as temporary:

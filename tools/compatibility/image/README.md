@@ -39,7 +39,12 @@ cp evals/compatibility/edit-agents/fixture/AGENTS.md "$TEST_PROJECT/AGENTS.md"
 mkdir -p "$TEST_PROJECT/tools/compatibility"
 cp tools/compatibility/edit_agents_stub.py "$TEST_PROJECT/tools/compatibility/edit_agents_stub.py"
 python3 tools/compatibility/run.py --project "$TEST_PROJECT" --image "$IMAGE_ID" --results-dir "$RESULTS_DIR" --timeout 30 --command python3 /workspace/tools/compatibility/edit_agents_stub.py
-rm -rf "$TEST_PROJECT" "$RESULTS_DIR"
+REPORT_PATH="$(find "$RESULTS_DIR" -name report.json -print -quit)"
+printf 'Отчёт: %s\n' "$REPORT_PATH"
+printf 'Diff: %s\n' "$(dirname "$REPORT_PATH")/agents.diff"
+rm -rf "$TEST_PROJECT"
+# Необязательно после просмотра отчёта и diff:
+# rm -rf "$RESULTS_DIR"
 ```
 
 Запускатель сам использует `--network none`, read-only rootfs, временный
