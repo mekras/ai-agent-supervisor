@@ -215,6 +215,7 @@ def test_cli_contract() -> None:
     args = MODULE.parse_args(["--image", "sha256:local", "--results-dir", "results", "--timeout", "45"])
     assert args.image == "sha256:local"
     assert args.timeout == 45
+    assert args.target == "codex"
     assert MODULE.COMMANDS["marketplace_add"] == [
         "apm",
         "marketplace",
@@ -230,6 +231,150 @@ def test_cli_contract() -> None:
         "--target",
         "codex",
     ]
+    hermes_args = MODULE.parse_args(
+        [
+            "--image",
+            "sha256:local",
+            "--results-dir",
+            "results",
+            "--timeout",
+            "45",
+            "--target",
+            "hermes",
+        ]
+    )
+    assert hermes_args.target == "hermes"
+    assert MODULE.commands_for_target("hermes")["install"][-1] == "hermes"
+
+
+def test_hermes_project_and_projection_validation() -> None:
+    with tempfile.TemporaryDirectory(prefix="install-published-hermes-test-") as directory:
+        root = Path(directory)
+        project = root / "project"
+        project.mkdir()
+        setup = MODULE.prepare_hermes_project(project)
+        assert setup["git_initialized"] is True
+        assert setup["commit_count"] == 0
+        assert (project / "AGENTS.md").read_bytes() == (
+            ROOT / "evals/compatibility/edit-agents/fixture/AGENTS.md"
+        ).read_bytes()
+        assert (project / ".git").is_dir()
+
+        skill = project / ".agents/skills/ai-agents-md-maintenance"
+        (skill / "references").mkdir(parents=True)
+        files = {
+            "SKILL.md": "skill\n",
+            "README.md": "readme\n",
+            "references/check.md": "check\n",
+        }
+        hashes = {}
+        for relative, content in files.items():
+            path = skill / relative
+            path.write_text(content, encoding="utf-8")
+            hashes[f".agents/skills/ai-agents-md-maintenance/{relative}"] = "sha256:" + hashlib.sha256(
+                content.encode()
+            ).hexdigest()
+        (project / "apm.lock.yaml").write_text(
+            "\n".join(
+                [
+                    "apm_version: 0.31.0",
+                    "dependencies:",
+                    "- name: ai-agent-supervisor",
+                    "  repo_url: mekras/apm-marketplace",
+                    "  version: 2.6.12",
+                    "  resolved_ref: ai-agent-supervisor--v2.6.12",
+                    "  resolved_commit: commit",
+                    "  deployed_file_hashes:",
+                    *[f"    {key}: {value}" for key, value in hashes.items()],
+                ]
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        commands = root / "results/commands"
+        commands.mkdir(parents=True)
+        for name in ("apm_version", "marketplace_add", "install"):
+            (commands / f"{name}.exit_code").write_text("0\n", encoding="utf-8")
+            (commands / f"{name}.stdout").write_text("ok\n", encoding="utf-8")
+            (commands / f"{name}.stderr").write_text("", encoding="utf-8")
+        discovery = {
+            "passed": True,
+            "name": "ai-agents-md-maintenance",
+            "path": str(skill),
+        }
+        validation = MODULE.validate_installation(project, root / "results", "hermes", discovery)
+        assert validation["target"] == "hermes"
+        assert validation["projection"]["root"].endswith(".agents/skills")
+        assert validation["projection"]["expected_path"].endswith(".agents/skills")
+        assert validation["projection"]["actual_path"].endswith(".agents/skills")
+        assert validation["projection"]["lock_hashes_status"] == "present"
+        assert validation["projection"]["matches_lock_hashes"] is True
+        assert validation["target_skill"]["passed"] is True
+        assert validation["installation_result"]["status"] == "passed"
+        assert validation["passed"] is True
+
+
+def test_hermes_detection_container_is_isolated() -> None:
+    arguments = MODULE.docker_command(
+        "docker",
+        "hermes-detection",
+        Path("/tmp/project"),
+        Path("/tmp/results"),
+        "sha256:local",
+        1000,
+        100,
+        network="none",
+        script=MODULE.HERMES_DETECTION_SCRIPT,
+        hermes_home=Path("/tmp/hermes-home"),
+    )
+    assert arguments[arguments.index("--network") + 1] == "none"
+    assert arguments[arguments.index("--user") + 1] == "1000:100"
+    assert "--read-only" in arguments
+    assert "HERMES_HOME=/tmp/hermes-home" in arguments
+    assert "hermes skills trust /workspace" in arguments[-1]
+    assert "hermes skills list --source local" in arguments[-1]
+
+
+def test_zero_apm_codes_do_not_hide_missing_hermes_projection() -> None:
+    with tempfile.TemporaryDirectory(prefix="install-published-hermes-failure-") as directory:
+        root = Path(directory)
+        project = root / "project"
+        results = root / "results"
+        commands = results / "commands"
+        project.mkdir()
+        commands.mkdir(parents=True)
+        (project / "apm.lock.yaml").write_text(
+            "\n".join(
+                [
+                    "apm_version: 0.31.0",
+                    "dependencies:",
+                    "- name: ai-agent-supervisor",
+                    "  repo_url: mekras/apm-marketplace",
+                    "  version: 2.6.12",
+                    "  resolved_commit: commit",
+                ]
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        for name in ("apm_version", "marketplace_add", "install"):
+            (commands / f"{name}.exit_code").write_text("0\n", encoding="utf-8")
+            (commands / f"{name}.stdout").write_text("ok\n", encoding="utf-8")
+            (commands / f"{name}.stderr").write_text("", encoding="utf-8")
+        validation = MODULE.validate_installation(
+            project,
+            results,
+            "hermes",
+            {"passed": False, "name": None, "path": str(project / ".agents/skills")},
+        )
+        assert validation["projection"]["expected_path"].endswith(".agents/skills")
+        assert validation["projection"]["actual_path"] is None
+        assert validation["projection"]["actual_exists"] is False
+        assert validation["projection"]["lock_hashes_status"] == "absent"
+        assert validation["projection"]["matches_lock_hashes"] is False
+        assert validation["installation_result"]["apm_commands_succeeded"] is True
+        assert validation["installation_result"]["status"] == "failed"
+        assert validation["passed"] is False
 
 
 def main() -> int:
@@ -238,6 +383,9 @@ def main() -> int:
     test_cleanup_failure_does_not_hide_successful_installation()
     test_cleanup_exception_does_not_hide_successful_installation()
     test_cli_contract()
+    test_hermes_project_and_projection_validation()
+    test_hermes_detection_container_is_isolated()
+    test_zero_apm_codes_do_not_hide_missing_hermes_projection()
     print("Проверки команды установки опубликованной коллекции пройдены.")
     return 0
 

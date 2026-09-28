@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Проверить установку опубликованной коллекции для цели Codex через Docker."""
+"""Проверить установку опубликованной коллекции для Codex или Hermes через Docker."""
 
 from __future__ import annotations
 
@@ -23,32 +23,86 @@ except ImportError:  # pragma: no cover - окружение без зависи
 PACKAGE_NAME = "ai-agent-supervisor"
 PACKAGE_REPOSITORY = "mekras/apm-marketplace"
 PACKAGE_VERSION = "2.6.12"
-# APM 0.31.0 projects the Codex target into the shared Agent Skills path.
 SKILLS_ROOT = Path(".agents/skills")
 TARGET_SKILL = "ai-agents-md-maintenance"
 INSPECT_TIMEOUT_SECONDS = 15
+PROJECT_FIXTURE = Path("evals/compatibility/edit-agents/fixture/AGENTS.md")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-COMMANDS = {
-    "apm_version": ["apm", "--version"],
-    "marketplace_add": [
-        "apm",
-        "marketplace",
-        "add",
-        PACKAGE_REPOSITORY,
-        "--ref",
-        "master",
-    ],
-    "install": [
-        "apm",
-        "install",
-        f"{PACKAGE_NAME}@mekras#{PACKAGE_VERSION}",
-        "--target",
-        "codex",
-    ],
+TARGETS = {
+    "codex": {
+        "projection_root": SKILLS_ROOT,
+        "run_prefix": "install-codex",
+    },
+    # APM 0.31.0 has no native Hermes profile.  Its shared Agent Skills
+    # projection is the only path that can be checked without inventing a
+    # Hermes-specific product route.
+    "hermes": {
+        "projection_root": SKILLS_ROOT,
+        "run_prefix": "install-hermes",
+    },
 }
 
 
-CONTAINER_SCRIPT = r"""#!/bin/sh
+def commands_for_target(target: str) -> dict[str, list[str]]:
+    if target not in TARGETS:
+        raise ValueError(f"Неизвестная цель установки: {target}")
+    return {
+        "apm_version": ["apm", "--version"],
+        "marketplace_add": [
+            "apm",
+            "marketplace",
+            "add",
+            PACKAGE_REPOSITORY,
+            "--ref",
+            "master",
+        ],
+        "install": [
+            "apm",
+            "install",
+            f"{PACKAGE_NAME}@mekras#{PACKAGE_VERSION}",
+            "--target",
+            target,
+        ],
+    }
+
+
+# Kept as a public compatibility constant for callers and the Codex tests.
+COMMANDS = commands_for_target("codex")
+
+
+def container_script(target: str) -> str:
+    commands = commands_for_target(target)
+    marketplace = " ".join(commands["marketplace_add"])
+    install = " ".join(commands["install"])
+    version = " ".join(commands["apm_version"])
+    return f"""#!/bin/sh
+set +e
+
+run_step() {{
+    name="$1"
+    shift
+    "$@" >"/results/commands/${{name}}.stdout" 2>"/results/commands/${{name}}.stderr"
+    code=$?
+    printf '%s\\n' "$code" >"/results/commands/${{name}}.exit_code"
+    last_code=$code
+    return 0
+}}
+
+run_step apm_version {version}
+run_step marketplace_add {marketplace}
+marketplace_code=$last_code
+run_step install {install}
+install_code=$last_code
+
+if [ "$marketplace_code" -eq 0 ] && [ "$install_code" -eq 0 ]; then
+    exit 0
+fi
+exit 1
+"""
+
+
+HERMES_DETECTION_SCRIPT = r"""#!/bin/sh
 set +e
 
 run_step() {
@@ -61,13 +115,12 @@ run_step() {
     return 0
 }
 
-run_step apm_version apm --version
-run_step marketplace_add apm marketplace add mekras/apm-marketplace --ref master
-marketplace_code=$last_code
-run_step install apm install ai-agent-supervisor@mekras#2.6.12 --target codex
-install_code=$last_code
+run_step hermes_trust hermes skills trust /workspace
+trust_code=$last_code
+run_step hermes_skill_list hermes skills list --source local
+list_code=$last_code
 
-if [ "$marketplace_code" -eq 0 ] && [ "$install_code" -eq 0 ]; then
+if [ "$trust_code" -eq 0 ] && [ "$list_code" -eq 0 ]; then
     exit 0
 fi
 exit 1
@@ -100,8 +153,12 @@ def docker_command(
     image_id: str,
     uid: int,
     gid: int,
+    *,
+    network: str = "bridge",
+    script: str | None = None,
+    hermes_home: Path | None = None,
 ) -> list[str]:
-    return [
+    arguments = [
         docker_executable,
         "run",
         "--interactive",
@@ -109,7 +166,7 @@ def docker_command(
         container_name,
         "--pull=never",
         "--network",
-        "bridge",
+        network,
         "--read-only",
         "--security-opt",
         "no-new-privileges:true",
@@ -130,11 +187,25 @@ def docker_command(
         f"type=bind,source={project},destination=/workspace",
         "--mount",
         f"type=bind,source={run_dir},destination=/results",
-        image_id,
-        "sh",
-        "-c",
-        CONTAINER_SCRIPT,
     ]
+    if hermes_home is not None:
+        arguments.extend(
+            [
+                "--mount",
+                f"type=bind,source={hermes_home},destination=/tmp/hermes-home",
+                "--env",
+                "HERMES_HOME=/tmp/hermes-home",
+            ]
+        )
+    arguments.extend(
+        [
+            image_id,
+            "sh",
+            "-c",
+            script if script is not None else container_script("codex"),
+        ]
+    )
+    return arguments
 
 
 def inspect_image(
@@ -296,7 +367,11 @@ def run_container(
     }
 
 
-def command_record(run_dir: Path, name: str) -> dict[str, Any]:
+def command_record(
+    run_dir: Path,
+    name: str,
+    commands: dict[str, list[str]],
+) -> dict[str, Any]:
     command_dir = run_dir / "commands"
     stdout_path = command_dir / f"{name}.stdout"
     stderr_path = command_dir / f"{name}.stderr"
@@ -308,7 +383,7 @@ def command_record(run_dir: Path, name: str) -> dict[str, Any]:
         except (OSError, ValueError):
             exit_code = None
     return {
-        "argv": COMMANDS[name],
+        "argv": commands.get(name, ["hermes", "skills", "list", "--source", "local"]),
         "status": "passed" if exit_code == 0 else "failed",
         "exit_code": exit_code,
         "stdout_path": str(stdout_path.relative_to(run_dir)),
@@ -346,7 +421,72 @@ def file_hashes(root: Path) -> tuple[dict[str, str], list[str]]:
     return hashes, unsafe
 
 
-def validate_installation(project: Path, run_dir: Path) -> dict[str, Any]:
+def hermes_discovery(run_dir: Path, project: Path) -> dict[str, Any]:
+    commands = {
+        "hermes_trust": ["hermes", "skills", "trust", "/workspace"],
+        "hermes_skill_list": ["hermes", "skills", "list", "--source", "local"],
+    }
+    trust = command_record(run_dir, "hermes_trust", commands)
+    listing = command_record(run_dir, "hermes_skill_list", commands)
+    projection_path = project / SKILLS_ROOT / TARGET_SKILL
+    listing_output = listing["stdout"] + listing["stderr"]
+    detected_name = TARGET_SKILL if TARGET_SKILL in listing_output else None
+    return {
+        "mechanism": "hermes skills list --source local",
+        "expected_name": TARGET_SKILL,
+        "name": detected_name,
+        "path": str(projection_path),
+        "container_path": f"/workspace/{(SKILLS_ROOT / TARGET_SKILL).as_posix()}",
+        "path_status": "present" if projection_path.is_dir() else "missing",
+        "trust": trust,
+        "diagnostic": listing,
+        "passed": (
+            trust["exit_code"] == 0
+            and listing["exit_code"] == 0
+            and detected_name == TARGET_SKILL
+            and projection_path.is_dir()
+            and (projection_path / "SKILL.md").is_file()
+        ),
+    }
+
+
+def prepare_hermes_project(project: Path) -> dict[str, Any]:
+    fixture = PROJECT_ROOT / PROJECT_FIXTURE
+    if not fixture.is_file():
+        raise FileNotFoundError(f"Не найдена фикстура AGENTS.md: {fixture}")
+    shutil.copy2(fixture, project / "AGENTS.md")
+    git = shutil.which("git")
+    if git is None:
+        raise FileNotFoundError("Git не найден для создания корня проекта Hermes")
+    result = subprocess.run(
+        [git, "-C", str(project), "init", "--quiet"],
+        check=False,
+        env={"GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": "/dev/null"},
+        text=True,
+        encoding="utf-8",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"Не удалось создать Git-корень Hermes: {result.stderr.strip()}")
+    return {
+        "fixture": str(fixture),
+        "agents_file": str(project / "AGENTS.md"),
+        "git_initialized": True,
+        "commit_count": 0,
+        "git_stdout": normalize_output(result.stdout),
+        "git_stderr": normalize_output(result.stderr),
+    }
+
+
+def validate_installation(
+    project: Path,
+    run_dir: Path,
+    target: str = "codex",
+    discovery: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    commands = commands_for_target(target)
+    projection_root = TARGETS[target]["projection_root"]
     lock, lock_error = load_lock(project / "apm.lock.yaml")
     raw_dependencies = lock.get("dependencies", []) if isinstance(lock, dict) else []
     dependencies = raw_dependencies if isinstance(raw_dependencies, list) else []
@@ -389,7 +529,7 @@ def validate_installation(project: Path, run_dir: Path) -> dict[str, Any]:
         "installed": installed_version,
         "passed": installed_version == PACKAGE_VERSION and len(package_entries) == 1,
     }
-    skills_root = project / SKILLS_ROOT
+    skills_root = project / projection_root
     installed_skills = sorted(
         path.parent.name for path in skills_root.glob("*/SKILL.md") if path.is_file()
     )
@@ -397,8 +537,9 @@ def validate_installation(project: Path, run_dir: Path) -> dict[str, Any]:
     if package_entry:
         raw_hashes = package_entry.get("deployed_file_hashes") or {}
         for path, digest in (raw_hashes if isinstance(raw_hashes, dict) else {}).items():
-            if isinstance(path, str) and path.startswith(f"{SKILLS_ROOT.as_posix()}/"):
-                expected_hashes[path[len(SKILLS_ROOT.as_posix()) + 1 :]] = str(digest)
+            prefix = f"{projection_root.as_posix()}/"
+            if isinstance(path, str) and path.startswith(prefix):
+                expected_hashes[path[len(prefix) :]] = str(digest)
     actual_hashes, unsafe_paths = file_hashes(skills_root)
     projection_matches = bool(expected_hashes) and expected_hashes == actual_hashes
     target_prefix = f"{TARGET_SKILL}/"
@@ -426,8 +567,23 @@ def validate_installation(project: Path, run_dir: Path) -> dict[str, Any]:
         and (target_path / "SKILL.md").is_file(),
     }
     lock_apm_version = lock.get("apm_version") if isinstance(lock, dict) else None
-    command_results = {name: command_record(run_dir, name) for name in COMMANDS}
+    command_results = {name: command_record(run_dir, name, commands) for name in commands}
+    discovery_result = discovery or {"passed": True, "status": "not_applicable"}
+    apm_commands_succeeded = (
+        command_results["marketplace_add"]["exit_code"] == 0
+        and command_results["install"]["exit_code"] == 0
+    )
+    projection_verified = (
+        target_check["passed"] and projection_matches and discovery_result["passed"]
+    )
+    overall_passed = (
+        lock_error is None
+        and apm_commands_succeeded
+        and version_check["passed"]
+        and projection_verified
+    )
     return {
+        "target": target,
         "lockfile": str(project / "apm.lock.yaml"),
         "lock_error": lock_error,
         "apm_version": {
@@ -440,20 +596,24 @@ def validate_installation(project: Path, run_dir: Path) -> dict[str, Any]:
         "installed_skills": installed_skills,
         "projection": {
             "root": str(skills_root),
+            "expected_path": str(skills_root),
+            "actual_path": str(skills_root) if skills_root.is_dir() else None,
+            "actual_exists": skills_root.is_dir(),
+            "lock_hashes_status": "present" if expected_hashes else "absent",
             "expected_files_from_lock": sorted(expected_hashes),
             "actual_files": sorted(actual_hashes),
             "unsafe_paths": unsafe_paths,
             "matches_lock_hashes": projection_matches,
         },
         "target_skill": target_check,
-        "passed": (
-            lock_error is None
-            and command_results["marketplace_add"]["exit_code"] == 0
-            and command_results["install"]["exit_code"] == 0
-            and version_check["passed"]
-            and target_check["passed"]
-            and projection_matches
-        ),
+        "hermes_discovery": discovery_result,
+        "installation_result": {
+            "status": "passed" if overall_passed else "failed",
+            "apm_commands_succeeded": apm_commands_succeeded,
+            "projection_verified": projection_verified,
+            "version_verified": version_check["passed"],
+        },
+        "passed": overall_passed,
     }
 
 
@@ -462,6 +622,7 @@ def run_case(
     results_dir: Path,
     timeout: float,
     *,
+    target: str = "codex",
     docker_executable: str = "docker",
     popen_factory: PopenFactory = subprocess.Popen,
     run_factory: RunFactory = subprocess.run,
@@ -470,13 +631,24 @@ def run_case(
         raise ValueError("ID Docker-образа должен быть одним значением без пробелов и параметров")
     if timeout <= 0:
         raise ValueError("Тайм-аут должен быть положительным")
+    if target not in TARGETS:
+        raise ValueError(f"Неизвестная цель установки: {target}")
     results_dir = results_dir.resolve()
     results_dir.mkdir(parents=True, exist_ok=True)
-    run_dir = results_dir / f"install-codex-{uuid.uuid4().hex}"
+    run_dir = results_dir / f"{TARGETS[target]['run_prefix']}-{uuid.uuid4().hex}"
     project = run_dir / "prepared-project"
     commands_dir = run_dir / "commands"
     project.mkdir(parents=True)
     commands_dir.mkdir()
+    hermes_home = run_dir / "hermes-home"
+    project_setup: dict[str, Any] = {"fixture": None, "git_initialized": False}
+    error: str | None = None
+    if target == "hermes":
+        try:
+            project_setup = prepare_hermes_project(project)
+            hermes_home.mkdir()
+        except (OSError, RuntimeError) as exc:
+            error = str(exc)
     owner = project.stat()
     image = inspect_image(docker_executable, image_id, run_factory)
     execution: dict[str, Any] = {
@@ -488,8 +660,8 @@ def run_case(
         "stderr": "",
         "cleanup": {"status": "not_run", "exit_code": None, "stdout": "", "stderr": ""},
     }
-    error: str | None = None
-    if image["status"] == "passed":
+    detection_execution = dict(execution)
+    if error is None and image["status"] == "passed":
         container_name = f"compatibility-install-{uuid.uuid4().hex}"
         arguments = docker_command(
             docker_executable,
@@ -499,6 +671,9 @@ def run_case(
             image_id,
             owner.st_uid,
             owner.st_gid,
+            network="bridge",
+            script=container_script(target),
+            hermes_home=hermes_home if target == "hermes" else None,
         )
         try:
             if owner.st_uid == 0:
@@ -510,22 +685,55 @@ def run_case(
                 popen_factory,
                 run_factory,
             )
+            if target == "hermes":
+                detection_name = f"compatibility-hermes-detect-{uuid.uuid4().hex}"
+                detection_arguments = docker_command(
+                    docker_executable,
+                    detection_name,
+                    project,
+                    run_dir,
+                    image_id,
+                    owner.st_uid,
+                    owner.st_gid,
+                    network="none",
+                    script=HERMES_DETECTION_SCRIPT,
+                    hermes_home=hermes_home,
+                )
+                detection_execution = run_container(
+                    detection_arguments,
+                    timeout,
+                    docker_executable,
+                    popen_factory,
+                    run_factory,
+                )
         except Exception as exc:
             error = str(exc)
-    validation = validate_installation(project, run_dir)
+    discovery = hermes_discovery(run_dir, project) if target == "hermes" else None
+    validation = validate_installation(project, run_dir, target, discovery)
     (run_dir / "container.stdout").write_text(execution["stdout"], encoding="utf-8")
     (run_dir / "container.stderr").write_text(execution["stderr"], encoding="utf-8")
+    if target == "hermes":
+        (run_dir / "hermes-detection.stdout").write_text(
+            detection_execution["stdout"], encoding="utf-8"
+        )
+        (run_dir / "hermes-detection.stderr").write_text(
+            detection_execution["stderr"], encoding="utf-8"
+        )
     status = (
         "passed"
         if image["status"] == "passed"
         and execution["status"] == "completed"
         and execution["cleanup"]["status"] == "passed"
+        and (target == "codex" or detection_execution["status"] == "completed")
+        and (target == "codex" or detection_execution["cleanup"]["status"] == "passed")
         and validation["passed"]
         else "failed"
     )
+    commands = commands_for_target(target)
     report = {
         "status": status,
         "error": error,
+        "target": target,
         "image": image,
         "container": {
             "user": f"{owner.st_uid}:{owner.st_gid}",
@@ -534,19 +742,69 @@ def run_case(
             "cpus": "1.0",
             "pids_limit": 64,
             "home": "/home/sandbox",
+            "hermes_home": "/tmp/hermes-home" if target == "hermes" else None,
             "project_mount": "/workspace",
             "results_mount": "/results",
             "repository_mount": False,
             "docker_socket": False,
             "pull": "never",
+            "read_only_rootfs": True,
             "host_environment": {},
-            "container_environment": {"HOME": "/home/sandbox"},
+            "container_environment": {
+                "HOME": "/home/sandbox",
+                **({"HERMES_HOME": "/tmp/hermes-home"} if target == "hermes" else {}),
+            },
         },
+        "detection_container": (
+            {
+                "network": "none",
+                "read_only_rootfs": True,
+                "user": f"{owner.st_uid}:{owner.st_gid}",
+                "project_mount": "/workspace",
+                "hermes_home": "/tmp/hermes-home",
+                "host_environment": {},
+                "container_environment": {
+                    "HOME": "/home/sandbox",
+                    "HERMES_HOME": "/tmp/hermes-home",
+                },
+            }
+            if target == "hermes"
+            else None
+        ),
         "execution": execution,
-        "commands": {name: command_record(run_dir, name) for name in COMMANDS},
+        "detection_execution": detection_execution if target == "hermes" else None,
+        "commands": {
+            **{name: command_record(run_dir, name, commands) for name in commands},
+            **(
+                {
+                    "hermes_trust": command_record(
+                        run_dir,
+                        "hermes_trust",
+                        {"hermes_trust": ["hermes", "skills", "trust", "/workspace"]},
+                    ),
+                    "hermes_skill_list": command_record(
+                        run_dir,
+                        "hermes_skill_list",
+                        {
+                            "hermes_skill_list": [
+                                "hermes",
+                                "skills",
+                                "list",
+                                "--source",
+                                "local",
+                            ],
+                        },
+                    ),
+                }
+                if target == "hermes"
+                else {}
+            ),
+        },
         "validation": validation,
-        "initial_project_files": [],
+        "project_setup": project_setup,
+        "initial_project_files": ["AGENTS.md", ".git"] if target == "hermes" else [],
         "prepared_project": str(project),
+        "hermes_home": str(hermes_home) if target == "hermes" else None,
         "report": str(run_dir / "report.json"),
     }
     write_json(run_dir / "report.json", report)
@@ -558,6 +816,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--image", required=True, help="Локальный ID уже собранного базового образа")
     parser.add_argument("--results-dir", required=True, type=Path)
     parser.add_argument("--timeout", required=True, type=float, help="Общий тайм-аут установки в секундах")
+    parser.add_argument("--target", choices=sorted(TARGETS), default="codex")
     args = parser.parse_args(argv)
     if args.timeout <= 0:
         parser.error("--timeout должен быть положительным")
@@ -575,6 +834,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.image,
             args.results_dir,
             args.timeout,
+            target=args.target,
             docker_executable=docker,
         )
     except (OSError, ValueError) as exc:
@@ -582,6 +842,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 2
     print(f"Отчёт: {report_path}")
     print(f"Проект: {report['prepared_project']}")
+    if report["hermes_home"]:
+        print(f"HERMES_HOME: {report['hermes_home']}")
     return 0 if report["status"] == "passed" else 1
 
 

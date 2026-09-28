@@ -140,8 +140,9 @@ https://developers.openai.com/codex/auth.
 контейнер. Образ пока проверен только для механики стенда. Установка коллекции и
 работа агентских сред ещё не проверялись.
 
-Для отдельной проверки штатной установки опубликованной коллекции только для
-цели Codex используйте уже существующий локальный ID образа. Команда не
+Для отдельной проверки штатной установки опубликованной коллекции используйте
+уже существующий локальный ID образа. По умолчанию выбирается прежний сценарий
+Codex. Цель можно явно выбрать параметром `--target codex|hermes`. Команда не
 пересобирает и не скачивает образ:
 
 ```text
@@ -149,10 +150,93 @@ RESULTS_DIR="$(mktemp -d)"
 python3 tools/compatibility/install_published.py --image "$IMAGE_ID" --results-dir "$RESULTS_DIR" --timeout 180
 ```
 
-Сценарий создаёт пустой проект потребителя, разрешает контейнерную сеть для
-получения публичного реестра и пакета, сохраняет проект и отчёт в `RESULTS_DIR`,
-а затем удаляет контейнер. В контейнер не передаются авторизация, переменные
-окружения или домашний каталог пользователя. Docker socket и каталог репозитория
-разработчика не монтируются. Сохраняются stdout, stderr и коды обеих команд APM,
-версия APM, сведения из lock-файла, список навыков и сверка хэшей проекции Codex.
-При ошибке частичные результаты остаются на месте.
+Для испытательного образа Hermes используйте его уже закреплённый ID и отдельный
+каталог результатов:
+
+```text
+HERMES_IMAGE_ID='sha256:eff6ae1832649f11d229d89a10be93a68a7c89b6ad91e8d2dc548cf96217df21'
+RESULTS_DIR="$(mktemp -d)"
+python3 tools/compatibility/install_published.py \
+  --image "$HERMES_IMAGE_ID" \
+  --results-dir "$RESULTS_DIR" \
+  --timeout 180 \
+  --target hermes
+```
+
+Сценарий Codex сохраняет прежнюю пустую рабочую копию. Сценарий Hermes создаёт
+отдельный проект с исходной фикстурой `evals/compatibility/edit-agents/fixture/AGENTS.md`
+и локальным Git-корнем без коммита. Установка APM выполняется с сетью `bridge`,
+а затем штатные команды `hermes skills trust /workspace` и
+`hermes skills list --source local` запускаются с сетью `none`, read-only rootfs,
+непривилегированным UID:GID и отдельным временным `HERMES_HOME`. Ни авторизация,
+ни профиль пользователя, ни модельные команды не передаются.
+
+Для цели Hermes проверяется общая APM-проекция `.agents/skills`, путь которой
+определён реализацией APM для Agent Skills. Проверка требует совпадения списка
+файлов и SHA-256 из `apm.lock.yaml`, поэтому одного `SKILL.md` недостаточно.
+На текущем опубликованном пакете `2.6.12` проверка фиксирует блокер: его метаданные
+целей содержат `claude` и `codex`, но не Hermes, поэтому APM не создаёт проекцию.
+Даже нулевые коды APM не меняют этот результат: отсутствие ожидаемой проекции
+или lock-хэшей считается общей ошибкой установки. Стенд сохраняет диагностический
+вывод и не исправляет это продуктовым маршрутом.
+В обоих сценариях сохраняются stdout, stderr, коды команд APM, версия APM,
+сведения из lock-файла и результаты очистки контейнеров. При ошибке частичные
+результаты остаются на месте.
+
+Проверку локального кандидата выполняйте отдельно от опубликованной `2.6.12`.
+Кандидат собирается только во временном marketplace по шагам
+«Синхронизировать состав пакета» из `.github/workflows/release.yml`. Исходный
+`apm.yml` передаётся в `tools/sync-marketplace-manifest.py`, поэтому `target` не
+исправляется вручную, а версия получает отдельное SemVer-значение:
+
+```text
+WORK_DIR="$(mktemp -d)"
+CANDIDATE_VERSION='2.6.12-hermes-local.20260928'
+git clone --branch master https://github.com/mekras/apm-marketplace.git "$WORK_DIR/marketplace"
+candidate_dir="$WORK_DIR/ai-agent-supervisor-candidate"
+package_dir="$WORK_DIR/marketplace/packages/ai-agent-supervisor"
+mkdir -p "$candidate_dir"
+cp -a .apm "$candidate_dir/.apm"
+cp README.md CHANGELOG.md LICENSE "$candidate_dir/"
+cp "$package_dir/apm.yml" "$candidate_dir/apm.yml"
+python3 tools/sync-marketplace-manifest.py \
+  --source apm.yml --package "$candidate_dir/apm.yml" --version "$CANDIDATE_VERSION"
+mv "$package_dir" "$WORK_DIR/previous-package"
+mv "$candidate_dir" "$package_dir"
+MARKETPLACE_DIR="$WORK_DIR/marketplace" RELEASE_VERSION="$CANDIDATE_VERSION" python3 - <<'PY'
+import os
+import re
+from pathlib import Path
+
+path = Path(os.environ["MARKETPLACE_DIR"]) / "apm.yml"
+text = path.read_text(encoding="utf-8")
+text, count = re.subn(
+    r"(source: ./packages/ai-agent-supervisor\n\s+version: )\"[^\"]+\"",
+    rf'\g<1>"{os.environ["RELEASE_VERSION"]}"',
+    text,
+    count=1,
+)
+if count != 1:
+    raise SystemExit("Не найдена версия пакета в реестре")
+path.write_text(text, encoding="utf-8")
+PY
+(cd "$WORK_DIR/marketplace" && apm marketplace check && \
+  apm pack --marketplace=claude,codex && \
+  apm pack --marketplace=claude,codex --check-clean --dry-run)
+git -C "$WORK_DIR/marketplace" add -A
+git -C "$WORK_DIR/marketplace" -c user.name='Hermes compatibility candidate' \
+  -c user.email='hermes-compatibility@example.invalid' \
+  commit -m 'Подготовлен локальный кандидат коллекции'
+```
+
+Затем в новом проекте создайте `.git` без коммита, установите кандидат через
+`apm marketplace add "$WORK_DIR/marketplace" --name local-candidate --ref master`
+и `apm install ai-agent-supervisor@local-candidate --target hermes`. В отдельном
+`HERMES_HOME` выполните с теми же параметрами read-only rootfs, UID:GID и сети
+`none`, что указаны выше, `hermes skills trust /workspace` и
+`hermes skills list --source local`. Успешный результат должен одновременно
+содержать проекцию `.agents/skills`, совпадение всех lock-хэшей и запись
+`ai-agents-md-maintenance` с источником `local`. В проверенном кандидате
+установились 14 навыков, совпали 202 файла и обнаружение прошло. Это не меняет
+результат опубликованной `2.6.12`, которая остаётся неуспешной из-за отсутствия
+цели Hermes.
