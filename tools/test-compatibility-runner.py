@@ -63,6 +63,55 @@ class FakeProcess:
             raise KeyboardInterrupt
         if self.docker.behavior == "communication-error":
             raise OSError("ошибка чтения Docker")
+        if runner.HERMES_CONTAINER_SCRIPT in self.arguments:
+            mount_values = [
+                self.arguments[index + 1]
+                for index, value in enumerate(self.arguments[:-1])
+                if value == "--mount"
+            ]
+            output_mount = next(
+                value for value in mount_values if "destination=/run-output" in value
+            )
+            output_source = next(
+                part.split("=", 1)[1]
+                for part in output_mount.split(",")
+                if part.startswith("source=")
+            )
+            output_path = Path(output_source)
+            (output_path / "hermes-trust.stdout").write_text("trusted\n", encoding="utf-8")
+            (output_path / "hermes-trust.stderr").write_text("", encoding="utf-8")
+            (output_path / "hermes-chat.stdout").write_text(
+                "Hermes result\n", encoding="utf-8"
+            )
+            (output_path / "hermes-chat.stderr").write_text(
+                "session_id: hermes-test-session\n", encoding="utf-8"
+            )
+            (output_path / "hermes-session-id.txt").write_text(
+                "hermes-test-session\n", encoding="utf-8"
+            )
+            session = {
+                "id": "hermes-test-session",
+                "status": "failed" if self.docker.hermes_session_failed else "completed",
+                "failed": self.docker.hermes_session_failed,
+                "messages": [{"role": "user", "content": PROMPT}],
+                "input_tokens": 10,
+                "output_tokens": 5,
+            }
+            (output_path / "hermes-session.jsonl").write_text(
+                json.dumps(session) + "\n", encoding="utf-8"
+            )
+            (output_path / "hermes-session-export.stdout").write_text(
+                "Exported 1 session\n", encoding="utf-8"
+            )
+            (output_path / "hermes-session-export.stderr").write_text(
+                "", encoding="utf-8"
+            )
+            (output_path / "hermes-agent.log.txt").write_text(
+                "tool: project skill scan\n", encoding="utf-8"
+            )
+            (output_path / "hermes-errors.log.txt").write_text("", encoding="utf-8")
+            self.returncode = self.docker.exit_code
+            return "Hermes result\n", "\nsession_id: hermes-test-session\n"
         if "--json" in self.arguments:
             mount_values = [
                 self.arguments[index + 1]
@@ -105,11 +154,13 @@ class FakeDocker:
         mutator: Callable[[Path, str], None] | None = None,
         exit_code: int = 0,
         final_answer_mode: str = "regular",
+        hermes_session_failed: bool = False,
     ) -> None:
         self.behavior = behavior
         self.mutator = mutator or (lambda workspace, task: None)
         self.exit_code = exit_code
         self.final_answer_mode = final_answer_mode
+        self.hermes_session_failed = hermes_session_failed
         self.stdout = "заглушка stdout"
         self.stderr = "заглушка stderr"
         self.popen_arguments: list[str] | None = None
@@ -202,6 +253,36 @@ def run_codex_case(
     )
 
 
+def run_hermes_case(
+    fake: FakeDocker,
+    results: Path,
+    *,
+    prepare: bool = False,
+    network: str = "none",
+):
+    hermes_home = results.parent / "hermes-home"
+    hermes_home.mkdir()
+    return runner.run_case(
+        FIXTURE,
+        "compatibility-test:hermes",
+        None,
+        results,
+        1,
+        docker_executable="docker",
+        popen_factory=fake.popen,
+        run_factory=fake.run,
+        scenario_path=SCENARIO,
+        check_path=CHECK,
+        mode="hermes",
+        provider="test-provider",
+        model="test-model",
+        effort="high",
+        prepare=prepare,
+        hermes_home=hermes_home,
+        network=network,
+    )
+
+
 def assert_safe_command(fake: FakeDocker, results: Path) -> None:
     assert fake.popen_arguments is not None
     arguments = fake.popen_arguments
@@ -282,6 +363,36 @@ def test_cli_parsing() -> None:
     assert codex_args.effort == "high"
     assert codex_args.codex_home == Path("/tmp/codex-home")
     assert codex_args.network == "bridge"
+    hermes_args = runner.parse_args(
+        [
+            "--project",
+            str(FIXTURE),
+            "--image",
+            "example:image",
+            "--results-dir",
+            "results",
+            "--timeout",
+            "12",
+            "--mode",
+            "hermes",
+            "--hermes-home",
+            "/tmp/hermes-home",
+            "--provider",
+            "test-provider",
+            "--model",
+            "test-model",
+            "--effort",
+            "high",
+            "--network",
+            "bridge",
+        ]
+    )
+    assert hermes_args.mode == "hermes"
+    assert hermes_args.provider == "test-provider"
+    assert hermes_args.model == "test-model"
+    assert hermes_args.effort == "high"
+    assert hermes_args.hermes_home == Path("/tmp/hermes-home")
+    assert hermes_args.network == "bridge"
 
 
 def assert_codex_command(fake: FakeDocker, results: Path) -> None:
@@ -325,6 +436,37 @@ def assert_codex_command(fake: FakeDocker, results: Path) -> None:
     assert codex_arguments[codex_arguments.index("-c") + 1] == 'model_reasoning_effort="high"'
     assert codex_arguments[codex_arguments.index("--output-last-message") + 1] == "/run-output/final-answer.txt"
     assert codex_arguments[-1] == "-"
+    assert fake.popen_kwargs["env"] == {}
+    assert fake.popen_kwargs["stdin"] is subprocess.PIPE
+    assert fake.stdin_values == [PROMPT]
+
+
+def assert_hermes_command(fake: FakeDocker, results: Path) -> None:
+    assert fake.popen_arguments is not None
+    arguments = fake.popen_arguments
+    joined = " ".join(arguments)
+    owner = FIXTURE.stat()
+    assert arguments[:2] == ["docker", "run"]
+    assert arguments[arguments.index("--network") + 1] == "none"
+    assert "--read-only" in arguments
+    assert arguments[arguments.index("--user") + 1] == f"{owner.st_uid}:{owner.st_gid}"
+    assert arguments[arguments.index("--workdir") + 1] == "/workspace"
+    assert arguments.count("--mount") == 3
+    assert any("destination=/workspace" in value for value in arguments)
+    assert any("destination=/run-output" in value for value in arguments)
+    home_mount = next(value for value in arguments if "destination=/hermes-home" in value)
+    assert ",readonly" not in home_mount
+    assert "HERMES_HOME=/hermes-home" in arguments
+    assert "compatibility-test:hermes" in arguments
+    assert runner.HERMES_CONTAINER_SCRIPT in arguments
+    assert "--ignore-user-config" not in runner.HERMES_CONTAINER_SCRIPT
+    assert "--ignore-user-config" not in joined
+    assert "--provider" not in arguments[arguments.index("sh") :]
+    assert PROMPT not in arguments
+    assert "/var/run/docker.sock" not in joined
+    assert str(FIXTURE.resolve()) not in joined
+    assert str(SCENARIO) not in joined
+    assert str(results.resolve()) not in joined
     assert fake.popen_kwargs["env"] == {}
     assert fake.popen_kwargs["stdin"] is subprocess.PIPE
     assert fake.stdin_values == [PROMPT]
@@ -535,6 +677,89 @@ def test_codex_home_persists_and_is_not_an_artifact_source() -> None:
                 )
 
 
+def test_hermes_mode_saves_query_and_structured_session() -> None:
+    source_before = (FIXTURE / "AGENTS.md").read_bytes()
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-hermes-") as temporary:
+        results = Path(temporary) / "results"
+        fake = FakeDocker(mutator=edit_agents)
+        report, report_path = run_hermes_case(fake, results)
+        assert report["status"] == "passed"
+        assert report["mode"] == "hermes"
+        assert report["hermes"]["version"] == "0.21.3"
+        assert report["hermes"]["requested_provider"] == "test-provider"
+        assert report["hermes"]["requested_model"] == "test-model"
+        assert report["hermes"]["requested_effort"] == "high"
+        assert report["hermes"]["effort_mechanism"] == "--reasoning"
+        assert report["hermes"]["session_id"] == "hermes-test-session"
+        assert report["hermes"]["session_evidence"]["failure_markers"] == []
+        assert report["hermes"]["session_evidence"]["usage_fields"] == [
+            "input_tokens",
+            "output_tokens",
+        ]
+        assert report["task"]["via_stdin"] is True
+        assert report["skill_application"]["verified"] is False
+        assert report_path.parent.joinpath("hermes-final-answer.txt").read_text(
+            encoding="utf-8"
+        ) == "Hermes result\n"
+        assert report_path.parent.joinpath("hermes-session.jsonl").is_file()
+        assert report_path.parent.joinpath("hermes-agent.log.txt").is_file()
+        command = json.loads(
+            report_path.parent.joinpath("hermes-command.json").read_text(encoding="utf-8")
+        )
+        assert command["hermes_argv"] == [
+            "hermes",
+            "chat",
+            "--query-file",
+            "-",
+            "--oneshot",
+            "-Q",
+            "--provider",
+            "test-provider",
+            "--model",
+            "test-model",
+            "--reasoning",
+            "high",
+        ]
+        assert "--ignore-user-config" not in command["hermes_argv"]
+        assert command["hermes_home"] == {
+            "host_path": str(results.parent / "hermes-home"),
+            "container_path": "/hermes-home",
+            "writable": True,
+            "persistent": True,
+        }
+        assert (FIXTURE / "AGENTS.md").read_bytes() == source_before
+        assert_hermes_command(fake, results)
+
+
+def test_hermes_preparation_does_not_execute() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-hermes-prepare-") as temporary:
+        results = Path(temporary) / "results"
+        fake = FakeDocker()
+        report, report_path = run_hermes_case(fake, results, prepare=True, network="bridge")
+        assert fake.popen_arguments is None
+        assert fake.cleanup_calls == []
+        assert report["status"] == "prepared"
+        assert report["preparation"] is True
+        assert report["execution"]["status"] == "not_run"
+        assert report["task"]["sent"] is False
+        command = json.loads(
+            report_path.parent.joinpath("hermes-command.json").read_text(encoding="utf-8")
+        )
+        assert command["task_via_stdin"] is True
+        assert command["network"] == "bridge"
+        assert command["effort_mechanism"] == "--reasoning"
+
+
+def test_hermes_zero_exit_with_failed_session_is_failed() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-hermes-failure-") as temporary:
+        fake = FakeDocker(mutator=edit_agents, hermes_session_failed=True, exit_code=0)
+        report, report_path = run_hermes_case(fake, Path(temporary) / "results")
+        assert report["status"] == "failed"
+        assert report["execution"]["exit_code"] == 0
+        assert report["hermes"]["session_evidence"]["failure_markers"]
+        assert report_path.is_file()
+
+
 def test_success_and_isolation() -> None:
     source_before = (FIXTURE / "AGENTS.md").read_bytes()
     with tempfile.TemporaryDirectory(prefix="compatibility-runner-test-") as temporary:
@@ -646,6 +871,9 @@ def main() -> int:
     test_codex_final_answer_type_failures_are_reported()
     test_codex_home_is_required_and_cannot_overlap()
     test_codex_home_persists_and_is_not_an_artifact_source()
+    test_hermes_mode_saves_query_and_structured_session()
+    test_hermes_preparation_does_not_execute()
+    test_hermes_zero_exit_with_failed_session_is_failed()
     test_success_and_isolation()
     test_unexpected_file_is_reported()
     test_command_failure_is_saved()
