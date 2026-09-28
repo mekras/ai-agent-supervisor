@@ -54,6 +54,20 @@ VERIFICATION_SUBJECT_LABELS = {
 }
 
 
+def has_codex_agents_md_check(data: dict[str, Any]) -> bool:
+    for check in data["checks"]:
+        environment = check["environment"]
+        if (
+            check["result"] == "passed"
+            and check["verification_subject"] == "agent_runtime"
+            and check["capability"] == "project_and_instruction_setup"
+            and environment["id"] == "codex_cli"
+            and environment["participation"] == "participated"
+        ):
+            return True
+    return False
+
+
 def load_registry(path: Path) -> dict[str, Any]:
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -188,6 +202,7 @@ def validate_basis(identifier: str, basis: Any, label: str) -> None:
 
 def render_summary(data: dict[str, Any]) -> str:
     validate_registry(data)
+    has_codex_check = has_codex_agents_md_check(data)
     environment_names = [item["name"] for item in data["environments"]]
     if len(environment_names) > 1:
         environment_list = ", ".join(environment_names[:-1]) + " и " + environment_names[-1]
@@ -207,10 +222,23 @@ def render_summary(data: dict[str, Any]) -> str:
             f"| {item['name']} | {item['user_summary']} |" for item in data["environments"]
         ]
     )
+    if has_codex_check:
+        lines.extend(
+            [
+                "",
+                "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят.",
+                "",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "",
+                "Проверки поведения навыков в реальных средах пока не отражены в реестре. Проверка установки через APM не подтверждает работу самих навыков.",
+            ]
+        )
     lines.extend(
         [
-            "",
-            "Проверки поведения навыков в реальных средах пока не отражены в реестре. Проверка установки через APM не подтверждает работу самих навыков.",
             "",
             "Подробные сведения приведены в [реестре поддержки](.apm/skills/ai-setup-apm/references/compatibility.yml).",
             "",

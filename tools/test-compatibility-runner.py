@@ -319,7 +319,7 @@ def assert_codex_command(fake: FakeDocker, results: Path) -> None:
     assert codex_arguments[:2] == ["codex", "exec"]
     assert "--json" in codex_arguments
     assert "--dangerously-bypass-approvals-and-sandbox" in codex_arguments
-    assert "--ignore-user-config" in codex_arguments
+    assert "--ignore-user-config" not in codex_arguments
     assert "--ephemeral" in codex_arguments
     assert codex_arguments[codex_arguments.index("--model") + 1] == "test-model"
     assert codex_arguments[codex_arguments.index("-c") + 1] == 'model_reasoning_effort="high"'
@@ -394,6 +394,10 @@ def test_codex_preparation_reports_network_and_does_not_read_home() -> None:
         codex_home = root / "codex-home"
         codex_home.mkdir()
         (codex_home / "auth.json").write_text("не читать этот секрет\n", encoding="utf-8")
+        (codex_home / "config.toml").write_text(
+            '[otel]\nheaders = { Authorization = "не читать этот заголовок" }\n',
+            encoding="utf-8",
+        )
         fake = FakeDocker()
         report, report_path = run_codex_case(
             fake, results, prepare=True, codex_home=codex_home, network="bridge"
@@ -406,9 +410,11 @@ def test_codex_preparation_reports_network_and_does_not_read_home() -> None:
             encoding="utf-8"
         )
         assert '"network": "bridge"' in command_text
-        assert "не читать этот секрет" not in report_path.parent.joinpath("report.json").read_text(
-            encoding="utf-8"
-        )
+        report_text = report_path.parent.joinpath("report.json").read_text(encoding="utf-8")
+        assert "не читать этот секрет" not in report_text
+        assert "не читать этот заголовок" not in report_text
+        assert "не читать этот секрет" not in command_text
+        assert "не читать этот заголовок" not in command_text
 
 
 def assert_codex_final_answer_failure(

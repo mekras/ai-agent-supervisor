@@ -185,7 +185,6 @@ def codex_command(model: str, effort: str) -> list[str]:
         "never",
         "--strict-config",
         "--skip-git-repo-check",
-        "--ignore-user-config",
         "--ephemeral",
         "--cd",
         "/workspace",

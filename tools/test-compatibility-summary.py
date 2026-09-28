@@ -49,7 +49,14 @@ def registry(checks: list[dict] | None = None) -> dict:
     }
 
 
-def check(capability: str, environment: str, date: str, result: str, evidence: str) -> dict:
+def check(
+    capability: str,
+    environment: str,
+    date: str,
+    result: str,
+    evidence: str,
+    verification_subject: str = "agent_runtime",
+) -> dict:
     return {
         "id": f"{environment}-{capability}-{date}-{result}",
         "date": date,
@@ -62,7 +69,7 @@ def check(capability: str, environment: str, date: str, result: str, evidence: s
         "capability": capability,
         "conditions": "тестовые условия",
         "method": "детерминированный сценарий",
-        "verification_subject": "agent_runtime",
+        "verification_subject": verification_subject,
         "result": result,
         "scope": "только тестируемая возможность",
         "evidence": [evidence],
@@ -103,9 +110,20 @@ def main() -> int:
     with_installation = render(registry([installation_pass]))
     assert with_installation == empty
 
-    behavior_pass = check(project, "codex_cli", "2026-09-21", "passed", "behavior")
+    behavior_pass = check(
+        project,
+        "codex_cli",
+        "2026-09-21",
+        "passed",
+        "behavior",
+        verification_subject="static_review",
+    )
     with_behavior = render(registry([installation_pass, behavior_pass]))
     assert with_behavior == empty
+
+    runtime_pass = check(project, "codex_cli", "2026-09-23", "passed", "runtime")
+    with_runtime = render(registry([runtime_pass]))
+    assert "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят." in with_runtime
 
     failure = check(project, "codex_cli", "2026-09-22", "failed", "new-failure")
     history = render(registry([installation_pass, behavior_pass, failure]))
@@ -125,6 +143,35 @@ def main() -> int:
     assert actual_check["evidence"] == [
         ".apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12"
     ]
+    runtime_check = actual["checks"][-1]
+    assert runtime_check["id"] == "codex_cli_ai_agents_md_maintenance_2_6_12"
+    assert str(runtime_check["date"]) == "2026-09-28"
+    assert runtime_check["collection_version"] == "2.6.12"
+    assert runtime_check["environment"] == {
+        "id": "codex_cli",
+        "version": "0.155.1",
+        "participation": "participated",
+        "tooling": {
+            "platform": "Linux/Docker",
+            "isolation": "external Docker",
+            "embedded_sandbox": "disabled",
+        },
+    }
+    assert runtime_check["capability"] == "project_and_instruction_setup"
+    assert runtime_check["model"] == "gpt-5.6-luna"
+    assert runtime_check["effort"] == "high"
+    assert runtime_check["verification_subject"] == "agent_runtime"
+    assert runtime_check["result"] == "passed"
+    assert "ai-agents-md-maintenance" in runtime_check["scope"]
+    assert "Авторизация позволила выполнить этот запуск" in runtime_check["scope"]
+    assert "Обновление токенов и длительная работа не проверялись" in runtime_check["scope"]
+    assert "Доставка телеметрии не подтверждена" in runtime_check["scope"]
+    assert runtime_check["evidence"] == [
+        ".apm/skills/ai-setup-apm/references/compatibility-history.md#L15-L27",
+        "evals/compatibility/evidence/codex-cli-2026-09-28/source-agents.md",
+        "evals/compatibility/evidence/codex-cli-2026-09-28/agents.diff",
+        "evals/compatibility/evidence/codex-cli-2026-09-28/journal-excerpts.md",
+    ]
     actual_capabilities = {item["id"]: item for item in actual["capabilities"]}
     assert actual_capabilities["subagent_setup_and_use"]["declared_implementation"]["claude_code"]["status"] == "documented"
     for environment_id, environment_name in (("codex_cli", "Codex CLI"), ("claude_code", "Claude Code")):
@@ -135,6 +182,7 @@ def main() -> int:
     actual_rendered = render(actual)
     assert "| Codex CLI | Предусмотрены установка и работа навыков." in actual_rendered
     assert "| Hermes Agent | Предусмотрена установка через APM." in actual_rendered
+    assert "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят." in actual_rendered
     assert "Загрузка и доступность навыков внутри Hermes не проверялись" not in actual_rendered
     assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" not in actual_rendered
     assert "Общая оценка результата через ai-work-result-evaluation доступна" not in actual_rendered

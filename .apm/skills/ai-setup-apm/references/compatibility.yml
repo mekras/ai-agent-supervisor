@@ -166,3 +166,27 @@ checks:
     scope: Проверена только поставка APM для цели hermes. Hermes Agent не запускался и в испытании не участвовал. Загрузка и доступность навыков внутри Hermes не проверялись. Свидетельство — запись CHANGELOG, отдельный отчёт испытания в пакете не сохранён.
     evidence:
       - .apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12
+  - id: codex_cli_ai_agents_md_maintenance_2_6_12
+    date: 2026-09-28
+    collection_version: 2.6.12
+    environment:
+      id: codex_cli
+      version: 0.155.1
+      participation: participated
+      tooling:
+        platform: Linux/Docker
+        isolation: external Docker
+        embedded_sandbox: disabled
+    capability: project_and_instruction_setup
+    model: gpt-5.6-luna
+    effort: high
+    conditions: Единственный реальный запуск в Linux/Docker с внешней изоляцией и отключённой встроенной песочницей Codex
+    method: Codex CLI получил задачу через stdin и изменил только AGENTS.md в подготовленной копии проекта
+    verification_subject: agent_runtime
+    result: passed
+    scope: Авторизация позволила выполнить этот запуск. Обновление токенов и длительная работа не проверялись. Фактические модель и усилие не подтверждены. Подтверждены только точечная правка AGENTS.md и сохранность исходного проекта. Чтение установленного навыка ai-agents-md-maintenance и действия по его процедуре наблюдались в событиях codex.jsonl item_1, item_4, item_5, item_11, item_13, item_14 и item_15. Полное соблюдение всех инструкций навыка не оценивалось. Доставка телеметрии не подтверждена. Наблюдались ошибки обновления списка моделей и ошибка Git в проекте без .git.
+    evidence:
+      - .apm/skills/ai-setup-apm/references/compatibility-history.md#L15-L27
+      - evals/compatibility/evidence/codex-cli-2026-09-28/source-agents.md
+      - evals/compatibility/evidence/codex-cli-2026-09-28/agents.diff
+      - evals/compatibility/evidence/codex-cli-2026-09-28/journal-excerpts.md
