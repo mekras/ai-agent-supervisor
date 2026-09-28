@@ -171,7 +171,17 @@ def run_case(fake: FakeDocker, results: Path):
     )
 
 
-def run_codex_case(fake: FakeDocker, results: Path, *, prepare: bool = False):
+def run_codex_case(
+    fake: FakeDocker,
+    results: Path,
+    *,
+    prepare: bool = False,
+    codex_home: Path | None = None,
+    network: str = "none",
+):
+    if codex_home is None:
+        codex_home = results.parent / "codex-home"
+        codex_home.mkdir()
     return runner.run_case(
         FIXTURE,
         "compatibility-test:codex",
@@ -187,6 +197,8 @@ def run_codex_case(fake: FakeDocker, results: Path, *, prepare: bool = False):
         model="test-model",
         effort="high",
         prepare=prepare,
+        codex_home=codex_home,
+        network=network,
     )
 
 
@@ -258,12 +270,18 @@ def test_cli_parsing() -> None:
             "test-model",
             "--effort",
             "high",
+            "--codex-home",
+            "/tmp/codex-home",
+            "--network",
+            "bridge",
         ]
     )
     assert codex_args.mode == "codex"
     assert codex_args.command is None
     assert codex_args.model == "test-model"
     assert codex_args.effort == "high"
+    assert codex_args.codex_home == Path("/tmp/codex-home")
+    assert codex_args.network == "bridge"
 
 
 def assert_codex_command(fake: FakeDocker, results: Path) -> None:
@@ -282,9 +300,15 @@ def assert_codex_command(fake: FakeDocker, results: Path) -> None:
     assert "--memory=512m" in arguments
     assert "--cpus=1.0" in arguments
     assert "--pids-limit=64" in arguments
-    assert arguments.count("--mount") == 2
+    assert arguments.count("--mount") == 3
     assert any("destination=/workspace" in value for value in arguments)
     assert any("destination=/run-output" in value for value in arguments)
+    home_mount = next(value for value in arguments if "destination=/codex-home" in value)
+    assert ",readonly" not in home_mount
+    home_mount_index = arguments.index(home_mount)
+    assert arguments[arguments.index("--env", home_mount_index + 1) + 1] == (
+        "CODEX_HOME=/codex-home"
+    )
     assert "compatibility-test:codex" in arguments
     assert "/var/run/docker.sock" not in joined
     assert str(FIXTURE.resolve()) not in joined
@@ -359,6 +383,32 @@ def test_codex_preparation_does_not_execute() -> None:
         assert command["task_via_stdin"] is True
         assert command["task_runner_prefix"] == ""
         assert command["codex_argv"][-1] == "-"
+        assert command["network"] == "none"
+        assert command["codex_home"]["container_path"] == "/codex-home"
+
+
+def test_codex_preparation_reports_network_and_does_not_read_home() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-prepare-home-") as temporary:
+        root = Path(temporary)
+        results = root / "results"
+        codex_home = root / "codex-home"
+        codex_home.mkdir()
+        (codex_home / "auth.json").write_text("не читать этот секрет\n", encoding="utf-8")
+        fake = FakeDocker()
+        report, report_path = run_codex_case(
+            fake, results, prepare=True, codex_home=codex_home, network="bridge"
+        )
+        assert fake.popen_arguments is None
+        assert fake.cleanup_calls == []
+        assert report["container"]["network"] == "bridge"
+        assert report["container"]["codex_home"]["writable"] is True
+        command_text = report_path.parent.joinpath("codex-command.json").read_text(
+            encoding="utf-8"
+        )
+        assert '"network": "bridge"' in command_text
+        assert "не читать этот секрет" not in report_path.parent.joinpath("report.json").read_text(
+            encoding="utf-8"
+        )
 
 
 def assert_codex_final_answer_failure(
@@ -419,6 +469,64 @@ def test_codex_requires_model_and_effort() -> None:
                 assert "требуется непустой" in str(error)
             else:
                 raise AssertionError("Режим codex принял отсутствующий параметр")
+
+
+def test_codex_home_is_required_and_cannot_overlap() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-home-required-") as temporary:
+        root = Path(temporary)
+        results = root / "results"
+        try:
+            runner.run_case(
+                FIXTURE,
+                "compatibility-test:codex",
+                None,
+                results,
+                1,
+                mode="codex",
+                model="test-model",
+                effort="high",
+            )
+        except ValueError as error:
+            assert "--codex-home" in str(error)
+        else:
+            raise AssertionError("Режим codex принял отсутствующий --codex-home")
+
+        results.mkdir()
+        try:
+            runner.run_case(
+                FIXTURE,
+                "compatibility-test:codex",
+                None,
+                results,
+                1,
+                mode="codex",
+                model="test-model",
+                effort="high",
+                codex_home=results,
+            )
+        except ValueError as error:
+            assert "не должен пересекаться" in str(error)
+        else:
+            raise AssertionError("Режим codex принял пересекающийся --codex-home")
+
+
+def test_codex_home_persists_and_is_not_an_artifact_source() -> None:
+    with tempfile.TemporaryDirectory(prefix="compatibility-runner-home-persist-") as temporary:
+        root = Path(temporary)
+        results = root / "results"
+        codex_home = root / "codex-home"
+        codex_home.mkdir()
+        auth_path = codex_home / "auth.json"
+        auth_path.write_text("не копировать авторизацию\n", encoding="utf-8")
+        fake = FakeDocker(mutator=edit_agents)
+        report, report_path = run_codex_case(fake, results, codex_home=codex_home)
+        assert report["status"] == "passed"
+        assert auth_path.read_text(encoding="utf-8") == "не копировать авторизацию\n"
+        for artifact in report_path.parent.rglob("*"):
+            if artifact.is_file():
+                assert "не копировать авторизацию" not in artifact.read_text(
+                    encoding="utf-8", errors="replace"
+                )
 
 
 def test_success_and_isolation() -> None:
@@ -527,8 +635,11 @@ def main() -> int:
     test_cli_parsing()
     test_codex_requires_model_and_effort()
     test_codex_preparation_does_not_execute()
+    test_codex_preparation_reports_network_and_does_not_read_home()
     test_codex_mode_saves_outputs_and_keeps_workspace_clean()
     test_codex_final_answer_type_failures_are_reported()
+    test_codex_home_is_required_and_cannot_overlap()
+    test_codex_home_persists_and_is_not_an_artifact_source()
     test_success_and_isolation()
     test_unexpected_file_is_reported()
     test_command_failure_is_saved()

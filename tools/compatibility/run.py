@@ -35,6 +35,8 @@ CODEX_COMMAND_ARTIFACT = "codex-command.json"
 CODEX_VERSION = "0.155.1"
 COMMAND_MODE = "command"
 CODEX_MODE = "codex"
+NETWORKS = ("none", "bridge")
+CODEX_HOME_CONTAINER = "/codex-home"
 
 PopenFactory = Callable[..., Any]
 RunFactory = Callable[..., Any]
@@ -122,6 +124,8 @@ def docker_command(
     container_uid: int,
     container_gid: int,
     output_workspace: Path | None = None,
+    network: str = "none",
+    codex_home: Path | None = None,
 ) -> list[str]:
     container_user = f"{container_uid}:{container_gid}"
     arguments = [
@@ -132,7 +136,7 @@ def docker_command(
         container_name,
         "--pull=never",
         "--network",
-        "none",
+        network,
         "--read-only",
         "--security-opt",
         "no-new-privileges:true",
@@ -152,6 +156,15 @@ def docker_command(
         "--mount",
         f"type=bind,source={workspace},destination=/workspace",
     ]
+    if codex_home is not None:
+        arguments.extend(
+            [
+                "--mount",
+                f"type=bind,source={codex_home},destination={CODEX_HOME_CONTAINER}",
+                "--env",
+                f"CODEX_HOME={CODEX_HOME_CONTAINER}",
+            ]
+        )
     if output_workspace is not None:
         arguments.extend(
             [
@@ -518,6 +531,30 @@ def save_agents_artifacts(
     return artifacts
 
 
+def validate_codex_home(
+    project: Path, results_dir: Path, value: Path | None
+) -> Path:
+    if value is None:
+        raise ValueError("В режиме codex требуется явно указанный --codex-home")
+    codex_home = Path(os.path.abspath(value))
+    try:
+        home_type = codex_home.lstat().st_mode
+    except FileNotFoundError as exc:
+        raise ValueError(f"Каталог --codex-home не найден: {codex_home}") from exc
+    except OSError as exc:
+        raise ValueError(f"Не удалось определить --codex-home: {exc}") from exc
+    if stat.S_ISLNK(home_type):
+        raise ValueError("Каталог --codex-home не может быть символической ссылкой")
+    if not stat.S_ISDIR(home_type):
+        raise ValueError("--codex-home должен указывать на каталог")
+    resolved_home = codex_home.resolve()
+    if paths_overlap(project, resolved_home) or paths_overlap(results_dir, resolved_home):
+        raise ValueError(
+            "Каталог --codex-home не должен пересекаться с проектом или каталогом результатов"
+        )
+    return resolved_home
+
+
 def run_case(
     project: Path,
     image: str,
@@ -534,6 +571,8 @@ def run_case(
     model: str | None = None,
     effort: str | None = None,
     prepare: bool = False,
+    codex_home: Path | None = None,
+    network: str = "none",
 ) -> tuple[dict[str, Any], Path]:
     project = project.resolve()
     results_dir = results_dir.resolve()
@@ -547,11 +586,15 @@ def run_case(
         raise ValueError("Docker-образ должен быть одним именем без пробелов и ведущих параметров")
     if mode not in {COMMAND_MODE, CODEX_MODE}:
         raise ValueError(f"Неизвестный режим запуска: {mode}")
+    if network not in NETWORKS:
+        raise ValueError(f"Сеть должна быть одной из: {', '.join(NETWORKS)}")
     if mode == COMMAND_MODE:
         if not command:
             raise ValueError("Команда контейнера не может быть пустой")
-        if model is not None or effort is not None or prepare:
+        if model is not None or effort is not None or prepare or codex_home is not None:
             raise ValueError("Параметры Codex доступны только в режиме codex")
+        if network != "none":
+            raise ValueError("Параметр --network доступен только в режиме codex")
     else:
         if command:
             raise ValueError("В режиме codex команда задаётся самим запускателем")
@@ -559,6 +602,7 @@ def run_case(
             raise ValueError("В режиме codex требуется непустой --model")
         if not isinstance(effort, str) or not effort.strip():
             raise ValueError("В режиме codex требуется непустой --effort")
+        codex_home = validate_codex_home(project, results_dir, codex_home)
     if timeout <= 0:
         raise ValueError("Тайм-аут должен быть положительным")
     if paths_overlap(project, results_dir):
@@ -606,6 +650,8 @@ def run_case(
             owner.st_uid,
             owner.st_gid,
             output_workspace=output_workspace,
+            network=network,
+            codex_home=codex_home if mode == CODEX_MODE else None,
         )
         if mode == CODEX_MODE:
             write_json(
@@ -618,6 +664,13 @@ def run_case(
                     "task_runner_prefix": "",
                     "model": model,
                     "effort": effort,
+                    "network": network,
+                    "codex_home": {
+                        "host_path": str(codex_home),
+                        "container_path": CODEX_HOME_CONTAINER,
+                        "writable": True,
+                        "persistent": True,
+                    },
                 },
             )
         if prepare:
@@ -705,7 +758,17 @@ def run_case(
             "name": container_name,
             "user": f"{owner.st_uid}:{owner.st_gid}",
             "workdir": "/workspace",
-            "network": "none",
+            "network": network,
+            "codex_home": (
+                {
+                    "host_path": str(codex_home),
+                    "container_path": CODEX_HOME_CONTAINER,
+                    "writable": True,
+                    "persistent": True,
+                }
+                if mode == CODEX_MODE
+                else None
+            ),
             "rootfs": "read-only",
             "embedded_sandbox": (
                 "disabled by --dangerously-bypass-approvals-and-sandbox"
@@ -783,6 +846,17 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--model", help="Обязательная модель в режиме codex")
     parser.add_argument("--effort", help="Обязательное усилие в режиме codex")
     parser.add_argument(
+        "--codex-home",
+        type=Path,
+        help="Явный постоянный каталог CODEX_HOME в режиме codex",
+    )
+    parser.add_argument(
+        "--network",
+        choices=NETWORKS,
+        default="none",
+        help="Сеть контейнера в режиме codex (по умолчанию none)",
+    )
+    parser.add_argument(
         "--prepare",
         action="store_true",
         help="Показать запуск Codex без создания контейнера и выполнения задачи",
@@ -796,8 +870,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     if args.mode == COMMAND_MODE:
         if not args.command:
             parser.error("в режиме command после --command нужен хотя бы один аргумент")
-        if args.model or args.effort or args.prepare:
+        if args.model or args.effort or args.prepare or args.codex_home:
             parser.error("--model, --effort и --prepare доступны только в режиме codex")
+        if args.network != "none":
+            parser.error("--network bridge доступен только в режиме codex")
     else:
         if args.command:
             parser.error("в режиме codex параметр --command не используется")
@@ -805,6 +881,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
             parser.error("в режиме codex обязателен непустой --model")
         if not args.effort or not args.effort.strip():
             parser.error("в режиме codex обязателен непустой --effort")
+        if args.codex_home is None:
+            parser.error("в режиме codex обязателен --codex-home")
     if args.timeout <= 0:
         parser.error("--timeout должен быть положительным")
     return args
@@ -828,6 +906,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             model=args.model,
             effort=args.effort,
             prepare=args.prepare,
+            codex_home=args.codex_home,
+            network=args.network,
         )
     except (OSError, ValueError) as exc:
         print(f"Запуск сценария не подготовлен: {exc}", file=sys.stderr)
