@@ -140,6 +140,64 @@ https://developers.openai.com/codex/auth.
 контейнер. Образ пока проверен только для механики стенда. Установка коллекции и
 работа агентских сред ещё не проверялись.
 
+Для режима Hermes используйте подготовленный проект с локальным Git-корнем и
+отдельный `HERMES_HOME`:
+
+```text
+HERMES_IMAGE_ID='sha256:eff6ae1832649f11d229d89a10be93a68a7c89b6ad91e8d2dc548cf96217df21'
+HERMES_PROJECT='/path/to/hermes-consumer'
+HERMES_HOME_DIR='/path/to/hermes-home'
+RESULTS_DIR="$(mktemp -d)"
+python3 tools/compatibility/run.py \
+  --project "$HERMES_PROJECT" \
+  --image "$HERMES_IMAGE_ID" \
+  --results-dir "$RESULTS_DIR" \
+  --timeout 180 \
+  --mode hermes \
+  --hermes-home "$HERMES_HOME_DIR" \
+  --provider PROVIDER \
+  --model MODEL \
+  --effort high \
+  --network none
+```
+
+`PROVIDER`, `MODEL` и `--effort` обязательны. Запускатель передаёт исходный
+`prompt` из `scenario.json` без изменений через stdin в
+`hermes chat --query-file - --oneshot -Q`. Значение `--effort` передаётся
+штатным параметром Hermes `--reasoning`, а не несуществующим флагом `--effort`.
+Перед задачей выполняется `hermes skills trust /workspace`. Команда `chat`
+запускается без `--ignore-user-config`, поэтому Hermes читает только
+подключённый к контейнеру отдельный `HERMES_HOME`, а пользовательский профиль
+не подключается и не копируется. Параметр `--prepare` записывает точную команду
+и не создаёт контейнер, не устанавливает доверие и не передаёт задачу.
+
+Проверка загрузки настроек выполняется без задачи и модели в том же образе с
+сетью `none`: она загружает `HERMES_HOME/config.yaml` штатным
+`hermes_cli.config.load_config`, проверяет сохранённое доверие к `/workspace`,
+затем вызывает `agent.skill_utils.get_project_skills_dirs` и находит
+`/workspace/.agents/skills/ai-agents-md-maintenance`. Исходники Hermes 0.21.3
+показывают, что обычный `cmd_chat` без флагов обхода передаёт
+`ignore_user_config=False`, а `cli.main` строит агент через обычный `load_config` и формирует
+проектные навыки из доверенных каталогов. `hermes skills trust` изменяет только
+раздел `skills.trusted_project_dirs` через `load_config` и `save_config`, поэтому
+проверка также сохраняет отдельные настройки профиля, включая `_config_version`.
+
+В отчёте Hermes отдельно сохраняются запрошенные provider, model и effort.
+stdout, stderr, итоговый ответ, вывод доверия, JSONL-экспорт конкретной сессии,
+`agent` и `errors` журналы сохраняются по отдельным именам. Версия `0.21.3`
+для `chat --query-file -` не поддерживает `--usage-file`, поэтому доступные
+поля расхода берутся из штатного JSONL-экспорта сессии. Содержимое всего
+`HERMES_HOME` в результаты не копируется. Запускатель считает результат
+неуспешным при ненулевом коде, сообщении Hermes о `failed` или `partial`,
+неполном экспорте сессии, отсутствии итогового ответа или ошибке очистки.
+Даже нулевой код процесса не отменяет эти условия. Применение навыка отдельно
+не подтверждается автоматически.
+
+Немодельная проверка закреплённого образа с сетью `none` подтвердила Hermes
+`0.21.3`, справку CLI и `chat`, доверие `/workspace`, обнаружение
+`ai-agents-md-maintenance` из `local`-проекции, Python `3.13.15`, Git `2.47.3`
+и APM `0.31.0`. Режимы `command` и `codex` сохраняются без изменения.
+
 Для отдельной проверки штатной установки опубликованной коллекции используйте
 уже существующий локальный ID образа. По умолчанию выбирается прежний сценарий
 Codex. Цель можно явно выбрать параметром `--target codex|hermes`. Команда не

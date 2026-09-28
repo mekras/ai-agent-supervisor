@@ -32,11 +32,27 @@ AGENTS_DIFF_ARTIFACT = "agents.diff"
 CODEX_JSONL_ARTIFACT = "codex.jsonl"
 CODEX_FINAL_ANSWER_ARTIFACT = "final-answer.txt"
 CODEX_COMMAND_ARTIFACT = "codex-command.json"
+HERMES_FINAL_ANSWER_ARTIFACT = "hermes-final-answer.txt"
+HERMES_COMMAND_ARTIFACT = "hermes-command.json"
+HERMES_SESSION_EXPORT_ARTIFACT = "hermes-session.jsonl"
+HERMES_AGENT_LOG_ARTIFACT = "hermes-agent.log.txt"
+HERMES_ERROR_LOG_ARTIFACT = "hermes-errors.log.txt"
+HERMES_TRUST_STDOUT_ARTIFACT = "hermes-trust.stdout"
+HERMES_TRUST_STDERR_ARTIFACT = "hermes-trust.stderr"
+HERMES_CHAT_STDOUT_ARTIFACT = "hermes-chat.stdout"
+HERMES_CHAT_STDERR_ARTIFACT = "hermes-chat.stderr"
+HERMES_SESSION_EXPORT_STDOUT_ARTIFACT = "hermes-session-export.stdout"
+HERMES_SESSION_EXPORT_STDERR_ARTIFACT = "hermes-session-export.stderr"
+HERMES_SESSION_ID_ARTIFACT = "hermes-session-id.txt"
 CODEX_VERSION = "0.155.1"
+HERMES_VERSION = "0.21.3"
 COMMAND_MODE = "command"
 CODEX_MODE = "codex"
+HERMES_MODE = "hermes"
 NETWORKS = ("none", "bridge")
 CODEX_HOME_CONTAINER = "/codex-home"
+HERMES_HOME_CONTAINER = "/hermes-home"
+HERMES_EFFORTS = ("none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra")
 
 PopenFactory = Callable[..., Any]
 RunFactory = Callable[..., Any]
@@ -126,6 +142,7 @@ def docker_command(
     output_workspace: Path | None = None,
     network: str = "none",
     codex_home: Path | None = None,
+    hermes_home: Path | None = None,
 ) -> list[str]:
     container_user = f"{container_uid}:{container_gid}"
     arguments = [
@@ -165,6 +182,15 @@ def docker_command(
                 f"CODEX_HOME={CODEX_HOME_CONTAINER}",
             ]
         )
+    if hermes_home is not None:
+        arguments.extend(
+            [
+                "--mount",
+                f"type=bind,source={hermes_home},destination={HERMES_HOME_CONTAINER}",
+                "--env",
+                f"HERMES_HOME={HERMES_HOME_CONTAINER}",
+            ]
+        )
     if output_workspace is not None:
         arguments.extend(
             [
@@ -196,6 +222,62 @@ def codex_command(model: str, effort: str) -> list[str]:
         "--output-last-message",
         f"/run-output/{CODEX_FINAL_ANSWER_ARTIFACT}",
         "-",
+    ]
+
+
+HERMES_CONTAINER_SCRIPT = r'''#!/bin/sh
+set +e
+
+: > /run-output/hermes-session-export.stderr
+: > /run-output/hermes-agent-log.stderr
+: > /run-output/hermes-errors-log.stderr
+
+hermes skills trust /workspace > /run-output/hermes-trust.stdout 2> /run-output/hermes-trust.stderr
+trust_code=$?
+if [ "$trust_code" -ne 0 ]; then
+    cat /run-output/hermes-trust.stderr >&2
+    exit "$trust_code"
+fi
+
+hermes chat --query-file - --oneshot -Q --provider "$1" --model "$2" --reasoning "$3" > /run-output/hermes-chat.stdout 2> /run-output/hermes-chat.stderr
+chat_code=$?
+
+session_id=$(sed -n 's/^session_id:[[:space:]]*//p' /run-output/hermes-chat.stderr | tail -n 1)
+printf '%s\n' "$session_id" > /run-output/hermes-session-id.txt
+export_code=0
+if [ -n "$session_id" ]; then
+    hermes sessions export --format jsonl --redact --session-id "$session_id" /run-output/hermes-session.jsonl > /run-output/hermes-session-export.stdout 2> /run-output/hermes-session-export.stderr
+    export_code=$?
+    hermes logs agent --session "$session_id" -n 10000 > /run-output/hermes-agent.log.txt 2> /run-output/hermes-agent-log.stderr
+    hermes logs errors --session "$session_id" -n 10000 > /run-output/hermes-errors.log.txt 2> /run-output/hermes-errors-log.stderr
+fi
+
+cat /run-output/hermes-chat.stdout
+cat /run-output/hermes-trust.stderr >&2
+cat /run-output/hermes-chat.stderr >&2
+cat /run-output/hermes-session-export.stderr >&2
+cat /run-output/hermes-agent-log.stderr >&2
+cat /run-output/hermes-errors-log.stderr >&2
+
+if [ "$chat_code" -ne 0 ]; then
+    exit "$chat_code"
+fi
+if [ -n "$session_id" ] && [ "$export_code" -ne 0 ]; then
+    exit "$export_code"
+fi
+exit 0
+'''
+
+
+def hermes_command(provider: str, model: str, effort: str) -> list[str]:
+    return [
+        "sh",
+        "-c",
+        HERMES_CONTAINER_SCRIPT,
+        "hermes-run",
+        provider,
+        model,
+        effort,
     ]
 
 
@@ -439,6 +521,144 @@ def save_codex_artifacts(
     }
 
 
+def copy_regular_artifact(source: Path, destination: Path) -> tuple[str | None, str, str]:
+    content, status, reason = read_regular_file(source)
+    if content is None:
+        return None, status, reason
+    try:
+        destination.write_bytes(content)
+    except OSError as exc:
+        return None, "write_error", f"Не удалось сохранить артефакт: {exc}"
+    return destination.name, "available", reason
+
+
+def hermes_session_evidence(path: Path) -> dict[str, Any]:
+    records: list[dict[str, Any]] = []
+    parse_errors: list[str] = []
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError as exc:
+        return {"records": 0, "parse_errors": [str(exc)], "failure_markers": [], "usage_fields": []}
+    for line_number, line in enumerate(lines, start=1):
+        if not line.strip():
+            continue
+        try:
+            value = json.loads(line)
+        except json.JSONDecodeError as exc:
+            parse_errors.append(f"строка {line_number}: {exc}")
+            continue
+        if isinstance(value, dict):
+            records.append(value)
+
+    failure_markers: list[str] = []
+    usage_fields: set[str] = set()
+    failure_reasons = {"error", "failed", "failure", "partial", "interrupted", "timeout", "timed_out", "aborted"}
+
+    def visit(value: Any, path_text: str) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                item_path = f"{path_text}.{key}" if path_text else key
+                if key in {"input_tokens", "output_tokens", "total_tokens", "cost", "estimated_cost", "api_calls"}:
+                    usage_fields.add(key)
+                if key in {"failed", "partial"} and item is True:
+                    failure_markers.append(item_path)
+                if key in {"end_reason", "status", "failure_reason"} and isinstance(item, str):
+                    if item.strip().lower() in failure_reasons:
+                        failure_markers.append(f"{item_path}={item}")
+                visit(item, item_path)
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                visit(item, f"{path_text}[{index}]")
+
+    for index, record in enumerate(records):
+        visit(record, f"record[{index}]")
+    return {
+        "records": len(records),
+        "parse_errors": parse_errors,
+        "failure_markers": failure_markers,
+        "usage_fields": sorted(usage_fields),
+    }
+
+
+def save_hermes_artifacts(
+    run_dir: Path, output_workspace: Path, execution: dict[str, Any]
+) -> dict[str, Any]:
+    file_map = {
+        HERMES_TRUST_STDOUT_ARTIFACT: "hermes-trust.stdout",
+        HERMES_TRUST_STDERR_ARTIFACT: "hermes-trust.stderr",
+        HERMES_CHAT_STDOUT_ARTIFACT: "hermes-chat.stdout",
+        HERMES_CHAT_STDERR_ARTIFACT: "hermes-chat.stderr",
+        HERMES_SESSION_EXPORT_ARTIFACT: "hermes-session.jsonl",
+        HERMES_SESSION_EXPORT_STDOUT_ARTIFACT: "hermes-session-export.stdout",
+        HERMES_SESSION_EXPORT_STDERR_ARTIFACT: "hermes-session-export.stderr",
+        HERMES_AGENT_LOG_ARTIFACT: "hermes-agent.log.txt",
+        HERMES_ERROR_LOG_ARTIFACT: "hermes-errors.log.txt",
+        HERMES_SESSION_ID_ARTIFACT: "hermes-session-id.txt",
+    }
+    saved: dict[str, Any] = {}
+    for artifact, source_name in file_map.items():
+        result = copy_regular_artifact(output_workspace / source_name, run_dir / artifact)
+        saved[artifact] = {"path": result[0], "status": result[1], "reason": result[2]}
+
+    session_id = ""
+    session_id_path = run_dir / HERMES_SESSION_ID_ARTIFACT
+    if saved[HERMES_SESSION_ID_ARTIFACT]["status"] == "available":
+        session_id = session_id_path.read_text(encoding="utf-8").strip()
+    session_export_path = run_dir / HERMES_SESSION_EXPORT_ARTIFACT
+    if saved[HERMES_SESSION_EXPORT_ARTIFACT]["status"] == "available":
+        session_evidence = hermes_session_evidence(session_export_path)
+    else:
+        session_evidence = {
+            "records": 0,
+            "parse_errors": [],
+            "failure_markers": [],
+            "usage_fields": [],
+        }
+    chat_stderr = ""
+    chat_stderr_path = run_dir / HERMES_CHAT_STDERR_ARTIFACT
+    if saved[HERMES_CHAT_STDERR_ARTIFACT]["status"] == "available":
+        chat_stderr = chat_stderr_path.read_text(encoding="utf-8", errors="replace")
+    stderr_failure = any(
+        line.lstrip().startswith("Error:") or "hermes -z: agent failed:" in line
+        for line in chat_stderr.splitlines()
+    )
+    final_answer = saved[HERMES_CHAT_STDOUT_ARTIFACT]
+    if final_answer["status"] == "available" and not (
+        run_dir / HERMES_CHAT_STDOUT_ARTIFACT
+    ).read_bytes().strip():
+        final_answer = {
+            "path": final_answer["path"],
+            "status": "empty",
+            "reason": "Hermes не вернул непустой итоговый ответ.",
+        }
+        saved[HERMES_CHAT_STDOUT_ARTIFACT] = final_answer
+    saved[HERMES_FINAL_ANSWER_ARTIFACT] = {
+        "path": HERMES_FINAL_ANSWER_ARTIFACT if final_answer["status"] == "available" else None,
+        "status": final_answer["status"],
+        "reason": final_answer["reason"],
+    }
+    if final_answer["status"] == "available":
+        (run_dir / HERMES_FINAL_ANSWER_ARTIFACT).write_bytes(
+            (run_dir / HERMES_CHAT_STDOUT_ARTIFACT).read_bytes()
+        )
+    return {
+        "version": HERMES_VERSION,
+        "session_id": session_id or None,
+        "session_export": saved[HERMES_SESSION_EXPORT_ARTIFACT],
+        "session_evidence": session_evidence,
+        "stderr_failure": stderr_failure,
+        "usage_report": {
+            "status": "not_available",
+            "reason": (
+                "hermes chat не принимает --usage-file. Структурированный экспорт сессии "
+                "сохранён и содержит доступные поля расхода."
+            ),
+            "source": HERMES_SESSION_EXPORT_ARTIFACT,
+        },
+        "artifacts": saved,
+    }
+
+
 def prepared_execution() -> dict[str, Any]:
     return {
         "status": "not_run",
@@ -530,28 +750,37 @@ def save_agents_artifacts(
     return artifacts
 
 
-def validate_codex_home(
-    project: Path, results_dir: Path, value: Path | None
+def validate_persistent_home(
+    project: Path,
+    results_dir: Path,
+    value: Path | None,
+    option: str,
 ) -> Path:
     if value is None:
-        raise ValueError("В режиме codex требуется явно указанный --codex-home")
+        raise ValueError(f"В этом режиме требуется явно указанный {option}")
     codex_home = Path(os.path.abspath(value))
     try:
         home_type = codex_home.lstat().st_mode
     except FileNotFoundError as exc:
-        raise ValueError(f"Каталог --codex-home не найден: {codex_home}") from exc
+        raise ValueError(f"Каталог {option} не найден: {codex_home}") from exc
     except OSError as exc:
-        raise ValueError(f"Не удалось определить --codex-home: {exc}") from exc
+        raise ValueError(f"Не удалось определить {option}: {exc}") from exc
     if stat.S_ISLNK(home_type):
-        raise ValueError("Каталог --codex-home не может быть символической ссылкой")
+        raise ValueError(f"Каталог {option} не может быть символической ссылкой")
     if not stat.S_ISDIR(home_type):
-        raise ValueError("--codex-home должен указывать на каталог")
+        raise ValueError(f"{option} должен указывать на каталог")
     resolved_home = codex_home.resolve()
     if paths_overlap(project, resolved_home) or paths_overlap(results_dir, resolved_home):
         raise ValueError(
-            "Каталог --codex-home не должен пересекаться с проектом или каталогом результатов"
+            f"Каталог {option} не должен пересекаться с проектом или каталогом результатов"
         )
     return resolved_home
+
+
+def validate_codex_home(
+    project: Path, results_dir: Path, value: Path | None
+) -> Path:
+    return validate_persistent_home(project, results_dir, value, "--codex-home")
 
 
 def run_case(
@@ -567,10 +796,12 @@ def run_case(
     scenario_path: Path = SCENARIO_PATH,
     check_path: Path = CHECK_PATH,
     mode: str = COMMAND_MODE,
+    provider: str | None = None,
     model: str | None = None,
     effort: str | None = None,
     prepare: bool = False,
     codex_home: Path | None = None,
+    hermes_home: Path | None = None,
     network: str = "none",
 ) -> tuple[dict[str, Any], Path]:
     project = project.resolve()
@@ -583,25 +814,43 @@ def run_case(
         or any(character.isspace() for character in image)
     ):
         raise ValueError("Docker-образ должен быть одним именем без пробелов и ведущих параметров")
-    if mode not in {COMMAND_MODE, CODEX_MODE}:
+    if mode not in {COMMAND_MODE, CODEX_MODE, HERMES_MODE}:
         raise ValueError(f"Неизвестный режим запуска: {mode}")
     if network not in NETWORKS:
         raise ValueError(f"Сеть должна быть одной из: {', '.join(NETWORKS)}")
     if mode == COMMAND_MODE:
         if not command:
             raise ValueError("Команда контейнера не может быть пустой")
-        if model is not None or effort is not None or prepare or codex_home is not None:
-            raise ValueError("Параметры Codex доступны только в режиме codex")
+        if provider is not None or model is not None or effort is not None or prepare or codex_home is not None or hermes_home is not None:
+            raise ValueError("Параметры моделей и подготовка доступны только в режимах codex и hermes")
         if network != "none":
-            raise ValueError("Параметр --network доступен только в режиме codex")
-    else:
+            raise ValueError("Параметр --network доступен только в режимах codex и hermes")
+    elif mode == CODEX_MODE:
         if command:
             raise ValueError("В режиме codex команда задаётся самим запускателем")
+        if provider is not None or hermes_home is not None:
+            raise ValueError("Параметры Hermes доступны только в режиме hermes")
         if not isinstance(model, str) or not model.strip():
             raise ValueError("В режиме codex требуется непустой --model")
         if not isinstance(effort, str) or not effort.strip():
             raise ValueError("В режиме codex требуется непустой --effort")
         codex_home = validate_codex_home(project, results_dir, codex_home)
+    else:
+        if command:
+            raise ValueError("В режиме hermes команда задаётся самим запускателем")
+        if codex_home is not None:
+            raise ValueError("Параметр --codex-home доступен только в режиме codex")
+        if not isinstance(provider, str) or not provider.strip():
+            raise ValueError("В режиме hermes требуется непустой --provider")
+        if not isinstance(model, str) or not model.strip():
+            raise ValueError("В режиме hermes требуется непустой --model")
+        if not isinstance(effort, str) or not effort.strip():
+            raise ValueError("В режиме hermes требуется непустой --effort")
+        if effort not in HERMES_EFFORTS:
+            raise ValueError(
+                f"В режиме hermes --effort должен быть одним из: {', '.join(HERMES_EFFORTS)}"
+            )
+        hermes_home = validate_persistent_home(project, results_dir, hermes_home, "--hermes-home")
     if timeout <= 0:
         raise ValueError("Тайм-аут должен быть положительным")
     if paths_overlap(project, results_dir):
@@ -623,23 +872,37 @@ def run_case(
         "final_answer_status": "not_applicable",
         "final_answer_reason": "Исполнение Codex не запускалось.",
     }
+    hermes_artifacts = {
+        "version": HERMES_VERSION,
+        "requested_provider": provider,
+        "requested_model": model,
+        "requested_effort": effort,
+        "effort_mechanism": "--reasoning",
+        "session_id": None,
+        "session_export": None,
+        "session_evidence": None,
+        "stderr_failure": False,
+        "usage_report": None,
+        "artifacts": {},
+    }
     with tempfile.TemporaryDirectory(prefix="compatibility-work-") as temporary:
         workspace = Path(temporary) / "project"
         shutil.copytree(project, workspace, symlinks=False)
         output_workspace = None
-        if mode == CODEX_MODE:
-            output_workspace = Path(temporary) / "codex-output"
+        if mode in {CODEX_MODE, HERMES_MODE}:
+            output_workspace = Path(temporary) / "agent-output"
             output_workspace.mkdir()
         owner = workspace.stat()
         if owner.st_uid == 0:
             raise ValueError(
                 "Рабочая копия принадлежит UID 0; запускатель не переходит к root автоматически"
             )
-        container_command = (
-            list(command)
-            if mode == COMMAND_MODE
-            else codex_command(model or "", effort or "")
-        )
+        if mode == COMMAND_MODE:
+            container_command = list(command or [])
+        elif mode == CODEX_MODE:
+            container_command = codex_command(model or "", effort or "")
+        else:
+            container_command = hermes_command(provider or "", model or "", effort or "")
         docker_argv = docker_command(
             docker_executable,
             container_name,
@@ -651,6 +914,7 @@ def run_case(
             output_workspace=output_workspace,
             network=network,
             codex_home=codex_home if mode == CODEX_MODE else None,
+            hermes_home=hermes_home if mode == HERMES_MODE else None,
         )
         if mode == CODEX_MODE:
             write_json(
@@ -667,6 +931,51 @@ def run_case(
                     "codex_home": {
                         "host_path": str(codex_home),
                         "container_path": CODEX_HOME_CONTAINER,
+                        "writable": True,
+                        "persistent": True,
+                    },
+                },
+            )
+        elif mode == HERMES_MODE:
+            write_json(
+                run_dir / HERMES_COMMAND_ARTIFACT,
+                {
+                    "docker_argv": docker_argv,
+                    "hermes_argv": [
+                        "hermes",
+                        "chat",
+                        "--query-file",
+                        "-",
+                        "--oneshot",
+                        "-Q",
+                        "--provider",
+                        provider,
+                        "--model",
+                        model,
+                        "--reasoning",
+                        effort,
+                    ],
+                    "trust_argv": ["hermes", "skills", "trust", "/workspace"],
+                    "session_export_argv": [
+                        "hermes",
+                        "sessions",
+                        "export",
+                        "--format",
+                        "jsonl",
+                        "--redact",
+                        "--session-id",
+                        "<session_id>",
+                    ],
+                    "task_source": f"{scenario_path}:prompt",
+                    "task_via_stdin": True,
+                    "effort_mechanism": "--reasoning",
+                    "provider": provider,
+                    "model": model,
+                    "effort": effort,
+                    "network": network,
+                    "hermes_home": {
+                        "host_path": str(hermes_home),
+                        "container_path": HERMES_HOME_CONTAINER,
                         "writable": True,
                         "persistent": True,
                     },
@@ -724,6 +1033,12 @@ def run_case(
                 codex_artifacts = save_codex_artifacts(
                     run_dir, output_workspace, execution  # type: ignore[arg-type]
                 )
+            elif mode == HERMES_MODE:
+                hermes_artifacts.update(
+                    save_hermes_artifacts(
+                        run_dir, output_workspace, execution  # type: ignore[arg-type]
+                    )
+                )
         source_after = file_snapshot(project)
         source_changed = changed_paths(before, source_after)
 
@@ -742,6 +1057,19 @@ def run_case(
         or file_check["status"] != "passed"
         or execution["cleanup"]["errors"]
         or (mode == CODEX_MODE and codex_artifacts["final_answer_status"] != "available")
+        or (
+            mode == HERMES_MODE
+            and (
+                hermes_artifacts["session_id"] is None
+                or hermes_artifacts["session_export"]["status"] != "available"
+                or hermes_artifacts["session_evidence"]["records"] == 0
+                or hermes_artifacts["session_evidence"]["parse_errors"]
+                or hermes_artifacts["session_evidence"]["failure_markers"]
+                or hermes_artifacts["stderr_failure"]
+                or hermes_artifacts["artifacts"][HERMES_FINAL_ANSWER_ARTIFACT]["status"]
+                != "available"
+            )
+        )
     ):
         status = "failed"
 
@@ -768,6 +1096,16 @@ def run_case(
                 if mode == CODEX_MODE
                 else None
             ),
+            "hermes_home": (
+                {
+                    "host_path": str(hermes_home),
+                    "container_path": HERMES_HOME_CONTAINER,
+                    "writable": True,
+                    "persistent": True,
+                }
+                if mode == HERMES_MODE
+                else None
+            ),
             "rootfs": "read-only",
             "embedded_sandbox": (
                 "disabled by --dangerously-bypass-approvals-and-sandbox"
@@ -791,9 +1129,10 @@ def run_case(
             if mode == CODEX_MODE
             else None
         ),
+        "hermes": hermes_artifacts if mode == HERMES_MODE else None,
         "task": {
             "source": f"{scenario_path}:prompt",
-            "via_stdin": mode == CODEX_MODE,
+            "via_stdin": mode in {CODEX_MODE, HERMES_MODE},
             "runner_prefix": "",
             "sent": not prepare,
         },
@@ -822,6 +1161,13 @@ def run_case(
             "codex_jsonl": codex_artifacts["jsonl"],
             "codex_final_answer": codex_artifacts["final_answer"],
             "codex_command": CODEX_COMMAND_ARTIFACT if mode == CODEX_MODE else None,
+            "hermes_final_answer": (
+                HERMES_FINAL_ANSWER_ARTIFACT if mode == HERMES_MODE else None
+            ),
+            "hermes_session_export": (
+                HERMES_SESSION_EXPORT_ARTIFACT if mode == HERMES_MODE else None
+            ),
+            "hermes_command": HERMES_COMMAND_ARTIFACT if mode == HERMES_MODE else None,
             "report": "report.json",
         },
     }
@@ -838,27 +1184,36 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--timeout", required=True, type=float)
     parser.add_argument(
         "--mode",
-        choices=(COMMAND_MODE, CODEX_MODE),
+        choices=(COMMAND_MODE, CODEX_MODE, HERMES_MODE),
         default=COMMAND_MODE,
-        help="Режим запуска: произвольная команда или Codex CLI",
+        help="Режим запуска: произвольная команда, Codex CLI или Hermes Agent",
     )
-    parser.add_argument("--model", help="Обязательная модель в режиме codex")
-    parser.add_argument("--effort", help="Обязательное усилие в режиме codex")
+    parser.add_argument("--provider", help="Обязательный провайдер в режиме hermes")
+    parser.add_argument("--model", help="Обязательная модель в режиме codex или hermes")
+    parser.add_argument(
+        "--effort",
+        help="Обязательное усилие. В режиме hermes передаётся как --reasoning",
+    )
     parser.add_argument(
         "--codex-home",
         type=Path,
         help="Явный постоянный каталог CODEX_HOME в режиме codex",
     )
     parser.add_argument(
+        "--hermes-home",
+        type=Path,
+        help="Явный постоянный каталог HERMES_HOME в режиме hermes",
+    )
+    parser.add_argument(
         "--network",
         choices=NETWORKS,
         default="none",
-        help="Сеть контейнера в режиме codex (по умолчанию none)",
+        help="Сеть контейнера в режимах codex и hermes (по умолчанию none)",
     )
     parser.add_argument(
         "--prepare",
         action="store_true",
-        help="Показать запуск Codex без создания контейнера и выполнения задачи",
+        help="Показать запуск Codex или Hermes без создания контейнера и выполнения задачи",
     )
     parser.add_argument(
         "--command",
@@ -869,19 +1224,38 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     if args.mode == COMMAND_MODE:
         if not args.command:
             parser.error("в режиме command после --command нужен хотя бы один аргумент")
-        if args.model or args.effort or args.prepare or args.codex_home:
-            parser.error("--model, --effort и --prepare доступны только в режиме codex")
+        if args.provider or args.model or args.effort or args.prepare or args.codex_home or args.hermes_home:
+            parser.error("Параметры моделей, домашних каталогов и --prepare доступны только в режимах codex и hermes")
         if args.network != "none":
-            parser.error("--network bridge доступен только в режиме codex")
-    else:
+            parser.error("--network bridge доступен только в режимах codex и hermes")
+    elif args.mode == CODEX_MODE:
         if args.command:
             parser.error("в режиме codex параметр --command не используется")
+        if args.provider or args.hermes_home:
+            parser.error("--provider и --hermes-home доступны только в режиме hermes")
         if not args.model or not args.model.strip():
             parser.error("в режиме codex обязателен непустой --model")
         if not args.effort or not args.effort.strip():
             parser.error("в режиме codex обязателен непустой --effort")
         if args.codex_home is None:
             parser.error("в режиме codex обязателен --codex-home")
+    else:
+        if args.command:
+            parser.error("в режиме hermes параметр --command не используется")
+        if args.codex_home:
+            parser.error("--codex-home доступен только в режиме codex")
+        if not args.provider or not args.provider.strip():
+            parser.error("в режиме hermes обязателен непустой --provider")
+        if not args.model or not args.model.strip():
+            parser.error("в режиме hermes обязателен непустой --model")
+        if not args.effort:
+            parser.error("в режиме hermes обязателен --effort")
+        if args.effort not in HERMES_EFFORTS:
+            parser.error(
+                f"в режиме hermes --effort должен быть одним из: {', '.join(HERMES_EFFORTS)}"
+            )
+        if args.hermes_home is None:
+            parser.error("в режиме hermes обязателен --hermes-home")
     if args.timeout <= 0:
         parser.error("--timeout должен быть положительным")
     return args
@@ -902,10 +1276,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.timeout,
             docker_executable=docker,
             mode=args.mode,
+            provider=args.provider,
             model=args.model,
             effort=args.effort,
             prepare=args.prepare,
             codex_home=args.codex_home,
+            hermes_home=args.hermes_home,
             network=args.network,
         )
     except (OSError, ValueError) as exc:
