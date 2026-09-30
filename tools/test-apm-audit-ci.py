@@ -415,6 +415,7 @@ def test_package_identity() -> None:
         assert rejected.returncode == 1, rejected.stdout + rejected.stderr
 
     resolve = runpy.run_path(str(AUDIT))["local_package_id"]
+    matches = runpy.run_path(str(AUDIT))["matches_local_source"]
     manifest = {"name": "local-package", "version": "1.0.0"}
     ordinary = {key: value for key, value in virtual.items() if key not in {"is_virtual", "virtual_path"}}
     assert resolve(manifest, {"dependencies": [ordinary]}) == "example/marketplace"
@@ -432,6 +433,33 @@ def test_package_identity() -> None:
     ):
         assert resolve(manifest, {"dependencies": [invalid]}) is None, invalid
     assert resolve(manifest, {"dependencies": [ordinary, {**ordinary, "repo_url": None}]}) is None
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        source = root / ".apm/skills/example/references/SKILL.md"
+        deployed = root / ".agents/skills/example/references/SKILL.md"
+        source.parent.mkdir(parents=True)
+        deployed.parent.mkdir(parents=True)
+        source.write_text(
+            "[history](../../other/references/history.md)\n",
+            encoding="utf-8",
+        )
+        deployed.write_text(
+            "[history](../../../../.apm/skills/other/references/history.md)\n",
+            encoding="utf-8",
+        )
+        assert matches(source, deployed, root)
+        deployed.write_text(
+            "[history](../../../../.apm/skills/wrong/references/history.md)\n",
+            encoding="utf-8",
+        )
+        assert not matches(source, deployed, root)
+        deployed.write_text(
+            "[history](../../../../.apm/skills/other/references/history.md)\n"
+            "unrelated change\n",
+            encoding="utf-8",
+        )
+        assert not matches(source, deployed, root)
 
 
 if __name__ == "__main__":
