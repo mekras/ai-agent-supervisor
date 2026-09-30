@@ -212,7 +212,7 @@ def main() -> int:
         assert "ai-work-result-evaluation" in analysis["gap"]
     actual_rendered = render(actual)
     assert "| Codex CLI | Предусмотрены установка и работа навыков." in actual_rendered
-    assert "| Hermes Agent | Установка и обнаружение локальных навыков, а также пробная правка AGENTS.md в Hermes проверены на локальном кандидате." in actual_rendered
+    assert "| Hermes Agent | Версия 2.6.13 содержит установку и обнаружение локальных навыков. Сценарий правки AGENTS.md в Hermes проверен только на локальном кандидате." in actual_rendered
     assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in actual_rendered
     assert "Загрузка и доступность навыков внутри Hermes не проверялись" not in actual_rendered
     assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" not in actual_rendered
