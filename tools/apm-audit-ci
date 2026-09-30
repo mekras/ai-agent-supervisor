@@ -154,7 +154,7 @@ def local_source_path(project_root: Path, deployed_path: str) -> Path | None:
     return project_root / ".apm" / "skills" / Path(*parts[skill_index + 1 :])
 
 
-def matches_local_source(source: Path, deployed: Path) -> bool:
+def matches_local_source(source: Path, deployed: Path, project_root: Path) -> bool:
     """Подтвердить источник с учётом переписанных APM относительных ссылок."""
     source_bytes = source.read_bytes()
     deployed_bytes = deployed.read_bytes()
@@ -165,11 +165,14 @@ def matches_local_source(source: Path, deployed: Path) -> bool:
         deployed_text = deployed_bytes.decode("utf-8")
     except UnicodeDecodeError:
         return False
-    restored = re.sub(
-        r"\]\(\.\./\.\./\.\./\.apm/skills/([^)]*)\)",
-        r"](../\1)",
-        deployed_text,
-    )
+    link_pattern = re.compile(r"\]\(((?:\.\./)+\.apm/skills/([^)]*))\)")
+
+    def restore_link(match: re.Match[str]) -> str:
+        target = project_root / ".apm" / "skills" / match.group(2)
+        relative = os.path.relpath(target, source.parent).replace(os.sep, "/")
+        return f"]({relative})"
+
+    restored = link_pattern.sub(restore_link, deployed_text)
     return restored == source_text
 
 
@@ -200,7 +203,7 @@ def is_local_override(
         source
         and source.is_file()
         and deployed.is_file()
-        and matches_local_source(source, deployed)
+        and matches_local_source(source, deployed, project_root)
     )
 
 
@@ -219,7 +222,7 @@ def is_local_addition(finding: dict[str, Any], project_root: Path) -> bool:
         source
         and source.is_file()
         and deployed.is_file()
-        and matches_local_source(source, deployed)
+        and matches_local_source(source, deployed, project_root)
     )
 
 
@@ -258,7 +261,7 @@ def is_confirmed_local_source_path(
         and isinstance(owners, list)
         and package_id in owners
         and "." in owners
-        and matches_local_source(source, deployed)
+        and matches_local_source(source, deployed, project_root)
     )
 
 
