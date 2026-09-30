@@ -200,6 +200,10 @@ def main() -> int:
     assert "auto-approve и yolo" in hermes_check["scope"]
     assert "Телеметрия не проверялась" in hermes_check["scope"]
     actual_capabilities = {item["id"]: item for item in actual["capabilities"]}
+    assert actual_capabilities["skill_loading_and_availability"]["declared_implementation"]["hermes_agent"]["status"] == "documented"
+    hermes_setup = actual_capabilities["project_and_instruction_setup"]["declared_implementation"]["hermes_agent"]
+    assert hermes_setup["status"] == "partial"
+    assert "остальные навыки и подагенты не проверены" in hermes_setup["gap"]
     assert actual_capabilities["subagent_setup_and_use"]["declared_implementation"]["claude_code"]["status"] == "documented"
     for environment_id, environment_name in (("codex_cli", "Codex CLI"), ("claude_code", "Claude Code")):
         analysis = actual_capabilities["work_analysis_and_result_evaluation"]["declared_implementation"][environment_id]
@@ -208,7 +212,7 @@ def main() -> int:
         assert "ai-work-result-evaluation" in analysis["gap"]
     actual_rendered = render(actual)
     assert "| Codex CLI | Предусмотрены установка и работа навыков." in actual_rendered
-    assert "| Hermes Agent | Установка и пробная правка AGENTS.md в Hermes проверены на локальном кандидате." in actual_rendered
+    assert "| Hermes Agent | Установка и обнаружение локальных навыков, а также пробная правка AGENTS.md в Hermes проверены на локальном кандидате." in actual_rendered
     assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in actual_rendered
     assert "Загрузка и доступность навыков внутри Hermes не проверялись" not in actual_rendered
     assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" not in actual_rendered
