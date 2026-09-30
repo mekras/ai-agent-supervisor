@@ -124,6 +124,11 @@ def main() -> int:
     runtime_pass = check(project, "codex_cli", "2026-09-23", "passed", "runtime")
     with_runtime = render(registry([runtime_pass]))
     assert "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят." in with_runtime
+    hermes_pass = check(project, "hermes_agent", "2026-09-29", "passed", "hermes-runtime")
+    with_hermes_runtime = render(registry([hermes_pass]))
+    assert "В локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in with_hermes_runtime
+    with_both_runtime = render(registry([runtime_pass, hermes_pass]))
+    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in with_both_runtime
 
     failure = check(project, "codex_cli", "2026-09-22", "failed", "new-failure")
     history = render(registry([installation_pass, behavior_pass, failure]))
@@ -143,8 +148,8 @@ def main() -> int:
     assert actual_check["evidence"] == [
         ".apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12"
     ]
-    runtime_check = actual["checks"][-1]
-    assert runtime_check["id"] == "codex_cli_ai_agents_md_maintenance_2_6_12"
+    runtime_checks = {item["id"]: item for item in actual["checks"]}
+    runtime_check = runtime_checks["codex_cli_ai_agents_md_maintenance_2_6_12"]
     assert str(runtime_check["date"]) == "2026-09-28"
     assert runtime_check["collection_version"] == "2.6.12"
     assert runtime_check["environment"] == {
@@ -172,6 +177,28 @@ def main() -> int:
         "evals/compatibility/evidence/codex-cli-2026-09-28/agents.diff",
         "evals/compatibility/evidence/codex-cli-2026-09-28/journal-excerpts.md",
     ]
+    hermes_check = runtime_checks["hermes_agent_ai_agents_md_maintenance_candidate_2026_09_29"]
+    assert hermes_check["collection_version"] == "2.6.12-hermes-local.20260929"
+    assert hermes_check["environment"] == {
+        "id": "hermes_agent",
+        "version": "0.21.3",
+        "participation": "participated",
+        "tooling": {
+            "platform": "Linux/Docker",
+            "isolation": "external Docker",
+            "image": "sha256:eff6ae1832649f11d229d89a10be93a68a7c89b6ad91e8d2dc548cf96217df21",
+            "apm_cli": "0.31.0",
+            "hermes_commit": "345cd2b057a452236de401d3534b8502a7465e8d",
+            "security_protected_instruction_files": False,
+        },
+    }
+    assert hermes_check["provider"] == "openai-codex"
+    assert hermes_check["model"] == "gpt-5.6-luna"
+    assert hermes_check["effort"] == "high"
+    assert hermes_check["result"] == "passed"
+    assert "опубликованная версия 2.6.12" in hermes_check["scope"]
+    assert "auto-approve и yolo" in hermes_check["scope"]
+    assert "Телеметрия не проверялась" in hermes_check["scope"]
     actual_capabilities = {item["id"]: item for item in actual["capabilities"]}
     assert actual_capabilities["subagent_setup_and_use"]["declared_implementation"]["claude_code"]["status"] == "documented"
     for environment_id, environment_name in (("codex_cli", "Codex CLI"), ("claude_code", "Claude Code")):
@@ -182,7 +209,7 @@ def main() -> int:
     actual_rendered = render(actual)
     assert "| Codex CLI | Предусмотрены установка и работа навыков." in actual_rendered
     assert "| Hermes Agent | Предусмотрена установка через APM." in actual_rendered
-    assert "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят." in actual_rendered
+    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in actual_rendered
     assert "Загрузка и доступность навыков внутри Hermes не проверялись" not in actual_rendered
     assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" not in actual_rendered
     assert "Общая оценка результата через ai-work-result-evaluation доступна" not in actual_rendered

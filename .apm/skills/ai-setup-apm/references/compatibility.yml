@@ -14,7 +14,7 @@ environments:
   - id: hermes_agent
     name: Hermes Agent
     declared_support: true
-    user_summary: Предусмотрена установка через APM. Работа навыков внутри Hermes пока не подтверждена.
+    user_summary: Предусмотрена установка через APM. Точечная работа навыка подтверждена только в локальном кандидате коллекции, опубликованная версия 2.6.12 для Hermes не подтверждена.
 capabilities:
   - id: collection_installation
     name: Установка коллекции
@@ -190,3 +190,34 @@ checks:
       - evals/compatibility/evidence/codex-cli-2026-09-28/source-agents.md
       - evals/compatibility/evidence/codex-cli-2026-09-28/agents.diff
       - evals/compatibility/evidence/codex-cli-2026-09-28/journal-excerpts.md
+  - id: hermes_agent_ai_agents_md_maintenance_candidate_2026_09_29
+    date: 2026-09-29
+    collection_version: 2.6.12-hermes-local.20260929
+    environment:
+      id: hermes_agent
+      version: 0.21.3
+      participation: participated
+      tooling:
+        platform: Linux/Docker
+        isolation: external Docker
+        image: sha256:eff6ae1832649f11d229d89a10be93a68a7c89b6ad91e8d2dc548cf96217df21
+        apm_cli: 0.31.0
+        hermes_commit: 345cd2b057a452236de401d3534b8502a7465e8d
+        security_protected_instruction_files: false
+    capability: project_and_instruction_setup
+    provider: openai-codex
+    model: gpt-5.6-luna
+    effort: high
+    model_source: evals/compatibility/evidence/hermes-agent-2026-09-29/journal-excerpts.md#успешный-прогон
+    effort_source: evals/compatibility/evidence/hermes-agent-2026-09-29/journal-excerpts.md#успешный-прогон
+    conditions: Единственный реальный запуск в Linux/Docker на локальном кандидате коллекции с внешней изоляцией и заранее разрешённой правкой защищённого файла в отдельном HERMES_HOME
+    method: Hermes Agent получил исходную задачу через stdin и --query-file -, загрузил установленный через APM навык и изменил только AGENTS.md в подготовленной копии проекта
+    verification_subject: agent_runtime
+    result: passed
+    scope: >-
+      Проверена только точечная правка AGENTS.md в Hermes Agent 0.21.3 на Linux/Docker. Использован локальный кандидат коллекции 2.6.12-hermes-local.20260929 из commit 4a18241910e49d9c9bdecc77c987f4c18b5d1043, установленный через APM, а не опубликованная версия 2.6.12. Исходный проект и остальные файлы сохранены. security.protected_instruction_files=false применялся только в конфигурации стенда. Общий auto-approve и yolo не включались. Наблюдались загрузка ai-agents-md-maintenance и его references, чтение, правка и проверка результата. Полное соблюдение навыка не оценивалось. Телеметрия не проверялась. Команда и клиентские журналы подтверждают переданные модель и усилие, но не доказывают фактические параметры на стороне сервера.
+    evidence:
+      - .apm/skills/ai-setup-apm/references/compatibility-history.md
+      - evals/compatibility/evidence/hermes-agent-2026-09-29/source-agents.md
+      - evals/compatibility/evidence/hermes-agent-2026-09-29/agents.diff
+      - evals/compatibility/evidence/hermes-agent-2026-09-29/journal-excerpts.md

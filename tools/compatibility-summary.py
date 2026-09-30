@@ -54,18 +54,26 @@ VERIFICATION_SUBJECT_LABELS = {
 }
 
 
-def has_codex_agents_md_check(data: dict[str, Any]) -> bool:
+def has_agents_md_runtime_check(data: dict[str, Any], environment_id: str) -> bool:
     for check in data["checks"]:
         environment = check["environment"]
         if (
             check["result"] == "passed"
             and check["verification_subject"] == "agent_runtime"
             and check["capability"] == "project_and_instruction_setup"
-            and environment["id"] == "codex_cli"
+            and environment["id"] == environment_id
             and environment["participation"] == "participated"
         ):
             return True
     return False
+
+
+def has_codex_agents_md_check(data: dict[str, Any]) -> bool:
+    return has_agents_md_runtime_check(data, "codex_cli")
+
+
+def has_hermes_agents_md_check(data: dict[str, Any]) -> bool:
+    return has_agents_md_runtime_check(data, "hermes_agent")
 
 
 def load_registry(path: Path) -> dict[str, Any]:
@@ -203,6 +211,7 @@ def validate_basis(identifier: str, basis: Any, label: str) -> None:
 def render_summary(data: dict[str, Any]) -> str:
     validate_registry(data)
     has_codex_check = has_codex_agents_md_check(data)
+    has_hermes_check = has_hermes_agents_md_check(data)
     environment_names = [item["name"] for item in data["environments"]]
     if len(environment_names) > 1:
         environment_list = ", ".join(environment_names[:-1]) + " и " + environment_names[-1]
@@ -222,11 +231,27 @@ def render_summary(data: dict[str, Any]) -> str:
             f"| {item['name']} | {item['user_summary']} |" for item in data["environments"]
         ]
     )
-    if has_codex_check:
+    if has_codex_check and has_hermes_check:
+        lines.extend(
+            [
+                "",
+                "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят.",
+                "",
+            ]
+        )
+    elif has_codex_check:
         lines.extend(
             [
                 "",
                 "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят.",
+                "",
+            ]
+        )
+    elif has_hermes_check:
+        lines.extend(
+            [
+                "",
+                "В локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят.",
                 "",
             ]
         )
