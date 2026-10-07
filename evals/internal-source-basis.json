@@ -1287,6 +1287,10 @@
         {
           "claim_id": "AUDIT-004",
           "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-001",
+          "statement_path": "evals/human-communication-basis.yml"
         }
       ],
       "cases": [
@@ -1439,38 +1443,49 @@
             ]
           ]
         },
-    {
-      "id": "ai-setup-project-result-decline-policy",
-      "required_claims": [
-        "SETUP-001"
+        {
+          "id": "ai-setup-project-result-decline-policy",
+          "required_claims": [
+            "SETUP-001"
           ],
           "finding_claims": [
             [
               "SETUP-001"
-        ]
-      ]
-    },
-    {
-      "id": "ai-setup-project-result-subagent-tools-drift-repair",
-      "required_claims": [
-        "ASKL-003",
-        "ASKL-004"
-      ],
-      "finding_claims": [
-        [
-          "ASKL-003",
-          "ASKL-004"
-        ]
-      ]
-    },
-    {
-      "id": "ai-setup-project-result-explicit-autonomy",
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-subagent-tools-drift-repair",
+          "required_claims": [
+            "ASKL-003",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-explicit-autonomy",
           "required_claims": [
             "AUDIT-004"
           ],
           "finding_claims": [
             [
               "AUDIT-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-human-communication",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
             ]
           ]
         }
@@ -2601,6 +2616,93 @@
             [
               "USAGE-002",
               "USAGE-004"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-human-communication": {
+      "source_basis": [
+        {
+          "claim_id": "HUMAN-COMMUNICATION-001",
+          "statement_path": "evals/human-communication-basis.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-human-communication-result-completed",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-blocked",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-authorized",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-decision-answered",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-admission",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-unknown-next-step",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-simple-fact",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001"
             ]
           ]
         }
