@@ -10,7 +10,7 @@ import stat
 import subprocess
 import sys
 import tempfile
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 # Русские сообщения не должны падать на консоли с однобайтовой кодировкой.
 for _stream in (sys.stdout, sys.stderr):
@@ -246,6 +246,7 @@ def run(
 def main() -> int:
     test_package_identity()
     test_apm_fields()
+    test_windows_ledger_path()
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         accepted = run(root, write_project(root))
@@ -383,6 +384,27 @@ def main() -> int:
 
     print("Узкий обход ложного APM drift проверен.")
     return 0
+
+
+def test_windows_ledger_path() -> None:
+    """Ключ ledger сохраняет разделитель APM при разборе пути Windows."""
+    namespace = runpy.run_path(str(AUDIT))
+    check = namespace["is_phantom_bytecode"]
+    check.__globals__["Path"] = PureWindowsPath
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        deployed = root / ".agents/skills/example/scripts/adapter.py"
+        deployed.parent.mkdir(parents=True)
+        deployed.write_text("pass\n", encoding="utf-8")
+        finding = {
+            "kind": "unintegrated", "package": "",
+            "path": ".agents/skills/example/scripts/__pycache__/adapter.cpython-313.pyc",
+        }
+        owners = {".agents/skills/example/scripts/adapter.py": {
+            "active_owner": "example/package", "owners": ["example/package"],
+        }}
+        assert check(finding, owners, "example/package", root)
+        assert not check(finding, {}, "example/package", root)
 
 
 def test_apm_fields() -> None:
