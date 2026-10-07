@@ -19,8 +19,7 @@ for _stream in (sys.stdout, sys.stderr):
         _reconfigure(encoding="utf-8", errors="replace")
 
 
-ROOT = Path(__file__).resolve().parent.parent
-AUDIT = ROOT / "tools" / "apm-audit-ci"
+AUDIT = Path(__file__).with_name("apm-audit-ci")
 
 
 def write_project(
@@ -207,6 +206,10 @@ deployments:
         encoding="utf-8",
     )
     fake_apm.chmod(fake_apm.stat().st_mode | stat.S_IXUSR)
+    if os.name == "nt":
+        wrapper = root / "fake-apm.cmd"
+        wrapper.write_text(f'@"{sys.executable}" "{fake_apm}" %*\n', encoding="utf-8")
+        return wrapper
     return fake_apm
 
 
@@ -219,6 +222,7 @@ def run(
     return subprocess.run(
         [
             sys.executable,
+            "-S",
             str(AUDIT),
             "--apm",
             str(fake_apm),
@@ -241,6 +245,7 @@ def run(
 
 def main() -> int:
     test_package_identity()
+    test_apm_fields()
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         accepted = run(root, write_project(root))
@@ -378,6 +383,59 @@ def main() -> int:
 
     print("Узкий обход ложного APM drift проверен.")
     return 0
+
+
+def test_apm_fields() -> None:
+    """Генерируемый APM YAML читается без PyYAML, неоднозначность отклоняется."""
+    load = runpy.run_path(str(AUDIT))["load_yaml"]
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        fake = write_project(root)
+        lock = root / "apm.lock.yaml"
+        lock.write_text(
+            "dependencies:\n"
+            "- repo_url: example/local-package\n"
+            "  name: local-package\n"
+            "  version: 1.0.0\n"
+            "  deployed_files:\n"
+            "  - .agents/skills/example/SKILL.md\n"
+            "  deployed_file_hashes:\n"
+            "    .agents/skills/example/SKILL.md: ignored\n"
+            "deployments:\n"
+            "- value: .agents/skills/example/SKILL.md\n"
+            "  owners:\n"
+            "  - example/local-package\n"
+            "  - '.'\n"
+            "  active_owner: '.'\n",
+            encoding="utf-8",
+        )
+        accepted = run(root, fake)
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        original = lock.read_text(encoding="utf-8")
+        indented = "\n".join(
+            line if line in {"dependencies:", "deployments:"} else "  " + line
+            for line in original.splitlines()
+        ) + "\n"
+        lock.write_text(indented, encoding="utf-8")
+        accepted = run(root, fake)
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        for invalid in (
+            original.replace("  name: local-package", "  name: local-package\n  name: other"),
+            original.replace("  active_owner: '.'", "  active_owner: *owner"),
+            original.replace("  version: 1.0.0", "  version: |\n    1.0.0"),
+            original + "dependencies: []\n",
+            original + "- value: .agents/skills/example/SKILL.md\n  owners: [.]\n  active_owner: .\n",
+            original.replace("- repo_url: example/local-package\n  name: local-package\n  version: 1.0.0\n  deployed_files:\n  - .agents/skills/example/SKILL.md\n  deployed_file_hashes:\n    .agents/skills/example/SKILL.md: ignored", "- repo_url: example/local-package\n  name: local-package\n  version: 1.0.0\n  version: 2.0.0"),
+        ):
+            lock.write_text(invalid, encoding="utf-8")
+            rejected = run(root, fake)
+            assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+            assert "не подтверждено" in rejected.stderr
+        lock.write_text(original, encoding="utf-8")
+        assert load(lock)["deployments"][0]["owners"] == ["example/local-package", "."]
+        manifest = root / "apm.yml"
+        manifest.write_text("name: local-package # комментарий\nversion: 1.0.0\ndependencies:\n  apm: []\n", encoding="utf-8")
+        assert load(manifest, manifest=True) == {"name": "local-package", "version": "1.0.0"}
 
 
 def test_package_identity() -> None:

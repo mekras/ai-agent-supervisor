@@ -1,6 +1,6 @@
 lockfile_version: '2'
-generated_at: '2026-09-30T10:12:46.020070+00:00'
-apm_version: 0.31.0
+generated_at: '2026-10-07T12:34:43.544445+00:00'
+apm_version: 0.33.0
 dependencies:
 - repo_url: mekras/ai-dev-team
   name: ai-dev-team
@@ -1708,25 +1708,25 @@ dependencies:
     .agents/skills/ai-rule-failure-analysis/evals/result-scenarios.json: sha256:a158a1f98a961ca1a5d4fd2f763f246e1b70a13462226c40aa66610a1a9a1fe9
     .agents/skills/ai-rule-failure-analysis/evals/triggers.json: sha256:c8b46792bf5d52d1bb190b3519039ac9da85065a066ff2a4a494d6b453eb281c
     .agents/skills/ai-setup-apm/README.md: sha256:99b460a189aefff8c3e97167766eb5207c8c366000d70921eb38665790f6c186
-    .agents/skills/ai-setup-apm/SKILL.md: sha256:192be54eb6e8d53a6013a16e4fc590f10f9e103d036c77df1ab66fe0dd4ae641
+    .agents/skills/ai-setup-apm/SKILL.md: sha256:e86462011b74004f7a7d938c72c250263df3a0a98c52902c3718f3f9adb48ee9
     .agents/skills/ai-setup-apm/agents/openai.yaml: sha256:8dc1fd4084ecd54dcde1a6e7f46147784e4e2c340999bf0e498a8f7115f16e4d
     .agents/skills/ai-setup-apm/evals/result-scenarios.json: sha256:b342bc395a2b1c662c8ef58d075b1428f095f6fc9aad713b2c83757c50b20ceb
     .agents/skills/ai-setup-apm/evals/script-contract-tests.json: sha256:4af62426c931ed1a0c6e2f102b911c8693ed3b073ce2ec20de6d8cd8a09b9101
     .agents/skills/ai-setup-apm/evals/script-fixtures/empty-project/.agents/skills/dependency/README.md: sha256:91033a538b99bfca34e438a2d995ec06ea3042e7a1a7fab91dfd04301cdc1664
     .agents/skills/ai-setup-apm/evals/script-fixtures/empty-project/apm.lock.yaml: sha256:d3880883f92bbf171a6b91e42e7965d21536848244b0cd1eec6349930f52344e
     .agents/skills/ai-setup-apm/evals/triggers.json: sha256:2446af9dc4ce0cd82b31d873e631d5d6c34ab43e32a6f9bd982b408e775151a7
-    .agents/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:11dfe4aff253002a728a13e2dbf52ecb80ba18fc84295439fb0f1eb46e74f11e
+    .agents/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:225036915f7e099bc2b71e8598f19fc45557a7a1f6c03433d16ed5abe61f6757
     .agents/skills/ai-setup-apm/references/comparison-evals.md: sha256:33c1047d2c14509be8661045a0b95d192730e4e07932491b75ed6191c0f1a357
     .agents/skills/ai-setup-apm/references/instruction-scope.md: sha256:b409660df9302dfe2784410ca418eb1b0a8382eae51dbd4ea80bacd225959c0c
     .agents/skills/ai-setup-apm/references/known-version-issues.md: sha256:afd23dbb6a5fc8d5de011a9089bb509f4b3dd116345cf77616da7dd08842793a
-    .agents/skills/ai-setup-apm/references/tooling-installers.md: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40
+    .agents/skills/ai-setup-apm/references/tooling-installers.md: sha256:9f7aaad6a82098606f04cb64cf1e8a3cf274f984486876a4ba1df82420188a1c
     .agents/skills/ai-setup-apm/scripts/eval-tools/adapters/claude: sha256:04a44d916fde36b496ff173dac8dc765b1bb9368ead90ce93542b44da32182b9
     .agents/skills/ai-setup-apm/scripts/eval-tools/adapters/codex: sha256:c3b586deaba5265ec89ca956f22384e11f84bf659075d3c4781f633ddf6cf141
     .agents/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py: sha256:4d7b3808573e5544b02e2e3cc3321cabc5bf99da9c3f4c410256fab74e464c8a
     .agents/skills/ai-setup-apm/scripts/eval-tools/evals.sample.yml: sha256:8ea6d60274d1ef50993cc1cf95dcd1c34f560607d29a6465eec56ef47560281e
-    .agents/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:cc15f3eabe83959e64b343e25acf45f93b839389c94a0a9e4a3615448aed5126
+    .agents/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:3d26e7837b391b09313797a35ada1b2d3673195d3552c74267dd72ee9b3e4fad
     .agents/skills/ai-setup-apm/scripts/eval-tools/run-apm-safe.py: sha256:07ebbd0306b500e143e710fbc93ce01a8e893c0be92d0b1e150f3f7a21b80068
-    .agents/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:8def425ee5c5aa44d4114caae3aafb49931a11571037aec7fe8240803450b32d
+    .agents/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:35093f986f5f6b6653b3a2e221a9b8470be03daacf2b918e3ba7b50ad48b0a75
     .agents/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py: sha256:ef56e0e1a77f83800a43219572a7a491afb5dd8b3d4e28522ec4aa03d1fc9cab
     .agents/skills/ai-setup-apm/scripts/eval-tools/run-skill-evals.py: sha256:57f0ff60559c79b85ec6c4f0132c1c762b400fcc8c342c3d94fed55fbcaf48dc
     .agents/skills/ai-setup-apm/scripts/eval-tools/run-skill-script-contract-tests.py: sha256:c23775d3e0fe088e9534055d12d68b5a508ee19b42fb425371f77d29a3917e3b
@@ -1764,9 +1764,9 @@ dependencies:
     .agents/skills/ai-setup-hooks/evals/result-scenarios.json: sha256:9d61599b4ff904d4f37292eec7745c106101f5964c3e4918af907a7ee0a596f8
     .agents/skills/ai-setup-hooks/evals/triggers.json: sha256:f6af75425e1762572018a9c7cccabb0a43d9459241cbe03ba4514c3737764044
     .agents/skills/ai-setup-project/README.md: sha256:9f63172690ac5f0c5df941e3124c86ab010f8aa5e09bdd8ad7885677119e3d05
-    .agents/skills/ai-setup-project/SKILL.md: sha256:ffd18f9bfa646fcd1a6a042681e71da237a37b36b2d9b81429d3893d9809b71a
+    .agents/skills/ai-setup-project/SKILL.md: sha256:6db90c864818bff589039e8c37bb5ae1d8018a1549a9edab12a9dd3b54722ec0
     .agents/skills/ai-setup-project/agents/openai.yaml: sha256:25b8a51fbe0f05f65f810340873b5e7bf08a9460bc7723ad1b86b7c7d5a2b580
-    .agents/skills/ai-setup-project/evals/result-scenarios.json: sha256:4b44a0f431b15ca6da51c3cf36e725375739ccf5a0c9b01b3ed0e0272d99c0fe
+    .agents/skills/ai-setup-project/evals/result-scenarios.json: sha256:abc0aaea16dbc27c6221809cef0d884d5125f47dedaee9a2762651592ac8edd1
     .agents/skills/ai-setup-project/evals/triggers.json: sha256:84337ce1deb4920b336f365cd57ef057ee0e3797a7c15838593d742fb59ad18a
     .agents/skills/ai-setup-subagents/README.md: sha256:844ba12430111c00627befcbd96c35bfb9061d9d82a66d71411e6934a2193f65
     .agents/skills/ai-setup-subagents/SKILL.md: sha256:6c00110743bf7107cd564e9f1717f1caf458ddd2db089078c7095febb71a999a
@@ -1900,25 +1900,25 @@ dependencies:
     .claude/skills/ai-rule-failure-analysis/evals/result-scenarios.json: sha256:a158a1f98a961ca1a5d4fd2f763f246e1b70a13462226c40aa66610a1a9a1fe9
     .claude/skills/ai-rule-failure-analysis/evals/triggers.json: sha256:c8b46792bf5d52d1bb190b3519039ac9da85065a066ff2a4a494d6b453eb281c
     .claude/skills/ai-setup-apm/README.md: sha256:99b460a189aefff8c3e97167766eb5207c8c366000d70921eb38665790f6c186
-    .claude/skills/ai-setup-apm/SKILL.md: sha256:192be54eb6e8d53a6013a16e4fc590f10f9e103d036c77df1ab66fe0dd4ae641
+    .claude/skills/ai-setup-apm/SKILL.md: sha256:e86462011b74004f7a7d938c72c250263df3a0a98c52902c3718f3f9adb48ee9
     .claude/skills/ai-setup-apm/agents/openai.yaml: sha256:8dc1fd4084ecd54dcde1a6e7f46147784e4e2c340999bf0e498a8f7115f16e4d
     .claude/skills/ai-setup-apm/evals/result-scenarios.json: sha256:b342bc395a2b1c662c8ef58d075b1428f095f6fc9aad713b2c83757c50b20ceb
     .claude/skills/ai-setup-apm/evals/script-contract-tests.json: sha256:4af62426c931ed1a0c6e2f102b911c8693ed3b073ce2ec20de6d8cd8a09b9101
     .claude/skills/ai-setup-apm/evals/script-fixtures/empty-project/.agents/skills/dependency/README.md: sha256:91033a538b99bfca34e438a2d995ec06ea3042e7a1a7fab91dfd04301cdc1664
     .claude/skills/ai-setup-apm/evals/script-fixtures/empty-project/apm.lock.yaml: sha256:d3880883f92bbf171a6b91e42e7965d21536848244b0cd1eec6349930f52344e
     .claude/skills/ai-setup-apm/evals/triggers.json: sha256:2446af9dc4ce0cd82b31d873e631d5d6c34ab43e32a6f9bd982b408e775151a7
-    .claude/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:11dfe4aff253002a728a13e2dbf52ecb80ba18fc84295439fb0f1eb46e74f11e
+    .claude/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:225036915f7e099bc2b71e8598f19fc45557a7a1f6c03433d16ed5abe61f6757
     .claude/skills/ai-setup-apm/references/comparison-evals.md: sha256:33c1047d2c14509be8661045a0b95d192730e4e07932491b75ed6191c0f1a357
     .claude/skills/ai-setup-apm/references/instruction-scope.md: sha256:b409660df9302dfe2784410ca418eb1b0a8382eae51dbd4ea80bacd225959c0c
     .claude/skills/ai-setup-apm/references/known-version-issues.md: sha256:afd23dbb6a5fc8d5de011a9089bb509f4b3dd116345cf77616da7dd08842793a
-    .claude/skills/ai-setup-apm/references/tooling-installers.md: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40
+    .claude/skills/ai-setup-apm/references/tooling-installers.md: sha256:9f7aaad6a82098606f04cb64cf1e8a3cf274f984486876a4ba1df82420188a1c
     .claude/skills/ai-setup-apm/scripts/eval-tools/adapters/claude: sha256:04a44d916fde36b496ff173dac8dc765b1bb9368ead90ce93542b44da32182b9
     .claude/skills/ai-setup-apm/scripts/eval-tools/adapters/codex: sha256:c3b586deaba5265ec89ca956f22384e11f84bf659075d3c4781f633ddf6cf141
     .claude/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py: sha256:4d7b3808573e5544b02e2e3cc3321cabc5bf99da9c3f4c410256fab74e464c8a
     .claude/skills/ai-setup-apm/scripts/eval-tools/evals.sample.yml: sha256:8ea6d60274d1ef50993cc1cf95dcd1c34f560607d29a6465eec56ef47560281e
-    .claude/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:cc15f3eabe83959e64b343e25acf45f93b839389c94a0a9e4a3615448aed5126
+    .claude/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:3d26e7837b391b09313797a35ada1b2d3673195d3552c74267dd72ee9b3e4fad
     .claude/skills/ai-setup-apm/scripts/eval-tools/run-apm-safe.py: sha256:07ebbd0306b500e143e710fbc93ce01a8e893c0be92d0b1e150f3f7a21b80068
-    .claude/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:8def425ee5c5aa44d4114caae3aafb49931a11571037aec7fe8240803450b32d
+    .claude/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:35093f986f5f6b6653b3a2e221a9b8470be03daacf2b918e3ba7b50ad48b0a75
     .claude/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py: sha256:ef56e0e1a77f83800a43219572a7a491afb5dd8b3d4e28522ec4aa03d1fc9cab
     .claude/skills/ai-setup-apm/scripts/eval-tools/run-skill-evals.py: sha256:57f0ff60559c79b85ec6c4f0132c1c762b400fcc8c342c3d94fed55fbcaf48dc
     .claude/skills/ai-setup-apm/scripts/eval-tools/run-skill-script-contract-tests.py: sha256:c23775d3e0fe088e9534055d12d68b5a508ee19b42fb425371f77d29a3917e3b
@@ -1956,9 +1956,9 @@ dependencies:
     .claude/skills/ai-setup-hooks/evals/result-scenarios.json: sha256:9d61599b4ff904d4f37292eec7745c106101f5964c3e4918af907a7ee0a596f8
     .claude/skills/ai-setup-hooks/evals/triggers.json: sha256:f6af75425e1762572018a9c7cccabb0a43d9459241cbe03ba4514c3737764044
     .claude/skills/ai-setup-project/README.md: sha256:9f63172690ac5f0c5df941e3124c86ab010f8aa5e09bdd8ad7885677119e3d05
-    .claude/skills/ai-setup-project/SKILL.md: sha256:ffd18f9bfa646fcd1a6a042681e71da237a37b36b2d9b81429d3893d9809b71a
+    .claude/skills/ai-setup-project/SKILL.md: sha256:6db90c864818bff589039e8c37bb5ae1d8018a1549a9edab12a9dd3b54722ec0
     .claude/skills/ai-setup-project/agents/openai.yaml: sha256:25b8a51fbe0f05f65f810340873b5e7bf08a9460bc7723ad1b86b7c7d5a2b580
-    .claude/skills/ai-setup-project/evals/result-scenarios.json: sha256:4b44a0f431b15ca6da51c3cf36e725375739ccf5a0c9b01b3ed0e0272d99c0fe
+    .claude/skills/ai-setup-project/evals/result-scenarios.json: sha256:abc0aaea16dbc27c6221809cef0d884d5125f47dedaee9a2762651592ac8edd1
     .claude/skills/ai-setup-project/evals/triggers.json: sha256:84337ce1deb4920b336f365cd57ef057ee0e3797a7c15838593d742fb59ad18a
     .claude/skills/ai-setup-subagents/README.md: sha256:844ba12430111c00627befcbd96c35bfb9061d9d82a66d71411e6934a2193f65
     .claude/skills/ai-setup-subagents/SKILL.md: sha256:6c00110743bf7107cd564e9f1717f1caf458ddd2db089078c7095febb71a999a
@@ -3278,6 +3278,60 @@ deployments:
   content_hash: sha256:4d2cac8ddb7df1502f96c4646933cc4ba9dd0957849c8d4dfa6bcfc41a5258d2
 - kind: project-relative
   target: claude
+  value: .claude/skills/ai-human-communication
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ai-human-communication/README.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:ebb4532e661f4b6389eb09a7bc6c1b2d5e28bfad293b7a77667ab44f8d3b9f15
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ai-human-communication/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:6e1c843579ad857366aa76c01034d60198a3be59d3bfd68b563be4495d1406a2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ai-human-communication/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8668bd0e008922178d24fb1932ab7536e5ee5eb9afe9da873150c7e6097a0446
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ai-human-communication/evals/result-scenarios.json
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:41b30595cf3d6676c83be101101e23993c12459be3e6c9d596e4f58cf2b8b62d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ai-human-communication/evals/triggers.json
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c582bd9aae017c73a3394f4c17c64eb001027d78bd0ff7c6c544fe1d1cc03b67
+- kind: project-relative
+  target: claude
   value: .claude/skills/ai-rule-failure-analysis
   runtime: null
   scope: project
@@ -3365,7 +3419,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:192be54eb6e8d53a6013a16e4fc590f10f9e103d036c77df1ab66fe0dd4ae641
+  content_hash: sha256:e86462011b74004f7a7d938c72c250263df3a0a98c52902c3718f3f9adb48ee9
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/agents/openai.yaml
@@ -3435,7 +3489,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:11dfe4aff253002a728a13e2dbf52ecb80ba18fc84295439fb0f1eb46e74f11e
+  content_hash: sha256:225036915f7e099bc2b71e8598f19fc45557a7a1f6c03433d16ed5abe61f6757
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/references/comparison-evals.md
@@ -3493,7 +3547,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40
+  content_hash: sha256:9f7aaad6a82098606f04cb64cf1e8a3cf274f984486876a4ba1df82420188a1c
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/scripts/eval-tools/adapters/claude
@@ -3514,6 +3568,15 @@ deployments:
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
   content_hash: sha256:c3b586deaba5265ec89ca956f22384e11f84bf659075d3c4781f633ddf6cf141
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ai-setup-apm/scripts/eval-tools/apm-audit-ci
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c8ac33f01affcaf0733282e0a8a0fe9e268c7a0c7acb4565b54338f53f24af6d
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py
@@ -3543,7 +3606,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:cc15f3eabe83959e64b343e25acf45f93b839389c94a0a9e4a3615448aed5126
+  content_hash: sha256:3d26e7837b391b09313797a35ada1b2d3673195d3552c74267dd72ee9b3e4fad
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/scripts/eval-tools/run-apm-safe.py
@@ -3563,7 +3626,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:8def425ee5c5aa44d4114caae3aafb49931a11571037aec7fe8240803450b32d
+  content_hash: sha256:35093f986f5f6b6653b3a2e221a9b8470be03daacf2b918e3ba7b50ad48b0a75
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py
@@ -3594,6 +3657,15 @@ deployments:
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
   content_hash: sha256:c23775d3e0fe088e9534055d12d68b5a508ee19b42fb425371f77d29a3917e3b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/ai-setup-apm/scripts/eval-tools/test-apm-audit-ci.py
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:0e39f44e023d039286dba4279b700c62f6979f460b847596b4414f24012363f2
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-apm/scripts/eval-tools/test-run-apm-safe.py
@@ -3973,7 +4045,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:ffd18f9bfa646fcd1a6a042681e71da237a37b36b2d9b81429d3893d9809b71a
+  content_hash: sha256:6db90c864818bff589039e8c37bb5ae1d8018a1549a9edab12a9dd3b54722ec0
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-project/agents/openai.yaml
@@ -3993,7 +4065,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:4b44a0f431b15ca6da51c3cf36e725375739ccf5a0c9b01b3ed0e0272d99c0fe
+  content_hash: sha256:abc0aaea16dbc27c6221809cef0d884d5125f47dedaee9a2762651592ac8edd1
 - kind: project-relative
   target: claude
   value: .claude/skills/ai-setup-project/evals/triggers.json
@@ -10051,7 +10123,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:192be54eb6e8d53a6013a16e4fc590f10f9e103d036c77df1ab66fe0dd4ae641
+  content_hash: sha256:e86462011b74004f7a7d938c72c250263df3a0a98c52902c3718f3f9adb48ee9
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-apm/agents/openai.yaml
@@ -10121,7 +10193,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:11dfe4aff253002a728a13e2dbf52ecb80ba18fc84295439fb0f1eb46e74f11e
+  content_hash: sha256:225036915f7e099bc2b71e8598f19fc45557a7a1f6c03433d16ed5abe61f6757
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-apm/references/comparison-evals.md
@@ -10161,7 +10233,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40
+  content_hash: sha256:9f7aaad6a82098606f04cb64cf1e8a3cf274f984486876a4ba1df82420188a1c
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-apm/scripts/eval-tools/adapters/claude
@@ -10211,7 +10283,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:cc15f3eabe83959e64b343e25acf45f93b839389c94a0a9e4a3615448aed5126
+  content_hash: sha256:3d26e7837b391b09313797a35ada1b2d3673195d3552c74267dd72ee9b3e4fad
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-apm/scripts/eval-tools/run-apm-safe.py
@@ -10231,7 +10303,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:8def425ee5c5aa44d4114caae3aafb49931a11571037aec7fe8240803450b32d
+  content_hash: sha256:35093f986f5f6b6653b3a2e221a9b8470be03daacf2b918e3ba7b50ad48b0a75
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py
@@ -10641,7 +10713,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:ffd18f9bfa646fcd1a6a042681e71da237a37b36b2d9b81429d3893d9809b71a
+  content_hash: sha256:6db90c864818bff589039e8c37bb5ae1d8018a1549a9edab12a9dd3b54722ec0
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-project/agents/openai.yaml
@@ -10661,7 +10733,7 @@ deployments:
   - mekras/apm-marketplace/packages/ai-agent-supervisor
   - .
   active_owner: mekras/apm-marketplace/packages/ai-agent-supervisor
-  content_hash: sha256:4b44a0f431b15ca6da51c3cf36e725375739ccf5a0c9b01b3ed0e0272d99c0fe
+  content_hash: sha256:abc0aaea16dbc27c6221809cef0d884d5125f47dedaee9a2762651592ac8edd1
 - kind: project-relative
   target: codex
   value: .agents/skills/ai-setup-project/evals/triggers.json
@@ -16377,6 +16449,60 @@ deployments:
   content_hash: sha256:caaaebb82015e3061fab7f4fd929d038e4f71826bc812c44ae395cce1725ea67
 - kind: project-relative
   target: legacy
+  value: .agents/skills/ai-human-communication
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/ai-human-communication/README.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:ebb4532e661f4b6389eb09a7bc6c1b2d5e28bfad293b7a77667ab44f8d3b9f15
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/ai-human-communication/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:6e1c843579ad857366aa76c01034d60198a3be59d3bfd68b563be4495d1406a2
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/ai-human-communication/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8668bd0e008922178d24fb1932ab7536e5ee5eb9afe9da873150c7e6097a0446
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/ai-human-communication/evals/result-scenarios.json
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:41b30595cf3d6676c83be101101e23993c12459be3e6c9d596e4f58cf2b8b62d
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/ai-human-communication/evals/triggers.json
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c582bd9aae017c73a3394f4c17c64eb001027d78bd0ff7c6c544fe1d1cc03b67
+- kind: project-relative
+  target: legacy
   value: .agents/skills/ai-setup-apm/references/compatibility-history.md
   runtime: null
   scope: project
@@ -16393,6 +16519,24 @@ deployments:
   - .
   active_owner: .
   content_hash: sha256:05a546ffed9b7751c8f0b22d7505016f608d9974c4cc73f447ef0bc17d0a1d36
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/ai-setup-apm/scripts/eval-tools/apm-audit-ci
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c8ac33f01affcaf0733282e0a8a0fe9e268c7a0c7acb4565b54338f53f24af6d
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/ai-setup-apm/scripts/eval-tools/test-apm-audit-ci.py
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:0e39f44e023d039286dba4279b700c62f6979f460b847596b4414f24012363f2
 - kind: project-relative
   target: legacy
   value: .agents/skills/ai-setup-subagents/assets/worker-policy-entrypoint.md
@@ -16514,6 +16658,12 @@ local_deployed_files:
 - .agents/skills/ai-data-collection/evals/result-scenarios.json
 - .agents/skills/ai-data-collection/evals/triggers.json
 - .agents/skills/ai-data-collection/references/data-collection-procedure.md
+- .agents/skills/ai-human-communication
+- .agents/skills/ai-human-communication/README.md
+- .agents/skills/ai-human-communication/SKILL.md
+- .agents/skills/ai-human-communication/agents/openai.yaml
+- .agents/skills/ai-human-communication/evals/result-scenarios.json
+- .agents/skills/ai-human-communication/evals/triggers.json
 - .agents/skills/ai-rule-failure-analysis
 - .agents/skills/ai-rule-failure-analysis/README.md
 - .agents/skills/ai-rule-failure-analysis/SKILL.md
@@ -16538,6 +16688,7 @@ local_deployed_files:
 - .agents/skills/ai-setup-apm/references/tooling-installers.md
 - .agents/skills/ai-setup-apm/scripts/eval-tools/adapters/claude
 - .agents/skills/ai-setup-apm/scripts/eval-tools/adapters/codex
+- .agents/skills/ai-setup-apm/scripts/eval-tools/apm-audit-ci
 - .agents/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py
 - .agents/skills/ai-setup-apm/scripts/eval-tools/evals.sample.yml
 - .agents/skills/ai-setup-apm/scripts/eval-tools/manifest.txt
@@ -16546,6 +16697,7 @@ local_deployed_files:
 - .agents/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py
 - .agents/skills/ai-setup-apm/scripts/eval-tools/run-skill-evals.py
 - .agents/skills/ai-setup-apm/scripts/eval-tools/run-skill-script-contract-tests.py
+- .agents/skills/ai-setup-apm/scripts/eval-tools/test-apm-audit-ci.py
 - .agents/skills/ai-setup-apm/scripts/eval-tools/test-run-apm-safe.py
 - .agents/skills/ai-setup-apm/scripts/eval-tools/test-run-fixture-checks.py
 - .agents/skills/ai-setup-apm/scripts/eval-tools/test-run-skill-evals.py
@@ -16732,6 +16884,12 @@ local_deployed_files:
 - .claude/skills/ai-data-collection/evals/result-scenarios.json
 - .claude/skills/ai-data-collection/evals/triggers.json
 - .claude/skills/ai-data-collection/references/data-collection-procedure.md
+- .claude/skills/ai-human-communication
+- .claude/skills/ai-human-communication/README.md
+- .claude/skills/ai-human-communication/SKILL.md
+- .claude/skills/ai-human-communication/agents/openai.yaml
+- .claude/skills/ai-human-communication/evals/result-scenarios.json
+- .claude/skills/ai-human-communication/evals/triggers.json
 - .claude/skills/ai-rule-failure-analysis
 - .claude/skills/ai-rule-failure-analysis/README.md
 - .claude/skills/ai-rule-failure-analysis/SKILL.md
@@ -16756,6 +16914,7 @@ local_deployed_files:
 - .claude/skills/ai-setup-apm/references/tooling-installers.md
 - .claude/skills/ai-setup-apm/scripts/eval-tools/adapters/claude
 - .claude/skills/ai-setup-apm/scripts/eval-tools/adapters/codex
+- .claude/skills/ai-setup-apm/scripts/eval-tools/apm-audit-ci
 - .claude/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py
 - .claude/skills/ai-setup-apm/scripts/eval-tools/evals.sample.yml
 - .claude/skills/ai-setup-apm/scripts/eval-tools/manifest.txt
@@ -16764,6 +16923,7 @@ local_deployed_files:
 - .claude/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py
 - .claude/skills/ai-setup-apm/scripts/eval-tools/run-skill-evals.py
 - .claude/skills/ai-setup-apm/scripts/eval-tools/run-skill-script-contract-tests.py
+- .claude/skills/ai-setup-apm/scripts/eval-tools/test-apm-audit-ci.py
 - .claude/skills/ai-setup-apm/scripts/eval-tools/test-run-apm-safe.py
 - .claude/skills/ai-setup-apm/scripts/eval-tools/test-run-fixture-checks.py
 - .claude/skills/ai-setup-apm/scripts/eval-tools/test-run-skill-evals.py
@@ -16945,36 +17105,43 @@ local_deployed_file_hashes:
   .agents/skills/ai-data-collection/evals/result-scenarios.json: sha256:cb3421f233446d46a47a7cc1546b852caae955d8c8539dd8729c630cb86488ef
   .agents/skills/ai-data-collection/evals/triggers.json: sha256:3236b80c7a689794353a050f1c0c5dca82d4e569a32ee10cdd4e297ebe50a5f7
   .agents/skills/ai-data-collection/references/data-collection-procedure.md: sha256:4d2cac8ddb7df1502f96c4646933cc4ba9dd0957849c8d4dfa6bcfc41a5258d2
+  .agents/skills/ai-human-communication/README.md: sha256:ebb4532e661f4b6389eb09a7bc6c1b2d5e28bfad293b7a77667ab44f8d3b9f15
+  .agents/skills/ai-human-communication/SKILL.md: sha256:6e1c843579ad857366aa76c01034d60198a3be59d3bfd68b563be4495d1406a2
+  .agents/skills/ai-human-communication/agents/openai.yaml: sha256:8668bd0e008922178d24fb1932ab7536e5ee5eb9afe9da873150c7e6097a0446
+  .agents/skills/ai-human-communication/evals/result-scenarios.json: sha256:41b30595cf3d6676c83be101101e23993c12459be3e6c9d596e4f58cf2b8b62d
+  .agents/skills/ai-human-communication/evals/triggers.json: sha256:c582bd9aae017c73a3394f4c17c64eb001027d78bd0ff7c6c544fe1d1cc03b67
   .agents/skills/ai-rule-failure-analysis/README.md: sha256:bd611709f4ef0e5e5aa30ed8333177d32c89c5c1c4ef722ec25037a8be1dc2e2
   .agents/skills/ai-rule-failure-analysis/SKILL.md: sha256:3b2a4c10c8dd4050ec083cf1fbb2b0be721e980aff7f0efeac080e2d2529c440
   .agents/skills/ai-rule-failure-analysis/agents/openai.yaml: sha256:a772d4f5c0df602bfff7583267701b616485e98a2341d719ae8fcf73ba7c5169
   .agents/skills/ai-rule-failure-analysis/evals/result-scenarios.json: sha256:a158a1f98a961ca1a5d4fd2f763f246e1b70a13462226c40aa66610a1a9a1fe9
   .agents/skills/ai-rule-failure-analysis/evals/triggers.json: sha256:c8b46792bf5d52d1bb190b3519039ac9da85065a066ff2a4a494d6b453eb281c
   .agents/skills/ai-setup-apm/README.md: sha256:99b460a189aefff8c3e97167766eb5207c8c366000d70921eb38665790f6c186
-  .agents/skills/ai-setup-apm/SKILL.md: sha256:192be54eb6e8d53a6013a16e4fc590f10f9e103d036c77df1ab66fe0dd4ae641
+  .agents/skills/ai-setup-apm/SKILL.md: sha256:e86462011b74004f7a7d938c72c250263df3a0a98c52902c3718f3f9adb48ee9
   .agents/skills/ai-setup-apm/agents/openai.yaml: sha256:8dc1fd4084ecd54dcde1a6e7f46147784e4e2c340999bf0e498a8f7115f16e4d
   .agents/skills/ai-setup-apm/evals/result-scenarios.json: sha256:b342bc395a2b1c662c8ef58d075b1428f095f6fc9aad713b2c83757c50b20ceb
   .agents/skills/ai-setup-apm/evals/script-contract-tests.json: sha256:4af62426c931ed1a0c6e2f102b911c8693ed3b073ce2ec20de6d8cd8a09b9101
   .agents/skills/ai-setup-apm/evals/script-fixtures/empty-project/.agents/skills/dependency/README.md: sha256:91033a538b99bfca34e438a2d995ec06ea3042e7a1a7fab91dfd04301cdc1664
   .agents/skills/ai-setup-apm/evals/script-fixtures/empty-project/apm.lock.yaml: sha256:d3880883f92bbf171a6b91e42e7965d21536848244b0cd1eec6349930f52344e
   .agents/skills/ai-setup-apm/evals/triggers.json: sha256:2446af9dc4ce0cd82b31d873e631d5d6c34ab43e32a6f9bd982b408e775151a7
-  .agents/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:11dfe4aff253002a728a13e2dbf52ecb80ba18fc84295439fb0f1eb46e74f11e
+  .agents/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:225036915f7e099bc2b71e8598f19fc45557a7a1f6c03433d16ed5abe61f6757
   .agents/skills/ai-setup-apm/references/comparison-evals.md: sha256:33c1047d2c14509be8661045a0b95d192730e4e07932491b75ed6191c0f1a357
   .agents/skills/ai-setup-apm/references/compatibility-history.md: sha256:928e5e036567b1a56bcf44d6b95d7a4ae26a0532abc5eb5fa8b57130565117ba
   .agents/skills/ai-setup-apm/references/compatibility.yml: sha256:05a546ffed9b7751c8f0b22d7505016f608d9974c4cc73f447ef0bc17d0a1d36
   .agents/skills/ai-setup-apm/references/instruction-scope.md: sha256:b409660df9302dfe2784410ca418eb1b0a8382eae51dbd4ea80bacd225959c0c
   .agents/skills/ai-setup-apm/references/known-version-issues.md: sha256:afd23dbb6a5fc8d5de011a9089bb509f4b3dd116345cf77616da7dd08842793a
-  .agents/skills/ai-setup-apm/references/tooling-installers.md: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40
+  .agents/skills/ai-setup-apm/references/tooling-installers.md: sha256:9f7aaad6a82098606f04cb64cf1e8a3cf274f984486876a4ba1df82420188a1c
   .agents/skills/ai-setup-apm/scripts/eval-tools/adapters/claude: sha256:04a44d916fde36b496ff173dac8dc765b1bb9368ead90ce93542b44da32182b9
   .agents/skills/ai-setup-apm/scripts/eval-tools/adapters/codex: sha256:c3b586deaba5265ec89ca956f22384e11f84bf659075d3c4781f633ddf6cf141
+  .agents/skills/ai-setup-apm/scripts/eval-tools/apm-audit-ci: sha256:c8ac33f01affcaf0733282e0a8a0fe9e268c7a0c7acb4565b54338f53f24af6d
   .agents/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py: sha256:4d7b3808573e5544b02e2e3cc3321cabc5bf99da9c3f4c410256fab74e464c8a
   .agents/skills/ai-setup-apm/scripts/eval-tools/evals.sample.yml: sha256:8ea6d60274d1ef50993cc1cf95dcd1c34f560607d29a6465eec56ef47560281e
-  .agents/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:cc15f3eabe83959e64b343e25acf45f93b839389c94a0a9e4a3615448aed5126
+  .agents/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:3d26e7837b391b09313797a35ada1b2d3673195d3552c74267dd72ee9b3e4fad
   .agents/skills/ai-setup-apm/scripts/eval-tools/run-apm-safe.py: sha256:07ebbd0306b500e143e710fbc93ce01a8e893c0be92d0b1e150f3f7a21b80068
-  .agents/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:8def425ee5c5aa44d4114caae3aafb49931a11571037aec7fe8240803450b32d
+  .agents/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:35093f986f5f6b6653b3a2e221a9b8470be03daacf2b918e3ba7b50ad48b0a75
   .agents/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py: sha256:ef56e0e1a77f83800a43219572a7a491afb5dd8b3d4e28522ec4aa03d1fc9cab
   .agents/skills/ai-setup-apm/scripts/eval-tools/run-skill-evals.py: sha256:57f0ff60559c79b85ec6c4f0132c1c762b400fcc8c342c3d94fed55fbcaf48dc
   .agents/skills/ai-setup-apm/scripts/eval-tools/run-skill-script-contract-tests.py: sha256:c23775d3e0fe088e9534055d12d68b5a508ee19b42fb425371f77d29a3917e3b
+  .agents/skills/ai-setup-apm/scripts/eval-tools/test-apm-audit-ci.py: sha256:0e39f44e023d039286dba4279b700c62f6979f460b847596b4414f24012363f2
   .agents/skills/ai-setup-apm/scripts/eval-tools/test-run-apm-safe.py: sha256:cf8b84ff560fe545ce6cf87a526477768609aed83a76d2204ac531614d3de844
   .agents/skills/ai-setup-apm/scripts/eval-tools/test-run-fixture-checks.py: sha256:5ab197c802db9b22c040400546c98932f6a418b582a8c3665759bbe3e2ffb04a
   .agents/skills/ai-setup-apm/scripts/eval-tools/test-run-skill-evals.py: sha256:030e60011c9197f7d1c1e534730c2fc02347ef791d25706f233f8d9929a0ea96
@@ -17009,9 +17176,9 @@ local_deployed_file_hashes:
   .agents/skills/ai-setup-hooks/evals/result-scenarios.json: sha256:9d61599b4ff904d4f37292eec7745c106101f5964c3e4918af907a7ee0a596f8
   .agents/skills/ai-setup-hooks/evals/triggers.json: sha256:f6af75425e1762572018a9c7cccabb0a43d9459241cbe03ba4514c3737764044
   .agents/skills/ai-setup-project/README.md: sha256:9f63172690ac5f0c5df941e3124c86ab010f8aa5e09bdd8ad7885677119e3d05
-  .agents/skills/ai-setup-project/SKILL.md: sha256:ffd18f9bfa646fcd1a6a042681e71da237a37b36b2d9b81429d3893d9809b71a
+  .agents/skills/ai-setup-project/SKILL.md: sha256:6db90c864818bff589039e8c37bb5ae1d8018a1549a9edab12a9dd3b54722ec0
   .agents/skills/ai-setup-project/agents/openai.yaml: sha256:25b8a51fbe0f05f65f810340873b5e7bf08a9460bc7723ad1b86b7c7d5a2b580
-  .agents/skills/ai-setup-project/evals/result-scenarios.json: sha256:4b44a0f431b15ca6da51c3cf36e725375739ccf5a0c9b01b3ed0e0272d99c0fe
+  .agents/skills/ai-setup-project/evals/result-scenarios.json: sha256:abc0aaea16dbc27c6221809cef0d884d5125f47dedaee9a2762651592ac8edd1
   .agents/skills/ai-setup-project/evals/triggers.json: sha256:84337ce1deb4920b336f365cd57ef057ee0e3797a7c15838593d742fb59ad18a
   .agents/skills/ai-setup-subagents/README.md: sha256:844ba12430111c00627befcbd96c35bfb9061d9d82a66d71411e6934a2193f65
   .agents/skills/ai-setup-subagents/SKILL.md: sha256:6c00110743bf7107cd564e9f1717f1caf458ddd2db089078c7095febb71a999a
@@ -17149,36 +17316,43 @@ local_deployed_file_hashes:
   .claude/skills/ai-data-collection/evals/result-scenarios.json: sha256:cb3421f233446d46a47a7cc1546b852caae955d8c8539dd8729c630cb86488ef
   .claude/skills/ai-data-collection/evals/triggers.json: sha256:3236b80c7a689794353a050f1c0c5dca82d4e569a32ee10cdd4e297ebe50a5f7
   .claude/skills/ai-data-collection/references/data-collection-procedure.md: sha256:4d2cac8ddb7df1502f96c4646933cc4ba9dd0957849c8d4dfa6bcfc41a5258d2
+  .claude/skills/ai-human-communication/README.md: sha256:ebb4532e661f4b6389eb09a7bc6c1b2d5e28bfad293b7a77667ab44f8d3b9f15
+  .claude/skills/ai-human-communication/SKILL.md: sha256:6e1c843579ad857366aa76c01034d60198a3be59d3bfd68b563be4495d1406a2
+  .claude/skills/ai-human-communication/agents/openai.yaml: sha256:8668bd0e008922178d24fb1932ab7536e5ee5eb9afe9da873150c7e6097a0446
+  .claude/skills/ai-human-communication/evals/result-scenarios.json: sha256:41b30595cf3d6676c83be101101e23993c12459be3e6c9d596e4f58cf2b8b62d
+  .claude/skills/ai-human-communication/evals/triggers.json: sha256:c582bd9aae017c73a3394f4c17c64eb001027d78bd0ff7c6c544fe1d1cc03b67
   .claude/skills/ai-rule-failure-analysis/README.md: sha256:bd611709f4ef0e5e5aa30ed8333177d32c89c5c1c4ef722ec25037a8be1dc2e2
   .claude/skills/ai-rule-failure-analysis/SKILL.md: sha256:3b2a4c10c8dd4050ec083cf1fbb2b0be721e980aff7f0efeac080e2d2529c440
   .claude/skills/ai-rule-failure-analysis/agents/openai.yaml: sha256:a772d4f5c0df602bfff7583267701b616485e98a2341d719ae8fcf73ba7c5169
   .claude/skills/ai-rule-failure-analysis/evals/result-scenarios.json: sha256:a158a1f98a961ca1a5d4fd2f763f246e1b70a13462226c40aa66610a1a9a1fe9
   .claude/skills/ai-rule-failure-analysis/evals/triggers.json: sha256:c8b46792bf5d52d1bb190b3519039ac9da85065a066ff2a4a494d6b453eb281c
   .claude/skills/ai-setup-apm/README.md: sha256:99b460a189aefff8c3e97167766eb5207c8c366000d70921eb38665790f6c186
-  .claude/skills/ai-setup-apm/SKILL.md: sha256:192be54eb6e8d53a6013a16e4fc590f10f9e103d036c77df1ab66fe0dd4ae641
+  .claude/skills/ai-setup-apm/SKILL.md: sha256:e86462011b74004f7a7d938c72c250263df3a0a98c52902c3718f3f9adb48ee9
   .claude/skills/ai-setup-apm/agents/openai.yaml: sha256:8dc1fd4084ecd54dcde1a6e7f46147784e4e2c340999bf0e498a8f7115f16e4d
   .claude/skills/ai-setup-apm/evals/result-scenarios.json: sha256:b342bc395a2b1c662c8ef58d075b1428f095f6fc9aad713b2c83757c50b20ceb
   .claude/skills/ai-setup-apm/evals/script-contract-tests.json: sha256:4af62426c931ed1a0c6e2f102b911c8693ed3b073ce2ec20de6d8cd8a09b9101
   .claude/skills/ai-setup-apm/evals/script-fixtures/empty-project/.agents/skills/dependency/README.md: sha256:91033a538b99bfca34e438a2d995ec06ea3042e7a1a7fab91dfd04301cdc1664
   .claude/skills/ai-setup-apm/evals/script-fixtures/empty-project/apm.lock.yaml: sha256:d3880883f92bbf171a6b91e42e7965d21536848244b0cd1eec6349930f52344e
   .claude/skills/ai-setup-apm/evals/triggers.json: sha256:2446af9dc4ce0cd82b31d873e631d5d6c34ab43e32a6f9bd982b408e775151a7
-  .claude/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:11dfe4aff253002a728a13e2dbf52ecb80ba18fc84295439fb0f1eb46e74f11e
+  .claude/skills/ai-setup-apm/references/apm-collection-settings.md: sha256:225036915f7e099bc2b71e8598f19fc45557a7a1f6c03433d16ed5abe61f6757
   .claude/skills/ai-setup-apm/references/comparison-evals.md: sha256:33c1047d2c14509be8661045a0b95d192730e4e07932491b75ed6191c0f1a357
   .claude/skills/ai-setup-apm/references/compatibility-history.md: sha256:928e5e036567b1a56bcf44d6b95d7a4ae26a0532abc5eb5fa8b57130565117ba
   .claude/skills/ai-setup-apm/references/compatibility.yml: sha256:05a546ffed9b7751c8f0b22d7505016f608d9974c4cc73f447ef0bc17d0a1d36
   .claude/skills/ai-setup-apm/references/instruction-scope.md: sha256:b409660df9302dfe2784410ca418eb1b0a8382eae51dbd4ea80bacd225959c0c
   .claude/skills/ai-setup-apm/references/known-version-issues.md: sha256:afd23dbb6a5fc8d5de011a9089bb509f4b3dd116345cf77616da7dd08842793a
-  .claude/skills/ai-setup-apm/references/tooling-installers.md: sha256:e2c8d2ef9fe1801303de256437853a1176f4fb2c4010d17fe0e6637dd8911e40
+  .claude/skills/ai-setup-apm/references/tooling-installers.md: sha256:9f7aaad6a82098606f04cb64cf1e8a3cf274f984486876a4ba1df82420188a1c
   .claude/skills/ai-setup-apm/scripts/eval-tools/adapters/claude: sha256:04a44d916fde36b496ff173dac8dc765b1bb9368ead90ce93542b44da32182b9
   .claude/skills/ai-setup-apm/scripts/eval-tools/adapters/codex: sha256:c3b586deaba5265ec89ca956f22384e11f84bf659075d3c4781f633ddf6cf141
+  .claude/skills/ai-setup-apm/scripts/eval-tools/apm-audit-ci: sha256:c8ac33f01affcaf0733282e0a8a0fe9e268c7a0c7acb4565b54338f53f24af6d
   .claude/skills/ai-setup-apm/scripts/eval-tools/check-eval-tools-drift.py: sha256:4d7b3808573e5544b02e2e3cc3321cabc5bf99da9c3f4c410256fab74e464c8a
   .claude/skills/ai-setup-apm/scripts/eval-tools/evals.sample.yml: sha256:8ea6d60274d1ef50993cc1cf95dcd1c34f560607d29a6465eec56ef47560281e
-  .claude/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:cc15f3eabe83959e64b343e25acf45f93b839389c94a0a9e4a3615448aed5126
+  .claude/skills/ai-setup-apm/scripts/eval-tools/manifest.txt: sha256:3d26e7837b391b09313797a35ada1b2d3673195d3552c74267dd72ee9b3e4fad
   .claude/skills/ai-setup-apm/scripts/eval-tools/run-apm-safe.py: sha256:07ebbd0306b500e143e710fbc93ce01a8e893c0be92d0b1e150f3f7a21b80068
-  .claude/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:8def425ee5c5aa44d4114caae3aafb49931a11571037aec7fe8240803450b32d
+  .claude/skills/ai-setup-apm/scripts/eval-tools/run-collection-checks.py: sha256:35093f986f5f6b6653b3a2e221a9b8470be03daacf2b918e3ba7b50ad48b0a75
   .claude/skills/ai-setup-apm/scripts/eval-tools/run-fixture-checks.py: sha256:ef56e0e1a77f83800a43219572a7a491afb5dd8b3d4e28522ec4aa03d1fc9cab
   .claude/skills/ai-setup-apm/scripts/eval-tools/run-skill-evals.py: sha256:57f0ff60559c79b85ec6c4f0132c1c762b400fcc8c342c3d94fed55fbcaf48dc
   .claude/skills/ai-setup-apm/scripts/eval-tools/run-skill-script-contract-tests.py: sha256:c23775d3e0fe088e9534055d12d68b5a508ee19b42fb425371f77d29a3917e3b
+  .claude/skills/ai-setup-apm/scripts/eval-tools/test-apm-audit-ci.py: sha256:0e39f44e023d039286dba4279b700c62f6979f460b847596b4414f24012363f2
   .claude/skills/ai-setup-apm/scripts/eval-tools/test-run-apm-safe.py: sha256:cf8b84ff560fe545ce6cf87a526477768609aed83a76d2204ac531614d3de844
   .claude/skills/ai-setup-apm/scripts/eval-tools/test-run-fixture-checks.py: sha256:5ab197c802db9b22c040400546c98932f6a418b582a8c3665759bbe3e2ffb04a
   .claude/skills/ai-setup-apm/scripts/eval-tools/test-run-skill-evals.py: sha256:030e60011c9197f7d1c1e534730c2fc02347ef791d25706f233f8d9929a0ea96
@@ -17213,9 +17387,9 @@ local_deployed_file_hashes:
   .claude/skills/ai-setup-hooks/evals/result-scenarios.json: sha256:9d61599b4ff904d4f37292eec7745c106101f5964c3e4918af907a7ee0a596f8
   .claude/skills/ai-setup-hooks/evals/triggers.json: sha256:f6af75425e1762572018a9c7cccabb0a43d9459241cbe03ba4514c3737764044
   .claude/skills/ai-setup-project/README.md: sha256:9f63172690ac5f0c5df941e3124c86ab010f8aa5e09bdd8ad7885677119e3d05
-  .claude/skills/ai-setup-project/SKILL.md: sha256:ffd18f9bfa646fcd1a6a042681e71da237a37b36b2d9b81429d3893d9809b71a
+  .claude/skills/ai-setup-project/SKILL.md: sha256:6db90c864818bff589039e8c37bb5ae1d8018a1549a9edab12a9dd3b54722ec0
   .claude/skills/ai-setup-project/agents/openai.yaml: sha256:25b8a51fbe0f05f65f810340873b5e7bf08a9460bc7723ad1b86b7c7d5a2b580
-  .claude/skills/ai-setup-project/evals/result-scenarios.json: sha256:4b44a0f431b15ca6da51c3cf36e725375739ccf5a0c9b01b3ed0e0272d99c0fe
+  .claude/skills/ai-setup-project/evals/result-scenarios.json: sha256:abc0aaea16dbc27c6221809cef0d884d5125f47dedaee9a2762651592ac8edd1
   .claude/skills/ai-setup-project/evals/triggers.json: sha256:84337ce1deb4920b336f365cd57ef057ee0e3797a7c15838593d742fb59ad18a
   .claude/skills/ai-setup-subagents/README.md: sha256:844ba12430111c00627befcbd96c35bfb9061d9d82a66d71411e6934a2193f65
   .claude/skills/ai-setup-subagents/SKILL.md: sha256:6c00110743bf7107cd564e9f1717f1caf458ddd2db089078c7095febb71a999a
