@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import os
+import runpy
 import shutil
 import subprocess
 import sys
@@ -33,6 +35,50 @@ def run(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
+
+
+def check_consumer_audit(consumer: Path) -> None:
+    """Проверить доставленный аудитор и весь цикл на локальных входах потребителя."""
+    fixture = runpy.run_path(str(consumer / "tools/test-apm-audit-ci.py"))
+    with tempfile.TemporaryDirectory(prefix="аудит потребителя ") as temporary:
+        project = Path(temporary)
+        fake = fixture["write_project"](project)
+        lock = project / "apm.lock.yaml"
+        _, _, deployments = lock.read_text(encoding="utf-8").partition("deployments:")
+        lock.write_text(
+            "dependencies:\n- repo_url: example/local-package\n"
+            "  name: local-package\n  version: 1.0.0\n"
+            "deployments:" + deployments, encoding="utf-8",
+        )
+        shutil.copytree(consumer / "tools", project / "tools")
+        fake_source = project / "fake-apm"
+        original = fake_source.read_text(encoding="utf-8")
+        # Подставной APM сохраняет lock-граф при install и возвращает дрейф при audit.
+        fake_source.write_text(
+            original.replace("import json\n", "import json, sys\nif sys.argv[1] == 'install': raise SystemExit(0)\n"),
+            encoding="utf-8",
+        )
+        fake_command = project / ("apm.cmd" if os.name == "nt" else "apm")
+        shutil.copy2(fake, fake_command)
+        command = [
+            sys.executable, "-S", str(project / "tools/run-apm-safe.py"),
+            "--project-root", str(project), "--apm", str(fake_command),
+            "--audit-runner", "tools/apm-audit-ci",
+        ]
+        env = {**os.environ, "PATH": str(project) + os.pathsep + os.environ.get("PATH", ""),
+               "PYTHONDONTWRITEBYTECODE": "1"}
+        def cycle() -> subprocess.CompletedProcess[str]:
+            return subprocess.run(command, cwd=project, env=env, check=False,
+                                  text=True, encoding="utf-8", errors="replace",
+                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        accepted = cycle()
+        assert accepted.returncode == 0, accepted.stdout + accepted.stderr
+        assert "подтверждено файлов — 1" in accepted.stdout
+        deployed = project / ".agents/skills/example/SKILL.md"
+        deployed.write_text("unrelated edit\n", encoding="utf-8")
+        rejected = cycle()
+        assert rejected.returncode == 1, rejected.stdout + rejected.stderr
+        assert '"modified"' in rejected.stdout
 
 
 def main() -> int:
@@ -110,6 +156,15 @@ scripts:
                 compile_result.stdout + compile_result.stderr
             )
             assert not (consumer / "CLAUDE.md").exists()
+            installed_skill = consumer / ".claude/skills/ai-setup-apm"
+            consumer_installer = installed_skill / "scripts/install-eval-tools"
+            delivered = run(str(consumer_installer), str(consumer), cwd=consumer)
+            assert delivered.returncode == 0, delivered.stdout + delivered.stderr
+            assert (consumer / "tools/apm-audit-ci").read_bytes() == (
+                setup_skill / "scripts/eval-tools/apm-audit-ci"
+            ).read_bytes()
+            check_consumer_audit(consumer)
+
             dependency_entries = list(
                 (consumer / "apm_modules").rglob(".claude/CLAUDE.md")
             )
