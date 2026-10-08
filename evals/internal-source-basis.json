@@ -738,6 +738,10 @@
         {
           "claim_id": "CCDC-001",
           "statement_path": "knowledge/data/ccdc/pages/claude-directory/statements.yml"
+        },
+        {
+          "claim_id": "TOOLING-DELIVERY-001",
+          "statement_path": "evals/tooling-delivery-basis.yml"
         }
       ],
       "cases": [
@@ -1010,6 +1014,42 @@
             ],
             [
               "APMP-015"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-repeat-setup-deliver-missing-auditor",
+          "required_claims": [
+            "TOOLING-DELIVERY-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "TOOLING-DELIVERY-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-tooling-conflict-blocks-completion",
+          "required_claims": [
+            "TOOLING-DELIVERY-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "TOOLING-DELIVERY-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-consumer-update-without-publisher-tooling",
+          "required_claims": [
+            "TOOLING-DELIVERY-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "TOOLING-DELIVERY-001"
             ]
           ]
         }
@@ -1291,6 +1331,10 @@
         {
           "claim_id": "HUMAN-COMMUNICATION-001",
           "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "TOOLING-DELIVERY-001",
+          "statement_path": "evals/tooling-delivery-basis.yml"
         }
       ],
       "cases": [
@@ -1486,6 +1530,18 @@
           "finding_claims": [
             [
               "HUMAN-COMMUNICATION-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-repeat-publisher-tooling",
+          "required_claims": [
+            "TOOLING-DELIVERY-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "TOOLING-DELIVERY-001"
             ]
           ]
         }
