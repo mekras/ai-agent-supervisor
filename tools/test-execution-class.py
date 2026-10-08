@@ -140,6 +140,15 @@ def write_process_group_fixture(
             else ""
         )
         + (
+            f"ready_path = Path({str(child_pid)!r})\n"
+            "ready_deadline = time.monotonic() + 3\n"
+            "while not ready_path.is_file() and time.monotonic() < ready_deadline:\n"
+            "    time.sleep(0.01)\n"
+            "assert ready_path.is_file(), 'child did not become ready'\n"
+            if mode == "leader-exits"
+            else ""
+        )
+        + (
             "child.wait(timeout=5)\n"
             "print(json.dumps({'model': 'claude-haiku-4-5', 'turn_completed': True, "
             "'model_evidence': {'source': 'journal', 'line': 1, "
@@ -246,6 +255,8 @@ def run_process_group_case(
         assert process.stdin is not None
         process.stdin.write("Проверь группу процессов.")
         process.stdin.close()
+        # communicate в Python 3.12 иначе пытается сбросить закрытый поток.
+        process.stdin = None
         adapter_pid = read_ready_pid(adapter_pid_path)
         child_pid = read_ready_pid(child_pid_path)
         if signal_to_runner is not None:
@@ -746,7 +757,8 @@ def main() -> int:
         assert timeout_record["stop_reason"] == "timeout"
         assert timeout_record["termination_confirmed"]
         assert timeout_record["returncode"] is not None
-        assert Path(timeout_record["journal"]).read_text(encoding="utf-8")
+        # Тайм-аут может наступить до первого сообщения адаптера.
+        assert Path(timeout_record["journal"]).is_file()
         assert Path(timeout_record["transport_path"]).is_file()
         assert Path(timeout_record["stderr"]).is_file()
 
