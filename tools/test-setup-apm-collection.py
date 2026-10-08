@@ -40,7 +40,72 @@ def run(project: Path, *extra: str) -> subprocess.CompletedProcess[str]:
     )
 
 
+def check_repeat_setup_delivery() -> None:
+    """Проверить доставку после обновления навыка при независимых старых tests."""
+    with tempfile.TemporaryDirectory(prefix="повторная настройка ") as temporary:
+        project = Path(temporary)
+        skill = project / ".agents/skills/ai-setup-apm"
+        shutil.copytree(SETUP.parent.parent, skill)
+        manifest_path = project / "apm.yml"
+        manifest = "name: existing-collection\nversion: 1.0.0\nscripts:\n  tests: python checks.py\n"
+        manifest_path.write_text(manifest, encoding="utf-8")
+        custom_check = project / "checks.py"
+        custom_check.write_text('print("existing checks passed")\n', encoding="utf-8")
+        checker = skill / "scripts/eval-tools/check-eval-tools-drift.py"
+        installer = skill / "scripts/install-eval-tools"
+
+        def invoke(*args: str) -> subprocess.CompletedProcess[str]:
+            return subprocess.run(
+                list(args), cwd=project, env=fixture_environment(), check=False,
+                text=True, encoding="utf-8", errors="replace",
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            )
+
+        assert invoke(sys.executable, str(custom_check)).returncode == 0
+        assert (skill / "scripts/eval-tools/apm-audit-ci").is_file()
+        auditor = project / "tools/apm-audit-ci"
+        assert not auditor.exists()
+        missing = invoke(sys.executable, str(checker))
+        assert missing.returncode == 1, missing.stdout + missing.stderr
+        assert "нет рабочей копии: tools/apm-audit-ci" in missing.stderr
+
+        installed = invoke(str(installer), str(project))
+        assert installed.returncode == 0, installed.stdout + installed.stderr
+        assert f"installed={project}" in installed.stdout
+        for line in (skill / "scripts/eval-tools/manifest.txt").read_text(encoding="utf-8").splitlines():
+            if not line.strip() or line.startswith("#"):
+                continue
+            source, destination, mode = line.split("|")
+            working_copy = project / destination
+            assert working_copy.read_bytes() == (skill / "scripts/eval-tools" / source).read_bytes(), destination
+            if os.name == "posix":
+                assert working_copy.stat().st_mode & 0o777 == int(mode, 8), destination
+        assert manifest_path.read_text(encoding="utf-8") == manifest
+        assert custom_check.read_text(encoding="utf-8") == 'print("existing checks passed")\n'
+        complete = invoke(sys.executable, str(checker))
+        assert complete.returncode == 0, complete.stdout + complete.stderr
+
+        # Прежние tests продолжают проходить, если из комплекта исчез один файл.
+        auditor.unlink()
+        assert invoke(sys.executable, str(custom_check)).returncode == 0
+        incomplete = invoke(sys.executable, str(checker))
+        assert incomplete.returncode == 1
+        assert "нет рабочей копии: tools/apm-audit-ci" in incomplete.stderr
+        restored = invoke(str(installer), str(project))
+        assert restored.returncode == 0, restored.stdout + restored.stderr
+        assert invoke(sys.executable, str(checker)).returncode == 0
+
+        adapter = project / "tools/adapters/codex"
+        own_content = "#!/bin/sh\nprintf 'project-owned adapter'\n"
+        adapter.write_text(own_content, encoding="utf-8")
+        conflict = invoke(sys.executable, str(checker))
+        assert conflict.returncode == 1
+        assert "расхождение: tools/adapters/codex" in conflict.stderr
+        assert adapter.read_text(encoding="utf-8") == own_content
+
+
 def main() -> int:
+    check_repeat_setup_delivery()
     with tempfile.TemporaryDirectory(prefix="навык с пробелом ") as temporary:
         project = Path(temporary)
         shutil.copytree(
@@ -118,7 +183,7 @@ def main() -> int:
     )
     assert help_result.returncode == 0
     assert "Create apm.yml" in help_result.stdout
-    print("Создание apm.yml и оснастки проверок без внешнего YAML-пакета проверено.")
+    print("Создание и повторная доставка оснастки, пропажа аудитора и конфликт адаптера проверены.")
     return 0
 
 
