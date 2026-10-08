@@ -1,0 +1,26 @@
+status: completed_with_conflicts
+
+items:
+- borey — версия `2.1.0`, команда `Юг`, хранение журналов `7 дней`.
+- vega — версия `3.0.1`, команда `Восток`, хранение журналов `30 дней`.
+- atlas — версия `1.4.2`, команда `Север`, хранение журналов `14 дней`.
+
+evidence:
+- [services/borey.md](/workspace/services/borey.md:3), [services/borey.md](/workspace/services/borey.md:4), [services/borey.md](/workspace/services/borey.md:5)
+- [services/vega.md](/workspace/services/vega.md:3), [services/vega.md](/workspace/services/vega.md:4), [services/vega.md](/workspace/services/vega.md:5)
+- [services/atlas.md](/workspace/services/atlas.md:3), [services/atlas.md](/workspace/services/atlas.md:4), [services/atlas.md](/workspace/services/atlas.md:5)
+- [release-summary.md](/workspace/release-summary.md:3): atlas полностью совпадает.
+- [release-summary.md](/workspace/release-summary.md:4): borey — версия `2.0.9` вместо `2.1.0`.
+- [release-summary.md](/workspace/release-summary.md:5): vega — хранение `14 дней` вместо `30 дней`.
+
+confidence: высокая для извлечённых значений и конфликтов.
+
+risk:
+- borey: противоречие версии.
+- vega: противоречие срока хранения.
+- release-summary.md не содержит отдельного названия поля, поэтому порядок значений интерпретирован по данным сервисных файлов.
+
+open_questions:
+- Какой источник является приоритетным при конфликтах: файлы сервисов или сводка выпуска?
+
+escalation_needed: да — требуется решение владельца по двум конфликтам.

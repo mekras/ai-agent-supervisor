@@ -1548,6 +1548,82 @@
         {
           "claim_id": "SUBAGENT-DESIGN-007",
           "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "HERMES-CODEX-001",
+          "statement_path": "evals/hermes-codex-route-basis.yml"
+        },
+        {
+          "claim_id": "HERMES-CODEX-002",
+          "statement_path": "evals/hermes-codex-route-basis.yml"
+        },
+        {
+          "claim_id": "HERMES-CODEX-003",
+          "statement_path": "evals/hermes-codex-route-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-PROFILE-001",
+          "statement_path": "evals/subagent-profile-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-PROFILE-002",
+          "statement_path": "evals/subagent-profile-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-PROFILE-003",
+          "statement_path": "evals/subagent-profile-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-PROFILE-004",
+          "statement_path": "evals/subagent-profile-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-PROFILE-005",
+          "statement_path": "evals/subagent-profile-basis.yml"
+        },
+        {
+          "claim_id": "HIST-001",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-002",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-003",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-004",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "PARENT-001",
+          "statement_path": "evals/parent-policy-basis.yml"
+        },
+        {
+          "claim_id": "PARENT-002",
+          "statement_path": "evals/parent-policy-basis.yml"
+        },
+        {
+          "claim_id": "PARENT-004",
+          "statement_path": "evals/parent-policy-basis.yml"
+        },
+        {
+          "claim_id": "RECONCILE-001",
+          "statement_path": "evals/subagent-reconciliation-basis.yml"
+        },
+        {
+          "claim_id": "RECONCILE-002",
+          "statement_path": "evals/subagent-reconciliation-basis.yml"
+        },
+        {
+          "claim_id": "RECONCILE-003",
+          "statement_path": "evals/subagent-reconciliation-basis.yml"
+        },
+        {
+          "claim_id": "RECONCILE-004",
+          "statement_path": "evals/subagent-reconciliation-basis.yml"
         }
       ],
       "cases": [
@@ -2047,6 +2123,277 @@
             [
               "SUBAGENT-DESIGN-006",
               "SUBAGENT-DESIGN-007"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-hermes-parent-codex-executor-route",
+          "required_claims": [
+            "HERMES-CODEX-001"
+          ],
+          "finding_claims": [
+            [
+              "HERMES-CODEX-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-hermes-codex-chatgpt-login-missing",
+          "required_claims": [
+            "HERMES-CODEX-002"
+          ],
+          "finding_claims": [
+            [
+              "HERMES-CODEX-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-hermes-entrypoint-connection-unconfirmed",
+          "required_claims": [
+            "HERMES-CODEX-003"
+          ],
+          "finding_claims": [
+            [
+              "HERMES-CODEX-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-profile-grounded-selection",
+          "required_claims": [
+            "SUBAGENT-PROFILE-001",
+            "SUBAGENT-PROFILE-002",
+            "SUBAGENT-PROFILE-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-PROFILE-001",
+              "SUBAGENT-PROFILE-002",
+              "SUBAGENT-PROFILE-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-profile-catalog-mismatch",
+          "required_claims": [
+            "SUBAGENT-PROFILE-001",
+            "SUBAGENT-PROFILE-002",
+            "SUBAGENT-PROFILE-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-PROFILE-001",
+              "SUBAGENT-PROFILE-002",
+              "SUBAGENT-PROFILE-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-profile-missing",
+          "required_claims": [
+            "SUBAGENT-PROFILE-001",
+            "SUBAGENT-PROFILE-002",
+            "SUBAGENT-PROFILE-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-PROFILE-001",
+              "SUBAGENT-PROFILE-002",
+              "SUBAGENT-PROFILE-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-profile-operation-transfer",
+          "required_claims": [
+            "SUBAGENT-PROFILE-004"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-PROFILE-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-protected-records-directory",
+          "required_claims": [
+            "SUBAGENT-PROFILE-005"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-PROFILE-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-history-before-selection",
+          "required_claims": [
+            "HIST-001",
+            "HIST-002",
+            "HIST-003",
+            "HIST-004"
+          ],
+          "finding_claims": [
+            [
+              "HIST-001",
+              "HIST-002",
+              "HIST-003",
+              "HIST-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-history-denied-fallback",
+          "required_claims": [
+            "HIST-001",
+            "HIST-002",
+            "HIST-003",
+            "HIST-004"
+          ],
+          "finding_claims": [
+            [
+              "HIST-001",
+              "HIST-002",
+              "HIST-003",
+              "HIST-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-complete-authorized-qualification",
+          "required_claims": [
+            "HIST-001",
+            "HIST-003",
+            "HIST-004"
+          ],
+          "finding_claims": [
+            [
+              "HIST-001",
+              "HIST-003",
+              "HIST-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-project-decisions-and-rule-review",
+          "required_claims": [
+            "HIST-001",
+            "HIST-003",
+            "HIST-004"
+          ],
+          "finding_claims": [
+            [
+              "HIST-001",
+              "HIST-003",
+              "HIST-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-parent-conditions",
+          "required_claims": [
+            "PARENT-001",
+            "PARENT-002"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-001",
+              "PARENT-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-joint-selection",
+          "required_claims": [
+            "PARENT-001",
+            "PARENT-002"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-001",
+              "PARENT-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-legacy-parent-unknown",
+          "required_claims": [
+            "PARENT-001",
+            "PARENT-002"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-001",
+              "PARENT-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-minimal-comparison",
+          "required_claims": [
+            "PARENT-001",
+            "PARENT-002"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-001",
+              "PARENT-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-executable-preflight",
+          "required_claims": [
+            "PARENT-004"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-completed-failure-reconciles-policy",
+          "required_claims": [
+            "RECONCILE-001"
+          ],
+          "finding_claims": [
+            [
+              "RECONCILE-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-credit-estimate-without-token-budget",
+          "required_claims": [
+            "RECONCILE-002"
+          ],
+          "finding_claims": [
+            [
+              "RECONCILE-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-claim-scope-before-contradiction",
+          "required_claims": [
+            "RECONCILE-003"
+          ],
+          "finding_claims": [
+            [
+              "RECONCILE-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-revised-contract-not-qualified",
+          "required_claims": [
+            "RECONCILE-004"
+          ],
+          "finding_claims": [
+            [
+              "RECONCILE-004"
             ]
           ]
         }
@@ -2562,6 +2909,30 @@
         {
           "claim_id": "USAGE-004",
           "statement_path": "evals/usage-analysis-basis.yml"
+        },
+        {
+          "claim_id": "HIST-001",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-002",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-003",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-004",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "PARENT-003",
+          "statement_path": "evals/parent-policy-basis.yml"
+        },
+        {
+          "claim_id": "PARENT-002",
+          "statement_path": "evals/parent-policy-basis.yml"
         }
       ],
       "cases": [
@@ -2616,6 +2987,536 @@
             [
               "USAGE-002",
               "USAGE-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-usage-analysis-result-handoff-grouping",
+          "required_claims": [
+            "HIST-001",
+            "HIST-002",
+            "HIST-003",
+            "HIST-004"
+          ],
+          "finding_claims": [
+            [
+              "HIST-001",
+              "HIST-002",
+              "HIST-003",
+              "HIST-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-usage-analysis-result-parent-effort-segments",
+          "required_claims": [
+            "PARENT-003"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-usage-analysis-result-participant-ledger",
+          "required_claims": [
+            "PARENT-002",
+            "PARENT-003"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-002",
+              "PARENT-003"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-model-analysis": {
+      "source_basis": [
+        {
+          "claim_id": "MODEL-ANALYSIS-001",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-002",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-003",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-004",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-005",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-006",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-007",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-008",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-009",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-010",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-011",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-012",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-013",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-014",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "MODEL-ANALYSIS-015",
+          "statement_path": "evals/model-analysis-basis.yml"
+        },
+        {
+          "claim_id": "HIST-001",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-002",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-003",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "HIST-004",
+          "statement_path": "evals/history-handoff-basis.yml"
+        },
+        {
+          "claim_id": "PARENT-002",
+          "statement_path": "evals/parent-policy-basis.yml"
+        },
+        {
+          "claim_id": "PARENT-003",
+          "statement_path": "evals/parent-policy-basis.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-model-analysis-result-first",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-003"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-confirm",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-011"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-011"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-change",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-002"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-partial",
+          "required_claims": [
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-004"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-no-history",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-003",
+            "MODEL-ANALYSIS-008"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-003",
+              "MODEL-ANALYSIS-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-select-set",
+          "required_claims": [
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-007",
+            "MODEL-ANALYSIS-008"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-007",
+              "MODEL-ANALYSIS-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-reuse-history",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-003",
+            "MODEL-ANALYSIS-004"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-003",
+              "MODEL-ANALYSIS-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-propose-paths",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-005"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-save-local-paths",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-005"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-discover-local-goals",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-005"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-current-catalog",
+          "required_claims": [
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-006",
+            "MODEL-ANALYSIS-008"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-006",
+              "MODEL-ANALYSIS-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-user-effort-evidence",
+          "required_claims": [
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-007",
+            "MODEL-ANALYSIS-008"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-007",
+              "MODEL-ANALYSIS-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-unknown-efforts",
+          "required_claims": [
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-006"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-006"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-comparable-measurements",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-008"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-incomparable-results",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-008"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-bounded-scope",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-002",
+            "MODEL-ANALYSIS-008"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-002",
+              "MODEL-ANALYSIS-008"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-published-evidence",
+          "required_claims": [
+            "MODEL-ANALYSIS-008",
+            "MODEL-ANALYSIS-009"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-008",
+              "MODEL-ANALYSIS-009"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-history-scope",
+          "required_claims": [
+            "MODEL-ANALYSIS-008",
+            "MODEL-ANALYSIS-009"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-008",
+              "MODEL-ANALYSIS-009"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-role-catalog",
+          "required_claims": [
+            "MODEL-ANALYSIS-008",
+            "MODEL-ANALYSIS-010"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-008",
+              "MODEL-ANALYSIS-010"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-research-not-done",
+          "required_claims": [
+            "MODEL-ANALYSIS-008",
+            "MODEL-ANALYSIS-009"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-008",
+              "MODEL-ANALYSIS-009"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-confirmed-full-scope",
+          "required_claims": [
+            "MODEL-ANALYSIS-001",
+            "MODEL-ANALYSIS-011"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-001",
+              "MODEL-ANALYSIS-011"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-all-study-participants",
+          "required_claims": [
+            "MODEL-ANALYSIS-013"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-013"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-source-scope",
+          "required_claims": [
+            "MODEL-ANALYSIS-012",
+            "MODEL-ANALYSIS-013"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-012",
+              "MODEL-ANALYSIS-013"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-source-global-restriction",
+          "required_claims": [
+            "MODEL-ANALYSIS-012"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-012"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-unfinished-coverage",
+          "required_claims": [
+            "MODEL-ANALYSIS-009",
+            "MODEL-ANALYSIS-013"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-009",
+              "MODEL-ANALYSIS-013"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-measurement-boundaries",
+          "required_claims": [
+            "MODEL-ANALYSIS-014",
+            "MODEL-ANALYSIS-015"
+          ],
+          "finding_claims": [
+            [
+              "MODEL-ANALYSIS-014",
+              "MODEL-ANALYSIS-015"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-history-targeted-update",
+          "required_claims": [
+            "HIST-001",
+            "HIST-002",
+            "HIST-003",
+            "HIST-004"
+          ],
+          "finding_claims": [
+            [
+              "HIST-001",
+              "HIST-002",
+              "HIST-003",
+              "HIST-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-parent-child-evidence",
+          "required_claims": [
+            "PARENT-002",
+            "PARENT-003"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-002",
+              "PARENT-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-model-analysis-result-partial-joint-cost",
+          "required_claims": [
+            "PARENT-002",
+            "PARENT-003"
+          ],
+          "finding_claims": [
+            [
+              "PARENT-002",
+              "PARENT-003"
             ]
           ]
         }

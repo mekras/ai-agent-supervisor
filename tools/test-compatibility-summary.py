@@ -126,9 +126,9 @@ def main() -> int:
     assert "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят." in with_runtime
     hermes_pass = check(project, "hermes_agent", "2026-09-29", "passed", "hermes-runtime")
     with_hermes_runtime = render(registry([hermes_pass]))
-    assert "В локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in with_hermes_runtime
+    assert "В локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Границы остальных проверок указаны в реестре." in with_hermes_runtime
     with_both_runtime = render(registry([runtime_pass, hermes_pass]))
-    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in with_both_runtime
+    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Границы остальных проверок указаны в реестре." in with_both_runtime
 
     failure = check(project, "codex_cli", "2026-09-22", "failed", "new-failure")
     history = render(registry([installation_pass, behavior_pass, failure]))
@@ -203,7 +203,7 @@ def main() -> int:
     assert actual_capabilities["skill_loading_and_availability"]["declared_implementation"]["hermes_agent"]["status"] == "documented"
     hermes_setup = actual_capabilities["project_and_instruction_setup"]["declared_implementation"]["hermes_agent"]
     assert hermes_setup["status"] == "partial"
-    assert "остальные навыки и подагенты не проверены" in hermes_setup["gap"]
+    assert "остальные навыки не проверены" in hermes_setup["gap"]
     assert actual_capabilities["subagent_setup_and_use"]["declared_implementation"]["claude_code"]["status"] == "documented"
     for environment_id, environment_name in (("codex_cli", "Codex CLI"), ("claude_code", "Claude Code")):
         analysis = actual_capabilities["work_analysis_and_result_evaluation"]["declared_implementation"][environment_id]
@@ -213,7 +213,7 @@ def main() -> int:
     actual_rendered = render(actual)
     assert "| Codex CLI | Предусмотрены установка и работа навыков." in actual_rendered
     assert "| Hermes Agent | Версия 2.6.13 содержит установку и обнаружение локальных навыков. Сценарий правки AGENTS.md в Hermes проверен только на локальном кандидате." in actual_rendered
-    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Проверки остальных возможностей ещё предстоят." in actual_rendered
+    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Границы остальных проверок указаны в реестре." in actual_rendered
     assert "Загрузка и доступность навыков внутри Hermes не проверялись" not in actual_rendered
     assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" not in actual_rendered
     assert "Общая оценка результата через ai-work-result-evaluation доступна" not in actual_rendered

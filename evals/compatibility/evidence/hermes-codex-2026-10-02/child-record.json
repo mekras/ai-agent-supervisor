@@ -1,0 +1,445 @@
+{
+  "run_id": "6f3ee6e6-caf9-4327-88d0-c9d14249b1c9",
+  "record_path": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.json",
+  "execution_class": "cheap_readonly_research",
+  "target": "codex",
+  "assigned_model": "gpt-5.6-luna",
+  "assigned_effort": "low",
+  "effort": "low",
+  "sandbox": "read-only",
+  "inputs": [
+    "/workspace/README.md",
+    "/workspace/release-summary.md",
+    "/workspace/apm.yml",
+    "/workspace/services/borey.md",
+    "/workspace/services/vega.md",
+    "/workspace/services/atlas.md",
+    "/workspace/tools/analyze-subagent-sessions",
+    "/workspace/tools/adapters/codex-subagents",
+    "/workspace/tools/adapters/codex-role",
+    "/workspace/tools/codex-usage-report",
+    "/workspace/tools/discover-subagent-models",
+    "/workspace/tools/check-subagent-models",
+    "/workspace/tools/run-execution-class",
+    "/workspace/tools/subagents.local.toml.sample",
+    "/workspace/tools/lib/model_evidence.py",
+    "/workspace/tools/model-selection-input.sample.json",
+    "/workspace/tools/codex-model-subagent",
+    "/workspace/tools/run-subagent-role",
+    "/workspace/tools/assess-subagent-policy-connection.py"
+  ],
+  "contract": {
+    "writes": false,
+    "result": "status, items, evidence, confidence, risk, open_questions, escalation_needed",
+    "stop": "неоднозначность, конфликтующие свидетельства, недостающий вход, запрос записи, решение за владельца или выход за границу"
+  },
+  "role_assignment": {
+    "role": "child_executor",
+    "route_decided_by": "parent",
+    "task_scope": "provided_subtask_only",
+    "delegation_permission": "none"
+  },
+  "command": {
+    "adapter_executable": "codex-role",
+    "adapter_argument_count": 1,
+    "model": "gpt-5.6-luna",
+    "effort": "low",
+    "sandbox": "read-only"
+  },
+  "environment": {
+    "codex_home_configured": true,
+    "nested_codex_context": false
+  },
+  "final": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.final.txt",
+  "result_path": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.final.txt",
+  "transport_path": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.transport.txt",
+  "transport_header_path": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.transport-header.json",
+  "stderr": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.stderr.txt",
+  "journal": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.jsonl",
+  "codex_stderr": ".codex/subagents/1790927356-codex-cheap_readonly_research-6f3ee6e6-caf9-4327-88d0-c9d14249b1c9.codex.stderr.txt",
+  "status": "completed",
+  "termination_confirmed": true,
+  "started_at": 1790927356.6733205,
+  "evidence_schema_version": 2,
+  "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+  "thread_status": "resolved",
+  "assigned": {
+    "model": "gpt-5.6-luna",
+    "effort": "low",
+    "source": "configuration",
+    "confirmation_boundary": "assignment"
+  },
+  "execution_evidence": {
+    "schema_version": 2,
+    "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+    "client": {
+      "model": {
+        "value": "gpt-5.6-luna",
+        "status": "confirmed",
+        "reason": null,
+        "confirmation_boundary": "client_execution",
+        "sources": [
+          {
+            "source": "codex_sqlite",
+            "confirmation_boundary": "client_execution",
+            "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "database": "/codex-home/state_5.sqlite",
+            "table": "threads",
+            "row_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "fields": [
+              "model"
+            ]
+          },
+          {
+            "source": "codex_rollout",
+            "confirmation_boundary": "client_execution",
+            "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+            "line": 5,
+            "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+            "event_type": "world_state",
+            "field": [
+              "payload",
+              "state",
+              "model"
+            ]
+          },
+          {
+            "source": "codex_rollout",
+            "confirmation_boundary": "client_execution",
+            "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+            "line": 6,
+            "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+            "event_type": "turn_context",
+            "field": [
+              "payload",
+              "model"
+            ]
+          }
+        ],
+        "evidence": {
+          "schema_version": 2,
+          "value": "gpt-5.6-luna",
+          "status": "confirmed",
+          "confirmation_boundary": "client_execution",
+          "sources": [
+            {
+              "source": "codex_sqlite",
+              "confirmation_boundary": "client_execution",
+              "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "database": "/codex-home/state_5.sqlite",
+              "table": "threads",
+              "row_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "fields": [
+                "model"
+              ]
+            },
+            {
+              "source": "codex_rollout",
+              "confirmation_boundary": "client_execution",
+              "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+              "line": 5,
+              "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+              "event_type": "world_state",
+              "field": [
+                "payload",
+                "state",
+                "model"
+              ]
+            },
+            {
+              "source": "codex_rollout",
+              "confirmation_boundary": "client_execution",
+              "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+              "line": 6,
+              "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+              "event_type": "turn_context",
+              "field": [
+                "payload",
+                "model"
+              ]
+            }
+          ]
+        }
+      },
+      "effort": {
+        "value": "low",
+        "status": "confirmed",
+        "reason": null,
+        "confirmation_boundary": "client_execution",
+        "sources": [
+          {
+            "source": "codex_sqlite",
+            "confirmation_boundary": "client_execution",
+            "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "database": "/codex-home/state_5.sqlite",
+            "table": "threads",
+            "row_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "fields": [
+              "reasoning_effort"
+            ]
+          },
+          {
+            "source": "codex_rollout",
+            "confirmation_boundary": "client_execution",
+            "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+            "line": 6,
+            "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+            "event_type": "turn_context",
+            "field": [
+              "payload",
+              "effort"
+            ]
+          },
+          {
+            "source": "codex_rollout",
+            "confirmation_boundary": "client_execution",
+            "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+            "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+            "line": 6,
+            "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+            "event_type": "turn_context",
+            "field": [
+              "payload",
+              "collaboration_mode",
+              "settings",
+              "reasoning_effort"
+            ]
+          }
+        ],
+        "evidence": {
+          "schema_version": 2,
+          "value": "low",
+          "status": "confirmed",
+          "confirmation_boundary": "client_execution",
+          "sources": [
+            {
+              "source": "codex_sqlite",
+              "confirmation_boundary": "client_execution",
+              "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "database": "/codex-home/state_5.sqlite",
+              "table": "threads",
+              "row_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "fields": [
+                "reasoning_effort"
+              ]
+            },
+            {
+              "source": "codex_rollout",
+              "confirmation_boundary": "client_execution",
+              "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+              "line": 6,
+              "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+              "event_type": "turn_context",
+              "field": [
+                "payload",
+                "effort"
+              ]
+            },
+            {
+              "source": "codex_rollout",
+              "confirmation_boundary": "client_execution",
+              "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+              "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+              "line": 6,
+              "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+              "event_type": "turn_context",
+              "field": [
+                "payload",
+                "collaboration_mode",
+                "settings",
+                "reasoning_effort"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "server": {
+      "model": {
+        "value": null,
+        "status": "unconfirmed",
+        "reason": "missing_evidence",
+        "confirmation_boundary": null,
+        "sources": [],
+        "evidence": null
+      },
+      "effort": {
+        "value": null,
+        "status": "unconfirmed",
+        "reason": "missing_evidence",
+        "confirmation_boundary": null,
+        "sources": [],
+        "evidence": null
+      }
+    }
+  },
+  "actual_model": "gpt-5.6-luna",
+  "model_status": "confirmed",
+  "model_evidence": {
+    "schema_version": 2,
+    "value": "gpt-5.6-luna",
+    "status": "confirmed",
+    "confirmation_boundary": "client_execution",
+    "sources": [
+      {
+        "source": "codex_sqlite",
+        "confirmation_boundary": "client_execution",
+        "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "database": "/codex-home/state_5.sqlite",
+        "table": "threads",
+        "row_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "fields": [
+          "model"
+        ]
+      },
+      {
+        "source": "codex_rollout",
+        "confirmation_boundary": "client_execution",
+        "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+        "line": 5,
+        "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+        "event_type": "world_state",
+        "field": [
+          "payload",
+          "state",
+          "model"
+        ]
+      },
+      {
+        "source": "codex_rollout",
+        "confirmation_boundary": "client_execution",
+        "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+        "line": 6,
+        "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+        "event_type": "turn_context",
+        "field": [
+          "payload",
+          "model"
+        ]
+      }
+    ]
+  },
+  "model_evidence_reason": null,
+  "actual_effort": "low",
+  "effort_status": "confirmed",
+  "effort_evidence": {
+    "schema_version": 2,
+    "value": "low",
+    "status": "confirmed",
+    "confirmation_boundary": "client_execution",
+    "sources": [
+      {
+        "source": "codex_sqlite",
+        "confirmation_boundary": "client_execution",
+        "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "database": "/codex-home/state_5.sqlite",
+        "table": "threads",
+        "row_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "fields": [
+          "reasoning_effort"
+        ]
+      },
+      {
+        "source": "codex_rollout",
+        "confirmation_boundary": "client_execution",
+        "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+        "line": 6,
+        "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+        "event_type": "turn_context",
+        "field": [
+          "payload",
+          "effort"
+        ]
+      },
+      {
+        "source": "codex_rollout",
+        "confirmation_boundary": "client_execution",
+        "thread_id": "01a0fb96-d918-7493-ba18-55d7ad5dbf08",
+        "journal": "/codex-home/sessions/2026/10/02/rollout-2026-10-02T07-49-22-01a0fb96-d918-7493-ba18-55d7ad5dbf08.jsonl",
+        "line": 6,
+        "sha256": "a98e2224e5d2f14a4545c002b0be7d2ece75c1410d32894007038c13b4a08c41",
+        "event_type": "turn_context",
+        "field": [
+          "payload",
+          "collaboration_mode",
+          "settings",
+          "reasoning_effort"
+        ]
+      }
+    ]
+  },
+  "effort_evidence_reason": null,
+  "client_model_status": "confirmed",
+  "client_effort_status": "confirmed",
+  "server_model_status": "unconfirmed",
+  "server_effort_status": "unconfirmed",
+  "client_model_matches": true,
+  "client_effort_matches": true,
+  "server_model_matches": null,
+  "server_effort_matches": null,
+  "model_matches": true,
+  "effort_matches": true,
+  "client_route_status": "confirmed",
+  "reported_model": "gpt-5.6-luna",
+  "reported_effort": "low",
+  "model_notice": null,
+  "usage": {
+    "input_tokens": 77726,
+    "cached_input_tokens": 58368,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1104,
+    "reasoning_output_tokens": 250
+  },
+  "result_available": true,
+  "result_file_available": true,
+  "result_nonempty": true,
+  "result_usable": true,
+  "turn_completed": true,
+  "stop_reason": null,
+  "seconds": 44.362,
+  "returncode": 0,
+  "completed_at": 1790927401.035792,
+  "signal_errors": [],
+  "acceptance": {
+    "status": "accepted",
+    "run_id": "6f3ee6e6-caf9-4327-88d0-c9d14249b1c9",
+    "criteria": [
+      "Все сервисы из services/ охвачены",
+      "Каждое значение имеет источник",
+      "Противоречия и неопределённость отмечены отдельно"
+    ],
+    "evidence": [
+      "services/atlas.md:1-5, services/borey.md:1-5, services/vega.md:1-5; README.md:3",
+      "services/atlas.md:3-5, services/borey.md:3-5, services/vega.md:3-5; release-summary.md:3-5",
+      "release-summary.md:4-5 против services/borey.md:3 и services/vega.md:5; README.md:4-6"
+    ],
+    "recorded_at": 1790927436.2212224,
+    "execution_sha256": "6b98bb5f0795d9ba5c174d2bffeea6bc9c4aa4f91248f3d80fac873a8809971f",
+    "result_sha256": "cb4f13ee7c6d0d78731b89c6c700ab1b84d406a3beff6e62c92a5518ad0a2538",
+    "unconfirmed_reason": ""
+  },
+  "quality_assessment": {
+    "status": "passed",
+    "summary": "Родитель сверил результат с исходными файлами: подтверждены 3 сервиса, значения и два конфликтующих поля; приоритет источника не установлен.",
+    "scope": "Только чтение переданных файлов проекта и сверка сведений о сервисах.",
+    "criteria": [
+      "Все сервисы из services/ охвачены",
+      "Каждое значение имеет источник",
+      "Противоречия и неопределённость отмечены отдельно"
+    ],
+    "evidence": [
+      "services/atlas.md:1-5, services/borey.md:1-5, services/vega.md:1-5; README.md:3",
+      "services/atlas.md:3-5, services/borey.md:3-5, services/vega.md:3-5; release-summary.md:3-5",
+      "release-summary.md:4-5 против services/borey.md:3 и services/vega.md:5; README.md:4-6"
+    ]
+  }
+}

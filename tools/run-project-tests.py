@@ -69,6 +69,10 @@ def main() -> int:
         args = [sys.executable, str(ROOT / relative)]
         if relative.endswith("validate-product-boundary.py"):
             args.append(target)
+        elif relative.endswith("validate-hidden-unicode.py"):
+            # Локальные журналы и кэш исполнителя не являются исходниками.
+            args.extend(["--exclude", "ai-subagent-runs.local", "--exclude", "ai-subagent-runs.local/**",
+                         "--exclude", ".local", "--exclude", ".local/**"])
         elif relative == "tools/compatibility-summary.py":
             args.append("--check")
         elif relative.endswith("validate-skill-descriptions.py"):
