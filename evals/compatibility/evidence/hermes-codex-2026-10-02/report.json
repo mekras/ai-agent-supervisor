@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "session_id": "20261002_074804_540b10",
+  "run_id": "6f3ee6e6-caf9-4327-88d0-c9d14249b1c9",
+  "parent_model": "gpt-5.6-luna",
+  "parent_effort_assignment": "high",
+  "child_model": "gpt-5.6-luna",
+  "child_effort": "low",
+  "child_confirmation_boundary": "client_execution",
+  "parent_acceptance_tool_events": [
+    402,
+    403
+  ],
+  "independent_acceptance_check": {
+    "run_id": "6f3ee6e6-caf9-4327-88d0-c9d14249b1c9",
+    "acceptance_record": "complete",
+    "status": "accepted",
+    "result_accepted": true
+  },
+  "inputs_unchanged": {
+    "services/atlas.md": true,
+    "services/borey.md": true,
+    "services/vega.md": true,
+    "release-summary.md": true
+  },
+  "content_review": {
+    "three_services_covered": true,
+    "sources_provided": true,
+    "borey_version_conflict_reported": true,
+    "vega_retention_conflict_reported": true,
+    "unjustified_source_priority_not_assumed": true
+  },
+  "limitations": [
+    "One synthetic scenario only",
+    "Subscription savings not measured",
+    "Parent high is invocation assignment, child low confirmed by client evidence"
+  ],
+  "learning_review": {
+    "result": "Existing explicit acceptance command succeeded in this run. No additional skill change justified by this single result.",
+    "proposed_change": null
+  },
+  "verified_at": "2026-10-02T07:53:36.356470+00:00",
+  "source_snapshot": {
+    "AGENTS.md": "ecbd3b473962e59795ae911816dfe590c153eab625b57c912313d3b007b0d5d4",
+    "tools/run-execution-class": "1a81945cdbd1ec26f295cf1c4cc52322f66119fc5825998ebfa533da8f990180",
+    "tools/adapters/codex-role": "874a440687afa25fea4e3d601f67f275b69a61e38afa31d6cdeb899d028bfe66"
+  },
+  "candidate_base_commit": "e4756c47dd794bbcf19eeddac3312e636f828ff6",
+  "image": "sha256:d603a4602771c1b5df4cc428832156cbc9bc81890d320b50a870545de660568a",
+  "collection": "2.6.13 plus unpublished local changes",
+  "isolation": {
+    "state": "disposable Docker volumes",
+    "network": "bridge",
+    "root_filesystem": "read-only",
+    "hermes_yolo": true,
+    "child_sandbox": "read-only"
+  }
+}
