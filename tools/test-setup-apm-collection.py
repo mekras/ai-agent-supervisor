@@ -69,9 +69,21 @@ def check_repeat_setup_delivery() -> None:
         assert missing.returncode == 1, missing.stdout + missing.stderr
         assert "нет рабочей копии: tools/apm-audit-ci" in missing.stderr
 
-        installed = invoke(str(installer), str(project))
-        assert installed.returncode == 0, installed.stdout + installed.stderr
-        assert f"installed={project}" in installed.stdout
+        # Переносимая доставка Python работает и без POSIX-оболочки.
+        # Bash-установщик дополнительно проверяется там, где запускается напрямую.
+        python_install = (
+            "import runpy, sys; from pathlib import Path; "
+            "runpy.run_path(sys.argv[1])['install_eval_tools'](Path(sys.argv[2]))"
+        )
+        install_commands = [(sys.executable, "-c", python_install,
+                             str(skill / "scripts/setup-apm-collection"), str(project))]
+        if os.name == "posix":
+            install_commands.append((str(installer), str(project)))
+        for command in install_commands:
+            installed = invoke(*command)
+            assert installed.returncode == 0, installed.stdout + installed.stderr
+            if command[0] == str(installer):
+                assert f"installed={project}" in installed.stdout
         for line in (skill / "scripts/eval-tools/manifest.txt").read_text(encoding="utf-8").splitlines():
             if not line.strip() or line.startswith("#"):
                 continue
@@ -86,14 +98,15 @@ def check_repeat_setup_delivery() -> None:
         assert complete.returncode == 0, complete.stdout + complete.stderr
 
         # Прежние tests продолжают проходить, если из комплекта исчез один файл.
-        auditor.unlink()
-        assert invoke(sys.executable, str(custom_check)).returncode == 0
-        incomplete = invoke(sys.executable, str(checker))
-        assert incomplete.returncode == 1
-        assert "нет рабочей копии: tools/apm-audit-ci" in incomplete.stderr
-        restored = invoke(str(installer), str(project))
-        assert restored.returncode == 0, restored.stdout + restored.stderr
-        assert invoke(sys.executable, str(checker)).returncode == 0
+        for command in install_commands:
+            auditor.unlink()
+            assert invoke(sys.executable, str(custom_check)).returncode == 0
+            incomplete = invoke(sys.executable, str(checker))
+            assert incomplete.returncode == 1
+            assert "нет рабочей копии: tools/apm-audit-ci" in incomplete.stderr
+            restored = invoke(*command)
+            assert restored.returncode == 0, restored.stdout + restored.stderr
+            assert invoke(sys.executable, str(checker)).returncode == 0
 
         adapter = project / "tools/adapters/codex"
         own_content = "#!/bin/sh\nprintf 'project-owned adapter'\n"
