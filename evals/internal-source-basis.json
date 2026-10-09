@@ -1335,6 +1335,10 @@
         {
           "claim_id": "TOOLING-DELIVERY-001",
           "statement_path": "evals/tooling-delivery-basis.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-002",
+          "statement_path": "evals/human-communication-basis.yml"
         }
       ],
       "cases": [
@@ -1525,11 +1529,13 @@
         {
           "id": "ai-setup-project-result-human-communication",
           "required_claims": [
-            "HUMAN-COMMUNICATION-001"
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002"
           ],
           "finding_claims": [
             [
-              "HUMAN-COMMUNICATION-001"
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002"
             ]
           ]
         },
@@ -1542,6 +1548,28 @@
           "finding_claims": [
             [
               "TOOLING-DELIVERY-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-human-communication-upgrade",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-002"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-human-communication-reuse",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-002"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-002"
             ]
           ]
         }
@@ -3645,6 +3673,10 @@
         {
           "claim_id": "HUMAN-COMMUNICATION-001",
           "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-002",
+          "statement_path": "evals/human-communication-basis.yml"
         }
       ],
       "cases": [
@@ -3717,11 +3749,57 @@
         {
           "id": "ai-human-communication-result-simple-fact",
           "required_claims": [
-            "HUMAN-COMMUNICATION-001"
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002"
           ],
           "finding_claims": [
             [
-              "HUMAN-COMMUNICATION-001"
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-progress",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-002"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-plain-explanation",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-002"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-requested-detail",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-002"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-002"
+            ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-problem-next-step",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-002"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-002"
             ]
           ]
         }
