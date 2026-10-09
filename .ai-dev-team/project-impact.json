@@ -26,7 +26,10 @@
       "kind": "concept",
       "semantic_type": "концепция проекта",
       "authority": "canonical",
-      "paths": ["README.md"],
+      "representations": [
+        {"path": "docs/concept.md", "role": "canonical"},
+        {"path": "README.md", "role": "navigation"}
+      ],
       "checks": ["ait-docs-concept"]
     },
     {
@@ -60,7 +63,7 @@
       "id": "knowledge",
       "title": "Корпус знаний",
       "kind": "knowledge",
-      "semantic_type": "корпус проверяемых оснований",
+      "semantic_type": "источник знаний о продукте и проекте",
       "authority": "canonical",
       "paths": ["knowledge/**"],
       "checks": ["kc-validation"]
@@ -107,7 +110,9 @@
         ".ai-dev-team/project-impact.json",
         "subagents.local.toml",
         ".gitignore",
-        "evals.sample.yml"
+        "evals.sample.yml",
+        "docs/agent-work/subagents.md",
+        "ai-subagent-launcher.local"
       ],
       "checks": ["ai-agents-md-maintenance", "ai-setup-subagents"]
     },
@@ -176,14 +181,16 @@
       "to": "requirements",
       "relation": "informs",
       "facets": ["semantic", "quality"],
-      "rationale": "Корпус даёт проверяемые основания для развития публикуемой коллекции."
+      "rationale": "Корпус предоставляет знания для анализа и вариантов развития требований. Сведения сами по себе не устанавливают обязательства.",
+      "basis": false
     },
     {
       "from": "knowledge",
       "to": "skills",
       "relation": "informs",
       "facets": ["semantic", "quality"],
-      "rationale": "Навыки используют проверяемые основания корпуса в пределах опубликованной коллекции."
+      "rationale": "Корпус предоставляет знания для анализа и вариантов развития навыков. Сведения сами по себе не устанавливают обязательства.",
+      "basis": false
     },
     {
       "from": "decisions",
@@ -233,6 +240,14 @@
       "relation": "verifies",
       "facets": ["quality", "operation"],
       "rationale": "Результаты проверок подтверждают готовность поставки."
+    },
+    {
+      "from": "knowledge",
+      "to": "configuration",
+      "relation": "informs",
+      "facets": ["semantic", "quality", "operation"],
+      "rationale": "Знания корпуса могут быть применимы к проектным правилам и рабочим процедурам. Они не устанавливают обязательства сами по себе.",
+      "basis": false
     }
   ]
 }

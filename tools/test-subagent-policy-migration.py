@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / ".apm/skills/ai-setup-subagents/scripts/migrate-subagent-policy.py"
 FIXTURE = ROOT / ".apm/skills/ai-setup-subagents/evals/script-fixtures/policy-migration"
 ASSET = ROOT / ".apm/skills/ai-setup-subagents/assets/worker-policy-entrypoint.md"
+PROCEDURE = ROOT / ".apm/skills/ai-setup-subagents/references/worker-policy-procedure.md"
 START = "<!-- ai-setup-subagents:runtime-policy:start -->"
 END = "<!-- ai-setup-subagents:runtime-policy:end -->"
 
@@ -57,7 +58,7 @@ def assert_unambiguous_entrypoint(text: str) -> None:
     assert positions == sorted(positions)
 
 
-def run(config: Path, entrypoint: Path, check: bool = False) -> subprocess.CompletedProcess[str]:
+def run(config: Path, entrypoint: Path, check: bool = False, replace: bool = False) -> subprocess.CompletedProcess[str]:
     command = [
         "python3",
         str(SCRIPT),
@@ -68,6 +69,8 @@ def run(config: Path, entrypoint: Path, check: bool = False) -> subprocess.Compl
     ]
     if check:
         command.append("--check")
+    if replace:
+        command.append("--replace-entrypoint")
     return subprocess.run(
         command,
         cwd=config.parent,
@@ -88,7 +91,13 @@ def main() -> int:
         shutil.copy2(FIXTURE / config.name, config)
         shutil.copy2(FIXTURE / "worker-instructions.md", entrypoint)
 
-        first = run(config, entrypoint)
+        initial_config = config.read_bytes()
+        initial_entrypoint = entrypoint.read_bytes()
+        conflict = run(config, entrypoint)
+        assert conflict.returncode != 0 and "конфликт" in conflict.stderr
+        assert config.read_bytes() == initial_config
+        assert entrypoint.read_bytes() == initial_entrypoint
+        first = run(config, entrypoint, replace=True)
         assert first.returncode == 0, first.stderr
         data = tomllib.loads(config.read_text(encoding="utf-8"))
         runtime = data["policy_runtime"]
@@ -127,7 +136,10 @@ def main() -> int:
         assert migrated_entrypoint.count(END) == 1
         canonical = ASSET.read_text(encoding="utf-8")
         assert canonical in migrated_entrypoint
-        assert_unambiguous_entrypoint(canonical)
+        assert_unambiguous_entrypoint(PROCEDURE.read_text(encoding="utf-8"))
+        assert "references/worker-policy-procedure.md" in canonical
+        assert "role_assignment.role" in canonical
+        assert "policy_applicability" in canonical
         assert "Keep this surrounding rule unchanged." in migrated_entrypoint
         assert "Keep this rule after the managed fragment unchanged." in migrated_entrypoint
 
@@ -152,13 +164,12 @@ def main() -> int:
             encoding="utf-8",
         )
         schema2_config = config.read_bytes()
-        repaired_schema2 = run(config, entrypoint)
+        repaired_schema2 = run(config, entrypoint, replace=True)
         assert repaired_schema2.returncode == 0, repaired_schema2.stderr
         assert "Политика подагентов мигрирована." in repaired_schema2.stdout
         assert config.read_bytes() == schema2_config
         migrated_schema2 = entrypoint.read_text(encoding="utf-8")
         assert canonical in migrated_schema2
-        assert_unambiguous_entrypoint(migrated_schema2)
         assert "Installed rules from version 2.6.7" in migrated_schema2
         assert "Local rule preserved" in migrated_schema2
         schema2_data = tomllib.loads(config.read_text(encoding="utf-8"))
@@ -173,6 +184,38 @@ def main() -> int:
         assert "уже актуальна" in stable_schema2.stdout
         assert config.read_bytes() == schema2_config
         assert entrypoint.read_bytes() == stable_schema2_entrypoint
+
+        # Штатный прежний длинный блок обновляется без разрешения конфликта.
+        legacy = START + "\n" + PROCEDURE.read_text(encoding="utf-8").strip() + "\n" + END + "\n"
+        entrypoint.write_text("# Before\n" + legacy + "# After\n", encoding="utf-8")
+        legacy_migration = run(config, entrypoint)
+        assert legacy_migration.returncode == 0, legacy_migration.stderr
+        assert entrypoint.read_text(encoding="utf-8") == "# Before\n" + canonical + "# After\n"
+        assert config.read_bytes() == schema2_config
+
+        # Реальная проектная адаптация сохраняется вместе со ссылкой на процедуру.
+        procedure = root / "docs" / "agent-work" / "subagents.md"
+        procedure.parent.mkdir(parents=True)
+        shutil.copy2(ROOT / "docs/agent-work/subagents.md", procedure)
+        shutil.copy2(ROOT / "AGENTS.md", entrypoint)
+        adapted = entrypoint.read_bytes()
+        assert run(config, entrypoint).returncode == 0
+        assert run(config, entrypoint, check=True).returncode == 0
+        assert entrypoint.read_bytes() == adapted
+        assert config.read_bytes() == schema2_config
+        procedure.unlink()
+        missing = run(config, entrypoint)
+        assert missing.returncode != 0 and "процедура не найдена" in missing.stderr
+        assert entrypoint.read_bytes() == adapted
+        assert config.read_bytes() == schema2_config
+
+        # Отсутствующий штатный блок добавляется один раз.
+        entrypoint.write_text("# Rules\n", encoding="utf-8")
+        assert run(config, entrypoint).returncode == 0
+        appended = entrypoint.read_bytes()
+        assert canonical in entrypoint.read_text(encoding="utf-8")
+        assert run(config, entrypoint).returncode == 0
+        assert entrypoint.read_bytes() == appended
 
     print("Миграция политики подагентов проверена на изолированной установке.")
     return 0
