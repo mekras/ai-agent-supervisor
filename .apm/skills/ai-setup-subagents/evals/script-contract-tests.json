@@ -688,7 +688,7 @@
         [
           "{python}",
           "-c",
-          "from pathlib import Path; import sys; p=Path(sys.argv[1]); s=Path(sys.argv[2]); doc=p/'docs/worker-policy.md'; doc.parent.mkdir(exist_ok=True); doc.write_text((s.parent.parent/'references/worker-policy-procedure.md').read_text()); (p/'worker-instructions.md').write_text('<!-- ai-setup-subagents:runtime-policy:start -->\\n<!-- ai-setup-subagents:runtime-policy:adapted-v2:docs/worker-policy.md -->\\nRead subagents.local.toml.\\n[Project procedure](docs/worker-policy.md)\\nKeep local adaptation.\\n<!-- ai-setup-subagents:runtime-policy:end -->\\n')",
+          "from pathlib import Path; import sys; p=Path(sys.argv[1]); s=Path(sys.argv[2]); doc=p/'docs/worker-policy.md'; doc.parent.mkdir(exist_ok=True); doc.write_text((s.parent.parent/'references/worker-policy-procedure.md').read_text(encoding='utf-8'), encoding='utf-8'); (p/'worker-instructions.md').write_text('<!-- ai-setup-subagents:runtime-policy:start -->\\n<!-- ai-setup-subagents:runtime-policy:adapted-v2:docs/worker-policy.md -->\\nRead subagents.local.toml.\\n[Project procedure](docs/worker-policy.md)\\nKeep local adaptation.\\n<!-- ai-setup-subagents:runtime-policy:end -->\\n', encoding='utf-8')",
           "{fixture}",
           "{script}"
         ]
@@ -725,7 +725,7 @@
         [
           "{python}",
           "-c",
-          "from pathlib import Path; import sys; p=Path(sys.argv[1]); s=Path(sys.argv[2]); body=(s.parent.parent/'references/worker-policy-procedure.md').read_text(); (p/'worker-instructions.md').write_text('<!-- ai-setup-subagents:runtime-policy:start -->\\n'+body+'<!-- ai-setup-subagents:runtime-policy:end -->\\n')",
+          "from pathlib import Path; import sys; p=Path(sys.argv[1]); s=Path(sys.argv[2]); body=(s.parent.parent/'references/worker-policy-procedure.md').read_text(encoding='utf-8'); (p/'worker-instructions.md').write_text('<!-- ai-setup-subagents:runtime-policy:start -->\\n'+body+'<!-- ai-setup-subagents:runtime-policy:end -->\\n', encoding='utf-8')",
           "{fixture}",
           "{script}"
         ]
