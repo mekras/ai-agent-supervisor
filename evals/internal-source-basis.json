@@ -1680,6 +1680,14 @@
         {
           "claim_id": "RECONCILE-004",
           "statement_path": "evals/subagent-reconciliation-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-DESIGN-008",
+          "statement_path": "evals/subagent-design-basis.yml"
+        },
+        {
+          "claim_id": "COMPLEXITY-003",
+          "statement_path": "evals/complexity-management-basis.yml"
         }
       ],
       "cases": [
@@ -2452,6 +2460,30 @@
               "RECONCILE-004"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-subagents-result-separate-policy-history",
+          "required_claims": [
+            "SUBAGENT-DESIGN-008",
+            "HIST-004"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-DESIGN-008",
+              "HIST-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-preserve-project-entrypoint",
+          "required_claims": [
+            "COMPLEXITY-003"
+          ],
+          "finding_claims": [
+            [
+              "COMPLEXITY-003"
+            ]
+          ]
         }
       ]
     },
@@ -2817,6 +2849,14 @@
         {
           "claim_id": "AUDIT-004",
           "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "COMPLEXITY-001",
+          "statement_path": "evals/complexity-management-basis.yml"
+        },
+        {
+          "claim_id": "COMPLEXITY-002",
+          "statement_path": "evals/complexity-management-basis.yml"
         }
       ],
       "cases": [
@@ -2876,6 +2916,28 @@
           "finding_claims": [
             [
               "AUDIT-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-work-control-result-main-complexity-principle",
+          "required_claims": [
+            "COMPLEXITY-001"
+          ],
+          "finding_claims": [
+            [
+              "COMPLEXITY-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-work-control-result-report-only-when-needed",
+          "required_claims": [
+            "COMPLEXITY-002"
+          ],
+          "finding_claims": [
+            [
+              "COMPLEXITY-002"
             ]
           ]
         }

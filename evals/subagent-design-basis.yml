@@ -72,6 +72,21 @@ claims:
       - .apm/skills/ai-setup-subagents/assets/worker-policy-entrypoint.md
       - .apm/skills/ai-setup-subagents/references/operation-policy.md
 
+  - id: SUBAGENT-DESIGN-008
+    kind: fact
+    text: >
+      Действующие условия политики и сведения её проектирования хранятся
+      раздельно. Перенос сохраняет ограничения, назначения, условия
+      применимости и все исторические сведения. История доступна по
+      policy_runtime.history_path и читается при настройке, пересмотре
+      или разборе соответствующего свидетельства. Она не разрешает
+      кандидатные назначения. Старый совмещённый формат остаётся читаемым.
+    basis: Согласие владельца на пункт 3 аудита продукта от 2026-10-09.
+    source: .apm/skills/ai-setup-subagents/references/confirmed-goals-procedure.md
+    source_section: Шаг 8
+    limitations:
+      - Это согласованное поведение, а не доказательство снижения расходов.
+
   - id: SUBAGENT-DESIGN-007
     kind: fact
     text: >
