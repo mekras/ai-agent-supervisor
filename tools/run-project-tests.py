@@ -24,6 +24,7 @@ SCRIPTS = [
     "tools/test-check-subagent-models.py",
     "tools/test-subagent-tools-drift.py",
     "tools/test-execution-class.py",
+    "tools/test-subagent-run-storage.py",
     "tools/test-model-evidence.py",
     "tools/compatibility-summary.py",
     "tools/test-compatibility-summary.py",

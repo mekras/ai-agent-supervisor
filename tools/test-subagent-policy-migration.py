@@ -143,6 +143,19 @@ def main() -> int:
         assert "Keep this surrounding rule unchanged." in migrated_entrypoint
         assert "Keep this rule after the managed fragment unchanged." in migrated_entrypoint
 
+        # Штатный прежний полный фрагмент мигрирует без замены чужих правил.
+        legacy = (FIXTURE / "legacy-full-entrypoint.md").read_text(encoding="utf-8")
+        entrypoint.write_text("Keep before.\n" + legacy + "Keep after.\n", encoding="utf-8")
+        upgraded = run(config, entrypoint)
+        assert upgraded.returncode == 0, upgraded.stderr
+        assert "Keep before." in entrypoint.read_text() and "Keep after." in entrypoint.read_text()
+        assert canonical in entrypoint.read_text()
+        entrypoint.write_text(legacy.replace("Сохраняйте записи", "Храните собственные данные"), encoding="utf-8")
+        custom_before = entrypoint.read_bytes()
+        assert run(config, entrypoint).returncode != 0
+        assert entrypoint.read_bytes() == custom_before
+        entrypoint.write_text(migrated_entrypoint, encoding="utf-8")
+
         saved_config = config.read_bytes()
         saved_entrypoint = entrypoint.read_bytes()
         second = run(config, entrypoint)
