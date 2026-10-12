@@ -274,7 +274,7 @@ def run_process_group_case(
         elapsed = time.monotonic() - started
         records = [
             path
-            for path in output.glob("*.json")
+            for path in output.glob("*/run.json")
             if not path.name.endswith(".transport-header.json")
         ]
         assert len(records) == 1, (
@@ -671,10 +671,10 @@ def main() -> int:
             input="Проверь факт.", text=True, capture_output=True,
         )
         assert via_policy.returncode == 0, via_policy.stderr
-        assert Path(json.loads(via_policy.stdout)["record_path"]).parent == configured_out
+        assert Path(json.loads(via_policy.stdout)["record_path"]).parent.parent == configured_out
         explicit = run(config, directory / "explicit-records", input_file, "review")
         assert explicit.returncode == 0, explicit.stderr
-        assert Path(json.loads(explicit.stdout)["record_path"]).parent == directory / "explicit-records"
+        assert Path(json.loads(explicit.stdout)["record_path"]).parent.parent == directory / "explicit-records"
         blocked_out = directory / "not-a-directory"
         blocked_out.write_text("Существующий файл, не каталог")
         config.write_text(configured_text.replace(str(configured_out), str(blocked_out)))
@@ -775,7 +775,7 @@ def main() -> int:
         interrupted_process.stdin.close()
         record_paths: list[Path] = []
         for _ in range(30):
-            record_paths = list(interrupted_out.glob("*.json"))
+            record_paths = list(interrupted_out.glob("*/run.json"))
             if record_paths:
                 break
             time.sleep(0.02)
@@ -817,7 +817,7 @@ def main() -> int:
                 else None
             )
         assert no_stdin_process.returncode == 2, no_stdin_stderr
-        no_stdin_records = list(no_stdin_out.glob("*.json"))
+        no_stdin_records = list(no_stdin_out.glob("*/run.json"))
         assert len(no_stdin_records) == 1
         no_stdin_record = json.loads(no_stdin_records[0].read_text(encoding="utf-8"))
         assert no_stdin_record["status"] == "timed_out"
@@ -932,10 +932,10 @@ def main() -> int:
         killed_process.stdin.write("Найди один факт.")
         killed_process.stdin.close()
         for _ in range(30):
-            if list(killed_out.glob("*.json")):
+            if list(killed_out.glob("*/run.json")):
                 break
             time.sleep(0.02)
-        killed_records = list(killed_out.glob("*.json"))
+        killed_records = list(killed_out.glob("*/run.json"))
         assert len(killed_records) == 1
         killed_process.kill()
         killed_process.wait(timeout=5)

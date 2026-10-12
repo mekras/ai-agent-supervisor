@@ -1716,6 +1716,10 @@
         {
           "claim_id": "COMPLEXITY-003",
           "statement_path": "evals/complexity-management-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-STORAGE-001",
+          "statement_path": "evals/subagent-storage-basis.yml"
         }
       ],
       "cases": [
@@ -2510,6 +2514,17 @@
           "finding_claims": [
             [
               "COMPLEXITY-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-temporary-run-storage",
+          "required_claims": [
+            "SUBAGENT-STORAGE-001"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-STORAGE-001"
             ]
           ]
         }
