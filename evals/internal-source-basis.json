@@ -894,6 +894,10 @@
         {
           "claim_id": "PUBLICATION-ROUTE-001",
           "statement_path": "evals/skill-publication-basis.yml"
+        },
+        {
+          "claim_id": "APM-VALIDATION-SCOPE-001",
+          "statement_path": "evals/skill-publication-basis.yml"
         }
       ],
       "cases": [
@@ -1251,6 +1255,60 @@
             "docs/requirements/REQ-0014.md",
             "docs/requirements/REQ-0020.md"
           ]
+        },
+        {
+          "id": "ai-setup-apm-result-source-check-without-install",
+          "required_claims": [
+            "APM-VALIDATION-SCOPE-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "APM-VALIDATION-SCOPE-001",
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Согласованное решение задаёт границы проверок и установки. REQ-0020 требует сохранять обязательное поведение без лишней сложности, REQ-0007 сохраняет защиту состояния. ASKL-004 обосновывает устройство проверочного случая."
+        },
+        {
+          "id": "ai-setup-apm-result-candidate-install-outside-workspace",
+          "required_claims": [
+            "APM-VALIDATION-SCOPE-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "APM-VALIDATION-SCOPE-001",
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Согласованное решение задаёт границы проверок и установки. REQ-0020 требует сохранять обязательное поведение без лишней сложности, REQ-0007 сохраняет защиту состояния. ASKL-004 обосновывает устройство проверочного случая."
+        },
+        {
+          "id": "ai-setup-apm-result-requested-workspace-install",
+          "required_claims": [
+            "APM-VALIDATION-SCOPE-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "APM-VALIDATION-SCOPE-001",
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Согласованное решение задаёт границы проверок и установки. REQ-0020 требует сохранять обязательное поведение без лишней сложности, REQ-0007 сохраняет защиту состояния. ASKL-004 обосновывает устройство проверочного случая."
         }
       ]
     },
