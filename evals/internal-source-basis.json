@@ -203,6 +203,10 @@
         {
           "claim_id": "CODX-004",
           "statement_path": "knowledge/data/codx/pages/security/statements.yml"
+        },
+        {
+          "claim_id": "PUBLICATION-ROUTE-001",
+          "statement_path": "evals/skill-publication-basis.yml"
         }
       ],
       "cases": [
@@ -618,6 +622,23 @@
               "ASKL-003"
             ]
           ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-publication-route-interaction-risk",
+          "required_claims": [
+            "PUBLICATION-ROUTE-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "PUBLICATION-ROUTE-001",
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0014.md",
+            "docs/requirements/REQ-0020.md"
+          ]
         }
       ]
     },
@@ -869,6 +890,10 @@
         {
           "claim_id": "TOOLING-DELIVERY-001",
           "statement_path": "evals/tooling-delivery-basis.yml"
+        },
+        {
+          "claim_id": "PUBLICATION-ROUTE-001",
+          "statement_path": "evals/skill-publication-basis.yml"
         }
       ],
       "cases": [
@@ -1209,6 +1234,23 @@
             "docs/requirements/REQ-0022.md"
           ],
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-apm-result-publication-route-package-only",
+          "required_claims": [
+            "PUBLICATION-ROUTE-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "PUBLICATION-ROUTE-001",
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0014.md",
+            "docs/requirements/REQ-0020.md"
+          ]
         }
       ]
     },
@@ -2758,6 +2800,10 @@
         {
           "claim_id": "LEARNING-005",
           "statement_path": "evals/skill-learning-basis.yml"
+        },
+        {
+          "claim_id": "PUBLICATION-ROUTE-001",
+          "statement_path": "evals/skill-publication-basis.yml"
         }
       ],
       "cases": [
@@ -3054,6 +3100,40 @@
             "docs/requirements/REQ-0022.md"
           ],
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-skill-development-result-publication-route-ordinary-requests",
+          "required_claims": [
+            "PUBLICATION-ROUTE-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "PUBLICATION-ROUTE-001",
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0014.md",
+            "docs/requirements/REQ-0020.md"
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-publication-route-without-apm",
+          "required_claims": [
+            "PUBLICATION-ROUTE-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "PUBLICATION-ROUTE-001",
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0014.md",
+            "docs/requirements/REQ-0020.md"
+          ]
         }
       ]
     },
@@ -3189,6 +3269,10 @@
         {
           "claim_id": "AUDIT-006",
           "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-003",
+          "statement_path": "evals/human-communication-basis.yml"
         }
       ],
       "cases": [
@@ -3231,6 +3315,20 @@
             [
               "AUDIT-006"
             ]
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-output-form-acceptance-in-dialogue",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md"
           ]
         }
       ]
@@ -3874,6 +3972,10 @@
         {
           "claim_id": "HUMAN-COMMUNICATION-002",
           "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-003",
+          "statement_path": "evals/human-communication-basis.yml"
         }
       ],
       "cases": [
@@ -3998,6 +4100,62 @@
             [
               "HUMAN-COMMUNICATION-002"
             ]
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-output-form-acceptance-in-dialogue",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-output-form-requested-file",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-output-form-procedure-file",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-output-form-technical-state",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md"
           ]
         }
       ]

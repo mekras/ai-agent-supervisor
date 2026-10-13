@@ -222,6 +222,60 @@
       "prompt": "Проверь только CLAUDE.md на выполнимость правил, без аудита других навыков.",
       "should_trigger": true,
       "rationale": "Предмет — правила работы агента в заданном охвате, независимо от контейнера."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-compare-models",
+      "prompt": "Сравни модели для подагентов.",
+      "should_trigger": false,
+      "rationale": "Основной маршрут — ai-model-analysis. Подготовка навыка сама по себе не требует APM или дополнительного аудита взаимодействия правил."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-setup-subagents",
+      "prompt": "Настрой подагентов в проекте.",
+      "should_trigger": false,
+      "rationale": "Основной маршрут — ai-setup-subagents. Подготовка навыка сама по себе не требует APM или дополнительного аудита взаимодействия правил."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-review-agents-md",
+      "prompt": "Проверь AGENTS.md.",
+      "should_trigger": true,
+      "rationale": "Основной маршрут — ai-audit-agent-rules. Подготовка навыка сама по себе не требует APM или дополнительного аудита взаимодействия правил."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-review-rule-system",
+      "prompt": "Проверь систему правил агента.",
+      "should_trigger": true,
+      "rationale": "Основной маршрут — ai-audit-agent-rules. Подготовка навыка сама по себе не требует APM или дополнительного аудита взаимодействия правил."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-collect-evidence",
+      "prompt": "Собери основания для изменения правил.",
+      "should_trigger": false,
+      "rationale": "Основной маршрут — ai-evidence-collection. Подготовка навыка сама по себе не требует APM или дополнительного аудита взаимодействия правил."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-prepare-skill",
+      "prompt": "Подготовь навык к публикации.",
+      "should_trigger": false,
+      "rationale": "Основной маршрут — ai-skill-development. Подготовка навыка сама по себе не требует APM или дополнительного аудита взаимодействия правил."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-apm-skill",
+      "prompt": "Подготовь навык из .apm/skills/example к публикации через APM: проверь содержание и пакет.",
+      "should_trigger": false,
+      "rationale": "Содержание навыка, пакет APM и риск взаимодействия правил проверяются по явно заданному предмету задачи."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-rule-conflict",
+      "prompt": "Подготовь навык к публикации и проверь конфликт его правил с AGENTS.md.",
+      "should_trigger": true,
+      "rationale": "Содержание навыка, пакет APM и риск взаимодействия правил проверяются по явно заданному предмету задачи."
+    },
+    {
+      "id": "ai-audit-agent-rules-publication-route-package-only",
+      "prompt": "Проверь только пакет APM, проекции, установку и выпуск. Содержание навыков уже проверено и не меняется.",
+      "should_trigger": false,
+      "rationale": "Содержание навыка, пакет APM и риск взаимодействия правил проверяются по явно заданному предмету задачи."
     }
   ]
 }

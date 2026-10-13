@@ -314,6 +314,7 @@ pricing:
             assert (workspace / "changed-by-claude").is_file()
 
     test_workspace_evidence()
+    test_report_output_form_oracles()
     test_cost_accounting()
     test_result_workspace()
     test_adapter_traces()
@@ -339,6 +340,38 @@ def sample_skills(root: Path) -> list[Path]:
         script.chmod(0o755)
         skills.append(skill)
     return skills
+
+
+def test_report_output_form_oracles() -> None:
+    dialogue_oracle = {"required_diff": {"must_not_include": ["+++ b/", "--- a/"]}}
+    with tempfile.TemporaryDirectory() as temporary:
+        before, workspace = Path(temporary) / "before", Path(temporary) / "workspace"
+        for path in (before, workspace):
+            path.mkdir()
+            (path / "checks.log").write_text("tests exit 0\n", encoding="utf-8")
+        def evidence():
+            return runner["collect_trial_evidence"](before, workspace, [], {})
+        def errors(oracle):
+            actual = evidence()
+            return runner["check_required_diff"](oracle, actual["workspace_diff"], actual["changed_paths"])
+        assert not errors(dialogue_oracle)
+        for relative in (".local/reports/acceptance.md", ".local/verification.md", "summary.md"):
+            report = workspace / relative
+            report.parent.mkdir(parents=True, exist_ok=True)
+            report.write_text("# Приёмка\nПроверка завершена.\n", encoding="utf-8")
+            assert errors(dialogue_oracle), relative
+            report.unlink()
+        for slug, relative in (("requested-file", "output/acceptance.md"),
+                               ("procedure-file", ".local/reports/acceptance.md"),
+                               ("technical-state", ".local/check-state.json")):
+            oracle = {"required_diff": {"paths": [relative]}}
+            assert errors(oracle)
+            output = workspace / relative
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text('{"accepted": true}\n' if slug == "technical-state" else "Проверка завершена.\n", encoding="utf-8")
+            assert not errors(oracle), evidence()
+            output.unlink()
+        assert (workspace / "checks.log").read_bytes() == (before / "checks.log").read_bytes()
 
 
 def test_workspace_evidence() -> None:
