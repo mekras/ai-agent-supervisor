@@ -261,7 +261,7 @@
         }
       ]
     },
-    "ai-audit-project": {
+    "ai-audit-agent-rules": {
       "source_basis": [
         {
           "claim_id": "CODX-002",
@@ -314,7 +314,7 @@
       ],
       "cases": [
         {
-          "id": "ai-audit-project-result-apm-skills-rules",
+          "id": "ai-audit-agent-rules-result-apm-skills-rules",
           "required_claims": [
             "CODX-002",
             "CODX-001",
@@ -335,7 +335,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-human-readme-context",
+          "id": "ai-audit-agent-rules-result-human-readme-context",
           "required_claims": [
             "CODX-001"
           ],
@@ -346,7 +346,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-open-problem-taxonomy",
+          "id": "ai-audit-agent-rules-result-open-problem-taxonomy",
           "required_claims": [
             "ASKL-004",
             "ASKL-003"
@@ -359,7 +359,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-apm-script-contract-gap",
+          "id": "ai-audit-agent-rules-result-apm-script-contract-gap",
           "required_claims": [
             "ASKL-004"
           ],
@@ -370,7 +370,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-formal-script-contract",
+          "id": "ai-audit-agent-rules-result-formal-script-contract",
           "required_claims": [
             "ASKL-004"
           ],
@@ -381,7 +381,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-weak-skill-evals",
+          "id": "ai-audit-agent-rules-result-weak-skill-evals",
           "required_claims": [
             "ASKL-004",
             "ASKL-003"
@@ -394,7 +394,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-behavioral-coverage",
+          "id": "ai-audit-agent-rules-result-behavioral-coverage",
           "required_claims": [
             "ASKL-004"
           ],
@@ -405,7 +405,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-stale-shadow-copy",
+          "id": "ai-audit-agent-rules-result-stale-shadow-copy",
           "required_claims": [
             "ASKL-004"
           ],
@@ -416,7 +416,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-existing-path-type-probe",
+          "id": "ai-audit-agent-rules-result-existing-path-type-probe",
           "required_claims": [
             "ASKL-004"
           ],
@@ -427,7 +427,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-diagnostic-object-report",
+          "id": "ai-audit-agent-rules-result-diagnostic-object-report",
           "required_claims": [
             "CODX-001",
             "ASKL-004"
@@ -440,7 +440,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-risk-based-coverage",
+          "id": "ai-audit-agent-rules-result-risk-based-coverage",
           "required_claims": [
             "AUDIT-004"
           ],
@@ -451,7 +451,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-undelivered-rule",
+          "id": "ai-audit-agent-rules-result-undelivered-rule",
           "required_claims": [
             "CCDC-001",
             "APMP-016"
@@ -467,7 +467,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-external-consumer-artifact",
+          "id": "ai-audit-agent-rules-result-external-consumer-artifact",
           "required_claims": [
             "CODX-070",
             "CODX-071",
@@ -486,7 +486,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-internal-only-artifact",
+          "id": "ai-audit-agent-rules-result-internal-only-artifact",
           "required_claims": [
             "CODX-070",
             "ASKL-004"
@@ -499,7 +499,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-backlog-intention-not-rule",
+          "id": "ai-audit-agent-rules-result-backlog-intention-not-rule",
           "required_claims": [
             "CODX-001"
           ],
@@ -510,7 +510,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-unknown-delivery-mechanism",
+          "id": "ai-audit-agent-rules-result-unknown-delivery-mechanism",
           "required_claims": [
             "CODX-001",
             "APMP-016"
@@ -523,7 +523,7 @@
           ]
         },
         {
-          "id": "ai-audit-project-result-vcs-all-changes",
+          "id": "ai-audit-agent-rules-result-vcs-all-changes",
           "required_claims": [
             "ASKL-004"
           ],
@@ -538,7 +538,7 @@
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         },
         {
-          "id": "ai-audit-project-result-vcs-agent-only",
+          "id": "ai-audit-agent-rules-result-vcs-agent-only",
           "required_claims": [
             "ASKL-004"
           ],
@@ -553,7 +553,7 @@
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         },
         {
-          "id": "ai-audit-project-result-vcs-manual",
+          "id": "ai-audit-agent-rules-result-vcs-manual",
           "required_claims": [
             "ASKL-004"
           ],
@@ -568,7 +568,7 @@
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         },
         {
-          "id": "ai-audit-project-result-vcs-mercurial",
+          "id": "ai-audit-agent-rules-result-vcs-mercurial",
           "required_claims": [
             "ASKL-004"
           ],
@@ -583,7 +583,7 @@
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         },
         {
-          "id": "ai-audit-project-result-vcs-none",
+          "id": "ai-audit-agent-rules-result-vcs-none",
           "required_claims": [
             "ASKL-004"
           ],
@@ -599,7 +599,7 @@
         }
       ]
     },
-    "ai-data-collection": {
+    "ai-evidence-collection": {
       "source_basis": [
         {
           "claim_id": "ASKL-003",
@@ -636,7 +636,7 @@
       ],
       "cases": [
         {
-          "id": "ai-data-collection-result-skill-change-basis",
+          "id": "ai-evidence-collection-result-skill-change-basis",
           "required_claims": [
             "ASKL-003",
             "ASKL-004",
@@ -655,7 +655,7 @@
           ]
         },
         {
-          "id": "ai-data-collection-result-necessity-before-expansion",
+          "id": "ai-evidence-collection-result-necessity-before-expansion",
           "required_claims": [
             "AUDIT-007"
           ],
@@ -666,7 +666,7 @@
           ]
         },
         {
-          "id": "ai-data-collection-result-artifact-consumer-lifecycle",
+          "id": "ai-evidence-collection-result-artifact-consumer-lifecycle",
           "required_claims": [
             "CODX-070",
             "CODX-071",

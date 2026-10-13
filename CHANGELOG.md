@@ -7,6 +7,10 @@
 
 ## [Невыпущено]
 
+- Навыки `ai-audit-project` и `ai-data-collection` переименованы в
+  `ai-audit-agent-rules` и `ai-evidence-collection`. Имена и описания уточняют
+  предмет проверки правил агента и сбора недостающих оснований.
+
 - Настройка общей пользовательской политики и проектных уточнений включена
   в `ai-setup-subagents`. Отдельный `ai-setup-execution-policy` расформирован.
 - Передача работы между сессиями выделена в `ai-session-handoff` с сохранением
@@ -19,6 +23,9 @@
   от фактической VCS. Отсутствие Git больше не считается такой защитой.
 
 ### Действия при обновлении
+
+- Замените вызовы и ссылки на `ai-audit-project` и `ai-data-collection`
+  новыми именами `ai-audit-agent-rules` и `ai-evidence-collection` соответственно.
 
 - Вместо `ai-setup-execution-policy` вызывайте `ai-setup-subagents` для
   политики и `ai-session-handoff` для передачи работы. Средство
