@@ -392,7 +392,7 @@ def prepare_qualification(args: argparse.Namespace) -> int:
         output = args.output.resolve()
         if output.exists():
             raise PolicyError(f"файл уже существует: {output}")
-        ensure_private_output(output, args.allow_git)
+        ensure_private_output(output, args.allow_git, storage_verified=args.storage_verified, git_storage=args.git_storage)
         content = "\n".join(
             (
                 f"schema_version = {SCHEMA_VERSION}",
@@ -457,11 +457,26 @@ def ignored_by_git(root: Path, path: Path) -> bool:
     return completed.returncode == 0
 
 
-def ensure_private_output(output: Path, allow_git: bool) -> None:
+def ensure_private_output(output: Path, allow_git: bool, *, storage_verified: bool = False, git_storage: bool = False) -> None:
     if allow_git:
         return
-    root = git_root(output)
-    if root and output.is_relative_to(root) and not ignored_by_git(root, output):
+    if storage_verified:
+        return
+    if not git_storage:
+        raise PolicyError("VCS не проверена. Для проверки защиты Git передайте --git-storage, иначе после проверки места --storage-verified")
+    try:
+        root = git_root(output)
+    except OSError as error:
+        raise PolicyError("VCS не проверена. Подтвердите защиту места и передайте --storage-verified") from error
+    if root is None:
+        raise PolicyError("Git не обнаружен. Проверьте фактическую VCS или её отсутствие и передайте --storage-verified")
+    tracked = subprocess.run(
+        ["git", "-C", str(root), "ls-files", "--error-unmatch", "--", str(output)],
+        capture_output=True, check=False,
+    )
+    if tracked.returncode not in {0, 1}:
+        raise PolicyError("состояние отслеживания приватного пути в Git не подтверждено")
+    if tracked.returncode == 0 or not ignored_by_git(root, output):
         raise PolicyError(
             "приватный файл внутри Git должен быть исключён из Git или создан с --allow-git"
         )
@@ -481,7 +496,7 @@ def initialize(args: argparse.Namespace, kind: str) -> int:
         return 2
     if kind == "user":
         try:
-            ensure_private_output(output, args.allow_git)
+            ensure_private_output(output, args.allow_git, storage_verified=args.storage_verified, git_storage=args.git_storage)
         except PolicyError as error:
             print(f"Ошибка создания: {error}", file=sys.stderr)
             return 2
@@ -597,6 +612,9 @@ def parse_args() -> argparse.Namespace:
         subparser.add_argument("--output", required=True, type=Path)
         if kind == "user":
             subparser.add_argument("--allow-git", action="store_true")
+            subparser.add_argument("--git-storage", action="store_true", help="используется Git, разрешена автоматическая проверка защиты")
+            subparser.add_argument("--storage-verified", action="store_true",
+                                   help="защита места от фактической VCS или отсутствие VCS проверены родителем")
         subparser.set_defaults(handler=lambda args, selected=kind: initialize(args, selected))
 
     check = commands.add_parser("check")
@@ -612,6 +630,9 @@ def parse_args() -> argparse.Namespace:
     prepare.add_argument("--task-class", required=True)
     prepare.add_argument("--output", required=True, type=Path)
     prepare.add_argument("--allow-git", action="store_true")
+    prepare.add_argument("--git-storage", action="store_true", help="используется Git, разрешена автоматическая проверка защиты")
+    prepare.add_argument("--storage-verified", action="store_true",
+                         help="защита места от фактической VCS или отсутствие VCS проверены родителем")
     prepare.set_defaults(handler=prepare_qualification)
 
     handoff = commands.add_parser("check-handoff")

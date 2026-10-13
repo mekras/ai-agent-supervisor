@@ -113,6 +113,36 @@
               "ASKL-004"
             ]
           ]
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-vcs-mercurial",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-vcs-none",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         }
       ]
     },
@@ -491,6 +521,81 @@
               "APMP-016"
             ]
           ]
+        },
+        {
+          "id": "ai-audit-project-result-vcs-all-changes",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-audit-project-result-vcs-agent-only",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-audit-project-result-vcs-manual",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-audit-project-result-vcs-mercurial",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-audit-project-result-vcs-none",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         }
       ]
     },
@@ -1052,6 +1157,36 @@
               "TOOLING-DELIVERY-001"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-apm-result-vcs-unverified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-apm-result-vcs-verified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         }
       ]
     },
@@ -1253,6 +1388,36 @@
               "AUDIT-005"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-execution-policy-result-vcs-unverified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-execution-policy-result-vcs-verified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         }
       ]
     },
@@ -1572,6 +1737,36 @@
               "HUMAN-COMMUNICATION-002"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-project-result-vcs-mercurial",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-project-result-vcs-none",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         }
       ]
     },
@@ -2527,6 +2722,36 @@
               "SUBAGENT-STORAGE-001"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-subagents-result-vcs-unverified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-subagents-result-vcs-verified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         }
       ]
     },
@@ -2872,6 +3097,21 @@
               "LEARNING-003"
             ]
           ]
+        },
+        {
+          "id": "ai-skill-development-result-vcs-portable-skill",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
         }
       ]
     },

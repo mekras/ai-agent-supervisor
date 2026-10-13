@@ -226,7 +226,7 @@ def run_process_group_case(
     config = write_config(directory, adapter, "claude-haiku-")
     output = directory / f"group-{mode}"
     arguments = [
-        str(RUNNER),
+        str(RUNNER), "--storage-verified",
         "cheap_readonly_research",
         "--target",
         "claude",
@@ -428,7 +428,7 @@ def run_hermes_codex_route_case(directory: Path, input_file: Path) -> None:
         output = directory / f"hermes-codex-{execution_class}"
         result = subprocess.run(
             [
-                str(RUNNER),
+                str(RUNNER), "--storage-verified",
                 execution_class,
                 "--target",
                 "codex",
@@ -525,7 +525,7 @@ def run(
     config: Path, out: Path, input_file: Path, obligation: str | None = None
 ) -> subprocess.CompletedProcess[str]:
     arguments = [
-        str(RUNNER),
+        str(RUNNER), "--storage-verified",
         "cheap_readonly_research",
         "--target",
         "claude",
@@ -667,7 +667,7 @@ def main() -> int:
         configured_text = config.read_text() + '\n[policy_runtime]\nrun_records_dir = ' + json.dumps(str(configured_out)) + '\n'
         config.write_text(configured_text)
         via_policy = subprocess.run(
-            [str(RUNNER), "cheap_readonly_research", "--target", "claude", "--config", str(config), "--input", str(input_file)],
+            [str(RUNNER), "--storage-verified", "cheap_readonly_research", "--target", "claude", "--config", str(config), "--input", str(input_file)],
             input="Проверь факт.", text=True, capture_output=True,
         )
         assert via_policy.returncode == 0, via_policy.stderr
@@ -679,7 +679,7 @@ def main() -> int:
         blocked_out.write_text("Существующий файл, не каталог")
         config.write_text(configured_text.replace(str(configured_out), str(blocked_out)))
         blocked = subprocess.run(
-            [str(RUNNER), "cheap_readonly_research", "--target", "claude", "--config", str(config), "--input", str(input_file)],
+            [str(RUNNER), "--storage-verified", "cheap_readonly_research", "--target", "claude", "--config", str(config), "--input", str(input_file)],
             input="Проверь факт.", text=True, capture_output=True,
         )
         assert blocked.returncode == 2 and "Модель не запускалась" in blocked.stderr
@@ -701,7 +701,7 @@ def main() -> int:
         assert json.loads(interrupted_result.stderr)["stop_reason"] == "model_turn_not_completed"
 
         blank = subprocess.run(
-            [str(RUNNER), "cheap_readonly_research", "--target", "claude", "--config", str(config), "--out", str(directory / "blank")],
+            [str(RUNNER), "--storage-verified", "cheap_readonly_research", "--target", "claude", "--config", str(config), "--out", str(directory / "blank")],
             input=" \n\t", text=True, encoding="utf-8", errors="replace", capture_output=True, check=False,
         )
         assert blank.returncode == 2 and "задание для класса исполнения пусто" in blank.stderr
@@ -745,7 +745,7 @@ def main() -> int:
         slow = write_fixture(directory, "claude-haiku-4-5", sleep_seconds=3)
         slow_config = write_config(directory, slow, "claude-haiku-")
         timeout = subprocess.run(
-            [str(RUNNER), "cheap_readonly_research", "--target", "claude",
+            [str(RUNNER), "--storage-verified", "cheap_readonly_research", "--target", "claude",
              "--config", str(slow_config), "--out", str(directory / "timeout"),
              "--input", str(input_file), "--timeout-seconds", "0.1"],
             input="Найди один факт.", text=True, encoding="utf-8", errors="replace",
@@ -764,7 +764,7 @@ def main() -> int:
 
         interrupted_out = directory / "interrupted-signal"
         interrupted_process = subprocess.Popen(
-            [str(RUNNER), "cheap_readonly_research", "--target", "claude",
+            [str(RUNNER), "--storage-verified", "cheap_readonly_research", "--target", "claude",
              "--config", str(slow_config), "--out", str(interrupted_out),
              "--input", str(input_file)],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -796,7 +796,7 @@ def main() -> int:
         no_stdin_config = write_config(directory, no_stdin_adapter, "claude-haiku-")
         no_stdin_out = directory / "no-stdin"
         no_stdin_process = subprocess.Popen(
-            [str(RUNNER), "cheap_readonly_research", "--target", "claude",
+            [str(RUNNER), "--storage-verified", "cheap_readonly_research", "--target", "claude",
              "--config", str(no_stdin_config), "--out", str(no_stdin_out),
              "--input", str(input_file), "--timeout-seconds", "0.2"],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -922,7 +922,7 @@ def main() -> int:
         killed_config = write_config(directory, killed, "claude-haiku-")
         killed_out = directory / "killed"
         killed_process = subprocess.Popen(
-            [str(RUNNER), "cheap_readonly_research", "--target", "claude",
+            [str(RUNNER), "--storage-verified", "cheap_readonly_research", "--target", "claude",
              "--config", str(killed_config), "--out", str(killed_out),
              "--input", str(input_file)],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -948,7 +948,7 @@ def main() -> int:
             adapter = write_fixture(directory, "claude-haiku-4-5", evidence=evidence)
             config = write_config(directory, adapter)
             role = subprocess.run(
-                [str(RUNNER.with_name("run-subagent-role")), "reviewer",
+                [str(RUNNER.with_name("run-subagent-role")), "--storage-verified", "reviewer",
                  "--config", str(config), "--input", str(input_file),
                  "--out", str(directory / f"role-{evidence}")],
                 input="Проверь факт.", text=True, encoding="utf-8", errors="replace", capture_output=True, check=False,

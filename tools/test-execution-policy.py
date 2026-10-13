@@ -97,6 +97,7 @@ def write_policy(directory: Path) -> tuple[Path, Path]:
 def qualify(core: Path, project: Path, output: Path, *, escalated: bool = False, rework: bool = False) -> None:
     prepared = run(
         "prepare-qualification",
+        "--storage-verified",
         "--user-core",
         str(core),
         "--project-overlay",
@@ -270,6 +271,7 @@ def main() -> int:
         incomplete_qualification = directory / "incomplete-qualification.toml"
         prepared = run(
             "prepare-qualification",
+            "--storage-verified",
             "--user-core",
             str(core),
             "--project-overlay",
@@ -445,23 +447,24 @@ def main() -> int:
         initialized = subprocess.run(["git", "init", str(repository)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         assert initialized.returncode == 0, initialized.stderr
         private_core = repository / "private.toml"
-        refused = run("init-user", "--output", str(private_core))
+        refused = run("init-user", "--git-storage", "--output", str(private_core))
         assert refused.returncode == 2
         assert "исключён из Git" in refused.stderr
         nested_private_core = repository / "nested/private.toml"
-        nested_refused = run("init-user", "--output", str(nested_private_core))
+        nested_refused = run("init-user", "--git-storage", "--output", str(nested_private_core))
         assert nested_refused.returncode == 2
         exclude = repository / ".git/info/exclude"
         exclude.write_text(exclude.read_text(encoding="utf-8") + "\nprivate.toml\n", encoding="utf-8")
-        created = run("init-user", "--output", str(private_core))
+        created = run("init-user", "--git-storage", "--output", str(private_core))
         assert created.returncode == 0, created.stderr
         assert stat.S_IMODE(private_core.stat().st_mode) == 0o600
-        repeated = run("init-user", "--output", str(private_core))
+        repeated = run("init-user", "--git-storage", "--output", str(private_core))
         assert repeated.returncode == 2
 
         private_qualification = repository / "qualification.toml"
         qualification_refused = run(
             "prepare-qualification",
+            "--git-storage",
             "--user-core",
             str(core),
             "--project-overlay",

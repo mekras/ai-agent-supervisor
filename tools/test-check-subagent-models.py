@@ -27,7 +27,7 @@ CLAUDE_INSTALLER = ROOT / ".apm/skills/ai-setup-subagents/scripts/install-claude
 def run_role(
     role_config: Path, output: Path, obligation: str | None = None
 ) -> subprocess.CompletedProcess[str]:
-    arguments = [str(ROLE_RUNNER), "reviewer", "--config", str(role_config), "--out", str(output)]
+    arguments = [str(ROLE_RUNNER), "--storage-verified", "reviewer", "--config", str(role_config), "--out", str(output)]
     if obligation is not None:
         arguments.extend(["--obligation", obligation])
     return subprocess.run(

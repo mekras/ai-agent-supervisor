@@ -36,6 +36,7 @@ SCRIPTS = [
     "tools/test-subagent-policy-migration.py",
     "tools/test-model-selection-evaluator.py",
     "tools/test-execution-policy.py",
+    "tools/test-vcs-policy.py",
     "tools/test-codex-model-subagent.py",
     "tools/test-run-skill-evals.py",
     "tools/test-run-fixture-checks.py",
