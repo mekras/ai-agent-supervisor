@@ -119,6 +119,19 @@ def validate_case_links(
         if not isinstance(case, dict) or not isinstance(case.get("id"), str):
             continue
         label = f"{skill_name}/{case['id']}"
+        requirements = case.get("requirement_basis", [])
+        if not isinstance(requirements, list):
+            errors.append(f"{label}: requirement_basis должен быть массивом путей")
+        else:
+            for requirement in requirements:
+                if not isinstance(requirement, str):
+                    errors.append(f"{label}: путь требования должен быть строкой")
+                    continue
+                relative = Path(requirement)
+                if (relative.is_absolute() or ".." in relative.parts
+                        or relative.parent != Path("docs/requirements")
+                        or not (ROOT / relative).is_file()):
+                    errors.append(f"{label}: требование недоступно: {requirement}")
         required = case.get("required_claims")
         finding_claims = case.get("finding_claims")
         if not isinstance(required, list) or not required:

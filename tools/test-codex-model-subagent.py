@@ -62,6 +62,7 @@ def run_case(runner: Path, directory: Path, mode: str) -> subprocess.CompletedPr
         "PATH": f"{directory}:{os.environ['PATH']}",
         "CODEX_SUBAGENT_OUT_DIR": str(output),
         "CODEX_SUBAGENT_USAGE_LINE": "0",
+        "CODEX_SUBAGENT_STORAGE_VERIFIED": "1",
         "MOCK_CODEX_MODE": mode,
     }
     return subprocess.run(

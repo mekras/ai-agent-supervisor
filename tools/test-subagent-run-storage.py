@@ -53,7 +53,7 @@ def fixture(root: Path) -> Path:
 
 
 def launch(root: Path, config: Path, *, script=RUNNER, extra=(), expected=0) -> dict:
-    args = ["review", "--config", str(config)]
+    args = ["review", "--git-storage", "--config", str(config)]
     if script == RUNNER:
         args += ["--target", "fixture"]
     completed = invoke(script, *args, *extra, cwd=root, expected=expected, task="Проверь ответ.")
@@ -109,6 +109,30 @@ def main() -> int:
         assert subprocess.check_output(["git", "ls-files", "-s"], cwd=root) == index_before
         assert old.read_text() == "Прежний журнал"
         assert product_role.read_text() == "Продуктовая роль"
+
+        # Другая VCS и отсутствие VCS: неподтверждённое место блокирует запуск,
+        # после проверки родителя доступны тот же результат, приёмка и очистка.
+        with tempfile.TemporaryDirectory() as outside:
+            no_git = Path(outside)
+            no_git_config = fixture(no_git)
+            for marker in (None, ".hg"):
+                if marker:
+                    (no_git / marker).mkdir()
+                for script in (RUNNER, ROLE):
+                    arguments = ["review", "--config", str(no_git_config)]
+                    if script == RUNNER:
+                        arguments += ["--target", "fixture"]
+                    stopped = invoke(script, *arguments, cwd=no_git, expected=2,
+                                     task="Не запускай без проверки места.")
+                    assert "VCS не проверена" in stopped.stderr
+                    assert not list((no_git / ".local/subagents").glob("*/run.json"))
+                    record = launch(no_git, no_git_config, script=script,
+                                    extra=("--storage-verified",))
+                    path = Path(record["record_path"])
+                    assert not (path.parent / ".gitignore").exists()
+                    accept(no_git, record, script=script)
+                    finish(no_git, record, script=script)
+                    assert not path.parent.exists()
 
         # Явный путь и путь из политики также защищены от обычного git add.
         config.write_text(config.read_text() + "\n[policy_runtime]\nrun_records_dir = 'configured'\n")

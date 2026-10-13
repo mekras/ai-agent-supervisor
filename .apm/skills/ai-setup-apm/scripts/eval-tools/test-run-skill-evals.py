@@ -85,7 +85,11 @@ pricing:
         sample = root / "evals.sample.yml"
         sample.write_text("models: []\n", encoding="utf-8")
         config = root / "evals.local.yml"
-        runner["bootstrap_config"](root, config)
+        os.environ["APM_EVAL_STORAGE_VERIFIED"] = "1"
+        try:
+            runner["bootstrap_config"](root, config)
+        finally:
+            os.environ.pop("APM_EVAL_STORAGE_VERIFIED", None)
         assert config.read_text(encoding="utf-8") == "models: []\n"
 
     answer = extract_answer_text(
@@ -656,6 +660,8 @@ results_dir: eval-results
 '''
         config.write_text(template, encoding="utf-8")
         env = {key: value for key, value in os.environ.items() if not key.startswith("APM_EVAL_")}
+        # Проверены точные временные пути настроек и отчётов этого испытания.
+        env["APM_EVAL_STORAGE_VERIFIED"] = "1"
         env["APM_EVAL_PATH"] = ".apm/skills/audit"
         command = [sys.executable, str(RUNNER), "--yes", "--output", "report.json"]
         stopped = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
@@ -751,6 +757,8 @@ judge_repetitions: 1
 results_dir: eval-results
 ''', encoding="utf-8")
         env = {key: value for key, value in os.environ.items() if not key.startswith("APM_EVAL_")}
+        # Проверены точные временные пути настроек и отчётов этого испытания.
+        env["APM_EVAL_STORAGE_VERIFIED"] = "1"
         stopped = subprocess.run(
             [sys.executable, str(RUNNER), "--yes"],
             cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True,
@@ -840,6 +848,8 @@ timeout: 10
 results_dir: eval-results
 ''', encoding="utf-8")
         env = {key: value for key, value in os.environ.items() if not key.startswith("APM_EVAL_")}
+        # Проверены точные временные пути настроек и отчётов этого испытания.
+        env["APM_EVAL_STORAGE_VERIFIED"] = "1"
         command = [sys.executable, str(RUNNER), "--comparison-plan", "evals/comparison/plan.json", "--output", "report.json", "--yes"]
         done = subprocess.run(command, cwd=root, env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
         assert done.returncode == 0, done.stdout + done.stderr
