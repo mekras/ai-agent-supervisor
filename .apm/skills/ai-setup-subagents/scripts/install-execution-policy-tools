@@ -26,7 +26,6 @@ install -m 0644 "$script_dir/../assets/execution-policy.user.toml.sample" \
   "$target_dir/execution-policy.user.toml.sample"
 install -m 0644 "$script_dir/../assets/execution-policy.project.toml.sample" \
   "$target_dir/execution-policy.project.toml.sample"
-install -m 0644 "$script_dir/../assets/handoff.md.template" \
-  "$target_dir/handoff.md.template"
+
 
 printf 'installed=%s\n' "$target_dir"

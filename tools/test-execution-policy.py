@@ -21,14 +21,20 @@ for _stream in (sys.stdout, sys.stderr):
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / ".apm/skills/ai-setup-execution-policy/scripts/execution-policy"
-INSTALLER = ROOT / ".apm/skills/ai-setup-execution-policy/scripts/install-execution-policy-tools"
-HANDOFF_TEMPLATE = ROOT / ".apm/skills/ai-setup-execution-policy/assets/handoff.md.template"
+SCRIPT = ROOT / ".apm/skills/ai-setup-subagents/scripts/execution-policy"
+INSTALLER = ROOT / ".apm/skills/ai-setup-subagents/scripts/install-execution-policy-tools"
+HANDOFF_TEMPLATE = ROOT / ".apm/skills/ai-session-handoff/assets/handoff.md.template"
+HANDOFF_SCRIPT = ROOT / ".apm/skills/ai-session-handoff/scripts/session-handoff"
+HANDOFF_INSTALLER = ROOT / ".apm/skills/ai-session-handoff/scripts/install-session-handoff-tools"
 
 
 def run(*arguments: str, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
+    script = SCRIPT
+    if arguments and arguments[0] == "check-handoff":
+        script = HANDOFF_SCRIPT
+        arguments = ("check", *arguments[1:])
     return subprocess.run(
-        [str(SCRIPT), *arguments],
+        [str(script), *arguments],
         cwd=cwd,
         text=True,
         encoding="utf-8",
@@ -482,7 +488,22 @@ def main() -> int:
         assert installed.returncode == 0, installed.stderr
         installed_script = installed_root / "tools/execution-policy"
         assert installed_script.read_bytes() == SCRIPT.read_bytes()
+        assert not (installed_root / "tools/handoff.md.template").exists()
+        separate = subprocess.run([str(HANDOFF_INSTALLER), str(installed_root)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
+        assert separate.returncode == 0, separate.stderr
+        assert (installed_root / "tools/session-handoff").read_bytes() == HANDOFF_SCRIPT.read_bytes()
+        installed_check = subprocess.run([str(installed_root / "tools/session-handoff"), "check", "--input", str(complete_handoff)], text=True, encoding="utf-8", capture_output=True, check=False)
+        assert installed_check.returncode == 0, installed_check.stderr
         assert (installed_root / "tools/handoff.md.template").read_bytes() == HANDOFF_TEMPLATE.read_bytes()
+
+        handoff_only = directory / "handoff-only"
+        independent = subprocess.run([str(HANDOFF_INSTALLER), str(handoff_only)], text=True, encoding="utf-8", capture_output=True, check=False)
+        assert independent.returncode == 0, independent.stderr
+        assert not (handoff_only / "tools/execution-policy").exists()
+        independent_check = subprocess.run([str(handoff_only / "tools/session-handoff"), "check", "--input", str(complete_handoff)], text=True, encoding="utf-8", capture_output=True, check=False)
+        assert independent_check.returncode == 0, independent_check.stderr
+        unsupported = subprocess.run([str(installed_script), "check-handoff", "--input", str(complete_handoff)], text=True, encoding="utf-8", capture_output=True, check=False)
+        assert unsupported.returncode == 2
 
     print("Проверки политики выполнения пройдены.")
     return 0

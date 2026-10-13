@@ -1190,237 +1190,6 @@
         }
       ]
     },
-    "ai-setup-execution-policy": {
-      "source_basis": [
-        {
-          "claim_id": "CODX-014",
-          "statement_path": "knowledge/data/codx/pages/config-advanced/statements.yml"
-        },
-        {
-          "claim_id": "CODX-033",
-          "statement_path": "knowledge/data/codx/pages/cli/features/statements.yml"
-        },
-        {
-          "claim_id": "CODX-022",
-          "statement_path": "knowledge/data/codx/pages/prompting/statements.yml"
-        },
-        {
-          "claim_id": "ASKL-004",
-          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-        },
-        {
-          "claim_id": "AUDIT-005",
-          "statement_path": "evals/conceptual-audit-followup.yml"
-        }
-      ],
-      "cases": [
-        {
-          "id": "ai-setup-execution-policy-result-separate-user-core",
-          "required_claims": [
-            "CODX-014",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-014"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-p0-without-automation",
-          "required_claims": [
-            "CODX-014",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-014"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-qualification-before-automatic-route",
-          "required_claims": [
-            "CODX-022",
-            "ASKL-004",
-            "AUDIT-005"
-          ],
-          "finding_claims": [
-            [
-              "CODX-022",
-              "AUDIT-005"
-            ],
-            [
-              "ASKL-004",
-              "AUDIT-005"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-qualified-route",
-          "required_claims": [
-            "CODX-022",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-022"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-escalation-with-preserved-work",
-          "required_claims": [
-            "CODX-022",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-022"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-escalation-with-rework",
-          "required_claims": [
-            "CODX-022",
-            "ASKL-004",
-            "AUDIT-005"
-          ],
-          "finding_claims": [
-            [
-              "CODX-022",
-              "AUDIT-005"
-            ],
-            [
-              "ASKL-004",
-              "AUDIT-005"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-root-trace-limit",
-          "required_claims": [
-            "CODX-022",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-022",
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-handoff-new-session",
-          "required_claims": [
-            "CODX-033",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-033"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-handoff-completed",
-          "required_claims": [
-            "CODX-033",
-            "ASKL-004",
-            "AUDIT-005"
-          ],
-          "finding_claims": [
-            [
-              "CODX-033",
-              "AUDIT-005"
-            ],
-            [
-              "ASKL-004",
-              "AUDIT-005"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-handoff-incomplete",
-          "required_claims": [
-            "CODX-033",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-033"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-handoff-rework",
-          "required_claims": [
-            "CODX-033",
-            "ASKL-004",
-            "AUDIT-005"
-          ],
-          "finding_claims": [
-            [
-              "CODX-033",
-              "AUDIT-005"
-            ],
-            [
-              "ASKL-004",
-              "AUDIT-005"
-            ]
-          ]
-        },
-        {
-          "id": "ai-setup-execution-policy-result-vcs-unverified-private-storage",
-          "required_claims": [
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "ASKL-004"
-            ]
-          ],
-          "requirement_basis": [
-            "docs/requirements/REQ-0022.md"
-          ],
-          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
-        },
-        {
-          "id": "ai-setup-execution-policy-result-vcs-verified-private-storage",
-          "required_claims": [
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "ASKL-004"
-            ]
-          ],
-          "requirement_basis": [
-            "docs/requirements/REQ-0022.md"
-          ],
-          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
-        }
-      ]
-    },
     "ai-setup-hooks": {
       "source_basis": [
         {
@@ -1915,6 +1684,18 @@
         {
           "claim_id": "SUBAGENT-STORAGE-001",
           "statement_path": "evals/subagent-storage-basis.yml"
+        },
+        {
+          "claim_id": "CODX-014",
+          "statement_path": "knowledge/data/codx/pages/config-advanced/statements.yml"
+        },
+        {
+          "claim_id": "CODX-022",
+          "statement_path": "knowledge/data/codx/pages/prompting/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-005",
+          "statement_path": "evals/conceptual-audit-followup.yml"
         }
       ],
       "cases": [
@@ -2740,6 +2521,145 @@
         },
         {
           "id": "ai-setup-subagents-result-vcs-verified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-subagents-result-separate-user-core",
+          "required_claims": [
+            "CODX-014",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-014"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-p0-without-automation",
+          "required_claims": [
+            "CODX-014",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-014"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-qualification-before-automatic-route",
+          "required_claims": [
+            "CODX-022",
+            "ASKL-004",
+            "AUDIT-005"
+          ],
+          "finding_claims": [
+            [
+              "CODX-022",
+              "AUDIT-005"
+            ],
+            [
+              "ASKL-004",
+              "AUDIT-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-qualified-route",
+          "required_claims": [
+            "CODX-022",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-022"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-escalation-with-preserved-work",
+          "required_claims": [
+            "CODX-022",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-022"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-escalation-with-rework",
+          "required_claims": [
+            "CODX-022",
+            "ASKL-004",
+            "AUDIT-005"
+          ],
+          "finding_claims": [
+            [
+              "CODX-022",
+              "AUDIT-005"
+            ],
+            [
+              "ASKL-004",
+              "AUDIT-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-root-trace-limit",
+          "required_claims": [
+            "CODX-022",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-022",
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-setup-subagents-result-policy-vcs-unverified-private-storage",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-subagents-result-policy-vcs-verified-private-storage",
           "required_claims": [
             "ASKL-004"
           ],
@@ -4055,6 +3975,105 @@
           "finding_claims": [
             [
               "HUMAN-COMMUNICATION-002"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-session-handoff": {
+      "source_basis": [
+        {
+          "claim_id": "CODX-033",
+          "statement_path": "knowledge/data/codx/pages/cli/features/statements.yml"
+        },
+        {
+          "claim_id": "ASKL-004",
+          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
+        },
+        {
+          "claim_id": "AUDIT-005",
+          "statement_path": "evals/conceptual-audit-followup.yml"
+        }
+      ],
+      "cases": [
+        {
+          "id": "ai-session-handoff-result-handoff-new-session",
+          "required_claims": [
+            "CODX-033",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-033"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-session-handoff-result-handoff-completed",
+          "required_claims": [
+            "CODX-033",
+            "ASKL-004",
+            "AUDIT-005"
+          ],
+          "finding_claims": [
+            [
+              "CODX-033",
+              "AUDIT-005"
+            ],
+            [
+              "ASKL-004",
+              "AUDIT-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-session-handoff-result-handoff-incomplete",
+          "required_claims": [
+            "CODX-033",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-033"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-session-handoff-result-handoff-rework",
+          "required_claims": [
+            "CODX-033",
+            "ASKL-004",
+            "AUDIT-005"
+          ],
+          "finding_claims": [
+            [
+              "CODX-033",
+              "AUDIT-005"
+            ],
+            [
+              "ASKL-004",
+              "AUDIT-005"
+            ]
+          ]
+        },
+        {
+          "id": "ai-session-handoff-result-without-automation",
+          "required_claims": [
+            "CODX-033",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-033"
+            ],
+            [
+              "ASKL-004"
             ]
           ]
         }
