@@ -20,7 +20,7 @@ for stream in (sys.stdout, sys.stderr):
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / '.apm/skills'
-POLICY = runpy.run_path(str(SKILLS / 'ai-setup-execution-policy/scripts/execution-policy'))
+POLICY = runpy.run_path(str(SKILLS / 'ai-setup-subagents/scripts/execution-policy'))
 STORAGE = runpy.run_path(str(SKILLS / 'ai-setup-subagents/scripts/lib/run_storage.py'))
 EVALS = runpy.run_path(str(SKILLS / 'ai-setup-apm/scripts/eval-tools/run-skill-evals.py'))
 

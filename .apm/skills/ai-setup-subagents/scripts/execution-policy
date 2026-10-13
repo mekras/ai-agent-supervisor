@@ -6,9 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import math
 import os
-import re
 import shutil
 import subprocess
 import sys
@@ -25,19 +23,6 @@ for _stream in (sys.stdout, sys.stderr):
 
 SCHEMA_VERSION = 1
 PRIVATE_PROJECT_FIELDS = {"model", "price", "cost", "limit", "account", "api_key", "token"}
-HANDOFF_SECTIONS = (
-    "Причина передачи",
-    "Цель и критерии готовности",
-    "Границы и запреты",
-    "Проверенные основания",
-    "Непроверенные выводы",
-    "Результаты и изменённые файлы",
-    "Выполненные проверки",
-    "Открытые вопросы и риски",
-    "Следующий шаг",
-    "Результат продолжения",
-    "Оценка экономии",
-)
 
 
 class PolicyError(ValueError):
@@ -513,96 +498,6 @@ def initialize(args: argparse.Namespace, kind: str) -> int:
     return 0
 
 
-def check_handoff(args: argparse.Namespace) -> int:
-    try:
-        content = args.input.read_text(encoding="utf-8")
-    except OSError as error:
-        print(f"Ошибка пакета передачи: {error}", file=sys.stderr)
-        return 2
-    missing: list[str] = []
-    sections: dict[str, str] = {}
-    for section in HANDOFF_SECTIONS:
-        heading = f"## {section}"
-        start = content.find(heading)
-        if start < 0:
-            missing.append(section)
-            continue
-        start += len(heading)
-        end = content.find("\n## ", start)
-        section_content = content[start:] if end < 0 else content[start:end]
-        sections[section] = section_content
-        if not section_content.strip() or "<заполнить>" in section_content:
-            missing.append(section)
-    if missing:
-        print("Ошибка пакета передачи: отсутствуют разделы: " + ", ".join(missing), file=sys.stderr)
-        return 1
-
-    def metadata(section: str, key: str) -> str | None:
-        match = re.search(rf"(?m)^{re.escape(key)}:[ \t]*([^\r\n]+?)[ \t]*$", sections[section])
-        return match.group(1).strip() if match else None
-
-    continuation_status = metadata("Результат продолжения", "status")
-    full_transcript = metadata("Результат продолжения", "full_transcript_required")
-    rework = metadata("Результат продолжения", "rework_required")
-    economy_confirmed = metadata("Оценка экономии", "confirmed")
-    economy_basis = metadata("Оценка экономии", "basis")
-    economy_scope = metadata("Оценка экономии", "scope")
-    economy_evidence = metadata("Оценка экономии", "evidence")
-    economy_digest = None
-    errors: list[str] = []
-    if continuation_status not in {"pending", "continued", "failed"}:
-        errors.append("раздел «Результат продолжения» должен содержать status: pending, continued или failed")
-    if full_transcript not in {"true", "false"}:
-        errors.append("раздел «Результат продолжения» должен содержать full_transcript_required: true или false")
-    if rework not in {"true", "false"}:
-        errors.append("раздел «Результат продолжения» должен содержать rework_required: true или false")
-    if economy_confirmed not in {"true", "false"}:
-        errors.append("раздел «Оценка экономии» должен содержать confirmed: true или false")
-    if not economy_basis:
-        errors.append("раздел «Оценка экономии» должен содержать непустое basis")
-    if economy_scope != "whole_task":
-        errors.append("оценка экономии должна явно задавать scope: whole_task")
-    if continuation_status == "pending" and economy_confirmed == "true":
-        errors.append("незавершённая передача не может подтверждать экономию")
-    if (full_transcript == "true" or rework == "true") and continuation_status != "failed":
-        errors.append("полная стенограмма или переделывание требуют status: failed")
-    if economy_confirmed == "true":
-        try:
-            require_string(economy_evidence, "evidence")
-            evidence_path = Path(economy_evidence)
-            if not evidence_path.is_absolute():
-                evidence_path = args.input.parent / evidence_path
-            evidence_bytes = evidence_path.read_bytes()
-            evidence = json.loads(evidence_bytes)
-            if not isinstance(evidence, dict) or evidence.get("scope") != "whole_task":
-                raise PolicyError("свидетельство должно описывать всю задачу: scope = whole_task")
-            for key in ("task_completed", "quality_preserved", "constraints_preserved", "comparable_conditions", "complete_accounting"):
-                if evidence.get(key) is not True:
-                    raise PolicyError(f"свидетельство экономии требует {key} = true")
-            for key in ("acceptance_evidence", "accounting_basis", "unit"):
-                require_string(evidence.get(key), key)
-            require_result_locations(evidence, ["acceptance_evidence", "accounting_evidence"], "economy_evidence", evidence_path.parent)
-            for key in ("reference_total", "candidate_total"):
-                value = evidence.get(key)
-                if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
-                    raise PolicyError(f"{key} должен быть конечным неотрицательным числом")
-            if evidence["candidate_total"] >= evidence["reference_total"]:
-                raise PolicyError("полная стоимость кандидата не ниже эталонной")
-            economy_digest = hashlib.sha256(evidence_bytes).hexdigest()
-        except (PolicyError, OSError, ValueError, OverflowError) as error:
-            errors.append(f"неподтверждённая экономия всей задачи: {error}")
-    if errors:
-        print("Ошибка пакета передачи: " + "; ".join(errors), file=sys.stderr)
-        return 1
-    print(
-        f"handoff_status=ready\ninput={args.input}\nhandoff_bytes={len(content.encode('utf-8'))}"
-        f"\nhandoff_continuation_status={continuation_status}\nhandoff_economy_confirmed={economy_confirmed}"
-        f"\neconomy_scope={economy_scope}\nevidence_check=structure_only"
-    )
-    if economy_digest:
-        print(f"economy_evidence_sha256={economy_digest}")
-    return 0
-
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Создать и проверить материалы политики выполнения.")
@@ -635,9 +530,6 @@ def parse_args() -> argparse.Namespace:
                          help="защита места от фактической VCS или отсутствие VCS проверены родителем")
     prepare.set_defaults(handler=prepare_qualification)
 
-    handoff = commands.add_parser("check-handoff")
-    handoff.add_argument("--input", required=True, type=Path)
-    handoff.set_defaults(handler=check_handoff)
     return parser.parse_args()
 
 
