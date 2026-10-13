@@ -7,6 +7,12 @@
 
 ## [Невыпущено]
 
+## [2.6.23] - 2026-10-13
+
+- Проверка исходников навыков отделена от испытания установки и обновления
+  рабочего окружения. Установка кандидата проверяется в отдельном тестовом
+  проекте без зависимостей среды разработки.
+
 - Уточнено описание `ai-model-analysis`: навык готовит сравнительный профиль
   моделей для разных проектов, политику проекта настраивает `ai-setup-subagents`.
 
@@ -1359,7 +1365,8 @@
 [2.6.22]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.21...2.6.22
 [2.6.21]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.20...2.6.21
 [2.6.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.19...2.6.20
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.22...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.23...HEAD
+[2.6.23]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.22...2.6.23
 [2.6.19]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.18...2.6.19
 [2.6.10]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.9...2.6.10
 [2.6.9]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.8...2.6.9
