@@ -23,6 +23,14 @@
         {
           "claim_id": "VSCD-001",
           "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-001",
+          "statement_path": "evals/subagent-availability-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-003",
+          "statement_path": "evals/subagent-availability-basis.yml"
         }
       ],
       "cases": [
@@ -143,6 +151,20 @@
             "docs/requirements/REQ-0022.md"
           ],
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-disabled-subagents-self-audit",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
         }
       ]
     },
@@ -207,6 +229,14 @@
         {
           "claim_id": "PUBLICATION-ROUTE-001",
           "statement_path": "evals/skill-publication-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-001",
+          "statement_path": "evals/subagent-availability-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-003",
+          "statement_path": "evals/subagent-availability-basis.yml"
         }
       ],
       "cases": [
@@ -639,6 +669,20 @@
             "docs/requirements/REQ-0014.md",
             "docs/requirements/REQ-0020.md"
           ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-disabled-subagents-completed-audit",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
         }
       ]
     },
@@ -1395,6 +1439,14 @@
         {
           "claim_id": "HUMAN-COMMUNICATION-002",
           "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-001",
+          "statement_path": "evals/subagent-availability-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-003",
+          "statement_path": "evals/subagent-availability-basis.yml"
         }
       ],
       "cases": [
@@ -1658,6 +1710,20 @@
             "docs/requirements/REQ-0022.md"
           ],
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-project-result-disabled-subagents-profile-skills",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
         }
       ]
     },
@@ -1818,6 +1884,18 @@
         {
           "claim_id": "AUDIT-005",
           "statement_path": "evals/conceptual-audit-followup.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-001",
+          "statement_path": "evals/subagent-availability-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-002",
+          "statement_path": "evals/subagent-availability-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-003",
+          "statement_path": "evals/subagent-availability-basis.yml"
         }
       ],
       "cases": [
@@ -2794,6 +2872,102 @@
             "docs/requirements/REQ-0022.md"
           ],
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-setup-subagents-result-continue-disabled-route",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-002",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-002",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-setup-subagents-result-continue-unavailable-launcher",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-002",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-002",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-setup-subagents-result-continue-unknown-parent-route",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-002",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-002",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-setup-subagents-result-continue-failed-launch",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-002",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-002",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-setup-subagents-result-continue-failed-without-record",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-002",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-002",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-setup-subagents-result-continue-rejected-result",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-002",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-002",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
         }
       ]
     },
@@ -3331,6 +3505,14 @@
         {
           "claim_id": "HUMAN-COMMUNICATION-003",
           "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-001",
+          "statement_path": "evals/subagent-availability-basis.yml"
+        },
+        {
+          "claim_id": "SUBAGENT-AVAILABILITY-003",
+          "statement_path": "evals/subagent-availability-basis.yml"
         }
       ],
       "cases": [
@@ -3388,6 +3570,62 @@
           "requirement_basis": [
             "docs/requirements/REQ-0020.md"
           ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-self-check-accepted-without-subagent",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-self-check-real-defect",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-self-check-missing-required-evidence",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-external-independent-check-required",
+          "required_claims": [
+            "SUBAGENT-AVAILABILITY-001",
+            "SUBAGENT-AVAILABILITY-003"
+          ],
+          "finding_claims": [
+            [
+              "SUBAGENT-AVAILABILITY-001",
+              "SUBAGENT-AVAILABILITY-003"
+            ]
+          ],
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
         }
       ]
     },

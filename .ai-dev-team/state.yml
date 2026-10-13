@@ -1,6 +1,6 @@
 product: mekras/ai-dev-team
-applied_version: 0.26.7
-updated_at: 2026-08-26
+applied_version: 0.29.1
+updated_at: 2026-10-13
 setup:
   visibility: public
   operating_context:
@@ -38,3 +38,7 @@ setup:
     path: docs/decisions/
     filename_pattern: DR-NNNN.md
     registry_path: docs/decisions/README.md
+  subagents:
+    status: disabled
+    reason: "Отключены по прямому поручению пользователя"
+    disabled_at: 2026-10-13

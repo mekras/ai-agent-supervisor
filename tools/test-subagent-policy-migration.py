@@ -45,8 +45,9 @@ def assert_unambiguous_entrypoint(text: str) -> None:
         "При несовпадении, неизвестности, отсутствии раздела или подходящей привязки приостановите зависимое назначение.",
         "Исключение допускается только через `independent_routes` с применимым основанием",
         "Пригодность прямого выполнения проверьте отдельно.",
-        "Если она неизвестна, сохраните неразрешённый маршрут.",
-        "Обязательную отдельную проверку не заменяйте самопроверкой.",
+        "назовите конкретные недоступные входы или проверки и продолжайте доступную работу.",
+        "Квалификация передачи не требуется для прямого выполнения навыка.",
+        "Внешнее требование отдельного исполнителя отделяйте от процедуры навыка",
         "После смены модели, усилия или существенных условий прежнее сравнение недействительно",
         "Кандидатная привязка не разрешает запуск.",
     ]
@@ -150,6 +151,24 @@ def main() -> int:
         assert upgraded.returncode == 0, upgraded.stderr
         assert "Keep before." in entrypoint.read_text() and "Keep after." in entrypoint.read_text()
         assert canonical in entrypoint.read_text()
+        # Оба штатных фрагмента до самостоятельной проверки распознаются точно.
+        for filename in ("legacy-brief-entrypoint.md", "legacy-storage-entrypoint.md"):
+            previous = (FIXTURE / filename).read_text(encoding="utf-8")
+            entrypoint.write_text("Keep before.\n" + previous + "Keep after.\n", encoding="utf-8")
+            config_before = config.read_bytes()
+            upgraded = run(config, entrypoint)
+            assert upgraded.returncode == 0, upgraded.stderr
+            result = entrypoint.read_text(encoding="utf-8")
+            assert canonical in result and "Keep before." in result and "Keep after." in result
+            assert config.read_bytes() == config_before
+            stable = entrypoint.read_bytes()
+            assert run(config, entrypoint).returncode == 0
+            assert entrypoint.read_bytes() == stable
+            # Изменённая пользователем версия не становится штатной по сходству.
+            entrypoint.write_text(previous.replace("Обязательную", "Проектную обязательную"), encoding="utf-8")
+            custom = entrypoint.read_bytes()
+            assert run(config, entrypoint).returncode != 0
+            assert entrypoint.read_bytes() == custom and config.read_bytes() == config_before
         entrypoint.write_text(legacy.replace("Сохраняйте записи", "Храните собственные данные"), encoding="utf-8")
         custom_before = entrypoint.read_bytes()
         assert run(config, entrypoint).returncode != 0
@@ -206,11 +225,17 @@ def main() -> int:
         assert entrypoint.read_text(encoding="utf-8") == "# Before\n" + canonical + "# After\n"
         assert config.read_bytes() == schema2_config
 
-        # Реальная проектная адаптация сохраняется вместе со ссылкой на процедуру.
-        procedure = root / "docs" / "agent-work" / "subagents.md"
+        # Самодостаточная проектная адаптация сохраняется вместе со ссылкой.
+        procedure = root / "docs" / "worker-policy.md"
         procedure.parent.mkdir(parents=True)
-        shutil.copy2(ROOT / "docs/agent-work/subagents.md", procedure)
-        shutil.copy2(ROOT / "AGENTS.md", entrypoint)
+        shutil.copy2(FIXTURE / "docs/worker-policy.md", procedure)
+        entrypoint.write_text(
+            START + "\n"
+            "<!-- ai-setup-subagents:runtime-policy:adapted-v2:docs/worker-policy.md -->\n"
+            "[Project procedure](docs/worker-policy.md)\nKeep local adaptation.\n"
+            + END + "\n",
+            encoding="utf-8",
+        )
         adapted = entrypoint.read_bytes()
         assert run(config, entrypoint).returncode == 0
         assert run(config, entrypoint, check=True).returncode == 0
