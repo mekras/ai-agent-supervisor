@@ -1,8 +1,8 @@
 {
-  "skill_name": "ai-data-collection",
+  "skill_name": "ai-evidence-collection",
   "cases": [
     {
-      "id": "ai-data-collection-result-skill-change-basis",
+      "id": "ai-evidence-collection-result-skill-change-basis",
       "prompt": "Перед изменением навыка нужно понять, подтверждается ли проблема реальными задачами, какие факты есть в репозитории и какие допущения остаются.",
       "input_files": [
         {
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "id": "ai-data-collection-result-necessity-before-expansion",
+      "id": "ai-evidence-collection-result-necessity-before-expansion",
       "prompt": "Оцени предложение добавить постоянный навык для этой задачи по приложенным данным. Дай решение об обоснованности, файлы не меняй.",
       "input_files": [
         {
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "id": "ai-data-collection-result-artifact-consumer-lifecycle",
+      "id": "ai-evidence-collection-result-artifact-consumer-lifecycle",
       "prompt": "Собери основания перед решением. Установщик создаёт файлы настроек в каталоге внешнего инструмента, эти файлы отслеживаются в Git, и поиск по репозиторию не нашёл кода, который бы их читал. Достаточно ли данных, чтобы перестать хранить их в Git?",
       "input_files": [
         {

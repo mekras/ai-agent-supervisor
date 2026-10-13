@@ -1,8 +1,8 @@
 {
-  "skill_name": "ai-audit-project",
+  "skill_name": "ai-audit-agent-rules",
   "cases": [
     {
-      "id": "ai-audit-project-result-apm-skills-rules",
+      "id": "ai-audit-agent-rules-result-apm-skills-rules",
       "prompt": "Это APM-коллекция навыков. Проверь .apm/skills/** как источники правил проекта и найди одну наиболее важную проблему для исправления.",
       "input_files": [
         {
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-human-readme-context",
+      "id": "ai-audit-agent-rules-result-human-readme-context",
       "prompt": "Проверь правила агента в проекте. В README проекта и README навыка есть описание установки, возможностей и примеры для пользователей, но нет явных обращений к ИИ.",
       "input_files": [
         {
@@ -88,7 +88,7 @@
           "purpose": "человеко-ориентированная документация проекта"
         },
         {
-          "path": ".apm/skills/ai-audit-project/README.md",
+          "path": ".apm/skills/ai-audit-agent-rules/README.md",
           "purpose": "человеко-ориентированное описание навыка"
         }
       ],
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-open-problem-taxonomy",
+      "id": "ai-audit-agent-rules-result-open-problem-taxonomy",
       "prompt": "Проверь правила проекта и справочный список типов проблем. Найди не только типовые дубли и противоречия, но и неожиданные проблемы, которые не перечислены в обычном списке.",
       "input_files": [
         {
@@ -154,7 +154,7 @@
           "content": "---\nname: example-skill\ndescription: Навык с проблемой, не описанной в закрытом списке.\n---\n\n# example-skill\n\n## Обязательный порядок\n\n1. Для любой задачи сначала проверь весь репозиторий.\n2. Если задача относится к одному файлу, всё равно загружай все справки и все сценарии.\n3. Если проблема не относится к дублям, противоречиям или устаревшим командам, не фиксируй её в отчёте.\n\nПроблема: правило 3 превращает список типов проблем в закрытый и скрывает дефекты стоимости контекста.\n"
         },
         {
-          "path": ".apm/skills/ai-audit-project/references/audit-checklist.md",
+          "path": ".apm/skills/ai-audit-agent-rules/references/audit-checklist.md",
           "purpose": "справочный список типов проблем для аудитора",
           "content": "# Справочный список\n\nТиповые проблемы:\n\n- дубли правил;\n- противоречия между инструкциями;\n- устаревшие команды;\n- неясная область действия.\n\nСписок используется как стартовая сетка и не должен закрывать другие подтверждённые проблемы.\n"
         }
@@ -207,7 +207,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-apm-script-contract-gap",
+      "id": "ai-audit-agent-rules-result-apm-script-contract-gap",
       "prompt": "Проверь APM-коллекцию навыков. Команда apm run tests сначала успешно выполнила 154 юнит-теста, затем среда сообщила, что она ещё работает. В коллекции есть публичный scripts/project_review.py, но нет evals/script-contract-tests.json. Найди одну наиболее важную проблему.",
       "input_files": [
         {
@@ -278,7 +278,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-formal-script-contract",
+      "id": "ai-audit-agent-rules-result-formal-script-contract",
       "prompt": "Проверь проект-потребитель APM. apm audit --ci завершился успешно. Установленный навык полной проверки проекта запускает команду init для создания JSON-состояния, но контракт скрипта проверяет только ожидаемый отказ команды inventory. Найди одну наиболее важную проблему.",
       "input_files": [
         {
@@ -358,7 +358,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-weak-skill-evals",
+      "id": "ai-audit-agent-rules-result-weak-skill-evals",
       "prompt": "Проверь APM-коллекцию навыков. У нескольких навыков есть evals и запускатель проверок, но сценарии результата не показывают, что агент реально применяет навыки. Найди одну наиболее важную проблему и предложи исправление.",
       "input_files": [
         {
@@ -428,7 +428,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-behavioral-coverage",
+      "id": "ai-audit-agent-rules-result-behavioral-coverage",
       "prompt": "Выполни полный аудит правил и поставляемой автоматизации проекта-потребителя APM. Найденные проблемы исправь и проверь результат. Не создавай отдельные задачи без моего разрешения.",
       "input_files": [
         {
@@ -525,7 +525,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-stale-shadow-copy",
+      "id": "ai-audit-agent-rules-result-stale-shadow-copy",
       "prompt": "Проверь правила проекта-потребителя APM и доведи найденные проблемы до исправления. В проекте установлена свежая коллекция навыков, но прошлые аудиты не выполняли обязательные проверки из новых версий навыков.",
       "input_files": [
         {
@@ -597,7 +597,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-existing-path-type-probe",
+      "id": "ai-audit-agent-rules-result-existing-path-type-probe",
       "prompt": "Продолжи аудит APM-коллекции. Контрактный запускатель сообщил, что операция с inputs: [] проверяет отсутствующие project-impact.json и src, хотя оба пути уже есть в исходной фикстуре. После добавления этих путей в inputs сценарии проходят. Проверь, действительно ли контракт исправлен, и устрани первопричину без маскировки ошибки.",
       "input_files": [
         {
@@ -680,7 +680,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-diagnostic-object-report",
+      "id": "ai-audit-agent-rules-result-diagnostic-object-report",
       "read_only": true,
       "prompt": "Проведи аудит правил проекта для агентов.",
       "input_files": [
@@ -754,7 +754,7 @@
       }
     },
     {
-      "id": "ai-audit-project-result-risk-based-coverage",
+      "id": "ai-audit-agent-rules-result-risk-based-coverage",
       "prompt": "Заверши аудит автоматизации. Обязательные операции и изменение данных проверены, известных дефектов нет. Остались строки форматирования необязательной подсказки. Оцени их риск, не доводи покрытие до идеала.",
       "input_files": [
         {
@@ -805,7 +805,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-undelivered-rule",
+      "id": "ai-audit-agent-rules-result-undelivered-rule",
       "prompt": "Проверь правила проекта для агента. Агент систематически не применяет проектную маршрутизацию, хотя файл правила установлен и написан верно.",
       "input_files": [
         {
@@ -881,7 +881,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-external-consumer-artifact",
+      "id": "ai-audit-agent-rules-result-external-consumer-artifact",
       "prompt": "В Git отслеживаются сгенерированные файлы `.codex/agents/*.toml`. Внутри репозитория их читает только валидатор, а `apm install` способен создать эти файлы заново. Следует ли перестать хранить их в Git?",
       "input_files": [
         {
@@ -962,7 +962,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-internal-only-artifact",
+      "id": "ai-audit-agent-rules-result-internal-only-artifact",
       "prompt": "Проверь вспомогательный модуль `tools/lib/text_format.py` и скажи, можно ли перенести его содержимое в `tools/build-report.py`.",
       "input_files": [
         {
@@ -1028,7 +1028,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-backlog-intention-not-rule",
+      "id": "ai-audit-agent-rules-result-backlog-intention-not-rule",
       "prompt": "Проверь правила агента в проекте. В BACKLOG.md есть запись в нормативной форме. Определи, является ли она действующим правилом и нужны ли изменения.",
       "input_files": [
         {
@@ -1091,7 +1091,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-unknown-delivery-mechanism",
+      "id": "ai-audit-agent-rules-result-unknown-delivery-mechanism",
       "prompt": "Проверь правила агента в проекте с неизвестной оснасткой. В проекте есть файл с нормативными требованиями и настройка, которая упоминает его как контекст, но механизм этой оснастки отсутствует в справке доставки правил.",
       "input_files": [
         {
@@ -1154,7 +1154,7 @@
       ]
     },
     {
-      "id": "ai-audit-project-result-vcs-all-changes",
+      "id": "ai-audit-agent-rules-result-vcs-all-changes",
       "prompt": "Проведи аудит правил. В note.txt уже есть чужие изменения, проверь и выполни политику проекта.\nУсловия проекта: # Правила\n\nВсе неигнорируемые изменения, включая прежние, сразу добавляй в индекс Git.\nПри аудите запрещены предметные исправления.\n",
       "workspace_vcs": "git",
       "input_files": [
@@ -1208,7 +1208,7 @@
       }
     },
     {
-      "id": "ai-audit-project-result-vcs-agent-only",
+      "id": "ai-audit-agent-rules-result-vcs-agent-only",
       "prompt": "Проведи аудит правил. В note.txt уже есть чужие изменения, проверь и выполни политику проекта.\nУсловия проекта: # Правила\n\nДобавляй в индекс Git только изменения агента текущей задачи, сохраняй прежние изменения.\nПри аудите запрещены предметные исправления.\n",
       "workspace_vcs": "git",
       "input_files": [
@@ -1262,7 +1262,7 @@
       }
     },
     {
-      "id": "ai-audit-project-result-vcs-manual",
+      "id": "ai-audit-agent-rules-result-vcs-manual",
       "prompt": "Проведи аудит правил. В note.txt уже есть чужие изменения, проверь и выполни политику проекта.\nУсловия проекта: # Правила\n\nИндекс Git меняет только пользователь вручную.\nПри аудите запрещены предметные исправления.\n",
       "workspace_vcs": "git",
       "input_files": [
@@ -1316,7 +1316,7 @@
       }
     },
     {
-      "id": "ai-audit-project-result-vcs-mercurial",
+      "id": "ai-audit-agent-rules-result-vcs-mercurial",
       "prompt": "Проведи аудит правил проекта и укажи смысловой дубль.\nУсловия проекта: # Правила\nИспользуется Mercurial. Фиксация и отправка только по прямому запросу. Автоматический учёт изменений не разрешён.\nПеред правкой проверяй влияние.\nПеред правкой проверяй влияние.\n",
       "workspace_vcs": "none",
       "input_files": [
@@ -1366,7 +1366,7 @@
       "read_only": true
     },
     {
-      "id": "ai-audit-project-result-vcs-none",
+      "id": "ai-audit-agent-rules-result-vcs-none",
       "prompt": "Проведи аудит правил проекта и укажи смысловой дубль.\nУсловия проекта: # Правила\nВ проекте нет VCS. Не настраивай VCS.\nПеред правкой проверяй влияние.\nПеред правкой проверяй влияние.\n",
       "workspace_vcs": "none",
       "input_files": [

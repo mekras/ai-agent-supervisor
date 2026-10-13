@@ -42,7 +42,7 @@ items:
     evidence:
       - .apm/skills/ai-work-control/SKILL.md
       - .apm/skills/ai-setup-project/SKILL.md
-      - .apm/skills/ai-audit-project/SKILL.md
+      - .apm/skills/ai-audit-agent-rules/SKILL.md
       - README.md
     verification:
       - Контроль ограничен риском, нужными свидетельствами и условием остановки.
@@ -80,7 +80,7 @@ items:
     status: implementation_verified
     evidence:
       - .apm/skills/ai-skill-development/SKILL.md
-      - .apm/skills/ai-data-collection/references/data-collection-procedure.md
+      - .apm/skills/ai-evidence-collection/references/data-collection-procedure.md
       - knowledge/data/arxc/source-map.yml
     verification:
       - Проверка необходимости отделена от руководства по реализации, учтены простой способ и опровергающие сведения.
