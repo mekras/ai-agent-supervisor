@@ -132,6 +132,96 @@
       "prompt": "Проверь требования продукта на полноту и непротиворечивость.",
       "should_trigger": false,
       "rationale": "Проверка требований продукта не является аудитом правил работы агента."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-single-file-check",
+      "prompt": "Проверь AGENTS.md в этом репозитории на минимальность, конфликтность и машинную пригодность.",
+      "should_trigger": true,
+      "rationale": "Запрос прямо просит проверку AGENTS.md по критериям, которые покрывает навык."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-nested-instructions",
+      "prompt": "Нужно оценить корневой AGENTS.md и вложенные инструкции, понять иерархию и найти конфликты.",
+      "should_trigger": true,
+      "rationale": "Навык предназначен для проверки цепочки AGENTS.md и соседних инструкций."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-before-edit",
+      "prompt": "Перед тем как переписывать AGENTS.md, подготовь замечания по структуре, детерминизму и перегрузке.",
+      "should_trigger": true,
+      "rationale": "Навык применяется для замечаний перед изменением AGENTS.md."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-machine-entry-vs-readme",
+      "prompt": "Проверь, не смешивает ли AGENTS.md машинные инструкции с README: много обзора проекта, истории и вводного текста для человека.",
+      "should_trigger": true,
+      "rationale": "Проверяется граница между машинными правилами и контекстом для человека."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-codex-scope-order",
+      "prompt": "В проекте несколько AGENTS.md. Восстанови порядок применения от корня к текущему каталогу и найди конфликтующие override-правила.",
+      "should_trigger": true,
+      "rationale": "Запрос требует восстановить иерархию и порядок применения нескольких файлов инструкций."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-context-cost",
+      "prompt": "Оцени AGENTS.md на раздувание контекста: длинные обзоры дерева, повторы и правила, которые не меняют поведение агента.",
+      "should_trigger": true,
+      "rationale": "Навык проверяет минимальную достаточность и стоимость контекста AGENTS.md."
+    },
+    {
+      "id": "ai-audit-agent-rules-negative-readme-review",
+      "prompt": "Проверь README.md на понятность для человека и предложи улучшения структуры.",
+      "should_trigger": false,
+      "rationale": "Запрос сосредоточен на README.md, а не на машинных инструкциях AGENTS.md."
+    },
+    {
+      "id": "ai-audit-agent-rules-negative-general-doc-audit",
+      "prompt": "Сделай общий аудит всей документации проекта и предложи план улучшений.",
+      "should_trigger": false,
+      "rationale": "Это более широкая задача по документации, не специализированная проверка AGENTS.md."
+    },
+    {
+      "id": "ai-audit-agent-rules-negative-code-change",
+      "prompt": "Исправь тесты и обнови Python-скрипт в tools.",
+      "should_trigger": false,
+      "rationale": "Запрос относится к коду и не требует навыка проверки AGENTS.md."
+    },
+    {
+      "id": "ai-audit-agent-rules-negative-maintenance-edit",
+      "prompt": "Перепиши AGENTS.md: сократи общие разделы, вынеси правила по каталогам и сразу внеси изменения.",
+      "should_trigger": false,
+      "rationale": "Запрос требует изменения AGENTS.md; сначала нужен ai-agents-md-maintenance, а аудит может быть независимым контролем результата."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-other-instruction-files",
+      "prompt": "Проверь .github/copilot-instructions.md и .cursor/rules на дубли и противоречия.",
+      "should_trigger": true,
+      "rationale": "Проверка правил не зависит от имени или формата контейнера."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-single-rule-container",
+      "prompt": "Проверь только rules/release.txt: можно ли выполнить эти правила и нет ли противоречий.",
+      "should_trigger": true,
+      "rationale": "Предмет — правила работы агента в заданном охвате, независимо от контейнера."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-single-skill-rules",
+      "prompt": "Проверь порядок применения правил в одном SKILL.md. Описание навыка и пакет не проверяй.",
+      "should_trigger": true,
+      "rationale": "Предмет — правила работы агента в заданном охвате, независимо от контейнера."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-limited-with-link",
+      "prompt": "Проверь только AGENTS.md на конфликты. Ссылки на навыки не означают аудит всей коллекции.",
+      "should_trigger": true,
+      "rationale": "Предмет — правила работы агента в заданном охвате, независимо от контейнера."
+    },
+    {
+      "id": "ai-audit-agent-rules-positive-other-container-scope",
+      "prompt": "Проверь только CLAUDE.md на выполнимость правил, без аудита других навыков.",
+      "should_trigger": true,
+      "rationale": "Предмет — правила работы агента в заданном охвате, независимо от контейнера."
     }
   ]
 }

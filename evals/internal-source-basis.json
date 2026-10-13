@@ -146,121 +146,6 @@
         }
       ]
     },
-    "ai-audit-agents-md": {
-      "source_basis": [
-        {
-          "claim_id": "CODX-002",
-          "statement_path": "knowledge/data/codx/pages/rules/statements.yml"
-        },
-        {
-          "claim_id": "CODX-003",
-          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
-        },
-        {
-          "claim_id": "CODX-004",
-          "statement_path": "knowledge/data/codx/pages/security/statements.yml"
-        },
-        {
-          "claim_id": "CODX-001",
-          "statement_path": "knowledge/data/codx/pages/agents-md/statements.yml"
-        },
-        {
-          "claim_id": "ASKL-004",
-          "statement_path": "knowledge/data/askl/pages/evaluating-skills/statements.yml"
-        },
-        {
-          "claim_id": "VSCD-001",
-          "statement_path": "knowledge/data/vscd/pages/custom-instructions/statements.yml"
-        }
-      ],
-      "cases": [
-        {
-          "id": "ai-audit-agents-md-result-machine-entry-vs-readme",
-          "required_claims": [
-            "CODX-001",
-            "ASKL-004",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-001",
-              "ASKL-004"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-audit-agents-md-result-duplicate-claude-entrypoint",
-          "required_claims": [
-            "CODX-002",
-            "CODX-003",
-            "VSCD-001",
-            "VSCD-001"
-          ],
-          "finding_claims": [
-            [
-              "VSCD-001",
-              "VSCD-001"
-            ]
-          ]
-        },
-        {
-          "id": "ai-audit-agents-md-result-nested-conflict",
-          "required_claims": [
-            "CODX-002",
-            "CODX-003",
-            "VSCD-001"
-          ],
-          "finding_claims": [
-            [
-              "CODX-002",
-              "CODX-003"
-            ],
-            [
-              "VSCD-001"
-            ]
-          ]
-        },
-        {
-          "id": "ai-audit-agents-md-result-operational-specificity",
-          "required_claims": [
-            "CODX-001",
-            "CODX-001",
-            "ASKL-004",
-            "ASKL-004"
-          ],
-          "finding_claims": [
-            [
-              "CODX-001",
-              "ASKL-004",
-              "CODX-001"
-            ],
-            [
-              "ASKL-004"
-            ]
-          ]
-        },
-        {
-          "id": "ai-audit-agents-md-result-context-size-and-splitting",
-          "required_claims": [
-            "CODX-004",
-            "ASKL-004",
-            "VSCD-001"
-          ],
-          "finding_claims": [
-            [
-              "CODX-004"
-            ],
-            [
-              "ASKL-004",
-              "VSCD-001"
-            ]
-          ]
-        }
-      ]
-    },
     "ai-audit-agent-rules": {
       "source_basis": [
         {
@@ -310,6 +195,14 @@
         {
           "claim_id": "CXSR-004",
           "statement_path": "knowledge/data/cxsr/pages/session-config-load/statements.yml"
+        },
+        {
+          "claim_id": "CODX-003",
+          "statement_path": "knowledge/data/codx/pages/subagents/statements.yml"
+        },
+        {
+          "claim_id": "CODX-004",
+          "statement_path": "knowledge/data/codx/pages/security/statements.yml"
         }
       ],
       "cases": [
@@ -596,6 +489,135 @@
             "docs/requirements/REQ-0022.md"
           ],
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Ожидаемое поведение VCS задаёт REQ-0022."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-machine-entry-vs-readme",
+          "required_claims": [
+            "CODX-001",
+            "ASKL-004",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-duplicate-claude-entrypoint",
+          "required_claims": [
+            "CODX-002",
+            "CODX-003",
+            "VSCD-001",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "VSCD-001",
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-nested-conflict",
+          "required_claims": [
+            "CODX-002",
+            "CODX-003",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-002",
+              "CODX-003"
+            ],
+            [
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-operational-specificity",
+          "required_claims": [
+            "CODX-001",
+            "CODX-001",
+            "ASKL-004",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "CODX-001",
+              "ASKL-004",
+              "CODX-001"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-context-size-and-splitting",
+          "required_claims": [
+            "CODX-004",
+            "ASKL-004",
+            "VSCD-001"
+          ],
+          "finding_claims": [
+            [
+              "CODX-004"
+            ],
+            [
+              "ASKL-004",
+              "VSCD-001"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-limited-agents-reference",
+          "required_claims": [
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-limited-other-container",
+          "required_claims": [
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-related-source-for-conflict",
+          "required_claims": [
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003"
+            ]
+          ]
+        },
+        {
+          "id": "ai-audit-agent-rules-result-single-skill-rule-order",
+          "required_claims": [
+            "ASKL-003"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-003"
+            ]
+          ]
         }
       ]
     },

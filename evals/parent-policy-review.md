@@ -9,7 +9,7 @@
 родительскими конфигурациями. Оснований достаточно для изменения процедуры,
 но недостаточно для выбора экономичного родителя. Применены ai-work-control,
 ai-skill-development, ai-model-analysis, ai-usage-analysis, ai-setup-subagents,
-ai-agents-md-maintenance, ai-audit-agents-md, ai-setup-apm и техническое письмо.
+ai-agents-md-maintenance, ai-audit-agent-rules, ai-setup-apm и техническое письмо.
 Решение — идти в разрешённой области. Источники истины меняет родитель.
 
 Рассмотрены два варианта: повторная свободная оценка при каждом запуске
