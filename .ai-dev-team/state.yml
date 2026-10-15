@@ -1,6 +1,6 @@
 product: mekras/ai-dev-team
-applied_version: 0.29.1
-updated_at: 2026-10-13
+applied_version: 0.29.4
+updated_at: 2026-10-15
 setup:
   visibility: public
   operating_context:
