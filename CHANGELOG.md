@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.6.25] - 2026-10-15
+
 - Образец границы проектной работы защищает другие проекты и исходники
   зависимостей от попутных правок, сохраняя необходимые операции с внешними
   файлами, временным каталогом, кэшем и журналами инструментов.
@@ -1399,7 +1401,8 @@
 [2.6.22]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.21...2.6.22
 [2.6.21]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.20...2.6.21
 [2.6.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.19...2.6.20
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.24...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.25...HEAD
+[2.6.25]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.24...2.6.25
 [2.6.24]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.23...2.6.24
 [2.6.23]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.22...2.6.23
 [2.6.19]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.18...2.6.19
