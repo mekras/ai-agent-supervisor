@@ -48,7 +48,7 @@ RUNNER_LOADER.exec_module(RUNNER_MODULE)
 
 def write_fixture(directory: Path, actual_model: str, *, evidence=True, journal=True,
                   wrong_reference=False, returncode=0, response=None, turn_completed=True,
-                  sleep_seconds=0) -> Path:
+                  sleep_seconds=0, writes=False) -> Path:
     if response is None:
         response = {"status": "ready", "evidence": ["fixture"]}
     adapter = directory / "adapter.py"
@@ -60,7 +60,7 @@ def write_fixture(directory: Path, actual_model: str, *, evidence=True, journal=
         "import time\n"
         "from pathlib import Path\n"
         "request = json.loads(input())\n"
-        "assert request['contract']['writes'] is False\n"
+        f"assert request['contract']['writes'] is {writes!r}\n"
         "assert request['inputs']\n"
         + (f"Path(os.environ['CODEX_ROLE_LOG']).write_text(json.dumps({{'message': {{'model': '{actual_model}'}}}}) + '\\n')\n" if journal else "")
         + f"header = {{'model': '{actual_model}', 'usage': {{'input_tokens': 1}}, 'turn_completed': {turn_completed!r}}}\n"
@@ -549,6 +549,69 @@ def run(
     )
 
 
+def test_write_contract_before_adapter() -> None:
+    with tempfile.TemporaryDirectory() as temporary:
+        directory = Path(temporary)
+        marker = directory / "adapter-started"
+        adapter = directory / "marker-adapter.py"
+        adapter.write_text(
+            "from pathlib import Path\n"
+            f"Path({str(marker)!r}).touch()\n",
+            encoding="utf-8",
+        )
+        cases = [
+            ("writes = true", "read-only", "writes класса не соответствует sandbox назначения"),
+            ("", "read-only", "контракт класса должен содержать writes типа bool"),
+            ('writes = "false"', "read-only", "контракт класса должен содержать writes типа bool"),
+            ("writes = 0", "read-only", "контракт класса должен содержать writes типа bool"),
+            ("writes = 1", "workspace-write", "контракт класса должен содержать writes типа bool"),
+            ("writes = false", "read-only", None),
+            ("writes = true", "workspace-write", None),
+            ("writes = false", "workspace-write", None),
+        ]
+        for index, (writes, sandbox, error) in enumerate(cases):
+            marker.unlink(missing_ok=True)
+            config = directory / "policy.toml"
+            config.write_text(
+                f"[execution_classes.patch]\n{writes}\n"
+                "[targets.codex.execution_classes.patch]\n"
+                'model = "test-model"\neffort = "low"\n'
+                f"sandbox = {json.dumps(sandbox)}\n"
+                f"adapter = {json.dumps([sys.executable, str(adapter)])}\n",
+                encoding="utf-8",
+            )
+            out = directory / f"runs-{index}"
+            result = subprocess.run(
+                [str(RUNNER), "patch", "--target", "codex", "--config", str(config),
+                 "--out", str(out), "--storage-verified"],
+                input="Правка.\n", text=True, encoding="utf-8", errors="replace",
+                capture_output=True, check=False,
+            )
+            if error is not None:
+                assert result.returncode == 2, (writes, sandbox, result.stderr)
+                assert error in result.stderr, result.stderr
+                assert not marker.exists(), (writes, sandbox)
+                assert not out.exists(), (writes, sandbox)
+            else:
+                assert marker.is_file(), (writes, sandbox, result.stderr)
+                assert result.returncode == 4, result.stderr
+                assert json.loads(result.stderr)["stop_reason"] == "empty_model_result"
+
+        adapter = write_fixture(directory, "claude-haiku-4-5", writes=True)
+        config = write_config(directory, adapter, "claude-haiku-")
+        config.write_text(
+            config.read_text(encoding="utf-8")
+            .replace("writes = false", "writes = true", 1)
+            .replace('sandbox = "read-only"', 'sandbox = "workspace-write"', 1),
+            encoding="utf-8",
+        )
+        input_file = directory / "input.md"
+        input_file.write_text("факт\n", encoding="utf-8")
+        result = run(config, directory / "write-success", input_file)
+        assert result.returncode == 0, result.stderr
+        assert json.loads(result.stdout)["result_usable"] is True
+
+
 def test_parent_acceptance() -> None:
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
@@ -622,6 +685,7 @@ def test_parent_acceptance() -> None:
 
 
 def main() -> int:
+    test_write_contract_before_adapter()
     test_parent_acceptance()
     with tempfile.TemporaryDirectory() as temporary:
         directory = Path(temporary)
