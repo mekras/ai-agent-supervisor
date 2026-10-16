@@ -4344,6 +4344,10 @@
         {
           "claim_id": "HUMAN-COMMUNICATION-003",
           "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-004",
+          "statement_path": "evals/human-communication-basis.yml"
         }
       ],
       "cases": [
@@ -4520,6 +4524,20 @@
           "finding_claims": [
             [
               "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0020.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-choice-context",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-004"
             ]
           ],
           "requirement_basis": [
