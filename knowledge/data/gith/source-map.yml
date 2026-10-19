@@ -1,0 +1,32 @@
+source_id: GITH
+long_source: true
+extraction_passport:
+  format: Официальная документация, выбранные страницы
+  file_size_bytes: 33020
+  metadata_source: source.yml
+  extraction_tool: HTTPS, HTML-to-text для HTML или копирование Markdown/AsciiDoc
+  extraction_status: selected_units
+  content_hash_absence_reason: Хэши отдельных снимков находятся в verification.yml.
+structure:
+  units:
+  - id: GITH--githooks
+    title: Git hooks
+    order: 1
+  - id: GITH--core-hooks-path
+    title: Git core.hooksPath
+    order: 2
+coverage:
+  units:
+  - unit_id: GITH--githooks
+    status: extracted
+    statements:
+    - pages/githooks/statements.yml
+    scope: 'Только разделы: DESCRIPTION, pre-commit and commit-msg'
+    deferred: Остальные разделы страницы не входят в текущую задачу об области применения хуков.
+  - unit_id: GITH--core-hooks-path
+    status: extracted
+    statements:
+    - pages/core-hooks-path/statements.yml
+    scope: 'Только разделы: core.hooksPath'
+    deferred: Остальные разделы страницы не входят в текущую задачу об области применения хуков.
+updated_at: '2026-10-19'

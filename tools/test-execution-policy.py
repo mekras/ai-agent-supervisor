@@ -350,15 +350,44 @@ def main() -> int:
             "Выполненные проверки",
             "Открытые вопросы и риски",
             "Следующий шаг",
-            "Результат продолжения",
-            "Оценка экономии",
         ):
             handoff_content = handoff_content.replace(f"## {section}", f"## {section}\n\nЗаполнено.")
-        handoff_content = handoff_content.replace("status: <pending|continued|failed>", "status: continued")
-        handoff_content = handoff_content.replace("full_transcript_required: <true|false>", "full_transcript_required: false")
-        handoff_content = handoff_content.replace("rework_required: <true|false>", "rework_required: false")
-        handoff_content = handoff_content.replace("confirmed: <true|false>", "confirmed: true")
-        handoff_content = handoff_content.replace("basis: <заполнить>", "basis: сопоставлены результаты проверок")
+        # Обычная передача не требует сведений о последующем результате.
+        assert "Результат продолжения" not in handoff_content
+        assert "Оценка экономии" not in handoff_content
+        complete_handoff.write_text(handoff_content, encoding="utf-8")
+        ordinary = run("check-handoff", "--input", str(complete_handoff))
+        assert ordinary.returncode == 0, ordinary.stderr
+        assert "handoff_status=ready" in ordinary.stdout
+        assert "handoff_continuation_status=" not in ordinary.stdout
+        assert "handoff_economy_confirmed=" not in ordinary.stdout
+        assert "economy_scope=" not in ordinary.stdout
+        ordinary_content = handoff_content
+        continuation_content = (
+            "\n## Результат продолжения\n\nstatus: continued\n"
+            "full_transcript_required: false\nrework_required: false\n"
+        )
+        economy_content = (
+            "\n## Оценка экономии\n\nscope: whole_task\nconfirmed: true\n"
+            "basis: сопоставлены результаты проверок\nevidence: economy.json\n"
+        )
+        complete_handoff.write_text(ordinary_content + continuation_content, encoding="utf-8")
+        continuation_only = run("check-handoff", "--input", str(complete_handoff))
+        assert continuation_only.returncode == 0, continuation_only.stderr
+        assert "handoff_continuation_status=continued" in continuation_only.stdout
+        assert "handoff_economy_confirmed=" not in continuation_only.stdout
+        # Отсутствие обязательных сведений по-прежнему обнаруживается.
+        complete_handoff.write_text(ordinary_content.replace("## Следующий шаг", "## Другое"), encoding="utf-8")
+        missing_next_step = run("check-handoff", "--input", str(complete_handoff))
+        assert missing_next_step.returncode == 1
+        assert "Следующий шаг" in missing_next_step.stderr
+        # Необязательная оценка проверяется, если она присутствует.
+        for section in ("Результат продолжения", "Оценка экономии"):
+            for body in ("", "Неполные сведения."):
+                complete_handoff.write_text(ordinary_content + f"\n## {section}\n{body}\n", encoding="utf-8")
+                invalid_evaluation = run("check-handoff", "--input", str(complete_handoff))
+                assert invalid_evaluation.returncode == 1, invalid_evaluation.stdout
+        handoff_content = ordinary_content + continuation_content + economy_content
         economy_record = {
             "scope": "whole_task",
             "task_completed": True,
@@ -381,10 +410,11 @@ def main() -> int:
             "Учебное свидетельство: эталон 100, кандидат 80. Учтены все попытки и участие человека.\n", encoding="utf-8",
         )
         economy_file.write_text(json.dumps(economy_record), encoding="utf-8")
-        handoff_content = handoff_content.replace(
-            "evidence: <путь к свидетельству JSON, обязателен при confirmed: true>",
-            "evidence: economy.json",
-        )
+        complete_handoff.write_text(ordinary_content + economy_content, encoding="utf-8")
+        economy_only = run("check-handoff", "--input", str(complete_handoff))
+        assert economy_only.returncode == 0, economy_only.stderr
+        assert "handoff_economy_confirmed=true" in economy_only.stdout
+        assert "handoff_continuation_status=" not in economy_only.stdout
         complete_handoff.write_text(handoff_content, encoding="utf-8")
         complete = run("check-handoff", "--input", str(complete_handoff))
         assert complete.returncode == 0, complete.stderr
@@ -464,6 +494,11 @@ def main() -> int:
         created = run("init-user", "--git-storage", "--output", str(private_core))
         assert created.returncode == 0, created.stderr
         assert stat.S_IMODE(private_core.stat().st_mode) == 0o600
+        initialized_core = tomllib.loads(private_core.read_text(encoding="utf-8"))
+        assert initialized_core.get("qualification_files") == [], (
+            "init-user должен создавать общий список квалификаций в корне TOML"
+        )
+        assert all("qualification_files" not in route for route in initialized_core["routes"])
         repeated = run("init-user", "--git-storage", "--output", str(private_core))
         assert repeated.returncode == 2
 

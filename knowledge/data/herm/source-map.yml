@@ -1,0 +1,23 @@
+source_id: HERM
+long_source: true
+extraction_passport:
+  format: Официальная документация, выбранные страницы
+  file_size_bytes: 135795
+  metadata_source: source.yml
+  extraction_tool: HTTPS, HTML-to-text для HTML или копирование Markdown/AsciiDoc
+  extraction_status: selected_units
+  content_hash_absence_reason: Хэши отдельных снимков находятся в verification.yml.
+structure:
+  units:
+  - id: HERM--hooks
+    title: Event Hooks
+    order: 1
+coverage:
+  units:
+  - unit_id: HERM--hooks
+    status: extracted
+    statements:
+    - pages/hooks/statements.yml
+    scope: 'Только разделы: Gateway Event Hooks, Shell Hooks, Consent model, Fail-open vs fail-closed'
+    deferred: Остальные разделы страницы не входят в текущую задачу об области применения хуков.
+updated_at: '2026-10-19'

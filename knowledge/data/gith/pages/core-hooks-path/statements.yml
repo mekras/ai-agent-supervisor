@@ -1,0 +1,29 @@
+statement_contract_version: 2
+statements:
+- id: GITH-003
+  source_id: GITH
+  item_id: GITH--core-hooks-path
+  kind: fact
+  text: core.hooksPath позволяет централизовать подключение хуков вместо отдельной настройки каждого репозитория.
+    Значение /dev/null отключает хуки. Относительный путь разрешается относительно каталога выполнения
+    хуков, а не файла конфигурации.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: core.hooksPath
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: centrally configure your Git hooks

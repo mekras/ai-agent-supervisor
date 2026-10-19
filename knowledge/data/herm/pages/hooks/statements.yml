@@ -1,0 +1,109 @@
+statement_contract_version: 2
+statements:
+- id: HERM-001
+  source_id: HERM
+  item_id: HERM--hooks
+  kind: fact
+  text: Хуки шлюза обнаруживаются в каталоге hooks домашнего каталога профиля. Размещение HOOK.yaml и
+    handler.py подключает их, удаление или переименование отключает. Они относятся к шлюзу, а не к произвольному
+    запуску CLI.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Gateway Event Hooks
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: <profile home>/hooks/
+- id: HERM-002
+  source_id: HERM
+  item_id: HERM--hooks
+  kind: inference
+  text: Командные хуки задаются в config.yaml профиля и работают в использующих этот профиль сеансах.
+    Профиль не тождественен проекту. Наличие отдельной копии навыков не доказывает отдельную область хуков.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Shell Hooks
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: your profile's `config.yaml`
+- id: HERM-003
+  source_id: HERM
+  item_id: HERM--hooks
+  kind: fact
+  text: Согласие на командный хук хранится для пары событие и строка команды. Правка самого скрипта не
+    отменяет сохранённого согласия автоматически. Поэтому согласие оснастки не доказывает согласования
+    нового поведения.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Consent model
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: '**Script edits are silently trusted.**'
+- id: HERM-004
+  source_id: HERM
+  item_id: HERM--hooks
+  kind: fact
+  text: Ошибки командных хуков обычно допускают продолжение. Для pre_tool_call параметр fail_closed может
+    сделать ошибку блокирующей. Код выхода 2 у этого события также блокирует вызов. Поведение других событий
+    отличается.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Fail-open vs fail-closed
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: shell hooks **fail open**

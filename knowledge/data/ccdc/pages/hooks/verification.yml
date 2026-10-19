@@ -1,0 +1,36 @@
+verification_contract_version: 1
+artifact: normalized.local.md
+hash:
+  algorithm: sha256
+  value: db1c50f1f56b805734c338f1da1e7d5de4a2159db3cbabe1c17e193c622438f1
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-10-19'
+  locator: https://code.claude.com/docs/en/hooks
+  resolved_locator: https://code.claude.com/docs/en/hooks
+  raw_sha256: 0c076da787f31be27a0bafa5f97e41cc15ed3621e6edab77b3f3556d7da08df2
+verification:
+  method: acquisition_check
+  checked_at: '2026-10-19'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: fragment
+    fragment: Hook locations; Disable or remove hooks; Exit code 2 behavior per event
+    metadata:
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: partial
+    metadata:
+      locator: verified
+      author: unverified
+      publication_date: unverified
+  evidence:
+  - Получен ответ официального ресурса по HTTPS. Проверены названные разделы и соответствие
+    извлечённых утверждений.
+  - Исходный ответ сохранён без изменения байтов в raw.local.txt.gz. raw_sha256 относится
+    к распакованным байтам. При нормализации удалены служебные U+200B из текста страницы.
+  limitations:
+  - Проверены только разделы о хуках. Исполнение оснастки не проверялось.

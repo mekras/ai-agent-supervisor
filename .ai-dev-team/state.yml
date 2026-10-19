@@ -1,6 +1,6 @@
 product: mekras/ai-dev-team
-applied_version: 0.29.4
-updated_at: 2026-10-15
+applied_version: 0.29.5
+updated_at: 2026-10-16
 setup:
   visibility: public
   operating_context:
@@ -38,7 +38,260 @@ setup:
     path: docs/decisions/
     filename_pattern: DR-NNNN.md
     registry_path: docs/decisions/README.md
+  sdd:
+    status: adopted
+    level: spec-as-source
+    decision_path: docs/decisions/DR-0010.md
+    scope:
+      - published-skill-collection
+      - required-verification-build-release-tooling
+    specification_paths:
+      - docs/concept.md
+      - docs/requirements/**
+      - docs/decisions/**
+      - docs/evaluation-protocol.md
+    specification_selection: >-
+      Применяются утверждённые требования, действующие решения и критерии
+      в их предметной области. Предложения, гипотезы и прежняя реализация
+      не становятся обязательными входами автоматически.
+    derived_paths:
+      - .apm/skills/**
+      - tools/adapters/**
+      - tools/lib/**
+      - tools/compatibility/**
+      - tools/git-hooks/**
+      - tools/test-*.py
+      - tools/validate-*.py
+      - tools/analyze-subagent-sessions
+      - tools/apm-audit-ci
+      - tools/assess-subagent-policy-connection.py
+      - tools/check-subagent-models
+      - tools/codex-model-subagent
+      - tools/codex-usage-report
+      - tools/compatibility-summary.py
+      - tools/discover-subagent-models
+      - tools/evaluate-model-selection.py
+      - tools/lint-commit-msg.py
+      - tools/model-selection-input.sample.json
+      - tools/run-apm-safe.py
+      - tools/run-collection-checks.py
+      - tools/run-execution-class
+      - tools/run-fixture-checks.py
+      - tools/run-project-tests.py
+      - tools/run-skill-evals.py
+      - tools/run-skill-script-contract-tests.py
+      - tools/run-subagent-role
+      - tools/sync-marketplace-manifest.py
+      - .github/workflows/**
+      - evals/fixtures/**/tests/*.py
+    execution_input_paths:
+      - AGENTS.md
+      - .claude/CLAUDE.md
+      - apm.yml
+      - apm.lock.yaml
+      - .gitignore
+      - evals.sample.yml
+    external_materials: only-explicit-references-from-approved-specifications
+    change_record: delta-in-existing-canonical-specification
+    approval: before-implementation
+    approval_policy: docs/decisions/DR-0010.md#порядок-изменений
+    exception_policy:
+      path_pattern: .ai-dev-team/exceptions/<exception-id>.md
+      rules_path: docs/decisions/DR-0010.md#порядок-временных-исключений
+    review_condition: required-delivery-artifact-outside-defined-categories
+    transition:
+      status: in-progress
+      specification_coverage: not-verified
+      reconstruction: not-tested
+      limitations:
+        - Принятие процесса не подтверждает полноту спецификаций и восстановление.
+        - Критерии внутри производных файлов ещё требуют независимого канонического описания.
+        - Контур восстановления с версиями всех инструментов и командами ещё не проверен.
+        - Материалы evals служат свидетельствами, их обязательность определяется спецификациями.
+        - Источники о SDD и spec-as-source в проектном корпусе не найдены, основание принятия — решение владельца.
   subagents:
     status: disabled
     reason: "Отключены по прямому поручению пользователя"
     disabled_at: 2026-10-13
+  version_review:
+    from_version: 0.29.4
+    to_version: 0.29.5
+    evidence: >-
+      Аудитор tools/apm-audit-ci завершился с кодом 0 и подтвердил 58 локальных
+      переопределений. Рассмотрен раздел «Действия при обновлении» версии 0.29.5
+      установленного ai-dev-team: согласовать контракты writes перед запуском.
+      В subagents.local.toml все четыре класса имеют булево writes = false,
+      policy.enabled = false. Изменение политики и запуск не требуются.
+  review:
+    checked_at: 2026-10-16
+    method: самопроверка текущим корневым агентом
+    directions:
+      - name: рабочий контекст проекта
+        status: сделано
+        basis: ранее подтверждённый некоммерческий контекст
+        evidence: setup.operating_context.kind = noncommercial
+        limitations: []
+      - name: профиль проекта
+        status: сделано
+        basis: ранее подтверждённая публикуемая коллекция навыков
+        evidence: docs/concept.md, apm.yml, .apm/skills, setup.project_profile
+        limitations: []
+      - name: концепция проекта
+        status: сделано
+        basis: действующая концепция и DR-0008
+        evidence: >-
+          По ait-docs-concept проверены проблема сопровождения правил, цель
+          сосредоточить человека на его задачах, способ через переносимую
+          коллекцию и ожидаемый итог. AGENTS.md содержит прямой указатель.
+        limitations: []
+      - name: README.md
+        status: сделано
+        basis: внешний пользователь коллекции и сопровождающий
+        evidence: >-
+          По ait-readme проверены назначение, выбор среды, установка в корне
+          проекта, первое действие ai-setup-project, обновление и отдельный
+          сценарий разработки. Версия 2.6.26 и цели claude, codex, hermes
+          согласованы с apm.yml.
+        limitations:
+          - Новая внешняя установка пакета в рамках этой сверки не выполнялась.
+      - name: правила для агентов и клиентские инструкции
+        status: сделано
+        basis: рукописный AGENTS.md и тонкое подключение Claude
+        evidence: >-
+          По ai-audit-agent-rules проверены AGENTS.md, .claude/CLAUDE.md,
+          активный ait-routing и ait-setup. Корневой вход задаёт маршрут,
+          концепцию, граф, безопасный APM, Git и запрет подагентов.
+          CLAUDE.md содержит @../AGENTS.md. Аудит проекций завершён с кодом 0.
+          Отличия копий ai-audit-agent-rules сводятся к переписанным APM ссылкам.
+        limitations:
+          - Поведение новой корневой сессии отдельно не наблюдалось.
+      - name: журнал изменений
+        status: сделано
+        basis: существующий CHANGELOG.md и правила выпуска в AGENTS.md
+        evidence: >-
+          По ait-changelog сверены формат, раздел «Невыпущено» и версия 2.6.26
+          с apm.yml. Учёт настройки не меняет поставляемое поведение.
+        limitations: []
+      - name: журналы решений
+        status: сделано
+        basis: >-
+          Владелец подтвердил сохранение местного соглашения: статус и сведения
+          о принятии в записях не нужны.
+        evidence: >-
+          docs/decisions/README.md задаёт единый журнал DR-NNNN.md без статусов
+          и сведений о принятии. Все девять записей перечислены в реестре,
+          битых ссылок на записи нет. Предложение изменить это правило
+          отклонено владельцем при продолжении ait-setup 2026-10-16.
+        limitations:
+          - Местное соглашение отличается от общей модели ait-decisions и имеет приоритет.
+      - name: корпус знаний
+        status: заблокировано
+        basis: >-
+          Существующий knowledge с договором corpus.yml. Владелец согласовал
+          запрет рабочих разговоров и их пересказов, согласование остальных
+          новых материалов и дальнейшее использование 19 существующих источников.
+        evidence: >-
+          Политика записана в knowledge/corpus.yml.source_admission.
+          Техническая запись .ai-dev-team/source-admission-2026-10-16.yml
+          содержит разрешённые источники и ограничения. Все 19 карточек
+          source.yml содержат внешнее происхождение и ссылку с SHA-256 записи.
+          Строгая проверка с --strict-admission, --strict-statements,
+          --strict-concepts, --strict-verification и --project-root . — код 0.
+          Эта же проверка включена в knowledge/operations.yml и выполнена
+          контроллером через --run-commands --stage corpus_validation:
+          команда validate-corpus-layout — код 0, изменений корпуса нет.
+          Повторный apm run tests после оформления допуска — код 0.
+          Анализ влияния допуска и настроек проверки завершён: настройки
+          обновлены, требования к публикуемому продукту, навыки, проверки
+          коллекции и поставка не требуют изменения. Правило REQ-0001
+          сохраняется: внутренние данные не внесены в .apm/skills.
+          assess по аспектам semantic и operation — код 0.
+          Планировщик очередей — код 0. Очереди fetch, transcribe, traceability
+          и source_check пусты. Глобальные стадии concepts, impact_audit,
+          apply_changes и corpus_validation ещё не закрыты полным проходом.
+        limitations:
+          - У 18 источников legacy adapter manual без воспроизводимого получения.
+          - Получение, транскрибация и проверка связей не имеют проектных команд.
+          - Содержательная полнота и удалённая актуальность всего корпуса не проверены.
+          - >-
+            Три оставшихся раздела работ arXiv отложены по ограничениям публикации.
+            Разрешение допуска сохраняет эти ограничения.
+        next_step: >-
+          завершить настройку исполнителей механических очередей и проверить их
+          непустые безопасные сценарии. Содержательные стадии выполняет текущий
+          агент без запуска подагентов.
+      - name: разработка на основе спецификаций
+        status: сделано
+        basis: решение владельца о spec-as-source, DR-0010 и поручение завершить настройку
+        evidence: >-
+          setup.sdd фиксирует принятие процесса, область, канонические входы,
+          производные пути, подтверждения и исключения. AGENTS.md прямо
+          вызывает ait-sdd для задач в этой области. Порядок изменений и
+          исключений сохранён ссылками на DR-0010 без повторного согласования.
+          Самопроверка подтвердила совпадение производных путей с графом,
+          разделение требований и предложений, ссылки на решение и сохранение
+          отключённой политики подагентов. Аудит APM и tools/run-project-tests.py
+          завершились с кодом 0.
+        limitations:
+          - Настроен процесс. Полнота описания и возможность восстановления ещё не проверены.
+          - Подготовка спецификаций и эксперимент восстановления относятся к следующим этапам.
+      - name: граф влияния проекта
+        status: сделано
+        basis: существующий граф схемы 2 и прямой указатель в AGENTS.md
+        evidence: >-
+          impact_graph.py validate — код 0, 13 вершин и 25 рёбер.
+          coverage — код 0, 929 сопоставленных путей, несопоставленных нет.
+          Граф согласован с DR-0010: требования отделены от предложений,
+          навыки и необходимая оснастка производны, критерии напрямую влияют
+          на проверки. trace и assess для AGENTS.md, состояния, графа и
+          CHANGELOG.md выполнены отдельно по semantic, operation и structure,
+          assess — код 0 для каждого аспекта. Проверены пути configuration
+          к skills, verification и development-support, delivery к verification.
+          Изменения их файлов не нужны: меняется порядок сопровождения,
+          поставляемое поведение и оснастка сохранены. Детерминированные
+          проверки проекта и аудит APM прошли.
+        limitations:
+          - Граф описывает связи между классами артефактов, полнота спецификаций каждого навыка ещё не проверена.
+      - name: уровень интерфейсных проверок
+        status: заблокировано
+        basis: сопровождающий взаимодействует с CLI и читает его вывод
+        evidence: >-
+          Профиль содержит cli. apm.yml объявляет tests и evals, tools
+          содержит команды для сопровождающего. setup.interface_checks
+          и отдельное правило выбора уровня отсутствуют.
+        limitations: []
+        next_step: >-
+          показать конкретный сценарий изменения CLI и согласовать последствие
+          недоступной проверки по разделу «Уровень интерфейсных проверок» ait-setup
+      - name: .gitignore
+        status: сделано
+        basis: действующее исключение локальных данных и проекций APM
+        evidence: >-
+          Проверены *.local.*, *.local, __pycache__, *.py[cod], apm_modules,
+          проекции .agents, .claude и .codex. Рукописный .claude/CLAUDE.md
+          и манифесты публикации сохранены исключениями из правил.
+        limitations: []
+      - name: лицензия
+        status: сделано
+        basis: ранее принятая MIT
+        evidence: LICENSE содержит MIT License, поле license в apm.yml — MIT
+        limitations:
+          - Эта сверка подтверждает согласованность обозначений, не выполняет новый правовой аудит источников.
+      - name: подагенты
+        status: не требуется
+        basis: прямое решение пользователя об отключении
+        evidence: AGENTS.md, setup.subagents.status = disabled, subagents.local.toml policy.enabled = false
+        limitations: []
+      - name: индекс Git, схема сообщений коммитов и проверки
+        status: сделано
+        basis: действующая политика индекса и custom-схема сообщений
+        evidence: >-
+          AGENTS.md задаёт добавление всех неигнорируемых изменений в индекс,
+          русскую тему результата и lint-commit-msg.py. Аудит APM и сверка
+          оснастки прошли. apm run tests завершился с кодом 0, включая
+          54 контрактных сценария скриптов и 40 тестовых проектов.
+          git diff --cached --check завершился с кодом 0. Все изменения
+          добавлены в индекс, commit и push не выполнялись.
+        limitations:
+          - Прогон сообщает строки скриптов, не исполненные контрактными сценариями.
+          - Модельные эксперименты и квалификация подагентов не выполнялись.

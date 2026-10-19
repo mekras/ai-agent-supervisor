@@ -237,6 +237,13 @@ items:
   workflow_stage: source_checked
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: CCDC--hooks
+  source_id: CCDC
+  path: data/ccdc/pages/hooks
+  title: Hooks reference
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный первоисточник. Полные снимки только локально.
 - id: CODX--agent-approvals-security
   source_id: CODX
   path: data/codx/pages/agent-approvals-security
@@ -504,11 +511,10 @@ items:
 - id: CODX--hooks
   source_id: CODX
   path: data/codx/pages/hooks
-  title: hooks
+  title: Hooks
   date_published: null
-  workflow_stage: indexed
-  access: Публичная веб-страница; условия копирования проверяются перед публикацией
-    фрагментов.
+  workflow_stage: source_checked
+  access: Публичный первоисточник. Полные снимки только локально.
 - id: CODX--ide
   source_id: CODX
   path: data/codx/pages/ide
@@ -813,6 +819,27 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: GITH--githooks
+  source_id: GITH
+  path: data/gith/pages/githooks
+  title: Git hooks
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный первоисточник. Полные снимки только локально.
+- id: GITH--core-hooks-path
+  source_id: GITH
+  path: data/gith/pages/core-hooks-path
+  title: Git core.hooksPath
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный первоисточник. Полные снимки только локально.
+- id: HERM--hooks
+  source_id: HERM
+  path: data/herm/pages/hooks
+  title: Event Hooks
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный первоисточник. Полные снимки только локально.
 - id: INSP--docs
   source_id: INSP
   path: data/insp/pages/docs

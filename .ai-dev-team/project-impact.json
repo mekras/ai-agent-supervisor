@@ -34,11 +34,11 @@
     },
     {
       "id": "requirements",
-      "title": "Требования и план развития",
+      "title": "Требования и критерии приёмки",
       "kind": "requirements",
-      "semantic_type": "требования и план развития",
+      "semantic_type": "канонические карточки требований с собственными статусами принятия",
       "authority": "canonical",
-      "paths": ["docs/requirements/**", "BACKLOG.md"],
+      "paths": ["docs/requirements/**"],
       "checks": ["ait-req-management", "ait-req-validation"]
     },
     {
@@ -46,7 +46,7 @@
       "title": "Гипотезы развития",
       "kind": "other",
       "semantic_type": "проверяемые гипотезы развития",
-      "authority": "canonical",
+      "authority": "supporting",
       "paths": ["docs/hypotheses/**"],
       "checks": ["ait-hypotheses"]
     },
@@ -64,7 +64,7 @@
       "title": "Корпус знаний",
       "kind": "knowledge",
       "semantic_type": "источник знаний о продукте и проекте",
-      "authority": "canonical",
+      "authority": "supporting",
       "paths": ["knowledge/**"],
       "checks": ["kc-validation"]
     },
@@ -73,9 +73,11 @@
       "title": "Публикуемая коллекция навыков",
       "kind": "implementation",
       "semantic_type": "переносимые навыки для применения ИИ",
-      "authority": "canonical",
-      "paths": [".apm/skills/**"],
-      "checks": ["ai-skill-development", "apm run tests"]
+      "authority": "derived",
+      "checks": ["ai-skill-development", "apm run tests"],
+      "representations": [
+        {"path": ".apm/skills/**", "role": "implementation"}
+      ]
     },
     {
       "id": "evaluation-protocol",
@@ -90,12 +92,41 @@
     },
     {
       "id": "verification",
-      "title": "Проверки и модельные сценарии",
+      "title": "Оснастка проверки и поставки",
       "kind": "test",
-      "semantic_type": "проверки и сценарии оценки",
-      "authority": "supporting",
-      "paths": ["tools/**", "evals/**", ".github/workflows/**"],
-      "checks": ["ait-code-testing", "apm run tests"]
+      "semantic_type": "производная собственная оснастка обязательных проверок, сборки и выпуска",
+      "authority": "derived",
+      "checks": ["ait-code-testing", "apm run tests"],
+      "representations": [
+        {"path": "tools/adapters/**", "role": "implementation"},
+        {"path": "tools/lib/**", "role": "implementation"},
+        {"path": "tools/compatibility/**", "role": "implementation"},
+        {"path": "tools/git-hooks/**", "role": "implementation"},
+        {"path": "tools/test-*.py", "role": "verification"},
+        {"path": "tools/validate-*.py", "role": "verification"},
+        {"path": "tools/analyze-subagent-sessions", "role": "implementation"},
+        {"path": "tools/apm-audit-ci", "role": "implementation"},
+        {"path": "tools/assess-subagent-policy-connection.py", "role": "implementation"},
+        {"path": "tools/check-subagent-models", "role": "implementation"},
+        {"path": "tools/codex-model-subagent", "role": "implementation"},
+        {"path": "tools/codex-usage-report", "role": "implementation"},
+        {"path": "tools/compatibility-summary.py", "role": "implementation"},
+        {"path": "tools/discover-subagent-models", "role": "implementation"},
+        {"path": "tools/evaluate-model-selection.py", "role": "implementation"},
+        {"path": "tools/lint-commit-msg.py", "role": "implementation"},
+        {"path": "tools/model-selection-input.sample.json", "role": "implementation"},
+        {"path": "tools/run-apm-safe.py", "role": "implementation"},
+        {"path": "tools/run-collection-checks.py", "role": "implementation"},
+        {"path": "tools/run-execution-class", "role": "implementation"},
+        {"path": "tools/run-fixture-checks.py", "role": "implementation"},
+        {"path": "tools/run-project-tests.py", "role": "implementation"},
+        {"path": "tools/run-skill-evals.py", "role": "implementation"},
+        {"path": "tools/run-skill-script-contract-tests.py", "role": "implementation"},
+        {"path": "tools/run-subagent-role", "role": "implementation"},
+        {"path": "tools/sync-marketplace-manifest.py", "role": "implementation"},
+        {"path": ".github/workflows/**", "role": "implementation"},
+        {"path": "evals/fixtures/**/tests/*.py", "role": "verification"}
+      ]
     },
     {
       "id": "configuration",
@@ -107,14 +138,16 @@
         "AGENTS.md",
         ".claude/CLAUDE.md",
         ".ai-dev-team/state.yml",
+        ".ai-dev-team/source-admission-*.yml",
         ".ai-dev-team/project-impact.json",
         "subagents.local.toml",
         ".gitignore",
         "evals.sample.yml",
         "docs/agent-work/subagents.md",
-        "ai-subagent-launcher.local"
+        "ai-subagent-launcher.local",
+        ".ai-dev-team/exceptions/**"
       ],
-      "checks": ["ai-agents-md-maintenance", "ai-setup-subagents"]
+      "checks": ["ai-agents-md-maintenance", "ait-sdd", "ai-setup-subagents"]
     },
     {
       "id": "delivery",
@@ -122,15 +155,47 @@
       "kind": "delivery",
       "semantic_type": "поставка публикуемой коллекции",
       "authority": "canonical",
-      "paths": [
-        "apm.yml",
-        "apm.lock.yaml",
-        "CHANGELOG.md",
-        "LICENSE",
-        ".claude-plugin/marketplace.json",
-        ".agents/plugins/marketplace.json"
+      "representations": [
+        {"path": "apm.yml", "role": "canonical"},
+        {"path": "apm.lock.yaml", "role": "canonical"},
+        {"path": "CHANGELOG.md", "role": "supporting"},
+        {"path": "LICENSE", "role": "canonical"},
+        {"path": ".claude-plugin/marketplace.json", "role": "canonical"},
+        {"path": ".agents/plugins/marketplace.json", "role": "canonical"}
       ],
       "checks": ["ai-setup-apm", "ait-changelog", "python3 tools/apm-audit-ci"]
+    },
+    {
+      "id": "backlog",
+      "title": "Открытые предложения развития",
+      "kind": "other",
+      "semantic_type": "предложения и незавершённые задачи без автоматического статуса требования",
+      "authority": "supporting",
+      "paths": ["BACKLOG.md"],
+      "checks": ["ait-req-management"]
+    },
+    {
+      "id": "evaluation-materials",
+      "title": "Материалы и свидетельства проверок",
+      "kind": "test",
+      "semantic_type": "сценарии, входные примеры, ожидаемые результаты и сохранённые свидетельства, требующие сверки с утверждёнными критериями",
+      "authority": "supporting",
+      "paths": ["evals/**"],
+      "checks": ["ai-work-result-evaluation"]
+    },
+    {
+      "id": "development-support",
+      "title": "Вспомогательные средства рабочей среды",
+      "kind": "operation",
+      "semantic_type": "обслуживание корпуса и примеры локальных настроек вне оснастки поставки",
+      "authority": "supporting",
+      "paths": [
+        "tools/check-corpus-sources.py",
+        "tools/rebuild-corpus-indexes.py",
+        "tools/subagent-policy-history.toml.sample",
+        "tools/subagents.local.toml.sample"
+      ],
+      "checks": ["ai-audit-agent-rules"]
     }
   ],
   "edges": [
@@ -139,7 +204,8 @@
       "to": "evaluation-protocol",
       "relation": "governs",
       "facets": ["semantic", "quality", "operation"],
-      "rationale": "DR-0006 задаёт одобренные принципы и границы внутреннего протокола оценки полезности."
+      "rationale": "DR-0006 задаёт одобренные принципы и границы внутреннего протокола оценки полезности.",
+      "basis": true
     },
     {
       "from": "evaluation-protocol",
@@ -167,14 +233,16 @@
       "to": "requirements",
       "relation": "constrains",
       "facets": ["semantic", "interface"],
-      "rationale": "Требования к коллекции не должны противоречить её назначению и определяют границу публичного продукта."
+      "rationale": "Требования к коллекции не должны противоречить её назначению и определяют границу публичного продукта.",
+      "basis": true
     },
     {
       "from": "hypotheses",
       "to": "requirements",
       "relation": "informs",
       "facets": ["semantic", "quality"],
-      "rationale": "Проверенные гипотезы могут дать основания для изменения требований и плана развития."
+      "rationale": "Проверенные гипотезы могут дать основания для изменения требований и плана развития.",
+      "basis": false
     },
     {
       "from": "knowledge",
@@ -197,21 +265,24 @@
       "to": "requirements",
       "relation": "constrains",
       "facets": ["semantic", "quality", "operation"],
-      "rationale": "Принятые решения ограничивают выбор требований и порядок развития коллекции."
+      "rationale": "Принятые решения ограничивают выбор требований и порядок развития коллекции.",
+      "basis": true
     },
     {
       "from": "requirements",
       "to": "skills",
       "relation": "realizes",
       "facets": ["semantic", "interface", "quality", "structure"],
-      "rationale": "Публикуемые навыки реализуют требования к продукту."
+      "rationale": "Публикуемые навыки реализуют требования к продукту.",
+      "basis": true
     },
     {
       "from": "skills",
       "to": "verification",
       "relation": "verifies",
       "facets": ["semantic", "interface", "quality", "structure"],
-      "rationale": "Проверки и сценарии подтверждают свойства публикуемых навыков."
+      "rationale": "Изменения реализации требуют проверить оснастку. Ожидаемое поведение задают утверждённые критерии, а не текущий текст навыка.",
+      "basis": false
     },
     {
       "from": "configuration",
@@ -232,14 +303,16 @@
       "to": "delivery",
       "relation": "packages",
       "facets": ["interface", "structure", "quality"],
-      "rationale": "Манифест и журнал изменений поставляют и описывают коллекцию навыков."
+      "rationale": "Манифест и журнал изменений поставляют и описывают коллекцию навыков.",
+      "basis": false
     },
     {
       "from": "verification",
       "to": "delivery",
       "relation": "verifies",
       "facets": ["quality", "operation"],
-      "rationale": "Результаты проверок подтверждают готовность поставки."
+      "rationale": "Результаты проверок подтверждают готовность поставки.",
+      "basis": false
     },
     {
       "from": "knowledge",
@@ -248,6 +321,78 @@
       "facets": ["semantic", "quality", "operation"],
       "rationale": "Знания корпуса могут быть применимы к проектным правилам и рабочим процедурам. Они не устанавливают обязательства сами по себе.",
       "basis": false
+    },
+    {
+      "from": "backlog",
+      "to": "requirements",
+      "relation": "informs",
+      "facets": ["semantic", "quality", "operation"],
+      "rationale": "Предложение требует проверки требований, но становится обязательством только после решения владельца.",
+      "basis": false
+    },
+    {
+      "from": "decisions",
+      "to": "configuration",
+      "relation": "governs",
+      "facets": ["semantic", "operation", "structure"],
+      "rationale": "DR-0010 задаёт границы SDD, порядок подтверждения и исключений, которые отражаются в правилах, состоянии и графе.",
+      "basis": true
+    },
+    {
+      "from": "decisions",
+      "to": "skills",
+      "relation": "constrains",
+      "facets": ["semantic", "operation", "quality"],
+      "rationale": "Границы и правила разработки из DR-0010 распространяются на всю публикуемую коллекцию.",
+      "basis": true
+    },
+    {
+      "from": "decisions",
+      "to": "verification",
+      "relation": "constrains",
+      "facets": ["semantic", "operation", "quality"],
+      "rationale": "DR-0010 относит необходимую оснастку к производным артефактам и отделяет её от канонических критериев.",
+      "basis": true
+    },
+    {
+      "from": "requirements",
+      "to": "verification",
+      "relation": "constrains",
+      "facets": ["semantic", "interface", "quality", "structure"],
+      "rationale": "Утверждённые требования и критерии напрямую определяют проверки независимо от текущей реализации навыков.",
+      "basis": true
+    },
+    {
+      "from": "requirements",
+      "to": "evaluation-materials",
+      "relation": "constrains",
+      "facets": ["semantic", "interface", "quality"],
+      "rationale": "Сценарии и ожидаемые результаты проверяются по утверждённым требованиям. Их наличие само по себе не утверждает новое требование.",
+      "basis": true
+    },
+    {
+      "from": "evaluation-materials",
+      "to": "verification",
+      "relation": "informs",
+      "facets": ["semantic", "data", "structure", "quality"],
+      "rationale": "Оснастка использует сценарии и входные материалы. Исторические результаты не заменяют критерии приёмки.",
+      "basis": false
+    },
+    {
+      "from": "configuration",
+      "to": "development-support",
+      "relation": "configures",
+      "facets": ["operation", "quality"],
+      "rationale": "Изменение рабочих правил требует проверить их применимость к вспомогательным средствам без включения этих средств в поставку.",
+      "basis": false
+    },
+    {
+      "from": "delivery",
+      "to": "verification",
+      "relation": "configures",
+      "facets": ["interface", "structure", "operation"],
+      "rationale": "Манифест задаёт команды проверок, зависимости и состав поставки, используемые оснасткой.",
+      "basis": true
     }
   ]
 }

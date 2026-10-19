@@ -60,8 +60,8 @@ def source_claims(
 ) -> set[str]:
     claims: set[str] = set()
     source_basis = value.get("source_basis")
-    if not isinstance(source_basis, list) or not source_basis:
-        errors.append(f"{skill_name}: source_basis должен быть непустым массивом")
+    if not isinstance(source_basis, list):
+        errors.append(f"{skill_name}: source_basis должен быть массивом")
         return claims
 
     for index, item in enumerate(source_basis):
@@ -120,25 +120,28 @@ def validate_case_links(
             continue
         label = f"{skill_name}/{case['id']}"
         requirements = case.get("requirement_basis", [])
+        requirements_valid = isinstance(requirements, list) and bool(requirements)
         if not isinstance(requirements, list):
             errors.append(f"{label}: requirement_basis должен быть массивом путей")
         else:
             for requirement in requirements:
                 if not isinstance(requirement, str):
                     errors.append(f"{label}: путь требования должен быть строкой")
+                    requirements_valid = False
                     continue
                 relative = Path(requirement)
                 if (relative.is_absolute() or ".." in relative.parts
                         or relative.parent != Path("docs/requirements")
                         or not (ROOT / relative).is_file()):
                     errors.append(f"{label}: требование недоступно: {requirement}")
+                    requirements_valid = False
         required = case.get("required_claims")
         finding_claims = case.get("finding_claims")
-        if not isinstance(required, list) or not required:
-            errors.append(f"{label}: required_claims должен быть непустым массивом")
+        if not isinstance(required, list) or (not required and not requirements_valid):
+            errors.append(f"{label}: нужны required_claims или доступное requirement_basis")
             continue
-        if not isinstance(finding_claims, list) or not finding_claims:
-            errors.append(f"{label}: finding_claims должен быть непустым массивом")
+        if not isinstance(finding_claims, list) or (not finding_claims and not requirements_valid):
+            errors.append(f"{label}: нужны finding_claims или доступное requirement_basis")
             continue
         if not all(isinstance(item, str) for item in required):
             errors.append(f"{label}: required_claims должен содержать только строки")

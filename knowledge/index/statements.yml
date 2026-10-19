@@ -657,6 +657,80 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: CCDC-009
+  source_id: CCDC
+  item_id: CCDC--hooks
+  path: knowledge/data/ccdc/pages/hooks/statements.yml
+  status: null
+  kind: fact
+  text: Настройки ~/.claude/settings.json относятся ко всем проектам пользователя,
+    а .claude/settings.json и .claude/settings.local.json — к одному проекту. Управляемые
+    настройки и подключённые плагины являются дополнительными источниками хуков.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: CCDC-010
+  source_id: CCDC
+  item_id: CCDC--hooks
+  path: knowledge/data/ccdc/pages/hooks/statements.yml
+  status: null
+  kind: fact
+  text: Отключение и доступность хуков зависят от источника настроек и политики администратора.
+    Обычный пользователь не должен считать управляемый хук отключаемым тем же способом,
+    что собственный.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: CCDC-011
+  source_id: CCDC
+  item_id: CCDC--hooks
+  path: knowledge/data/ccdc/pages/hooks/statements.yml
+  status: null
+  kind: fact
+  text: Возможность блокировки и последствия ошибки определяются событием. Нельзя
+    переносить поведение одного события на все остальные.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
 - id: CODX-017
   source_id: CODX
   item_id: CODX--agent-approvals-security
@@ -1250,20 +1324,53 @@ statements:
   source_id: CODX
   item_id: CODX--hooks
   path: knowledge/data/codx/pages/hooks/statements.yml
-  status: ready_for_review
+  status: null
   kind: fact
-  text: Немодерируемый командный хук запускается только после просмотра и доверия
-    к точному определению; при изменении хука он снова требует проверки по новому
-    хешу.
+  text: Хуки, не управляемые политикой администратора, требуют доверия к точному определению.
+    Изменение определения требует новой проверки его хэша. В CLI просмотр и отключение
+    доступны через /hooks, управляемые хуки имеют другой порядок.
   artifact: normalized.local.md
-  checked_at: 2026-07-10
-  processing_status: null
-  source_role: null
-  evidence_strength: null
-  confidence: null
-  temporal_status: null
-  corroboration: null
-  limitations: null
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: CODX-072
+  source_id: CODX
+  item_id: CODX--hooks
+  path: knowledge/data/codx/pages/hooks/statements.yml
+  status: null
+  kind: fact
+  text: Хуки загружаются из активных пользовательских и проектных слоёв, включая hooks.json
+    и таблицы hooks в config.toml, а также из включённых плагинов. Совпадающие хуки
+    объединяются, более высокий слой не заменяет остальные. Доверие к проектному слою
+    не отключает пользовательские и системные хуки.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
 - id: CODX-052
   source_id: CODX
   item_id: CODX--ide
@@ -1948,6 +2055,181 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: GITH-001
+  source_id: GITH
+  item_id: GITH--githooks
+  path: knowledge/data/gith/pages/githooks/statements.yml
+  status: null
+  kind: fact
+  text: По умолчанию Git ищет хуки в $GIT_DIR/hooks. Настройка core.hooksPath может
+    заменить каталог. Область применения определяется эффективной конфигурацией, а
+    не только расположением скрипта.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: GITH-002
+  source_id: GITH
+  item_id: GITH--githooks
+  path: knowledge/data/gith/pages/githooks/statements.yml
+  status: null
+  kind: fact
+  text: Ненулевой код pre-commit или commit-msg прерывает соответствующую операцию.
+    Для этих событий предусмотрен обход через --no-verify, поэтому наличие хука не
+    доказывает контроль всех путей.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: GITH-003
+  source_id: GITH
+  item_id: GITH--core-hooks-path
+  path: knowledge/data/gith/pages/core-hooks-path/statements.yml
+  status: null
+  kind: fact
+  text: core.hooksPath позволяет централизовать подключение хуков вместо отдельной
+    настройки каждого репозитория. Значение /dev/null отключает хуки. Относительный
+    путь разрешается относительно каталога выполнения хуков, а не файла конфигурации.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: HERM-001
+  source_id: HERM
+  item_id: HERM--hooks
+  path: knowledge/data/herm/pages/hooks/statements.yml
+  status: null
+  kind: fact
+  text: Хуки шлюза обнаруживаются в каталоге hooks домашнего каталога профиля. Размещение
+    HOOK.yaml и handler.py подключает их, удаление или переименование отключает. Они
+    относятся к шлюзу, а не к произвольному запуску CLI.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: HERM-002
+  source_id: HERM
+  item_id: HERM--hooks
+  path: knowledge/data/herm/pages/hooks/statements.yml
+  status: null
+  kind: inference
+  text: Командные хуки задаются в config.yaml профиля и работают в использующих этот
+    профиль сеансах. Профиль не тождественен проекту. Наличие отдельной копии навыков
+    не доказывает отдельную область хуков.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: HERM-003
+  source_id: HERM
+  item_id: HERM--hooks
+  path: knowledge/data/herm/pages/hooks/statements.yml
+  status: null
+  kind: fact
+  text: Согласие на командный хук хранится для пары событие и строка команды. Правка
+    самого скрипта не отменяет сохранённого согласия автоматически. Поэтому согласие
+    оснастки не доказывает согласования нового поведения.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
+- id: HERM-004
+  source_id: HERM
+  item_id: HERM--hooks
+  path: knowledge/data/herm/pages/hooks/statements.yml
+  status: null
+  kind: fact
+  text: Ошибки командных хуков обычно допускают продолжение. Для pre_tool_call параметр
+    fail_closed может сделать ошибку блокирующей. Код выхода 2 у этого события также
+    блокирует вызов. Поведение других событий отличается.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
+    сверить с окружением.
 - id: LSME-001
   source_id: LSME
   item_id: LSME--evaluation

@@ -2,26 +2,33 @@ verification_contract_version: 1
 artifact: normalized.local.md
 hash:
   algorithm: sha256
-  value: 3e7cc8b744c4b2586e2130debb6cc91786e60f28a0d4c9ccc84fe187426d9745
+  value: 57166ef03e7059732dd90925d5c42dd4d187eb2625d66cc154d0fbd2edb65f92
 acquisition:
-  method: local_file
-  recorded_at: '2026-06-08'
+  method: adapter_fetch
+  recorded_at: '2026-10-19'
+  locator: https://learn.chatgpt.com/docs/hooks.md
+  resolved_locator: https://learn.chatgpt.com/docs/hooks.md
+  raw_sha256: 57166ef03e7059732dd90925d5c42dd4d187eb2625d66cc154d0fbd2edb65f92
 verification:
-  method: local_integrity_only
-  checked_at: '2026-09-16'
+  method: acquisition_check
+  checked_at: '2026-10-19'
   checked_by:
-    role: kc-pipeline агент
+    role: Корневой агент, самопроверка
   scope:
-    content: none
-    metadata: []
-  result:
-    overall: unverified
-    content_match: unverified
-    scope_completeness: not_assessed
+    content: fragment
+    fragment: Review and trust hooks; Where Codex looks for hooks
     metadata:
-      locator: unverified
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: partial
+    metadata:
+      locator: verified
       author: unverified
       publication_date: unverified
+  evidence:
+  - Получен ответ официального ресурса по HTTPS. Проверены названные разделы и соответствие извлечённых
+    утверждений.
   limitations:
-  - Проверена только локальная целостность сохранённого артефакта; сверка с текущим
-    состоянием источника и актуальность снимка не выполнялись.
+  - Проверены только разделы о хуках. Исполнение оснастки не проверялось.

@@ -238,3 +238,29 @@
   `pages/` из Git; в Git сохраняются метаданные и хэши.
 - Условия: полный текст и крупные дословные фрагменты не публикуются без
   отдельной проверки условий использования.
+
+
+## Обновление сведений о хуках — 2026-10-19
+
+Официальные страницы Claude Code Hooks, OpenAI Codex Hooks, Hermes Agent
+Event Hooks и Git githooks/core.hooksPath получены точечно. Адреса и хэши
+сохранены в карточках единиц и `verification.yml`. Полные первичные и
+нормализованные снимки остаются в исключённых из Git файлах `*.local.*`.
+Отслеживаемые утверждения и справка содержат собственные формулировки фактов,
+без публикации полного текста или крупных дословных фрагментов.
+
+- Claude Code: <https://code.claude.com/docs/en/hooks>.
+- OpenAI Codex: <https://learn.chatgpt.com/docs/hooks>, переход с прежнего
+  <https://developers.openai.com/codex/hooks>.
+- Hermes Agent: <https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks>.
+  Снимок документации получен из официального репозитория
+  <https://github.com/NousResearch/hermes-agent>. Для полного повторного
+  использования нужно отдельно проверить лицензию конкретного материала.
+- Git: <https://git-scm.com/docs/githooks> и
+  <https://git-scm.com/docs/git-config#Documentation/git-config.txt-corehooksPath>.
+  Снимки получены из официального репозитория <https://github.com/git/git>.
+  Полные тексты документации здесь не распространяются.
+
+Дата относится к выбранным разделам о хуках и не обновляет автоматически
+остальные материалы этих источников. Версия установленной оснастки и её
+фактическое поведение по этим снимкам не подтверждены.

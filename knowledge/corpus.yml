@@ -22,3 +22,10 @@ sensitive_data_policy:
   rules:
     - "Не добавлять в Git токены, cookies, сессии, пароли и закрытые ссылки."
     - "Временная структура миграции не заменяет проверяемое извлечение утверждений."
+source_admission:
+  version: 1
+  default: require_approval
+  rules:
+    - id: working-dialogues
+      origins: [working_dialogue]
+      action: prohibit
