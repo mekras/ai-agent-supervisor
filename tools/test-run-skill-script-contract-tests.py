@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -87,6 +88,163 @@ def write_script(skill: Path, source: str) -> None:
         encoding="utf-8",
     )
     (scripts / "save_state.py").write_text(source, encoding="utf-8")
+
+
+def check_absence_contracts() -> None:
+    """Проверить новый договор через публичную команду запускателя."""
+    with tempfile.TemporaryDirectory() as temporary:
+        skill = Path(temporary) / "навык отсутствия"
+        write_contract(skill)
+        contract_path = skill / "evals/script-contract-tests.json"
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract["version"] = 3
+        case = contract["cases"][0]
+        fixture = skill / case["fixture"]
+        declaration = {"path": "legacy", "reason": "Устаревший слой запрещён"}
+        case["absent_inputs"] = [declaration]
+        ending = '''
+Path('state.json').write_text('{"status": "ready"}', encoding='utf-8')
+print('state_saved')
+'''
+        source = '''from pathlib import Path
+if Path('legacy').exists():
+    print('legacy forbidden')
+    raise SystemExit(1)
+''' + ending
+        write_script(skill, source)
+
+        def save() -> None:
+            contract_path.write_text(json.dumps(contract, ensure_ascii=False), encoding="utf-8")
+
+        def expect(code: int, message: str = "") -> None:
+            result = run(skill)
+            assert result.returncode == code, result.stderr
+            assert message in result.stderr, result.stderr
+
+        save()
+        expect(0)
+        # Один и тот же запрет должен отклонять как файл, так и каталог.
+        legacy = fixture / "legacy"
+        legacy.write_text("old", encoding="utf-8")
+        expect(1, "путь legacy существует после подготовки")
+        legacy.unlink()
+        legacy.mkdir()
+        expect(1, "путь legacy существует после подготовки")
+        legacy.rmdir()
+        try:
+            legacy.symlink_to("nonexistent-target")
+        except (OSError, NotImplementedError):
+            pass
+        else:
+            legacy.unlink()
+            case["prepare"].append(["{python}", "-c", "import os; os.symlink('nonexistent-target', 'legacy')"])
+            save()
+            expect(1, "путь legacy существует после подготовки")
+            case["prepare"].pop()
+
+        negative = json.loads(json.dumps(case))
+        negative["id"] = "legacy-is-rejected"
+        negative.pop("absent_inputs")
+        negative["prepare"] = [["{python}", "-c", "from pathlib import Path; Path('legacy').mkdir()"]]
+        negative["expect"] = {"exit_code": 1, "stdout_contains": ["legacy forbidden"]}
+        contract["cases"].append(negative)
+        save()
+        expect(0)
+        contract["cases"].pop()
+
+        unscoped = json.loads(json.dumps(case))
+        unscoped["id"] = "absence-is-not-global"
+        unscoped.pop("absent_inputs")
+        contract["cases"].append(unscoped)
+        save()
+        expect(1, "legacy, но не объявляет его в inputs")
+        contract["cases"].pop()
+
+        case["prepare"].append(["{python}", "-c", "from pathlib import Path; Path('legacy').touch()"])
+        save()
+        expect(1, "путь legacy существует после подготовки")
+        case["prepare"].pop()
+
+        write_script(skill, "from pathlib import Path\n" + ending)
+        save()
+        expect(1, "путь legacy не проверен командой")
+        successful_expectation = case["expect"]
+        case["expect"] = {"exit_code": 1, "stdout_contains": ["expected failure"]}
+        write_script(skill, "print('expected failure')\nraise SystemExit(1)\n")
+        save()
+        expect(1, "путь legacy не проверен командой")
+        case["expect"] = successful_expectation
+        save()
+        write_script(skill, source + "assert not Path('other').exists()\n")
+        expect(1, "other, но не объявляет его в inputs")
+        write_script(skill, source)
+
+        contract["operations"][0]["inputs"] = ["legacy"]
+        save()
+        expect(1, "объявленный вход legacy отсутствует во всех фикстурах")
+        contract["operations"][0]["inputs"] = []
+
+        for invalid, message in [
+            ("legacy", "нужен массив записей"),
+            (["legacy"], "нужна запись с path и reason"),
+            ([{"path": "legacy"}], "нужна непустая причина"),
+            ([{"path": "legacy", "reason": "  "}], "нужна непустая причина"),
+            ([{"path": "../legacy", "reason": "unsafe"}], "безопасный относительный путь"),
+            ([{"path": "/legacy", "reason": "unsafe"}], "безопасный относительный путь"),
+            ([{"path": "C:\\legacy", "reason": "unsafe"}], "безопасный относительный путь"),
+            ([declaration, declaration], "повтор 'legacy'"),
+        ]:
+            case["absent_inputs"] = invalid
+            save()
+            expect(1, message)
+        case["absent_inputs"] = [declaration]
+        contract["version"] = 2
+        save()
+        expect(1, "требуется version: 3")
+        contract["version"] = 3
+        contract["operations"][0]["absent_inputs"] = ["legacy"]
+        save()
+        expect(1, "перенеси объявления в cases[].absent_inputs")
+        contract["operations"][0].pop("absent_inputs")
+        contract["version"] = 99
+        save()
+        expect(1, "нужен объект с version: 2 или version: 3")
+
+        # Конфигурация выбирается по приоритету. Отсутствие не скрывает входы.
+        contract["version"] = 3
+        contract["operations"][0]["inputs"] = ["config.txt", "nested/config.txt"]
+        case["absent_inputs"] = [{"path": "nested/config.txt", "reason": "Поиск от вложенного каталога"}]
+        case["expect"]["stdout_contains"] = ["chosen: root"]
+        (fixture / "config.txt").write_text("root", encoding="utf-8")
+        write_script(skill, '''from pathlib import Path
+selected = next((p for p in [Path('nested/config.txt'), Path('config.txt')] if p.is_file()), None)
+if selected is None:
+    print('no config')
+    raise SystemExit(1)
+print('chosen: ' + selected.read_text(encoding='utf-8'))
+''' + ending)
+        both = skill / "evals/script-fixtures/both"
+        shutil.copytree(fixture, both)
+        (both / "nested").mkdir()
+        (both / "nested/config.txt").write_text("near", encoding="utf-8")
+        priority = json.loads(json.dumps(case))
+        priority.update(id="priority", fixture="evals/script-fixtures/both")
+        priority.pop("absent_inputs")
+        priority["expect"]["stdout_contains"] = ["chosen: near"]
+        contract["cases"].append(priority)
+        empty = skill / "evals/script-fixtures/empty"
+        empty.mkdir()
+        missing = json.loads(json.dumps(case))
+        missing.update(id="missing-config", fixture="evals/script-fixtures/empty")
+        missing["absent_inputs"].append({"path": "config.txt", "reason": "Нет ни одного кандидата"})
+        missing["expect"] = {"exit_code": 1, "stdout_contains": ["no config"]}
+        contract["cases"].append(missing)
+        save()
+        expect(0)
+        priority["fixture"] = case["fixture"]
+        save()
+        # Настоящий вход всё равно должен присутствовать в успешной фикстуре.
+        expect(1, "объявленный вход nested/config.txt отсутствует во всех фикстурах")
 
 
 def main() -> int:
@@ -401,6 +559,7 @@ args.output.write_text(json.dumps(state), encoding="utf-8")''',
         assert missing.returncode == 1
         assert "script-contract-tests.json" in missing.stderr
 
+    check_absence_contracts()
     print("Исполнимые контрактные проверки скриптов навыков проверены.")
     return 0
 
