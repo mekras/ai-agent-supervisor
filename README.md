@@ -17,15 +17,15 @@
 ## Источники знаний
 
 - [Anthropic Engineering](https://www.anthropic.com/engineering)
-- [документации Agent Package Manager для авторов](https://microsoft.github.io/apm/producer/)
-- [стандарта AI Safety Evaluation Standard](https://ukgovernmentbeis.github.io/as-evaluation-standard/)
+- [Документация Agent Package Manager для авторов](https://microsoft.github.io/apm/producer/)
+- [Стандарт AI Safety Evaluation Standard](https://ukgovernmentbeis.github.io/as-evaluation-standard/)
 - [Agent Skills](https://agentskills.io)
 - [Microsoft Learn: evaluation flow for Prompt flow](https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/how-to-develop-an-evaluation-flow)
-- [документации OpenAI Codex](https://developers.openai.com/codex)
-- [документации LangSmith](https://docs.langchain.com/langsmith)
+- [Документация OpenAI Codex](https://developers.openai.com/codex)
+- [Документация LangSmith](https://docs.langchain.com/langsmith)
 - [Perplexity Research: Agent Skills](https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity)
-- [документации Promptfoo](https://www.promptfoo.dev/docs/intro/)
-- [документации Visual Studio Code о пользовательских инструкциях](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
+- [Документация Promptfoo](https://www.promptfoo.dev/docs/intro/)
+- [Документация Visual Studio Code о пользовательских инструкциях](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
 
 <!-- compatibility-summary:start -->
 ## Поддерживаемые среды
