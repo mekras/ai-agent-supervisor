@@ -56,3 +56,9 @@ sources:
   - id: XEM7
     title: "EXM7777 post and related X Article"
     path: data/xem7
+  - id: GITH
+    title: "Git Documentation"
+    path: data/gith
+  - id: HERM
+    title: "Hermes Agent Documentation"
+    path: data/herm

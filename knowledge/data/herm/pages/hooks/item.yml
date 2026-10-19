@@ -1,0 +1,19 @@
+id: HERM--hooks
+source_id: HERM
+title: Event Hooks
+url: https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks
+locator: https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks
+access: Публичный первоисточник. Полные снимки только локально.
+status: indexed
+workflow_stage: source_checked
+files:
+  local:
+  - raw.local.txt
+  - normalized.local.md
+provenance:
+  origin: external_material
+  locator: https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-hooks-2026-10-19.yml
+    sha256: 46157bab84e2e554d32512f517f87173af3338a325d3c6c92270feb9c4b2ec01

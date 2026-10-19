@@ -1,0 +1,51 @@
+id: HERM
+slug: herm
+title: Hermes Agent Documentation
+status: approved
+priority: normal
+carrier_type: website
+source_kind: reference
+long_source: true
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Точечно сверить официальные страницы о хуках, сохранить происхождение и ограничения, обновить
+    индекс единиц. Не запускать хуки.
+  write_scope:
+  - knowledge/data/herm/
+  allowed_operations:
+  - index
+  - fetch
+  - verify
+storage_strategy: local_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: Локальное чтение официальной документации, атрибуция и собственные формулировки фактов. Полный
+  текст не публикуется.
+requires_access_check: true
+url: https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks
+locator: https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks
+public_reference: https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks
+license_or_terms: См. knowledge/source-attribution.md. Полные копии не публикуются.
+access:
+  default: Публичные официальные страницы и исходники документации.
+reliability: official
+stability: mutable
+refresh_policy: Проверить при изменении поддерживаемой оснастки и перед использованием для настройки хуков.
+retrieved_at: '2026-10-19'
+last_checked_at: '2026-10-19'
+scope:
+  includes:
+  - Область применения и жизненный цикл хуков.
+  excludes:
+  - Остальная документация.
+known_limitations:
+- Документация ветви разработки не доказывает поведение установленной версии.
+provenance:
+  origin: external_material
+  locator: https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-hooks-2026-10-19.yml
+    sha256: 46157bab84e2e554d32512f517f87173af3338a325d3c6c92270feb9c4b2ec01

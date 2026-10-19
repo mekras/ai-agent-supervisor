@@ -1,0 +1,34 @@
+verification_contract_version: 1
+artifact: normalized.local.md
+hash:
+  algorithm: sha256
+  value: f717c7a43c588fbc52e764f5931208d14b135dbc4b88fb4c98ab2588332dcd89
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-10-19'
+  locator: https://raw.githubusercontent.com/NousResearch/hermes-agent/main/website/docs/user-guide/features/hooks.md
+  resolved_locator: https://raw.githubusercontent.com/NousResearch/hermes-agent/main/website/docs/user-guide/features/hooks.md
+  raw_sha256: f717c7a43c588fbc52e764f5931208d14b135dbc4b88fb4c98ab2588332dcd89
+verification:
+  method: acquisition_check
+  checked_at: '2026-10-19'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: fragment
+    fragment: Gateway Event Hooks; Shell Hooks; Consent model; Fail-open vs fail-closed
+    metadata:
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: partial
+    metadata:
+      locator: verified
+      author: unverified
+      publication_date: unverified
+  evidence:
+  - Получен ответ официального ресурса по HTTPS. Проверены названные разделы и соответствие извлечённых
+    утверждений.
+  limitations:
+  - Проверены только разделы о хуках. Исполнение оснастки не проверялось.

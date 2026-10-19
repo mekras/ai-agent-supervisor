@@ -31,3 +31,10 @@ known_limitations:
   - "Источник привязан к одному коммиту ветки main; поведение других версий и выпущенных сборок им не подтверждается."
 processing_notes:
   - "Фрагменты получены через публичный интерфейс GitHub по фиксированному коммиту."
+provenance:
+  origin: external_material
+  locator: "https://github.com/openai/codex/tree/50d77959bf927293c4b5ddcca81d05331ae582ea"
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-2026-10-16.yml
+    sha256: "2bdc3a558d1c2a1e8d5b2f7b70ca2732336c68f5567f9468f5298eb82e970cc9"

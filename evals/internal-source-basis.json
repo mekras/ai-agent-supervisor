@@ -237,6 +237,15 @@
             ]
           ],
           "basis_explanation": "ASKL-004 обосновывает устройство проверочного случая. Содержательные ожидания заданы описанием дефекта границы работы и уточнённым предложением, согласованным пользователем командой «Делай» 2026-10-15. Корпус не выдаётся за источник этого решения."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-accepted-scope-and-delivery",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0033.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
@@ -755,6 +764,15 @@
             ]
           ],
           "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-accepted-current-diagnostic",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0034.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
@@ -842,6 +860,22 @@
               "CXSR-004"
             ]
           ]
+        },
+        {
+          "id": "ai-evidence-collection-result-conflicting-basis",
+          "requirement_basis": [
+            "docs/requirements/REQ-0023.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-evidence-collection-result-unavailable-basis",
+          "requirement_basis": [
+            "docs/requirements/REQ-0023.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
         }
       ]
     },
@@ -922,6 +956,9 @@
             [
               "AUDIT-003"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0030.md"
           ]
         },
         {
@@ -937,7 +974,66 @@
             [
               "CCDC-003"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0029.md"
           ]
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-rule-received",
+          "requirement_basis": [
+            "docs/requirements/REQ-0029.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-rule-delivery-unknown",
+          "requirement_basis": [
+            "docs/requirements/REQ-0029.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-conflicting-instructions-causality",
+          "requirement_basis": [
+            "docs/requirements/REQ-0030.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-cause-without-action-trace",
+          "requirement_basis": [
+            "docs/requirements/REQ-0030.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-delivery-effect-observation",
+          "requirement_basis": [
+            "docs/requirements/REQ-0031.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-synthetic-effect-unconfirmed",
+          "requirement_basis": [
+            "docs/requirements/REQ-0031.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-unsafe-effect-replay",
+          "requirement_basis": [
+            "docs/requirements/REQ-0031.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
         }
       ]
     },
@@ -1425,6 +1521,15 @@
             "docs/requirements/REQ-0007.md"
           ],
           "basis_explanation": "Согласованное решение задаёт границы проверок и установки. REQ-0020 требует сохранять обязательное поведение без лишней сложности, REQ-0007 сохраняет защиту состояния. ASKL-004 обосновывает устройство проверочного случая."
+        },
+        {
+          "id": "ai-setup-apm-result-vcs-efficient-command-or-reading",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0022.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
@@ -1471,6 +1576,87 @@
               "AUDIT-006"
             ]
           ]
+        },
+        {
+          "id": "ai-setup-hooks-result-accepted-event-and-repeat",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-setup-hooks-result-alternative-sufficient",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
+        },
+        {
+          "id": "ai-setup-hooks-result-project-scope-consent",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
+        },
+        {
+          "id": "ai-setup-hooks-result-shared-scope-warning",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
+        },
+        {
+          "id": "ai-setup-hooks-result-dedicated-user-approved",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
+        },
+        {
+          "id": "ai-setup-hooks-result-unknown-scope",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
+        },
+        {
+          "id": "ai-setup-hooks-result-changed-consent",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
+        },
+        {
+          "id": "ai-setup-hooks-result-disabled-and-other-project",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
+        },
+        {
+          "id": "ai-setup-hooks-result-stale-platform-knowledge",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0037.md"
+          ],
+          "basis_explanation": "Критерии REQ-0037.1–REQ-0037.3 приняты владельцем. Вымышленная оснастка отделяет проверку решения от знания конкретной платформы. Модельный прогон не выполнен."
         }
       ]
     },
@@ -1595,7 +1781,12 @@
               "ASKL-003",
               "ASKL-004"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0035.md",
+            "docs/requirements/REQ-0012.md"
+          ],
+          "basis_explanation": "REQ-0035.1 сохраняет прямое поручение и отменяет запуск по одному сроку. Подтверждение целей остаётся отдельным условием REQ-0012."
         },
         {
           "id": "ai-setup-project-result-subagent-review-explicit-request-overrides-refusal",
@@ -1796,6 +1987,42 @@
             ]
           ],
           "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-setup-project-result-accepted-existing-route",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0035.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-setup-project-result-expired-review-offer-only",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0035.md"
+          ],
+          "basis_explanation": "REQ-0035.1 принят владельцем 2026-10-19. Сценарий подготовлен, модельное исполнение не подтверждено."
+        },
+        {
+          "id": "ai-setup-project-result-invalid-review-date-offer-only",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0035.md"
+          ],
+          "basis_explanation": "REQ-0035.1 принят владельцем 2026-10-19. Сценарий подготовлен, модельное исполнение не подтверждено."
+        },
+        {
+          "id": "ai-setup-project-result-expired-review-declined-continue",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0035.md"
+          ],
+          "basis_explanation": "REQ-0035.1 принят владельцем 2026-10-19. Сценарий подготовлен, модельное исполнение не подтверждено."
         }
       ]
     },
@@ -2087,7 +2314,12 @@
               "ASKL-003",
               "ASKL-004"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0035.md",
+            "docs/requirements/REQ-0012.md"
+          ],
+          "basis_explanation": "REQ-0035.1 сохраняет прямое поручение и отменяет запуск по одному сроку. Подтверждение целей остаётся отдельным условием REQ-0012."
         },
         {
           "id": "ai-setup-subagents-result-sequential-project-model-evaluation",
@@ -3549,6 +3781,23 @@
               "COMPLEXITY-002"
             ]
           ]
+        },
+        {
+          "id": "ai-work-control-result-reuse-unchanged-control-and-continue",
+          "requirement_basis": [
+            "docs/requirements/REQ-0023.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-control-result-accepted-control-depth",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0032.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
@@ -3627,6 +3876,9 @@
             [
               "AUDIT-006"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0024.md"
           ]
         },
         {
@@ -3655,7 +3907,10 @@
               "SUBAGENT-AVAILABILITY-003"
             ]
           ],
-          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно.",
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ]
         },
         {
           "id": "ai-work-result-evaluation-result-self-check-real-defect",
@@ -3669,7 +3924,10 @@
               "SUBAGENT-AVAILABILITY-003"
             ]
           ],
-          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно.",
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ]
         },
         {
           "id": "ai-work-result-evaluation-result-self-check-missing-required-evidence",
@@ -3683,7 +3941,10 @@
               "SUBAGENT-AVAILABILITY-003"
             ]
           ],
-          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+          "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно.",
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ]
         },
         {
           "id": "ai-work-result-evaluation-result-external-independent-check-required",
@@ -3698,6 +3959,38 @@
             ]
           ],
           "basis_explanation": "Прямые критерии пользователя задают доступное продолжение, обозначение самопроверки и сохранение содержательных ограничений. Модельное исполнение сценария проверяется отдельно."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-assigned-reviewer-without-result",
+          "requirement_basis": [
+            "docs/requirements/REQ-0024.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-separate-review-bounded-context",
+          "requirement_basis": [
+            "docs/requirements/REQ-0024.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-separate-review-author-context",
+          "requirement_basis": [
+            "docs/requirements/REQ-0024.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-structure-only-trial-claim",
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
         }
       ]
     },
@@ -3943,7 +4236,11 @@
               "MODEL-ANALYSIS-002",
               "MODEL-ANALYSIS-003"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
+          ],
+          "basis_explanation": "REQ-0036 и уточнение владельца 2026-10-18 заменяют прежнюю зависимость профиля от целей. Исторические сведения MODEL-ANALYSIS-001/011 уточнены, сохранение отдельных целей не требуется. Остальные границы сценария сохранены."
         },
         {
           "id": "ai-model-analysis-result-confirm",
@@ -3956,7 +4253,11 @@
               "MODEL-ANALYSIS-001",
               "MODEL-ANALYSIS-011"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
+          ],
+          "basis_explanation": "REQ-0036 и уточнение владельца 2026-10-18 заменяют прежнюю зависимость профиля от целей. Исторические сведения MODEL-ANALYSIS-001/011 уточнены, сохранение отдельных целей не требуется. Остальные границы сценария сохранены."
         },
         {
           "id": "ai-model-analysis-result-change",
@@ -3969,7 +4270,11 @@
               "MODEL-ANALYSIS-001",
               "MODEL-ANALYSIS-002"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
+          ],
+          "basis_explanation": "REQ-0036 и уточнение владельца 2026-10-18 заменяют прежнюю зависимость профиля от целей. Исторические сведения MODEL-ANALYSIS-001/011 уточнены, сохранение отдельных целей не требуется. Остальные границы сценария сохранены."
         },
         {
           "id": "ai-model-analysis-result-partial",
@@ -3982,6 +4287,9 @@
               "MODEL-ANALYSIS-002",
               "MODEL-ANALYSIS-004"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -3999,6 +4307,9 @@
               "MODEL-ANALYSIS-003",
               "MODEL-ANALYSIS-008"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4014,6 +4325,9 @@
               "MODEL-ANALYSIS-007",
               "MODEL-ANALYSIS-008"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4031,6 +4345,9 @@
               "MODEL-ANALYSIS-003",
               "MODEL-ANALYSIS-004"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4044,7 +4361,11 @@
               "MODEL-ANALYSIS-001",
               "MODEL-ANALYSIS-005"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
+          ],
+          "basis_explanation": "REQ-0036 и уточнение владельца 2026-10-18 заменяют прежнюю зависимость профиля от целей. Исторические сведения MODEL-ANALYSIS-001/011 уточнены, сохранение отдельных целей не требуется. Остальные границы сценария сохранены."
         },
         {
           "id": "ai-model-analysis-result-save-local-paths",
@@ -4057,7 +4378,11 @@
               "MODEL-ANALYSIS-001",
               "MODEL-ANALYSIS-005"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
+          ],
+          "basis_explanation": "REQ-0036 и уточнение владельца 2026-10-18 заменяют прежнюю зависимость профиля от целей. Исторические сведения MODEL-ANALYSIS-001/011 уточнены, сохранение отдельных целей не требуется. Остальные границы сценария сохранены."
         },
         {
           "id": "ai-model-analysis-result-discover-local-goals",
@@ -4070,7 +4395,11 @@
               "MODEL-ANALYSIS-001",
               "MODEL-ANALYSIS-005"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
+          ],
+          "basis_explanation": "REQ-0036 и уточнение владельца 2026-10-18 заменяют прежнюю зависимость профиля от целей. Исторические сведения MODEL-ANALYSIS-001/011 уточнены, сохранение отдельных целей не требуется. Остальные границы сценария сохранены."
         },
         {
           "id": "ai-model-analysis-result-current-catalog",
@@ -4085,6 +4414,9 @@
               "MODEL-ANALYSIS-006",
               "MODEL-ANALYSIS-008"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4100,6 +4432,9 @@
               "MODEL-ANALYSIS-007",
               "MODEL-ANALYSIS-008"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4113,6 +4448,9 @@
               "MODEL-ANALYSIS-002",
               "MODEL-ANALYSIS-006"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4128,6 +4466,9 @@
               "MODEL-ANALYSIS-002",
               "MODEL-ANALYSIS-008"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4143,6 +4484,9 @@
               "MODEL-ANALYSIS-002",
               "MODEL-ANALYSIS-008"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4158,6 +4502,9 @@
               "MODEL-ANALYSIS-002",
               "MODEL-ANALYSIS-008"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4171,6 +4518,9 @@
               "MODEL-ANALYSIS-008",
               "MODEL-ANALYSIS-009"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4184,6 +4534,9 @@
               "MODEL-ANALYSIS-008",
               "MODEL-ANALYSIS-009"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4197,6 +4550,9 @@
               "MODEL-ANALYSIS-008",
               "MODEL-ANALYSIS-010"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4210,6 +4566,9 @@
               "MODEL-ANALYSIS-008",
               "MODEL-ANALYSIS-009"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4223,6 +4582,9 @@
               "MODEL-ANALYSIS-001",
               "MODEL-ANALYSIS-011"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4234,6 +4596,9 @@
             [
               "MODEL-ANALYSIS-013"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4247,6 +4612,9 @@
               "MODEL-ANALYSIS-012",
               "MODEL-ANALYSIS-013"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4258,6 +4626,9 @@
             [
               "MODEL-ANALYSIS-012"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4271,6 +4642,9 @@
               "MODEL-ANALYSIS-009",
               "MODEL-ANALYSIS-013"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4284,6 +4658,9 @@
               "MODEL-ANALYSIS-014",
               "MODEL-ANALYSIS-015"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4301,6 +4678,9 @@
               "HIST-003",
               "HIST-004"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4314,6 +4694,9 @@
               "PARENT-002",
               "PARENT-003"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         },
         {
@@ -4327,6 +4710,9 @@
               "PARENT-002",
               "PARENT-003"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0036.md"
           ]
         }
       ]
@@ -4485,7 +4871,8 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0020.md"
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0026.md"
           ]
         },
         {
@@ -4499,7 +4886,8 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0020.md"
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0026.md"
           ]
         },
         {
@@ -4513,7 +4901,8 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0020.md"
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0026.md"
           ]
         },
         {
@@ -4527,7 +4916,8 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0020.md"
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0026.md"
           ]
         },
         {
@@ -4541,8 +4931,33 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0020.md"
+            "docs/requirements/REQ-0020.md",
+            "docs/requirements/REQ-0028.md"
           ]
+        },
+        {
+          "id": "ai-human-communication-result-authorized-plan-and-action",
+          "requirement_basis": [
+            "docs/requirements/REQ-0027.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-diagnose-available-log",
+          "requirement_basis": [
+            "docs/requirements/REQ-0027.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-required-confirmation-pending",
+          "requirement_basis": [
+            "docs/requirements/REQ-0027.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
         }
       ]
     },
@@ -4575,7 +4990,11 @@
             [
               "ASKL-004"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задаёт REQ-0006 с редакцией от 2026-10-18. Материалы корпуса обосновывают границу возобновления и устройство проверки, но не обязательность оценки каждой передачи."
         },
         {
           "id": "ai-session-handoff-result-handoff-completed",
@@ -4593,7 +5012,11 @@
               "ASKL-004",
               "AUDIT-005"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задаёт REQ-0006 с редакцией от 2026-10-18. Материалы корпуса обосновывают границу возобновления и устройство проверки, но не обязательность оценки каждой передачи."
         },
         {
           "id": "ai-session-handoff-result-handoff-incomplete",
@@ -4608,7 +5031,11 @@
             [
               "ASKL-004"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задаёт REQ-0006 с редакцией от 2026-10-18. Материалы корпуса обосновывают границу возобновления и устройство проверки, но не обязательность оценки каждой передачи."
         },
         {
           "id": "ai-session-handoff-result-handoff-rework",
@@ -4626,7 +5053,11 @@
               "ASKL-004",
               "AUDIT-005"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задаёт REQ-0006 с редакцией от 2026-10-18. Материалы корпуса обосновывают границу возобновления и устройство проверки, но не обязательность оценки каждой передачи."
         },
         {
           "id": "ai-session-handoff-result-without-automation",
@@ -4641,7 +5072,20 @@
             [
               "ASKL-004"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задаёт REQ-0006 с редакцией от 2026-10-18. Материалы корпуса обосновывают границу возобновления и устройство проверки, но не обязательность оценки каждой передачи."
+        },
+        {
+          "id": "ai-session-handoff-result-ordinary-without-evaluation",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Отмена обязательной оценки каждой передачи принята владельцем 2026-10-18. Сценарий проверяет критерий 5 REQ-0006, его наличие не подтверждает исполнение моделью."
         }
       ]
     }

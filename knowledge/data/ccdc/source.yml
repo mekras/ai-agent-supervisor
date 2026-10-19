@@ -1,6 +1,6 @@
 id: CCDC
 slug: ccdc
-title: "Claude Code Documentation"
+title: Claude Code Documentation
 status: approved
 priority: normal
 carrier_type: website
@@ -11,26 +11,37 @@ storage_strategy: local_only
 processing_scope: selected_fragments
 retrieval_mode: on_demand
 copy_policy: local_only
-allowed_use: "Точечная проверка нормализованных фрагментов с атрибуцией источника."
+allowed_use: Точечная проверка нормализованных фрагментов с атрибуцией источника.
 requires_access_check: true
-url: "https://code.claude.com/docs"
-locator: "https://code.claude.com/docs/llms.txt"
-public_reference: "https://code.claude.com/docs"
-license_or_terms: "См. knowledge/source-attribution.md."
+url: https://code.claude.com/docs
+locator: https://code.claude.com/docs/llms.txt
+public_reference: https://code.claude.com/docs
+license_or_terms: См. knowledge/source-attribution.md.
 access:
-  default: "Публичная документация; страницы доступны в машинной форме по адресу страницы с суффиксом `.md`. Условия публикации фрагментов проверяются перед использованием."
+  default: Публичная документация; страницы доступны в машинной форме по адресу страницы с суффиксом `.md`.
+    Условия публикации фрагментов проверяются перед использованием.
 reliability: official
 stability: mutable
 refresh_policy: manual
-retrieved_at: "2026-09-18"
-last_checked_at: "2026-09-18"
+retrieved_at: '2026-09-18'
+last_checked_at: '2026-09-18'
 scope:
   includes:
-    - "Страницы о составе каталога `.claude` и об окне контекста."
-    - "Страницы о подагентах и настройке моделей."
-  excludes: ["Остальные страницы документации до отдельного решения об их обработке."]
+  - Страницы о составе каталога `.claude` и об окне контекста.
+  - Страницы о подагентах и настройке моделей.
+  - Страницы о хуках, их области применения, активации и отключении.
+  excludes:
+  - Остальные страницы документации до отдельного решения об их обработке.
 known_limitations:
-  - "Документация меняется без версионирования, поэтому фрагмент проверяй на дату сверки."
-  - "Снимки страниц хранятся локально и не отслеживаются Git."
+- Документация меняется без версионирования, поэтому фрагмент проверяй на дату сверки.
+- Снимки страниц хранятся локально и не отслеживаются Git.
 processing_notes:
-  - "Снимок получен запросом к машинной форме страницы, без ручной правки текста."
+- Снимок получен запросом к машинной форме страницы, без ручной правки текста.
+- '2026-10-19: отдельно проверена единица CCDC--hooks, дата не означает обновление остальных страниц.'
+provenance:
+  origin: external_material
+  locator: https://code.claude.com/docs/llms.txt
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-2026-10-16.yml
+    sha256: 2bdc3a558d1c2a1e8d5b2f7b70ca2732336c68f5567f9468f5298eb82e970cc9

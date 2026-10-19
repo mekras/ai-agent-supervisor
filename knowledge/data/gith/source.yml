@@ -1,0 +1,55 @@
+id: GITH
+slug: gith
+title: Git Documentation
+status: approved
+priority: normal
+carrier_type: website
+source_kind: reference
+long_source: true
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Точечно сверить официальные страницы о хуках, сохранить происхождение и ограничения, обновить
+    индекс единиц. Не запускать хуки.
+  write_scope:
+  - knowledge/data/gith/
+  allowed_operations:
+  - index
+  - fetch
+  - verify
+storage_strategy: local_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: Локальное чтение официальной документации, атрибуция и собственные формулировки фактов. Полный
+  текст не публикуется.
+requires_access_check: true
+url: https://git-scm.com/docs/githooks
+locator: https://git-scm.com/docs/githooks
+public_reference: https://git-scm.com/docs/githooks
+license_or_terms: См. knowledge/source-attribution.md. Полные копии не публикуются.
+access:
+  default: Публичные официальные страницы и исходники документации.
+reliability: official
+stability: mutable
+refresh_policy: Проверить при изменении поддерживаемой оснастки и перед использованием для настройки хуков.
+retrieved_at: '2026-10-19'
+last_checked_at: '2026-10-19'
+scope:
+  includes:
+  - Область применения и жизненный цикл хуков.
+  - Страницы о хуках, их области применения, активации и отключении.
+  excludes:
+  - Остальная документация.
+known_limitations:
+- Документация ветви разработки не доказывает поведение установленной версии.
+provenance:
+  origin: external_material
+  locator: https://git-scm.com/docs/githooks
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-hooks-2026-10-19.yml
+    sha256: 46157bab84e2e554d32512f517f87173af3338a325d3c6c92270feb9c4b2ec01
+processing_notes:
+- '2026-10-19: отдельно проверена единица GITH--core-hooks-path, дата не означает обновление остальных
+  страниц.'

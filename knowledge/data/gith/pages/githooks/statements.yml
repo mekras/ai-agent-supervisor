@@ -1,0 +1,54 @@
+statement_contract_version: 2
+statements:
+- id: GITH-001
+  source_id: GITH
+  item_id: GITH--githooks
+  kind: fact
+  text: По умолчанию Git ищет хуки в $GIT_DIR/hooks. Настройка core.hooksPath может заменить каталог.
+    Область применения определяется эффективной конфигурацией, а не только расположением скрипта.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: DESCRIPTION
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: $GIT_DIR/hooks
+- id: GITH-002
+  source_id: GITH
+  item_id: GITH--githooks
+  kind: fact
+  text: Ненулевой код pre-commit или commit-msg прерывает соответствующую операцию. Для этих событий предусмотрен
+    обход через --no-verify, поэтому наличие хука не доказывает контроль всех путей.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: pre-commit and commit-msg
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: non-zero status

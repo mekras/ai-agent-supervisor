@@ -1,18 +1,56 @@
+statement_contract_version: 2
 statements:
-  - id: CODX-049
-    source_id: CODX
-    item_id: CODX--hooks
-    status: ready_for_review
-    kind: fact
-    text: "Немодерируемый командный хук запускается только после просмотра и доверия к точному определению; при изменении хука он снова требует проверки по новому хешу."
-    excerpt: |-
-      Before a
-      non-managed command hook can run, Codex requires you to review and trust the
-      exact hook definition. Codex records trust against the hook’s current hash, so
-      new or changed hooks are marked for review and skipped until trusted.
-    artifact: normalized.local.md
-    checked_at: 2026-07-10
-    scope:
-      section_title: "Review and trust hooks"
-      limitations: "Относится к hooks Codex, не управляемым политикой администратора."
-    open_questions: []
+- id: CODX-049
+  source_id: CODX
+  item_id: CODX--hooks
+  kind: fact
+  text: Хуки, не управляемые политикой администратора, требуют доверия к точному определению. Изменение
+    определения требует новой проверки его хэша. В CLI просмотр и отключение доступны через /hooks, управляемые
+    хуки имеют другой порядок.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Review and trust hooks
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: Codex records trust against the hook's current hash
+- id: CODX-072
+  source_id: CODX
+  item_id: CODX--hooks
+  kind: fact
+  text: Хуки загружаются из активных пользовательских и проектных слоёв, включая hooks.json и таблицы
+    hooks в config.toml, а также из включённых плагинов. Совпадающие хуки объединяются, более высокий
+    слой не заменяет остальные. Доверие к проектному слою не отключает пользовательские и системные хуки.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Where Codex looks for hooks
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: Higher-precedence config layers don't replace lower-precedence hooks.

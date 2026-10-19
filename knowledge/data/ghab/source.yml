@@ -29,3 +29,10 @@ scope:
   excludes: ["Непроверенные материалы вне индексированных единиц."]
 known_limitations: []
 processing_notes: []
+provenance:
+  origin: external_material
+  locator: "https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/"
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-2026-10-16.yml
+    sha256: "2bdc3a558d1c2a1e8d5b2f7b70ca2732336c68f5567f9468f5298eb82e970cc9"

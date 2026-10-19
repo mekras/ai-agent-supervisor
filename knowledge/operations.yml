@@ -42,6 +42,10 @@ stages:
           - knowledge
           - --strict-statements
           - --strict-concepts
+          - --strict-verification
+          - --strict-admission
+          - --project-root
+          - .
         working_directory: .
         write_paths: [knowledge]
         required: true

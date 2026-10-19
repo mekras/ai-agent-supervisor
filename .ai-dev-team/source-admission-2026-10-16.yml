@@ -1,0 +1,90 @@
+status: accepted
+decided_by: Владелец проекта
+decided_at: '2026-10-16'
+scope:
+  sources:
+  - AENG
+  - APMP
+  - ARXC
+  - ASES
+  - ASKL
+  - AZPF
+  - CCDC
+  - CODX
+  - CXSR
+  - GHAB
+  - GIST
+  - INSP
+  - LCMS
+  - LSME
+  - PHSC
+  - PPRX
+  - PRFO
+  - VSCD
+  - XEM7
+  origins:
+  - external_material
+decision: Продолжить использование 19 существующих источников из knowledge/catalog.yml с сохранением ограничений
+  хранения и публикации.
+constraints:
+- Рабочие разговоры с агентом и их пересказы в корпус не включаются.
+- Новые материалы требуют отдельного согласования.
+- Разрешение допуска не подтверждает актуальность, достоверность или полноту обработки источника.
+sources:
+- id: AENG
+  title: Anthropic Engineering
+  locator: https://www.anthropic.com/engineering
+- id: APMP
+  title: Agent Package Manager Producer Docs
+  locator: https://microsoft.github.io/apm/producer/
+- id: ARXC
+  title: 'arXiv: исследования контекстных инструкций'
+  locator: https://arxiv.org
+- id: ASES
+  title: AI Safety Evaluation Standard
+  locator: https://ukgovernmentbeis.github.io/as-evaluation-standard/
+- id: ASKL
+  title: Agent Skills
+  locator: https://agentskills.io
+- id: AZPF
+  title: 'Microsoft Learn: evaluation flow for Prompt flow'
+  locator: https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/how-to-develop-an-evaluation-flow
+- id: CCDC
+  title: Claude Code Documentation
+  locator: https://code.claude.com/docs/llms.txt
+- id: CODX
+  title: OpenAI Codex Documentation
+  locator: https://developers.openai.com/codex
+- id: CXSR
+  title: 'OpenAI Codex: исходный код (openai/codex)'
+  locator: https://github.com/openai/codex/tree/50d77959bf927293c4b5ddcca81d05331ae582ea
+- id: GHAB
+  title: 'GitHub Blog: agents.md practices'
+  locator: https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/
+- id: GIST
+  title: 'GitHub Gist: AGENTS.md recommendations'
+  locator: https://gist.github.com/0xfauzi/7c8f65572930a21efa62623557d6e
+- id: INSP
+  title: Inspect Documentation
+  locator: https://inspect.aisi.org.uk/
+- id: LCMS
+  title: 'LangChain Blog: multi-agent systems'
+  locator: https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems
+- id: LSME
+  title: LangSmith Documentation
+  locator: https://docs.langchain.com/langsmith
+- id: PHSC
+  title: 'philschmid.de: Writing good agents'
+  locator: https://www.philschmid.de/writing-good-agents
+- id: PPRX
+  title: 'Perplexity Research: Agent Skills'
+  locator: https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity
+- id: PRFO
+  title: Promptfoo Documentation
+  locator: https://www.promptfoo.dev/docs/intro/
+- id: VSCD
+  title: 'Visual Studio Code Docs: custom instructions'
+  locator: https://code.visualstudio.com/docs/agent-customization/custom-instructions
+- id: XEM7
+  title: EXM7777 post and related X Article
+  locator: https://x.com/EXM7777/status/2060736517564477901

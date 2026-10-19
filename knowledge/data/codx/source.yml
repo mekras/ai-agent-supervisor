@@ -1,6 +1,6 @@
 id: CODX
 slug: codx
-title: "OpenAI Codex Documentation"
+title: OpenAI Codex Documentation
 status: approved
 priority: normal
 carrier_type: website
@@ -11,21 +11,32 @@ storage_strategy: local_only
 processing_scope: selected_fragments
 retrieval_mode: on_demand
 copy_policy: local_only
-allowed_use: "Точечная проверка нормализованных фрагментов с атрибуцией источника."
+allowed_use: Точечная проверка нормализованных фрагментов с атрибуцией источника.
 requires_access_check: true
-url: "https://developers.openai.com/codex"
-locator: "https://developers.openai.com/codex"
-public_reference: "https://developers.openai.com/codex"
-license_or_terms: "См. knowledge/source-attribution.md."
+url: https://developers.openai.com/codex
+locator: https://developers.openai.com/codex
+public_reference: https://developers.openai.com/codex
+license_or_terms: См. knowledge/source-attribution.md.
 access:
-  default: "Публичный веб-источник; условия публикации фрагментов проверяются перед использованием."
+  default: Публичный веб-источник; условия публикации фрагментов проверяются перед использованием.
 reliability: official
 stability: mutable
 refresh_policy: manual
-retrieved_at: "2026-06-08"
-last_checked_at: "2026-06-08"
+retrieved_at: '2026-06-08'
+last_checked_at: '2026-06-08'
 scope:
-  includes: ["Страницы из прежнего page-index.tsv."]
-  excludes: ["Непроверенные материалы вне индексированных единиц."]
+  includes:
+  - Страницы из прежнего page-index.tsv.
+  - Страницы о хуках, их области применения, активации и отключении.
+  excludes:
+  - Непроверенные материалы вне индексированных единиц.
 known_limitations: []
-processing_notes: []
+processing_notes:
+- '2026-10-19: отдельно проверена единица CODX--hooks, дата не означает обновление остальных страниц.'
+provenance:
+  origin: external_material
+  locator: https://developers.openai.com/codex
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-2026-10-16.yml
+    sha256: 2bdc3a558d1c2a1e8d5b2f7b70ca2732336c68f5567f9468f5298eb82e970cc9

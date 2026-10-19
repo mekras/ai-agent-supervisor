@@ -1,0 +1,81 @@
+statement_contract_version: 2
+statements:
+- id: CCDC-009
+  source_id: CCDC
+  item_id: CCDC--hooks
+  kind: fact
+  text: Настройки ~/.claude/settings.json относятся ко всем проектам пользователя, а .claude/settings.json
+    и .claude/settings.local.json — к одному проекту. Управляемые настройки и подключённые плагины являются
+    дополнительными источниками хуков.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Hook locations
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: All your projects
+- id: CCDC-010
+  source_id: CCDC
+  item_id: CCDC--hooks
+  kind: fact
+  text: Отключение и доступность хуков зависят от источника настроек и политики администратора. Обычный
+    пользователь не должен считать управляемый хук отключаемым тем же способом, что собственный.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Disable or remove hooks
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: setting can’t disable managed hooks from outside managed settings.
+- id: CCDC-011
+  source_id: CCDC
+  item_id: CCDC--hooks
+  kind: fact
+  text: Возможность блокировки и последствия ошибки определяются событием. Нельзя переносить поведение
+    одного события на все остальные.
+  artifact: normalized.local.md
+  checked_at: '2026-10-19'
+  scope:
+    section_title: Exit code 2 behavior per event
+    limitations: Проверено по документации, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением сверить с окружением.
+  open_questions: []
+  excerpt: Exit code 2 behavior per event
