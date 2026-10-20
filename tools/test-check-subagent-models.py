@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import shlex
 import subprocess
 import tempfile
 from pathlib import Path
@@ -121,10 +122,84 @@ def main() -> int:
         code, result = run("--model", "missing:model")
         assert code == 1 and result["models"][0]["status"] == "unverified"
 
-        catalog = make_adapter(directory, "catalog", "if [ \"$1\" = list ]; then printf '%s\\n' '{\"harness\":\"other\",\"models\":[{\"id\":\"family-exact\",\"hidden\":false,\"supportedReasoningEfforts\":[{\"reasoningEffort\":\"low\"}]}]}'; else exit 2; fi\n")
-        discovered = subprocess.run([str(DISCOVER), "--adapter", str(catalog)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
-        payload = json.loads(discovered.stdout)
-        assert discovered.returncode == 0 and payload["harness"] == "other" and payload["models"][0]["id"] == "family-exact"
+        # REQ-0038: принятый договор читателя, tooling-interfaces.md,
+        # раздел «Совместимость читателя каталога». Ответы фиксированы,
+        # оснастка и модели не вызываются.
+        model_entry = {
+            "id": "family-exact",
+            "hidden": False,
+            "supportedReasoningEfforts": [{"reasoningEffort": "low"}],
+            "extra": {"label": "Модель 'А'", "limits": [None, 0]},
+        }
+        complete_catalog = {
+            "harness": "other",
+            "status": "available",
+            "models": [model_entry],
+        }
+        extra_catalog = {
+            "harness": "other",
+            "models": [model_entry],
+            "extra": {"revision": 7, "features": ["catalog"]},
+        }
+        catalog_cases = [
+            ("complete", json.dumps(complete_catalog), complete_catalog, 0),
+            (
+                "without-status",
+                json.dumps({"harness": "other", "models": [model_entry]}),
+                complete_catalog,
+                0,
+            ),
+            (
+                "without-harness",
+                '{"status":"available","models":[]}',
+                {"status": "available", "models": []},
+                0,
+            ),
+            (
+                "models-only",
+                '{"models":[]}',
+                {"models": [], "status": "available"},
+                0,
+            ),
+            (
+                "additional-fields",
+                json.dumps(extra_catalog),
+                {**extra_catalog, "status": "available"},
+                0,
+            ),
+            (
+                "explicit-other-status",
+                '{"models":[],"status":"unavailable","reason":"catalog disabled"}',
+                {"models": [], "status": "unavailable", "reason": "catalog disabled"},
+                1,
+            ),
+            ("without-models", '{"harness":"other","status":"available"}', None, 1),
+            ("invalid-json", '{"models":', None, 1),
+            ("models-not-array", '{"models":{}}', None, 1),
+            ("not-an-object", '[]', None, 1),
+        ]
+        for name, response, expected, expected_code in catalog_cases:
+            catalog = make_adapter(
+                directory,
+                f"catalog-{name}",
+                'if [ "$1" = list ]; then\n'
+                f"printf '%s\\n' {shlex.quote(response)}\n"
+                "else exit 2\nfi\n",
+            )
+            discovered = subprocess.run(
+                [str(DISCOVER), "--adapter", str(catalog)],
+                text=True, encoding="utf-8", errors="replace",
+                capture_output=True, check=False,
+            )
+            payload = json.loads(discovered.stdout)
+            assert discovered.returncode == expected_code, (name, discovered)
+            if expected is not None:
+                assert payload == expected, (name, payload, expected)
+            else:
+                assert payload["status"] == "not_received", (name, payload)
+                assert payload["models"] == [], (name, payload)
+                assert payload["reason_kind"] == "adapter_contract", (name, payload)
+                assert isinstance(payload["reason"], str) and payload["reason"].strip(), (name, payload)
 
         unavailable = make_adapter(directory, "unavailable", "exit 5\n")
         discovered = subprocess.run([str(DISCOVER), "--adapter", str(unavailable)], text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
