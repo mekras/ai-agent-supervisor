@@ -1908,6 +1908,9 @@
               "HUMAN-COMMUNICATION-001",
               "HUMAN-COMMUNICATION-002"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
           ]
         },
         {
@@ -1931,6 +1934,9 @@
             [
               "HUMAN-COMMUNICATION-002"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
           ]
         },
         {
@@ -1942,6 +1948,9 @@
             [
               "HUMAN-COMMUNICATION-002"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
           ]
         },
         {
@@ -2023,6 +2032,14 @@
             "docs/requirements/REQ-0035.md"
           ],
           "basis_explanation": "REQ-0035.1 принят владельцем 2026-10-19. Сценарий подготовлен, модельное исполнение не подтверждено."
+        },
+        {
+          "id": "ai-setup-project-result-human-communication-messages-only",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
         }
       ]
     },
@@ -4955,6 +4972,78 @@
           "id": "ai-human-communication-result-required-confirmation-pending",
           "requirement_basis": [
             "docs/requirements/REQ-0027.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-readable-labels",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-source-fragments",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-source-footnote",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-emphasize-value",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-plain-value-allowed",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-unknown-human-role",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-confirmed-domain-roles",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-exact-technical-trace",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-human-document-content",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
           ],
           "required_claims": [],
           "finding_claims": []
