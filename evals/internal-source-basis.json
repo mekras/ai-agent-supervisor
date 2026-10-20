@@ -3942,6 +3942,14 @@
           ]
         },
         {
+          "id": "ai-work-result-evaluation-result-code-fix-without-extra-report",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
           "id": "ai-work-result-evaluation-result-self-check-accepted-without-subagent",
           "required_claims": [
             "SUBAGENT-AVAILABILITY-001",
