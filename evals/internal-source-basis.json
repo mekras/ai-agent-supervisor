@@ -246,6 +246,35 @@
             "docs/requirements/REQ-0033.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-bootstrap-complete-reading",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0040.md"
+          ],
+          "basis_explanation": "Ожидаемый порядок получения обязательного текста согласован пользователем и закреплён в REQ-0040. Учебный случай не подтверждает модельное исполнение или снижение частоты нарушений."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-recover-truncated-reading",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0040.md",
+            "docs/requirements/REQ-0026.md",
+            "docs/requirements/REQ-0033.md"
+          ],
+          "basis_explanation": "Ожидаемый порядок получения обязательного текста согласован пользователем и закреплён в REQ-0040. Учебный случай не подтверждает модельное исполнение или снижение частоты нарушений."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-unavailable-reading-fragment",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0040.md"
+          ],
+          "basis_explanation": "Ожидаемый порядок получения обязательного текста согласован пользователем и закреплён в REQ-0040. Учебный случай не подтверждает модельное исполнение или снижение частоты нарушений."
         }
       ]
     },
