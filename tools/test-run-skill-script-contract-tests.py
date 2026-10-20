@@ -247,6 +247,121 @@ print('chosen: ' + selected.read_text(encoding='utf-8'))
         expect(1, "объявленный вход nested/config.txt отсутствует во всех фикстурах")
 
 
+def check_annotation_function_coverage() -> None:
+    """REQ-0007.2: отличать функции исходника от вычисления аннотаций."""
+    annotated = '''def example(
+    value: int,
+) -> int:
+    return value
+'''
+    user_annotation = '''def __annotate__(
+    value: int,
+) -> int:
+    return value
+'''
+    cases = [
+        (annotated + 'example(1)\n', None),
+        (annotated, 'example'),
+        ('def __annotate__(value):\n    return value\n', '__annotate__'),
+        ('def __annotate__(value):\n    return value\n__annotate__(1)\n', None),
+        (user_annotation, '__annotate__'),
+        (user_annotation + '__annotate__(1)\n', None),
+        # При общей строке сигнатуры и тела проверка по строкам неприменима.
+        ('''def __annotate__(
+    value: int,
+) -> int: return value
+print(__annotate__.__annotations__)
+''', None),
+        (annotated + user_annotation +
+         'example(1)\nprint(example.__annotations__)\n', '__annotate__'),
+        (annotated + user_annotation +
+         'example(1)\nprint(example.__annotations__)\n__annotate__(1)\n', None),
+        ('''def outer():
+    def inner(value: int) -> int:
+        return value
+    return inner(1)
+outer()
+''', None),
+        ('''def outer():
+    def inner(value: int) -> int:
+        return value
+outer()
+''', 'outer.<locals>.inner'),
+        ('''class Example:
+    def method(self, value: int) -> int:
+        return value
+Example().method(1)
+''', None),
+        ('''class Example:
+    def method(self, value: int) -> int:
+        return value
+''', 'Example.method'),
+        ('''def decorate(function):
+    return function
+@(
+    decorate
+)
+def example(value: int) -> int:
+    return value
+example(1)
+''', None),
+        ('''def decorate(function):
+    return function
+@decorate
+def example(value: int) -> int:
+    return value
+''', 'example'),
+        ('''import asyncio
+async def example(value: int) -> int:
+    return value
+asyncio.run(example(1))
+''', None),
+        ('''async def example(value: int) -> int:
+    return value
+''', 'example'),
+    ]
+    with tempfile.TemporaryDirectory() as temporary:
+        skill = Path(temporary) / 'аннотации'
+        write_contract(skill)
+        contract_path = skill / 'evals/script-contract-tests.json'
+        contract = json.loads(contract_path.read_text(encoding='utf-8'))
+        contract['cases'][0]['expect'] = {'stdout_contains': ['fixture-ok']}
+        contract_path.write_text(json.dumps(contract), encoding='utf-8')
+        for future in ('', 'from __future__ import annotations\n'):
+            contract.pop('unexercised_functions', None)
+            contract_path.write_text(json.dumps(contract), encoding='utf-8')
+            for source, missing in cases:
+                write_script(skill, future + source + 'print("fixture-ok")\n')
+                result = run(skill)
+                assert result.returncode == (1 if missing else 0), (
+                    sys.version, future + source, result.stdout, result.stderr
+                )
+                if missing:
+                    assert f'функция {missing} не выполнена ни одним сценарием' in result.stderr
+            contract['unexercised_functions'] = [{
+                'script': 'scripts/save_state.py',
+                'function': '__annotate__',
+                'reason': 'защитный отказ для внешнего окружения',
+            }]
+            contract_path.write_text(json.dumps(contract), encoding='utf-8')
+            allowance_cases = [
+                (annotated + 'example(1)\n', 1, 'неизвестную функцию __annotate__'),
+                ('''def __annotate__(
+    value: int,
+) -> int: return value
+print(__annotate__.__annotations__)
+''', 1, 'неизвестную функцию __annotate__'),
+                (user_annotation, 0, ''),
+                (user_annotation + '__annotate__(1)\n', 1,
+                 'запись unexercised_functions о функции __annotate__ устарела'),
+            ]
+            for source, code, message in allowance_cases:
+                write_script(skill, future + source + 'print("fixture-ok")\n')
+                result = run(skill)
+                assert result.returncode == code, (sys.version, source, result.stderr)
+                assert message in result.stderr
+
+
 def main() -> int:
     script = '''import argparse
 import json
@@ -560,6 +675,7 @@ args.output.write_text(json.dumps(state), encoding="utf-8")''',
         assert "script-contract-tests.json" in missing.stderr
 
     check_absence_contracts()
+    check_annotation_function_coverage()
     print("Исполнимые контрактные проверки скриптов навыков проверены.")
     return 0
 

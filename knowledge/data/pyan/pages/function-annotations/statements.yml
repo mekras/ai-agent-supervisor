@@ -1,0 +1,28 @@
+statement_contract_version: 2
+statements:
+- id: PYAN-003
+  source_id: PYAN
+  item_id: PYAN--function-annotations
+  kind: fact
+  text: Начиная с Python 3.14 аннотации по умолчанию вычисляются отложенно в области аннотаций. При future
+    annotations они хранятся как строки.
+  artifact: normalized.local.rst
+  checked_at: '2026-10-20'
+  scope:
+    section_title: Annotations
+    limitations: Выбранный раздел официального источника. Не задаёт требования к покрытию проекта.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Annotations are now lazily evaluated by default.

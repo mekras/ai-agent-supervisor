@@ -1,0 +1,34 @@
+verification_contract_version: 1
+artifact: normalized.local.rst
+hash:
+  algorithm: sha256
+  value: 0d88aab21477bf0738af6b83182828c7853373f70434dccc13505d85dd7ec83d
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-10-20'
+  locator: https://raw.githubusercontent.com/python/cpython/v3.14.7/Doc/reference/compound_stmts.rst
+  resolved_locator: https://raw.githubusercontent.com/python/cpython/v3.14.7/Doc/reference/compound_stmts.rst
+  raw_sha256: 67bc5a27e2f1ca3de3c3fc99b8e66e44c64832b706ef4a77005f08b8cc695eb7
+verification:
+  method: acquisition_check
+  checked_at: '2026-10-20'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: fragment
+    fragment: Annotations
+    metadata:
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: partial
+    metadata:
+      locator: verified
+      author: unverified
+      publication_date: unverified
+  evidence:
+  - Получен официальный исходник по HTTPS. Нормализованный фрагмент составлен из указанных разделов без
+    изменения текста. Утверждения и выдержки сверены с ним.
+  limitations:
+  - Проверены только выбранные разделы. Это не независимая проверка и не проверка всех деталей реализации.

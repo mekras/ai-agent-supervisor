@@ -1,0 +1,20 @@
+id: PYAN--function-annotations
+source_id: PYAN
+title: Python 3.14.7 Language Reference — Annotations
+url: https://docs.python.org/3.14/reference/compound_stmts.html#annotations
+locator: https://docs.python.org/3.14/reference/compound_stmts.html#annotations
+access: Публичный официальный источник, полные снимки локальны.
+status: indexed
+workflow_stage: source_checked
+provenance:
+  origin: external_material
+  locator: https://docs.python.org/3.14/reference/compound_stmts.html#annotations
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-python-annotations-2026-10-20.yml
+    sha256: 1505e7e8a44cffeba09e0b7f7403d465941ac6c458a16f1844a7ce5ba6d67fb9
+files:
+  local:
+  - raw.local.rst
+  - normalized.local.rst
+  - license.local.txt

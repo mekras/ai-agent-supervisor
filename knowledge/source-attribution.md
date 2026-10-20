@@ -264,3 +264,17 @@ Event Hooks и Git githooks/core.hooksPath получены точечно. Ад
 Дата относится к выбранным разделам о хуках и не обновляет автоматически
 остальные материалы этих источников. Версия установленной оснастки и её
 фактическое поведение по этим снимкам не подтверждены.
+
+## Аннотации Python — 2026-10-20
+
+- [PEP 649](https://peps.python.org/pep-0649/) и
+  [PEP 749](https://peps.python.org/pep-0749/): разделы Copyright указывают
+  public domain или CC0-1.0-Universal, в зависимости от более разрешительного
+  варианта. Авторы — Larry Hastings и Jelle Zijlstra соответственно.
+- [Справочник Python 3.14, Annotations](https://docs.python.org/3.14/reference/compound_stmts.html#annotations):
+  Python Software Foundation, [PSF License Version 2](https://docs.python.org/3.14/license.html).
+  Снимок получен из тега CPython `v3.14.7`. Текст лицензии сохранён локально.
+
+В Git включены метаданные, ссылки, собственные краткие формулировки фактов
+и короткие выдержки для проверки происхождения. Полные исходные и выбранные
+нормализованные снимки находятся в файлах `*.local.*` и не публикуются.

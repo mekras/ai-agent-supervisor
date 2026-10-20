@@ -1,0 +1,44 @@
+source_id: PYAN
+long_source: true
+extraction_passport:
+  format: reStructuredText, выбранные разделы официальных документов
+  file_size_bytes: 188783
+  metadata_source: source.yml
+  extraction_tool: HTTPS, выделение разделов reStructuredText без смысловых преобразований
+  extraction_status: selected_units
+  content_hash_absence_reason: Хэши каждого снимка и фрагмента находятся в verification.yml.
+structure:
+  units:
+  - id: PYAN--pep-0649
+    title: PEP 649 — Deferred Evaluation Of Annotations Using Descriptors
+    order: 1
+    locator: https://peps.python.org/pep-0649/
+  - id: PYAN--pep-0749
+    title: PEP 749 — Implementing PEP 649
+    order: 2
+    locator: https://peps.python.org/pep-0749/
+  - id: PYAN--function-annotations
+    title: Python 3.14.7 Language Reference — Annotations
+    order: 3
+    locator: https://docs.python.org/3.14/reference/compound_stmts.html#annotations
+coverage:
+  units:
+  - unit_id: PYAN--pep-0649
+    status: extracted
+    statements:
+    - pages/pep-0649/statements.yml
+    scope: Overview и Compiler-generated __annotate__ functions
+    deferred: Остальные разделы не входят в выбранную область index_only.
+  - unit_id: PYAN--pep-0749
+    status: extracted
+    statements:
+    - pages/pep-0749/statements.yml
+    scope: The future of from __future__ import annotations, Abstract
+    deferred: Остальные разделы не входят в выбранную область index_only.
+  - unit_id: PYAN--function-annotations
+    status: extracted
+    statements:
+    - pages/function-annotations/statements.yml
+    scope: Annotations
+    deferred: Остальные разделы не входят в выбранную область index_only.
+updated_at: '2026-10-20'

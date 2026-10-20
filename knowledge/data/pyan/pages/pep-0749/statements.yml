@@ -1,0 +1,53 @@
+statement_contract_version: 2
+statements:
+- id: PYAN-002
+  source_id: PYAN
+  item_id: PYAN--pep-0749
+  kind: fact
+  text: В Python 3.14 future annotations сохраняет строковую семантику. Функция __annotate__ такого объекта
+    возвращает строки в формате VALUE.
+  artifact: normalized.local.rst
+  checked_at: '2026-10-20'
+  scope:
+    section_title: The future of from __future__ import annotations
+    limitations: Выбранный раздел официального источника. Не задаёт требования к покрытию проекта.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: the annotations as strings
+- id: PYAN-004
+  source_id: PYAN
+  item_id: PYAN--pep-0749
+  kind: fact
+  text: PEP 749 заменяет предложенный PEP 649 флаг кода для fake globals форматом VALUE_WITH_FAKE_GLOBALS.
+  artifact: normalized.local.rst
+  checked_at: '2026-10-20'
+  scope:
+    section_title: Abstract
+    limitations: Выбранный раздел официального источника. Не задаёт требования к покрытию проекта.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: There will not be a code flag

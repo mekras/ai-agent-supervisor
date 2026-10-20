@@ -1,0 +1,19 @@
+id: PYAN--pep-0649
+source_id: PYAN
+title: PEP 649 — Deferred Evaluation Of Annotations Using Descriptors
+url: https://peps.python.org/pep-0649/
+locator: https://peps.python.org/pep-0649/
+access: Публичный официальный источник, полные снимки локальны.
+status: indexed
+workflow_stage: source_checked
+provenance:
+  origin: external_material
+  locator: https://peps.python.org/pep-0649/
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-python-annotations-2026-10-20.yml
+    sha256: 1505e7e8a44cffeba09e0b7f7403d465941ac6c458a16f1844a7ce5ba6d67fb9
+files:
+  local:
+  - raw.local.rst
+  - normalized.local.rst

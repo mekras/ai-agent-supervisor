@@ -62,3 +62,6 @@ sources:
   - id: HERM
     title: "Hermes Agent Documentation"
     path: data/herm
+  - id: PYAN
+    title: "Аннотации Python: PEP 649, PEP 749 и справочник Python 3.14"
+    path: data/pyan

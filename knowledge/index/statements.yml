@@ -2317,6 +2317,98 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: PYAN-001
+  source_id: PYAN
+  item_id: PYAN--pep-0649
+  path: knowledge/data/pyan/pages/pep-0649/statements.yml
+  status: null
+  kind: fact
+  text: Компилятор выделяет выражения аннотаций в отдельную функцию, доступную через
+    __annotate__. Вычисление отложено до обращения к аннотациям.
+  artifact: normalized.local.rst
+  checked_at: '2026-10-20'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+- id: PYAN-002
+  source_id: PYAN
+  item_id: PYAN--pep-0749
+  path: knowledge/data/pyan/pages/pep-0749/statements.yml
+  status: null
+  kind: fact
+  text: В Python 3.14 future annotations сохраняет строковую семантику. Функция __annotate__
+    такого объекта возвращает строки в формате VALUE.
+  artifact: normalized.local.rst
+  checked_at: '2026-10-20'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+- id: PYAN-004
+  source_id: PYAN
+  item_id: PYAN--pep-0749
+  path: knowledge/data/pyan/pages/pep-0749/statements.yml
+  status: null
+  kind: fact
+  text: PEP 749 заменяет предложенный PEP 649 флаг кода для fake globals форматом
+    VALUE_WITH_FAKE_GLOBALS.
+  artifact: normalized.local.rst
+  checked_at: '2026-10-20'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+- id: PYAN-003
+  source_id: PYAN
+  item_id: PYAN--function-annotations
+  path: knowledge/data/pyan/pages/function-annotations/statements.yml
+  status: null
+  kind: fact
+  text: Начиная с Python 3.14 аннотации по умолчанию вычисляются отложенно в области
+    аннотаций. При future annotations они хранятся как строки.
+  artifact: normalized.local.rst
+  checked_at: '2026-10-20'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
 - id: VSCD-001
   source_id: VSCD
   item_id: VSCD--custom-instructions

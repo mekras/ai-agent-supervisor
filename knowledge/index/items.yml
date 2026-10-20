@@ -904,6 +904,27 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: PYAN--pep-0649
+  source_id: PYAN
+  path: data/pyan/pages/pep-0649
+  title: PEP 649 — Deferred Evaluation Of Annotations Using Descriptors
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный официальный источник, полные снимки локальны.
+- id: PYAN--pep-0749
+  source_id: PYAN
+  path: data/pyan/pages/pep-0749
+  title: PEP 749 — Implementing PEP 649
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный официальный источник, полные снимки локальны.
+- id: PYAN--function-annotations
+  source_id: PYAN
+  path: data/pyan/pages/function-annotations
+  title: Python 3.14.7 Language Reference — Annotations
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный официальный источник, полные снимки локальны.
 - id: VSCD--custom-instructions
   source_id: VSCD
   path: data/vscd/pages/custom-instructions

@@ -1,0 +1,73 @@
+id: PYAN
+slug: pyan
+title: 'Аннотации Python: PEP 649, PEP 749 и справочник Python 3.14'
+status: approved
+priority: normal
+carrier_type: website
+source_kind: reference
+long_source: true
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Точечно получить только PEP 649, PEP 749 и раздел Annotations справочника Python 3.14.
+    Сверить нужные разделы, хэши и индекс. Не обходить всю документацию.
+  write_scope:
+  - knowledge/data/pyan/
+  allowed_operations:
+  - index
+  - fetch
+  - verify
+storage_strategy: index_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: Чтение официальных материалов и собственные краткие формулировки фактов с атрибуцией. Полные
+  снимки только локально.
+requires_access_check: true
+url: https://peps.python.org/pep-0649/
+locator: https://peps.python.org/pep-0649/
+public_reference: https://peps.python.org/pep-0649/
+license_or_terms: 'PEP 649 и PEP 749: public domain или CC0-1.0-Universal по разделам Copyright. Справочник
+  Python: PSF License Version 2 (https://docs.python.org/3.14/license.html). Полные тексты не публикуются.'
+access:
+  default: Публичные официальные страницы и репозитории Python.
+reliability: official
+stability: mutable
+refresh_policy: Перепроверить при изменении семантики Python или способа обнаружения функций. Для реализации
+  3.14.7 использовать документацию тега v3.14.7.
+retrieved_at: '2026-10-20'
+last_checked_at: '2026-10-20'
+scope:
+  includes:
+  - 'PEP 649: Overview и Compiler-generated __annotate__ functions.'
+  - 'PEP 749: поведение future annotations и замена предлагаемого флага кода.'
+  - 'Python 3.14.7 Language Reference: Annotations.'
+  excludes:
+  - Остальные PEP и разделы справочника.
+  - Полная обработка перечисленных PEP вне выбранных разделов.
+normalization:
+  required: true
+  input: Локальный исходник reStructuredText официального репозитория.
+  output: pages/<slug>/normalized.local.rst — выбранные разделы без смыслового преобразования.
+  selection: Только перечисленные scope.includes, остальные разделы доступны по внешним ссылкам.
+known_limitations:
+- PEP не задают правило проверки покрытия проекта.
+- Предложенные в PEP детали сверяются с PEP 749 и фактическим выпуском CPython.
+- Страница docs.python.org/3.14 изменяется с выпуском исправлений. Снимок справочника получен из v3.14.7.
+provenance:
+  origin: external_material
+  locator: https://peps.python.org/pep-0649/
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-python-annotations-2026-10-20.yml
+    sha256: 1505e7e8a44cffeba09e0b7f7403d465941ac6c458a16f1844a7ce5ba6d67fb9
+use_policy:
+  action: read_and_store_selected_facts
+  status: restricted
+  basis: Публичные официальные источники. Разделы Copyright обоих PEP и History and License справочника
+    проверены 2026-10-20.
+  scope: Три выбранные единицы. Собственные формулировки фактов, ссылки и краткие выдержки.
+  checked_at: '2026-10-20'
+  restrictions:
+  - Полные первичные и нормализованные снимки только в исключённом из Git локальном слое.
+  - Не распространять полный текст справочника без выполнения условий PSF License Version 2.

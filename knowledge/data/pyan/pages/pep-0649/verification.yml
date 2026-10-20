@@ -1,0 +1,34 @@
+verification_contract_version: 1
+artifact: normalized.local.rst
+hash:
+  algorithm: sha256
+  value: 516cf05ef2da2674f8b447c78dbcd2bb300dae2e74e1588f5ae6f0596a46a092
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-10-20'
+  locator: https://raw.githubusercontent.com/python/peps/main/peps/pep-0649.rst
+  resolved_locator: https://raw.githubusercontent.com/python/peps/main/peps/pep-0649.rst
+  raw_sha256: 58948a3b8fb4b8a5cb55a12b2bf4719b7a3e89408e39daeeb48f4d3dc5be5e13
+verification:
+  method: acquisition_check
+  checked_at: '2026-10-20'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: fragment
+    fragment: Overview
+    metadata:
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: partial
+    metadata:
+      locator: verified
+      author: unverified
+      publication_date: unverified
+  evidence:
+  - Получен официальный исходник по HTTPS. Нормализованный фрагмент составлен из указанных разделов без
+    изменения текста. Утверждения и выдержки сверены с ним.
+  limitations:
+  - Проверены только выбранные разделы. Это не независимая проверка и не проверка всех деталей реализации.
