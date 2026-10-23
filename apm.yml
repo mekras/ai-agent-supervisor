@@ -17,4 +17,4 @@ scripts:
   evals: python tools/run-skill-evals.py
 devDependencies:
   apm:
-  - mekras/ai-dev-team#^0.29.5
+  - mekras/ai-dev-team#^0.29.8

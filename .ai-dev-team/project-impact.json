@@ -192,6 +192,8 @@
       "paths": [
         "tools/check-corpus-sources.py",
         "tools/rebuild-corpus-indexes.py",
+        "tools/corpus-queues.py",
+        "tools/corpus-queues-tests.py",
         "tools/subagent-policy-history.toml.sample",
         "tools/subagents.local.toml.sample"
       ],

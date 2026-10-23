@@ -6,7 +6,17 @@ priority: normal
 carrier_type: website
 source_kind: reference
 long_source: true
-adapter: manual
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Текущий агент открывает локатор и выбранные единицы доступным веб-инструментом. Обновляет
+    индекс только в пределах scope источника, сохраняет ограничения доступа и копирования. Не расширяет
+    выборку и не меняет прежние снимки. При полном проходе оставляет свидетельство по договору agent-index-evidence
+    контроллера kc-pipeline.
+  write_scope:
+  - knowledge/data/lsme/
+  allowed_operations:
+  - index
 storage_strategy: local_only
 processing_scope: selected_fragments
 retrieval_mode: on_demand
