@@ -275,6 +275,14 @@
             "docs/requirements/REQ-0040.md"
           ],
           "basis_explanation": "Ожидаемый порядок получения обязательного текста согласован пользователем и закреплён в REQ-0040. Учебный случай не подтверждает модельное исполнение или снижение частоты нарушений."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-hermes-personal-profile",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0041.md"
+          ]
         }
       ]
     },
@@ -2069,6 +2077,38 @@
           ],
           "required_claims": [],
           "finding_claims": []
+        },
+        {
+          "id": "ai-setup-project-result-hermes-no-project",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0041.md"
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-hermes-named-profile",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0041.md"
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-hermes-approval-unavailable",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0041.md"
+          ]
+        },
+        {
+          "id": "ai-setup-project-result-hermes-project-scope",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0041.md"
+          ]
         }
       ]
     },

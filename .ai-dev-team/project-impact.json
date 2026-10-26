@@ -209,6 +209,28 @@
         "tools/subagents.local.toml.sample"
       ],
       "checks": ["ai-audit-agent-rules"]
+    },
+    {
+      "id": "getting-started",
+      "title": "Руководство подключения и настройки Hermes",
+      "kind": "documentation",
+      "semantic_type": "пользовательское руководство установки и настройки Hermes с областью изменений",
+      "authority": "derived",
+      "representations": [
+        {
+          "path": "docs/hermes.md",
+          "role": "supporting"
+        },
+        {
+          "path": "README.md",
+          "role": "navigation"
+        }
+      ],
+      "checks": [
+        "ait-writing",
+        "ait-readme",
+        "ai-work-result-evaluation"
+      ]
     }
   ],
   "edges": [
@@ -406,6 +428,44 @@
       "facets": ["interface", "structure", "operation"],
       "rationale": "Манифест задаёт команды проверок, зависимости и состав поставки, используемые оснасткой.",
       "basis": true
+    },
+    {
+      "from": "concept",
+      "to": "getting-started",
+      "relation": "informs",
+      "facets": [
+        "semantic",
+        "interface"
+      ],
+      "rationale": "Назначение коллекции определяет пользовательское представление подключения.",
+      "basis": true
+    },
+    {
+      "from": "requirements",
+      "to": "getting-started",
+      "relation": "constrains",
+      "facets": [
+        "semantic",
+        "interface",
+        "quality",
+        "structure"
+      ],
+      "rationale": "Требования определяют область настройки и критерии пользовательского пути.",
+      "basis": true
+    },
+    {
+      "from": "skills",
+      "to": "getting-started",
+      "relation": "informs",
+      "facets": [
+        "semantic",
+        "interface",
+        "structure",
+        "operation",
+        "documentation"
+      ],
+      "rationale": "Изменения процедуры навыков требуют сверки руководства, которое их описывает.",
+      "basis": false
     }
   ]
 }
