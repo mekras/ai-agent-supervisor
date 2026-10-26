@@ -33,6 +33,17 @@
       "checks": ["ait-docs-concept"]
     },
     {
+      "id": "personas",
+      "title": "Персонажи пользователей",
+      "kind": "other",
+      "semantic_type": "рабочие модели пользователей, их целей и потребностей",
+      "authority": "supporting",
+      "representations": [
+        {"path": "docs/Персонажи/**", "role": "supporting"}
+      ],
+      "checks": ["ait-ux-design", "ait-writing"]
+    },
+    {
       "id": "requirements",
       "title": "Требования и критерии приёмки",
       "kind": "requirements",
