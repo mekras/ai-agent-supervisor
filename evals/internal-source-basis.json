@@ -4045,6 +4045,96 @@
           ],
           "required_claims": [],
           "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-closed-task-unmet-criterion",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-open-task-already-satisfied",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-partial-dependency-by-criteria",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-stale-evidence-current-state-unavailable",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-available-current-check",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-working-result-procedure-skipped",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-procedure-evidence-missing",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-procedure-done-result-defective",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-superseded-criterion",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-conflicting-current-bases",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
         }
       ]
     },
