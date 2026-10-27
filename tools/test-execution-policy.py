@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import stat
 import subprocess
 import sys
@@ -156,7 +157,105 @@ def qualify(core: Path, project: Path, output: Path, *, escalated: bool = False,
     output.write_text(content, encoding="utf-8")
 
 
+def check_posix_handoff_installer() -> None:
+    shells = [shutil.which(name) for name in ("sh", "dash", "ash", "ksh")]
+    shells = list(dict.fromkeys(shell for shell in shells if shell))
+    assert shells, "Для проверки установщика нужна POSIX-оболочка."
+    for shell in shells:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary).resolve()
+            skill = directory / "исходник с пробелами"
+            (skill / "scripts").mkdir(parents=True)
+            (skill / "assets").mkdir()
+            installer = skill / "scripts" / HANDOFF_INSTALLER.name
+            shutil.copy2(HANDOFF_INSTALLER, installer)
+            shutil.copy2(HANDOFF_SCRIPT, skill / "scripts/session-handoff")
+            shutil.copy2(HANDOFF_TEMPLATE, skill / "assets/handoff.md.template")
+            binaries = directory / "bin"
+            binaries.mkdir()
+            for name in ("dirname", "mkdir", "cp", "chmod", "rm"):
+                executable = shutil.which(name)
+                assert executable, name
+                (binaries / name).symlink_to(executable)
+            environment = {**os.environ, "PATH": str(binaries), "CDPATH": str(directory)}
+
+            def install(*arguments: str, cwd: Path = directory) -> subprocess.CompletedProcess[str]:
+                return subprocess.run(
+                    [shell, os.path.relpath(installer, cwd), *arguments],
+                    cwd=cwd, env=environment, text=True, encoding="utf-8",
+                    errors="replace", capture_output=True, check=False,
+                )
+
+            for option in ("-h", "--help"):
+                help_result = install(option)
+                assert help_result.returncode == 0, help_result.stderr
+                assert "Usage: install-session-handoff-tools" in help_result.stdout
+                assert not (directory / "tools").exists()
+
+            project = directory / "-проект с пробелами"
+            result = install(project.name)
+            assert result.returncode == 0, result.stderr
+            assert result.stdout == f"installed={project.name}/tools\n"
+            expected = {"session-handoff": (HANDOFF_SCRIPT, 0o755),
+                        "handoff.md.template": (HANDOFF_TEMPLATE, 0o644)}
+            for name, (source, mode) in expected.items():
+                destination = project / "tools" / name
+                assert destination.read_bytes() == source.read_bytes(), name
+                assert stat.S_IMODE(destination.stat().st_mode) == mode, name
+                destination.write_text("прежняя версия", encoding="utf-8")
+                destination.chmod(0o400)
+            repeated = install(str(project))
+            assert repeated.returncode == 0, repeated.stderr
+            for name, (source, mode) in expected.items():
+                destination = project / "tools" / name
+                assert destination.read_bytes() == source.read_bytes(), name
+                assert stat.S_IMODE(destination.stat().st_mode) == mode, name
+
+            default = install(cwd=project)
+            assert default.returncode == 0, default.stderr
+            assert default.stdout == f"installed={project}/tools\n"
+            direct = subprocess.run(
+                [str(installer), str(project)], env=environment, text=True,
+                encoding="utf-8", capture_output=True, check=False,
+            )
+            assert direct.returncode == 0, direct.stderr
+
+            outside = directory / "собственный файл"
+            outside.write_text("сохранить", encoding="utf-8")
+            destination = project / "tools/session-handoff"
+            destination.unlink()
+            destination.symlink_to(outside)
+            replaced = install(str(project))
+            assert replaced.returncode == 0, replaced.stderr
+            assert not destination.is_symlink()
+            assert outside.read_text(encoding="utf-8") == "сохранить"
+
+            destination.unlink()
+            destination.mkdir()
+            refused = install(str(project))
+            assert refused.returncode != 0
+            assert "installed=" not in refused.stdout
+            assert not list(destination.iterdir())
+
+            destination.rmdir()
+            (skill / "scripts/session-handoff").unlink()
+            missing = install(str(project))
+            assert missing.returncode != 0
+            assert "installed=" not in missing.stdout
+
+            shutil.copy2(HANDOFF_SCRIPT, skill / "scripts/session-handoff")
+            chmod = binaries / "chmod"
+            chmod.unlink()
+            chmod.write_text("#!/bin/sh\nexit 1\n", encoding="utf-8")
+            chmod.chmod(0o755)
+            denied = install(str(project))
+            assert denied.returncode != 0
+            assert "installed=" not in denied.stdout
+        print(f"Установщик передачи проверен через {shell}.")
+
+
 def main() -> int:
+    check_posix_handoff_installer()
     with tempfile.TemporaryDirectory() as temporary:
         directory = Path(temporary)
         core, project = write_policy(directory)
