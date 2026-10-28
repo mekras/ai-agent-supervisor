@@ -28,6 +28,7 @@
       "authority": "canonical",
       "representations": [
         {"path": "docs/concept.md", "role": "canonical"},
+        {"path": "docs/intro.webp", "role": "supporting"},
         {"path": "README.md", "role": "navigation"}
       ],
       "checks": ["ait-docs-concept"]

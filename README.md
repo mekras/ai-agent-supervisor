@@ -14,6 +14,8 @@
 - разбирать ошибки агентов и предотвращать их повторение;
 - создавать и развивать коллекции [APM](https://microsoft.github.io/apm/).
 
+![Как ai-agent-supervisor упорядочивает работу агентов ИИ](docs/intro.webp)
+
 ## Источники знаний
 
 - [Anthropic Engineering](https://www.anthropic.com/engineering)
