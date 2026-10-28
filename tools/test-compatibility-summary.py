@@ -95,16 +95,12 @@ def main() -> int:
     project = "project_and_instruction_setup"
 
     empty = render(registry())
-    assert "Коллекция развивает поддержку Codex CLI, Claude Code и Hermes Agent." in empty
-    assert "| Среда | Текущее состояние |" in empty
-    assert "| Codex CLI | Сводка Codex CLI. |" in empty
-    assert "| Claude Code | Сводка Claude Code. |" in empty
-    assert "| Hermes Agent | Сводка Hermes Agent. |" in empty
-    assert "Проверки поведения навыков в реальных средах пока не отражены в реестре." in empty
-    assert "Проверка установки через APM не подтверждает работу самих навыков." in empty
-    assert "[реестре поддержки](.apm/skills/ai-setup-apm/references/compatibility.yml)" in empty
-    for detail in ("В пакете", "Основания заявленного состояния", "Зарегистрированные проверки", "old", "behavior"):
-        assert detail not in empty
+    assert empty == (
+        "<!-- compatibility-summary:start -->\n"
+        "## Поддерживаемые среды\n\n"
+        "Коллекцию можно установить в Codex CLI, Claude Code и Hermes Agent.\n\n"
+        "<!-- compatibility-summary:end -->\n"
+    )
 
     installation_pass = check(installation, "codex_cli", "2026-09-20", "passed", "old")
     with_installation = render(registry([installation_pass]))
@@ -123,16 +119,19 @@ def main() -> int:
 
     runtime_pass = check(project, "codex_cli", "2026-09-23", "passed", "runtime")
     with_runtime = render(registry([runtime_pass]))
-    assert "В Codex CLI проверена правка AGENTS.md с помощью установленного навыка ai-agents-md-maintenance. Проверки остальных навыков и сред ещё предстоят." in with_runtime
+    assert with_runtime == empty
     hermes_pass = check(project, "hermes_agent", "2026-09-29", "passed", "hermes-runtime")
     with_hermes_runtime = render(registry([hermes_pass]))
-    assert "В локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Границы остальных проверок указаны в реестре." in with_hermes_runtime
+    assert with_hermes_runtime == empty
     with_both_runtime = render(registry([runtime_pass, hermes_pass]))
-    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Границы остальных проверок указаны в реестре." in with_both_runtime
+    assert with_both_runtime == empty
 
     failure = check(project, "codex_cli", "2026-09-22", "failed", "new-failure")
     history = render(registry([installation_pass, behavior_pass, failure]))
     assert history == empty
+    changed_description = registry([hermes_pass])
+    changed_description["environments"][2]["user_summary"] = "Испытания локального кандидата."
+    assert render(changed_description) == empty
 
     actual = MODULE["load_registry"](ROOT / ".apm/skills/ai-setup-apm/references/compatibility.yml")
     actual_check = actual["checks"][0]
@@ -210,16 +209,7 @@ def main() -> int:
         assert analysis["status"] == "partial"
         assert environment_name in analysis["gap"]
         assert "ai-work-result-evaluation" in analysis["gap"]
-    actual_rendered = render(actual)
-    assert "| Codex CLI | Предусмотрены установка и работа навыков." in actual_rendered
-    assert "| Hermes Agent | Версия 2.6.13 содержит установку и обнаружение локальных навыков. Сценарий правки AGENTS.md в Hermes проверен только на локальном кандидате." in actual_rendered
-    assert "В Codex CLI и локальном кандидате коллекции для Hermes Agent проверена правка AGENTS.md с помощью установленного навыка. Границы остальных проверок указаны в реестре." in actual_rendered
-    assert "Загрузка и доступность навыков внутри Hermes не проверялись" not in actual_rendered
-    assert ".apm/skills/ai-setup-subagents/references/operation-policy.md#L331-L342" not in actual_rendered
-    assert "Общая оценка результата через ai-work-result-evaluation доступна" not in actual_rendered
-    assert ".apm/skills/ai-setup-apm/references/compatibility-history.md#L5-L12" not in actual_rendered
-    assert "<br>" not in actual_rendered
-    assert "поставляется в коллекции" not in actual_rendered
+    assert render(actual) == empty
 
     missing_basis = registry()
     missing_basis["capabilities"][0]["declared_implementation"]["codex_cli"]["basis"] = []
@@ -256,20 +246,26 @@ def main() -> int:
         root = Path(temporary)
         registry_path = root / "compatibility.yml"
         readme_path = root / "README.md"
-        old_data = registry([installation_pass])
         new_data = registry([installation_pass, failure])
-        new_data["environments"][0]["user_summary"] = "Обновлённая сводка."
         registry_path.write_text(yaml.safe_dump(new_data, allow_unicode=True, sort_keys=False), encoding="utf-8")
-        readme_path.write_text(render(old_data), encoding="utf-8")
+        prefix = "# Коллекция\n\n"
+        suffix = "\n## Установка\n\nКоманда установки.\n"
+        readme_path.write_text(prefix + empty.replace(
+            "Коллекцию можно установить в Codex CLI, Claude Code и Hermes Agent.",
+            "| Среда | Текущее состояние |\n| Hermes Agent | Версия 2.6.13 |",
+        ) + suffix, encoding="utf-8")
         before = readme_path.read_bytes()
         result = run_cli("--check", "--registry", str(registry_path), "--readme", str(readme_path))
         assert result.returncode == 1
         assert readme_path.read_bytes() == before
         result = run_cli("--write", "--registry", str(registry_path), "--readme", str(readme_path))
         assert result.returncode == 0
-        assert "Обновлённая сводка." in readme_path.read_text(encoding="utf-8")
+        assert readme_path.read_text(encoding="utf-8") == prefix + empty + suffix
         result = run_cli("--check", "--registry", str(registry_path), "--readme", str(readme_path))
         assert result.returncode == 0
+        result = run_cli("--write", "--registry", str(registry_path), "--readme", str(readme_path))
+        assert result.returncode == 0
+        assert readme_path.read_text(encoding="utf-8") == prefix + empty + suffix
 
     print("Реестр и сводка поддержки проверены.")
     return 0
