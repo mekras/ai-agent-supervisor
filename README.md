@@ -423,7 +423,9 @@ apm install ai-agent-supervisor@mekras#2.6.31 --target codex
 Проверки разделены на две команды.
 
 Обязательная проверка не вызывает модель или сеть. Для проверки исходного
-репозитория нужны Python 3, Git, APM и пакет PyYAML:
+репозитория нужны Python 3.11 или новее, Git, APM и пакет PyYAML. Python ниже
+3.11 не подходит: тесты безусловно импортируют `tomllib`, который появился
+в [Python 3.11](https://docs.python.org/3/library/tomllib.html).
 
 ```bash
 apm run tests
