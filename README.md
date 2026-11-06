@@ -256,7 +256,8 @@ apm install ai-agent-supervisor@mekras#2.7.0 --target codex
 
 #### ai-session-handoff
 
-Готовит и проверяет передачу работы в новую сессию.
+Готовит запрос для новой сессии или другого агента: проблему, существенные
+факты и решения пользователя.
 
 [README навыка](.apm/skills/ai-session-handoff/README.md)
 

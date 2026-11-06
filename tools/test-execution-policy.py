@@ -438,7 +438,48 @@ def main() -> int:
         incomplete = run("check-handoff", "--input", str(incomplete_handoff))
         assert incomplete.returncode == 1
         complete_handoff = directory / "handoff.md"
-        handoff_content = HANDOFF_TEMPLATE.read_text(encoding="utf-8")
+        handoff_content = (
+            "# Передача задачи\n\n## Проблема и цель\n\n"
+            "В отчёте ошибка запуска выглядит как отрицательная оценка. "
+            "Нужно понимать причину результата.\n\n## Существенные факты\n\n"
+            "В case.json после завершения процесса с кодом 2 сохранён вердикт fail. "
+            "Причина пока не установлена.\n"
+        )
+        # Достаточный краткий пакет не требует запретов, следующего шага и оценок.
+        complete_handoff.write_text(handoff_content, encoding="utf-8")
+        short = run("check-handoff", "--input", str(complete_handoff))
+        assert short.returncode == 0, short.stderr
+        assert "handoff_status=ready" in short.stdout
+        assert "evidence_check=structure_only" in short.stdout
+        for section in ("Проблема и цель", "Существенные факты"):
+            section_start = handoff_content.index(f"## {section}") + len(f"## {section}")
+            section_end = handoff_content.find("\n## ", section_start)
+            if section_end < 0:
+                section_end = len(handoff_content)
+            for body in ("", "<заполнить>"):
+                complete_handoff.write_text(
+                    handoff_content[:section_start] + f"\n{body}\n" + handoff_content[section_end:], encoding="utf-8"
+                )
+                assert run("check-handoff", "--input", str(complete_handoff)).returncode == 1
+            complete_handoff.write_text(
+                handoff_content.replace(f"## {section}", f"## {section} дополнение"), encoding="utf-8"
+            )
+            assert run("check-handoff", "--input", str(complete_handoff)).returncode == 1
+        for section in ("Решения пользователя", "Предположения и наработки", "Состояние работы",
+                        "Открытые вопросы и риски", "Следующий шаг"):
+            for body in ("", "<заполнить>"):
+                complete_handoff.write_text(handoff_content + f"\n## {section}\n{body}\n", encoding="utf-8")
+                assert run("check-handoff", "--input", str(complete_handoff)).returncode == 1
+            complete_handoff.write_text(
+                handoff_content + f"\n## {section}\nСведения, нужные для продолжения.\n", encoding="utf-8"
+            )
+            assert run("check-handoff", "--input", str(complete_handoff)).returncode == 0
+        template_content = HANDOFF_TEMPLATE.read_text(encoding="utf-8")
+        complete_handoff.write_text(template_content.replace("<заполнить>", "Сведения о задаче."), encoding="utf-8")
+        assert run("check-handoff", "--input", str(complete_handoff)).returncode == 0
+        short_content = handoff_content
+        # Прежние пакеты продолжают приниматься вместе с отдельными оценками.
+        handoff_content = "# Пакет передачи\n"
         for section in (
             "Причина передачи",
             "Цель и критерии готовности",
@@ -450,7 +491,7 @@ def main() -> int:
             "Открытые вопросы и риски",
             "Следующий шаг",
         ):
-            handoff_content = handoff_content.replace(f"## {section}", f"## {section}\n\nЗаполнено.")
+            handoff_content += f"\n## {section}\n\nЗаполнено.\n"
         # Обычная передача не требует сведений о последующем результате.
         assert "Результат продолжения" not in handoff_content
         assert "Оценка экономии" not in handoff_content
@@ -475,6 +516,10 @@ def main() -> int:
         assert continuation_only.returncode == 0, continuation_only.stderr
         assert "handoff_continuation_status=continued" in continuation_only.stdout
         assert "handoff_economy_confirmed=" not in continuation_only.stdout
+        complete_handoff.write_text(short_content + continuation_content, encoding="utf-8")
+        short_continuation = run("check-handoff", "--input", str(complete_handoff))
+        assert short_continuation.returncode == 0, short_continuation.stderr
+        assert "handoff_continuation_status=continued" in short_continuation.stdout
         # Отсутствие обязательных сведений по-прежнему обнаруживается.
         complete_handoff.write_text(ordinary_content.replace("## Следующий шаг", "## Другое"), encoding="utf-8")
         missing_next_step = run("check-handoff", "--input", str(complete_handoff))
