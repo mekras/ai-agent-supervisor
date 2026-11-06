@@ -79,7 +79,7 @@ apm marketplace add mekras/apm-marketplace --ref master
 Выполните в корне Git-репозитория проекта:
 
 ```bash
-apm install ai-agent-supervisor@mekras#2.7.0 --target hermes
+apm install ai-agent-supervisor@mekras#2.8.0 --target hermes
 ```
 
 Чтобы Hermes загружал навыки этого проекта, предоставьте ему доверие.
