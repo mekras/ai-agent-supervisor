@@ -13,7 +13,7 @@
 
 В существующем диалоге с Hermes попросите:
 
-> Установи себе коллекцию навыков версии 2.7.0 через APM в текущий профиль
+> Установи себе коллекцию навыков версии 2.8.1 через APM в текущий профиль
 > Hermes из https://github.com/mekras/ai-agent-supervisor. Покажи имя профиля и
 > его каталог. Проверь, что можешь обнаружить и открыть навык
 > `ai-setup-project`.
@@ -79,7 +79,7 @@ apm marketplace add mekras/apm-marketplace --ref master
 Выполните в корне Git-репозитория проекта:
 
 ```bash
-apm install ai-agent-supervisor@mekras#2.8.0 --target hermes
+apm install ai-agent-supervisor@mekras#2.8.1 --target hermes
 ```
 
 Чтобы Hermes загружал навыки этого проекта, предоставьте ему доверие.
