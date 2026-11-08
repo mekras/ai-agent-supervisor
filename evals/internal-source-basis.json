@@ -1071,6 +1071,34 @@
           ],
           "required_claims": [],
           "finding_claims": []
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-available-rule-check-before-conclusion",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0029.md",
+            "docs/requirements/REQ-0030.md",
+            "docs/requirements/REQ-0031.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-rule-failure-analysis-result-useful-analysis-with-unknown-cause",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0029.md",
+            "docs/requirements/REQ-0030.md",
+            "docs/requirements/REQ-0031.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
         }
       ]
     },
@@ -4175,6 +4203,39 @@
             "docs/requirements/REQ-0025.md"
           ],
           "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-promise-without-execution",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-same-status-with-actual-execution",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-technical-report-without-practical-conclusion",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
         }
       ]
     },
@@ -5214,6 +5275,72 @@
           ],
           "required_claims": [],
           "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-implementation-without-working-use",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-human-communication-result-analysis-must-continue",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-human-communication-result-service-details-without-decision-value",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-human-communication-result-unlaunched-work-after-final",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-human-communication-result-running-process-without-return",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-human-communication-result-confirmed-background-return",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
+            "docs/requirements/REQ-0027.md",
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
         }
       ]
     },
