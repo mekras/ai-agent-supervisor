@@ -1595,6 +1595,30 @@
             "docs/requirements/REQ-0022.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-setup-apm-result-separate-development-install",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0044.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-single-install-without-conflict",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0044.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-separate-install-ownership-conflict",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0044.md"
+          ]
         }
       ]
     },
@@ -3948,6 +3972,18 @@
         {
           "claim_id": "SUBAGENT-AVAILABILITY-003",
           "statement_path": "evals/subagent-availability-basis.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-001",
+          "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-002",
+          "statement_path": "evals/human-communication-basis.yml"
+        },
+        {
+          "claim_id": "HUMAN-COMMUNICATION-004",
+          "statement_path": "evals/human-communication-basis.yml"
         }
       ],
       "cases": [
@@ -4281,6 +4317,120 @@
           ],
           "required_claims": [],
           "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-pipeline-metadata-only",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-pipeline-conflicting-permissions",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-requested-run-diagnostics",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-handoff-needs-evidence",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-evidence-without-new-files",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-output-form-technical-state",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
+          "id": "ai-work-result-evaluation-result-output-form-requested-file",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
         }
       ]
     },
@@ -5386,6 +5536,92 @@
             "docs/requirements/REQ-0039.md"
           ],
           "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-human-communication-result-pipeline-metadata-only",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-pipeline-conflicting-permissions",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-requested-run-diagnostics",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-handoff-needs-evidence",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-001",
+            "HUMAN-COMMUNICATION-002",
+            "HUMAN-COMMUNICATION-004"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-001",
+              "HUMAN-COMMUNICATION-002",
+              "HUMAN-COMMUNICATION-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-evidence-without-new-files",
+          "required_claims": [
+            "HUMAN-COMMUNICATION-003"
+          ],
+          "finding_claims": [
+            [
+              "HUMAN-COMMUNICATION-003"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0026.md"
+          ]
         }
       ]
     },
