@@ -38,6 +38,7 @@ SCRIPTS = [
     "tools/test-execution-policy.py",
     "tools/test-vcs-policy.py",
     "tools/test-codex-model-subagent.py",
+    "tools/test-eval-freshness.py",
     "tools/test-run-skill-evals.py",
     "tools/test-run-fixture-checks.py",
     "tools/test-setup-apm-collection.py",
@@ -63,6 +64,7 @@ SCRIPTS = [
     "tools/validate-skill-portability.py",
     "tools/validate-fixture-evals.py",
     "tools/run-fixture-checks.py",
+    "tools/eval_freshness.py",
     "tools/validate-python-artifacts.py",
 ]
 

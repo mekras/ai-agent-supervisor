@@ -79,6 +79,7 @@ setup:
       - tools/run-fixture-checks.py
       - tools/run-project-tests.py
       - tools/run-skill-evals.py
+      - tools/eval_freshness.py
       - tools/run-skill-script-contract-tests.py
       - tools/run-subagent-role
       - tools/sync-marketplace-manifest.py

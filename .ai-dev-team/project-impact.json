@@ -133,6 +133,7 @@
         {"path": "tools/run-fixture-checks.py", "role": "implementation"},
         {"path": "tools/run-project-tests.py", "role": "implementation"},
         {"path": "tools/run-skill-evals.py", "role": "implementation"},
+        {"path": "tools/eval_freshness.py", "role": "implementation"},
         {"path": "tools/run-skill-script-contract-tests.py", "role": "implementation"},
         {"path": "tools/run-subagent-role", "role": "implementation"},
         {"path": "tools/sync-marketplace-manifest.py", "role": "implementation"},
