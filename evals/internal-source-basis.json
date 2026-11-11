@@ -4236,6 +4236,51 @@
             "docs/requirements/REQ-0039.md"
           ],
           "basis_explanation": "Проверка применения действующих обязательств: вывод по фактическим свидетельствам, выполнение доступного продолжения и понятная передача результата. Случай с заданной траекторией проверяет оценку свидетельств. Случай с правкой требует фактического изменения и следа действий. Наличие сценария не подтверждает модельное исполнение или снижение частоты сбоя."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-recommendation-cleanup-residual",
+          "requirement_basis": [
+            "docs/requirements/REQ-0045.md",
+            "docs/requirements/REQ-0025.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-recommendation-polling-unjustified",
+          "requirement_basis": [
+            "docs/requirements/REQ-0045.md",
+            "docs/requirements/REQ-0025.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-recommendation-polling-justified",
+          "requirement_basis": [
+            "docs/requirements/REQ-0045.md",
+            "docs/requirements/REQ-0025.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-recommendation-bounded-step",
+          "requirement_basis": [
+            "docs/requirements/REQ-0045.md",
+            "docs/requirements/REQ-0025.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-work-result-evaluation-result-recommendation-formal-comparison",
+          "requirement_basis": [
+            "docs/requirements/REQ-0045.md",
+            "docs/requirements/REQ-0025.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
         }
       ]
     },
