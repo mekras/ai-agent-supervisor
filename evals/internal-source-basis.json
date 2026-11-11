@@ -5489,6 +5489,146 @@
           "basis_explanation": "REQ-0006.1 и REQ-0006.2: сохранение подтверждённых решений, особых ограничений и состояния согласованной работы. Изменение согласовано пользователем 2026-11-06. Проверяется критерий 9. Исполнение моделью не подтверждено."
         }
       ]
+    },
+    "ai-solution-discovery": {
+      "source_basis": [],
+      "cases": [
+        {
+          "id": "ai-solution-discovery-result-setup",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-update",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-collect",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-repeat",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-no-candidates-partial",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-invalid",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-unknown-vcs",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-remote",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-missing-concept",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md",
+            "docs/requirements/REQ-0022.md",
+            "docs/requirements/REQ-0007.md"
+          ],
+          "basis_explanation": "Поведение и критерии заданы двумя режимами REQ-0042, подтверждёнными пользователем. Сохраняются переносимый основной путь и политика VCS. Структурная проверка не подтверждает исполнение моделью."
+        },
+        {
+          "id": "ai-solution-discovery-result-cross-project-context",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md"
+          ],
+          "basis_explanation": "Уточнение пользователя: общий анализ, происхождение повторов, организационный контекст и вложенные проекты. Критерии 7–9 REQ-0042.2. Модельное исполнение не подтверждено."
+        },
+        {
+          "id": "ai-solution-discovery-result-unknown-origin",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md"
+          ],
+          "basis_explanation": "Уточнение пользователя: общий анализ, происхождение повторов, организационный контекст и вложенные проекты. Критерии 7–9 REQ-0042.2. Модельное исполнение не подтверждено."
+        },
+        {
+          "id": "ai-solution-discovery-result-nested-projects",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md"
+          ],
+          "basis_explanation": "Уточнение пользователя: общий анализ, происхождение повторов, организационный контекст и вложенные проекты. Критерии 7–9 REQ-0042.2. Модельное исполнение не подтверждено."
+        },
+        {
+          "id": "ai-solution-discovery-result-independent-proposals",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0042.md"
+          ],
+          "basis_explanation": "Уточнение пользователя отменяет обязательный общий вывод по всем проектам. Критерии 2 и 7 REQ-0042.2 сохраняют обоснованные предложения и сравнение источников. Самостоятельные решения не требуют единой закономерности. Модельное исполнение не подтверждено."
+        }
+      ]
     }
   }
 }
