@@ -112,11 +112,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 
 ### Навыки
 
-#### ai-agents-md-maintenance
+#### [ai-agents-md-maintenance](.apm/skills/ai-agents-md-maintenance/README.md)
 
 Обслуживает `AGENTS.md` и связанные инструкции для агентов.
-
-[README навыка](.apm/skills/ai-agents-md-maintenance/README.md)
 
 Примеры запросов:
 
@@ -128,12 +126,10 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Оптимизируй AGENTS.md.
 ```
 
-#### ai-audit-agent-rules
+#### [ai-audit-agent-rules](.apm/skills/ai-audit-agent-rules/README.md)
 
 Проверяет правила работы агента в одном источнике, связанном наборе или всей
 системе: применимость, конфликты, выполнимость и стоимость контекста.
-
-[README навыка](.apm/skills/ai-audit-agent-rules/README.md)
 
 Примеры запросов:
 
@@ -149,12 +145,10 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Проведи аудит инструкций и навыков проекта.
 ```
 
-#### ai-evidence-collection
+#### [ai-evidence-collection](.apm/skills/ai-evidence-collection/README.md)
 
 Собирает и проверяет недостающие основания перед изменением правил, навыков
 и других источников истины по запросу пользователя или сигналу `ai-work-control`.
-
-[README навыка](.apm/skills/ai-evidence-collection/README.md)
 
 Примеры запросов:
 
@@ -166,22 +160,18 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Проверь, хватает ли данных для изменения правил доступа.
 ```
 
-#### ai-human-communication
+#### [ai-human-communication](.apm/skills/ai-human-communication/README.md)
 
 Задаёт общие правила понятных сообщений и документов для человека, включая
 промежуточные сообщения, требования и записи решений. При проблеме предлагает
 решение или следующий шаг для его поиска. Учитывает запрошенные подробность
 и формат, результат поручения и уже полученные разрешения.
 
-[README навыка](.apm/skills/ai-human-communication/README.md)
-
-#### ai-model-analysis
+#### [ai-model-analysis](.apm/skills/ai-model-analysis/README.md)
 
 Составляет и обновляет сравнительный профиль доступных моделей и усилий для
 подагентов: качество, полные затраты и границы данных. Профиль сохраняется
 в личном файле и используется для последующего выбора моделей под задачи.
-
-[README навыка](.apm/skills/ai-model-analysis/README.md)
 
 Пример запроса:
 
@@ -189,11 +179,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Сравни доступные мне модели для подагентов и сохрани характеристики и выводы.
 ```
 
-#### ai-rule-failure-analysis
+#### [ai-rule-failure-analysis](.apm/skills/ai-rule-failure-analysis/README.md)
 
 Разбирает, почему агент нарушил правило или пропустил шаг.
-
-[README навыка](.apm/skills/ai-rule-failure-analysis/README.md)
 
 Примеры запросов:
 
@@ -205,12 +193,10 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Предложи, как предотвратить повторение пропущенного шага.
 ```
 
-#### ai-setup-apm
+#### [ai-setup-apm](.apm/skills/ai-setup-apm/README.md)
 
 Настраивает и проверяет пакет APM, проекции, установку и выпуск.
 Назначение, содержание, границы и качество навыка проверяет `ai-skill-development`.
-
-[README навыка](.apm/skills/ai-setup-apm/README.md)
 
 Примеры запросов:
 
@@ -222,12 +208,10 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Проверь настройки APM в проекте.
 ```
 
-#### ai-session-handoff
+#### [ai-session-handoff](.apm/skills/ai-session-handoff/README.md)
 
 Готовит запрос для новой сессии или другого агента: проблему, существенные
 факты и решения пользователя.
-
-[README навыка](.apm/skills/ai-session-handoff/README.md)
 
 Примеры запросов:
 
@@ -239,11 +223,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Проверь пакет продолжения задачи в новом диалоге.
 ```
 
-#### ai-setup-hooks
+#### [ai-setup-hooks](.apm/skills/ai-setup-hooks/README.md)
 
 Настраивает автоматическую проверку правил проекта.
-
-[README навыка](.apm/skills/ai-setup-hooks/README.md)
 
 Примеры запросов:
 
@@ -255,11 +237,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Добавь проверку инструкций агента в непрерывную интеграцию.
 ```
 
-#### ai-setup-project
+#### [ai-setup-project](.apm/skills/ai-setup-project/README.md)
 
 Настраивает проект для работы с агентами.
-
-[README навыка](.apm/skills/ai-setup-project/README.md)
 
 Примеры запросов:
 
@@ -271,11 +251,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Подготовь проект к использованию ИИ.
 ```
 
-#### ai-setup-subagents
+#### [ai-setup-subagents](.apm/skills/ai-setup-subagents/README.md)
 
 Настраивает политику подагентов, включая общие пользовательские настройки и проектные уточнения.
-
-[README навыка](.apm/skills/ai-setup-subagents/README.md)
 
 Примеры запросов:
 
@@ -287,12 +265,10 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Проверь настройки подагентов.
 ```
 
-#### ai-skill-development
+#### [ai-skill-development](.apm/skills/ai-skill-development/README.md)
 
 Создаёт, проверяет и улучшает навыки агентов, в том числе по опыту выполненных
 задач.
-
-[README навыка](.apm/skills/ai-skill-development/README.md)
 
 [Какую проверку выбрать](.apm/skills/ai-skill-development/README.md#какую-проверку-выбрать).
 
@@ -306,7 +282,7 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Улучши навык проверки проектных решений.
 ```
 
-#### ai-solution-discovery
+#### [ai-solution-discovery](.apm/skills/ai-solution-discovery/README.md)
 
 Ищет в правилах, навыках и других решениях выбранных локальных проектов
 предложения для текущего продукта. Список источников сохраняется локально
@@ -314,13 +290,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Сопоставляет источники между собой, учитывает происхождение повторов,
 организационную специфику и вложенные проекты.
 
-[Настройка источников и сбор предложений](.apm/skills/ai-solution-discovery/README.md)
-
-#### ai-usage-analysis
+#### [ai-usage-analysis](.apm/skills/ai-usage-analysis/README.md)
 
 Накапливает наблюдения о реальном применении ИИ по локальным сессиям.
-
-[README навыка](.apm/skills/ai-usage-analysis/README.md)
 
 Примеры запросов:
 
@@ -332,11 +304,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Проанализируй все локальные сессии по всем проектам.
 ```
 
-#### ai-work-control
+#### [ai-work-control](.apm/skills/ai-work-control/README.md)
 
 Проверяет задачу перед поручением агенту.
-
-[README навыка](.apm/skills/ai-work-control/README.md)
 
 Примеры запросов:
 
@@ -348,11 +318,9 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 Проведи полный контроль перед изменением правил проекта.
 ```
 
-#### ai-work-result-evaluation
+#### [ai-work-result-evaluation](.apm/skills/ai-work-result-evaluation/README.md)
 
 Проверяет результат работы агента.
-
-[README навыка](.apm/skills/ai-work-result-evaluation/README.md)
 
 Примеры запросов:
 
