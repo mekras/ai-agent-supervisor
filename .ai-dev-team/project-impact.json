@@ -233,9 +233,33 @@
         "ait-readme",
         "ai-work-result-evaluation"
       ]
+    },
+    {
+      "id": "maintenance-guide",
+      "title": "Руководство проверок и выпуска",
+      "kind": "documentation",
+      "semantic_type": "справочное руководство сопровождения исходного репозитория",
+      "authority": "derived",
+      "representations": [
+        {"path": "docs/maintenance.md", "role": "supporting"},
+        {"path": "README.md", "role": "navigation"}
+      ],
+      "checks": ["ait-writing", "ait-readme", "ai-work-result-evaluation"]
     }
   ],
   "edges": [
+    {
+      "from": "verification", "to": "maintenance-guide", "relation": "documents",
+      "facets": ["semantic", "interface", "structure", "operation", "quality"],
+      "rationale": "Руководство описывает команды и условия проверок и выпуска исходного репозитория.",
+      "basis": false
+    },
+    {
+      "from": "delivery", "to": "maintenance-guide", "relation": "documents",
+      "facets": ["interface", "structure", "operation"],
+      "rationale": "Изменения команд манифеста и способа поставки требуют сверки руководства сопровождения.",
+      "basis": false
+    },
     {
       "from": "decisions",
       "to": "evaluation-protocol",
