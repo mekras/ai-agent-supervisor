@@ -3,7 +3,12 @@
 
 from __future__ import annotations
 
+import os
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -21,6 +26,38 @@ def jobs(text: str) -> str:
     marker = "jobs:\n"
     assert marker in text
     return text.split(marker, 1)[1]
+
+
+def check_package_documentation(release: str) -> None:
+    # Исполняем настоящие команды копирования в изолированном каталоге пакета.
+    start = release.index('          mkdir -p "$candidate_dir"')
+    end = release.index('          python3 tools/sync-marketplace-manifest.py', start)
+    commands = "\n".join(line[10:] for line in release[start:end].splitlines())
+    bash = shutil.which("bash")
+    if bash is None:
+        raise AssertionError("Для проверки сборки документации требуется bash")
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        previous = root / "previous"
+        previous.mkdir()
+        (previous / "apm.yml").write_text("name: fixture\n", encoding="utf-8")
+        candidate = root / "candidate"
+        subprocess.run(
+            [bash, "-euc", commands], cwd=ROOT, check=True,
+            env={**os.environ, "candidate_dir": candidate.as_posix(),
+                 "package_dir": previous.as_posix()},
+        )
+        for base in (ROOT, candidate):
+            readme = read(base / "README.md")
+            targets = re.findall(r"\]\((docs/[^)#]+)(?:#[^)]*)?\)", readme)
+            assert {"docs/hermes.md", "docs/concept.md", "docs/intro.webp"} <= set(targets)
+            for target in targets:
+                path = base / target
+                assert path.is_file(), f"Недоступна ссылка README: {path}"
+                assert path.stat().st_size, f"Пустой документ: {path}"
+            assert (base / "docs/../README.md").is_file()
+        for target in targets:
+            assert (candidate / target).read_bytes() == (ROOT / target).read_bytes()
 
 
 def main() -> int:
@@ -48,6 +85,7 @@ def main() -> int:
     assert release.index("Опубликовать версию пакета") < release.index(
         "Проверить опубликованный пакет в изолированном проекте"
     )
+    check_package_documentation(release)
     print("Выпуск ожидает матрицу переносимости и проверяет опубликованный пакет отдельно.")
     return 0
 

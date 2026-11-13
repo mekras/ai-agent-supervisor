@@ -87,6 +87,8 @@ jobs:
           mkdir -p "$candidate_dir"
           cp -a .apm "$candidate_dir/.apm"
           cp README.md CHANGELOG.md LICENSE "$candidate_dir/"
+          mkdir -p "$candidate_dir/docs"
+          cp docs/hermes.md docs/concept.md docs/intro.webp "$candidate_dir/docs/"
           cp "$package_dir/apm.yml" "$candidate_dir/apm.yml"
           python3 tools/sync-marketplace-manifest.py \
             --source apm.yml \
