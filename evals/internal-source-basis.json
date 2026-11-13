@@ -5622,6 +5622,24 @@
           "requirement_basis": [
             "docs/requirements/REQ-0026.md"
           ]
+        },
+        {
+          "id": "ai-human-communication-documentation-ordinary-benefits",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Согласованный критерий точности с учётом назначения текста: обычное описание пользы после настройки и неподтверждённые гарантии оцениваются по разным основаниям."
+        },
+        {
+          "id": "ai-human-communication-documentation-unsupported-guarantee",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Согласованный критерий точности с учётом назначения текста: обычное описание пользы после настройки и неподтверждённые гарантии оцениваются по разным основаниям."
         }
       ]
     },
