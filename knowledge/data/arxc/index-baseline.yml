@@ -1,0 +1,29 @@
+contract_version: 1
+source_id: ARXC
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  ARXC--2601.20404v2:
+    fingerprint: 5a047cc6af23cb057b175f2edb9267e0947b2d3deb42e00fce470097c16d37f1
+  ARXC--2601.20404v2-full:
+    fingerprint: 2e95feba47a98715e09aa50edf8b9485ef7403fa49a6d8873b0ca599c481c5e7
+  ARXC--2602.11988v2:
+    fingerprint: 0a7d7f7269d50de5d70d52f6d0ae4c579c3e815383fde97d68a339c9790b150c
+  ARXC--2602.11988v2-full:
+    fingerprint: 0a2e9498117f6a6a399caff30917885e14b5595db2981642e03d0fcaf49bd18e
+  ARXC--2607.27250v1:
+    fingerprint: 9837177d74240cb60416dd5ad1a7930cbdc3c36185e18e3dfaa92e833147264e
+  ARXC--2607.27250v1-full:
+    fingerprint: c93c2715821eceaf1975d3e247d843dcfb4307fb60eff5e182a3a82158f82d4f
+observation:
+  scope: selected-arxiv-versions-pdf-v1
+  units:
+    ARXC--2601.20404v2:
+      locator: https://arxiv.org/abs/2601.20404v2
+      fingerprint: 8aaa07614b61ae47cc340289340263ec9f68a5cd9c34f7d730b11d7c38b49fea
+    ARXC--2602.11988v2:
+      locator: https://arxiv.org/abs/2602.11988v2
+      fingerprint: efa31841f8ada102cc488e080209762957d78ff1a22bd6d4cd73b6bb565b6bec
+    ARXC--2607.27250v1:
+      locator: https://arxiv.org/abs/2607.27250v1
+      fingerprint: fcf153dbd49b7faea48e9c0a83697942b1e5ecde89524421cf3b7a963fa57967

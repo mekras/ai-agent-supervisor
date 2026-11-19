@@ -1,0 +1,9 @@
+contract_version: 1
+source_id: GITH
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  GITH--core-hooks-path:
+    fingerprint: 7eb9233ce4d721b760b187209b31d9ad8a53f4b393f8d27b9dace74ae106eec2
+  GITH--githooks:
+    fingerprint: a0c69dd4f899d8baf67898346910ed5db992683f6f0350e36334dd61a8b1a6a5

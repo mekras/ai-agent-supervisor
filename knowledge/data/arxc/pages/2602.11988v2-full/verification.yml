@@ -1,0 +1,36 @@
+verification_contract_version: 1
+artifact: normalized.md
+hash:
+  algorithm: sha256
+  value: 6eaafa7334d9c6b9508f41ee404c5c47bad83ddfe98dc9d472b7fa8d1bf4eff7
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-11-19'
+  locator: https://arxiv.org/e-print/2602.11988v2
+  resolved_locator: https://arxiv.org/e-print/2602.11988v2
+  raw_sha256: de47f50b09616005ac6c90c8dd0782fcfb02471b5dc344f1daf5550c4d504d16
+verification:
+  method: acquisition_check
+  checked_at: '2026-11-19'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: full_text
+    metadata:
+    - locator
+    - author
+    - publication_date
+  result:
+    overall: verified
+    content_match: verified
+    scope_completeness: complete
+    metadata:
+      locator: verified
+      author: verified
+      publication_date: verified
+  evidence:
+  - Исходник LaTeX и PDF версии 2602.11988v2 получены по HTTPS с arxiv.org 2026-11-19. SHA-256 PDF efa31841f8ada102cc488e080209762957d78ff1a22bd6d4cd73b6bb565b6bec.
+  - Нормализованный текст построен из исходника LaTeX. Нумерация разделов, таблиц и рисунков сверена с PDF, словарь текста сверен с текстовым слоем PDF.
+  - Авторы, дата версии и лицензия CC BY 4.0 сверены со страницей https://arxiv.org/abs/2602.11988v2.
+  limitations:
+  - Самопроверка, не независимая. Изображения рисунков не перенесены, сверка значений на графиках не выполнялась.

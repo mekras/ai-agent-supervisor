@@ -1,0 +1,648 @@
+statement_contract_version: 2
+statements:
+- id: ARXC-097
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: На 10 репозиториях и 124 PR наличие AGENTS.md связано с меньшей медианной
+    длительностью работы агента (на 28,64 %) и меньшим числом выходных токенов (на
+    16,58 %) при сопоставимом выполнении задач.
+  excerpt: reduced output token consumption
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Abstract
+    unit_id: ARXC--2601.20404v2-full-abstract
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Сопоставимость выполнения задач проверена только выборочным ручным просмотром
+    (см. утверждение о метриках).
+- id: ARXC-098
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Авторы описывают контекстные файлы как «README для агентов», где записаны
+    архитектура, команды сборки, соглашения о коде и операционные ограничения.
+  excerpt: READMEs for agents
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. Introduction
+    unit_id: ARXC--2601.20404v2-full-s1-introduction
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-099
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: По обзору авторов, контекстные файлы активно сопровождаются и посвящены в
+    основном функциональным инструкциям о сборке, тестировании и реализации, а производительность
+    и безопасность в них затрагиваются редко.
+  excerpt: non-functional concerns such as performance and security are comparatively
+    rare
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. Introduction
+    unit_id: ARXC--2601.20404v2-full-s1-introduction
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: secondary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Пересказ чужой работы в обзоре литературы.
+- id: ARXC-100
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Авторы не знают работ, которые изолировали бы влияние добавления AGENTS.md
+    на эффективность агента в парном опыте на одних и тех же задачах и репозиториях.
+  excerpt: paired, same-task/same-repository evaluation design
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Background and Related Work
+    unit_id: ARXC--2601.20404v2-full-s2-background
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Оценка новизны на момент подачи работы, январь 2026 года.
+- id: ARXC-101
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Эффективность определена как вычислительные ресурсы на выполнение задачи и
+    измеряется числом токенов и временем до завершения.
+  excerpt: defined as the computational resources required to complete a development
+    task
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3. Study Design
+    unit_id: ARXC--2601.20404v2-full-s3-study-design
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-102
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: В опыте использован только агент OpenAI Codex с моделью gpt-5.2-codex. Проверка
+    на других агентах и семействах моделей отнесена к будущей работе.
+  excerpt: which we use consistently across all experiments
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.1 Agent Selection
+    unit_id: ARXC--2601.20404v2-full-s3-1-1-agent
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-103
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Из 132 репозиториев прежнего исследования отобраны 89 с единственным AGENTS.md
+    в корне. Модель gpt-oss-120b с ручной проверкой оставила 26 репозиториев, чьи
+    файлы содержат соглашения и практики, архитектуру и структуру проекта и описание
+    проекта. Из них случайно выбраны 10.
+  excerpt: Applying this constraint yields 89 repositories (from 132 total).
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.2 Repository Sampling and Inclusion Criteria
+    unit_id: ARXC--2601.20404v2-full-s3-1-2-sampling
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Отбор намеренно оставлял файлы с описанием архитектуры, структуры и назначения
+    проекта, поэтому вывод относится к таким файлам.
+- id: ARXC-104
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: 'Взято до 15 слитых PR на репозиторий: не больше 100 изменённых строк и 5
+    файлов, только изменения кода, созданные после появления AGENTS.md в репозитории.'
+  excerpt: PR modifies code files only
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.3 Pull Request Selection and Task Construction
+    unit_id: ARXC--2601.20404v2-full-s3-1-3-pr-selection
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Крупные изменения и рефакторинг в выборку не входили.
+- id: ARXC-105
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Каждая задача воспроизводит состояние репозитория перед слиянием PR вместе
+    с той версией AGENTS.md, которая была в этом коммите.
+  excerpt: Extract the `AGENTS.md` version that existed at that commit.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.4 Reconstructing Pre-PR Repository State
+    unit_id: ARXC--2601.20404v2-full-s3-1-4-pre-pr-state
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-106
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: 'Описание задачи для каждого PR генерирует локальная модель gpt-oss-120b по
+    диффу PR и дереву файлов: постановка, ожидаемое поведение, ограничения и критерии
+    приёмки в виде задачи GitHub.'
+  excerpt: a structured task description that resembles a GitHub issue
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.5 Issue Generation for PRs Lacking Usable Descriptions
+    unit_id: ARXC--2601.20404v2-full-s3-1-5-issue-generation
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Работа не сообщает о проверке того, что описание, построенное по диффу, не раскрывает
+    решение.
+- id: ARXC-107
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: 'Сравнивались два условия на одном снимке репозитория и одном описании задачи:
+    с корневым AGENTS.md и без него.'
+  excerpt: paired within-task design
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.6 Experimental Conditions
+    unit_id: ARXC--2601.20404v2-full-s3-1-6-conditions
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Работа не указывает число повторов запуска в каждом условии.
+- id: ARXC-108
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Запуски шли в изолированных Docker-контейнерах. Рабочая копия сбрасывалась
+    между задачами, кэши и промежуточные файлы не переиспользовались.
+  excerpt: was reused across tasks beyond the version-controlled repository contents
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.7 Running the Experiments
+    unit_id: ARXC--2601.20404v2-full-s3-1-7-running
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-109
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Измерялись входные, кэшированные входные и выходные токены и время до завершения
+    работы агента.
+  excerpt: Wall-clock time for the agent to produce its final output
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.8 Metrics
+    unit_id: ARXC--2601.20404v2-full-s3-1-8-metrics
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-110
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: limitation
+  text: Правильность изменений не оценивалась. Вручную просмотрены 50 случайных задач
+    только на то, что агент выдал непустое и нетривиальное изменение по задаче.
+  excerpt: is beyond the scope of this paper
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1.8 Metrics
+    unit_id: ARXC--2601.20404v2-full-s3-1-8-metrics
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-111
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: С AGENTS.md среднее время работы снизилось со 162,94 до 129,91 с (на 20,27
+    %), медианное — с 98,57 до 70,34 с (на 28,64 %). Различие значимо по критерию
+    Уилкоксона (p < 0,05).
+  excerpt: complete tasks faster than agents operating without it
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. Results
+    unit_id: ARXC--2601.20404v2-full-s4-results
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-112
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: 'Значимо снизились только выходные токены: среднее на 20,08 %, медиана на
+    16,58 %. Различия входных, кэшированных и суммарных токенов незначимы, а медианы
+    входных и суммарных токенов с AGENTS.md немного выше (на 3,41 % и 1,29 %).'
+  excerpt: with medians essentially unchanged or slightly higher
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. Results
+    unit_id: ARXC--2601.20404v2-full-s4-results
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Входные токены составляют основную часть суммарного расхода, поэтому снижение
+    полной стоимости работа не показывает.
+- id: ARXC-113
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: inference
+  text: Авторы считают, что снижение выходных токенов приходится в основном на немногие
+    очень дорогие запуски, а снижение времени отражает общий сдвиг к более быстрому
+    завершению.
+  excerpt: primarily reduces token usage in a small number of very high-cost runs
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. Results
+    unit_id: ARXC--2601.20404v2-full-s4-results
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-114
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: limitation
+  text: Эффекты могут зависеть от стохастичности агента, конкретной оснастки и модели
+    и свойств задач. Авторы называют необходимыми повторение на других репозиториях,
+    более крупных PR и других агентах и оценку правильности.
+  excerpt: observed effects may still depend on agent stochasticity
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5. Research Roadmap
+    unit_id: ARXC--2601.20404v2-full-s5-roadmap
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: current
+  corroboration: not_applicable
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-115
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: inference
+  text: Авторы предполагают, что выигрыш в эффективности возникает потому, что AGENTS.md
+    заранее описывает структуру репозитория и соглашения и сокращает исследовательскую
+    навигацию. Анализом трасс предположение не проверено.
+  excerpt: we speculate that some of the efficiency gains
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5. Research Roadmap
+    unit_id: ARXC--2601.20404v2-full-s5-roadmap
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: passed
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: conflict
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - Прямое измерение в 2602.11988v2 не показало, что контекстные файлы с обзором заметно
+    сокращают число шагов до первого обращения к нужному файлу (ARXC-028).
+  - 'Усиленная проверка выполнена основным агентом 2026-11-19 как самопроверка по
+    полным текстам трёх работ. Независимая проверка не выполнялась: запуск подагентов
+    в проекте отключён.'
+- id: ARXC-116
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: fact
+  text: Авторы планируют исследовать, как свойства файла (конкретность, организация,
+    наличие указаний о рабочем процессе) связаны с результатами агента.
+  excerpt: such as specificity, organization, and the inclusion of workflow guidance
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5. Research Roadmap
+    unit_id: ARXC--2601.20404v2-full-s5-roadmap
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+- id: ARXC-117
+  source_id: ARXC
+  item_id: ARXC--2601.20404v2-full
+  kind: observation
+  text: Данные трёх работ о стоимости работы с контекстными файлами расходятся. Здесь
+    Codex с файлом работал быстрее и тратил меньше выходных токенов без значимого
+    изменения суммарных токенов. В 2602.11988v2 стоимость и число шагов выросли примерно
+    на 20 % (ARXC-025). В 2607.27250v1 метрики Codex не изменились (ARXC-076).
+  excerpt: Providing an `AGENTS.md` file reduces generation cost.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. Results
+    unit_id: ARXC--2601.20404v2-full-s4-results
+    url: https://arxiv.org/abs/2601.20404v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: passed
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: conflict
+  limitations:
+  - 'Одна работа: только Codex с моделью gpt-5.2-codex, 10 репозиториев, небольшие
+    PR. Правильность решений не оценивалась, воспроизводимость в корпусе не проверялась.'
+  - Полный текст хранится локально, в утверждении приведена только короткая цитата.
+  - 'Работы различаются агентами и моделями, размером задач и мерой стоимости: время
+    и выходные токены здесь, стоимость в долларах и шаги у Gloaguen и соавторов, вызовы
+    и токены у Khatri.'
+  - 'Усиленная проверка выполнена основным агентом 2026-11-19 как самопроверка по
+    полным текстам трёх работ. Независимая проверка не выполнялась: запуск подагентов
+    в проекте отключён.'

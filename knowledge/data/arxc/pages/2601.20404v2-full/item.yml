@@ -1,0 +1,24 @@
+id: "ARXC--2601.20404v2-full"
+source_id: "ARXC"
+path: "pages/2601.20404v2-full"
+title: "On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents (полный текст, локально)"
+locator: "https://arxiv.org/abs/2601.20404v2"
+url: "https://arxiv.org/abs/2601.20404v2"
+access: "Публичная страница выбранной версии. Полный текст хранится только локально."
+status: "normalized"
+workflow_stage: source_checked
+version_date: "2026-03-30"
+checked_at: "2026-11-19"
+provenance:
+  origin: external_material
+  locator: "https://arxiv.org/abs/2601.20404v2"
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-arxc-2601-local-2026-11-19.yml
+    sha256: "d9e771f676f0bb02b7d06ef99f5b260a238a3bed83adb6b65dfdc0d3f8db2004"
+files:
+  local:
+    - raw.local.pdf
+    - source.local.tar.gz
+    - normalized.local.md
+known_limitations: ["Полный текст только в локальном слое: в Git утверждения и короткие цитаты. Изображение рисунка не перенесено. Воспроизводимость эксперимента не проверялась."]

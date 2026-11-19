@@ -1,0 +1,34 @@
+verification_contract_version: 1
+artifact: normalized.local.md
+hash:
+  algorithm: sha256
+  value: 051e78355adcbb2918c1613cf84cc102a53d43154bcb64905c9f61ad272f23b8
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-11-19'
+  locator: https://arxiv.org/e-print/2601.20404v2
+  resolved_locator: https://arxiv.org/e-print/2601.20404v2
+  raw_sha256: 856a0a3f41e64d2f6852fb6f58ae06c74b7809878e81f04a8b0569bf75061b15
+verification:
+  method: acquisition_check
+  checked_at: '2026-11-19'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: full_text
+    metadata:
+    - locator
+    - author
+  result:
+    overall: verified
+    content_match: verified
+    scope_completeness: complete
+    metadata:
+      locator: verified
+      author: verified
+      publication_date: unverified
+  evidence:
+  - Исходник LaTeX и PDF версии 2601.20404v2 получены по HTTPS с arxiv.org 2026-11-19. SHA-256 PDF 8aaa07614b61ae47cc340289340263ec9f68a5cd9c34f7d730b11d7c38b49fea совпадает с отпечатком наблюдения источника.
+  - Нормализованный текст построен из исходника LaTeX и прочитан целиком.
+  limitations:
+  - Самопроверка, не независимая. Полный текст хранится локально и недоступен в другой среде без повторного получения.

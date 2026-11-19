@@ -283,6 +283,36 @@
           "requirement_basis": [
             "docs/requirements/REQ-0041.md"
           ]
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-check-run-conditions",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0047.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0047. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-check-without-targeted-alternative",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0047.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0047. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
@@ -1175,6 +1205,10 @@
         {
           "claim_id": "APM-VALIDATION-SCOPE-001",
           "statement_path": "evals/skill-publication-basis.yml"
+        },
+        {
+          "claim_id": "COMPARISON-INFORMATIVE-TASKS-001",
+          "statement_path": "evals/skill-publication-basis.yml"
         }
       ],
       "cases": [
@@ -1675,6 +1709,20 @@
           "requirement_basis": [
             "docs/requirements/REQ-0046.md"
           ]
+        },
+        {
+          "id": "ai-setup-apm-result-comparison-informative-tasks",
+          "required_claims": [
+            "COMPARISON-INFORMATIVE-TASKS-001",
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "COMPARISON-INFORMATIVE-TASKS-001",
+              "ASKL-004"
+            ]
+          ],
+          "basis_explanation": "Принятое правило протокола оценки задаёт отбор информативных задач. ASKL-004 обосновывает устройство проверочного случая."
         }
       ]
     },

@@ -30,7 +30,7 @@ concepts:
 
   - id: agent-instruction
     primary: "проектная инструкция агента"
-    forms: ["AGENTS.md", "agent instruction"]
+    forms: ["AGENTS.md", "agent instruction", "context file"]
     definition: "Постоянное операционное правило проекта, которое агент читает до работы и применяет в пределах своей области действия."
     boundaries:
       includes:
@@ -49,8 +49,8 @@ concepts:
         target: "agent-skill"
     synonyms_by_source:
       CODX: ["AGENTS.md", "custom instructions"]
-      ARXC: ["AGENTS.md"]
-    reconciliation: "Термин описывает назначение проектного правила, а не конкретный формат файла: `AGENTS.md` — основная форма его записи в этом проекте."
+      ARXC: ["AGENTS.md", "context file", "CLAUDE.md"]
+    reconciliation: "Термин описывает назначение проектного правила, а не конкретный формат файла: `AGENTS.md` — основная форма его записи в этом проекте. В исследованиях ARXC «context file» обозначает файл уровня репозитория (`AGENTS.md`, `CLAUDE.md`), который оснастка подаёт агенту, и соответствует этому понятию."
     collisions:
       - "Не путать с README: README объясняет проект человеку, а проектная инструкция направляет действия агента."
 

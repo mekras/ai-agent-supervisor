@@ -1,0 +1,11 @@
+contract_version: 1
+source_id: XEM7
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  XEM7--article:
+    fingerprint: d0717ab3eb08e6105f3e5027fde56ad25724bbcf426fd88ceb341a0ce430c4f9
+  XEM7--article-body:
+    fingerprint: 44288880b9bf24da93e53e046129c30f131d9d35cf8c7ea6344df44d27e98032
+  XEM7--status:
+    fingerprint: 23812a6c1779344e29a33697f6105f526dd22db5d706a32df4c30694b67f41c0

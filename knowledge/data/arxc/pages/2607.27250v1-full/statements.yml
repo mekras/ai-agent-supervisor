@@ -1,0 +1,1249 @@
+statement_contract_version: 2
+statements:
+- id: ARXC-057
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Контролируемый эксперимент на двух агентах (Claude Code и Codex), 17 задачах
+    из 3 репозиториев и 288 оценённых запусках не выявил влияния способа подачи контекста
+    на правильность решения. Эффект ограничен 10–15 п. п. тестом эквивалентности.
+  excerpt: bounded to ≤10–15pp via equivalence testing
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Abstract
+    unit_id: ARXC--2607.27250v1-full-abstract
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Граница эквивалентности описательная и не подтверждена достаточной мощностью (ARXC-074).
+  - Согласуется с отсутствием значимого выигрыша от файлов разработчиков в 2602.11988v2
+    (ARXC-026), но pdm и opshin входят в CTXbench, поэтому подтверждение не считается
+    независимым.
+- id: ARXC-058
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Работа называет данные о пользе контекстных файлов противоречивыми: Lulla
+    и соавторы сообщают о выигрыше в эффективности, Gloaguen и соавторы — об отсутствии
+    значимого влияния на выполнение задач. Её цель — примирить эти результаты, меняя
+    способ подачи контекста на агентах двух семейств.'
+  excerpt: Yet empirical evidence is contradictory.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. Introduction
+    unit_id: ARXC--2607.27250v1-full-s1-introduction
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-059
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: observation
+  text: Работа описывает исследование Gloaguen и соавторов (2602.11988) как исследование
+    агентов семейства Claude. Сама статья Gloaguen и соавторов сравнивает четыре пары
+    агента и модели, включая Codex с GPT-5.2 и GPT-5.1 mini и Qwen Code (см. ARXC-021).
+  excerpt: Gloaguen et al. (2026) run a larger naturalistic study with Claude-family
+    agents
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Related Work
+    unit_id: ARXC--2607.27250v1-full-s2-related-work
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: passed
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: conflict
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Расхождение влияет на предложенное в работе объяснение противоречий через различие
+    семейств агентов (ARXC-080, ARXC-086).
+  - 'Усиленная проверка выполнена основным агентом 2026-11-19 как самопроверка: сверены
+    разделы 1 и 2 работы 2607.27250v1 с разделом 4.1 версии v2 и разделом «Coding
+    Agents» версии v1 работы 2602.11988. Обе версии сравнивают четыре агента. Независимая
+    проверка не выполнялась: запуск подагентов в проекте отключён.'
+- id: ARXC-060
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Модели неравномерно используют сведения в длинном контексте и недоиспользуют
+    материал из середины. Работа считает это важным для вопроса, учитывается ли постоянно
+    подаваемый AGENTS.md в системном промпте.
+  excerpt: often underusing material placed mid-context
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Related Work
+    unit_id: ARXC--2607.27250v1-full-s2-related-work
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: secondary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Пересказ чужой работы в обзоре литературы.
+- id: ARXC-061
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'AGENTS.md отличается от извлечения контекста по запросу (RAG): это статический
+    слой контекста, курируемый автором и ортогональный извлечению.'
+  excerpt: a *static, author-curated* context layer orthogonal to retrieval
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Related Work
+    unit_id: ARXC--2607.27250v1-full-s2-related-work
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-062
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Обычная проверка нулевой гипотезы не подтверждает отсутствие эффекта. Для
+    ограниченного утверждения об эквивалентности применяются два односторонних теста
+    (TOST), в оценке агентов они редки.
+  excerpt: Traditional null-hypothesis testing cannot confirm the absence of an effect
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Related Work
+    unit_id: ARXC--2607.27250v1-full-s2-related-work
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-063
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Из примерно 40 репозиториев отбирались те, у которых ровно один корневой AGENTS.md
+    без конкурирующих инструкций, качество файла не ниже Good по рубрике, посильная
+    настройка и только Python. Выбраны pdm (файл на 477 слов), firebase-admin-python
+    (1236 слов) и opshin (248 слов).
+  excerpt: exactly one root `AGENTS.md` with no competing instruction stack
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Task Selection and Evaluation
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-064
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Задачи взяты из слитых PR: описание PR служит заданием, тесты PR — эталонной
+    проверкой. Чтобы избежать задач только у пола и потолка, Codex прогнал отбор 84
+    кандидатов и добавил 4 пограничные задачи. Итог — 17 задач для Codex и 15 для
+    Claude.'
+  excerpt: we ran a Codex screening sweep over 84 candidate tasks
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Task Selection and Evaluation
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Пограничный диапазон откалиброван на Codex, а не на Claude.
+- id: ARXC-065
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Задача засчитывается, только если проходят все эталонные тесты, которых агент
+    не видит. Запуски изолированы: исходящая сеть закрыта, удалённые репозитории удалены,
+    push и commit запрещены, будущая история Git обрезана.'
+  excerpt: Future commit history is pruned so the agent cannot read gold solutions
+    from `git log`.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Task Selection and Evaluation
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-066
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Сравнивались три стратегии: NONE без контекста, ALWAYS_ON с полным AGENTS.md
+    в системном промпте на каждом ходе и SELECTIVE с тематическими wiki-файлами, которые
+    агент читает по подсказке. Во всех условиях сам AGENTS.md удалён из рабочей копии.'
+  excerpt: In all conditions, the `AGENTS.md` file itself is removed from the workspace
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.3 Independent Variable
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-067
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: Только для opshin корпус SELECTIVE совпадает с AGENTS.md. Для pdm и firebase
+    это автоматически созданная wiki примерно в 10 и 18 раз больше, поэтому SELECTIVE
+    смешивает канал подачи и объём контекста.
+  excerpt: roughly 10× and 18× the words of the `AGENTS.md`, respectively
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.3 Independent Variable
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - 'Размер AGENTS.md в opshin указан в работе по-разному: 248 слов в разделе 3.2
+    и 256 слов в разделе 3.3.'
+- id: ARXC-068
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Claude Code (claude-sonnet-4-6) получал контекст через `--append-system-prompt`
+    с лимитом 6 долларов на запуск. Codex CLI (gpt-5.5) получал контекст в начале
+    пользовательского промпта, так как флага системного промпта нет, с лимитом 120
+    ходов. Различие каналов признано смешивающим фактором.
+  excerpt: Context injected by prepending to the user prompt (Codex lacks a system-prompt
+    flag)
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.4 Agents
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Результаты привязаны к названным версиям моделей.
+- id: ARXC-069
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Переносимыми между агентами считаются число вызовов инструментов, время и
+    выходные токены. Ходы исключены, потому что Codex отправляет ровно одно событие
+    `turn.completed` за сессию независимо от объёма работы.
+  excerpt: Codex emits exactly 1 `turn.completed` event per session regardless of
+    work performed
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.5 Efficiency Metrics
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-070
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Единица анализа — задача, а не повтор: три повтора усредняются. Применены
+    перестановочный омнибус-тест, парные тесты Уилкоксона с поправкой Холма — Бонферрони,
+    TOST на кластерном бутстрепе и моделирование мощности методом Монте-Карло.'
+  excerpt: The unit of analysis is the *task* (not the repeat).
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.6 Statistical Analysis
+    unit_id: ARXC--2607.27250v1-full-s3-method
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-071
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Доля решённых задач по стратегиям NONE, ALWAYS_ON и SELECTIVE: у Claude 53,3
+    %, 55,6 % и 55,6 %, у Codex 58,8 %, 56,9 % и 52,9 %. Омнибус-тест значимого эффекта
+    не показал (p = 1,00 и 0,66).'
+  excerpt: '| NONE | 53.3% (24/45) | 58.8% (30/51) |'
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.1 Correctness
+    unit_id: ARXC--2607.27250v1-full-s4-1-correctness
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Согласуется с отсутствием значимого выигрыша от файлов разработчиков в 2602.11988v2
+    (ARXC-026), но pdm и opshin входят в CTXbench, поэтому подтверждение не считается
+    независимым.
+- id: ARXC-072
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: Омнибус-тест здесь заведомо маломощен из-за задач у пола и потолка. Основной
+    вывод об отсутствии эффекта опирается на подмножество пограничных задач.
+  excerpt: We note this test is intrinsically low-power here
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.1 Correctness
+    unit_id: ARXC--2607.27250v1-full-s4-1-correctness
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-073
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'На четырёх пограничных для Codex задачах NONE дал 58 %, а ALWAYS_ON и SELECTIVE
+    — по 42 %: подача контекста не помогла и там, где эффект мог проявиться.'
+  excerpt: NONE achieves 58% vs. ALWAYS_ON 42% and SELECTIVE 42%
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.1 Correctness
+    unit_id: ARXC--2607.27250v1-full-s4-1-correctness
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Всего четыре задачи.
+- id: ARXC-074
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: 'Границы эквивалентности (меньше 10 п. п. для Claude и 15 п. п. для Codex)
+    описательны и не являются утверждением эквивалентности с достаточной мощностью:
+    минимально обнаружимый эффект больше 30 п. п.'
+  excerpt: not a powered equivalence claim given n=15–17 clusters
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.1 Correctness
+    unit_id: ARXC--2607.27250v1-full-s4-1-correctness
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-075
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: У Claude стратегия SELECTIVE значимо снижала число токенов создания кэша по
+    сравнению с NONE (11 из 11 задач, p с поправкой Холма = 0,012). Работа объясняет
+    это механикой подачи, а не ростом способностей агента.
+  excerpt: SELECTIVE uses significantly less cache-creation tokens than NONE
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.2 Efficiency
+    unit_id: ARXC--2607.27250v1-full-s4-2-efficiency
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Для pdm и firebase эффект смешан с другим корпусом wiki.
+- id: ARXC-076
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'У Codex все метрики эффективности одинаковы для всех стратегий: вызовы инструментов,
+    выходные токены и время различаются не больше чем на 3,8 %.'
+  excerpt: All efficiency metrics are flat across strategies
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.2 Efficiency
+    unit_id: ARXC--2607.27250v1-full-s4-2-efficiency
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-077
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'В opshin AGENTS.md предупреждает, что полный набор тестов идёт больше 20
+    минут. С этим контекстом Claude реже запускал весь набор вслепую (3,67, 2,44 и
+    1,67 раза на ячейку для NONE, ALWAYS_ON и SELECTIVE), и время работы снизилось
+    примерно на 24 %. Эффект поисковый: выявлен постфактум, только у Claude и только
+    в opshin.'
+  excerpt: Stripped of the `AGENTS.md` warning, the agent repeatedly runs the slow
+    full suite; given the warning, it runs targeted tests instead.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.2 Efficiency
+    unit_id: ARXC--2607.27250v1-full-s4-2-efficiency
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - n = 4–5 задач, статистическая значимость не достигнута.
+- id: ARXC-078
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Codex стабильно экономнее Claude по вызовам, времени и токенам при немного
+    меньшей доле успеха. Сравнение между агентами только качественное из-за различий
+    канала подачи, токенизатора и учёта токенов.
+  excerpt: Codex is consistently leaner
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.2 Efficiency
+    unit_id: ARXC--2607.27250v1-full-s4-2-efficiency
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-079
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Трудность задачи зависит от агента: доли успеха по задачам коррелируют (Спирмен
+    ρ = 0,75), но из 15 общих задач 6 пограничны только для одного агента и 6 по-разному
+    упираются в пол или потолок. По оценке работы, примерно для 40 % задач эффект
+    контекста мог бы проявиться только у одного из агентов. Поэтому задачи для абляций
+    нужно отбирать отдельно для каждого агента.'
+  excerpt: ablation studies must screen tasks *per agent*
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Agent-Specific Borderline Tasks
+    unit_id: ARXC--2607.27250v1-full-s4-3-borderline
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-080
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: inference
+  text: 'Работа выдвигает непроверенную гипотезу: прежние исследования могли получить
+    разные эффекты, потому что их задачи попали в пограничные диапазоны разных агентов.'
+  excerpt: a hypothesis we cannot test directly without their exact task sets
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Agent-Specific Borderline Tasks
+    unit_id: ARXC--2607.27250v1-full-s4-3-borderline
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Гипотеза опирается на описание Gloaguen и соавторов как исследования агентов Claude,
+    что расходится с самой статьёй (ARXC-059).
+- id: ARXC-081
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Классификатор трудоёмкости по числу ходов (порог 30) ошибочно отнёс все задачи
+    Codex к тривиальным и отбросил 8 трудоёмких. Переход на число вызовов инструментов
+    их вернул: метрики по ходам непереносимы между архитектурами агентов.'
+  excerpt: turn-based metrics are non-portable across agent architectures
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.4 Classifier Portability Lesson
+    unit_id: ARXC--2607.27250v1-full-s4-4-classifier
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-082
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: При 17 задачах и трёх повторах эффект в 30 п. п. обнаруживается лишь в 57
+    % случаев. Для 10 п. п. с мощностью 80 % нужно примерно 120–200 задач. Дополнительные
+    повторы почти не помогают, масштабировать нужно число задач.
+  excerpt: scaling requires more *tasks*, not more repeats
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.5 Power Analysis
+    unit_id: ARXC--2607.27250v1-full-s4-5-power
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-083
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Разбор почти решённых задач (510, 907, 554, 593) показал недостаток точности
+    реализации, выбора архитектурного паттерна, точной спецификации поведения и рассуждения
+    о типах. Ни один провал не объясняется отсутствием факта, который мог бы дать
+    AGENTS.md.
+  excerpt: None of these failures isolate a knowable-fact gap that an `AGENTS.md`
+    could fill.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5.1 Why the Null Holds
+    unit_id: ARXC--2607.27250v1-full-s5-1-triage
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Разбор четырёх задач, классификация пробелов выполнена автором.
+- id: ARXC-084
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: В заранее зарегистрированной проверке две почти решённые задачи прогнаны по
+    всем стратегиям на обоих агентах (36 ячеек). Настоящий AGENTS.md ни разу не превратил
+    почти решённую задачу в решённую. На задаче 907 Claude решил 2 из 3 без контекста,
+    1 из 3 с ALWAYS_ON и 0 из 3 с SELECTIVE.
+  excerpt: across both agents the real `AGENTS.md` never converts a near-miss to a
+    pass
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5.2 Manipulation-Validity Probe
+    unit_id: ARXC--2607.27250v1-full-s5-2-probe
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Тренд по задаче 907 — одна задача с тремя повторами.
+- id: ARXC-085
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: Оценки качества файлов (Excellent для firebase, Good для pdm и opshin) выставлены
+    по собственной рубрике автора, а не внешним аудитом.
+  excerpt: This is our own rubric assessment, not a third-party audit.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5.2 Manipulation-Validity Probe
+    unit_id: ARXC--2607.27250v1-full-s5-2-probe
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-086
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: inference
+  text: 'Работа предлагает гипотезу примирения: контекстные файлы не улучшают правильность
+    ни у одного семейства агентов, а сообщённый Lulla и соавторами выигрыш эффективности,
+    вероятно, отражает механику подачи контекста. Рост стоимости больше чем на 20
+    % у Gloaguen и соавторов она считает проявлением той же механики с другим знаком.'
+  excerpt: likely reflects the *mechanical* cost of context injection
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5.3 Reconciling Prior Work
+    unit_id: ARXC--2607.27250v1-full-s5-3-reconciling
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: medium
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - 'Механизм объяснён не полностью: больший промпт увеличивает число токенов, а Lulla
+    и соавторы сообщают о снижении времени и выходных токенов.'
+  - Опирается на описание семейств агентов, расходящееся с ARXC-021.
+- id: ARXC-087
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Практический вывод работы: в её выборке общие контекстные файлы не повышают
+    правильность, и усилия на них могут окупаться хуже, чем декомпозиция задач, инструменты
+    или промпты с примерами. Контекст всё же может оправдывать себя снижением затрат
+    и задержек, например предупреждением о медленных тестах.'
+  excerpt: context may still earn its place on cost and latency grounds
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5.4 Practitioner Implications
+    unit_id: ARXC--2607.27250v1-full-s5-4-implications
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Это рекомендация автора в пределах трёх Python-репозиториев.
+- id: ARXC-088
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: Работа не исключает пользы контекста для других языков, крупных репозиториев
+    и специально написанного под задачу контекста.
+  excerpt: We cannot rule out benefits for other languages, larger repositories, or
+    purpose-built task-specific context
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5.4 Practitioner Implications
+    unit_id: ARXC--2607.27250v1-full-s5-4-implications
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: current
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-089
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'В заключении оба сохранившихся эффекта эффективности названы узкими и процессными:
+    меньший след кэша у SELECTIVE для Claude и меньше слепых полных прогонов тестов
+    в репозитории, где файл предупреждает об их стоимости. Ни один из них не меняет
+    правильность.'
+  excerpt: neither changes the correctness outcome
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 6. Conclusion
+    unit_id: ARXC--2607.27250v1-full-s6-conclusion
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-090
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: ALWAYS_ON сильнее естественного сценария, в котором агент один раз читает
+    файл из рабочей копии. Вывод, что естественное обнаружение тоже не поможет, —
+    умозаключение, а не измерение.
+  excerpt: this is an inference, not a direct measurement
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Limitations
+    unit_id: ARXC--2607.27250v1-full-limitations
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-091
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: Результаты относятся к снимкам моделей claude-sonnet-4-6 и gpt-5.5 и могут
+    измениться с обновлением моделей. Анализ чувствительности к запуску части повторов
+    Claude на локальной машине вывод не меняет.
+  excerpt: agent behavior, and hence the null, may shift as these models are updated
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Limitations
+    unit_id: ARXC--2607.27250v1-full-limitations
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-092
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: limitation
+  text: Открытым остаётся вопрос, поможет ли контекст, специально написанный под задачу
+    и содержащий факт, который агент заведомо не может вывести сам.
+  excerpt: Whether *purpose-built, task-specific* context (a fact the agent provably
+    cannot infer) would help remains an open question for future work.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Limitations
+    unit_id: ARXC--2607.27250v1-full-limitations
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: current
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-093
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Исследование не использует людей и персональные данные. Агенты — объект изучения,
+    а при подготовке текста и каркаса кода автор пользовался ИИ-ассистентом и проверял
+    результаты по опубликованным данным.
+  excerpt: the authors used an AI assistant for drafting support and code scaffolding
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Ethics Statement
+    unit_id: ARXC--2607.27250v1-full-ethics
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-094
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'Оснастка эксперимента строит эшелонированную защиту от изменения внешнего
+    состояния: блокировка DNS GitHub, удаление удалённых репозиториев, запрет push,
+    commit и remote через PATH-обёртки и `--disallowedTools`, удаление токенов GitHub
+    из окружения и обрезка будущей истории Git.'
+  excerpt: Our harness implements defense-in-depth to prevent the agent from modifying
+    external state
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: A. Experimental Harness Details
+    unit_id: ARXC--2607.27250v1-full-appA-harness
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-095
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: 'По задачам opshin число слепых полных прогонов тестов без контекста и с контекстом:
+    595 — 2,50 и 0,75, 605 — 1,20 и 1,25, 610 — 2,50 и 0,67, 616 — 9,33 и 6,25. Три
+    из четырёх задач идут с меньшим числом прогонов, задача 605 — исключение. Полные
+    результаты по задачам вынесены в дополнительные материалы.'
+  excerpt: task 605 runs counter to the trend
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: B. Per-Task Results
+    unit_id: ARXC--2607.27250v1-full-appB-pertask
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-096
+  source_id: ARXC
+  item_id: ARXC--2607.27250v1-full
+  kind: fact
+  text: Опубликованы оснастка, реализации стратегий, слой защиты, спецификации задач,
+    код анализа и наборы данных в открытом репозитории codeprakhar25/context-files-coding-agents.
+    Сырые трассы агентов доступны по запросу.
+  excerpt: Raw agent transcripts are available from the authors on request.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: C. Reproduction and Data Availability
+    unit_id: ARXC--2607.27250v1-full-appC-reproduction
+    url: https://arxiv.org/abs/2607.27250v1
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - 'Исследование одного автора на небольшой выборке: 15–17 задач из трёх Python-репозиториев.
+    Воспроизводимость в корпусе не проверялась.'
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Содержимое репозитория с данными в корпусе не проверялось.

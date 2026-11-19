@@ -1,0 +1,23 @@
+contract_version: 1
+source_id: PYAN
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  PYAN--function-annotations:
+    fingerprint: 92412cf0134b84ef5bc4c5543c9567533a19596d26d26262f2f578e1c34a86fc
+  PYAN--pep-0649:
+    fingerprint: d2d87b47c7427b0b076c99e41698189ca4257868e2dd28652a4ccf88fa09f598
+  PYAN--pep-0749:
+    fingerprint: 29c136bd95d257c92c16eb395f3433efcf793a7b3027b3990abae3428db5ddd7
+observation:
+  scope: pinned-raw-rst-v1
+  units:
+    PYAN--pep-0649:
+      locator: https://peps.python.org/pep-0649/
+      fingerprint: 58948a3b8fb4b8a5cb55a12b2bf4719b7a3e89408e39daeeb48f4d3dc5be5e13
+    PYAN--pep-0749:
+      locator: https://peps.python.org/pep-0749/
+      fingerprint: 242e31343465e77e3f55cb1559ca24314acce5ae4533a54d06b88453144b85c5
+    PYAN--function-annotations:
+      locator: https://docs.python.org/3.14/reference/compound_stmts.html#annotations
+      fingerprint: 67bc5a27e2f1ca3de3c3fc99b8e66e44c64832b706ef4a77005f08b8cc695eb7

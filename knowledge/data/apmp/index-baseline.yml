@@ -1,0 +1,33 @@
+contract_version: 1
+source_id: APMP
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  APMP--author-primitives:
+    fingerprint: 5aa08d895023fb8a5d1d9784a6c197a0120e1f16af315b4bf1a0df54616e6503
+  APMP--author-primitives-hooks-and-commands:
+    fingerprint: 911fe90772bb531558dea673b477a75302379322694813526d63126eb190eb46
+  APMP--author-primitives-instructions-and-agents:
+    fingerprint: b611a0ccc4a3f3284eac39aaad078f5573e870c3dbe24dd9e5064d6532153434
+  APMP--author-primitives-mcp-as-primitive:
+    fingerprint: dbf85ebda6fcf79f169a1d7d131c9b1368e79b05e62702df3c4c89bb66c36ade
+  APMP--author-primitives-prompts:
+    fingerprint: 41a0b36e2d6fb35692d33cc505d61f96af0e4cf452a7cd70270fcfb3add3a99f
+  APMP--author-primitives-skills:
+    fingerprint: c7955f6f4c999675d0b9ef60d5e0991184e3b550c58241c080efeefc994bddbe
+  APMP--compile:
+    fingerprint: 15bd675d4a7b3317b2321299c388b42d47b938e687defae24ff81abd20242277
+  APMP--consumer-drift-and-secure-by-default:
+    fingerprint: 3997f7cd885ddcd6cf2a3bdc00d0b234ac63e6234f13bb126d3b8c5aa92889e3
+  APMP--consumer-manage-dependencies:
+    fingerprint: 9eb7397ec94b9447f00e8efdbe5e86cb0b0035a676651db22e77822df948f498
+  APMP--overview:
+    fingerprint: 96283cf5ae8174aa710d85377532beb9092f3279ca14eb230fe6296236dbe811
+  APMP--pack-a-bundle:
+    fingerprint: 5a024bc643c788b031b0a83a076610e5e1a8aab00b8de7bb74e140e2cde7dee4
+  APMP--package-relative-links:
+    fingerprint: 7760336e77789aeb39e339269629a11992ad68ab884feefb0eaabdfbbdf93cd8
+  APMP--preview-and-validate:
+    fingerprint: 5daa58e7efce5217c15d65e740fe6920d6cb66a92e5f3a126b25e58d69ef2fc4
+  APMP--publish-to-a-marketplace:
+    fingerprint: cb45ae8839cfdf1ed18e3cab0a4464c7372dc614145e427527b0ef528103734a

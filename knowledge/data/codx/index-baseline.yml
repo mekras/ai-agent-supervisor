@@ -1,0 +1,141 @@
+contract_version: 1
+source_id: CODX
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  CODX--agent-approvals-security:
+    fingerprint: 9aaa4af21a77aff6ae3c59ba48a0d13b6c356a18000299a6cd0fb67e30058b07
+  CODX--agents-md:
+    fingerprint: 71c420c53ea36bc0c15226edeebad9a9f3ed50630302b28028c96a3bfbcaa4a7
+  CODX--app:
+    fingerprint: 4e020f6efbdc9a0f87c06d2d7caa9eb7ed7332c259688a52459c447619456cda
+  CODX--app-server:
+    fingerprint: ea1a17d4e42ec50f876b693e607da8506a25b1f03163c820ccf6250b955937e9
+  CODX--app/automations:
+    fingerprint: 4f72f844fbed545c9ab63d9e87ac4db04263f35058b211b45cc8b1c25be22315
+  CODX--app/commands:
+    fingerprint: 55229cdf5790bddc6347ad67bb63210a226407a0c6ad9b825440392d5766f08f
+  CODX--app/features:
+    fingerprint: f9d532ec8f44f3ba2402c30ac84f891900be3254fc5ca11d1d672d8b7a6f9242
+  CODX--app/local-environments:
+    fingerprint: d5dd11f980b0ff0b50f9440a1b62349960adaa84c1b8880ff376b262c8db1966
+  CODX--app/settings:
+    fingerprint: 82f7ac4a869775fbce0fe2efd3ab03531e64a5b2521789ac817baa0e085eb7b4
+  CODX--app/troubleshooting:
+    fingerprint: e778414d46ed076f4024ff81b11b467434a7eccdfe96e3faa1d54d7391ebc16d
+  CODX--app/worktrees:
+    fingerprint: 0a8ca5495e23cb5531c17859c66cede32e69a9201311f8425cc1412afe010b0d
+  CODX--changelog:
+    fingerprint: 9ea38cfb402535c0625175a409273f7567ef4d2da5bb729d2e5c00b755fc2a16
+  CODX--cli:
+    fingerprint: 130011564f322c2a26b17af22a6ec8bfeefb6a29bb072161f253d7fd67016d89
+  CODX--cli/features:
+    fingerprint: a9c19cba7af4ed422483edc9eafbd2f3e6cdbcdea81fb6e6d88824e3a2681a70
+  CODX--cli/reference:
+    fingerprint: d58b8f3e051d5b61034de75ed82d42b9213c2d8684b781d132faf6cbaaf2fa4a
+  CODX--cli/slash-commands:
+    fingerprint: b89a2895c334307f076d244d9b738c548858931854750840ab78283028b6d596
+  CODX--cloud:
+    fingerprint: 7ff1d41f6cb68b2aa615a4beeef669ff6cde15c31fbee5ad26013b8012cf4632
+  CODX--cloud/environments:
+    fingerprint: 282b11471c97bbe3e50225a9a4debac9441d5aadbe94b4efa0a483cfc3a8f370
+  CODX--cloud/internet-access:
+    fingerprint: 508191b5f05e381bf17fa242b12d641421080d39165cc3c07e282578d2ca2306
+  CODX--concepts/customization:
+    fingerprint: 44590a51be3f4fb81a1c6e6d973ee221406f3bac995fa57098de86715cc5a455
+  CODX--concepts/sandboxing:
+    fingerprint: feddf5e1ecb0c260e2c9ba4d0999d9f1139c84851cb24b5bec8e56109c04619f
+  CODX--concepts/subagents:
+    fingerprint: 6462ebe0ca09555b38304814dcb6eb1f136448dcfb0d61ede45afa2dc2ac2c29
+  CODX--config-advanced:
+    fingerprint: 1afa35ef3520d04a732ead35939df963d5e4fd89ed82b8fd48117009e0ec128c
+  CODX--config-basic:
+    fingerprint: cfd05bb993b0b015382417abc66d4b4d53ee91b23dacb27658f4c0a46d88613b
+  CODX--config-reference:
+    fingerprint: 3a83320182400281732d51065e97a5ff1dd7db740d4045f9e0bf92500ee1617f
+  CODX--config-sample:
+    fingerprint: 1ca9c587fd96ca5f82fcd004fd99753f3e898b45269a75dd50eaf40347f86375
+  CODX--enterprise/access-tokens:
+    fingerprint: 9182b1372f113871a1a1c5c94c44493d424b81ca32d2e92de286a2be21b3c317
+  CODX--enterprise/admin-setup:
+    fingerprint: b5aa0e79749f8396a64e4e669b8af45be9c6b38736b0fcc0cb6ef4ef5ba39e75
+  CODX--enterprise/governance:
+    fingerprint: e771b09afb2834a247ed908213b0da2bf1e5a490662372dea6d2d11837d1b644
+  CODX--enterprise/managed-configuration:
+    fingerprint: e3dfaf64c876503334dc357e25eab4c7d91e2512346d2bca092105a10829a8be
+  CODX--environment-variables:
+    fingerprint: 8838a66a2c52c309533e64f7adcf92aa905e411ee199f9032502a791aa95c654
+  CODX--github-action:
+    fingerprint: 320ba10b8633ff3598a9ad8d459c2cfe330efe1ba4c6b38d6da78b9258b101ee
+  CODX--guides/agents-md:
+    fingerprint: 93fd150fe105227dc619783c7de970ffe647f40c3e2c8d428abbdefd90bce624
+  CODX--hooks:
+    fingerprint: 4e8de15e1651498d2628c50fb826b041642a5ed29e596c87ef8dddb833cd548c
+  CODX--ide:
+    fingerprint: 8d96d7d9138bf27ac9caad498ab60cea2c960f8e3c06c625d89e8d5d69afdf92
+  CODX--ide/commands:
+    fingerprint: f32decd7d7a647a2e1d4c3249b4a34ff0ee220f4d5e2c1346b86ffc3d29d00bd
+  CODX--ide/features:
+    fingerprint: f514898f875a7b8fdcd6f405d7b243f8a4176399c8152bc44d67d8f99c9bf303
+  CODX--ide/settings:
+    fingerprint: 6a73c3f3bb4b070effad830d8cfda27d980877a8d6c6b904aebef97006e481a5
+  CODX--ide/slash-commands:
+    fingerprint: 853066a7b1ff938d78ce674ebf8b6fbfa308fcbbc59b38a584ce2f66782d090a
+  CODX--integrations/github:
+    fingerprint: 82dbfe4efe58ebc581466a6ae83e69facfef450e74927f6e0361c9852c38d34a
+  CODX--integrations/linear:
+    fingerprint: 05b30449bda3f0a69d9e1af96077f6348db0635313587405b23efd06c10115ae
+  CODX--integrations/slack:
+    fingerprint: 47a37a1de51bd74539296cee19b2e414a11bb98b977d4838777cb7a80eed6535
+  CODX--learn/best-practices:
+    fingerprint: 956cc06412b2a21de965d071124b5caa8e96e2ab771250a05deae778921da968
+  CODX--mcp:
+    fingerprint: b83b4078ec5d7ccca5c60910a4e202a21c944a96f37703a51bd61e18b8c54965
+  CODX--memories:
+    fingerprint: 8c8c15ee69e432b9d89b47a8add61a5f517e818fd789ca1516e2e8868f4a94e5
+  CODX--memories/chronicle:
+    fingerprint: 9b585cc6cc7b56daf0ac4f155ae1e02b421086096c8ea227c12fcea829c725ec
+  CODX--migrate:
+    fingerprint: 2fe158b3e98cbd6185ef9aeafdb111d16e98b9fb4cd7694ac2289cf451eda178
+  CODX--models:
+    fingerprint: bb3438aecda72a8e631cbbd7addc95a2be238951676405f039baea4e58b99cfb
+  CODX--noninteractive:
+    fingerprint: 58245fc86f44bdce379ce6d8d2ad2a2d0e8cada5c0ef9eeb764932b5b9fb6776
+  CODX--permissions:
+    fingerprint: b251ee6604f2eda9e900428c2c692b2e33722a1b5256089e8dffa03e3452a5da
+  CODX--plugins:
+    fingerprint: 6d6e2828087bc8f36ed3d3a427caf35e1392d922376f7b2c85690f96052e8ecc
+  CODX--plugins/build:
+    fingerprint: 982eda18e0fb942623e02c796643923f1c5cb45b43ee9fc43d1f3d305f5e74b1
+  CODX--prompting:
+    fingerprint: 5446caa238d1de7112ae3ac7006419d0f16d940123af4a4b895ce19bcf6e2c24
+  CODX--quickstart:
+    fingerprint: 6d8d0d3ab80149c548e71966da377318da071562a27dfd88c41f5d559f3f584f
+  CODX--remote-connections:
+    fingerprint: fe62c6a00bcc004839f7d578fa5cfaa34354d927da91756861ed0645e77e2c3b
+  CODX--rules:
+    fingerprint: 18a711235a4925faa8fa556f293a8f0a416b6d0518f8355b9fa8f8b216650fbb
+  CODX--sdk:
+    fingerprint: d7b3eab21a4c82c013c633d116e6235351a40f5defb195e3923a0c66830f48f6
+  CODX--security:
+    fingerprint: 8919149d9cb9ac0ace9c074613b26b210542de3d821f1d8dc3b3fd64e94730ed
+  CODX--security/faq:
+    fingerprint: abbd86a60fd71b694ee0e9c1aa1e16f4709c76cb884fb3ed54adb23e43394f79
+  CODX--security/plugin:
+    fingerprint: 7eba1a49b1cac8780b2b51a1ff49056e3367c7874cfe9a65b8b260f2520791bb
+  CODX--security/setup:
+    fingerprint: 48c5cfac4c95d3769dbb3f802575d5e57dafbe58a383c841f621539d6c654c02
+  CODX--security/threat-model:
+    fingerprint: 0448faa04bc7d9ab6c084f2dfda741547671ac4dfcc79b918d206b0dfeab1ba7
+  CODX--sites:
+    fingerprint: 6418fe334c94919297f4debc18c1c84d4dd41370e2541cc90fca3f37871e1aac
+  CODX--skills:
+    fingerprint: 469ac54c8339b10648aa451d7fbbe3efca21b40897a77719951dbdbcbd5846e3
+  CODX--speed:
+    fingerprint: 3b5d81994a2dde6d35d1d875c0fdd1aab1cc36b9ff3aeae6c131d413a4071211
+  CODX--subagents:
+    fingerprint: 03cf6c8121dcd7415c969a2cce35a9d71fe2105cc7f3f278089b7361d65bbf85
+  CODX--web:
+    fingerprint: 4cf60c44bb29c541f8c2b052f737fe13a7378880868ec12670045d4c2ce2aca8
+  CODX--workflows:
+    fingerprint: 40bc6af56e8554f4f1a0ecae4a5988034b742cf2fbab0dd1c0fd6ba9217f826b

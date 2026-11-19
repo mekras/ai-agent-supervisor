@@ -1,0 +1,23 @@
+id: "ARXC--2602.11988v2-full"
+source_id: "ARXC"
+path: "pages/2602.11988v2-full"
+title: "Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents? (полный текст)"
+locator: "https://arxiv.org/abs/2602.11988v2"
+url: "https://arxiv.org/abs/2602.11988v2"
+access: "Публичная страница и исходник выбранной версии. Лицензия CC BY 4.0."
+status: "normalized"
+workflow_stage: source_checked
+version_date: "2026-06-23"
+checked_at: "2026-11-19"
+provenance:
+  origin: external_material
+  locator: "https://arxiv.org/abs/2602.11988v2"
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-arxc-fulltext-2026-11-19.yml
+    sha256: "df99313e5c286fde450f813b1a58d73b5176c87c1ff578c0f929b3f489291e2f"
+files:
+  local:
+    - raw.local.pdf
+    - source.local.tar.gz
+known_limitations: ["Изображения рисунков не перенесены, значения только с графиков в тексте отсутствуют. Воспроизводимость эксперимента не проверялась."]

@@ -1,0 +1,9 @@
+contract_version: 1
+source_id: CXSR
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  CXSR--agent-role-loader:
+    fingerprint: 414e6e847b69e97df76b66e5527898babc59fb14ae6f769477d17caa586f5c53
+  CXSR--session-config-load:
+    fingerprint: b7c209e6e1959de322800139fdd2a2e609e68549a03b9a51e8d73ef2e32c007d

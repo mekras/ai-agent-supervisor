@@ -1,0 +1,13 @@
+contract_version: 1
+source_id: AENG
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  AENG--building-effective-agents:
+    fingerprint: 2860ec3ec48b09188d96c8922ca66fcfe126893fe2161888976a08652bd3797b
+  AENG--demystifying-evals-for-ai-agents:
+    fingerprint: 2d470afe70a8c0b49f27e4a215610d8f426cc5c05a30e9bf1c2f288472991662
+  AENG--effective-context-engineering-for-ai-agents:
+    fingerprint: 5859bf8a909f578c080735b1803ac64a2af3534e6004726bd9d1fa5b9542e124
+  AENG--multi-agent-research-system:
+    fingerprint: e84ef0421170db85fbcb30d8361acec5daabdd879c31a5e229f26f04c9c2ed49

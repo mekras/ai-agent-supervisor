@@ -1,0 +1,1654 @@
+statement_contract_version: 2
+statements:
+- id: ARXC-004
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Контекстные файлы в среднем увеличивают стоимость вывода больше чем на 20
+    % и при этом в общем случае не повышают долю решённых задач. Наблюдение устойчиво
+    для разных моделей, агентов, сгенерированных и написанных разработчиками файлов.
+  excerpt: while *increasing inference cost* by over 20% on average
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Abstract
+    unit_id: ARXC--2602.11988v2-full-abstract
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Отсутствие выигрыша согласуется с 2607.27250v1 (ARXC-071), но два из трёх его
+    репозиториев (pdm и opshin) входят в CTXbench. Рост стоимости в 2607.27250v1 не
+    подтверждён (ARXC-076).
+  - 'В первой версии статьи (2602.11988v1) вывод сформулирован сильнее: контекстные
+    файлы скорее снижали долю решённых задач.'
+- id: ARXC-005
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Агенты хорошо выполняют инструкции из контекстных файлов, а обзоры репозитория
+    в этих файлах, хотя их рекомендуют поставщики моделей, не помогают.
+  excerpt: instructions in the context files are well followed by coding agents, repository
+    overviews, although popular and recommended by model providers, are not helpful
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Abstract
+    unit_id: ARXC--2602.11988v2-full-abstract
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-006
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Авторы делают вывод: контекстные файлы полезны для описания нестандартных
+    практик кодирования, а любую попытку повысить ими результативность нужно строго
+    оценивать до внедрения.'
+  excerpt: context files are useful for specifying non-standard coding practices,
+    any attempts to improve performance should be rigorously evaluated before deployment
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Abstract
+    unit_id: ARXC--2602.11988v2-full-abstract
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Это рекомендация авторов, а не измеренный результат.
+- id: ARXC-007
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: По данным сайта AGENTS.md, на который ссылаются авторы, контекстные файлы
+    поддерживаются большинством популярных платформ агентов и включены более чем в
+    60 000 открытых репозиториев.
+  excerpt: context files are now supported by most popular agent frameworks, and included
+    in over 60'000 open-source repositories
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. Introduction
+    unit_id: ARXC--2602.11988v2-full-s1-introduction
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: secondary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Число взято авторами из вторичного источника и меняется со временем.
+- id: ARXC-008
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Оценку контекстных файлов затрудняют две причины: в прежних бенчмарках их
+    нет, а популярные репозитории, из которых обычно строят бенчмарки, нерепрезентативны
+    для большинства кодовых баз.'
+  excerpt: context files are not available for instances of prior benchmarks, and
+    ii) popular, well-known repositories, typically used to create such benchmarks,
+    are not representative of most codebases
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. Introduction
+    unit_id: ARXC--2602.11988v2-full-s1-introduction
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-009
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Во введении сказано, что файлы, написанные разработчиками, превосходят сгенерированные
+    моделью в среднем на 7 %, а инструкции из файлов усиливают исследование, тестирование
+    и рассуждение агентов, повышая стоимость больше чем на 20 %.
+  excerpt: '*developer-committed* files outperform *LLM-generated* ones by a significant
+    margin of 7% on average'
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. Introduction
+    unit_id: ARXC--2602.11988v2-full-s1-introduction
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: medium
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - По таблице 5 абсолютная разница средних по CTXbench около 4 п. п., поэтому 7 %,
+    вероятно, относительная разница. В тексте это не уточнено.
+- id: ARXC-010
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Авторы советуют пока не использовать сгенерированные моделью контекстные файлы
+    вопреки рекомендациям разработчиков агентов. Файлы, написанные людьми, по их мнению,
+    должны содержать только инструкции, которых нет в README, например особые соглашения
+    или нефункциональные требования, и проходить строгую оценку до внедрения.
+  excerpt: should only include instructions required for coding agents that are not
+    already present in the `README`
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. Introduction
+    unit_id: ARXC--2602.11988v2-full-s1-introduction
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Это рекомендация авторов по результатам их выборки.
+- id: ARXC-011
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Разработчики моделей и агентов рекомендуют добавлять в кодовые базы контекстные
+    файлы вроде AGENTS.md и CLAUDE.md, а многие оснастки дают встроенную команду их
+    автоматического создания, например `/init`.
+  excerpt: providing a dedicated `/init` command in the agent interface
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Background and Related Work
+    unit_id: ARXC--2602.11988v2-full-s2-background
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: secondary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-012
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Прежние работы о контекстных файлах в основном описывали и классифицировали
+    их содержание, не проверяя эффективность. Авторы называют своё исследование первым
+    масштабным изучением влияния реально используемых файлов на поведение и результат
+    агентов.
+  excerpt: deriving mostly descriptive metrics about their content without investigating
+    their effectiveness
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Background and Related Work
+    unit_id: ARXC--2602.11988v2-full-s2-background
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Заявление о первенстве — оценка авторов на момент публикации.
+- id: ARXC-013
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Поставщики моделей обучают модели пользоваться инструментами своих оснасток,
+    и это может заметно повышать способность к программированию по сравнению с более
+    простыми оснастками.
+  excerpt: Model providers now train their LLMs to use the tools exposed by their
+    harnesses
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 2. Background and Related Work
+    unit_id: ARXC--2602.11988v2-full-s2-background
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: secondary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Пересказ чужих работ в обзоре литературы.
+- id: ARXC-014
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Доля успеха определена как процент предсказанных патчей, после применения
+    которых весь набор тестов экземпляра проходит.
+  excerpt: We define the *success rate* S as the percentage of predicted patches
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.1 Notation and Definitions
+    unit_id: ARXC--2602.11988v2-full-s3-ctxbench
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-015
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Для CTXbench отбирались Python-репозитории с контекстным файлом в корне, набором
+    тестов и не менее чем 400 PR. PR оставлялись, если ссылаются на задачу, меняют
+    Python-файл и, по оценке агента, вносят детерминированное проверяемое поведение.
+  excerpt: they should reference at least one issue, and they should modify at least
+    one Python file
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Generation of CTXbench Instances
+    unit_id: ARXC--2602.11988v2-full-s3-ctxbench
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-016
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Отдельный агент переписывает описание PR в стандартную задачу из шести разделов
+    без раскрытия решения. Авторы проверили все экземпляры и не нашли утечек решения.
+  excerpt: This standardized task description is divided into 6 sections
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Generation of CTXbench Instances
+    unit_id: ARXC--2602.11988v2-full-s3-ctxbench
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-017
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Тесты экземпляров генерирует агент. Они проверяются на падение до эталонного
+    патча и прохождение после него, вручную очищаются от подгонки под эталонную реализацию
+    и покрывают в среднем 75 % изменённого кода.
+  excerpt: We verify that the added tests fail on R and pass on R ∘ X^*
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Generation of CTXbench Instances
+    unit_id: ARXC--2602.11988v2-full-s3-ctxbench
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-018
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: CTXbench содержит 138 экземпляров из 5694 PR 12 репозиториев. Контекстные
+    файлы разработчиков в нём содержат в среднем 641 слово (от 24 до 2003) и 9,7 раздела.
+  excerpt: 138 instances from a total of 5694 PRs from 12 repositories
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Generation of CTXbench Instances
+    unit_id: ARXC--2602.11988v2-full-s3-ctxbench
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-019
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: observation
+  text: 'Подписи рисунка 2 называют 12 репозиториев CTXbench: openai-agents-python,
+    smolagents, ragas, opshin, tinygrad, wagtail, fastmcp, ansible, pdm, pr-agent,
+    transformers и graphiti. Сумма указанных чисел экземпляров равна 138.'
+  excerpt: openai-agents-python (17), smolagents (16), ragas (14), opshin (14)
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2, Figure 2
+    unit_id: ARXC--2602.11988v2-full-s3-ctxbench
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: medium
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Состав взят из текстового слоя рисунка в PDF, а не из основного текста статьи.
+- id: ARXC-020
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: limitation
+  text: Контекстные файлы формализованы лишь в августе 2025 года и внедрены неравномерно,
+    поэтому репозитории с ними в основном нишевые и часто не имеют тестов в PR. Из-за
+    этого тесты пришлось генерировать.
+  excerpt: context files were only formalized in August 2025
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 3.2 Generation of CTXbench Instances
+    unit_id: ARXC--2602.11988v2-full-s3-ctxbench
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-021
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Сравнивались четыре пары агента и модели: Claude Code с Sonnet-4.5, Codex
+    с GPT-5.2 и GPT-5.1 mini, Qwen Code с Qwen3-30b-coder. Каждый агент запускался
+    один раз на экземпляр. Контекстный файл записывался как AGENTS.md для Codex и
+    Qwen Code и как CLAUDE.md для Claude Code.'
+  excerpt: either by writing it to `AGENTS.md` for Codex and Qwen Code, or to `CLAUDE.md`
+    for Claude Code
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.1 Experimental Setup
+    unit_id: ARXC--2602.11988v2-full-s4-1-setup
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Результаты привязаны к названным версиям моделей и агентов.
+- id: ARXC-022
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Использованы SWE-bench Lite (300 задач из 11 популярных репозиториев без
+    контекстных файлов) и CTXbench. Сравнивались три условия: без файла, с файлом,
+    созданным рекомендованной командой инициализации каждого агента, и с файлом разработчиков
+    (только в CTXbench).'
+  excerpt: We use the recommended initialization command and model for each agent
+    individually to generate the context file
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.1 Experimental Setup
+    unit_id: ARXC--2602.11988v2-full-s4-1-setup
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-023
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Кроме доли успеха измерялись число шагов, где шаг — одно взаимодействие с
+    окружением, и полная стоимость вывода модели.
+  excerpt: Each step is one interaction with the environment
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.1 Experimental Setup
+    unit_id: ARXC--2602.11988v2-full-s4-1-setup
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-024
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Сгенерированные моделью контекстные файлы снижали результат в 5 из 8 конфигураций:
+    в среднем на 0,5 % на SWE-bench и на 2 % на CTXbench. Различие статистически незначимо
+    (p = 0,87 и 0,37).'
+  excerpt: LLM-generated context files cause performance drops in 5 out of 8 settings
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.2 Main Results
+    unit_id: ARXC--2602.11988v2-full-s4-2-main-results
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - 2607.27250v1 не испытывала сгенерированные файлы, поэтому независимого подтверждения
+    нет.
+- id: ARXC-025
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Сгенерированные файлы увеличивали число шагов во всех конфигурациях (в среднем
+    на 2,45 и 3,92) и значимо повышали стоимость на 20 % и 23 %.
+  excerpt: leading to a significant (p-value < 0.001%) cost increase of 20% and 23%
+    on average
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.2 Main Results
+    unit_id: ARXC--2602.11988v2-full-s4-2-main-results
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-026
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Файлы разработчиков повышали результат в среднем на 2,4 % незначимо (p = 0,21),
+    но значимо превосходили сгенерированные (p = 0,038). Они помогали всем агентам,
+    кроме Claude Code, и увеличивали число шагов в среднем на 3,34 и стоимость до
+    19 %.
+  excerpt: Developer-provided context files improve agent performance by 2.4% on average
+    (p = 21%)
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.2 Main Results
+    unit_id: ARXC--2602.11988v2-full-s4-2-main-results
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-027
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Из 12 файлов разработчиков в CTXbench 8 содержат обзор кодовой базы. Промпты
+    генерации Codex и Qwen Code требуют раздела обзора, а промпт Claude Code допускает
+    только высокоуровневый обзор и предостерегает от перечисления легко обнаруживаемых
+    компонентов. Обзор найден во всех файлах Sonnet-4.5, в 95 % файлов Qwen3, 99 %
+    GPT-5.2 и 36 % GPT-5.1 mini.
+  excerpt: the Claude Code prompt advocates for a high-level overview only and warns
+    against listing components that are easily discoverable
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Understanding Behavioral Changes
+    unit_id: ARXC--2602.11988v2-full-s4-3-behavior
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Наличие обзора определяла модель-судья GPT-OSS-120b.
+- id: ARXC-028
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Контекстные файлы не сокращают заметно число шагов до первого обращения агента
+    к файлу из эталонного патча, а для GPT-5.1 mini значимо увеличивают его. Авторы
+    делают вывод, что файлы неэффективны как обзор репозитория.
+  excerpt: We conclude that context files are not effective at providing a repository
+    overview.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Understanding Behavioral Changes
+    unit_id: ARXC--2602.11988v2-full-s4-3-behavior
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - 3 % экземпляров без обращения к файлам патча исключены из метрики.
+- id: ARXC-029
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: При наличии контекстных файлов GPT-5.1 mini выполнял несколько команд для
+    их поиска и перечитывал их, хотя они уже были в контексте агента. Без файлов такого
+    поведения не наблюдалось.
+  excerpt: issuing multiple commands to find the context files and (ii) reading them
+    (multiple times) despite them being already included in the agent's context
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Understanding Behavioral Changes
+    unit_id: ARXC--2602.11988v2-full-s4-3-behavior
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Наблюдение получено ручным просмотром трасс одной модели.
+- id: ARXC-030
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: С контекстными файлами агенты всех моделей чаще запускают тесты, больше ищут,
+    читают и пишут файлы и чаще используют инструменты конкретного репозитория.
+  excerpt: when context files are present, the coding agents run more tests
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Understanding Behavioral Changes
+    unit_id: ARXC--2602.11988v2-full-s4-3-behavior
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Категории вызовов для команд оболочки определяла модель-судья.
+- id: ARXC-031
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Агенты следуют упоминаниям инструментов: `uv` вызывается в среднем 1,6 раза
+    на экземпляр, если он упомянут в файле, и меньше 0,01 раза, если нет. Для инструментов
+    репозитория — 2,5 и меньше 0,05 раза. Поэтому отсутствие выигрыша не объясняется
+    плохим выполнением инструкций.'
+  excerpt: '`uv` is used 1.6 times per instance on average when mentioned in the context
+    files'
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Understanding Behavioral Changes
+    unit_id: ARXC--2602.11988v2-full-s4-3-behavior
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-032
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Сгенерированные файлы увеличивали число токенов рассуждения у GPT-5.2 на 22
+    % и у GPT-5.1 mini на 10 % на SWE-bench, а файлы разработчиков на CTXbench — на
+    20 % и 2 %. Авторы выдвигают гипотезу, что дополнительные инструкции усложняют
+    задачу.
+  excerpt: We hypothesize that these additional instructions make the task harder.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.3 Understanding Behavioral Changes
+    unit_id: ARXC--2602.11988v2-full-s4-3-behavior
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Причинное объяснение сформулировано как гипотеза и не проверено отдельно.
+- id: ARXC-033
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Файлы, созданные более сильными моделями, не лучше: для GPT-5.1 mini и Qwen3
+    они дали +2 % на SWE-bench и −3 % на CTXbench по сравнению с собственными.'
+  excerpt: stronger models do not necessarily generate superior context files
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.4 Ablations
+    unit_id: ARXC--2602.11988v2-full-s4-4-ablations
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-034
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Ни промпт генерации своего агента, ни один конкретный промпт (Codex или Claude
+    Code) не давал устойчиво лучших файлов. Чувствительность к выбору промпта в целом
+    мала.
+  excerpt: sensitivity to good prompts is overall small
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4.4 Ablations
+    unit_id: ARXC--2602.11988v2-full-s4-4-ablations
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-035
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: limitation
+  text: Оценка выполнена только на Python. Сведения об инструментах и зависимостях
+    могут уже быть в параметрических знаниях модели и обнулять эффект файлов, поэтому
+    для редких языков и инструментов результат может отличаться.
+  excerpt: might be present in the models' parametric knowledge, nullifying the effect
+    of context files
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5. Limitations and Future Work
+    unit_id: ARXC--2602.11988v2-full-s5-limitations
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-036
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: limitation
+  text: Измерялась только доля решённых задач. Влияние контекстных файлов на эффективность
+    кода и безопасность не оценивалось, хотя безопасность, по прежним работам, чувствительна
+    к изменениям промпта.
+  excerpt: Security, specifically, was found to be sensitive to prompt changes in
+    prior work
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5. Limitations and Future Work
+    unit_id: ARXC--2602.11988v2-full-s5-limitations
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-037
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Авторы называют открытой задачей автоматическое создание полезных контекстных
+    файлов и предлагают свою работу как базовый образец строгой оценки таких файлов.
+  excerpt: Our work may serve as a baseline for how to rigorously evaluate automatically
+    generated context files.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 5. Limitations and Future Work
+    unit_id: ARXC--2602.11988v2-full-s5-limitations
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-038
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: В заключении сказано, что все контекстные файлы устойчиво увеличивают стоимость
+    и число шагов, а файлы должны содержать только конкретные дополнительные инструкции
+    сверх доступного в кодовой базе. Авторы отмечают разрыв между рекомендациями разработчиков
+    агентов и наблюдаемым результатом.
+  excerpt: should only contain specific additional instructions beyond what is already
+    available in the codebase
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 6. Conclusion
+    unit_id: ARXC--2602.11988v2-full-s6-conclusion
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: aging
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Рост стоимости и шагов в 2607.27250v1 не подтверждён (ARXC-076, ARXC-077). Рекомендация
+    основана на выборке самих авторов.
+- id: ARXC-039
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Агенты работали в Docker-контейнере с доступом в интернет, без истории Git
+    и удалённых репозиториев. Веб-запросы составили меньше 1 % вызовов, случаев подглядывания
+    в решение не найдено. В Claude Code был включён инструмент Task, позволяющий Sonnet-4.5
+    вызывать подагентов на Haiku-4.5.
+  excerpt: it allows Sonnet-4.5 to invoke sub-agents, using Haiku-4.5, to solve sub-tasks
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: A.1 Additional Experimental Details
+    unit_id: ARXC--2602.11988v2-full-appA-experimental-details
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-040
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Намерения вызовов оболочки размечала модель-судья GPT-OSS-120b, создавая
+    категории по ходу разметки. 334 полученные категории сведены в 10 групп: git,
+    model, env_deps, build, quality, testing, run_exec, search, file_ops и system.
+    Инструменты разных агентов сопоставлены с инструментами Claude Code по таблице
+    эквивалентности.'
+  excerpt: 334 different categories in total
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: A.2 Trace Analysis
+    unit_id: ARXC--2602.11988v2-full-appA-experimental-details
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-041
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Инструменты `uv`, `pytest` и инструменты репозитория используются почти исключительно
+    тогда, когда упомянуты в контекстном файле. Анализ по намерениям показывает рост
+    тестирования, исследования кодовой базы и проверок качества кода.
+  excerpt: are used almost exclusively if they are mentioned in the context file
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: A.2 Trace Analysis
+    unit_id: ARXC--2602.11988v2-full-appA-experimental-details
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-042
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Ни в одном отдельном репозитории наличие контекстного файла не дало значимого
+    эффекта. Оценки по SWE-bench шумные, так как большинство его экземпляров из django.
+  excerpt: there is no single repository where the presence of context files has a
+    significant impact
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: A.3 Per-repository Success Rate
+    unit_id: ARXC--2602.11988v2-full-appA-experimental-details
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-043
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: По таблице 5 Sonnet-4.5 в Claude Code на CTXbench решил 73,2 % задач без контекстного
+    файла, 70,3 % с файлом разработчиков и 65,2 % со сгенерированным.
+  excerpt: '**73.2 ± 3.8**'
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: A.4 Additional Data
+    unit_id: ARXC--2602.11988v2-full-appA-experimental-details
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - В источнике строки CTXbench в таблице 5 подписаны «Plan-Bench».
+- id: ARXC-044
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Стратифицированные перестановочные тесты подтверждают значимый рост числа
+    шагов и стоимости при наличии контекстных файлов во всех проверенных сравнениях.
+  excerpt: context files systematically and significantly increase the average number
+    of steps and the cost
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: A.5 Additional Statistical Testing
+    unit_id: ARXC--2602.11988v2-full-appA-experimental-details
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-045
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Если удалить из кодовой базы всю документацию, сгенерированные файлы повышают
+    результат в среднем на 2,7 % и превосходят файлы разработчиков. Авторы считают,
+    что сгенерированные файлы в основном дублируют имеющуюся документацию, и это может
+    объяснять отзывы об улучшении в слабо документированных репозиториях.
+  excerpt: LLM-generated context files not only consistently improve performance by
+    2.7% on average
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: B. Additional Results
+    unit_id: ARXC--2602.11988v2-full-appB-additional-results
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Claude Code в этом опыте не участвовал из-за стоимости.
+- id: ARXC-046
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Длина контекстного файла не связана ни с долей успеха, ни со стоимостью экземпляра.
+    Рост стоимости лучше объясняется тем, что агенты выполняют инструкции из файла.
+  excerpt: We observe no clear dependency between the success rate or the per-instance
+    cost and the context file length.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: B. Additional Results
+    unit_id: ARXC--2602.11988v2-full-appB-additional-results
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-047
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Удаление из сгенерированных файлов разделов об обзоре, инструментах или тестировании
+    не меняет точность значимо. Раздел о тестировании значимо повышает стоимость на
+    обоих бенчмарках, раздел об инструментах — на SWE-bench.
+  excerpt: the testing category leads to a significant increase in cost in both SWE-bench
+    and CTXbench
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: B. Additional Results
+    unit_id: ARXC--2602.11988v2-full-appB-additional-results
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Разделы удалялись моделью GPT-5.4, опыт проведён только на GPT-5.2.
+- id: ARXC-048
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Разделение экземпляров по дате среза знаний моделей не выявило значимой разницы,
+    поэтому утечка задач в обучающие данные не объясняет отсутствие выигрыша.
+  excerpt: suggesting that contamination does not affect our conclusions
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: B. Additional Results
+    unit_id: ARXC--2602.11988v2-full-appB-additional-results
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-049
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Файлы разработчиков в CTXbench короче сгенерированных и, по детектору Pangram
+    EditLens, значимо реже созданы ИИ, поэтому, вероятно, написаны или отредактированы
+    людьми.
+  excerpt: are significantly less likely to be AI-generated
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: C. Validating CTXbench instances
+    unit_id: ARXC--2602.11988v2-full-appC-validation
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Оценка авторства опирается на автоматический детектор.
+- id: ARXC-050
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'В 25 из 138 экземпляров тесты вручную исправлены, чтобы убрать излишнюю конкретику.
+    Пример на рисунке 16: тест по-прежнему проверяет отказ, но больше не требует определённого
+    текста сообщения об ошибке.'
+  excerpt: For 25 of the 138 instances, we manually edit the test cases to remove
+    over-specified tests.
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: C. Validating CTXbench instances
+    unit_id: ARXC--2602.11988v2-full-appC-validation
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-051
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Описания задач, сгенерированные конвейером CTXbench, повышают точность на
+    SWE-bench примерно на 15 % при сохранении порядка моделей. Авторы считают CTXbench
+    немного более лёгкой, но более справедливой оценкой.
+  excerpt: a consistent trend of about 15% higher accuracy, preserving all model rankings
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: C. Validating CTXbench instances
+    unit_id: ARXC--2602.11988v2-full-appC-validation
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-052
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: limitation
+  text: SWE-bench Lite распространяется по MIT. Репозитории CTXbench имеют лицензии
+    Apache-2.0, MIT, AGPL-3.0, GPL-3.0 и BSD-3-Clause. Codex и Qwen Code — Apache-2.0,
+    Claude Code и модели Anthropic — коммерческие условия Anthropic, модели GPT —
+    условия OpenAI.
+  excerpt: the licenses are Apache-2.0, MIT, AGPL-3.0, GPL-3.0, and BSD-3-Clause
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: D. Asset Licenses
+    unit_id: ARXC--2602.11988v2-full-appD-licenses
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Лицензии приведены авторами на момент публикации и не перепроверялись.
+- id: ARXC-053
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Промпт генерации тестов требует детерминированных тестов ожидаемого поведения
+    без опоры на детали реализации, которые падают до патча и проходят после него,
+    размещаются только в новых файлах и сопровождаются скриптом запуска.
+  excerpt: rely on internal implementation details (variables, hidden helpers, etc.)
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: E.1 CTXbench instances generation
+    unit_id: ARXC--2602.11988v2-full-appE-prompts
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+  - Шаблон промпта относится к построению бенчмарка, а не к работе агента над задачей.
+- id: ARXC-054
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Промпт описания экземпляра требует не раскрывать решение, а для новой функции
+    дать точную спецификацию входов, выходов, побочных эффектов и ошибок. Человекочитаемые
+    сообщения из PR должны входить в спецификацию и использоваться дословно.
+  excerpt: include them in the specification and state that fixes must use **exactly**
+    those messages
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: E.1 CTXbench instances generation
+    unit_id: ARXC--2602.11988v2-full-appE-prompts
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-055
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: Промпт отбора PR просит агента не менять код проекта, сохранить решение в
+    JSON по заданной схеме и выбирать `include` только при уверенности, что PR — самодостаточное
+    исправление, проверяемое регрессионными тестами. При сомнении требуется ручная
+    проверка.
+  excerpt: Set `"decision"` to `"include"` only when you are confident the PR is a
+    self-contained
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: E.1 CTXbench instances generation
+    unit_id: ARXC--2602.11988v2-full-appE-prompts
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.
+- id: ARXC-056
+  source_id: ARXC
+  item_id: ARXC--2602.11988v2-full
+  kind: fact
+  text: 'Промпт разметки трасс требует одной категории намерения: 2–5 слов в нижнем
+    регистре в форме «глагол + объект», без путей и флагов, пригодной для повторного
+    использования и не привязанной к конкретному инструменту. При нескольких действиях
+    выбирается основное.'
+  excerpt: 2–5 words, lowercase, verb + object
+  artifact: normalized.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: E.2 Analyzing Traces of Coding Agents
+    unit_id: ARXC--2602.11988v2-full-appE-prompts
+    url: https://arxiv.org/abs/2602.11988v2
+  open_questions: []
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: strong
+  confidence: high
+  temporal_status: historical
+  corroboration: not_applicable
+  limitations:
+  - Результат сообщён авторами одной работы, воспроизводимость эксперимента в корпусе
+    не проверялась.
+  - Контекстные файлы репозиториев не тождественны публикуемой коллекции навыков.

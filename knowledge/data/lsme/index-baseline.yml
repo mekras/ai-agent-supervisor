@@ -1,0 +1,11 @@
+contract_version: 1
+source_id: LSME
+checked_at: '2026-11-19T17:43:25.122851+00:00'
+reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+units:
+  LSME--evaluation:
+    fingerprint: d554f52fcea9f913b208fc43e26a8cc9b7021740f80298636f59c35231bfc2cc
+  LSME--evaluation-approaches:
+    fingerprint: 7f640666aae583f7f6b27dfecbcdff121ab19a85068592ec4f70aa5fa544ac73
+  LSME--trajectory-evals:
+    fingerprint: f4266f178020872cab58560f0979a5326945965396d8a8fb6a6e9eb0828c26c3
