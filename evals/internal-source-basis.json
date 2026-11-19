@@ -313,6 +313,39 @@
             "docs/requirements/REQ-0047.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0047. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-move-keeps-general-rules",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ],
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0050.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0050. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-move-reports-every-rule",
+          "required_claims": [
+            "ASKL-004"
+          ],
+          "finding_claims": [
+            [
+              "ASKL-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0050.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0050. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
