@@ -502,17 +502,34 @@
           ]
         },
         {
-          "id": "ai-audit-agent-rules-result-diagnostic-object-report",
-          "required_claims": [
-            "CODX-001",
-            "ASKL-004"
+          "id": "ai-audit-agent-rules-result-brief-coverage-summary",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0048.md",
+            "docs/requirements/REQ-0034.md"
           ],
-          "finding_claims": [
-            [
-              "CODX-001",
-              "ASKL-004"
-            ]
-          ]
+          "basis_explanation": "Ожидаемая форма отчёта задана принятым требованием. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-coverage-gap-limits-conclusion",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0048.md",
+            "docs/requirements/REQ-0034.md"
+          ],
+          "basis_explanation": "Ожидаемая форма отчёта задана принятым требованием. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-detailed-coverage-on-request",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0048.md",
+            "docs/requirements/REQ-0034.md"
+          ],
+          "basis_explanation": "Ожидаемая форма отчёта задана принятым требованием. Учебный случай не подтверждает модельное исполнение."
         },
         {
           "id": "ai-audit-agent-rules-result-risk-based-coverage",
