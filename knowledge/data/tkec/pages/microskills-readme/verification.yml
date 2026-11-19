@@ -1,0 +1,36 @@
+verification_contract_version: 1
+artifact: normalized.local.md
+hash:
+  algorithm: sha256
+  value: fa9d09a2682eabce6c6015d8c33c48aa28ad7cf03493dcf0819a2644649ee0fc
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-11-19'
+  locator: https://raw.githubusercontent.com/microsoft/TokenEconomizer/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/README.md
+  resolved_locator: https://raw.githubusercontent.com/microsoft/TokenEconomizer/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/README.md
+  raw_sha256: 2c93a859a678ec2c1951f577dc04a3328fd114d3c80c5817e73c961a7a020304
+verification:
+  method: acquisition_check
+  checked_at: '2026-11-19'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: full_text
+    fragment: Весь файл
+    metadata:
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: complete
+    metadata:
+      locator: verified
+      author: unverified
+      publication_date: unverified
+  evidence:
+  - Файл получен по HTTPS с raw.githubusercontent.com по зафиксированному коммиту. Исходные байты сохранены в raw.local.md.gz,
+    raw_sha256 относится к распакованным байтам.
+  - Нормализованный снимок составлен из выбранных частей без изменения текста. Выдержки утверждений найдены в нём
+    дословно.
+  limitations:
+  - Проверены только выбранные части. Это не независимая проверка и не испытание установленного плагина.

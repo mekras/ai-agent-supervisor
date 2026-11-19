@@ -1,0 +1,19 @@
+id: TKEC--plugin-design
+source_id: TKEC
+title: 'The plugin: design and verified agent behaviour'
+url: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/docs/PLUGIN.md
+locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/docs/PLUGIN.md
+access: Публичный репозиторий под MIT License. Полные снимки только локально.
+status: indexed
+workflow_stage: source_checked
+provenance:
+  origin: external_material
+  locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/docs/PLUGIN.md
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-tokeneconomizer-2026-11-19.yml
+    sha256: f1ed4568cc74fcfde30d422f7577bf1ab9438a731d7425aad3729b4016bb9335
+files:
+  local:
+  - raw.local.md.gz
+  - normalized.local.md

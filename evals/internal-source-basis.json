@@ -857,6 +857,15 @@
             "docs/requirements/REQ-0034.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-plugin-injected-context",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0034.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым уточнением REQ-0034.1. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
@@ -2282,6 +2291,51 @@
           "requirement_basis": [
             "docs/requirements/REQ-0041.md"
           ]
+        },
+        {
+          "id": "ai-setup-project-result-tokeneconomizer-detect-and-envfacts",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0049.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0049. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-setup-project-result-tokeneconomizer-contradicting-fact",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0049.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0049. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-setup-project-result-tokeneconomizer-protect-subagents",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0049.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0049. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-setup-project-result-tokeneconomizer-repo-only-consent",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0049.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0049. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-setup-project-result-tokeneconomizer-version-mismatch",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0049.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0049. Учебный случай не является свидетельством фактического исполнения."
         }
       ]
     },
@@ -3857,7 +3911,8 @@
           "id": "ai-skill-development-result-learning-setup-proposals",
           "required_claims": [
             "LEARNING-003",
-            "LEARNING-004"
+            "LEARNING-004",
+            "AENG-002"
           ],
           "finding_claims": [
             [
@@ -3865,8 +3920,45 @@
             ],
             [
               "LEARNING-004"
+            ],
+            [
+              "AENG-002"
             ]
-          ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0015.md"
+          ],
+          "basis_explanation": "Проверка режима без чтения всего состояния задана принятым требованием REQ-0015.1. AENG-002 обосновывает отбор контекста. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-skill-development-result-learning-setup-no-json-command",
+          "required_claims": [
+            "AENG-002"
+          ],
+          "finding_claims": [
+            [
+              "AENG-002"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0015.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0015.1. AENG-002 обосновывает отбор контекста. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-skill-development-result-learning-setup-replace-full-read-line",
+          "required_claims": [
+            "AENG-002"
+          ],
+          "finding_claims": [
+            [
+              "AENG-002"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0015.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0015.1. AENG-002 обосновывает отбор контекста. Учебный случай не является свидетельством фактического исполнения."
         },
         {
           "id": "ai-skill-development-result-learning-manual-no-runtime",

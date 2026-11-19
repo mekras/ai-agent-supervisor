@@ -278,3 +278,18 @@ Event Hooks и Git githooks/core.hooksPath получены точечно. Ад
 В Git включены метаданные, ссылки, собственные краткие формулировки фактов
 и короткие выдержки для проверки происхождения. Полные исходные и выбранные
 нормализованные снимки находятся в файлах `*.local.*` и не публикуются.
+
+## TokenEconomizer — 2026-11-19
+
+- [microsoft/TokenEconomizer](https://github.com/microsoft/TokenEconomizer),
+  коммит `4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91`: выбранные разделы
+  `plugin/README.md` и `docs/PLUGIN.md`, файл
+  `tokeneconomizer/microskills/README.md` и фрагменты
+  `tokeneconomizer/microskills/distiller.py`.
+- Лицензия: [MIT License](https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/LICENSE),
+  Copyright (c) 2026 Microsoft.
+
+В Git включены метаданные, ссылки, собственные краткие формулировки фактов
+и короткие выдержки для проверки происхождения. Полные исходные и выбранные
+нормализованные снимки находятся в файлах `*.local.*` и не публикуются.
+Поведение установленного плагина по этим снимкам не подтверждено.

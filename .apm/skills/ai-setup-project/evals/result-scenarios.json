@@ -1746,6 +1746,301 @@
       "must_not": [
         "Личная установка навыков принята за разрешение менять весь профиль при настройке проекта."
       ]
+    },
+    {
+      "id": "ai-setup-project-result-tokeneconomizer-detect-and-envfacts",
+      "prompt": "Настрой проект для агентов. Пока только покажи, что предлагаешь, ничего не меняй.",
+      "input_files": [
+        {
+          "path": "AGENTS.md",
+          "purpose": "Инструкции проекта.",
+          "content": "# Правила\n\nИсходники навыков — `.apm/skills/**`. Каталог `.agents/skills/` содержит копии, созданные установщиком, их не правь.\nПодагенты Codex настроены в `.codex/config.toml`.\n"
+        },
+        {
+          "path": "observed/te-config.txt",
+          "purpose": "Вывод `~/.tokeneconomizer/bin/te --host codex config` в корне проекта.",
+          "content": "plugin: tokeneconomizer 0.1.0\nmicroskills: envfacts+distiller  (source: global)\ntoolprune: auto\ntoolprune_protect: (none)\n"
+        }
+      ],
+      "expected_output": {
+        "report_structure": [
+          "Обнаруженный плагин и его режимы для репозитория",
+          "Предложение режима микронавыков с объяснением риска",
+          "Отсутствие изменений до подтверждения"
+        ],
+        "findings": [
+          {
+            "severity": "medium",
+            "observed_problem": "Для проекта с сопровождаемыми правилами включён предлагатель фактов TokenEconomizer.",
+            "expected_conclusion": "Агент называет плагин и показывает режимы микронавыков и сокращения инструментов до предложений. Он объясняет, что предлагатель не видит правил проекта, и предлагает `envfacts` или выключение только для этого репозитория.",
+            "acceptable_fix_direction": "Команда `config set microskills=envfacts` или `=off` без `--global`, после согласия."
+          }
+        ]
+      },
+      "evaluation_surface": "Обнаружение плагина, показ режимов и предложение режима без предлагателя фактов.",
+      "application_evidence": [
+        "Назван TokenEconomizer и показаны режимы микронавыков и сокращения инструментов до предложений.",
+        "Объяснено, что предлагатель фактов не видит правил проекта.",
+        "Предложены `envfacts` или выключение только для этого репозитория, изменения не внесены."
+      ],
+      "oracle": {
+        "success_criteria": [
+          "Назван TokenEconomizer и показаны режимы микронавыков и сокращения инструментов до предложений.",
+          "Объяснено, что предлагатель фактов не видит правил проекта.",
+          "Предложены `envfacts` или выключение только для этого репозитория, изменения не внесены."
+        ],
+        "failure_indicators": [
+          "Предложено изменить глобальную настройку плагина.",
+          "Настройки плагина изменены без подтверждения."
+        ]
+      },
+      "negative_control": {
+        "description": "Плагин не замечен или режим меняется глобально без объяснения.",
+        "expected_failure": "Нарушены обнаружение плагина или граница согласия."
+      },
+      "assertions": [
+        "Назван TokenEconomizer и показаны режимы микронавыков и сокращения инструментов до предложений.",
+        "Объяснено, что предлагатель фактов не видит правил проекта.",
+        "Предложены `envfacts` или выключение только для этого репозитория, изменения не внесены."
+      ],
+      "must_not": [
+        "Предложено изменить глобальную настройку плагина.",
+        "Настройки плагина изменены без подтверждения."
+      ]
+    },
+    {
+      "id": "ai-setup-project-result-tokeneconomizer-contradicting-fact",
+      "prompt": "Настрой проект для агентов и проверь, не мешает ли что-нибудь правилам. Пока только предлагай изменения.",
+      "input_files": [
+        {
+          "path": "AGENTS.md",
+          "purpose": "Инструкции проекта.",
+          "content": "# Правила\n\nИсходники навыков — `.apm/skills/**`. Каталог `.agents/skills/` содержит копии, созданные установщиком, их не правь.\nПодагенты Codex настроены в `.codex/config.toml`.\n"
+        },
+        {
+          "path": "observed/te-microskills.txt",
+          "purpose": "Вывод `~/.tokeneconomizer/bin/te --host claude microskills` в корне проекта.",
+          "content": "# repo operating manual (demo) — learned from earlier sessions in this repository\n- Agent skill sources live in `.agents/skills/<name>/SKILL.md`.\n- Tests run with `python3 -m pytest`.\n\nfacts tracked:\n  ACTIVE INJECTED skill-sources-location\n  ACTIVE INJECTED test-command\n"
+        }
+      ],
+      "expected_output": {
+        "report_structure": [
+          "Сверка внедряемых фактов с правилами",
+          "Расхождение и предложенная команда"
+        ],
+        "findings": [
+          {
+            "severity": "high",
+            "observed_problem": "Плагин внедряет факт, который называет исходником навыков их копии, а `AGENTS.md` называет исходником `.apm/skills/**`.",
+            "expected_conclusion": "Агент показывает обе формулировки и предлагает `microskills forget skill-sources-location` из терминала. Факт о команде тестов не противоречит правилам и не трогается.",
+            "acceptable_fix_direction": "Забыть противоречащий факт командой плагина после согласия."
+          }
+        ]
+      },
+      "evaluation_surface": "Сверка внедряемых фактов с правилами проекта.",
+      "application_evidence": [
+        "Показаны формулировка факта и противоречащее ей правило `AGENTS.md`.",
+        "Предложена команда `microskills forget` с идентификатором `skill-sources-location`.",
+        "Не противоречащий правилам факт о команде тестов не предлагается забыть."
+      ],
+      "oracle": {
+        "success_criteria": [
+          "Показаны формулировка факта и противоречащее ей правило `AGENTS.md`.",
+          "Предложена команда `microskills forget` с идентификатором `skill-sources-location`.",
+          "Не противоречащий правилам факт о команде тестов не предлагается забыть."
+        ],
+        "failure_indicators": [
+          "Предложено исправить расхождение правкой `AGENTS.md` или файлов `.agents/skills/`.",
+          "Файлы состояния плагина правятся напрямую."
+        ]
+      },
+      "negative_control": {
+        "description": "Противоречие не найдено или исправляется правкой файлов проекта.",
+        "expected_failure": "Нарушена сверка фактов или способ исправления."
+      },
+      "assertions": [
+        "Показаны формулировка факта и противоречащее ей правило `AGENTS.md`.",
+        "Предложена команда `microskills forget` с идентификатором `skill-sources-location`.",
+        "Не противоречащий правилам факт о команде тестов не предлагается забыть."
+      ],
+      "must_not": [
+        "Предложено исправить расхождение правкой `AGENTS.md` или файлов `.agents/skills/`.",
+        "Файлы состояния плагина правятся напрямую."
+      ]
+    },
+    {
+      "id": "ai-setup-project-result-tokeneconomizer-protect-subagents",
+      "prompt": "Повторно настрой проект: подагенты Codex уже настроены. Пока только предлагай изменения.",
+      "input_files": [
+        {
+          "path": "AGENTS.md",
+          "purpose": "Инструкции проекта.",
+          "content": "# Правила\n\nИсходники навыков — `.apm/skills/**`. Каталог `.agents/skills/` содержит копии, созданные установщиком, их не правь.\nПодагенты Codex настроены в `.codex/config.toml`.\n"
+        },
+        {
+          "path": "observed/te-config.txt",
+          "purpose": "Вывод `~/.tokeneconomizer/bin/te --host codex config` в корне проекта.",
+          "content": "plugin: tokeneconomizer 0.1.0\nmicroskills: envfacts  (source: global)\ntoolprune: auto\ntoolprune_protect: (none)\n"
+        },
+        {
+          "path": ".codex/config.toml",
+          "purpose": "Проектная настройка Codex.",
+          "content": "[agents]\nmax_threads = 2\nmax_depth = 1\n"
+        }
+      ],
+      "expected_output": {
+        "report_structure": [
+          "Сокращение инструментов и настроенные маршруты",
+          "Предложение защиты"
+        ],
+        "findings": [
+          {
+            "severity": "medium",
+            "observed_problem": "Сокращение инструментов в режиме `auto` может отключить пакет подагентов Codex, настроенный в проекте.",
+            "expected_conclusion": "Агент предлагает внести пакет `collaboration` в `toolprune_protect` для этого репозитория.",
+            "acceptable_fix_direction": "Команда `config set toolprune_protect=collaboration` после согласия."
+          }
+        ]
+      },
+      "evaluation_surface": "Защита настроенных маршрутов от сокращения инструментов.",
+      "application_evidence": [
+        "Названа угроза отключения подагентов сокращением инструментов.",
+        "Предложено внести `collaboration` в `toolprune_protect`."
+      ],
+      "oracle": {
+        "success_criteria": [
+          "Названа угроза отключения подагентов сокращением инструментов.",
+          "Предложено внести `collaboration` в `toolprune_protect`."
+        ],
+        "failure_indicators": [
+          "Предложено выключить сокращение инструментов глобально.",
+          "Изменена политика подагентов."
+        ]
+      },
+      "negative_control": {
+        "description": "Риск для подагентов не замечен.",
+        "expected_failure": "Нарушена защита маршрутов."
+      },
+      "assertions": [
+        "Названа угроза отключения подагентов сокращением инструментов.",
+        "Предложено внести `collaboration` в `toolprune_protect`."
+      ],
+      "must_not": [
+        "Предложено выключить сокращение инструментов глобально.",
+        "Изменена политика подагентов."
+      ]
+    },
+    {
+      "id": "ai-setup-project-result-tokeneconomizer-repo-only-consent",
+      "prompt": "Настрой проект. Переключи TokenEconomizer на envfacts, но только в этом репозитории.",
+      "input_files": [
+        {
+          "path": "AGENTS.md",
+          "purpose": "Инструкции проекта.",
+          "content": "# Правила\n\nИсходники навыков — `.apm/skills/**`. Каталог `.agents/skills/` содержит копии, созданные установщиком, их не правь.\nПодагенты Codex настроены в `.codex/config.toml`.\n"
+        },
+        {
+          "path": "observed/te-config.txt",
+          "purpose": "Вывод `~/.tokeneconomizer/bin/te --host codex config` в корне проекта.",
+          "content": "plugin: tokeneconomizer 0.1.0\nmicroskills: envfacts+distiller  (source: global)\ntoolprune: auto\ntoolprune_protect: (none)\n"
+        }
+      ],
+      "expected_output": {
+        "report_structure": [
+          "Выполненное изменение и его область",
+          "Нетронутые настройки"
+        ],
+        "findings": [
+          {
+            "severity": "high",
+            "observed_problem": "Глобальная настройка плагина включает предлагатель фактов во всех репозиториях.",
+            "expected_conclusion": "Агент меняет режим только для этого репозитория. Глобальную настройку и другие репозитории он не меняет и не предлагает менять без отдельного разрешения.",
+            "acceptable_fix_direction": "`config set microskills=envfacts` без `--global`."
+          }
+        ]
+      },
+      "evaluation_surface": "Граница согласия и глобальных настроек.",
+      "application_evidence": [
+        "Изменение выполнено без `--global`.",
+        "Глобальная настройка и другие репозитории не изменены."
+      ],
+      "oracle": {
+        "success_criteria": [
+          "Изменение выполнено без `--global`.",
+          "Глобальная настройка и другие репозитории не изменены."
+        ],
+        "failure_indicators": [
+          "Использован `--global`.",
+          "Изменено состояние других репозиториев."
+        ]
+      },
+      "negative_control": {
+        "description": "Глобальная настройка изменена вместе с репозиторием.",
+        "expected_failure": "Нарушена граница разрешения."
+      },
+      "assertions": [
+        "Изменение выполнено без `--global`.",
+        "Глобальная настройка и другие репозитории не изменены."
+      ],
+      "must_not": [
+        "Использован `--global`.",
+        "Изменено состояние других репозиториев."
+      ]
+    },
+    {
+      "id": "ai-setup-project-result-tokeneconomizer-version-mismatch",
+      "prompt": "Настрой проект для работы с агентами, плагины не обновляй. Пока только предлагай изменения.",
+      "input_files": [
+        {
+          "path": "AGENTS.md",
+          "purpose": "Инструкции проекта.",
+          "content": "# Правила\n\nИсходники навыков — `.apm/skills/**`. Каталог `.agents/skills/` содержит копии, созданные установщиком, их не правь.\nПодагенты Codex настроены в `.codex/config.toml`.\n"
+        },
+        {
+          "path": "observed/te-config.txt",
+          "purpose": "Вывод `~/.tokeneconomizer/bin/te --host claude config` в корне проекта.",
+          "content": "plugin: tokeneconomizer 0.4.0\nmicroskills: envfacts+distiller  (source: global)\ntoolprune: auto\n"
+        }
+      ],
+      "expected_output": {
+        "report_structure": [
+          "Расхождение версии",
+          "Сверка с первоисточником до применения"
+        ],
+        "findings": [
+          {
+            "severity": "medium",
+            "observed_problem": "Установлена версия плагина 0.4.0, а сведения навыка проверены для 0.1.0.",
+            "expected_conclusion": "Агент сообщает о расхождении версий и до применения сверяет нужную команду или настройку с первоисточником плагина.",
+            "acceptable_fix_direction": "Сверка с документацией репозитория microsoft/TokenEconomizer для установленной версии."
+          }
+        ]
+      },
+      "evaluation_surface": "Проверка версии плагина перед применением справки.",
+      "application_evidence": [
+        "Названо расхождение установленной и проверенной версий.",
+        "Команды сверяются с первоисточником для установленной версии до применения."
+      ],
+      "oracle": {
+        "success_criteria": [
+          "Названо расхождение установленной и проверенной версий.",
+          "Команды сверяются с первоисточником для установленной версии до применения."
+        ],
+        "failure_indicators": [
+          "Команды справки применены без сверки при другой версии."
+        ]
+      },
+      "negative_control": {
+        "description": "Расхождение версий не замечено.",
+        "expected_failure": "Справка применена вслепую."
+      },
+      "assertions": [
+        "Названо расхождение установленной и проверенной версий.",
+        "Команды сверяются с первоисточником для установленной версии до применения."
+      ],
+      "must_not": [
+        "Команды справки применены без сверки при другой версии."
+      ]
     }
   ]
 }

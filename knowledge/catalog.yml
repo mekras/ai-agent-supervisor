@@ -65,3 +65,6 @@ sources:
   - id: PYAN
     title: "Аннотации Python: PEP 649, PEP 749 и справочник Python 3.14"
     path: data/pyan
+  - id: TKEC
+    title: "TokenEconomizer: документация и код плагина"
+    path: data/tkec

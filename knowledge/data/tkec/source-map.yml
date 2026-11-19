@@ -1,0 +1,55 @@
+source_id: TKEC
+long_source: true
+extraction_passport:
+  format: Markdown и Python, выбранные файлы репозитория
+  file_size_bytes: 191096
+  metadata_source: source.yml
+  extraction_tool: HTTPS, выделение разделов и фрагментов без смысловых преобразований
+  extraction_status: selected_units
+  content_hash_absence_reason: Хэши каждого снимка и фрагмента находятся в verification.yml.
+structure:
+  units:
+  - id: TKEC--plugin-readme
+    title: plugin/README.md — TokenEconomizer plugin README
+    order: 1
+    locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/plugin/README.md
+  - id: TKEC--plugin-design
+    title: 'docs/PLUGIN.md — The plugin: design and verified agent behaviour'
+    order: 2
+    locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/docs/PLUGIN.md
+  - id: TKEC--microskills-readme
+    title: tokeneconomizer/microskills/README.md — Micro-skills
+    order: 3
+    locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/README.md
+  - id: TKEC--fact-proposer
+    title: tokeneconomizer/microskills/distiller.py
+    order: 4
+    locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/distiller.py
+coverage:
+  units:
+  - unit_id: TKEC--plugin-readme
+    status: extracted
+    statements:
+    - pages/plugin-readme/statements.yml
+    scope: Before you start; Claude Code; Codex; Hermes Agent; What to expect; Commands; Settings
+    deferred: Остальные разделы относятся к оснасткам вне целей продукта или к необязательным механизмам.
+  - unit_id: TKEC--plugin-design
+    status: extracted
+    statements:
+    - pages/plugin-design/statements.yml
+    scope: 1. What it does, hook by hook; 4. State and privacy
+    deferred: §2, §3 и §5 описывают отличия от экспериментов, проверки по оснасткам и ограничения и не входят в
+      текущую задачу.
+  - unit_id: TKEC--microskills-readme
+    status: extracted
+    statements:
+    - pages/microskills-readme/statements.yml
+    scope: Весь файл
+  - unit_id: TKEC--fact-proposer
+    status: extracted
+    statements:
+    - pages/fact-proposer/statements.yml
+    scope: proposer_view; PROPOSER_SYSTEM и _GENERIC_HEAD; build_proposer_prompt; Distiller.render
+    deferred: Остальной код описывает детекторы, жизненный цикл и экспериментальные режимы и не входит в текущую
+      задачу.
+updated_at: '2026-11-19'

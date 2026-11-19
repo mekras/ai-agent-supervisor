@@ -1,0 +1,161 @@
+statement_contract_version: 2
+statements:
+- id: TKEC-032
+  source_id: TKEC
+  item_id: TKEC--fact-proposer
+  kind: fact
+  text: Подсказка предлагателя фактов в плагине просит выводить устойчивые факты о репозитории, в том числе о нужных
+    или ненужных шагах установки и генерации и о том, где лежат генерируемые, настраиваемые и вендорные файлы.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: _GENERIC_HEAD
+    limitations: Проверено по коду на коммите 4a04fe4. Установленная версия может отличаться.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: where generated, configured or vendored files live
+- id: TKEC-033
+  source_id: TKEC
+  item_id: TKEC--fact-proposer
+  kind: fact
+  text: 'Предлагатель получает сводки сессий: изменённые файлы, шаблоны команд, команды сборки, тестов и проверки,
+    неудачные команды со строкой ошибки и флаги — а не сырые журналы и содержимое файлов.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: _GENERIC_HEAD
+    limitations: Проверено по коду на коммите 4a04fe4. Установленная версия может отличаться.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: NOT raw logs or file contents
+- id: TKEC-034
+  source_id: TKEC
+  item_id: TKEC--fact-proposer
+  kind: inference
+  text: Функция `build_proposer_prompt` собирает подсказку из имени репозитория, уже известных фактов, имён признаков,
+    сводок сессий и необработанных фрагментов команд. Файлов инструкций репозитория, например `AGENTS.md` или `CLAUDE.md`,
+    среди её входов нет, поэтому предлагатель не может сверить факт с правилами проекта.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: build_proposer_prompt
+    limitations: Вывод сделан по сигнатуре и телу функции на одном коммите. Другие пути внедрения контекста плагином
+      отдельно не проверялись.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: weak
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Проверено по коду на коммите 4a04fe4. Установленная версия может отличаться.
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: def build_proposer_prompt(repo, window, existing, existing_feats, raw_excerpts,
+- id: TKEC-035
+  source_id: TKEC
+  item_id: TKEC--fact-proposer
+  kind: fact
+  text: У существующего факта предлагатель может изменить только условие противоречия. Повторная выдача идентификатора
+    с изменением утверждения, внедряемой строки или других полей отклоняется.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: PROPOSER_SYSTEM
+    limitations: Проверено по коду на коммите 4a04fe4. Установленная версия может отличаться.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Re-emitting an id while changing any other field is rejected
+- id: TKEC-036
+  source_id: TKEC
+  item_id: TKEC--fact-proposer
+  kind: fact
+  text: Внедряемый блок начинается заголовком `# repo operating manual (<имя репозитория>) — learned from earlier
+    sessions in this repository`, за которым каждый факт идёт отдельным пунктом списка.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Distiller.render
+    limitations: Проверено по коду на коммите 4a04fe4. Установленная версия может отличаться.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: — learned from earlier sessions in this repository
+- id: TKEC-037
+  source_id: TKEC
+  item_id: TKEC--fact-proposer
+  kind: fact
+  text: Подсказка требует формулировать внедряемую строку как утверждение о репозитории и запрещает формулировать
+    её как запрет исследования или использования инструментов.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: PROPOSER_SYSTEM
+    limitations: Проверено по коду на коммите 4a04fe4. Установленная версия может отличаться.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: NEVER phrase it as a prohibition on exploration or tool use

@@ -1,0 +1,36 @@
+verification_contract_version: 1
+artifact: normalized.local.md
+hash:
+  algorithm: sha256
+  value: fba31c2c4ae2cb823e1bc1d4f58619d207f29413c0630c1547042d42f996a20d
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-11-19'
+  locator: https://raw.githubusercontent.com/microsoft/TokenEconomizer/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/docs/PLUGIN.md
+  resolved_locator: https://raw.githubusercontent.com/microsoft/TokenEconomizer/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/docs/PLUGIN.md
+  raw_sha256: af00f7be65f00560c8819c17cc17b5ad2fd0c3fd60f77252be682c348108fdd5
+verification:
+  method: acquisition_check
+  checked_at: '2026-11-19'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: fragment
+    fragment: 1. What it does, hook by hook; 4. State and privacy
+    metadata:
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: partial
+    metadata:
+      locator: verified
+      author: unverified
+      publication_date: unverified
+  evidence:
+  - Файл получен по HTTPS с raw.githubusercontent.com по зафиксированному коммиту. Исходные байты сохранены в raw.local.md.gz,
+    raw_sha256 относится к распакованным байтам.
+  - Нормализованный снимок составлен из выбранных частей без изменения текста. Выдержки утверждений найдены в нём
+    дословно.
+  limitations:
+  - Проверены только выбранные части. Это не независимая проверка и не испытание установленного плагина.

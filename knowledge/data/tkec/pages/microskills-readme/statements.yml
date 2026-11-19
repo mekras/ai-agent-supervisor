@@ -1,0 +1,84 @@
+statement_contract_version: 2
+statements:
+- id: TKEC-029
+  source_id: TKEC
+  item_id: TKEC--microskills-readme
+  kind: fact
+  text: 'Слой `envfacts` формирует кандидаты без вызова модели из пяти видов повторяющихся свидетельств: исправление
+    формы команды, отказ сетевого доступа к узлу, пустые запросы к VCS, исправленный аргумент теста и недостающая
+    переменная окружения.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Micro-skills
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: "turns recurring shapes of evidence into candidate facts, with no\n   model call"
+- id: TKEC-030
+  source_id: TKEC
+  item_id: TKEC--microskills-readme
+  kind: fact
+  text: Ручное забывание (`te microskills forget`) убирает факт из блока и заносит идентификатор в множество забытых,
+    поэтому факт больше не формируется под этим идентификатором. Предлагатель также отклоняет новый идентификатор,
+    который подтверждается только свидетельствами забытого факта.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Micro-skills
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: "the proposer's\n   admission also refuses a new id that confirms only on the forgotten fact's evidence"
+- id: TKEC-031
+  source_id: TKEC
+  item_id: TKEC--microskills-readme
+  kind: fact
+  text: Блок фактов ограничен по числу и размеру, а проверка отклоняет любой факт, который читается как совет о
+    завершении или проверке работы.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Micro-skills
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'a lint refuses any
+
+    fact that reads as completion or verification advice'

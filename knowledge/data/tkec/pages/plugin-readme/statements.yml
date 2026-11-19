@@ -1,0 +1,545 @@
+statement_contract_version: 2
+statements:
+- id: TKEC-001
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: 'Микронавыки (`microskills`) по умолчанию выключены. Значение `on` означает `envfacts+distiller`: факты
+    без вызовов модели и предлагатель фактов на основе модели. Допустимы также `off`, `envfacts` (только факты без
+    вызовов модели) и `distiller` (только предлагатель).'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Settings
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: '`envfacts+distiller`: facts found without model calls, plus a model proposing facts'
+- id: TKEC-002
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Настройки плагина задаются для текущего репозитория или для всех репозиториев с `--global` и общие для всех
+    агентов, работающих в репозитории. Для одной сессии побеждает переменная окружения `TE_<ИМЯ>`, затем настройки
+    репозитория, затем глобальные, затем значения по умолчанию. `config unset` возвращает на один уровень назад.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Settings
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'Otherwise the repository''s
+
+    settings win over the global ones, and those over the defaults; `unset` goes back one level.'
+- id: TKEC-003
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: 'Изменение настройки вступает в силу со следующего вызова хука: для фактов и списка запрета — со следующего
+    старта сессии. `TE_DISABLE=1` выключает плагин для одной сессии, а `TE_MICROSKILLS` меняет режим микронавыков
+    для неё.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Settings
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'facts and the
+
+    deny list at the next session start'
+- id: TKEC-004
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: 'Плагин можно включить только в выбранных репозиториях: выключить глобально через `config set enabled=false
+    --global` и включить в нужном репозитории через `config set enabled=true`. В выключенном репозитории плагин
+    ничего не записывает.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Settings
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: in a repository left off, the plugin records nothing
+- id: TKEC-005
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: 'Предлагатель фактов запускается раз в `microskills_propose_every` сессий (по умолчанию 3). Модель читает
+    сводки недавних сессий: выполненные команды, изменённые файлы, неудачные команды со строкой ошибки — и пишет
+    факты о репозитории с шаблонами, которые проверяют их на следующих сессиях.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: What to expect
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: reads digests of the recent sessions
+- id: TKEC-006
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Факт становится активным после подтверждения в трёх сессиях и внедряется при каждом старте сессии, пока
+    предотвращаемая им ошибка продолжает встречаться или предотвращаться минимум в 40% применимых сессий (не менее
+    четырёх). Факт снимается, если сессия ему противоречит (для факта о написании команды — две сессии подряд).
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: What to expect
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: A fact becomes active once three sessions confirm it
+- id: TKEC-007
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Возобновлённая сессия сохраняет дословно те факты, с которыми она началась, чтобы не нарушить кэш подсказки.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: What to expect
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: "A resumed\n  session keeps the facts it started with, word for word"
+- id: TKEC-008
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: 'Каждая оснастка обучается отдельно: факты, выученные Claude Code в репозитории, не используются Codex в
+    том же репозитории. Настройки при этом общие для всех оснасток.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: What to expect
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'what Claude Code learned in a
+
+    repository is not used by Codex there'
+- id: TKEC-009
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: В Claude Code однострочные сообщения плагина, включая сообщение о добавленных фактах, видны только в подробной
+    расшифровке (Ctrl+O).
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Claude Code
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'Claude Code shows the plugin''s one-line messages (facts added,
+
+    tools left out) only in its detailed transcript'
+- id: TKEC-010
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Команда `microskills` показывает внедряемые факты и формирующиеся кандидаты. `microskills forget ID …` прекращает
+    внедрять факты с этими идентификаторами и больше не выучивает их под тем же идентификатором и на тех же свидетельствах.
+    `microskills unforget ID …` возвращает забытые факты.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Commands
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: stop injecting the facts with these ids
+- id: TKEC-011
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: '`microskills forget` и `unforget` выполняются только из терминала, например `~/.tokeneconomizer/bin/te
+    --host claude microskills forget ID`: для них нет команды с косой чертой или навыка Codex. Идентификатор с пробелами
+    или спецсимволами нужно заключить в кавычки.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Commands
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: '`doctor`, `history`, `repomap` and `microskills forget`/`unforget` run from a terminal'
+- id: TKEC-012
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Команда плагина внутри агента стоит один ход модели, а из терминала выполняется без затрат. Лаунчер `~/.tokeneconomizer/bin/te`
+    появляется после первой сессии.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Commands
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Inside an agent, each command is one model turn; from a terminal it costs nothing.
+- id: TKEC-013
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: '`microskills_max_facts` (по умолчанию 4) ограничивает только факты из повторяющихся ошибок. Факты предлагателя
+    этим ограничением не охвачены. `microskills_max_tokens` (по умолчанию 150) задаёт размер блока этих фактов.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Settings
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: the proposer's facts are not capped
+- id: TKEC-014
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Сокращение инструментов (`toolprune`) в режиме `auto` исключает долго не используемые инструменты без вопроса
+    человеку. В Claude Code правила запрета записываются в `.claude/settings.local.json` репозитория, созданный
+    плагином файл добавляется в `.git/info/exclude`, а правила запрета, написанные человеком, плагин не трогает.
+    Режим `toolprune=propose` только предлагает список до `toolprune apply`.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Claude Code
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: The deny rules go into this repository's `.claude/settings.local.json`
+- id: TKEC-015
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Настройка `toolprune_protect` перечисляет инструменты (имена или шаблоны) или пакеты возможностей Codex,
+    которые плагин никогда не исключает. Добавленное ранее плагином правило для такого инструмента снимается при
+    следующей обработке.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Settings
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: tools never left out however long they go unused
+- id: TKEC-016
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: 'В Codex список запрета пишется в `.codex/config.toml` проекта и может выключить пакеты подагентов (`collaboration`),
+    `goals` и изображений (`image_media`) после достаточного периода неиспользования. В `config.toml`, который хранится
+    в Git репозитория, плагин не пишет: список остаётся предложением.'
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Codex
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'never into a `config.toml` your repository
+
+    commits'
+- id: TKEC-017
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: В Codex команды плагина доступны как навыки `$tokeneconomizer:<команда>`. Вопрос обычными словами может
+    получить ответ по файлам плагина без запуска команды. Команды, меняющие состояние, пишут в `~/.tokeneconomizer`
+    и требуют подтверждения выхода из песочницы.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Codex
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Name the skill rather than asking in plain words
+- id: TKEC-018
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Для Hermes Agent плагин экспериментален и поддерживает только микронавыки и защиту от зацикливания, без
+    сокращения инструментов. Команды выполняются из терминала, микронавыки по умолчанию выключены, переменные `TE_`
+    доходят до плагина только после перезапуска шлюза Hermes.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Hermes Agent
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Experimental, and narrower than the other agents
+- id: TKEC-019
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: В Hermes блок микронавыков должен помещаться в раздел подсказки размером 4000 знаков. Значительно больший
+    блок отбрасывается с предупреждением в журнале Hermes.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Hermes Agent
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Micro-skills' block must fit Hermes's 4,000-character prompt section
+- id: TKEC-020
+  source_id: TKEC
+  item_id: TKEC--plugin-readme
+  kind: fact
+  text: Плагину нужен Python 3.10 или новее. Установленный плагин работает из клона репозитория, поэтому клон нельзя
+    перемещать или удалять.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: Before you start
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'Keep the clone where it is: the installed plugin runs from it.'

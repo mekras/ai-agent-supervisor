@@ -1,0 +1,212 @@
+statement_contract_version: 2
+statements:
+- id: TKEC-021
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: На событии `SessionStart` плагин внедряет микронавыки репозитория как `additionalContext` (кэшированный
+    готовый текст), а об изменённых фактах сообщает одной строкой `systemMessage`.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. What it does, hook by hook
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Injects the repository's micro-skills (a cached render) as `additionalContext`
+- id: TKEC-022
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: На событии `SessionEnd` плагин передаёт сессию отдельному процессу `te fold`, который обновляет микронавыки,
+    сокращение инструментов и учёт затрат.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. What it does, hook by hook
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Hands the session to a detached `te fold`
+- id: TKEC-023
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: Все хуки плагина при ошибке пропускают работу без изменений и пишут трассировку в `~/.tokeneconomizer/errors.log`.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 1. What it does, hook by hook
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: Every hook fails open
+- id: TKEC-024
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: Всё состояние плагина хранится локально в `$TOKENECONOMIZER_HOME` (по умолчанию `~/.tokeneconomizer`), отдельно
+    для каждого репозитория и оснастки. Удаление плагина оставляет этот каталог.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. State and privacy
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: All state is local, under `$TOKENECONOMIZER_HOME`
+- id: TKEC-025
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: Репозиторий с удалённым `origin` определяется по нему, поэтому все клоны, рабочие деревья и повторные клоны
+    одного репозитория разделяют выученное.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. State and privacy
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: every clone, worktree and re-clone shares what was learned
+- id: TKEC-026
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: Выученный факт — это текст, внедряемый в контекст агента и выведенный из вывода команд, который контролирует
+    репозиторий. Факты предлагателя формулируются свободно. Для недоверенного репозитория документация советует
+    оставить микронавыки выключенными или использовать `microskills=envfacts` и читать выученное через `te microskills`.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. State and privacy
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: On a repository you do not trust, leave micro-skills off
+- id: TKEC-027
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: Вызовы модели предлагателя и судьи отправляют сводки — шаблоны команд, имена изменённых файлов, строки ошибок
+    с маскированными путями — без содержимого файлов через CLI агента пользователя и оплачиваются там же, где сессия.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. State and privacy
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: never file contents
+- id: TKEC-028
+  source_id: TKEC
+  item_id: TKEC--plugin-design
+  kind: fact
+  text: Запись списка запрета отказывается работать с путём `.claude`, `.codex` или `.github`, который является
+    символической ссылкой за пределы репозитория, и не перезаписывает файл настроек, который не удаётся разобрать.
+  artifact: normalized.local.md
+  checked_at: '2026-11-19'
+  scope:
+    section_title: 4. State and privacy
+    limitations: Проверено по документации на коммите 4a04fe4, не испытанием установленной оснастки.
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Самопроверка корневым агентом, независимая проверка не выполнялась.
+  open_questions: []
+  excerpt: 'refuses to edit a settings file that does not
+
+    parse rather than write over it'

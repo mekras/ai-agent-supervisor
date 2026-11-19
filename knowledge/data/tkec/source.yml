@@ -1,0 +1,78 @@
+id: TKEC
+slug: tkec
+title: 'TokenEconomizer: документация и код плагина (microsoft/TokenEconomizer)'
+status: approved
+priority: normal
+carrier_type: repository
+source_kind: reference
+long_source: true
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Точечно получить выбранные файлы репозитория microsoft/TokenEconomizer по зафиксированному
+    коммиту через raw.githubusercontent.com. Сверить хэши и индекс. Не обходить весь репозиторий и не
+    менять локальную установку плагина.
+  write_scope:
+  - knowledge/data/tkec/
+  allowed_operations:
+  - index
+  - fetch
+  - verify
+storage_strategy: index_only
+processing_scope: selected_fragments
+retrieval_mode: on_demand
+copy_policy: local_only
+allowed_use: Собственные краткие формулировки фактов о настройке и поведении плагина с атрибуцией и указанием
+  коммита. Полные снимки только локально.
+requires_access_check: true
+url: https://github.com/microsoft/TokenEconomizer
+locator: https://github.com/microsoft/TokenEconomizer/tree/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91
+public_reference: https://github.com/microsoft/TokenEconomizer
+license_or_terms: MIT License, Copyright (c) 2026 Microsoft (LICENSE в корне репозитория). См. knowledge/source-attribution.md.
+access:
+  default: Публичный репозиторий GitHub, доступ без авторизации.
+reliability: official
+stability: mutable
+refresh_policy: Перепроверить при обновлении установленного плагина, при выпуске новой версии и перед
+  изменением навыков, которые настраивают плагин или разбирают его внедрения в контекст.
+retrieved_at: '2026-11-19'
+last_checked_at: '2026-11-19'
+scope:
+  includes:
+  - 'plugin/README.md: Before you start, Claude Code, Codex, Hermes Agent, What to expect, Commands, Settings.'
+  - 'docs/PLUGIN.md: §1 What it does, hook by hook и §4 State and privacy.'
+  - tokeneconomizer/microskills/README.md целиком.
+  - 'tokeneconomizer/microskills/distiller.py: proposer_view, подсказка предлагателя фактов, build_proposer_prompt
+    и Distiller.render.'
+  excludes:
+  - Остальные разделы и файлы репозитория, эксперименты и исследовательская статья.
+  - Оснастки вне целей продукта (Copilot, Pi, Cursor, Grok, opencode, Antigravity, Factory Droid).
+  - Локальное состояние плагина на машине пользователя и рабочие диалоги.
+normalization:
+  required: true
+  input: Исходные файлы репозитория на коммите 4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91.
+  output: pages/<slug>/normalized.local.md — выбранные разделы или фрагменты кода без изменения текста.
+  selection: Только перечисленные scope.includes.
+known_limitations:
+- Снимок взят с ветки main на 2026-11-19. Установленный у пользователя плагин версии 0.1.0 соответствует
+  более раннему коммиту b57d03f81585a18b936a0eaecbd1eb51cdcecf71, его документация по выбранным темам отличается
+  только разделом Hermes Agent.
+- Поведение описано по документации и коду, а не испытанием установленной оснастки.
+- Hermes Agent поддерживается плагином как экспериментальная оснастка.
+provenance:
+  origin: external_material
+  locator: https://github.com/microsoft/TokenEconomizer/tree/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-tokeneconomizer-2026-11-19.yml
+    sha256: f1ed4568cc74fcfde30d422f7577bf1ab9438a731d7425aad3729b4016bb9335
+use_policy:
+  action: read_and_store_selected_facts
+  status: permitted
+  basis: MIT License в корне репозитория на зафиксированном коммите проверена 2026-11-19. Лицензия разрешает
+    копирование и распространение при сохранении уведомления об авторском праве и текста лицензии.
+  scope: Четыре выбранные единицы. Собственные формулировки фактов, ссылки и короткие выдержки.
+  checked_at: '2026-11-19'
+  restrictions:
+  - Полные первичные и нормализованные снимки хранятся только в исключённом из Git локальном слое.
+  - При публикации существенной части текста сохранять уведомление MIT License.

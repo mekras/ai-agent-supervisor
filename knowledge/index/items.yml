@@ -949,6 +949,34 @@ items:
   date_published: null
   workflow_stage: source_checked
   access: Публичный официальный источник, полные снимки локальны.
+- id: TKEC--plugin-readme
+  source_id: TKEC
+  path: data/tkec/pages/plugin-readme
+  title: TokenEconomizer plugin README
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный репозиторий под MIT License. Полные снимки только локально.
+- id: TKEC--plugin-design
+  source_id: TKEC
+  path: data/tkec/pages/plugin-design
+  title: 'The plugin: design and verified agent behaviour'
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный репозиторий под MIT License. Полные снимки только локально.
+- id: TKEC--microskills-readme
+  source_id: TKEC
+  path: data/tkec/pages/microskills-readme
+  title: Micro-skills
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный репозиторий под MIT License. Полные снимки только локально.
+- id: TKEC--fact-proposer
+  source_id: TKEC
+  path: data/tkec/pages/fact-proposer
+  title: tokeneconomizer/microskills/distiller.py
+  date_published: null
+  workflow_stage: source_checked
+  access: Публичный репозиторий под MIT License. Полные снимки только локально.
 - id: VSCD--custom-instructions
   source_id: VSCD
   path: data/vscd/pages/custom-instructions

@@ -89,6 +89,7 @@ stages:
 # операцией: manual и агентные маршруты не выдаются за исполняемые адаптеры.
 adapters: {}
 
-# Производные индексы пересобираются через
-# ``python3 tools/rebuild-corpus-indexes.py``. Мост приводит базовый каталог
-# путей к договору корпуса, не изменяя установленные APM-зависимости.
+# Производные индексы пересобираются установленным контроллером:
+# ``python3 .agents/skills/kc-pipeline/scripts/run-corpus-operations.py knowledge
+# --operations knowledge/operations.yml --rebuild-indexes``. С версии 0.19.6
+# пакета project-knowledge-corpus он сам пишет пути относительно корня корпуса.

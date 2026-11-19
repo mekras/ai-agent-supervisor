@@ -1,0 +1,36 @@
+verification_contract_version: 1
+artifact: normalized.local.md
+hash:
+  algorithm: sha256
+  value: 7544ac78da6151154908410f7f091f77b163462349b37c4c8d15aa12aa0c428d
+acquisition:
+  method: adapter_fetch
+  recorded_at: '2026-11-19'
+  locator: https://raw.githubusercontent.com/microsoft/TokenEconomizer/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/distiller.py
+  resolved_locator: https://raw.githubusercontent.com/microsoft/TokenEconomizer/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/distiller.py
+  raw_sha256: b8c514ac4d1aa44a719b90586072be90e050569a5ad7b82f30fa36a1b1211c91
+verification:
+  method: acquisition_check
+  checked_at: '2026-11-19'
+  checked_by:
+    role: Корневой агент, самопроверка
+  scope:
+    content: fragment
+    fragment: proposer_view; PROPOSER_SYSTEM и _GENERIC_HEAD; build_proposer_prompt; Distiller.render
+    metadata:
+    - locator
+  result:
+    overall: partially_verified
+    content_match: verified
+    scope_completeness: partial
+    metadata:
+      locator: verified
+      author: unverified
+      publication_date: unverified
+  evidence:
+  - Файл получен по HTTPS с raw.githubusercontent.com по зафиксированному коммиту. Исходные байты сохранены в raw.local.py.gz,
+    raw_sha256 относится к распакованным байтам.
+  - Нормализованный снимок составлен из выбранных частей без изменения текста. Выдержки утверждений найдены в нём
+    дословно.
+  limitations:
+  - Проверены только выбранные части. Это не независимая проверка и не испытание установленного плагина.
