@@ -123,6 +123,17 @@
 запускай `py_compile` или `compileall` над `.apm`, `.agents`, `.claude`,
 `.codex` и `tools`, даже с ключом `-B` или `PYTHONDONTWRITEBYTECODE=1`.
 
+`tools/run-apm-safe.py` выполняет `apm install --frozen` и не меняет версии
+зависимостей: при изменении графа в `apm.lock.yaml` он останавливается. Если
+задача требует обновить зависимости APM, выполни из корня проекта
+с `PYTHONDONTWRITEBYTECODE=1`:
+
+1. `python3 tools/validate-python-artifacts.py`. Барьер нужен до того, как APM
+   скопирует исходники в проекции и закрепит их в `apm.lock.yaml`.
+2. `apm update --yes`.
+3. `python3 tools/apm-audit-ci`.
+4. `apm run tests`. Проверки повторяют барьер до и после остальных проверок.
+
 ## Концепция проекта
 
 Концепция проекта закреплена в [docs/concept.md](docs/concept.md). Перед

@@ -1619,6 +1619,62 @@
           "requirement_basis": [
             "docs/requirements/REQ-0044.md"
           ]
+        },
+        {
+          "id": "ai-setup-apm-result-dependency-update-within-range",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-dependency-update-not-frozen-install",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-dependency-update-mixed-self-application",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-dependency-update-unconfirmed-drift",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-dependency-update-latest-outside-range",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-dependency-update-without-target-version",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-setup-apm-result-dependency-update-portable-route",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
         }
       ]
     },
