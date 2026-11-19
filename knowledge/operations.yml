@@ -4,6 +4,9 @@ operations_version: 1
 # публикуемого корпуса.
 report:
   path: .local/reports/corpus-operations.md
+# Находки анализа влияния, по которым контроллер проверяет покрытие дельты.
+impact_report:
+  path: .local/reports/impact-findings.yml
 run_state:
   path: .local/state/corpus-pipeline.json
 human_attention:
