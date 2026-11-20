@@ -151,8 +151,12 @@ def main() -> int:
         assert upgraded.returncode == 0, upgraded.stderr
         assert "Keep before." in entrypoint.read_text() and "Keep after." in entrypoint.read_text()
         assert canonical in entrypoint.read_text()
-        # Оба штатных фрагмента до самостоятельной проверки распознаются точно.
-        for filename in ("legacy-brief-entrypoint.md", "legacy-storage-entrypoint.md"):
+        # Прежние штатные фрагменты распознаются точно.
+        for filename, needle in (
+            ("legacy-brief-entrypoint.md", "Обязательную"),
+            ("legacy-storage-entrypoint.md", "Обязательную"),
+            ("legacy-route-message-entrypoint.md", "Обозначайте самопроверку"),
+        ):
             previous = (FIXTURE / filename).read_text(encoding="utf-8")
             entrypoint.write_text("Keep before.\n" + previous + "Keep after.\n", encoding="utf-8")
             config_before = config.read_bytes()
@@ -165,7 +169,8 @@ def main() -> int:
             assert run(config, entrypoint).returncode == 0
             assert entrypoint.read_bytes() == stable
             # Изменённая пользователем версия не становится штатной по сходству.
-            entrypoint.write_text(previous.replace("Обязательную", "Проектную обязательную"), encoding="utf-8")
+            assert needle in previous
+            entrypoint.write_text(previous.replace(needle, "Проектно " + needle.lower()), encoding="utf-8")
             custom = entrypoint.read_bytes()
             assert run(config, entrypoint).returncode != 0
             assert entrypoint.read_bytes() == custom and config.read_bytes() == config_before

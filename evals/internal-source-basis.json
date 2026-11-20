@@ -351,6 +351,15 @@
           "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0050. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
         },
         {
+          "id": "ai-agents-md-maintenance-result-move-rule-map-on-request",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0050.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия 3 REQ-0050 в редакции 2026-11-20: место каждого перенесённого правила выдаётся по запросу. Наличие сценария не подтверждает модельное исполнение."
+        },
+        {
           "id": "ai-agents-md-maintenance-result-local-notes-disable-agents-md",
           "required_claims": [],
           "finding_claims": [],
@@ -4372,6 +4381,16 @@
             "docs/requirements/REQ-0032.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-work-control-result-ask-only-unknown-boundary",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Регрессионный случай сверки навыка по REQ-0052.1: вопрос только о неустановленном сведении, от которого зависит ближайшее действие, вместо обязательного опроса. Наличие сценария не подтверждает модельное исполнение."
         }
       ]
     },
@@ -4612,6 +4631,15 @@
             "docs/requirements/REQ-0025.md"
           ],
           "basis_explanation": "Критерии 4–10 принятого требования задают актуальные основания, оценку по критериям, различение дефекта, недостатка свидетельств и процедурного пропуска, а также оставшиеся действия. Сценарий не является свидетельством модельного исполнения."
+        },
+        {
+          "id": "ai-work-result-evaluation-result-partial-dependency-breakdown-on-request",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0025.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия 2 раздела «Сообщение о повторной оценке» REQ-0025: разбор по каждому критерию выдаётся по запросу. Наличие сценария не подтверждает модельное исполнение."
         },
         {
           "id": "ai-work-result-evaluation-result-stale-evidence-current-state-unavailable",
@@ -5008,6 +5036,15 @@
               "PARENT-003"
             ]
           ]
+        },
+        {
+          "id": "ai-usage-analysis-result-summary-starts-with-findings",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Регрессионный случай сверки навыка по REQ-0052.1: итог анализа применения начинается с выводов, охват служит основанием уверенности. Наличие сценария не подтверждает модельное исполнение."
         }
       ]
     },
@@ -5590,6 +5627,15 @@
           "requirement_basis": [
             "docs/requirements/REQ-0036.md"
           ]
+        },
+        {
+          "id": "ai-model-analysis-result-summary-starts-with-result",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Регрессионный случай сверки навыка по REQ-0052.1: итог анализа начинается с результата и ссылается на отбор сведений навыка общения. Наличие сценария не подтверждает модельное исполнение."
         }
       ]
     },
@@ -6098,6 +6144,16 @@
           "basis_explanation": "Проверочный случай критерия приёмки 6 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
         },
         {
+          "id": "ai-human-communication-result-procedure-term-explained",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 11 REQ-0052: термин процедуры заменён обычными словами или пояснён. Наличие сценария не подтверждает модельное исполнение."
+        },
+        {
           "id": "ai-human-communication-result-handoff-text-form",
           "required_claims": [],
           "finding_claims": [],
@@ -6260,6 +6316,24 @@
             "docs/requirements/REQ-0039.md"
           ],
           "basis_explanation": "Проверочный случай уточнения REQ-0039 от 2026-11-20 о тексте для передачи другому агенту, критерии 1 и 2. Наличие сценария не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-session-handoff-result-codes-named",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия 10 REQ-0006: сущности в пакете названы понятными словами, коды рядом. Наличие сценария не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-session-handoff-result-foreign-answer-form",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0006.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия 11 REQ-0006: шаблон ответа прежней процедуры не переносится, просьба пользователя о форме сохраняется. Наличие сценария не подтверждает модельное исполнение."
         }
       ]
     },
