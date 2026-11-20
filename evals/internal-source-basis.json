@@ -2264,7 +2264,8 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ]
         },
         {
@@ -2290,7 +2291,8 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ]
         },
         {
@@ -2304,7 +2306,8 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ]
         },
         {
@@ -2390,10 +2393,41 @@
         {
           "id": "ai-setup-project-result-human-communication-messages-only",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
+        },
+        {
+          "id": "ai-setup-project-result-human-communication-foreign-procedure-only",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 8 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-setup-project-result-human-communication-claude-misses-agents-md",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 9 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-setup-project-result-human-communication-direct-rule-kept",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 10 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
         },
         {
           "id": "ai-setup-project-result-hermes-no-project",
@@ -4156,6 +4190,60 @@
             "docs/requirements/REQ-0014.md",
             "docs/requirements/REQ-0020.md"
           ]
+        },
+        {
+          "id": "ai-skill-development-result-new-skill-overloaded-summary",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 1 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-skill-development-result-review-finds-stage-listing",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 2 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-skill-development-result-other-section-edit-reports-finding",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 2 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-skill-development-result-accepted-requirement-human-text",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 3 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-skill-development-result-machine-only-skill-no-communication-check",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 4 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-skill-development-result-shared-section-change-dependents",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 5 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
         }
       ]
     },
@@ -5988,6 +6076,35 @@
             "docs/requirements/REQ-0039.md"
           ],
           "basis_explanation": "Согласованный критерий точности с учётом назначения текста: обычное описание пользы после настройки и неподтверждённые гарантии оцениваются по разным основаниям."
+        },
+        {
+          "id": "ai-human-communication-result-final-after-long-work",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 6 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-human-communication-result-long-work-exact-codes",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверочный случай критерия приёмки 6 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-human-communication-result-handoff-text-form",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверочный случай уточнения REQ-0039 от 2026-11-20 о тексте для передачи другому агенту, критерий 3. Наличие сценария не подтверждает модельное исполнение."
         }
       ]
     },
@@ -6134,6 +6251,15 @@
             "docs/requirements/REQ-0006.md"
           ],
           "basis_explanation": "REQ-0006.1 и REQ-0006.2: сохранение подтверждённых решений, особых ограничений и состояния согласованной работы. Изменение согласовано пользователем 2026-11-06. Проверяется критерий 9. Исполнение моделью не подтверждено."
+        },
+        {
+          "id": "ai-session-handoff-result-code-block-request",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "basis_explanation": "Проверочный случай уточнения REQ-0039 от 2026-11-20 о тексте для передачи другому агенту, критерии 1 и 2. Наличие сценария не подтверждает модельное исполнение."
         }
       ]
     },
