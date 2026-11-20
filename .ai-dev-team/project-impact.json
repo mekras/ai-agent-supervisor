@@ -156,9 +156,6 @@
         "subagents.local.toml",
         ".gitignore",
         "evals.sample.yml",
-        "docs/agent-work/subagents.md",
-        "docs/agent-work/apm.md",
-        "docs/agent-work/release.md",
         "ai-subagent-launcher.local",
         ".ai-dev-team/exceptions/**"
       ],

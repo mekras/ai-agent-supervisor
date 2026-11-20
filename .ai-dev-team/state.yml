@@ -88,8 +88,6 @@ setup:
     execution_input_paths:
       - AGENTS.md
       - .claude/CLAUDE.md
-      - docs/agent-work/apm.md
-      - docs/agent-work/release.md
       - apm.yml
       - apm.lock.yaml
       - .gitignore
