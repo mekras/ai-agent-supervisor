@@ -294,7 +294,8 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 
 #### [ai-usage-analysis](.apm/skills/ai-usage-analysis/README.md)
 
-Накапливает наблюдения о реальном применении ИИ по локальным сессиям.
+Накапливает наблюдения о реальном применении ИИ по локальным сессиям
+и находит причины резкого роста расхода.
 
 Примеры запросов:
 
@@ -304,6 +305,10 @@ apm install ai-agent-supervisor@mekras#2.9.0 --target codex
 
 ```text
 Проанализируй все локальные сессии по всем проектам.
+```
+
+```text
+Почему вчера резко вырос расход лимита? Разберись по сессиям.
 ```
 
 #### [ai-work-control](.apm/skills/ai-work-control/README.md)

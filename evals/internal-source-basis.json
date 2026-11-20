@@ -367,6 +367,24 @@
             "docs/requirements/REQ-0051.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-apm-rules-lazy-load-source",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0053.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0053. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-new-rule-at-lazy-load-limit",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0053.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0053. Учебный случай не подтверждает модельное исполнение."
         }
       ]
     },
@@ -962,6 +980,15 @@
             "docs/requirements/REQ-0051.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-claude-large-lazy-instruction-load",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0053.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0053. Учебный случай не подтверждает модельное исполнение."
         }
       ]
     },
@@ -5045,6 +5072,24 @@
             "docs/requirements/REQ-0052.md"
           ],
           "basis_explanation": "Регрессионный случай сверки навыка по REQ-0052.1: итог анализа применения начинается с выводов, охват служит основанием уверенности. Наличие сценария не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-usage-analysis-result-cost-spike-lazy-load",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0053.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0053. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-usage-analysis-result-subagents-default-model",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0053.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0053. Учебный случай не подтверждает модельное исполнение."
         }
       ]
     },

@@ -1494,6 +1494,377 @@
       "must_not": [
         "Не копировать текст AGENTS.md в другой файл инструкций."
       ]
+    },
+    {
+      "id": "ai-agents-md-maintenance-result-apm-rules-lazy-load-source",
+      "prompt": "Claude Code сбрасывает кэш, когда агент впервые заходит в docs/kb. Уменьши подгрузку правил там. Правки в docs/kb разрешены.",
+      "input_files": [
+        {
+          "path": "docs/kb/apm.yml",
+          "content": "name: kb\nversion: 0.1.0\ntargets:\n  - claude\n",
+          "purpose": "Подпроект базы знаний развёртывает свои инструкции через APM."
+        },
+        {
+          "path": "docs/kb/CLAUDE.md",
+          "content": "# База знаний\n\n- Страницы пиши по шаблону раздела.\n",
+          "purpose": "Инструкции вложенного каталога."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-01.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 01\n---\n\n- Требование 01 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-02.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 02\n---\n\n- Требование 02 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-03.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 03\n---\n\n- Требование 03 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-04.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 04\n---\n\n- Требование 04 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-05.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 05\n---\n\n- Требование 05 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-06.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 06\n---\n\n- Требование 06 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-07.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 07\n---\n\n- Требование 07 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-08.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 08\n---\n\n- Требование 08 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-09.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 09\n---\n\n- Требование 09 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-10.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 10\n---\n\n- Требование 10 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-11.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 11\n---\n\n- Требование 11 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-12.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 12\n---\n\n- Требование 12 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-13.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 13\n---\n\n- Требование 13 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-14.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 14\n---\n\n- Требование 14 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-15.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 15\n---\n\n- Требование 15 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-16.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 16\n---\n\n- Требование 16 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-17.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 17\n---\n\n- Требование 17 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.apm/instructions/kb-18.instructions.md",
+          "content": "---\ndescription: Правило базы знаний 18\n---\n\n- Требование 18 к страницам базы знаний.\n",
+          "purpose": "Исходная инструкция подпроекта."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-01.md",
+          "content": "- Требование 01 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-02.md",
+          "content": "- Требование 02 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-03.md",
+          "content": "- Требование 03 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-04.md",
+          "content": "- Требование 04 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-05.md",
+          "content": "- Требование 05 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-06.md",
+          "content": "- Требование 06 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-07.md",
+          "content": "- Требование 07 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-08.md",
+          "content": "- Требование 08 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-09.md",
+          "content": "- Требование 09 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-10.md",
+          "content": "- Требование 10 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-11.md",
+          "content": "- Требование 11 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-12.md",
+          "content": "- Требование 12 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-13.md",
+          "content": "- Требование 13 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-14.md",
+          "content": "- Требование 14 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-15.md",
+          "content": "- Требование 15 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-16.md",
+          "content": "- Требование 16 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-17.md",
+          "content": "- Требование 17 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-18.md",
+          "content": "- Требование 18 к страницам базы знаний.\n",
+          "purpose": "Копия, развёрнутая APM из исходной инструкции."
+        },
+        {
+          "path": "docs/kb/apm.lock.yaml",
+          "content": "lockfile_version: '2'\nlocal_deployed_files:\n- .claude/rules/kb-01.md\n- .claude/rules/kb-02.md\n- .claude/rules/kb-03.md\n- .claude/rules/kb-04.md\n- .claude/rules/kb-05.md\n- .claude/rules/kb-06.md\n- .claude/rules/kb-07.md\n- .claude/rules/kb-08.md\n- .claude/rules/kb-09.md\n- .claude/rules/kb-10.md\n- .claude/rules/kb-11.md\n- .claude/rules/kb-12.md\n- .claude/rules/kb-13.md\n- .claude/rules/kb-14.md\n- .claude/rules/kb-15.md\n- .claude/rules/kb-16.md\n- .claude/rules/kb-17.md\n- .claude/rules/kb-18.md\n",
+          "purpose": "Перечень развёрнутых копий."
+        }
+      ],
+      "expected_output": {
+        "report_structure": [
+          "Подсчёт до исправления: CLAUDE.md и 18 развёрнутых правил — 19 файлов за одно обращение.",
+          "Правила объединены по темам в исходных инструкциях docs/kb/.apm/instructions, развёрнутые копии напрямую не правятся.",
+          "Копии развёрнуты заново штатной командой APM, затем подгрузка посчитана повторно и не превышает 15 файлов.",
+          "Все 18 требований сохранены после объединения."
+        ],
+        "findings": [
+          {
+            "severity": "medium",
+            "observed_problem": "Правила docs/kb развёрнуты APM из 18 исходных инструкций, и вместе с CLAUDE.md подгрузка составляет 19 файлов.",
+            "expected_conclusion": "Исправлять нужно исходные инструкции: правка копий в .claude/rules пропадёт при следующей развёртке.",
+            "acceptable_fix_direction": "Объединить исходные инструкции по темам, развернуть их заново через APM и повторить подсчёт."
+          }
+        ]
+      },
+      "negative_control": {
+        "description": "Агент объединяет или удаляет файлы прямо в docs/kb/.claude/rules.",
+        "expected_failure": "Следующая развёртка APM возвращает 18 файлов, и сброс кэша повторяется."
+      },
+      "oracle": {
+        "success_criteria": [
+          "Изменены исходные инструкции, а не развёрнутые копии.",
+          "Повторный подсчёт выполнен после развёртки.",
+          "Ни одно требование не потеряно."
+        ],
+        "failure_indicators": [
+          "Правка внесена только в docs/kb/.claude/rules.",
+          "Подсчёт после исправления не выполнен.",
+          "Часть требований удалена ради предела."
+        ]
+      },
+      "application_evidence": [
+        "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
+        "результат соблюдает assertions и не нарушает must_not"
+      ],
+      "evaluation_surface": "Исправление подгрузки, образованной правилами из APM (REQ-0053.1, критерий 3).",
+      "assertions": [
+        "Исправление направлено в исходник правил.",
+        "Предел проверен повторным подсчётом."
+      ],
+      "must_not": [
+        "Не править развёрнутые копии как исходник.",
+        "Не удалять требования ради уменьшения числа файлов."
+      ]
+    },
+    {
+      "id": "ai-agents-md-maintenance-result-new-rule-at-lazy-load-limit",
+      "prompt": "Разбор нарушения показал, что агент правил страницу базы знаний без сверки с её версией в Confluence. Добавь правило для работы в docs/kb: перед правкой страницы сверяй её версию с Confluence. Работаем в Claude Code.",
+      "input_files": [
+        {
+          "path": "docs/kb/CLAUDE.md",
+          "content": "# База знаний\n\n- Страницы пиши по шаблону раздела.\n",
+          "purpose": "Инструкции вложенного каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/kb-editing.md",
+          "content": "# Правка страниц\n\n- Перед правкой открой шаблон раздела.\n- После правки проверь ссылки.\n",
+          "purpose": "Существующее правило о правке страниц."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r01.md",
+          "content": "# Правило 01\n\n- База знаний: требование 01 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r02.md",
+          "content": "# Правило 02\n\n- База знаний: требование 02 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r03.md",
+          "content": "# Правило 03\n\n- База знаний: требование 03 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r04.md",
+          "content": "# Правило 04\n\n- База знаний: требование 04 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r05.md",
+          "content": "# Правило 05\n\n- База знаний: требование 05 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r06.md",
+          "content": "# Правило 06\n\n- База знаний: требование 06 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r07.md",
+          "content": "# Правило 07\n\n- База знаний: требование 07 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r08.md",
+          "content": "# Правило 08\n\n- База знаний: требование 08 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r09.md",
+          "content": "# Правило 09\n\n- База знаний: требование 09 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r10.md",
+          "content": "# Правило 10\n\n- База знаний: требование 10 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r11.md",
+          "content": "# Правило 11\n\n- База знаний: требование 11 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r12.md",
+          "content": "# Правило 12\n\n- База знаний: требование 12 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        },
+        {
+          "path": "docs/kb/.claude/rules/r13.md",
+          "content": "# Правило 13\n\n- База знаний: требование 13 к работе в этом каталоге.\n",
+          "purpose": "Безусловное правило каталога."
+        }
+      ],
+      "expected_output": {
+        "report_structure": [
+          "Подсчёт: docs/kb уже подгружает 15 файлов, новый файл вывел бы его за предел.",
+          "Правило добавлено в существующий файл docs/kb/.claude/rules/kb-editing.md или поставлено под условие paths:.",
+          "Итог работы называет причину такого размещения."
+        ],
+        "findings": [
+          {
+            "severity": "medium",
+            "observed_problem": "Место docs/kb подгружает 15 файлов: CLAUDE.md и 14 безусловных правил.",
+            "expected_conclusion": "Отдельный шестнадцатый файл превысит предел одновременной подгрузки.",
+            "acceptable_fix_direction": "Дописать правило в kb-editing.md, где уже собраны правила правки страниц, или поставить новый файл под условие paths:."
+          }
+        ]
+      },
+      "negative_control": {
+        "description": "Агент создаёт новый безусловный файл docs/kb/.claude/rules/confluence-version.md.",
+        "expected_failure": "Подгрузка docs/kb вырастает до 16 файлов без предупреждения."
+      },
+      "oracle": {
+        "success_criteria": [
+          "Правило сохранено по смыслу.",
+          "Подгрузка docs/kb не превышает 15 файлов.",
+          "Причина размещения названа в итоге."
+        ],
+        "failure_indicators": [
+          "Создан шестнадцатый безусловный файл.",
+          "Правило ослаблено или потеряно при встраивании."
+        ]
+      },
+      "application_evidence": [
+        "результат содержит ожидаемую структуру отчёта из expected_output.report_structure",
+        "результат раскрывает findings из expected_output.findings через наблюдаемую проблему, вывод и направление исправления",
+        "результат соблюдает assertions и не нарушает must_not"
+      ],
+      "evaluation_surface": "Новое правило у предела одновременной подгрузки (REQ-0053.2, критерий 4).",
+      "assertions": [
+        "Подсчёт выполнен до создания файла.",
+        "Размещение объяснено человеку."
+      ],
+      "must_not": [
+        "Не создавать новый безусловный файл правила в месте у предела."
+      ]
     }
   ]
 }
