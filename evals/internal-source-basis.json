@@ -896,9 +896,39 @@
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
+            "docs/requirements/REQ-0034.md",
+            "docs/requirements/REQ-0048.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятыми уточнениями REQ-0034.1 и REQ-0048.1. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-external-sources-section",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0048.md",
             "docs/requirements/REQ-0034.md"
           ],
-          "basis_explanation": "Ожидаемое поведение задано принятым уточнением REQ-0034.1. Учебный случай не является свидетельством фактического исполнения."
+          "basis_explanation": "Ожидаемое поведение задано принятым уточнением REQ-0048.1. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-unknown-problem-source",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0048.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым уточнением REQ-0048.1. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-fix-keeps-external-source",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0034.md",
+            "docs/requirements/REQ-0048.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым уточнением REQ-0034.2. Учебный случай не подтверждает модельное исполнение."
         }
       ]
     },
