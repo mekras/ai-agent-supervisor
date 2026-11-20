@@ -56,7 +56,7 @@
           ]
         },
         {
-          "id": "ai-agents-md-maintenance-result-add-claude-entrypoint-without-rule-duplication",
+          "id": "ai-agents-md-maintenance-result-claude-reads-agents-md-without-entrypoint",
           "required_claims": [
             "CODX-002",
             "CODX-003",
@@ -70,6 +70,9 @@
               "VSCD-001",
               "VSCD-001"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
           ]
         },
         {
@@ -346,6 +349,15 @@
             "docs/requirements/REQ-0050.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0050. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
+        },
+        {
+          "id": "ai-agents-md-maintenance-result-local-notes-disable-agents-md",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
         }
       ]
     },
@@ -752,6 +764,9 @@
               "VSCD-001",
               "VSCD-001"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
           ]
         },
         {
@@ -929,6 +944,15 @@
             "docs/requirements/REQ-0048.md"
           ],
           "basis_explanation": "Ожидаемое поведение задано принятым уточнением REQ-0034.2. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-audit-agent-rules-result-dependency-development-rules-in-context",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
         }
       ]
     },
@@ -1812,6 +1836,51 @@
             ]
           ],
           "basis_explanation": "Принятое правило протокола оценки задаёт отбор информативных задач. ASKL-004 обосновывает устройство проверочного случая."
+        },
+        {
+          "id": "ai-setup-apm-result-claude-dependency-rules-after-update",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-setup-apm-result-claude-compiled-agents-without-own-entry",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-setup-apm-result-claude-package-memory-intended",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-setup-apm-result-claude-workaround-rule-cleanup",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-setup-apm-result-hermes-package-rules-hint",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым уточнением REQ-0051.4. Учебный случай не подтверждает модельное исполнение."
         }
       ]
     },
@@ -2006,7 +2075,7 @@
           ]
         },
         {
-          "id": "ai-setup-project-result-offer-claude-entrypoint-from-apm-targets",
+          "id": "ai-setup-project-result-claude-target-without-extra-entrypoint",
           "required_claims": [
             "ASKL-003",
             "ASKL-003",
@@ -2018,6 +2087,9 @@
               "ASKL-003",
               "VSCD-001"
             ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
           ]
         },
         {
