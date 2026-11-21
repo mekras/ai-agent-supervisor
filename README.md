@@ -58,7 +58,7 @@ apm marketplace add mekras/apm-marketplace --ref master
 Выполните **в корне проекта** команду для используемого агента.
 
 ```bash
-apm install ai-agent-supervisor@mekras#2.10.0 --target <цель>
+apm install ai-agent-supervisor@mekras#2.11.0 --target <цель>
 ```
 
 `<цель>` — это `claude` для Claude Code или `codex` для Codex CLI.
@@ -66,7 +66,7 @@ apm install ai-agent-supervisor@mekras#2.10.0 --target <цель>
 Пример для Codex:
 
 ```bash
-apm install ai-agent-supervisor@mekras#2.10.0 --target codex
+apm install ai-agent-supervisor@mekras#2.11.0 --target codex
 ```
 
 ### Настройка проекта
@@ -103,7 +103,7 @@ apm install ai-agent-supervisor@mekras#2.10.0 --target codex
 
 Ниже описаны некоторые возможности, а также перечислены все навыки коллекции.
 
-- [Самообучение](Документация/Самообучение.md)
+- [Самообучение](https://github.com/mekras/ai-agent-supervisor/blob/master/Документация/Самообучение.md)
 
 ### Обучение
 
