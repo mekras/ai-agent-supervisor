@@ -6209,6 +6209,16 @@
           "basis_explanation": "Проверочный случай критерия приёмки 11 REQ-0052: термин процедуры заменён обычными словами или пояснён. Наличие сценария не подтверждает модельное исполнение."
         },
         {
+          "id": "ai-human-communication-result-successive-repair-explanations",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Проверка понятности запроса на исправление и повторного объяснения. Читатель понимает проблему, место и последствия правки. Повторное объяснение учитывает предыдущие уточнения. Результат сценария не подтверждает эффект в реальных сессиях."
+        },
+        {
           "id": "ai-human-communication-result-handoff-text-form",
           "required_claims": [],
           "finding_claims": [],
