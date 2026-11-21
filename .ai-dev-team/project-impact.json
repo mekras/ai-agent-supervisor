@@ -243,6 +243,28 @@
         {"path": "README.md", "role": "navigation"}
       ],
       "checks": ["ait-writing", "ait-readme", "ai-work-result-evaluation"]
+    },
+    {
+      "id": "self-learning-guide",
+      "title": "Руководство по самообучению",
+      "kind": "documentation",
+      "semantic_type": "пользовательское руководство по обучению на опыте и работе с его результатами",
+      "authority": "derived",
+      "representations": [
+        {"path": "Документация/Самообучение.md", "role": "supporting"}
+      ],
+      "checks": ["ait-writing", "ai-work-result-evaluation"]
+    },
+    {
+      "id": "skill-reference",
+      "title": "Справка о навыке агента",
+      "kind": "documentation",
+      "semantic_type": "пользовательская справка о назначении, составе и выборе навыка агента",
+      "authority": "derived",
+      "representations": [
+        {"path": "Документация/Справочник/Навык.md", "role": "supporting"}
+      ],
+      "checks": ["ait-writing", "ai-work-result-evaluation"]
     }
   ],
   "edges": [
@@ -489,6 +511,30 @@
         "documentation"
       ],
       "rationale": "Изменения процедуры навыков требуют сверки руководства, которое их описывает.",
+      "basis": false
+    },
+    {
+      "from": "requirements", "to": "self-learning-guide", "relation": "constrains",
+      "facets": ["semantic", "interface", "data", "quality", "security", "reliability", "operation"],
+      "rationale": "Требования определяют, когда агент разбирает опыт, что сохраняет и в каких пределах применяет изменения.",
+      "basis": true
+    },
+    {
+      "from": "skills", "to": "self-learning-guide", "relation": "informs",
+      "facets": ["semantic", "interface", "data", "security", "reliability", "operation", "documentation"],
+      "rationale": "Изменения процедуры обучения и хранения результатов требуют сверить пользовательские шаги и примеры.",
+      "basis": false
+    },
+    {
+      "from": "knowledge", "to": "skill-reference", "relation": "informs",
+      "facets": ["semantic", "structure", "documentation"],
+      "rationale": "Справка передаёт назначение и границы навыка агента из понятийного аппарата проекта.",
+      "basis": true
+    },
+    {
+      "from": "skill-reference", "to": "self-learning-guide", "relation": "informs",
+      "facets": ["semantic", "structure", "documentation"],
+      "rationale": "Из руководства читатель переходит к справке, чтобы понять, что меняется при обучении на опыте.",
       "basis": false
     }
   ]
