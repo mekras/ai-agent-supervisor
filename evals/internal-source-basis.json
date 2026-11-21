@@ -4052,6 +4052,16 @@
           ]
         },
         {
+          "id": "ai-skill-development-result-learning-proposal-follow-up",
+          "requirement_basis": [
+            "docs/requirements/REQ-0013.md",
+            "docs/requirements/REQ-0015.md",
+            "docs/requirements/REQ-0017.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
           "id": "ai-skill-development-result-learning-combined-restructure",
           "required_claims": [
             "LEARNING-001",
