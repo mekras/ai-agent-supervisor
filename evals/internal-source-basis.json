@@ -5953,6 +5953,22 @@
           "finding_claims": []
         },
         {
+          "id": "ai-human-communication-result-session-log-explanation",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
+          "id": "ai-human-communication-result-session-log-location",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
           "id": "ai-human-communication-result-source-fragments",
           "requirement_basis": [
             "docs/requirements/REQ-0039.md"
