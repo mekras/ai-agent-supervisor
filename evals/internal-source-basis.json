@@ -4123,6 +4123,14 @@
           ]
         },
         {
+          "id": "ai-skill-development-result-learning-storage-unassigned",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0054.md"
+          ]
+        },
+        {
           "id": "ai-skill-development-result-learning-setup-proposals",
           "required_claims": [
             "LEARNING-003",
@@ -5880,6 +5888,14 @@
           "requirement_basis": [
             "docs/requirements/REQ-0020.md",
             "docs/requirements/REQ-0026.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-temporary-verification-file",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0054.md"
           ]
         },
         {
