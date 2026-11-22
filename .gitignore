@@ -8,6 +8,7 @@
 !/.claude-plugin/marketplace.json
 /.claude/*
 !/.claude/CLAUDE.md
+!/.claude/settings.json
 /.codex
 /knowledge/private.local/
 /knowledge/raw.local/

@@ -150,6 +150,7 @@
       "paths": [
         "AGENTS.md",
         ".claude/CLAUDE.md",
+        ".claude/settings.json",
         ".ai-dev-team/state.yml",
         ".ai-dev-team/source-admission-*.yml",
         ".ai-dev-team/project-impact.json",

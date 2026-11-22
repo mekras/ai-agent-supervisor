@@ -1,0 +1,5 @@
+{
+  "claudeMdExcludes": [
+    "**/.claude/rules/ai-dev-team-connection.md"
+  ]
+}
