@@ -5913,6 +5913,14 @@
           ]
         },
         {
+          "id": "ai-human-communication-result-interactive-choice-review",
+          "requirement_basis": [
+            "docs/requirements/REQ-0028.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
           "id": "ai-human-communication-result-authorized-plan-and-action",
           "requirement_basis": [
             "docs/requirements/REQ-0027.md"
