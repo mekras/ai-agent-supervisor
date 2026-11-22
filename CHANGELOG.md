@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.11.2] - 2026-11-22
+
 - Если нужно выбрать один из предложенных вариантов, агент использует доступную
   для вопроса интерактивную форму или предлагает ответить номером в чате.
 - При разборе прошлой сессии агент объясняет вывод в самом ответе. Точный адрес
@@ -1825,7 +1827,8 @@
 [2.6.22]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.21...2.6.22
 [2.6.21]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.20...2.6.21
 [2.6.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.19...2.6.20
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.1...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.2...HEAD
+[2.11.2]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.1...2.11.2
 [2.11.1]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.0...2.11.1
 [2.11.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.10.0...2.11.0
 [2.6.29]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.28...2.6.29
