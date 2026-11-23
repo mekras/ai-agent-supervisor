@@ -4101,6 +4101,35 @@
           ]
         },
         {
+          "id": "ai-skill-development-result-learning-manual-dependency-scope",
+          "required_claims": [
+            "LEARNING-004"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0016.md"
+          ]
+        },
+        {
+          "id": "ai-skill-development-result-learning-qualified-local-edit",
+          "required_claims": [
+            "LEARNING-004"
+          ],
+          "finding_claims": [
+            [
+              "LEARNING-004"
+            ]
+          ],
+          "requirement_basis": [
+            "docs/requirements/REQ-0005.md",
+            "docs/requirements/REQ-0016.md"
+          ]
+        },
+        {
           "id": "ai-skill-development-result-learning-restore-conflict",
           "required_claims": [
             "LEARNING-005"
