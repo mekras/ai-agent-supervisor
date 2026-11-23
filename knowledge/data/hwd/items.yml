@@ -1,0 +1,35 @@
+items:
+- id: HWD--goal
+  source_id: HWD
+  title: Назначение документации
+  url: https://github.com/mekras/hwd/blob/master/src/pages/theory/goal.rst
+  locator: https://github.com/mekras/hwd/blob/master/src/pages/theory/goal.rst
+  access: Публичный репозиторий. Право копирования снимков для этого проекта отдельно не установлено.
+  status: indexed
+  workflow_stage: indexed
+  topic: Цель читателя и отбор документации по его задаче.
+  provenance:
+    origin: external_material
+    locator: https://github.com/mekras/hwd/blob/master/src/pages/theory/goal.rst
+  admission:
+    decision:
+      ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+      sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+  path: pages/goal
+- id: HWD--how-people-read
+  source_id: HWD
+  title: Как люди читают документацию
+  url: https://github.com/mekras/hwd/blob/master/src/pages/theory/how-people-read.rst
+  locator: https://github.com/mekras/hwd/blob/master/src/pages/theory/how-people-read.rst
+  access: Публичный репозиторий. Право копирования снимков для этого проекта отдельно не установлено.
+  status: indexed
+  workflow_stage: indexed
+  topic: Поиск сведений по структуре, беглый просмотр и самостоятельность отдельно открытой статьи.
+  provenance:
+    origin: external_material
+    locator: https://github.com/mekras/hwd/blob/master/src/pages/theory/how-people-read.rst
+  admission:
+    decision:
+      ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+      sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+  path: pages/how-people-read

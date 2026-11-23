@@ -1,0 +1,19 @@
+items:
+- id: TSYG--contracts
+  source_id: TSYG
+  title: Понимание текстов гражданско-правовых договоров читающими
+  url: https://doi.org/10.14258/leglin(2025)3603
+  locator: https://doi.org/10.14258/leglin(2025)3603
+  access: Открытая научная статья. В метаданных журнала указана лицензия CC BY 4.0.
+  status: indexed
+  workflow_stage: indexed
+  topic: Исследование вопросов на понимание русскоязычных договоров. Выводы о трудности вопросов
+    относятся к исследованным текстам и выборке.
+  provenance:
+    origin: external_material
+    locator: https://doi.org/10.14258/leglin(2025)3603
+  admission:
+    decision:
+      ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+      sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+  path: pages/contracts

@@ -1,0 +1,19 @@
+items:
+- id: ROZN--identical-forms
+  source_id: ROZN
+  title: § 204. Нанизывание одинаковых форм
+  url: https://rus-yaz.niv.ru/doc/rules-rosental/articles/204-nanizyvanie-odinakovyh-form.htm
+  locator: https://rus-yaz.niv.ru/doc/rules-rosental/articles/204-nanizyvanie-odinakovyh-form.htm
+  access: Открытое электронное представление справочника. Разрешение на распространение текста не
+    установлено.
+  status: indexed
+  workflow_stage: indexed
+  topic: Правка цепочек падежных форм и отглагольных существительных в русских предложениях.
+  provenance:
+    origin: external_material
+    locator: https://rus-yaz.niv.ru/doc/rules-rosental/articles/204-nanizyvanie-odinakovyh-form.htm
+  admission:
+    decision:
+      ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+      sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+  path: pages/identical-forms

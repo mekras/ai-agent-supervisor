@@ -2300,7 +2300,6 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md",
             "docs/requirements/REQ-0052.md"
           ]
         },
@@ -2327,7 +2326,6 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md",
             "docs/requirements/REQ-0052.md"
           ]
         },
@@ -2342,7 +2340,6 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md",
             "docs/requirements/REQ-0052.md"
           ]
         },
@@ -2429,7 +2426,6 @@
         {
           "id": "ai-setup-project-result-human-communication-messages-only",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md",
             "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
@@ -2440,7 +2436,6 @@
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md",
             "docs/requirements/REQ-0052.md"
           ],
           "basis_explanation": "Проверочный случай критерия приёмки 8 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
@@ -2460,7 +2455,6 @@
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md",
             "docs/requirements/REQ-0052.md"
           ],
           "basis_explanation": "Проверочный случай критерия приёмки 10 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
@@ -4327,6 +4321,15 @@
             "docs/requirements/REQ-0052.md"
           ],
           "basis_explanation": "Проверочный случай критерия приёмки 5 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
+        },
+        {
+          "id": "ai-skill-development-result-filled-template-hides-decision-condition",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ]
         }
       ]
     },
@@ -5992,7 +5995,8 @@
         {
           "id": "ai-human-communication-result-readable-labels",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6000,7 +6004,8 @@
         {
           "id": "ai-human-communication-result-session-log-explanation",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6008,7 +6013,8 @@
         {
           "id": "ai-human-communication-result-session-log-location",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6016,7 +6022,8 @@
         {
           "id": "ai-human-communication-result-source-fragments",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6024,7 +6031,8 @@
         {
           "id": "ai-human-communication-result-source-footnote",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6032,7 +6040,7 @@
         {
           "id": "ai-human-communication-result-emphasize-value",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6040,7 +6048,7 @@
         {
           "id": "ai-human-communication-result-plain-value-allowed",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6048,7 +6056,8 @@
         {
           "id": "ai-human-communication-result-unknown-human-role",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6056,7 +6065,8 @@
         {
           "id": "ai-human-communication-result-confirmed-domain-roles",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6064,7 +6074,7 @@
         {
           "id": "ai-human-communication-result-exact-technical-trace",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6072,7 +6082,8 @@
         {
           "id": "ai-human-communication-result-human-document-content",
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
           ],
           "required_claims": [],
           "finding_claims": []
@@ -6226,6 +6237,7 @@
             ]
           ],
           "requirement_basis": [
+            "docs/requirements/REQ-0025.md",
             "docs/requirements/REQ-0026.md"
           ]
         },
@@ -6234,7 +6246,7 @@
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0055.md"
           ],
           "basis_explanation": "Согласованный критерий точности с учётом назначения текста: обычное описание пользы после настройки и неподтверждённые гарантии оцениваются по разным основаниям."
         },
@@ -6243,7 +6255,7 @@
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0055.md"
           ],
           "basis_explanation": "Согласованный критерий точности с учётом назначения текста: обычное описание пользы после настройки и неподтверждённые гарантии оцениваются по разным основаниям."
         },
@@ -6292,9 +6304,36 @@
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0006.md"
           ],
-          "basis_explanation": "Проверочный случай уточнения REQ-0039 от 2026-11-20 о тексте для передачи другому агенту, критерий 3. Наличие сценария не подтверждает модельное исполнение."
+          "basis_explanation": "Проверочный случай REQ-0006.3 о форме текста для передачи. Наличие сценария не подтверждает модельное исполнение."
+        },
+        {
+          "id": "ai-human-communication-result-short-question-and-status",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-decision-find-and-apply-exception",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ]
+        },
+        {
+          "id": "ai-human-communication-result-requirement-starts-with-criteria",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ]
         }
       ]
     },
@@ -6447,9 +6486,9 @@
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
-            "docs/requirements/REQ-0039.md"
+            "docs/requirements/REQ-0006.md"
           ],
-          "basis_explanation": "Проверочный случай уточнения REQ-0039 от 2026-11-20 о тексте для передачи другому агенту, критерии 1 и 2. Наличие сценария не подтверждает модельное исполнение."
+          "basis_explanation": "Проверочный случай REQ-0006.3 о форме текста для передачи. Наличие сценария не подтверждает модельное исполнение."
         },
         {
           "id": "ai-session-handoff-result-codes-named",

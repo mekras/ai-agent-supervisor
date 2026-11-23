@@ -1,0 +1,38 @@
+id: MCHL
+slug: mchl
+title: Аркадий Мильчин и Людмила Чельцова — Справочник издателя и автора
+status: approved
+carrier_type: document
+source_kind: reference
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Открывать только учтённые единицы по их локаторам. Перепроверять доступ и условия
+    использования, не сохранять копии материалов.
+  write_scope:
+  - knowledge/data/mchl/
+  allowed_operations:
+  - index
+storage_strategy: external_reference
+processing_scope: selected_items
+retrieval_mode: on_demand
+copy_policy: metadata_only
+allowed_use: Точечное чтение и проверка по первоисточнику. В корпусе — ссылки, метаданные и собственные
+  краткие замечания о применимости.
+requires_access_check: true
+locator: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
+public_reference: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
+license_or_terms: 7-е издание, 2024, ISBN 978-5-6047877-3-1. По ссылке доступны выходные сведения
+  и оглавление, которое указывает на главы полного издания.
+access:
+  default: Обращение по ссылке. Доступ к полному тексту зависит от источника.
+reliability: Издательский справочник. Оглавление указывает на главы, для проверки отдельных правил нужно полное издание.
+refresh_policy: Перепроверять перед использованием в новом проектном решении.
+last_checked_at: '2026-11-23'
+provenance:
+  origin: external_material
+  locator: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+    sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679

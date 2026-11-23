@@ -1,0 +1,37 @@
+id: WTDG
+slug: wtdg
+title: Write the Docs — Documentation principles
+status: approved
+carrier_type: web_page
+source_kind: reference
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Открывать только учтённые единицы по их локаторам. Перепроверять доступ и условия
+    использования, не сохранять копии материалов.
+  write_scope:
+  - knowledge/data/wtdg/
+  allowed_operations:
+  - index
+storage_strategy: external_reference
+processing_scope: selected_items
+retrieval_mode: on_demand
+copy_policy: metadata_only
+allowed_use: Точечное чтение и проверка по первоисточнику. В корпусе — ссылки, метаданные и собственные
+  краткие замечания о применимости.
+requires_access_check: true
+locator: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+public_reference: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+license_or_terms: Лицензия сайта CC BY-NC-SA 4.0 (writethedocs/www, LICENSE.md).
+access:
+  default: Обращение по ссылке. Доступ к полному тексту зависит от источника.
+reliability: Редакторские рекомендации сообщества Write the Docs по англоязычной документации.
+refresh_policy: Перепроверять перед использованием в новом проектном решении.
+last_checked_at: '2026-11-23'
+provenance:
+  origin: external_material
+  locator: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+    sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679

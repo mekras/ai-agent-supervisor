@@ -1,0 +1,18 @@
+id: MCHL--structure
+source_id: MCHL
+title: Рубрикация, перечни, выделения и внутритекстовые ссылки
+url: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
+locator: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
+access: 7-е издание, 2024, ISBN 978-5-6047877-3-1. По ссылке доступны выходные сведения и оглавление,
+  которое указывает на главы полного издания.
+status: indexed
+workflow_stage: indexed
+topic: Главы 1, 2, 5 и 9. Печатное руководство используется для принципов группировки и поиска сведений
+  в развёрнутом документе.
+provenance:
+  origin: external_material
+  locator: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+    sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679

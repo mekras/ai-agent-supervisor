@@ -827,6 +827,14 @@ items:
   workflow_stage: source_checked
   access: Публичный репозиторий; условия копирования проверяются перед публикацией
     фрагментов.
+- id: DPRS--messages
+  source_id: DPRS
+  path: data/dprs/pages/messages
+  title: Новые правила деловой переписки — рабочие просьбы и ответы
+  date_published: null
+  workflow_stage: indexed
+  access: Страница издателя и фрагмент в открытом доступе. Полный текст по условиям
+    издателя.
 - id: GHAB--how-to-write-a-great-agents-md-lessons-from-over-2500-repositories
   source_id: GHAB
   path: data/ghab/pages/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories
@@ -864,6 +872,22 @@ items:
   date_published: null
   workflow_stage: source_checked
   access: Публичный первоисточник. Полные снимки только локально.
+- id: HWD--goal
+  source_id: HWD
+  path: data/hwd/pages/goal
+  title: Назначение документации
+  date_published: null
+  workflow_stage: indexed
+  access: Публичный репозиторий. Право копирования снимков для этого проекта отдельно
+    не установлено.
+- id: HWD--how-people-read
+  source_id: HWD
+  path: data/hwd/pages/how-people-read
+  title: Как люди читают документацию
+  date_published: null
+  workflow_stage: indexed
+  access: Публичный репозиторий. Право копирования снимков для этого проекта отдельно
+    не установлено.
 - id: INSP--docs
   source_id: INSP
   path: data/insp/pages/docs
@@ -904,6 +928,14 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: MCHL--structure
+  source_id: MCHL
+  path: data/mchl/pages/structure
+  title: Рубрикация, перечни, выделения и внутритекстовые ссылки
+  date_published: null
+  workflow_stage: indexed
+  access: 7-е издание, 2024, ISBN 978-5-6047877-3-1. По ссылке доступны выходные сведения
+    и оглавление, которое указывает на главы полного издания.
 - id: PHSC--writing-good-agents
   source_id: PHSC
   path: data/phsc/pages/writing-good-agents
@@ -928,6 +960,14 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: PSHR--writing
+  source_id: PSHR
+  path: data/pshr/pages/writing
+  title: Пиши, сокращай 2025 — «Предложение» и «Текст»
+  date_published: null
+  workflow_stage: indexed
+  access: Электронное издание Бюро Горбунова, 2023. На странице указано авторское
+    право издательства.
 - id: PYAN--pep-0649
   source_id: PYAN
   path: data/pyan/pages/pep-0649
@@ -949,6 +989,14 @@ items:
   date_published: null
   workflow_stage: source_checked
   access: Публичный официальный источник, полные снимки локальны.
+- id: ROZN--identical-forms
+  source_id: ROZN
+  path: data/rozn/pages/identical-forms
+  title: § 204. Нанизывание одинаковых форм
+  date_published: null
+  workflow_stage: indexed
+  access: Открытое электронное представление справочника. Разрешение на распространение
+    текста не установлено.
 - id: TKEC--plugin-readme
   source_id: TKEC
   path: data/tkec/pages/plugin-readme
@@ -977,6 +1025,13 @@ items:
   date_published: null
   workflow_stage: source_checked
   access: Публичный репозиторий под MIT License. Полные снимки только локально.
+- id: TSYG--contracts
+  source_id: TSYG
+  path: data/tsyg/pages/contracts
+  title: Понимание текстов гражданско-правовых договоров читающими
+  date_published: null
+  workflow_stage: indexed
+  access: Открытая научная статья. В метаданных журнала указана лицензия CC BY 4.0.
 - id: VSCD--custom-instructions
   source_id: VSCD
   path: data/vscd/pages/custom-instructions
@@ -985,6 +1040,13 @@ items:
   workflow_stage: indexed
   access: Публичная веб-страница; условия копирования проверяются перед публикацией
     фрагментов.
+- id: WTDG--skimmable
+  source_id: WTDG
+  path: data/wtdg/pages/skimmable
+  title: Documentation principles — Skimmable
+  date_published: null
+  workflow_stage: indexed
+  access: Лицензия сайта CC BY-NC-SA 4.0 (writethedocs/www, LICENSE.md).
 - id: XEM7--status
   source_id: XEM7
   path: data/xem7/pages/status

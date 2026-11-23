@@ -1,0 +1,17 @@
+id: WTDG--skimmable
+source_id: WTDG
+title: Documentation principles — Skimmable
+url: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+locator: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+access: Лицензия сайта CC BY-NC-SA 4.0 (writethedocs/www, LICENSE.md).
+status: indexed
+workflow_stage: indexed
+topic: Дополнительный источник по английской документации. Проверять применимость приёмов на русских
+  текстах проекта.
+provenance:
+  origin: external_material
+  locator: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+    sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679

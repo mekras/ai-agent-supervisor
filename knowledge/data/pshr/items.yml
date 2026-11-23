@@ -1,0 +1,19 @@
+items:
+- id: PSHR--writing
+  source_id: PSHR
+  title: Пиши, сокращай 2025 — «Предложение» и «Текст»
+  url: https://bureau.ru/books/pishi/
+  locator: https://bureau.ru/books/pishi/
+  access: Электронное издание Бюро Горбунова, 2023. На странице указано авторское право издательства.
+  status: indexed
+  workflow_stage: indexed
+  topic: Редактура русских предложений и структура текста. Использовать примеры для подбора приёмов
+    под задачу читателя.
+  provenance:
+    origin: external_material
+    locator: https://bureau.ru/books/pishi/
+  admission:
+    decision:
+      ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+      sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+  path: pages/writing

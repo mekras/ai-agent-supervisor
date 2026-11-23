@@ -68,3 +68,24 @@ sources:
   - id: TKEC
     title: "TokenEconomizer: документация и код плагина"
     path: data/tkec
+  - id: HWD
+    title: mekras/hwd — Как писать документацию
+    path: data/hwd
+  - id: PSHR
+    title: Максим Ильяхов и Людмила Сарычева — Пиши, сокращай 2025
+    path: data/pshr
+  - id: DPRS
+    title: Максим Ильяхов и Людмила Сарычева — Новые правила деловой переписки
+    path: data/dprs
+  - id: ROZN
+    title: Дитмар Розенталь — справочник по правописанию и литературной правке
+    path: data/rozn
+  - id: MCHL
+    title: Аркадий Мильчин и Людмила Чельцова — Справочник издателя и автора
+    path: data/mchl
+  - id: TSYG
+    title: Людмила Цыгульская — Понимание текстов гражданско-правовых договоров читающими
+    path: data/tsyg
+  - id: WTDG
+    title: Write the Docs — Documentation principles
+    path: data/wtdg

@@ -1,0 +1,38 @@
+id: PSHR
+slug: pshr
+title: Максим Ильяхов и Людмила Сарычева — Пиши, сокращай 2025
+status: approved
+carrier_type: document
+source_kind: reference
+adapter: agent
+agent_route:
+  mode: agent
+  instructions: Открывать только учтённые единицы по их локаторам. Перепроверять доступ и условия
+    использования, не сохранять копии материалов.
+  write_scope:
+  - knowledge/data/pshr/
+  allowed_operations:
+  - index
+storage_strategy: external_reference
+processing_scope: selected_items
+retrieval_mode: on_demand
+copy_policy: metadata_only
+allowed_use: Точечное чтение и проверка по первоисточнику. В корпусе — ссылки, метаданные и собственные
+  краткие замечания о применимости.
+requires_access_check: true
+locator: https://bureau.ru/books/pishi/
+public_reference: https://bureau.ru/books/pishi/
+license_or_terms: Электронное издание Бюро Горбунова, 2023. На странице указано авторское право
+  издательства.
+access:
+  default: Обращение по ссылке. Доступ к полному тексту зависит от источника.
+reliability: Редакторское руководство. Приёмы иллюстрируются примерами на русском языке.
+refresh_policy: Перепроверять перед использованием в новом проектном решении.
+last_checked_at: '2026-11-23'
+provenance:
+  origin: external_material
+  locator: https://bureau.ru/books/pishi/
+admission:
+  decision:
+    ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
+    sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
