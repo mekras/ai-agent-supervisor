@@ -1883,6 +1883,15 @@
           "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
         },
         {
+          "id": "ai-setup-apm-result-claude-dependency-rules-report-only-after-update",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0051.md"
+          ],
+          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0051. Учебный случай не подтверждает модельное исполнение."
+        },
+        {
           "id": "ai-setup-apm-result-claude-compiled-agents-without-own-entry",
           "required_claims": [],
           "finding_claims": [],
