@@ -331,9 +331,9 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0050.md"
+            "docs/requirements/REQ-0033.md"
           ],
-          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0050. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
+          "basis_explanation": "Ожидаемое поведение задано критериями 4 и 5 REQ-0033 о выносе правил. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
         },
         {
           "id": "ai-agents-md-maintenance-result-move-reports-every-rule",
@@ -346,18 +346,18 @@
             ]
           ],
           "requirement_basis": [
-            "docs/requirements/REQ-0050.md"
+            "docs/requirements/REQ-0033.md"
           ],
-          "basis_explanation": "Ожидаемое поведение задано принятым требованием REQ-0050. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
+          "basis_explanation": "Ожидаемое поведение задано критерием 6 REQ-0033 о сверке переноса. ASKL-004 обосновывает устройство проверочного случая. Учебный случай не является свидетельством фактического исполнения."
         },
         {
           "id": "ai-agents-md-maintenance-result-move-rule-map-on-request",
           "required_claims": [],
           "finding_claims": [],
           "requirement_basis": [
-            "docs/requirements/REQ-0050.md"
+            "docs/requirements/REQ-0033.md"
           ],
-          "basis_explanation": "Проверочный случай критерия 3 REQ-0050 в редакции 2026-11-20: место каждого перенесённого правила выдаётся по запросу. Наличие сценария не подтверждает модельное исполнение."
+          "basis_explanation": "Критерий 6 REQ-0033 сохраняет принятое 2026-11-20 условие: место каждого перенесённого правила выдаётся по запросу. Наличие сценария не подтверждает модельное исполнение."
         },
         {
           "id": "ai-agents-md-maintenance-result-local-notes-disable-agents-md",
@@ -6352,6 +6352,16 @@
             "docs/requirements/REQ-0039.md",
             "docs/requirements/REQ-0052.md"
           ]
+        },
+        {
+          "id": "ai-human-communication-result-obligation-in-context",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Сценарий проверяет сохранение смысла, исполнителя и обязательности с учётом назначения фрагмента. Примеры и ожидаемые формы заданы поручением владельца проекта."
         }
       ]
     },
