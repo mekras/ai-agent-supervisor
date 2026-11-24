@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.11.5] - 2026-11-24
+
 - В сообщениях и документах главное должно быть видно в начале, а существенные
   условия должны стоять рядом с действием. Проверка оценивает это на готовых текстах
   и заполненных шаблонах. В подписи ссылки сохраняется полное название документа,
@@ -1858,7 +1860,8 @@
 [2.6.22]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.21...2.6.22
 [2.6.21]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.20...2.6.21
 [2.6.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.19...2.6.20
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.2...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.5...HEAD
+[2.11.5]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.4...2.11.5
 [2.11.2]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.1...2.11.2
 [2.11.1]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.0...2.11.1
 [2.11.0]: https://github.com/mekras/ai-agent-supervisor/compare/2.10.0...2.11.0
