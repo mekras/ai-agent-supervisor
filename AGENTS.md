@@ -206,8 +206,9 @@ python3 -I -c "import json; print(json.load(open('ai-learning-state.local.json',
 #### Обновление зависимостей
 
 `tools/run-apm-safe.py` выполняет `apm install --frozen` и не меняет версии
-зависимостей: при изменении графа в `apm.lock.yaml` он останавливается. Если
-задача требует обновить зависимости APM, выполни из корня проекта
+зависимостей: при изменении графа в `apm.lock.yaml` он останавливается. Для
+обновления зависимостей примени [ai-apm-update](.apm/skills/ai-apm-update/SKILL.md).
+После одобрения и повторной сверки плана выполни из корня проекта
 с `PYTHONDONTWRITEBYTECODE=1`:
 
 1. `python3 tools/validate-python-artifacts.py`. Барьер нужен до того, как APM

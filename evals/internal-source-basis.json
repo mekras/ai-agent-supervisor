@@ -2,6 +2,91 @@
   "format_version": 1,
   "purpose": "Внутренняя прослеживаемость сценариев результата к источникам проекта; файл не входит в публикуемую коллекцию.",
   "skills": {
+    "ai-apm-update": {
+      "source_basis": [],
+      "cases": [
+        {
+          "id": "ai-apm-update-result-dependency-update-within-range",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-not-frozen-install",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-mixed-self-application",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-unconfirmed-drift",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-latest-outside-range",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-without-target-version",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-portable-route",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-preview-and-release-notes",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-plan-changed",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        },
+        {
+          "id": "ai-apm-update-result-dependency-update-project-impact",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0046.md"
+          ]
+        }
+      ]
+    },
     "ai-agents-md-maintenance": {
       "source_basis": [
         {
@@ -1801,62 +1886,6 @@
           "finding_claims": [],
           "requirement_basis": [
             "docs/requirements/REQ-0044.md"
-          ]
-        },
-        {
-          "id": "ai-setup-apm-result-dependency-update-within-range",
-          "required_claims": [],
-          "finding_claims": [],
-          "requirement_basis": [
-            "docs/requirements/REQ-0046.md"
-          ]
-        },
-        {
-          "id": "ai-setup-apm-result-dependency-update-not-frozen-install",
-          "required_claims": [],
-          "finding_claims": [],
-          "requirement_basis": [
-            "docs/requirements/REQ-0046.md"
-          ]
-        },
-        {
-          "id": "ai-setup-apm-result-dependency-update-mixed-self-application",
-          "required_claims": [],
-          "finding_claims": [],
-          "requirement_basis": [
-            "docs/requirements/REQ-0046.md"
-          ]
-        },
-        {
-          "id": "ai-setup-apm-result-dependency-update-unconfirmed-drift",
-          "required_claims": [],
-          "finding_claims": [],
-          "requirement_basis": [
-            "docs/requirements/REQ-0046.md"
-          ]
-        },
-        {
-          "id": "ai-setup-apm-result-dependency-update-latest-outside-range",
-          "required_claims": [],
-          "finding_claims": [],
-          "requirement_basis": [
-            "docs/requirements/REQ-0046.md"
-          ]
-        },
-        {
-          "id": "ai-setup-apm-result-dependency-update-without-target-version",
-          "required_claims": [],
-          "finding_claims": [],
-          "requirement_basis": [
-            "docs/requirements/REQ-0046.md"
-          ]
-        },
-        {
-          "id": "ai-setup-apm-result-dependency-update-portable-route",
-          "required_claims": [],
-          "finding_claims": [],
-          "requirement_basis": [
-            "docs/requirements/REQ-0046.md"
           ]
         },
         {
