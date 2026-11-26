@@ -6308,6 +6308,15 @@
           "basis_explanation": "Проверочный случай критерия приёмки 6 REQ-0052. Наличие сценария не подтверждает модельное исполнение или снижение числа неудачных ответов."
         },
         {
+          "id": "ai-human-communication-result-connected-findings-and-links",
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "required_claims": [],
+          "finding_claims": []
+        },
+        {
           "id": "ai-human-communication-result-untitled-file-links",
           "required_claims": [],
           "finding_claims": [],
