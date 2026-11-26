@@ -1,13 +1,13 @@
 lockfile_version: '2'
-generated_at: '2026-11-26T14:20:32.061475+00:00'
+generated_at: '2026-11-26T18:28:48.153249+00:00'
 apm_version: 0.33.0
 dependencies:
 - repo_url: mekras/ai-dev-team
   name: ai-dev-team
   host: github.com
-  resolved_commit: eaab242a6f6d5a4ec619d96554e553945ad4717c
-  resolved_ref: 1.5.3
-  version: 1.5.3
+  resolved_commit: b544ffa1df5b406a6f4bc29413ef56fa6c2e05b7
+  resolved_ref: 1.5.4
+  version: 1.5.4
   package_type: apm_package
   deployed_files:
   - .agents/skills/ait-analysis
@@ -1092,7 +1092,7 @@ dependencies:
     .claude/agents/software-architect.md: sha256:d7006ee93c0d7ef9084a3221d5e0d9f502e2ce2b6527ad61bbcc4c8a9b70281c
     .claude/agents/source-inventory.md: sha256:8f6d125ff92ca76981b0bd06bdf1e739d6fd2e344105dee8d7f3cd6292eb4ead
     .claude/agents/statement-extractor.md: sha256:a45f4a31ca1f2b26fca3f8dd91065193787bb263c2a21a1a477a506464d78ce4
-    .claude/agents/technical-writer.md: sha256:b2fec0e2305b975fe9cebfc3f6c7b94646034254158067af4f927854ce740aaa
+    .claude/agents/technical-writer.md: sha256:2692b9738a9b676db8bb246642a0ec5a65ebcd9c518e93e79660b7d283f837a9
     .claude/agents/ux-specialist.md: sha256:62e7030e2df665ddff3eec7e8c823fe076449036cdb66193bf1b4590566152eb
     .claude/rules/ai-dev-team-connection.md: sha256:9c26b0b695fc4862e04296187fe39c56fc347bdcd8cc609eee444c257c2fb830
     .claude/skills/ait-analysis/SKILL.md: sha256:b73a1022de3c6b6bc5e8bec850535a9a8f579d2a543e9f2c7b26a481863d136c
@@ -1431,13 +1431,13 @@ dependencies:
     .codex/agents/software-architect.toml: sha256:3c282ff8778d31213c499a48641192987a7d0e077b1980481655af0039ebd27d
     .codex/agents/source-inventory.toml: sha256:0ff261007215d4a2e249b28643f9a69d45395420f64d7ed1fa0e2b1c25ea3010
     .codex/agents/statement-extractor.toml: sha256:93a102c56805353c4124104deb3d2ef6aeec070e38cb571366789b2aec3df247
-    .codex/agents/technical-writer.toml: sha256:8f6c2c5cfbd69720412c6906eadd925e714a6a5ff4f4316c2b5245df93ef76f6
+    .codex/agents/technical-writer.toml: sha256:4b2625e9a836178bf25d2d074fc7ce10876674536b82d1e7b7b2fffaa4959742
     .codex/agents/ux-specialist.toml: sha256:fd4a62def6b061a5798dd24613d2955eb25f057648ea20c3f16da87ed65195e3
-  content_hash: sha256:d872d9eb58c82eec2e39b29fe631a4ff4930547a6b629a4fe4f3dd89e15e7d65
+  content_hash: sha256:15d4807923dc1f6c02056b139bc43304e650de46a743e0417f43f826fde54a46
   is_dev: true
   constraint: ^1.0.1
-  resolved_tag: 1.5.3
-  resolved_at: '2026-11-26T14:20:16+00:00'
+  resolved_tag: 1.5.4
+  resolved_at: '2026-11-26T18:28:29+00:00'
   declared_license: MIT
 - repo_url: mekras/apm-marketplace
   name: ai-agent-supervisor
@@ -3765,7 +3765,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:b2fec0e2305b975fe9cebfc3f6c7b94646034254158067af4f927854ce740aaa
+  content_hash: sha256:2692b9738a9b676db8bb246642a0ec5a65ebcd9c518e93e79660b7d283f837a9
 - kind: project-relative
   target: claude
   value: .claude/agents/ux-specialist.md
@@ -20915,7 +20915,7 @@ deployments:
   owners:
   - mekras/ai-dev-team
   active_owner: mekras/ai-dev-team
-  content_hash: sha256:8f6c2c5cfbd69720412c6906eadd925e714a6a5ff4f4316c2b5245df93ef76f6
+  content_hash: sha256:4b2625e9a836178bf25d2d074fc7ce10876674536b82d1e7b7b2fffaa4959742
 - kind: project-relative
   target: codex
   value: .codex/agents/ux-specialist.toml
