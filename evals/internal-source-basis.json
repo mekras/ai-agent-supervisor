@@ -6374,6 +6374,16 @@
           ]
         },
         {
+          "id": "ai-human-communication-result-link-to-recorded-decision",
+          "required_claims": [],
+          "finding_claims": [],
+          "requirement_basis": [
+            "docs/requirements/REQ-0039.md",
+            "docs/requirements/REQ-0052.md"
+          ],
+          "basis_explanation": "Сценарий проверяет отдельное полное чтение правил проверки после работы с инструментами, прямую ссылку при первом упоминании результата и полное название записи по REQ-0052.3. Пользователь не просит ссылку отдельно."
+        },
+        {
           "id": "ai-human-communication-result-decision-find-and-apply-exception",
           "required_claims": [],
           "finding_claims": [],
