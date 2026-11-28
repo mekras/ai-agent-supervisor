@@ -171,12 +171,29 @@ def test_missing_lockfile_and_git_repository_report_diagnostics() -> None:
         shutil.rmtree(project)
 
 
+def test_unreadable_lockfile_does_not_pass_as_unowned_path() -> None:
+    project = create_project()
+    try:
+        path = ".agents/.gitkeep"
+        write_file(project, path)
+        track(project, path)
+        (project / "apm.lock.yaml").write_text("dependencies: [\n", encoding="utf-8")
+
+        result = run_validator(project)
+
+        assert result.returncode == 2
+        assert f"apm find не смог проверить {path!r}" in result.stderr
+    finally:
+        shutil.rmtree(project)
+
+
 def main() -> int:
     test_tracked_dependency_file_fails()
     test_untracked_dependency_file_passes()
     test_root_apm_file_and_project_client_file_pass()
     test_multiple_owners_and_unicode_paths_are_reported()
     test_missing_lockfile_and_git_repository_report_diagnostics()
+    test_unreadable_lockfile_does_not_pass_as_unowned_path()
     print("Проверки границы проекций APM и Git пройдены.")
     return 0
 
