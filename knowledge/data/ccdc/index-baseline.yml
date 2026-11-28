@@ -1,7 +1,7 @@
 contract_version: 1
 source_id: CCDC
-checked_at: '2026-11-19T17:43:25.122851+00:00'
-reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
 units:
   CCDC--claude-directory:
     fingerprint: ac2d73d4cea2c236ce9355b9be6a95f10c2c80afc11adb0a3390d90e78c73688

@@ -1,0 +1,30 @@
+statement_contract_version: 2
+statements:
+- id: ROZN-001
+  source_id: ROZN
+  item_id: ROZN--identical-forms
+  kind: fact
+  text: Цепочки одинаковых падежных форм могут затруднять понимание. Среди способов
+    правки справочник предлагает заменить отглагольное существительное глагольной
+    конструкцией или перестроить фразу.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: § 204, пп. 1–2
+    url: https://rus-yaz.niv.ru/doc/rules-rosental/articles/204-nanizyvanie-odinakovyh-form.htm
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Проверять стоит понятность связи слов. Само совпадение падежей не обосновывает
+    автоматическую замену.
+  open_questions: []
+  excerpt: скопление одинаковых падежных форм

@@ -1,0 +1,29 @@
+statement_contract_version: 2
+statements:
+- id: PSHR-001
+  source_id: PSHR
+  item_id: PSHR--writing
+  kind: fact
+  text: 'Авторы рассматривают ясность на двух уровнях: внутри предложения и в устройстве
+    текста. Правка отдельных слов не решает проблем порядка и связности мысли.'
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: Предложение и Текст
+    url: https://bureau.ru/books/pishi/
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Подходит для раздельной проверки формулировок и структуры. Редакторская рекомендация
+    не задаёт числового порога длины.
+  open_questions: []
+  excerpt: Предложение

@@ -1,0 +1,112 @@
+statement_contract_version: 2
+statements:
+- id: XEM7-001
+  source_id: XEM7
+  item_id: XEM7--article-body
+  kind: fact
+  text: Автор предлагает повторять проверку после исправления. Он различает проверку
+    сохранённых случаев перед выпуском, проверку отдельного результата при работе
+    системы и выборочный контроль рабочих результатов.
+  excerpt: re-score
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: what an eval loop actually is
+    url: https://x.com/i/article/2060729909690224640
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.
+  open_questions: []
+- id: XEM7-002
+  source_id: XEM7
+  item_id: XEM7--article-body
+  kind: fact
+  text: Для набора оценок автор выделяет проверочные случаи с ожидаемым результатом,
+    способы измерения и порог допуска. Способ измерения зависит от задачи.
+  excerpt: ground truth
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: the benchmark, the three parts you're about to build
+    url: https://x.com/i/article/2060729909690224640
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.
+  open_questions: []
+- id: XEM7-003
+  source_id: XEM7
+  item_id: XEM7--article-body
+  kind: fact
+  text: В примере для Hermes автор предлагает хранить критерии и прогоны как повторно
+    используемые навыки, задерживать выпуск при ухудшении относительно базового уровня,
+    выборочно проверять рабочие результаты и добавлять обнаруженные сбои в набор случаев.
+  excerpt: judge skill
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: building the loop inside hermes
+    url: https://x.com/i/article/2060729909690224640
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.
+  open_questions: []
+- id: XEM7-004
+  source_id: XEM7
+  item_id: XEM7--article-body
+  kind: limitation
+  text: Число 0,7 — предложенная автором начальная отсечка для его шкалы. В статье
+    нет проверки, которая устанавливала бы этот порог для задач проекта.
+  excerpt: 0.7 is a reasonable place to start
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: the benchmark, the three parts you're about to build
+    url: https://x.com/i/article/2060729909690224640
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.
+  open_questions: []

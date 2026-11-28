@@ -1,0 +1,30 @@
+statement_contract_version: 2
+statements:
+- id: TSYG-001
+  source_id: TSYG
+  item_id: TSYG--contracts
+  kind: fact
+  text: В опросе 60 читателей о двух видах договоров доля верных ответов по вопросам
+    составила от 55 до 93,3 %. Среди наиболее трудных были вопросы о правах и обязанностях
+    сторон.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: § 3 и выводы, с. 18–21
+    url: https://legallinguistics.ru/article/download/%282025%293603/15150/
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Обосновывает проверку понимания роли и обязанности на задачах читателя. Результат
+    не измеряет понятность ответов ИИ и не задаёт универсального порога.
+  open_questions: []
+  excerpt: от 55% до 93,3% в зависимости от вопроса

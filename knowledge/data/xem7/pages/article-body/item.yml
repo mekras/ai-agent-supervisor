@@ -8,3 +8,4 @@ workflow_stage: source_checked
 files:
   local:
   - normalized.local.md
+  - article-2060729909690224640.local.md

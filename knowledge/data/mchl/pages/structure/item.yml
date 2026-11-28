@@ -3,12 +3,12 @@ source_id: MCHL
 title: Рубрикация, перечни, выделения и внутритекстовые ссылки
 url: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
 locator: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
-access: 7-е издание, 2024, ISBN 978-5-6047877-3-1. По ссылке доступны выходные сведения и оглавление,
-  которое указывает на главы полного издания.
+access: 7-е издание, 2024, ISBN 978-5-6047877-3-1. По ссылке доступны выходные сведения
+  и оглавление, которое указывает на главы полного издания.
 status: indexed
-workflow_stage: indexed
-topic: Главы 1, 2, 5 и 9. Печатное руководство используется для принципов группировки и поиска сведений
-  в развёрнутом документе.
+workflow_stage: source_checked
+topic: Главы 1, 2, 5 и 9. Печатное руководство используется для принципов группировки
+  и поиска сведений в развёрнутом документе.
 provenance:
   origin: external_material
   locator: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
@@ -16,3 +16,16 @@ admission:
   decision:
     ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
     sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+processing_scope: selected_fragments
+files:
+  local:
+  - chapters-2014.local.md
+local_basis:
+  artifact: spravochnik-2014.local.epub
+  format: epub
+  edition: 4-е, 2014
+  scope: Главы 1, 2, 5 и 9
+  sha256: e17733091fc94b637284aefc7e711639072f52ccfa57f4e8aa28b33037da3403
+  acquisition: user_provided
+  limitations: Ссылка в карточке остаётся указателем на оглавление седьмого издания.
+    Текст изданий не сопоставлялся.

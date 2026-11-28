@@ -1,0 +1,13 @@
+contract_version: 1
+source_id: TSYG
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  TSYG--contracts:
+    fingerprint: 58cffc3ba7e2bbbb6131a11e7e43ab751c6d071b95127190badc60b249926a9d
+observation:
+  scope: registered-unit-response-v1
+  units:
+    TSYG--contracts:
+      locator: https://doi.org/10.14258/leglin(2025)3603
+      fingerprint: 8d649e4207c00efba5d605ce9d5ac42531dfe263f2afefd048c42a89f330912f

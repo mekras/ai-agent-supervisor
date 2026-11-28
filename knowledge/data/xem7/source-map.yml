@@ -1,31 +1,39 @@
 source_id: XEM7
 long_source: true
 extraction_passport:
-  format: "legacy web snapshot set"
-  file_size_bytes: 1
-  content_hash_absence_reason: "Снимки остаются в прежней локальной структуре до финального переключения."
-  metadata_source: "source.yml"
-  extraction_tool: "local normalized snapshot inspection"
-  extraction_status: "in_progress"
+  format: X Article через FxTwitter API, блоки Draft.js
+  file_size_bytes: 17332
+  content_hash: 7e4e2e9095fc6ec7a582f1c1ec7e60a0ced798ae13b533cb4ac1c5da11a47e75
+  metadata_source: https://api.fxtwitter.com/status/2060736517564477901
+  extraction_tool: HTTPS и извлечение текстовых блоков статьи из JSON
+  extraction_status: selected_units
+  limitations:
+  - Прямой веб-доступ к X отсутствует. Идентификаторы поста, автора и статьи сверены
+    с карточками. Извлекался текст, изображения не использовались. Прежний локальный
+    снимок не изменён.
 structure:
   units:
-    - id: XEM7--status
-      title: "status"
-      order: 1
-    - id: XEM7--article
-      title: "article"
-      order: 2
-    - id: XEM7--article-body
-      title: "article body"
-      order: 3
+  - id: XEM7--status
+    title: status
+    order: 1
+  - id: XEM7--article
+    title: article
+    order: 2
+  - id: XEM7--article-body
+    title: article body
+    order: 3
 coverage:
   units:
-    - unit_id: XEM7--status
-      status: no_significant_content
-      reason: "Короткий технический фрагмент без содержательного текста; основное содержание находится в article-body."
-    - unit_id: XEM7--article
-      status: no_significant_content
-      reason: "Короткий технический фрагмент без содержательного текста; основное содержание находится в article-body."
-    - unit_id: XEM7--article-body
-      status: no_significant_content
-      reason: "Нормализованный снимок содержит необработанную HTML-страницу ошибки X и служебную разметку, а не текст статьи."
+  - unit_id: XEM7--status
+    status: no_significant_content
+    reason: Публикация содержит переход к статье, отдельного смыслового текста нет.
+  - unit_id: XEM7--article
+    status: no_significant_content
+    reason: Заголовок и короткое описание дублируют содержание статьи.
+  - unit_id: XEM7--article-body
+    status: extracted
+    statements:
+    - pages/article-body/statements.yml
+    scope: Текстовые блоки статьи. Иллюстрации не использованы. Проверены диагностическая
+      часть, устройство оценки, критерии, пример Hermes и ограничения порога.
+updated_at: '2026-11-28'

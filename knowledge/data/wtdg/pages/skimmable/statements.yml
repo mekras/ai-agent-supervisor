@@ -1,0 +1,29 @@
+statement_contract_version: 2
+statements:
+- id: WTDG-001
+  source_id: WTDG
+  item_id: WTDG--skimmable
+  kind: fact
+  text: Краткие содержательные заголовки и структура, по которой можно пропускать
+    ненужные фрагменты, помогают найти ответ при быстром просмотре.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: Skimmable
+    url: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Дополнительная рекомендация для документации. При проверке русского текста решающи
+    задачи и контекст его читателя.
+  open_questions: []
+  excerpt: Headings — should be descriptive and concise

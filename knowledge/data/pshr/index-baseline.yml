@@ -1,0 +1,13 @@
+contract_version: 1
+source_id: PSHR
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  PSHR--writing:
+    fingerprint: 73b67fa62007f2c4e85164cf0bcf0c56d29380295825e6c4678fd240bf4c2c4f
+observation:
+  scope: registered-unit-response-v1
+  units:
+    PSHR--writing:
+      locator: https://bureau.ru/books/pishi/
+      fingerprint: 2f32f768be6545d177636cdf8a8493efb4ba3d4a676ba99d027ee67c5cf9ff69

@@ -1,7 +1,7 @@
 contract_version: 1
 source_id: PHSC
-checked_at: '2026-11-19T17:43:25.122851+00:00'
-reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
 units:
   PHSC--writing-good-agents:
     fingerprint: d92d744bc269ea23002d0b8f06489e8ead431589ad368c8102bf3765c7607257

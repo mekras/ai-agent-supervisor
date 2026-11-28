@@ -1,0 +1,29 @@
+statement_contract_version: 2
+statements:
+- id: HWD-002
+  source_id: HWD
+  item_id: HWD--how-people-read
+  kind: fact
+  text: Руководство предлагает рассчитывать на поиск отдельной статьи и быстрый просмотр.
+    Нужный контекст должен быть доступен в самой статье.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: Как ищут статьи и Как читают статьи
+    url: https://github.com/mekras/hwd/blob/master/src/pages/theory/how-people-read.rst
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Относится к навигации и понятности отдельно открытого раздела. Частота способов
+    чтения здесь не измерена.
+  open_questions: []
+  excerpt: Никогда не полагайтесь на то, что человек прочитал предыдущий материал

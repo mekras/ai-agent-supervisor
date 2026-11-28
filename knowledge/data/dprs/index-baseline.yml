@@ -1,0 +1,13 @@
+contract_version: 1
+source_id: DPRS
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  DPRS--messages:
+    fingerprint: a07369efaae6e03ec080bb99c9c2f2a4ca63b163a3ed8f716feef6a2a49c04b1
+observation:
+  scope: registered-unit-response-v1
+  units:
+    DPRS--messages:
+      locator: https://alpinabook.ru/catalog/book-novye-pravila-delovoy-perepiski/
+      fingerprint: fe3fd4bc30024203aeb3e40275330bd28895654f7fbd4415211d6dba9f8ce41a

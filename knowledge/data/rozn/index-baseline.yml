@@ -1,0 +1,13 @@
+contract_version: 1
+source_id: ROZN
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  ROZN--identical-forms:
+    fingerprint: 55e5f7d320c6ddb915124c1496870d7b102a2abdc78b5fa537b02401e28c5bbb
+observation:
+  scope: registered-unit-response-v1
+  units:
+    ROZN--identical-forms:
+      locator: https://rus-yaz.niv.ru/doc/rules-rosental/articles/204-nanizyvanie-odinakovyh-form.htm
+      fingerprint: b645cf672b45ada4bdad2005e6144bc00f660d1fa61162560620a9ab0518d8d1

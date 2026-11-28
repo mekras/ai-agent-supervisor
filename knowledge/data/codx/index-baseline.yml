@@ -1,7 +1,7 @@
 contract_version: 1
 source_id: CODX
-checked_at: '2026-11-19T17:43:25.122851+00:00'
-reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
 units:
   CODX--agent-approvals-security:
     fingerprint: 9aaa4af21a77aff6ae3c59ba48a0d13b6c356a18000299a6cd0fb67e30058b07

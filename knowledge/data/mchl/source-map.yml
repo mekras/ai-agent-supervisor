@@ -1,0 +1,40 @@
+source_id: MCHL
+long_source: true
+extraction_passport:
+  format: EPUB, 4-е издание 2014 года
+  file_size_bytes: 8918402
+  content_hash: e17733091fc94b637284aefc7e711639072f52ccfa57f4e8aa28b33037da3403
+  metadata_source: Титульный лист и оглавление предоставленного локального EPUB
+  extraction_tool: Чтение XHTML через Beautiful Soup
+  extraction_status: selected_units
+  limitations:
+  - Седьмое издание доступно только как внешняя библиографическая ссылка на оглавление.
+  - Полный EPUB и извлечённый текст хранятся вне Git.
+structure:
+  units:
+  - id: MCHL--structure
+    title: 'Выбранные главы: рубрикация, перечни, выделения, ссылки'
+    order: 1
+    chapters:
+    - chapter: 1
+      title: Рубрикация
+      locator: OEBPS/Text/Milchin-v2-1.xhtml
+    - chapter: 2
+      title: Перечни
+      locator: OEBPS/Text/Milchin-v2-2.xhtml
+    - chapter: 5
+      title: Выделения и графическая форма текста
+      locator: OEBPS/Text/Milchin-v2-5.xhtml
+    - chapter: 9
+      title: Внутритекстовые ссылки на элементы издания
+      locator: OEBPS/Text/Milchin-v2-9.xhtml
+coverage:
+  units:
+  - unit_id: MCHL--structure
+    status: extracted
+    statements:
+    - pages/structure/statements.yml
+    scope: Главы 1, 2, 5 и 9 (4-е издание). Извлечены общие принципы для поиска и
+      чтения. Макеты печатной полосы, региональные и типографские примеры в правила
+      продукта не переносились.
+updated_at: '2026-11-28'

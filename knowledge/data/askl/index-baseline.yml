@@ -1,7 +1,7 @@
 contract_version: 1
 source_id: ASKL
-checked_at: '2026-11-19T17:43:25.122851+00:00'
-reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
 units:
   ASKL--best-practices:
     fingerprint: 05990b4f149035144a50f133e2f02335a5f0b2589f106793c123737a785d8aec

@@ -6,7 +6,7 @@ locator: https://rus-yaz.niv.ru/doc/rules-rosental/articles/204-nanizyvanie-odin
 access: Открытое электронное представление справочника. Разрешение на распространение текста не
   установлено.
 status: indexed
-workflow_stage: indexed
+workflow_stage: source_checked
 topic: Правка цепочек падежных форм и отглагольных существительных в русских предложениях.
 provenance:
   origin: external_material
@@ -15,3 +15,4 @@ admission:
   decision:
     ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
     sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+processing_scope: selected_fragments

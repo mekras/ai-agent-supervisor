@@ -1,0 +1,13 @@
+contract_version: 1
+source_id: MCHL
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  MCHL--structure:
+    fingerprint: 9e75ac6869365db61f3e1ae5a68e23a9802f15e8d23180603d35c14857201966
+observation:
+  scope: registered-unit-response-v1
+  units:
+    MCHL--structure:
+      locator: https://www.spsl.nsc.ru/Fulltext/ONIMR/25-01/18532430.pdf
+      fingerprint: 3c2f6e430c8fb8e3725e6121063dab481f8ab7c3a21b10de0232d71dcd696d21

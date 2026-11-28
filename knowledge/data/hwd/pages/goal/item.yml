@@ -5,7 +5,7 @@ url: https://github.com/mekras/hwd/blob/master/src/pages/theory/goal.rst
 locator: https://github.com/mekras/hwd/blob/master/src/pages/theory/goal.rst
 access: Публичный репозиторий. Право копирования снимков для этого проекта отдельно не установлено.
 status: indexed
-workflow_stage: indexed
+workflow_stage: source_checked
 topic: Цель читателя и отбор документации по его задаче.
 provenance:
   origin: external_material
@@ -14,3 +14,4 @@ admission:
   decision:
     ref: .ai-dev-team/source-admission-readable-russian-texts-2026-11-23.yml
     sha256: ab7e551e454751536a25579b6c4d38c0e583562bd5f66afa203ec5a862c2f679
+processing_scope: selected_fragments

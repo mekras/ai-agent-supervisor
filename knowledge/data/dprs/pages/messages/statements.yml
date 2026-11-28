@@ -1,0 +1,29 @@
+statement_contract_version: 2
+statements:
+- id: DPRS-001
+  source_id: DPRS
+  item_id: DPRS--messages
+  kind: fact
+  text: Авторы связывают удобство делового письма с ясной просьбой, сроком и доступностью
+    сведений, нужных для ответа.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: Фрагмент издателя, с. 4–5 PDF
+    url: https://alpinabook.ru/upload/iblock/785/7856e6c1c2cffd1001ce98f9c4ddb340.pdf#page=4
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Применимо к запросам решения в диалоге. Фрагмент не устанавливает обязательность
+    срока для каждого запроса.
+  open_questions: []
+  excerpt: четко сформулирована просьба и срок

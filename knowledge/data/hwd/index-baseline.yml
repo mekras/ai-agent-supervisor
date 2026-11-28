@@ -1,0 +1,18 @@
+contract_version: 1
+source_id: HWD
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  HWD--goal:
+    fingerprint: fd2b6c93f437329c14122f1ea03a85720665d5db1e4d7566e17c85a5804e2fd8
+  HWD--how-people-read:
+    fingerprint: 5fa8a249f62dc9c5bb94225e42282c8c95d32fc01878d182e291808e17d879ab
+observation:
+  scope: registered-unit-response-v1
+  units:
+    HWD--goal:
+      locator: https://github.com/mekras/hwd/blob/master/src/pages/theory/goal.rst
+      fingerprint: 9337bf5aa76a46bcb36a651406186b748e92ed7def2e2d8ff86fca479f6abba7
+    HWD--how-people-read:
+      locator: https://github.com/mekras/hwd/blob/master/src/pages/theory/how-people-read.rst
+      fingerprint: 9ba6fbe0f5532b5b086567649e5d8db6ea9d544542d77994aeb5051415644198

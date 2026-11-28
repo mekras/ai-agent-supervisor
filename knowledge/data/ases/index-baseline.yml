@@ -1,7 +1,7 @@
 contract_version: 1
 source_id: ASES
-checked_at: '2026-11-19T17:43:25.122851+00:00'
-reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
 units:
   ASES--standard:
     fingerprint: 05e6a18512f3bea4cfdabdb8c38d66e538f34fcc7664eef8641e57a17a7931c6

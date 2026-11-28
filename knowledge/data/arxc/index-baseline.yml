@@ -1,7 +1,7 @@
 contract_version: 1
 source_id: ARXC
-checked_at: '2026-11-19T17:43:25.122851+00:00'
-reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
 units:
   ARXC--2601.20404v2:
     fingerprint: 5a047cc6af23cb057b175f2edb9267e0947b2d3deb42e00fce470097c16d37f1

@@ -1,0 +1,139 @@
+statement_contract_version: 2
+statements:
+- id: MCHL-001
+  source_id: MCHL
+  item_id: MCHL--structure
+  kind: fact
+  text: Тематический заголовок должен соответствовать содержанию раздела. Сужение
+    и расширение темы дают читателю неверное ожидание.
+  excerpt: ýже или шире текста
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: 1.10.1. Соответствие заголовка и текста по содержанию
+    edition: 4-е, 2014
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+  open_questions: []
+- id: MCHL-002
+  source_id: MCHL
+  item_id: MCHL--structure
+  kind: fact
+  text: Рабочее оглавление показывает уровни заголовков. По нему авторы предлагают
+    отдельно сравнить заголовки одного уровня и проверить подчинённые заголовки относительно
+    родительского.
+  excerpt: сопоставить по содержанию одноступенные заголовки
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: 1.11.6–1.11.7. Рабочее оглавление
+    edition: 4-е, 2014
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+  open_questions: []
+- id: MCHL-003
+  source_id: MCHL
+  item_id: MCHL--structure
+  kind: fact
+  text: Однородные по назначению элементы списка оформляют одинаково. Во вводной фразе
+    рекомендуется назвать общее для элементов понятие, а не заканчивать её предлогом,
+    который должен соединяться с каждым пунктом.
+  excerpt: обобщающее слово
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: 2.2.1 и 2.3.1–2.3.3. Обозначения и ввод к перечню
+    edition: 4-е, 2014
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+  open_questions: []
+- id: MCHL-004
+  source_id: MCHL
+  item_id: MCHL--structure
+  kind: fact
+  text: Разные по назначению выделения должны различаться там, где иначе их можно
+    спутать. Один приём следует применять последовательно к однотипным элементам.
+  excerpt: применять выделения последовательно
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: 5.3. Общие требования к использованию приемов выделения
+    edition: 4-е, 2014
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+  open_questions: []
+- id: MCHL-005
+  source_id: MCHL
+  item_id: MCHL--structure
+  kind: fact
+  text: Внутритекстовую ссылку сокращают, пока читатель может однозначно найти цель.
+    Отсылка по ходу текста может заменить отдельную фразу, повторяющую заголовок.
+  excerpt: устраняют лишние слова
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: 9.1.2–9.1.3 и 9.2.1. Краткость и адресность ссылок
+    edition: 4-е, 2014
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+  open_questions: []

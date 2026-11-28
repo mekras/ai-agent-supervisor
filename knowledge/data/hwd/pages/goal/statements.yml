@@ -1,0 +1,29 @@
+statement_contract_version: 2
+statements:
+- id: HWD-001
+  source_id: HWD
+  item_id: HWD--goal
+  kind: fact
+  text: Руководство предлагает начинать с цели читателя, затем убирать лишние действия
+    или облегчать необходимые.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  scope:
+    section_title: Как помочь читателям достичь целей
+    url: https://github.com/mekras/hwd/blob/master/src/pages/theory/goal.rst
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Подходит для отбора сведений и инструкций. Это практическое руководство, а не
+    измерение экономии времени.
+  open_questions: []
+  excerpt: помогать решать эти задачи с наименьшими затратами

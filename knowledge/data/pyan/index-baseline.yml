@@ -1,7 +1,7 @@
 contract_version: 1
 source_id: PYAN
-checked_at: '2026-11-19T17:43:25.122851+00:00'
-reviewed_at: '2026-11-19T17:43:43.600866+00:00'
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
 units:
   PYAN--function-annotations:
     fingerprint: 92412cf0134b84ef5bc4c5543c9567533a19596d26d26262f2f578e1c34a86fc

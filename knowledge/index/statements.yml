@@ -5102,6 +5102,30 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: DPRS-001
+  source_id: DPRS
+  item_id: DPRS--messages
+  path: knowledge/data/dprs/pages/messages/statements.yml
+  status: null
+  kind: fact
+  text: Авторы связывают удобство делового письма с ясной просьбой, сроком и доступностью
+    сведений, нужных для ответа.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Применимо к запросам решения в диалоге. Фрагмент не устанавливает обязательность
+    срока для каждого запроса.
 - id: GITH-001
   source_id: GITH
   item_id: GITH--githooks
@@ -5277,6 +5301,54 @@ statements:
   limitations:
   - Не установлена версия выпуска, соответствующая изменяемой странице. Перед применением
     сверить с окружением.
+- id: HWD-001
+  source_id: HWD
+  item_id: HWD--goal
+  path: knowledge/data/hwd/pages/goal/statements.yml
+  status: null
+  kind: fact
+  text: Руководство предлагает начинать с цели читателя, затем убирать лишние действия
+    или облегчать необходимые.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Подходит для отбора сведений и инструкций. Это практическое руководство, а не
+    измерение экономии времени.
+- id: HWD-002
+  source_id: HWD
+  item_id: HWD--how-people-read
+  path: knowledge/data/hwd/pages/how-people-read/statements.yml
+  status: null
+  kind: fact
+  text: Руководство предлагает рассчитывать на поиск отдельной статьи и быстрый просмотр.
+    Нужный контекст должен быть доступен в самой статье.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Относится к навигации и понятности отдельно открытого раздела. Частота способов
+    чтения здесь не измерена.
 - id: LSME-001
   source_id: LSME
   item_id: LSME--evaluation
@@ -5329,6 +5401,128 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: MCHL-001
+  source_id: MCHL
+  item_id: MCHL--structure
+  path: knowledge/data/mchl/pages/structure/statements.yml
+  status: null
+  kind: fact
+  text: Тематический заголовок должен соответствовать содержанию раздела. Сужение
+    и расширение темы дают читателю неверное ожидание.
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+- id: MCHL-002
+  source_id: MCHL
+  item_id: MCHL--structure
+  path: knowledge/data/mchl/pages/structure/statements.yml
+  status: null
+  kind: fact
+  text: Рабочее оглавление показывает уровни заголовков. По нему авторы предлагают
+    отдельно сравнить заголовки одного уровня и проверить подчинённые заголовки относительно
+    родительского.
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+- id: MCHL-003
+  source_id: MCHL
+  item_id: MCHL--structure
+  path: knowledge/data/mchl/pages/structure/statements.yml
+  status: null
+  kind: fact
+  text: Однородные по назначению элементы списка оформляют одинаково. Во вводной фразе
+    рекомендуется назвать общее для элементов понятие, а не заканчивать её предлогом,
+    который должен соединяться с каждым пунктом.
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+- id: MCHL-004
+  source_id: MCHL
+  item_id: MCHL--structure
+  path: knowledge/data/mchl/pages/structure/statements.yml
+  status: null
+  kind: fact
+  text: Разные по назначению выделения должны различаться там, где иначе их можно
+    спутать. Один приём следует применять последовательно к однотипным элементам.
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
+- id: MCHL-005
+  source_id: MCHL
+  item_id: MCHL--structure
+  path: knowledge/data/mchl/pages/structure/statements.yml
+  status: null
+  kind: fact
+  text: Внутритекстовую ссылку сокращают, пока читатель может однозначно найти цель.
+    Отсылка по ходу текста может заменить отдельную фразу, повторяющую заголовок.
+  artifact: chapters-2014.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: historical
+  corroboration: single_source
+  limitations:
+  - Проверено по 4-му изданию 2014 года. Приёмы описаны для издательского текста.
+    На седьмое издание и конкретные средства оформления Markdown не обобщается.
 - id: PPRX-001
   source_id: PPRX
   item_id: PPRX--designing-refining-maintaining-agent-skills
@@ -5364,6 +5558,30 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: PSHR-001
+  source_id: PSHR
+  item_id: PSHR--writing
+  path: knowledge/data/pshr/pages/writing/statements.yml
+  status: null
+  kind: fact
+  text: 'Авторы рассматривают ясность на двух уровнях: внутри предложения и в устройстве
+    текста. Правка отдельных слов не решает проблем порядка и связности мысли.'
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Подходит для раздельной проверки формулировок и структуры. Редакторская рекомендация
+    не задаёт числового порога длины.
 - id: PYAN-001
   source_id: PYAN
   item_id: PYAN--pep-0649
@@ -5456,6 +5674,31 @@ statements:
   corroboration: single_source
   limitations:
   - Самопроверка корневым агентом, независимая проверка не выполнялась.
+- id: ROZN-001
+  source_id: ROZN
+  item_id: ROZN--identical-forms
+  path: knowledge/data/rozn/pages/identical-forms/statements.yml
+  status: null
+  kind: fact
+  text: Цепочки одинаковых падежных форм могут затруднять понимание. Среди способов
+    правки справочник предлагает заменить отглагольное существительное глагольной
+    конструкцией или перестроить фразу.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Проверять стоит понятность связи слов. Само совпадение падежей не обосновывает
+    автоматическую замену.
 - id: TKEC-001
   source_id: TKEC
   item_id: TKEC--plugin-readme
@@ -6349,6 +6592,31 @@ statements:
   corroboration: single_source
   limitations:
   - Самопроверка корневым агентом, независимая проверка не выполнялась.
+- id: TSYG-001
+  source_id: TSYG
+  item_id: TSYG--contracts
+  path: knowledge/data/tsyg/pages/contracts/statements.yml
+  status: null
+  kind: fact
+  text: В опросе 60 читателей о двух видах договоров доля верных ответов по вопросам
+    составила от 55 до 93,3 %. Среди наиболее трудных были вопросы о правах и обязанностях
+    сторон.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Обосновывает проверку понимания роли и обязанности на задачах читателя. Результат
+    не измеряет понятность ответов ИИ и не задаёт универсального порога.
 - id: VSCD-001
   source_id: VSCD
   item_id: VSCD--custom-instructions
@@ -6367,3 +6635,125 @@ statements:
   temporal_status: null
   corroboration: null
   limitations: null
+- id: WTDG-001
+  source_id: WTDG
+  item_id: WTDG--skimmable
+  path: knowledge/data/wtdg/pages/skimmable/statements.yml
+  status: null
+  kind: fact
+  text: Краткие содержательные заголовки и структура, по которой можно пропускать
+    ненужные фрагменты, помогают найти ответ при быстром просмотре.
+  artifact: normalized.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Дополнительная рекомендация для документации. При проверке русского текста решающи
+    задачи и контекст его читателя.
+- id: XEM7-001
+  source_id: XEM7
+  item_id: XEM7--article-body
+  path: knowledge/data/xem7/pages/article-body/statements.yml
+  status: null
+  kind: fact
+  text: Автор предлагает повторять проверку после исправления. Он различает проверку
+    сохранённых случаев перед выпуском, проверку отдельного результата при работе
+    системы и выборочный контроль рабочих результатов.
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.
+- id: XEM7-002
+  source_id: XEM7
+  item_id: XEM7--article-body
+  path: knowledge/data/xem7/pages/article-body/statements.yml
+  status: null
+  kind: fact
+  text: Для набора оценок автор выделяет проверочные случаи с ожидаемым результатом,
+    способы измерения и порог допуска. Способ измерения зависит от задачи.
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.
+- id: XEM7-003
+  source_id: XEM7
+  item_id: XEM7--article-body
+  path: knowledge/data/xem7/pages/article-body/statements.yml
+  status: null
+  kind: fact
+  text: В примере для Hermes автор предлагает хранить критерии и прогоны как повторно
+    используемые навыки, задерживать выпуск при ухудшении относительно базового уровня,
+    выборочно проверять рабочие результаты и добавлять обнаруженные сбои в набор случаев.
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.
+- id: XEM7-004
+  source_id: XEM7
+  item_id: XEM7--article-body
+  path: knowledge/data/xem7/pages/article-body/statements.yml
+  status: null
+  kind: limitation
+  text: Число 0,7 — предложенная автором начальная отсечка для его шкалы. В статье
+    нет проверки, которая устанавливала бы этот порог для задач проекта.
+  artifact: article-2060729909690224640.local.md
+  checked_at: '2026-11-28'
+  processing_status:
+    extraction: complete
+    traceability: passed
+    semantic_review: passed
+    strong_review: not_required
+    corroboration_check: complete
+  source_role: primary
+  evidence_strength: moderate
+  confidence: high
+  temporal_status: current
+  corroboration: single_source
+  limitations:
+  - Практический пример автора. Возможности установленного Hermes, эффективность схемы
+    и порог для проекта отдельно не проверены.

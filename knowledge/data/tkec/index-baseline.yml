@@ -1,0 +1,28 @@
+contract_version: 1
+source_id: TKEC
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  TKEC--fact-proposer:
+    fingerprint: 7e581c5ac258b3a722aa1198ceb94d84513c99c1ecf0a717c7aff7ba6c30d036
+  TKEC--microskills-readme:
+    fingerprint: 6e8d814dd699ae347a518139e0a59747af726135ede75ae740c4b86cd35f0f3a
+  TKEC--plugin-design:
+    fingerprint: 5e19b5468df879670c7b6d2c83b89cef03c0bdce834849448830c8931468a5bd
+  TKEC--plugin-readme:
+    fingerprint: 2f247b55d006160b691b1650e254d456336a132e2dbd3870a601dc2e37163f02
+observation:
+  scope: registered-unit-response-v1
+  units:
+    TKEC--plugin-readme:
+      locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/plugin/README.md
+      fingerprint: 62a1300f758980bc2e7e0f30c68085a3fa4fc1e000690175ed7df2c331e974a4
+    TKEC--plugin-design:
+      locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/docs/PLUGIN.md
+      fingerprint: af00f7be65f00560c8819c17cc17b5ad2fd0c3fd60f77252be682c348108fdd5
+    TKEC--microskills-readme:
+      locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/README.md
+      fingerprint: 2c93a859a678ec2c1951f577dc04a3328fd114d3c80c5817e73c961a7a020304
+    TKEC--fact-proposer:
+      locator: https://github.com/microsoft/TokenEconomizer/blob/4a04fe4e1fb5a21d51c26b17598a1f2adbd46b91/tokeneconomizer/microskills/distiller.py
+      fingerprint: b8c514ac4d1aa44a719b90586072be90e050569a5ad7b82f30fa36a1b1211c91

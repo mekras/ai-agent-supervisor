@@ -1,0 +1,13 @@
+contract_version: 1
+source_id: WTDG
+checked_at: '2026-11-28T06:27:20.109890+00:00'
+reviewed_at: '2026-11-28T06:27:40.083625+00:00'
+units:
+  WTDG--skimmable:
+    fingerprint: 411a99f64b763f951d5fd1464b86f39ae9ed7e7180e483a3841169d1e75e89bc
+observation:
+  scope: registered-unit-response-v1
+  units:
+    WTDG--skimmable:
+      locator: https://www.writethedocs.org/guide/writing/docs-principles/#skimmable
+      fingerprint: 212395c403ced4328bb4e078cee23bdbd3271c1c23c9834db2bcfd7153de588c
