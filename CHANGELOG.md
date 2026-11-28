@@ -7,6 +7,8 @@
 
 ## [Невыпущено]
 
+## [2.12.3] - 2026-11-28
+
 - Проверена установка коллекции через APM 0.39.1 для Claude, Codex и Hermes.
   Минимальная версия APM остаётся 0.29.1.
 - Исправлен ложный отказ проверки проекций APM в Git: в APM 0.39.1
@@ -1906,7 +1908,8 @@
 [2.6.22]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.21...2.6.22
 [2.6.21]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.20...2.6.21
 [2.6.20]: https://github.com/mekras/ai-agent-supervisor/compare/2.6.19...2.6.20
-[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.12.2...HEAD
+[Невыпущено]: https://github.com/mekras/ai-agent-supervisor/compare/2.12.3...HEAD
+[2.12.3]: https://github.com/mekras/ai-agent-supervisor/compare/2.12.2...2.12.3
 [2.12.2]: https://github.com/mekras/ai-agent-supervisor/compare/2.12.1...2.12.2
 [2.11.5]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.4...2.11.5
 [2.11.2]: https://github.com/mekras/ai-agent-supervisor/compare/2.11.1...2.11.2
